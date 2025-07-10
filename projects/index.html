@@ -27,7 +27,7 @@
 	<!-- Kaspa -->
 	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
 	
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/styles/main.css" />
 	<link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/favicon.ico" />
 	<style>
 	.filter-card {
@@ -78,10 +78,16 @@
 </aside>
 
 <section class="filter-list-main">
-	<section class="community-projects-section">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search projects..."/>
+		<select id="sortSelect">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 	<div class="filter-grid" id="projectGrid"></div>
-		<button class="theme-1" id="loadMoreBtn">Load More</button>
-	</section>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 </div>
 </main>
@@ -111,7 +117,7 @@ const communityProjects = [
 },
 {
 	name: "Igra Labs",
-	description: "Building an EVM-compatible programmable layer (L2) on Kaspa L1, aiming to be the first  ZK rollup to enhance scalability and smart contract functionality.",
+	description: "Building an EVM-compatible programmable layer (L2) on Kaspa L1, aiming to be the first ZK rollup to enhance scalability and smart contract functionality.",
 	officialSite: "https://igralabs.com",
 	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/igralabs.webp",
 	features: {
@@ -600,8 +606,6 @@ const communityProjects = [
 		wallet: true
 	}
 }
-
-
 ];
 
 let filteredProjects = [...communityProjects];
@@ -609,6 +613,9 @@ let filteredProjects = [...communityProjects];
 const projectGrid = document.getElementById('projectGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
 let lastCheckedRadio = null;
 
 function renderProjects(initial = false) {
@@ -623,7 +630,7 @@ function renderProjects(initial = false) {
 		card.classList.add('filter-card', 'theme-1');
 		card.innerHTML = `
 <div class="filter-logo">
-    <img src="${project.logo}" alt="${project.name} Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100?text=Logo';" loading="lazy">
+<img src="${project.logo}" alt="${project.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
 </div>
 <h3>${project.name}</h3>
 <p class="filter-description">${project.description}</p>
@@ -632,42 +639,55 @@ function renderProjects(initial = false) {
 	});
 
 	currentIndex += slice.length;
-	document.getElementById('counter').textContent = `(${filteredProjects.length} of ${communityProjects.length})`;
+	counter.textContent = `(${filteredProjects.length} of ${communityProjects.length})`;
 	
 	loadMoreBtn.style.display = currentIndex < filteredProjects.length ? 'block' : 'none';
 }
 
 function filterProjects() {
 	const selectedFeature = Array.from(filterRadios).find(radio => radio.checked)?.dataset.feature;
-	filteredProjects = selectedFeature
-		? communityProjects.filter(project => project.features[selectedFeature])
-		: [...communityProjects];
-
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...communityProjects];
+	
+	filteredProjects = defaultOrder.filter(project => {
+		if (selectedFeature && !project.features[selectedFeature]) return false;
+		return searchTerm === "" || project.name.toLowerCase().includes(searchTerm) || project.description.toLowerCase().includes(searchTerm);
+	});
+	
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') {
+		filteredProjects.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredProjects.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
+	
 	if (filteredProjects.length === 0) {
-		projectGrid.innerHTML = '<p class="no-items-message">No community projects match your selected filter.</p>';
-		document.getElementById('counter').textContent = `(0 of ${communityProjects.length})`;
+		projectGrid.innerHTML = '<p class="no-items-message">No community projects match your search and filters.</p>';
+		counter.textContent = `(0 of ${communityProjects.length})`;
 		loadMoreBtn.style.display = 'none';
 		return;
 	}
-
+	
 	renderProjects(true);
 }
 
 filterRadios.forEach(radio => {
 	radio.addEventListener('click', function () {
-	if (lastCheckedRadio === this) {
-		this.checked = false;
-		lastCheckedRadio = null;
-	} else {
-		lastCheckedRadio = this;
-	}
-	filterProjects();
+		if (lastCheckedRadio === this) {
+			this.checked = false;
+			lastCheckedRadio = null;
+		} else {
+			lastCheckedRadio = this;
+		}
+		filterProjects();
 	});
 });
 
+searchInput.addEventListener('input', filterProjects);
+sortSelect.addEventListener('change', filterProjects);
 loadMoreBtn.addEventListener('click', () => renderProjects());
+
 renderProjects(true);
 </script>
-
 </body>
 </html>
