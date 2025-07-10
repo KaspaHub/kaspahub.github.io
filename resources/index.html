@@ -10,7 +10,7 @@
 	<title>Kaspa Hub - Research</title>
 	<meta name="title" content="Kaspa Hub - Research" />
 	<meta name="description" content="Discover a range of tools and resources for the research and study of Kaspa, including analytics platforms, block explorers, data visualizers, and more—designed to help you explore on-chain data and gain deeper insights into the network." />
-	<meta name="keywords" content="blockchain, blockdag, ghostdag, cryptocurrency, dagknight, block explorer, visualizer, krc20, krc-721" />
+	<meta name="keywords" content="blockchain, blockdag, ghostdag, cryptocurrency, analytics, block explorer, visualizer, krc20, krc-721" />
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://kaspahub.github.io/resources/" />
@@ -27,7 +27,7 @@
 	<!-- Kaspa -->
 	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
 	
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/styles/main.css" />
 	<link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/favicon.ico" />
 	<style>
 	.filter-card {
@@ -83,14 +83,24 @@
 	</div>
 </aside>
 <section class="filter-list-main">
-<section class="research-tools-section">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search resources..."/>
+		<select id="sortSelect">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 	<div class="filter-grid" id="toolGrid"></div>
-</section>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 </div>
 </main>
-<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
+<footer id="page-footer"><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
 <script>
+const toolsPerPage = 30;
+let currentIndex = 0;
+
 const researchTools = [
 {
 	name: "PHANTOM GHOSTDAG Whitepaper",
@@ -145,10 +155,10 @@ const researchTools = [
 	}
 },
 {
-	name: "KaspArchive",
-	description: "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
-	officialSite: "https://kasparchive.com",
-	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/kaspa.webp",
+	name: "Kaspa Core R&D (public) Telegram",
+	description: "A public topic-based group for Kaspa core research and development. Enthusiasts and developers can join to follow dev discussions.",
+	officialSite: "https://t.me/kasparnd",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/telegram.webp",
 	features: {
 		articles: false,
 		analytics: false,
@@ -288,6 +298,19 @@ const researchTools = [
 	}
 },
 {
+	name: "KaspArchive",
+	description: "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
+	officialSite: "https://kasparchive.com",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/kaspa.webp",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
+},
+{
 	name: "Kaspa Daily",
 	description: "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
 	officialSite: "https://kaspadaily.com/",
@@ -330,7 +353,7 @@ const researchTools = [
 	name: "Burno",
 	description: "Community-driven platform for Kaspa’s ecosystem, covering KRC-20 tokens, projects, wallets, news, and insights with curated posts for traders and enthusiasts.",
 	officialSite: "https://burno.xyz/",
-	logo: "https://kaspahub.org/assets/logos/burno.webp",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/burno.webp",
 	features: {
 		articles: true,
 		analytics: false,
@@ -343,7 +366,7 @@ const researchTools = [
 	name: "Kaspa FAQ",
 	description: "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
 	officialSite: "https://www.kaspafaq.com/",
-	logo: "https://kaspahub.org/assets/logos/kaspafaq.webp",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/kaspafaq.webp",
 	features: {
 		articles: true,
 		analytics: false,
@@ -589,7 +612,7 @@ const researchTools = [
 {
 	name: "KasMap",
 	description: "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
-	officialSite: "https://kasmap.xyz",
+	officialSite: "https://kasmap.xyz/",
 	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/kaspa.webp",
 	features: {
 		articles: false,
@@ -719,38 +742,67 @@ const researchTools = [
 ];
 
 const toolGrid = document.getElementById('toolGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
 let lastCheckedRadio = null;
+let filteredTools = [...researchTools];
 
-function renderTools(filteredTools) {
-	toolGrid.innerHTML = '';
-	const counter = document.getElementById('counter');
-	counter.textContent = `(${filteredTools.length} of ${researchTools.length})`;
-	if (filteredTools.length === 0) {
-		toolGrid.innerHTML = '<p class="no-items-message">No research tools match your selected filter.</p>';
-		return;
+function renderTools(initial = false) {
+	if (initial) {
+		toolGrid.innerHTML = '';
+		currentIndex = 0;
 	}
 
-	filteredTools.forEach(tool => {
+	const slice = filteredTools.slice(currentIndex, currentIndex + toolsPerPage);
+	slice.forEach(tool => {
 		const card = document.createElement('div');
 		card.classList.add('filter-card', 'theme-1');
 		card.innerHTML = `
 <div class="filter-logo">
-	<img src="${tool.logo}" alt="${tool.name} Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100?text=Logo';" loading="lazy">
+<img src="${tool.logo}" alt="${tool.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
 </div>
 <h3>${tool.name}</h3>
 <p class="filter-description">${tool.description}</p>
 <a href="${tool.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
 		toolGrid.appendChild(card);
 	});
+
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredTools.length} of ${researchTools.length})`;
+
+	loadMoreBtn.style.display = currentIndex < filteredTools.length ? 'block' : 'none';
 }
 
 function filterTools() {
 	const selectedFeature = Array.from(filterRadios).find(radio => radio.checked)?.dataset.feature;
-	const filtered = selectedFeature
-		? researchTools.filter(tool => tool.features[selectedFeature])
-		: researchTools;
-	renderTools(filtered);
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...researchTools];
+
+	filteredTools = defaultOrder.filter(tool => {
+		if (selectedFeature && !tool.features[selectedFeature]) return false;
+		return searchTerm === "" ||
+			tool.name.toLowerCase().includes(searchTerm) ||
+			tool.description.toLowerCase().includes(searchTerm);
+	});
+
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') {
+		filteredTools.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredTools.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
+
+	if (filteredTools.length === 0) {
+		toolGrid.innerHTML = '<p class="no-items-message">No resources match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${researchTools.length})`;
+		return;
+	}
+
+	renderTools(true);
 }
 
 filterRadios.forEach(radio => {
@@ -765,7 +817,11 @@ filterRadios.forEach(radio => {
 	});
 });
 
-renderTools(researchTools);
+loadMoreBtn.addEventListener('click', () => renderTools());
+searchInput.addEventListener('input', filterTools);
+sortSelect.addEventListener('change', filterTools);
+
+renderTools(true);
 </script>
 </body>
 </html>
