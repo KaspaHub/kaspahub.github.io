@@ -27,7 +27,7 @@
 	<!-- Kaspa -->
 	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
 	
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/styles/main.css" />
 	<link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/favicon.ico" />
 </head>
 <body class="">
@@ -103,18 +103,28 @@
 		</div>
 	</aside>
 	<section class="filter-list-main">
-		<section class="wallet-list-section">
-			<div class="filter-grid" id="walletGrid"></div>
-		</section>
+		<div class="theme-1 search-sort-controls">
+			<input type="text" id="searchInput" placeholder="Search wallets..." />
+			<select id="sortSelect">
+				<option value="default">Default</option>
+				<option value="az">A - Z</option>
+				<option value="za">Z - A</option>
+			</select>
+		</div>
+		<div class="filter-grid" id="walletGrid"></div>
+		<button class="theme-1" id="loadMoreBtn">Load More</button>
 	</section>
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
 <script>
+const walletsPerPage = 30;
+let currentIndex = 0;
+
 const wallets = [
 {
 	name: "Tangem",
-	description: "Popular hardware wallet for simple, multi-chain asset management. Ideal for users valuing simplicity with keyless operation.",
+	description: "Popular cold wallet for simple, multi-chain asset management. Ideal for users valuing simplicity with keyless operation.",
 	officialSite: "https://tangem.com",
 	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/tangemwallet.webp",
 	features: {
@@ -170,44 +180,6 @@ const wallets = [
 	}
 },
 {
-	name: "SafePal",
-	description: "Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping.",
-	officialSite: "https://www.safepal.com",
-	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/safepalwallet.webp",
-	features: {
-		openSource: false,
-		multiChain: true,
-		selfCustodial: true,
-		krc20: false,
-		krc721: false,
-		knsDomains: false,
-		hardware: true,
-		mobile: true,
-		desktop: false,
-		browserExtension: true,
-		web: false
-	}
-},
-{
-	name: "Goldshell Wallet",
-	description: "Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring.",
-	officialSite: "https://www.goldshell.com/product/goldshell-wallet/",
-	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/goldshellwallet.webp",
-	features: {
-		openSource: false,
-		multiChain: true,
-		selfCustodial: true,
-		krc20: false,
-		krc721: false,
-		knsDomains: false,
-		hardware: true,
-		mobile: true,
-		desktop: false,
-		browserExtension: false,
-		web: false
-	}
-},
-{
 	name: "KasKeeper",
 	description: "Web3 wallet for Kaspa with KRC20 token support, backed by KEF, designed for secure self-custodial storage and daily transactions.",
 	officialSite: "https://kaskeeper.vercel.app",
@@ -222,6 +194,25 @@ const wallets = [
 		hardware: false,
 		desktop: false,
 		mobile: true,
+		browserExtension: true,
+		web: false
+	}
+},
+{
+	name: "Kasware",
+	description: "The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains.",
+	officialSite: "https://www.kasware.xyz",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/kaswarewallet.webp",
+	features: {
+		openSource: true,
+		multiChain: false,
+		selfCustodial: true,
+		krc20: true,
+		krc721: true,
+		knsDomains: true,
+		hardware: false,
+		mobile: true,
+		desktop: false,
 		browserExtension: true,
 		web: false
 	}
@@ -265,25 +256,6 @@ const wallets = [
 	}
 },
 {
-	name: "Kasware",
-	description: "The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains.",
-	officialSite: "https://www.kasware.xyz",
-	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/kaswarewallet.webp",
-	features: {
-		openSource: true,
-		multiChain: false,
-		selfCustodial: true,
-		krc20: true,
-		krc721: true,
-		knsDomains: true,
-		hardware: false,
-		mobile: true,
-		desktop: false,
-		browserExtension: true,
-		web: false
-	}
-},
-{
 	name: "Kurncy",
 	description: "Lightweight custodial Kaspa wallet with self-custody option on iOS & Android, supporting KRC20, KRC721 tokens and KNS domains.",
 	officialSite: "https://www.kurncy.com",
@@ -319,6 +291,63 @@ const wallets = [
 		mobile: false,
 		browserExtension: false,
 		web: true
+	}
+},
+{
+	name: "SafePal",
+	description: "Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping.",
+	officialSite: "https://www.safepal.com",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/safepalwallet.webp",
+	features: {
+		openSource: false,
+		multiChain: true,
+		selfCustodial: true,
+		krc20: false,
+		krc721: false,
+		knsDomains: false,
+		hardware: true,
+		mobile: true,
+		desktop: false,
+		browserExtension: true,
+		web: false
+	}
+},
+{
+	name: "Goldshell Wallet",
+	description: "Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring.",
+	officialSite: "https://www.goldshell.com/product/goldshell-wallet/",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/goldshellwallet.webp",
+	features: {
+		openSource: false,
+		multiChain: true,
+		selfCustodial: true,
+		krc20: false,
+		krc721: false,
+		knsDomains: false,
+		hardware: true,
+		mobile: true,
+		desktop: false,
+		browserExtension: false,
+		web: false
+	}
+},
+{
+	name: "Cool Wallet",
+	description: "Secure wallet with both cold and hot wallet functionality, supporting multi-chain assets and built-in token swapping.",
+	officialSite: "https://www.coolwallet.io",
+	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/coolwallet.webp",
+	features: {
+		openSource: false,
+		multiChain: true,
+		selfCustodial: true,
+		krc20: false,
+		krc721: false,
+		knsDomains: false,
+		hardware: true,
+		mobile: true,
+		desktop: false,
+		browserExtension: false,
+		web: false
 	}
 },
 {
@@ -436,25 +465,6 @@ const wallets = [
 	}
 },
 {
-	name: "Cool Wallet",
-	description: "Hardware wallet with cold and hot wallet functionality, supporting multi-chain assets and built-in token swapping.",
-	officialSite: "https://www.coolwallet.io",
-	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/coolwallet.webp",
-	features: {
-		openSource: false,
-		multiChain: true,
-		selfCustodial: true,
-		krc20: false,
-		krc721: false,
-		knsDomains: false,
-		hardware: true,
-		mobile: true,
-		desktop: false,
-		browserExtension: false,
-		web: false
-	}
-},
-{
 	name: "Plus Wallet",
 	description: "Lightweight multi-chain wallet with built-in swap feature, available on mobile and web for easy use.",
 	officialSite: "https://pluswallet.app",
@@ -551,7 +561,7 @@ const wallets = [
 },
 {
 	name: "Ledger",
-	description: "Great hardware wallet for multi-chain asset management on desktop and mobile, <strong>currently only works with KasVault</strong>.",
+	description: "Industry-leading cold wallet for multi-chain asset management on desktop and mobile, <strong>currently only works with KasVault</strong>.",
 	officialSite: "https://kasvault.io",
 	logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/ledgerwallet.webp",
 	features: {
@@ -571,7 +581,13 @@ const wallets = [
 ];
 
 const walletGrid = document.getElementById('walletGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+let filteredWallets = [...wallets];
 
 const tagInfoMap = {
 	openSource: { name: "Open Source", type: "feature" },
@@ -583,45 +599,40 @@ const tagInfoMap = {
 	hardware: { name: "Hardware", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/hardware.webp" },
 	desktop: { name: "Desktop", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/desktop.webp" },
 	mobile: { name: "Mobile", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/mobile.webp" },
-	browserExtension: { name: "Browser Extension", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/extension.webp" },
+	browserExtension: { name: "Browser", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/extension.webp" },
 	web: { name: "Web", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/web.webp" }
 };
 
-function renderWallets(filteredWallets) {
-walletGrid.innerHTML = '';
+function renderWallets(initial = false) {
+	if (initial) {
+		walletGrid.innerHTML = '';
+		currentIndex = 0;
+	}
 
-const counter = document.getElementById('counter');
-counter.textContent = `(${filteredWallets.length} of ${wallets.length})`;
+	const slice = filteredWallets.slice(currentIndex, currentIndex + walletsPerPage);
+	slice.forEach(wallet => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
 
-if (filteredWallets.length === 0) {
-	walletGrid.innerHTML = '<p class="no-items-message">No wallets match your selected filters.</p>';
-	return;
-}
+		let featureTagsHtml = '';
+		let platformTagsHtml = '';
 
-filteredWallets.forEach(wallet => {
-	const card = document.createElement('div');
-	card.classList.add('filter-card');
-	card.classList.add('theme-1');
-	
-	let featureTagsHtml = '';
-	let platformTagsHtml = '';
-	
-	for (const featureKey in wallet.features) {
+		for (const featureKey in wallet.features) {
 			if (wallet.features[featureKey]) {
 				const tagInfo = tagInfoMap[featureKey];
 				if (tagInfo) {
-				if (tagInfo.type === 'feature') {
-					featureTagsHtml += `<span class="feature-tag">${tagInfo.name}</span>`;
-				} else if (tagInfo.type === 'device') {
-					platformTagsHtml += `<span class="platform-tag"><img src="${tagInfo.icon || 'https://img.icons8.com/ios-filled/50/000000/puzzle.png'}" alt="${tagInfo.name} Icon" loading="lazy">${tagInfo.name}</span>`;
+					if (tagInfo.type === 'feature') {
+						featureTagsHtml += `<span class="feature-tag">${tagInfo.name}</span>`;
+					} else if (tagInfo.type === 'device') {
+						platformTagsHtml += `<span class="platform-tag"><img src="${tagInfo.icon || 'https://img.icons8.com/ios-filled/50/000000/puzzle.png'}" alt="${tagInfo.name} Icon" loading="lazy">${tagInfo.name}</span>`;
+					}
 				}
 			}
 		}
-	}
 
-	card.innerHTML = `
+		card.innerHTML = `
 <div class="filter-logo">
-	<img src="${wallet.logo}" alt="${wallet.name} Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100?text=Logo';" loading="lazy">
+<img src="${wallet.logo}" alt="${wallet.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
 </div>
 <h3>${wallet.name}</h3>
 <p class="filter-description">${wallet.description}</p>
@@ -629,40 +640,52 @@ filteredWallets.forEach(wallet => {
 <div class="filter-platforms-container">${platformTagsHtml}</div>
 <a href="${wallet.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
 `;
-	walletGrid.appendChild(card);
+
+		walletGrid.appendChild(card);
 	});
+
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredWallets.length} of ${wallets.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredWallets.length ? 'block' : 'none';
 }
 
 function filterWallets() {
-	const activeFeatureKeys = new Set();
-	filterCheckboxes.forEach(checkbox => {
-		if (checkbox.checked) {
-			activeFeatureKeys.add(checkbox.dataset.feature);
+	const activeFeatures = new Set();
+	filterCheckboxes.forEach(cb => cb.checked && activeFeatures.add(cb.dataset.feature));
+
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...wallets];
+
+	filteredWallets = defaultOrder.filter(wallet => {
+		for (let feature of activeFeatures) {
+			if (!wallet.features[feature]) return false;
 		}
+		return searchTerm === "" || wallet.name.toLowerCase().includes(searchTerm) || wallet.description.toLowerCase().includes(searchTerm);
 	});
-	
-	const filtered = wallets.filter(wallet => {
-		if (activeFeatureKeys.size === 0) {
-			return true;
-		}
-	
-	    for (const featureKey of activeFeatureKeys) {
-		if (!wallet.features[featureKey]) {
-			return false;
-		}
+
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') {
+		filteredWallets.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredWallets.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
 	}
-	return true;
-	});
-		
-	renderWallets(filtered);
+
+	if (filteredWallets.length === 0) {
+		walletGrid.innerHTML = '<p class="no-items-message">No wallets match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${wallets.length})`;
+		return;
+	}
+
+	renderWallets(true);
 }
 
-filterCheckboxes.forEach(checkbox => {
-	checkbox.addEventListener('change', filterWallets);
-});
+filterCheckboxes.forEach(cb => cb.addEventListener('change', filterWallets));
+loadMoreBtn.addEventListener('click', () => renderWallets());
+searchInput.addEventListener('input', filterWallets);
+sortSelect.addEventListener('change', filterWallets);
 
-renderWallets(wallets);
-
+renderWallets(true);
 </script>
 </body>
 </html>
