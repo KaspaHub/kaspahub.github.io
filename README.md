@@ -26,13 +26,6 @@ While not strictly required, including the original &lt;footer&gt; element helps
 
 Localized versions that include the footer may also be featured on our site, helping others discover your work.
 
-# License & Usage
-
-Kaspa Hub is freely available for anyone to use, copy, rename, and create localized versions. You are encouraged to adapt and translate the platform to serve your community better.
-
-While not strictly required, including the original &lt;footer&gt; element helps ensure consistent attribution and community connection across all versions of Kaspa Hub.
-
-Localized versions that include the footer may also be featured on our site, helping others discover your work.
 
 # Contact Us
 
