@@ -1,21 +1,21 @@
 # Explore the Kaspa Ecosystem
 Dive into the Kaspa universe with Kaspa Hub - an independent community-driven platform bringing together resources, tools, and connections for anyone interested in the Kaspa network.
 
-https://kaspahub.org/
+https://kaspahub.github.io/
 
-https://kaspahub.org/projects/
+https://kaspahub.github.io/projects/
 
-https://kaspahub.org/communities/
+https://kaspahub.github.io/communities/
 
-https://kaspahub.org/resources/
+https://kaspahub.github.io/resources/
 
-https://kaspahub.org/wallets/
+https://kaspahub.github.io/wallets/
 
-https://kaspahub.org/exchanges/
+https://kaspahub.github.io/exchanges/
 
-https://kaspahub.org/solutions/
+https://kaspahub.github.io/solutions/
 
-https://kaspahub.org/developers/
+https://kaspahub.github.io/developers/
 
 
 # License & Usage
