@@ -13,8 +13,7 @@ furnished to do so, subject to the following conditions:
    copies or substantial portions of the Software.
 
 2. All localized or derivative versions of the Software must retain the original
-   `<footer>` element unchanged, as specified in the project documentation, to
-   ensure consistent attribution and community connection.
+   `<footer>` element unchanged to ensure consistent attribution and community connection.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
