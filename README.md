@@ -10,7 +10,7 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 - [Wallets](https://kaspahub.github.io/wallets/)
 
 ## License
-Kaspa Hub is licensed under the MIT License with a custom clause. See the [LICENSE](LICENSE) file for details.
+Kaspa Hub is licensed under the MIT License with a **custom clause**. See the [LICENSE](LICENSE) file for details.
 
 ## New Project Submissions & Updates
 Want to share your project? We’d love to see your contributions to the Kaspa ecosystem! You can:
