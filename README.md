@@ -15,7 +15,7 @@ Kaspa Hub is licensed under the MIT License with a custom clause. See the [LICEN
 ## New Project Submissions & Updates
 Want to share your project? We’d love to see your contributions to the Kaspa ecosystem! You can:
 - Share your work via X DM: [https://x.com/KaspaHub](https://x.com/KaspaHub)
-- Fill in this Google form: [https://docs.google.com/forms/d/e/1FAIpQLSf9s_KUsrgK4YrQG4dpBx1674QnQ6AQzQW2jwx3Nqr9XFs_SA/viewform](https://docs.google.com/forms/d/e/1FAIpQLSf9s_KUsrgK4YrQG4dpBx1674QnQ6AQzQW2jwx3Nqr9XFs_SA/viewform)
+- Fill in this Google form: [https://docs.google.com/forms/d/e/1FAIpQLSf9s_KUsrgK4YrQG4dpBx1674QnQ6AQzQW2jwx3Nqr9XFs_SA](https://docs.google.com/forms/d/e/1FAIpQLSf9s_KUsrgK4YrQG4dpBx1674QnQ6AQzQW2jwx3Nqr9XFs_SA)
 - Or submit your project directly on GitHub via a pull request.
 
 ## Contact Us
