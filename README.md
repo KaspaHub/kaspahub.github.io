@@ -1,13 +1,13 @@
 # Kaspa Hub - Explore the Kaspa Ecosystem
 Dive into the Kaspa universe with Kaspa Hub - an independent community-driven platform bringing together resources, tools, and connections for anyone interested in the Kaspa network.
 - [Home](https://kaspahub.github.io/)
-- [Projects](https://kaspahub.github.io/projects/)
 - [Communities](https://kaspahub.github.io/communities/)
-- [Resources](https://kaspahub.github.io/resources/)
-- [Wallets](https://kaspahub.github.io/wallets/)
-- [Exchanges](https://kaspahub.github.io/exchanges/)
-- [Solutions](https://kaspahub.github.io/solutions/)
 - [Developers](https://kaspahub.github.io/developers/)
+- [Exchanges](https://kaspahub.github.io/exchanges/)
+- [Projects](https://kaspahub.github.io/projects/)
+- [Resources](https://kaspahub.github.io/resources/)
+- [Solutions](https://kaspahub.github.io/solutions/)
+- [Wallets](https://kaspahub.github.io/wallets/)
 
 ## License
 Kaspa Hub is licensed under the MIT License with a custom clause. See the [LICENSE](LICENSE) file for details.
