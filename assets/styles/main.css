@@ -38,6 +38,10 @@ main {
 	flex: 1;
 }
 
+br {
+	user-select: none;
+}
+
 .background-light {
 	background: linear-gradient(to bottom right, #8BAFC4, #8BC6BD);
 	color: #3d3d3d;
