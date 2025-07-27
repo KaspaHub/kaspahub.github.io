@@ -59,10 +59,11 @@ main {
 <script src="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/scripts/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/scripts/jquery-qrcode-0.18.0.min.js"></script>
 <script type="module">
-import { users } from 'https://kaspahub.github.io/directory/wallets.js';
+import { users } from 'https://kaspahub.github.io/kaspa-wallet-directory/wallets.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-	const xUser = new URLSearchParams(window.location.search).get('user');
+	const urlParams = new URLSearchParams(window.location.search);
+	const xUserRaw = urlParams.get('user');
 
 	const displayElement = document.getElementById("text-display");
 	const titleElement = document.getElementById("page-title");
@@ -77,15 +78,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.head.appendChild(meta);
 	}
 
-	if (!xUser) {
+	if (!xUserRaw) {
 		displayElement.textContent = "Missing X handle in the URL. Use ?user=YourXHandle";
 		return;
 	}
 
-	const user = users.find(u => u.x?.toLowerCase() === xUser?.toLowerCase());
+	const user = users.find(u => u.x?.toLowerCase() === xUserRaw.toLowerCase());
 
 	if (!user) {
-		displayElement.innerHTML = `<span class='error'>No user found with X handle <strong>@${xUser}</strong>.</span>`;
+		displayElement.innerHTML = `<span class='error'>No user found with X handle <strong>@${xUserRaw}</strong>.</span>`;
 		return;
 	}
 
@@ -126,5 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	setMetaTag('kaspa:wallet', user.wallet);
 });
 </script>
+
 </body>
 </html>
