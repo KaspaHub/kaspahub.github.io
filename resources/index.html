@@ -321,16 +321,16 @@ const internalResources = [
   // {
   //   name: "Custom Item",
   //   description: "A unique item not in the external list.",
-  //   officialSite: "https://x.com/KaspaHub",
+  //   link: "https://x.com/KaspaHub",
   //   logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp",
   //   features: { analytics: true }
   // }
 ];
 
-const externalSites = new Set(resources.map(r => r.officialSite));
+const externalSites = new Set(resources.map(r => r.link));
 const combinedResources = [
   ...resources,
-  ...internalResources.filter(r => !externalSites.has(r.officialSite))
+  ...internalResources.filter(r => !externalSites.has(r.link))
 ];
 
 const resourcesWithDescriptions = combinedResources.map(resource => {
@@ -367,7 +367,7 @@ function renderTools(initial = false) {
     </div>
     <h3>${tool.name}</h3>
     <p class="filter-description">${tool.description || ''}</p>
-    <a href="${tool.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
+    <a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
     toolGrid.appendChild(card);
   });
 
