@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		return;
 	}
 
-	const user = users.find(u => u.x?.toLowerCase() === xUser.toLowerCase());
+	const user = users.find(u => u.x?.toLowerCase() === xUser?.toLowerCase());
 
 	if (!user) {
 		displayElement.innerHTML = `<span class='error'>No user found with X handle <strong>@${xUser}</strong>.</span>`;
