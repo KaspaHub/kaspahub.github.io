@@ -640,7 +640,24 @@ table tr:hover {
 	background-color: rgba(100, 100, 100, 0.1);
 }
 
-/* ad */
+/* google ad v */
 ins.adsbygoogle[data-ad-status="unfilled"] {
     display: none !important;
+}
+
+/* cosmetic v */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+#itemGrid {
+	opacity: 0;
+	animation: fadeIn 0.8s ease-out forwards;
 }
