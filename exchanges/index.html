@@ -690,7 +690,7 @@ const internalArray = [
 const internalMap = new Map(internalArray.map(item => [item.title, item]));
 const externalMap = new Map(externalArray.map(item => [item.title, item]));
 
-const mergedItems = internalArray.map(internal => {
+const mergedArray = internalArray.map(internal => {
 	const external = externalMap.get(internal.title) || {};
 	return {
 		...external,
@@ -705,7 +705,7 @@ const mergedItems = internalArray.map(internal => {
 if (!HIDE_MISSING) {
 	externalArray.forEach(external => {
 		if (!internalMap.has(external.title)) {
-			mergedItems.push({
+			mergedArray.push({
 				...external,
 				description: "",
 				features: {}
@@ -721,7 +721,7 @@ const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
 
-let filteredItems = [...mergedItems];
+let filteredItems = [...mergedArray];
 
 function renderItems(initial = false) {
 	if (initial) {
@@ -746,7 +746,7 @@ function renderItems(initial = false) {
 	});
 
 	currentIndex += slice.length;
-	counter.textContent = `(${filteredItems.length} of ${mergedItems.length})`;
+	counter.textContent = `(${filteredItems.length} of ${mergedArray.length})`;
 	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
@@ -755,7 +755,7 @@ function filterItems() {
 	filterCheckboxes.forEach(cb => cb.checked && activeFeatures.add(cb.dataset.feature));
 
 	const searchTerm = searchInput.value.trim().toLowerCase();
-	const defaultOrder = [...mergedItems];
+	const defaultOrder = [...mergedArray];
 
 	filteredItems = defaultOrder.filter(item => {
 		for (let feature of activeFeatures) {
@@ -774,7 +774,7 @@ function filterItems() {
 	if (filteredItems.length === 0) {
 		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
-		counter.textContent = `(0 of ${mergedItems.length})`;
+		counter.textContent = `(0 of ${mergedArray.length})`;
 		return;
 	}
 
