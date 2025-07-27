@@ -84,7 +84,7 @@
 			<option value="za">Z - A</option>
 		</select>
 	</div>
-	<div class="filter-grid" id="toolGrid"></div>
+	<div class="filter-grid" id="itemGrid"></div>
 	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 </div>
@@ -93,255 +93,622 @@
 <script type="module">
 import { resources } from 'https://kaspahub.github.io/directory/resources.js';
 
+const HIDE_MISSING = true;
+
 const toolsPerPage = 30;
 let currentIndex = 0;
 
-const descriptions = [
+const items = [
 {
-	name: "PHANTOM GHOSTDAG Whitepaper",
+	item: "PHANTOM GHOSTDAG Whitepaper",
 	description: "The PHANTOM GHOSTDAG whitepaper introduces a scalable generalization of Nakamoto Consensus, utilizing a blockDAG structure to enhance throughput and security, implemented in the Kaspa cryptocurrency.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "DAG KNIGHT Whitepaper",
+	item: "DAG KNIGHT Whitepaper",
 	description: "The DAG KNIGHT whitepaper presents a parameterless evolution of the PHANTOM protocol, enabling a permissionless consensus without a priori latency bounds, enhancing speed and security for Kaspa’s blockDAG.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa.org",
+	item: "Kaspa.org",
 	description: "The main Kaspa website provides comprehensive information on Kaspa’s GHOSTDAG protocol, blockDAG architecture, and ecosystem resources, including links to wallets, explorers, and development tools for network analysis.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: true,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa.com",
+	item: "Kaspa.com",
 	description: "Community-driven platform for minting and trading KRC-20 tokens, KRC-721 NFTs, and KNS domains on Kaspa’s blockDAG, with educational blog posts, portfolio tools, and token ecosystem analytics.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KASmedia",
+	item: "KASmedia",
 	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Ecosystem Foundation",
+	item: "Kaspa Ecosystem Foundation",
 	description: "Supports the growth and development of the Kaspa ecosystem through grants, events, and community initiatives, publishing monthly reports and news to build a thriving ecosystem.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: true,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Industrial Initiative",
+	item: "Kaspa Industrial Initiative",
 	description: "A foundation leveraging Kaspa’s high-performance DAG-based DLT to drive innovation and efficiency across industrial and enterprise sectors, fostering a robust ecosystem through events and educational campaigns.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: true,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Research",
+	item: "Kaspa Research",
 	description: "A community platform for discussing and developing on Kaspa, covering topics such as consensus, mining, privacy, and more.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Wiki",
+	item: "Kaspa Wiki",
 	description: "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockchain, its protocol, and ecosystem.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Yonatan Sompolinsky Medium",
+	item: "Yonatan Sompolinsky Medium",
 	description: "Medium profile of Yonatan Sompolinsky, inventor of the GHOSTDAG protocol and founder of DAGLabs, providing insights into Kaspa and blockchain technology.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Shai Wyborski Medium",
+	item: "Shai Wyborski Medium",
 	description: "Medium profile of Shai (Deshe) Wyborski, Ph.D. in quantum cryptography from Hebrew University, key Kaspa contributor and GHOSTDAG paper co-author, sharing insights on Kaspa, blockDAGs, blockchain technology, and cryptography.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Michael Sutton Medium",
+	item: "Michael Sutton Medium",
 	description: "Medium profile of Michael Sutton, a core Kaspa developer with an M.Sc. from Hebrew University in parallel algorithms and distributed systems, co-author of DAG KNIGHT, sharing insights on Kaspa’s Rust rewrite, Crescendo Hard-Fork, and Bitcoin.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Aviv Zohar Medium",
+	item: "Aviv Zohar Medium",
 	description: "Medium profile of Aviv Zohar, Hebrew University professor and PHANTOM GHOSTDAG co-author, sharing insights on Kaspa’s blockDAG, Bitcoin economics, and blockchain protocols.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Ori Newman Medium",
+	item: "Ori Newman Medium",
 	description: "Medium profile of Ori Newman, a core Kaspa developer and Bitcoin enthusiast since 2013, sharing insights on Kaspa’s BlockDAG, Bitcoin scaling, and blockchain security.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "coderofstuff Medium",
+	item: "coderofstuff Medium",
 	description: "Medium profile of coderofstuff, sharing articles and insights on Kaspa’s blockDAG, covering its technology, updates, and ecosystem developments.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Core R&D (public) Telegram",
+	item: "Kaspa Core R&D (public) Telegram",
 	description: "A public topic-based group for Kaspa core research and development. Enthusiasts and developers can join to follow dev discussions.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KaspaSilver",
+	item: "KaspaSilver",
 	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: true,
+		visualizer: false
+	}
 },
 {
-	name: "The Book of Kaspa",
+	item: "The Book of Kaspa",
 	description: "A book by N.R. Crowningshield exploring Kaspa’s BlockDAG architecture, GHOSTDAG protocol, and its role in advancing digital finance, offering insights into its technology and community.",
+	features: {
+			articles: false,
+			analytics: false,
+			blockExplorer: false,
+			videos: false,
+			visualizer: false
+	}
 },
 {
-	name: "KaspArchive",
+	item: "KaspArchive",
 	description: "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
-
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Daily",
+	item: "Kaspa Daily",
 	description: "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kasbun",
+	item: "Kasbun",
 	description: "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Mineable Money",
+	item: "Mineable Money",
 	description: "Mineable.money provides Kaspa resources for developers and miners, offering links to mining tools, developer APIs, and network data for the decentralized Kaspa cryptocurrency.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KasBay",
+	item: "KasBay",
 	description: "A comprehensive resource hub for the Kaspa ecosystem, offering information on cutting-edge technology, latest news, innovative tools, and community resources, including educational content and access to explorers and KRC20 tools.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Burno",
+	item: "Burno",
 	description: "Community-driven platform for Kaspa’s ecosystem, covering KRC-20 tokens, projects, wallets, news, and insights with curated posts for traders and enthusiasts.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa FAQ",
+	item: "Kaspa FAQ",
 	description: "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "The Crypto Chronicles of Yonatan Sompolinsky",
+	item: "The Crypto Chronicles of Yonatan Sompolinsky",
 	description: "A Medium post detailing Yonatan Sompolinsky's contributions to cryptocurrency, emphasizing his citations and involvement in Ethereum, Polkadot, Avalanche, and others, based on extensive online research.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Hub",
+	item: "Kaspa Hub - Articles",
 	description: "A collection of articles exploring Kaspa and the cryptocurrency ecosystem, providing insights and practical information for users.",
+	features: {
+		articles: true,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KaspHub",
+	item: "KaspHub",
 	description: "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
+	features: {
+		articles: true,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Explorer",
+	item: "Kaspa Explorer",
 	description: "The Kaspa Block Explorer allows querying addresses, blocks, and transactions, including KRC-20 token transactions, providing essential on-chain data for researchers analyzing Kaspa's blockDAG structure.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: true,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kas.fyi",
+	item: "Kas.fyi",
 	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data—perfect for exploring blocks, addresses, and on-chain activity.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: true,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspalytics",
+	item: "Kaspalytics",
 	description: "Kaspalytics provides on-chain analysis with a DAG Tip Visualizer, market data (price, market cap, volume), and network statistics (DAA Score, hashrate, supply). It includes tools like Circulating Supply Aging and Addresses by KAS Balance.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspa NG",
+	item: "Kaspa NG",
 	description: "KNG is a p2p node, wallet, and BlockDAG visualizer built on Rusty Kaspa. Its visualizer displays Kaspa’s blockDAG topology, aiding researchers in analyzing network structure and performance.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "KRC-20.org",
+	item: "KRC-20.org",
 	description: "KaspaDash is an app for exploring KRC-20 tokens on Kaspa, featuring a token directory and a dashboard for portfolio management and transaction tracking using the Kasware wallet.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KatScan",
+	item: "KatScan",
 	description: "KatScan is a KRC-20 token explorer for the Kaspa ecosystem, offering real-time tracking, market analysis, and a mint heatmap for visualizing token activity.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: true,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Node Map",
+	item: "Kaspa Node Map",
 	description: "A map of public Kaspa nodes providing real-time data on node distribution and status, useful for monitoring network health and launching new nodes.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspa Globe",
+	item: "Kaspa Globe",
 	description: "An interactive globe displaying Kaspa network peers in real-time, providing insights into the distribution and connectivity of the Kaspa network.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspa Network Hashrate",
+	item: "Kaspa Network Hashrate",
 	description: "An interactive visualization tool displaying accurate Kaspa network hashrate data, providing real-time insights and historical measurements since genesis.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kasunder",
+	item: "Kasunder",
 	description: "Kaspa's first on-chain visual analytics tool, offering dazzling visual representations of on-chain data to help users understand and navigate the Kaspa blockchain.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspa Graph Inspector",
+	item: "Kaspa Graph Inspector",
 	description: "The KGI BlockDAG Visualizer is designed to display Kaspa’s blockDAG topology, helping researchers understand the structure and relationships of parallel blocks in the network.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "KasNodes",
+	item: "KasNodes",
 	description: "KasNodes tracks Kaspa network nodes, providing performance metrics and geographic distribution data to monitor network health and decentralization for researchers and node operators.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Insights",
+	item: "Kaspa Insights",
 	description: "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Rainbow Chart",
+	item: "Kaspa Rainbow Chart",
 	description: "A visualization tool that plots Kaspa's price trend using the power law on a rainbow chart, helping users understand potential price movements based on historical data.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "KasMap",
+	item: "KasMap",
 	description: "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kasplore",
+	item: "Kasplore",
 	description: "A comprehensive Kaspa explorer providing real-time data on blocks, transactions, and addresses, with support for KRC20 tokens.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: true,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Look into Kaspa",
+	item: "Look into Kaspa",
 	description: "A platform for Kaspa network interaction, offering a DM Slider to send messages with KAS, a mempool visualizer, and energy trading simulations with real-time network stats like transactions and blocks per second.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KaspaWave",
+	item: "KaspaWave",
 	description: "KaspaWave is a community platform for Kaspa cryptocurrency, offering tools to track wallets, monitor KRC20 tokens, and stay updated with the latest news and discussions in the Kaspa ecosystem.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "KasView",
+	item: "KasView",
 	description: "A comprehensive tool for tracking Kaspa's price, converting currencies, simulating investments, and monitoring live rates and portfolio performance.",
+	features: {
+		articles: false,
+		analytics: true,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa vs. Bitcoin Miner Revenue Calculator",
+	item: "Kaspa vs. Bitcoin Miner Revenue Calculator",
 	description: "A calculator comparing Kaspa and Bitcoin miner revenue, simulating future scenarios to demonstrate Kaspa’s potential to outperform Bitcoin in hashrate and security budget.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kaspa Breakeven Calculator",
+	item: "Kaspa Breakeven Calculator",
 	description: "Kaspa Breakeven Calculator computes breakeven points for Kaspa mining or investments, helping users assess profitability with cost and revenue inputs.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: false
+	}
 },
 {
-	name: "Kas Music 3D Visualizer",
-	description: "A 3D visualizer for the Kaspa block DAG that provides an interactive and auditory experience of the network's structure.",
-},
-{
-	name: "Kaspa 10 BPS 3D Visualizer",
-	description: "A 3D visualizer for the Kaspa blockDAG network operating at 10 blocks per second, providing an interactive and dynamic representation of real-time block creation and network activity.",
-},
-{
-	name: "Kaspa GHOSTDAG Visualizer",
+	item: "Kaspa GHOSTDAG Visualizer",
 	description: "An interactive tool visualizing Kaspa’s GHOSTDAG protocol, showcasing real-time parallel block processing and deterministic block ordering with network stats like blue score, DAA score, and blocks per second.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspaspeed",
+	item: "Kas Music 3D Visualizer",
+	description: "A 3D visualizer for the Kaspa block DAG that provides an interactive and auditory experience of the network's structure.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
+},
+{
+	item: "Kaspa 10 BPS 3D Visualizer",
+	description: "A 3D visualizer for the Kaspa blockDAG network operating at 10 blocks per second, providing an interactive and dynamic representation of real-time block creation and network activity.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
+},
+{
+	item: "Kaspaspeed",
 	description: "Kaspaspeed visualizes block speeds of blockchain networks, comparing Kaspa’s high block rate (10 BPS) with Bitcoin, Solana, and others. It highlights Kaspa’s blockDAG performance for PoW vs. PoS research.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 },
 {
-	name: "Kaspa Network Visualizer",
+	item: "Kaspa Network Visualizer",
 	description: "An interactive 3D visualization of the Kaspa blockchain network, allowing users to observe real-time block creation and network dynamics, inspired by the book 'Kaspa: From Ghost to Knight'.",
+	features: {
+		articles: false,
+		analytics: false,
+		blockExplorer: false,
+		videos: false,
+		visualizer: true
+	}
 }
 ];
 
-// If you have some internal resources NOT present in external, add here:
-const internalResources = [
-// {
-//	 name: "Custom Item",
-//	 description: "A unique item not in the external list.",
-//	 link: "https://x.com/KaspaHub",
-//	 logo: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp",
-//	 features: { analytics: true }
-// }
-];
+const descriptionMap = new Map(items.map(d => [d.item, d]));
 
-const externalSites = new Set(resources.map(r => r.link));
-const combinedResources = [
-	...resources,
-	...internalResources.filter(r => !externalSites.has(r.link))
-];
+const mergedResources = resources
+	.filter(resource => !HIDE_MISSING || descriptionMap.has(resource.item))
+	.map(resource => {
+		const meta = descriptionMap.get(resource.item);
+		return {
+			...resource,
+			description: meta?.description || '',
+			features: meta?.features || {}
+		};
+	});
 
-const resourcesWithDescriptions = combinedResources.map(resource => {
-	const descObj = descriptions.find(d => d.name === resource.name);
-	return {
-		...resource,
-		description: descObj ? descObj.description : (resource.description || "")
-	};
-});
-
-const toolGrid = document.getElementById('toolGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
 const searchInput = document.getElementById('searchInput');
@@ -349,11 +716,11 @@ const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
 
 let lastCheckedRadio = null;
-let filteredTools = [...resourcesWithDescriptions];
+let filteredTools = [...mergedResources];
 
 function renderTools(initial = false) {
 	if (initial) {
-		toolGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
@@ -362,17 +729,17 @@ function renderTools(initial = false) {
 		const card = document.createElement('div');
 		card.classList.add('filter-card', 'theme-1');
 		card.innerHTML = `
-		<div class="filter-logo">
-			<img src="${tool.logo}" alt="${tool.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
-		</div>
-		<h3>${tool.name}</h3>
-		<p class="filter-description">${tool.description || ''}</p>
-		<a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
-		toolGrid.appendChild(card);
+			<div class="filter-logo">
+				<img src="${tool.logo}" alt="${tool.item} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
+			</div>
+			<h3>${tool.item}</h3>
+			<p class="filter-description">${tool.description || ''}</p>
+			<a href="${tool.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
+		itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
-	counter.textContent = `(${filteredTools.length} of ${resourcesWithDescriptions.length})`;
+	counter.textContent = `(${filteredTools.length} of ${mergedResources.length})`;
 	loadMoreBtn.style.display = currentIndex < filteredTools.length ? 'block' : 'none';
 }
 
@@ -380,24 +747,24 @@ function filterTools() {
 	const selectedFeature = Array.from(filterRadios).find(radio => radio.checked)?.dataset.feature;
 	const searchTerm = searchInput.value.trim().toLowerCase();
 
-	filteredTools = [...resourcesWithDescriptions].filter(tool => {
+	filteredTools = [...mergedResources].filter(tool => {
 		if (selectedFeature && !tool.features?.[selectedFeature]) return false;
 		return searchTerm === "" ||
-			tool.name.toLowerCase().includes(searchTerm) ||
+			tool.item.toLowerCase().includes(searchTerm) ||
 			(tool.description && tool.description.toLowerCase().includes(searchTerm));
 	});
 
 	const sortMode = sortSelect.value;
 	if (sortMode === 'az') {
-		filteredTools.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+		filteredTools.sort((a, b) => a.item.localeCompare(b.item, 'en', { sensitivity: 'base' }));
 	} else if (sortMode === 'za') {
-		filteredTools.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+		filteredTools.sort((a, b) => b.item.localeCompare(a.item, 'en', { sensitivity: 'base' }));
 	}
 
 	if (filteredTools.length === 0) {
-		toolGrid.innerHTML = '<p class="no-items-message">No resources match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No resources match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
-		counter.textContent = `(0 of ${resourcesWithDescriptions.length})`;
+		counter.textContent = `(0 of ${mergedResources.length})`;
 		return;
 	}
 
