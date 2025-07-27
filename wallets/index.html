@@ -118,15 +118,15 @@
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
 <script type="module">
-import { wallets as externalWallets } from 'https://kaspahub.github.io/directory/wallets.js';
+import { wallets as externalArray } from 'https://kaspahub.github.io/directory/wallets.js';
 
 const HIDE_MISSING = true;
-const walletsPerPage = 30;
+const itemsPerPage = 30;
 let currentIndex = 0;
 
-const internalWallets = [
+const internalArray = [
 {
-	item: "Tangem",
+	title: "Tangem",
 	description: "Popular cold wallet for simple, multi-chain asset management. Ideal for users valuing simplicity with keyless operation.",
 	features: {
 		multiChain: true,
@@ -137,7 +137,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "OneKey",
+	title: "OneKey",
 	description: "Secure hardware DeFi wallet for advanced users, offering multi-chain support across devices, and browsers.",
 	features: {
 		openSource: true,
@@ -150,7 +150,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kaspium",
+	title: "Kaspium",
 	description: "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
 	features: {
 		openSource: true,
@@ -159,7 +159,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "KasKeeper",
+	title: "KasKeeper",
 	description: "Web3 wallet for Kaspa with KRC20 token support, backed by KEF, designed for secure self-custodial storage and daily transactions.",
 	features: {
 		selfCustodial: true,
@@ -169,7 +169,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kasware",
+	title: "Kasware",
 	description: "The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains.",
 	features: {
 		openSource: true,
@@ -182,7 +182,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kastle Wallet",
+	title: "Kastle Wallet",
 	description: "Kastle Wallet is a secure, user-friendly wallet for the Kaspa network, supporting KRC-20 tokens, KRC-721 NFTs, KNS domains, and Ledger integration.",
 	features: {
 		selfCustodial: true,
@@ -194,7 +194,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Ghost Wallet",
+	title: "Ghost Wallet",
 	description: "Non-custodial, open-source Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, swapping, and transfers.",
 	features: {
 		openSource: true,
@@ -204,7 +204,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kurncy",
+	title: "Kurncy",
 	description: "Lightweight custodial Kaspa wallet with self-custody option on iOS & Android, supporting KRC20, KRC721 tokens and KNS domains.",
 	features: {
 		krc20: true,
@@ -214,7 +214,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kaspa NG",
+	title: "Kaspa NG",
 	description: "KNG is a Kaspa wallet with advanced features, including tools for full-node runners and developers, with a strong focus on security.",
 	features: {
 		openSource: true,
@@ -224,7 +224,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "SafePal",
+	title: "SafePal",
 	description: "Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping.",
 	features: {
 		multiChain: true,
@@ -235,7 +235,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Goldshell Wallet",
+	title: "Goldshell Wallet",
 	description: "Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring.",
 	features: {
 		multiChain: true,
@@ -245,7 +245,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Cool Wallet",
+	title: "Cool Wallet",
 	description: "Secure wallet with both cold and hot wallet functionality, supporting multi-chain assets and built-in token swapping.",
 	features: {
 		multiChain: true,
@@ -255,7 +255,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kaspanet",
+	title: "Kaspanet",
 	description: "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
 	features: {
 		openSource: true,
@@ -264,7 +264,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Guarda",
+	title: "Guarda",
 	description: "Multiplatform non-custodial wallet with features for managing, buying, exchanging, and staking a wide range of cryptocurrencies.",
 	features: {
 		multiChain: true,
@@ -275,7 +275,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Zelcore",
+	title: "Zelcore",
 	description: "Non-custodial multi-chain wallet for mobile and desktop, supporting assets across a wide range of blockchains.",
 	features: {
 		multiChain: true,
@@ -286,7 +286,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "CoinEx Wallet",
+	title: "CoinEx Wallet",
 	description: "Multi-chain non-custodial wallet with DeFi integration for secure storage and trading. Formerly known as ViaWallet.",
 	features: {
 		multiChain: true,
@@ -295,7 +295,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "OKX Wallet",
+	title: "OKX Wallet",
 	description: "Custodial wallet integrated with a Tier 1 exchange, offering multi-chain support and seamless access to trading, transfers, and Web3 features.",
 	features: {
 		multiChain: true,
@@ -304,7 +304,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "NOW Wallet",
+	title: "NOW Wallet",
 	description: "Cross-platform non-custodial wallet with multi-chain support, staking, NFTs, dApps, and fiat-to-crypto swap feature.",
 	features: {
 		multiChain: true,
@@ -314,7 +314,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Plus Wallet",
+	title: "Plus Wallet",
 	description: "Lightweight multi-chain wallet with built-in swap feature, available on mobile and web for easy use.",
 	features: {
 		multiChain: true,
@@ -323,7 +323,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Atomik Wallet",
+	title: "Atomik Wallet",
 	description: "A cross-platform wallet from Kasway designed for easy and secure payments on the Kaspa network, focused on simplicity for all users. <b>Work in progress.</b>",
 	features: {
 		openSource: true,
@@ -332,7 +332,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Kaspacom Wallet",
+	title: "Kaspacom Wallet",
 	description: "An open-source KaspaCom web wallet, formerly known as Kaspiano, fully integrated with both Layer 1 and Layer 2 of the Kaspa network. <b>Work in progress.</b>",
 	features: {
 		openSource: true,
@@ -340,7 +340,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "KSPR Bot",
+	title: "KSPR Bot",
 	description: "Telegram-based wallet for Kaspa, offering seamless KRC20 token management and self-custodial storage, ideal for users seeking convenience and integration with messaging platform.",
 	features: {
 		selfCustodial: true,
@@ -349,7 +349,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Math Wallet",
+	title: "Math Wallet",
 	description: "Versatile multi-chain wallet with support for hundreds of blockchains, featuring hardware integration and cross-platform access.",
 	features: {
 		multiChain: true,
@@ -361,7 +361,7 @@ const internalWallets = [
 	}
 },
 {
-	item: "Ledger",
+	title: "Ledger",
 	description: "Industry-leading cold wallet for multi-chain asset management on desktop and mobile, <strong>currently only works with KasVault</strong>.",
 	features: {
 		multiChain: true,
@@ -373,11 +373,11 @@ const internalWallets = [
 }
 ];
 
-const internalMap = new Map(internalWallets.map(w => [w.item, w]));
-const externalMap = new Map(externalWallets.map(w => [w.item, w]));
+const internalMap = new Map(internalArray.map(item => [item.title, item]));
+const externalMap = new Map(externalArray.map(item => [item.title, item]));
 
-const mergedWallets = internalWallets.map(internal => {
-	const external = externalMap.get(internal.item) || {};
+const mergedItems = internalArray.map(internal => {
+	const external = externalMap.get(internal.title) || {};
 	return {
 		...external,
 		...internal,
@@ -389,9 +389,9 @@ const mergedWallets = internalWallets.map(internal => {
 });
 
 if (!HIDE_MISSING) {
-	externalWallets.forEach(external => {
-		if (!internalMap.has(external.item)) {
-			mergedWallets.push({
+	externalArray.forEach(external => {
+		if (!internalMap.has(external.title)) {
+			mergedItems.push({
 				...external,
 				description: "",
 				features: {}
@@ -407,7 +407,7 @@ const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
 
-let filteredWallets = [...mergedWallets];
+let filteredItems = [...mergedItems];
 
 const tagInfoMap = {
 	openSource: { name: "Open Source", type: "feature" },
@@ -423,22 +423,22 @@ const tagInfoMap = {
 	web: { name: "Web", type: "device", icon: "https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/devices/web.webp" }
 };
 
-function renderWallets(initial = false) {
+function renderItems(initial = false) {
 	if (initial) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
-	const slice = filteredWallets.slice(currentIndex, currentIndex + walletsPerPage);
-	slice.forEach(wallet => {
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
 		const card = document.createElement('div');
 		card.classList.add('filter-card', 'theme-1');
 
 		let featureTagsHtml = '';
 		let platformTagsHtml = '';
 
-		for (const key in wallet.features) {
-			if (wallet.features[key]) {
+		for (const key in item.features) {
+			if (item.features[key]) {
 				const tag = tagInfoMap[key];
 				if (tag?.type === 'feature') {
 					featureTagsHtml += `<span class="feature-tag">${tag.name}</span>`;
@@ -451,60 +451,60 @@ function renderWallets(initial = false) {
 
 		card.innerHTML = `
 <div class="filter-logo">
-<img src="${wallet.logo}" alt="${wallet.item} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/directory@latest/logos/logo.webp';" loading="lazy">
+<img src="${item.logo}" alt="${item.title} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/directory@latest/logos/logo.webp';" loading="lazy">
 </div>
-<h3>${wallet.item}</h3>
-<p class="filter-description">${wallet.description || ''}</p>
+<h3>${item.title}</h3>
+<p class="filter-description">${item.description || ''}</p>
 <div class="filter-features-container">${featureTagsHtml}</div>
 <div class="filter-platforms-container">${platformTagsHtml}</div>
-<a href="${wallet.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
+<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
 		`;
 
 		itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
-	counter.textContent = `(${filteredWallets.length} of ${mergedWallets.length})`;
-	loadMoreBtn.style.display = currentIndex < filteredWallets.length ? 'block' : 'none';
+	counter.textContent = `(${filteredItems.length} of ${mergedItems.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
-function filterWallets() {
+function filterItems() {
 	const activeFeatures = new Set();
 	filterCheckboxes.forEach(cb => cb.checked && activeFeatures.add(cb.dataset.feature));
 
 	const searchTerm = searchInput.value.trim().toLowerCase();
 
-	filteredWallets = mergedWallets.filter(wallet => {
+	filteredItems = mergedItems.filter(item => {
 		for (let f of activeFeatures) {
-			if (!wallet.features?.[f]) return false;
+			if (!item.features?.[f]) return false;
 		}
 		return (
 			searchTerm === '' ||
-			wallet.item.toLowerCase().includes(searchTerm) ||
-			(wallet.description && wallet.description.toLowerCase().includes(searchTerm))
+			item.title.toLowerCase().includes(searchTerm) ||
+			(item.description && item.description.toLowerCase().includes(searchTerm))
 		);
 	});
 
 	const sortMode = sortSelect.value;
-	if (sortMode === 'az') filteredWallets.sort((a, b) => a.item.localeCompare(b.item));
-	if (sortMode === 'za') filteredWallets.sort((a, b) => b.item.localeCompare(a.item));
+	if (sortMode === 'az') filteredItems.sort((a, b) => a.title.localeCompare(b.title));
+	if (sortMode === 'za') filteredItems.sort((a, b) => b.title.localeCompare(a.title));
 
-	if (filteredWallets.length === 0) {
-		itemGrid.innerHTML = '<p class="no-items-message">No wallets match your search and filters.</p>';
+	if (filteredItems.length === 0) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
-		counter.textContent = `(0 of ${mergedWallets.length})`;
+		counter.textContent = `(0 of ${mergedItems.length})`;
 		return;
 	}
 
-	renderWallets(true);
+	renderItems(true);
 }
 
-filterCheckboxes.forEach(cb => cb.addEventListener('change', filterWallets));
-searchInput.addEventListener('input', filterWallets);
-sortSelect.addEventListener('change', filterWallets);
-loadMoreBtn.addEventListener('click', () => renderWallets());
+filterCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
 
-renderWallets(true);
+renderItems(true);
 </script>
 
 </body>
