@@ -94,7 +94,6 @@
 import { resources } from 'https://kaspahub.github.io/directory/resources.js';
 
 const HIDE_MISSING = true;
-
 const toolsPerPage = 30;
 let currentIndex = 0;
 
@@ -375,18 +374,7 @@ const items = [
 	}
 },
 {
-	item: "The Crypto Chronicles of Yonatan Sompolinsky",
-	description: "A Medium post detailing Yonatan Sompolinsky's contributions to cryptocurrency, emphasizing his citations and involvement in Ethereum, Polkadot, Avalanche, and others, based on extensive online research.",
-	features: {
-		articles: true,
-		analytics: false,
-		blockExplorer: false,
-		videos: false,
-		visualizer: false
-	}
-},
-{
-	item: "Kaspa Hub - Articles",
+	item: "Kaspa Hub",
 	description: "A collection of articles exploring Kaspa and the cryptocurrency ecosystem, providing insights and practical information for users.",
 	features: {
 		articles: true,
@@ -697,16 +685,26 @@ const items = [
 
 const descriptionMap = new Map(items.map(d => [d.item, d]));
 
-const mergedResources = resources
-	.filter(resource => !HIDE_MISSING || descriptionMap.has(resource.item))
-	.map(resource => {
-		const meta = descriptionMap.get(resource.item);
-		return {
-			...resource,
-			description: meta?.description || '',
-			features: meta?.features || {}
-		};
-	});
+const externalMap = new Map(resources.map(r => [r.item, r]));
+
+const mergedResources = items.map(hardcoded => {
+	const external = externalMap.get(hardcoded.item) || {};
+	return {
+		...external,
+		...hardcoded,
+		features: {
+			...(external.features || {}),
+			...(hardcoded.features || {})
+		}
+	};
+});
+
+resources.forEach(external => {
+	if (!descriptionMap.has(external.item)) {
+		mergedResources.push(external);
+	}
+});
+
 
 const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
@@ -730,7 +728,7 @@ function renderTools(initial = false) {
 		card.classList.add('filter-card', 'theme-1');
 		card.innerHTML = `
 			<div class="filter-logo">
-				<img src="${tool.logo}" alt="${tool.item} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/logos/logo.webp';" loading="lazy">
+				<img src="${tool.logo}" alt="${tool.item} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/KaspaHub/directory@latest/logos/logo.webp';" loading="lazy">
 			</div>
 			<h3>${tool.item}</h3>
 			<p class="filter-description">${tool.description || ''}</p>
