@@ -124,114 +124,114 @@ margin: 0;
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const button = document.getElementById("load-chart-btn");
-      const container = document.getElementById("chart-container");
-      let loaded = false;
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const button = document.getElementById("load-chart-btn");
+const container = document.getElementById("chart-container");
+let loaded = false;
 
-      button.addEventListener("click", () => {
-        if (!loaded) {
-          const widget = document.createElement("div");
-          widget.className = "tradingview-widget-container";
-          widget.style = "height:100%; width:100%";
-          widget.innerHTML = `
-            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-            <div class="tradingview-widget-copyright">
-              <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-                <span class="blue-text">Track all markets on TradingView</span>
-              </a>
-            </div>
-          `;
+button.addEventListener("click", () => {
+if (!loaded) {
+  const widget = document.createElement("div");
+  widget.className = "tradingview-widget-container";
+  widget.style = "height:100%; width:100%";
+  widget.innerHTML = `
+    <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+    <div class="tradingview-widget-copyright">
+      <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+	<span class="blue-text">Track all markets on TradingView</span>
+      </a>
+    </div>
+  `;
 
-          const script = document.createElement("script");
-          script.type = "text/javascript";
-          script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-          script.async = true;
-          script.innerHTML = JSON.stringify({
-            symbol: "MEXC:KASUSDT",
-            interval: "60",
-            theme: "dark",
-            style: "1",
-            locale: "en",
-            autosize: true,
-            backgroundColor: "#0F0F0F",
-            gridColor: "rgba(242, 242, 242, 0.06)",
-            timezone: "Etc/UTC",
-            allow_symbol_change: true,
-            hide_top_toolbar: false,
-            hide_side_toolbar: true,
-            hide_volume: false,
-            calendar: false,
-            details: false,
-            save_image: true,
-          });
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+  script.async = true;
+  script.innerHTML = JSON.stringify({
+    symbol: "MEXC:KASUSDT",
+    interval: "60",
+    theme: "dark",
+    style: "1",
+    locale: "en",
+    autosize: true,
+    backgroundColor: "#0F0F0F",
+    gridColor: "rgba(242, 242, 242, 0.06)",
+    timezone: "Etc/UTC",
+    allow_symbol_change: true,
+    hide_top_toolbar: false,
+    hide_side_toolbar: true,
+    hide_volume: false,
+    calendar: false,
+    details: false,
+    save_image: true,
+  });
 
-          widget.appendChild(script);
-          container.appendChild(widget);
-          loaded = true;
-          button.textContent = "❌ Close Chart";
-        } else {
-          container.innerHTML = "";
-          loaded = false;
-          button.textContent = "📈 Open Chart";
-        }
-      });
-    });
-  </script>
+  widget.appendChild(script);
+  container.appendChild(widget);
+  loaded = true;
+  button.textContent = "❌ Close Chart";
+} else {
+  container.innerHTML = "";
+  loaded = false;
+  button.textContent = "📈 Open Chart";
+}
+});
+});
+</script>
 
-  <script defer>
-    document.addEventListener("DOMContentLoaded", () => {
-      const priceEl = document.getElementById("price");
-      const marketCapEl = document.getElementById("market-cap");
-      const fdvEl = document.getElementById("fdv");
-      const circEl = document.getElementById("circ-supply");
-      const maxEl = document.getElementById("max-supply");
+<script defer>
+document.addEventListener("DOMContentLoaded", () => {
+const priceEl = document.getElementById("price");
+const marketCapEl = document.getElementById("market-cap");
+const fdvEl = document.getElementById("fdv");
+const circEl = document.getElementById("circ-supply");
+const maxEl = document.getElementById("max-supply");
 
-      const supply = {
-        circulating: 26476089441,
-        max: 28704026601
-      };
+const supply = {
+circulating: 26476089441,
+max: 28704026601
+};
 
-      async function fetchPrice() {
-        try {
-          const res = await fetch("https://api.kaspa.org/info/price");
-          if (!res.ok) throw new Error("API error");
-          const { price } = await res.json();
-          updateUI(price);
-        } catch (e) {
-          console.error("Failed to fetch Kaspa price:", e);
-          priceEl.textContent = "Error loading price";
-        }
-      }
+async function fetchPrice() {
+try {
+  const res = await fetch("https://api.kaspa.org/info/price");
+  if (!res.ok) throw new Error("API error");
+  const { price } = await res.json();
+  updateUI(price);
+} catch (e) {
+  console.error("Failed to fetch Kaspa price:", e);
+  priceEl.textContent = "Error loading price";
+}
+}
 
-      function updateUI(price) {
-        const priceFormatted = price.toFixed(6);
-        document.title = `$${price.toFixed(4)} - KAS/USD`;
-        priceEl.textContent = `$${priceFormatted}`;
-        priceEl.classList.remove("updated");
-        void priceEl.offsetWidth;
-        priceEl.classList.add("updated");
+function updateUI(price) {
+const priceFormatted = price.toFixed(6);
+document.title = `$${price.toFixed(4)} - KAS/USD`;
+priceEl.textContent = `$${priceFormatted}`;
+priceEl.classList.remove("updated");
+void priceEl.offsetWidth;
+priceEl.classList.add("updated");
 
-        const marketCap = price * supply.circulating;
-        const fdv = price * supply.max;
+const marketCap = price * supply.circulating;
+const fdv = price * supply.max;
 
-        marketCapEl.textContent = formatLargeNumber(marketCap);
-        fdvEl.textContent = formatLargeNumber(fdv);
-        circEl.textContent = `${(supply.circulating / 1e9).toFixed(2)}B KAS`;
-        maxEl.textContent = `${(supply.max / 1e9).toFixed(2)}B KAS`;
-      }
+marketCapEl.textContent = formatLargeNumber(marketCap);
+fdvEl.textContent = formatLargeNumber(fdv);
+circEl.textContent = `${(supply.circulating / 1e9).toFixed(2)}B KAS`;
+maxEl.textContent = `${(supply.max / 1e9).toFixed(2)}B KAS`;
+}
 
-      function formatLargeNumber(value) {
-        if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
-        if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
-        if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
-        return `$${value.toFixed(2)}`;
-      }
+function formatLargeNumber(value) {
+if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
+if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+return `$${value.toFixed(2)}`;
+}
 
-      fetchPrice();
-      setInterval(fetchPrice, 15000);
-    });
-  </script>
+fetchPrice();
+setInterval(fetchPrice, 15000);
+});
+</script>
 </body>
 </html>
