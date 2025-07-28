@@ -150,4 +150,10 @@
 	<changefreq>weekly</changefreq>
 	<priority>0.7</priority>
 </url>
+<url>
+	<loc>https://kaspahub.org/sitemap-html/</loc>
+	<lastmod>2025-07-28</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>0.6</priority>
+</url>
 </urlset>
