@@ -133,6 +133,7 @@ hr {
 
 .sidebar h3 {
 	margin-bottom: 15px;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 	padding-bottom: 10px;
 	font-weight: 600;
 	opacity: 0.75;
