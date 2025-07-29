@@ -49,40 +49,43 @@
 	<p style="padding-left: 7px;">To get Kaspa, you’ll need a platform such as an exchange, swap service, or custodian - services that let you buy, sell, and manage Kaspa. <br>Filter by features to find the option that best fits your needs.</p>
 </div>
 <div class="main-content-area">
-	<aside class="sidebar theme-1">
-		<div class="filter-category">
-			<h2 id="counter"></h2>
-			<h3>Features</h3>
-			<div class="filter-group">
-				<input type="checkbox" id="noKyc" data-feature="noKyc">
-				<label for="noKyc">No KYC</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="cryptoCard" data-feature="cryptoCard">
-				<label for="cryptoCard">Crypto Card</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="futuresTrading" data-feature="futuresTrading">
-				<label for="futuresTrading">Futures Trading</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="googleApplePay" data-feature="googleApplePay">
-				<label for="googleApplePay">Google & Apple Pay</label>
-			</div>
+
+<aside class="sidebar theme-1">
+	<h2 id="counter"></h2>
+	<h3>Features</h3>
+	<div class="filter-category">
+		<div class="filter-group">
+			<input type="checkbox" id="noKyc" data-feature="noKyc">
+			<label for="noKyc">No KYC</label>
 		</div>
-	</aside>
-	<section class="filter-list-main">
-		<div class="theme-1 search-sort-controls">
-			<input type="text" id="searchInput" placeholder="Search exchanges..."/>
-			<select id="sortSelect">
-				<option value="default">Default</option>
-				<option value="az">A - Z</option>
-				<option value="za">Z - A</option>
-			</select>
+		<div class="filter-group">
+			<input type="checkbox" id="cryptoCard" data-feature="cryptoCard">
+			<label for="cryptoCard">Crypto Card</label>
 		</div>
-		<div class="filter-grid" id="exchangeGrid"></div>
-		<button class="theme-1" id="loadMoreBtn">Load More</button>
-	</section>
+		<div class="filter-group">
+			<input type="checkbox" id="futuresTrading" data-feature="futuresTrading">
+			<label for="futuresTrading">Futures Trading</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="googleApplePay" data-feature="googleApplePay">
+			<label for="googleApplePay">Google & Apple Pay</label>
+		</div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
+		<select id="sortSelect">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
@@ -1185,7 +1188,7 @@ const exchanges = [
 }
 ];
 
-const exchangeGrid = document.getElementById('exchangeGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
 const searchInput = document.getElementById('searchInput');
@@ -1196,7 +1199,7 @@ let filteredExchanges = [...exchanges];
 
 function renderExchanges(initial = false) {
 	if (initial) {
-		exchangeGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
@@ -1213,7 +1216,7 @@ function renderExchanges(initial = false) {
 <a href="${exchange.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
 `;
 		
-		exchangeGrid.appendChild(card);
+		itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
@@ -1244,7 +1247,7 @@ function filterExchanges() {
 	}
 
 	if (filteredExchanges.length === 0) {
-		exchangeGrid.innerHTML = '<p class="no-items-message">No exchanges match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No exchanges match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
 		counter.textContent = `(0 of ${exchanges.length})`;
 		return;

@@ -49,10 +49,11 @@
 	<p style="padding-left: 7px;">Explore Kaspa community chats across various platforms where users worldwide connect, share ideas, exchange insights, and engage in conversations about Kaspa and beyond.</p>
 </div>
 <div class="main-content-area">
+
 <aside class="sidebar theme-1">
+	<h2 id="counter"></h2>
+	<h3>Platforms</h3>
 	<div class="filter-category">
-		<h2 id="counter"></h2>
-		<h3>Platforms</h3>
 		<div class="filter-group">
 			<input type="radio" name="platform" id="discord" data-platform="discord">
 			<label for="discord">Discord</label>
@@ -75,18 +76,20 @@
 		</div>
 	</div>
 </aside>
+
 <section class="filter-list-main">
-<div class="theme-1 search-sort-controls">
-	<input type="text" id="searchInput" placeholder="Search communities..."/>
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
 		<select id="sortSelect">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
-</div>
-<div class="filter-grid" id="communityGrid"></div>
-<button class="theme-1" id="loadMoreBtn">Load More</button>
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
+
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
@@ -342,7 +345,7 @@ const communityChats = [
 }
 ];
 
-const communityGrid = document.getElementById('communityGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-platform]');
 const searchInput = document.getElementById('searchInput');
@@ -353,7 +356,7 @@ let filteredCommunities = [...communityChats];
 
 function renderCommunities(initial = false) {
 	if (initial) {
-		communityGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
@@ -369,7 +372,7 @@ function renderCommunities(initial = false) {
 <p class="filter-description">${community.description}</p>
 <a href="${community.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Community</a>
 `;
-	communityGrid.appendChild(card);
+	itemGrid.appendChild(card);
 	});
 	
 	currentIndex += slice.length;
@@ -396,7 +399,7 @@ function filterCommunities() {
 	}
 
 	if (filteredCommunities.length === 0) {
-		communityGrid.innerHTML = '<p class="no-items-message">No communities match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No communities match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
 		counter.textContent = `(0 of ${communityChats.length})`;
 		return;

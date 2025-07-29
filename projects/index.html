@@ -50,10 +50,11 @@
 </div>
 
 <div class="main-content-area">
+
 <aside class="sidebar theme-1">
+	<h2 id="counter"></h2>
+	<h3>Category</h3>
 	<div class="filter-category">
-		<h2 id="counter"></h2>
-		<h3>Category</h3>
 		<div class="filter-group"><input type="radio" name="feature" id="ai" data-feature="ai"><label for="ai">AI</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="analytics" data-feature="analytics"><label for="analytics">Analytics</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="defi" data-feature="defi"><label for="defi">DeFi</label></div>
@@ -72,16 +73,17 @@
 
 <section class="filter-list-main">
 	<div class="theme-1 search-sort-controls">
-		<input type="text" id="searchInput" placeholder="Search projects..."/>
+		<input type="text" id="searchInput" placeholder="Search..."/>
 		<select id="sortSelect">
 			<option value="default">Default</option>
 			<option value="az">A - Z</option>
 			<option value="za">Z - A</option>
 		</select>
 	</div>
-	<div class="filter-grid" id="projectGrid"></div>
+	<div class="filter-grid" id="itemGrid"></div>
 	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
+
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
@@ -612,7 +614,7 @@ const communityProjects = [
 
 let filteredProjects = [...communityProjects];
 
-const projectGrid = document.getElementById('projectGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
 const searchInput = document.getElementById('searchInput');
@@ -622,7 +624,7 @@ let lastCheckedRadio = null;
 
 function renderProjects(initial = false) {
 	if (initial) {
-		projectGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
@@ -637,7 +639,7 @@ function renderProjects(initial = false) {
 <h3>${project.name}</h3>
 <p class="filter-description">${project.description}</p>
 <a href="${project.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
-	projectGrid.appendChild(card);
+	itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
@@ -664,7 +666,7 @@ function filterProjects() {
 	}
 	
 	if (filteredProjects.length === 0) {
-		projectGrid.innerHTML = '<p class="no-items-message">No community projects match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No community projects match your search and filters.</p>';
 		counter.textContent = `(0 of ${communityProjects.length})`;
 		loadMoreBtn.style.display = 'none';
 		return;
