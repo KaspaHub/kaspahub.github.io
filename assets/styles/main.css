@@ -133,7 +133,6 @@ hr {
 
 .sidebar h3 {
 	margin-bottom: 15px;
-	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 	padding-bottom: 10px;
 	font-weight: 600;
 	opacity: 0.75;
@@ -294,6 +293,11 @@ img {
 	aspect-ratio: 16 / 9;
 }
 
+#counter {
+	margin-bottom: 15px;
+	margin-top: 0;
+}
+
 @media (max-width: 800px) and (max-aspect-ratio: 1/1) {
 	.articleVid {
 		min-width: 100%;
@@ -309,6 +313,7 @@ img {
 	}
 	
 	.sidebar {
+		width: 100%;
 	}
 	
 	.sidebar h2, .filter-category h3 {
