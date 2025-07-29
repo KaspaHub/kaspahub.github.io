@@ -49,44 +49,47 @@
 	<p style="padding-left: 7px;">To start accepting Kaspa, you’ll need a merchant solution - a platform to process KAS payments. <br>Filter by features to find your ideal solution.</p>
 </div>
 <div class="main-content-area">
-	<aside class="sidebar theme-1">
-		<div class="filter-category">
-			<h2 id="counter"></h2>
-			<h3>Features</h3>
-			<div class="filter-group">
-				<input type="checkbox" id="api" data-feature="api">
-				<label for="api">API</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="openSource" data-feature="openSource">
-				<label for="openSource">Open Source</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="onlinePayments" data-feature="onlinePayments">
-				<label for="onlinePayments">Online Payments</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="pointOfSale" data-feature="pointOfSale">
-				<label for="pointOfSale">Point of Sale</label>
-			</div>
-			<div class="filter-group">
-				<input type="checkbox" id="donations" data-feature="donations">
-				<label for="donations">Donations</label>
-			</div>
+
+<aside class="sidebar theme-1">
+	<h2 id="counter"></h2>
+	<h3>Features</h3>
+	<div class="filter-category">
+		<div class="filter-group">
+			<input type="checkbox" id="api" data-feature="api">
+			<label for="api">API</label>
 		</div>
-	</aside>
-	<section class="filter-list-main">
+		<div class="filter-group">
+			<input type="checkbox" id="openSource" data-feature="openSource">
+			<label for="openSource">Open Source</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="onlinePayments" data-feature="onlinePayments">
+			<label for="onlinePayments">Online Payments</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="pointOfSale" data-feature="pointOfSale">
+			<label for="pointOfSale">Point of Sale</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="donations" data-feature="donations">
+			<label for="donations">Donations</label>
+		</div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
 	<div class="theme-1 search-sort-controls">
-		<input type="text" id="searchInput" placeholder="Search merchant solutions..."/>
+		<input type="text" id="searchInput" placeholder="Search..."/>
 		<select id="sortSelect">
 			<option value="default">Default</option>
 			<option value="az">A - Z</option>
 			<option value="za">Z - A</option>
 		</select>
 	</div>
-	<div class="filter-grid" id="merchantGrid"></div>
+	<div class="filter-grid" id="itemGrid"></div>
 	<button class="theme-1" id="loadMoreBtn">Load More</button>
-	</section>
+</section>
+
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
@@ -422,7 +425,7 @@ const merchantSolutions = [
 }
 ];
 
-const merchantGrid = document.getElementById('merchantGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
 const searchInput = document.getElementById('searchInput');
@@ -433,7 +436,7 @@ let filteredMerchants = [...merchantSolutions];
 
 function renderMerchants(initial = false) {
 	if (initial) {
-		merchantGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 	
@@ -449,7 +452,7 @@ function renderMerchants(initial = false) {
 <p class="filter-description">${merchant.description}</p>
 <a href="${merchant.officialSite}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
 `;
-	merchantGrid.appendChild(card);
+	itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
@@ -480,7 +483,7 @@ function filterMerchants() {
 	}
 	
 	if (filteredMerchants.length === 0) {
-	merchantGrid.innerHTML = '<p class="no-items-message">No merchant solutions match your search and filters.</p>';
+	itemGrid.innerHTML = '<p class="no-items-message">No merchant solutions match your search and filters.</p>';
 	loadMoreBtn.style.display = 'none';
 	counter.textContent = `(0 of ${merchantSolutions.length})`;
 	return;

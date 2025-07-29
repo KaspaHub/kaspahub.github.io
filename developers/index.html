@@ -49,10 +49,11 @@
 	<p style="padding-left: 7px;">Discover open-source tools for building on Kaspa, including nodes, wallets, visualization tools, and community support applications. <br>Filter by programming language to find the right tool for your development needs.</p>
 </div>
 <div class="main-content-area">
+
 <aside class="sidebar theme-1">
+	<h2 id="counter"></h2>
+	<h3>Languages</h3>
 	<div class="filter-category">
-		<h2 id="counter"></h2>
-		<h3>Languages</h3>
 		<div class="filter-group">
 			<input type="radio" name="language" id="rust" data-feature="rust">
 			<label for="rust">Rust</label>
@@ -83,18 +84,20 @@
 		</div>
 	</div>
 </aside>
+
 <section class="filter-list-main">
 	<div class="theme-1 search-sort-controls">
-		<input type="text" id="searchInput" placeholder="Search tools..."/>
+		<input type="text" id="searchInput" placeholder="Search..."/>
 		<select id="sortSelect">
 			<option value="default">Default</option>
 			<option value="az">A - Z</option>
 			<option value="za">Z - A</option>
 		</select>
 	</div>
-	<div class="filter-grid" id="toolGrid"></div>
+	<div class="filter-grid" id="itemGrid"></div>
 	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
+
 </div>
 </main>
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
@@ -329,7 +332,7 @@ const tools = [
 }
 ];
 
-const toolGrid = document.getElementById('toolGrid');
+const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
 const searchInput = document.getElementById('searchInput');
@@ -350,7 +353,7 @@ function getRandomColor() {
 
 function renderTools(initial = false) {
 	if (initial) {
-		toolGrid.innerHTML = '';
+		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 	
@@ -367,7 +370,7 @@ function renderTools(initial = false) {
 <p class="filter-description">${tool.description}</p>
 <a href="${tool.githubUrl}" target="_blank" rel="noopener noreferrer" class="link-button">View</a>
 `;
-toolGrid.appendChild(card);
+itemGrid.appendChild(card);
 });
 
 	currentIndex += slice.length;
@@ -394,7 +397,7 @@ function filterTools() {
 	}
 	
 	if (filteredTools.length === 0) {
-		toolGrid.innerHTML = '<p class="no-items-message">No tools match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No tools match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
 		counter.textContent = `(0 of ${tools.length})`;
 		return;
