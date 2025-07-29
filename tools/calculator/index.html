@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#000000" />
+
+	<!-- Primary Meta Tags -->
+	<title>Calculator - Kaspa Hub</title>
+	<meta name="title" content="Calculator - Kaspa Hub" />
+	<meta name="description" content="Easily calculate anything with our Simple Online Calculator web app. Accessible from any device, no installation required. Try it now for free!" />
+	<meta name="keywords" content="count, subtract, multiply, free, download, pwa, web, math, mobile, open source, foss" />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://kaspahub.org/tools/calculator/" />
+	<meta property="og:title" content="Calculator - Kaspa Hub" />
+	<meta property="og:description" content="Easily calculate anything with our Simple Online Calculator web app. Accessible from any device, no installation required. Try it now for free!" />
+	<meta property="og:image" content="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/kaspahub.jpg" />
+	<!-- Twitter -->
+	<meta name="twitter:site" content="@KaspaHub" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:url" content="https://kaspahub.org/tools/calculator/" />
+	<meta name="twitter:title" content="Calculator - Kaspa Hub" />
+	<meta name="twitter:description" content="Easily calculate anything with our Simple Online Calculator web app. Accessible from any device, no installation required. Try it now for free!" />
+	<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/kaspahub.jpg" />
+	<!-- Kaspa -->
+	<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
+	
+	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<style>
+iframe {
+	display: none;
+}
+.rwrap {
+	display: flex;
+	flex-direction:row;
+	position: relative; 
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.rwrap > * {
+	margin: 0.2vw;
+}
+.e-button {
+	min-height: 3.5vw; 
+	max-height: 3.5vw; 
+	min-width: 3.5vw; 
+	max-width: 3.5vw; 
+	font-size: 2vw;
+
+	border-radius: 50%;
+	background-color: rgba(192,192,192, 0.4);
+}
+#calculator {
+	display: flex;
+	flex-direction: column;
+	width: calc(14vw + 2.4vw);
+}
+
+#input, #result {
+	border: none;
+	outline: none;
+	border-radius: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#input {
+	font-size: 2vw;
+	height: 3vw;
+	background-color: rgba(192,192,192, 0.7);
+	text-align: right;
+
+}
+#result {
+	font-size: 2vw;
+	background-color: transparent;
+	text-align: center;
+}
+@media (max-width: 1360px) {
+	.rwrap > * {
+		margin: 5px;
+	}
+	#calculator {
+		width: 232px;
+	}
+	.e-button {
+		min-height: 48px;
+		max-height: 48px;
+		min-width: 48px;
+		max-width: 48px;
+		font-size: 1rem;
+
+	}
+	#input {
+		font-size: 1.3rem;
+		height: 40px;
+
+	}
+	#result {
+		font-size: 2rem;
+	}
+}
+@media (max-aspect-ratio: 0.6 / 1) {
+	#top-wrapper {
+		display: none;
+	}
+
+	.rwrap > * {
+		margin: 3vw;
+	}
+
+	.e-button {
+		min-height: 19vw;
+		max-height: 19vw;
+		min-width: 19vw;
+		font-size: 5vw;
+		border-radius: 50%;
+	}
+	#calculator {
+		width: 100vw;
+		position: fixed;
+		bottom: 50px;
+	}
+	.container-0 {
+
+		width: 100vw;
+		min-height: calc(100vh - 50px);
+		padding: 0;
+	}
+	.wrapper-1 {
+		margin: 0;
+	}
+	#input {
+		font-size: 10vw;
+		height: 16vw;
+	}
+	#result {
+		font-size: 10vw;
+	}
+	footer {
+		display: none;
+	}
+	body {
+		margin:0;
+	}
+}
+.close {
+	float: right;
+
+	background-image: url('/assets/icons/close.png');
+	display: block;
+	transform: rotate(45deg);
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	min-width: 25px;
+	min-height: 25px;
+	max-width: 25px;
+	max-height: 25px;
+
+	cursor: pointer;
+}
+a.close {
+	text-decoration: none !important;
+}
+button.close {
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+.close > * {
+	visibility: hidden;
+}
+</style>
+</head>
+<body class="">
+
+<header>
+	<nav id="page-nav">
+		<h2><a href="/">Kaspa Hub</a></h2>
+		<div class="toggle-theme">
+			<input type="checkbox" id="toggle-theme-checkbox" aria-label="Toggle theme-1">
+			<label for="toggle-theme-checkbox"></label>
+		</div>
+	</nav>
+	<script>const c=document.getElementById("toggle-theme-checkbox");c.addEventListener("change",()=>{document.cookie="theme="+(c.checked?"dark":"light")+"; path=/; SameSite=Lax";location.reload()}),c.checked=document.cookie.includes("theme=dark"),(()=>{document.body.classList.add("background-"+(document.cookie.includes("theme=dark")?"dark":"light"))})();</script>
+</header>
+
+<main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
+
+<div class="container-0 fade-in theme-1">
+<div id="top-wrapper">
+	<section id="top">
+		<label>Calculator</label>
+		<a draggable="false" class="close" href="/tools/"></a>
+	</section>
+	<hr>
+</div>
+<section id="calculator">
+	<input type="text" id="input" oninput="updateResult()" placeholder="" />
+	<input type="text" id="result" disabled />
+<hr style="width: 100%; margin: 0;">
+<div class="rwrap theme-filter">
+	<button class="e-button" style="color: orange;" onclick="clean()">C</button>
+	<button class="e-button" onclick="append('(')">(</button>
+	<button class="e-button" onclick="append(')')">)</button>
+	<button class="e-button" onclick="backspace()">⌫</button>
+
+	<button class="e-button" onclick="append('7')">7</button>
+	<button class="e-button" onclick="append('8')">8</button>
+	<button class="e-button" onclick="append('9')">9</button>
+	<button class="e-button" onclick="append('/')">÷</button>
+
+	<button class="e-button" onclick="append('4')">4</button>
+	<button class="e-button" onclick="append('5')">5</button>
+	<button class="e-button" onclick="append('6')">6</button>
+	<button class="e-button" onclick="append('+')">+</button>
+	<button class="e-button" onclick="append('1')">1</button>
+	<button class="e-button" onclick="append('2')">2</button>
+	<button class="e-button" onclick="append('3')">3</button>
+	<button class="e-button" onclick="append('*')">x</button>
+
+	<button class="e-button" onclick="append('0')">0</button>
+	<button class="e-button" onclick="append('.')">.</button>
+	<button class="e-button" onclick="append('-')">-</button>
+
+	<button class="e-button" onclick="calculate()">=</button>
+</div>
+</section>
+</div>
+
+</main>
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
+<script>
+const result = document.getElementById("result");
+const input = document.getElementById("input");
+
+function append(value) {
+	input.value += value;
+	updateResult();
+	result.focus();
+}
+
+function clean() {
+	result.value = "";
+	input.value = "";
+}
+
+function backspace() {
+	input.value = input.value.slice(0, -1);
+	updateResult();
+}
+
+function updateResult() {
+ try {
+	result.value = eval(input.value);
+ } catch (error) {
+	result.value = "";
+ }
+}
+
+function calculate() {
+try {
+	input.value = eval(input.value);
+	result.value = "";
+	updateResult();
+ } catch (error) {
+	input.value = "";
+	result.value = "";
+ }
+}
+
+
+
+result.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+	event.preventDefault();
+	calculate();
+		updateResult();
+	}
+}); 
+</script>
+</body>
+</html>
