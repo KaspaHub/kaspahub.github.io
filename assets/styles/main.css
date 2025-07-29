@@ -312,10 +312,6 @@ img {
 	}
 	
 	.sidebar {
-		flex: none;
-		margin-bottom: 20px;
-		padding: 20px 0;
-		box-shadow: none;
 	}
 	
 	.sidebar h2, .filter-category h3 {
@@ -328,9 +324,8 @@ img {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 15px;
+		gap: 7px;
 		margin-bottom: 15px;
-		padding: 0 15px;
 	}
 	
 	.filter-group {
