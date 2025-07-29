@@ -132,6 +132,7 @@ hr {
 }
 
 .sidebar h3 {
+	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 	margin-bottom: 15px;
 	padding-bottom: 10px;
 	font-weight: 600;
@@ -314,12 +315,6 @@ img {
 	
 	.sidebar {
 		width: 100%;
-	}
-	
-	.sidebar h2, .filter-category h3 {
-		text-align: center;
-		border-bottom: 0;
-		padding-bottom: 0;
 	}
 	
 	.filter-category {
