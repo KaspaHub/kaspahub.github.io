@@ -526,7 +526,8 @@ code {
 	border: 1px solid rgb(0 147 133);
 	color: #fff !important;
 	transition: background-color 0.3s ease, transform 0.2s ease;
-	padding: 12px 25px;
+	padding: 10px 25px;
+	margin: 5px;
 	border-radius: 16px;
 }
 

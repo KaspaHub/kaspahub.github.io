@@ -361,7 +361,7 @@ function renderTools(initial = false) {
 		const randomColor = getRandomColor();
 		card.innerHTML = `
 <div class="filter-logo" style="background-color: ${randomColor}; display: flex; align-items: center; justify-content: center; height: 100px;">
-<h3 style="color: #F1F1F1; margin: 0;">${tool.name}</h3>
+<h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${tool.name.charAt(0)}</h2>
 </div>
 <h3>${tool.name}</h3>
 <p class="filter-description">${tool.description}</p>
