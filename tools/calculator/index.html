@@ -149,32 +149,15 @@ iframe {
 	}
 }
 .close {
+	color: inherit !important;
+	opacity: 0.9;
 	float: right;
-
-	background-image: url('/assets/icons/x.svg');
-	display: block;
 	transform: rotate(45deg);
-	background-repeat: no-repeat;
-	background-size: contain;
+	min-width: 24px;
+	height: 24px;
+}
 
-	min-width: 25px;
-	min-height: 25px;
-	max-width: 25px;
-	max-height: 25px;
 
-	cursor: pointer;
-}
-a.close {
-	text-decoration: none !important;
-}
-button.close {
-	padding: 0;
-	border: 0;
-	background: transparent;
-}
-.close > * {
-	visibility: hidden;
-}
 </style>
 </head>
 <body class="">
@@ -196,7 +179,7 @@ button.close {
 <div id="top-wrapper">
 	<section id="top">
 		<label>Calculator</label>
-		<a draggable="false" class="close" href="/tools/"></a>
+		<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
 	</section>
 	<hr>
 </div>
