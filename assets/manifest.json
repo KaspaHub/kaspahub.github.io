@@ -8,7 +8,7 @@
   "display": "standalone",
   "display_override": ["minimal-ui"],
   "orientation": "portrait",
-  "theme_color": "#70C7BA",
+  "theme_color": "#000000",
   "background_color": "#000000",
   "icons": [
     { "src": "/assets/logo-512x.png", "sizes": "512x512", "type": "image/png" },
