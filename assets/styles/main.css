@@ -100,9 +100,13 @@ header a {
 }
 
 .intro {
-	padding-left: 10px; 
+	padding: 7px;
 	min-height: 300px; 
 	align-content: center;
+}
+
+.intro p {
+	padding: 0 7px;
 }
 
 .page-wrapper {
