@@ -3,7 +3,7 @@
   "short_name": "Kaspa Hub",
   "description": "Your starting point for everything Kaspa.",
   "lang": "en",
-  "start_url": "/?source=pwa",
+  "start_url": "/",
   "scope": "/",
   "id": "/",
   "display": "standalone",
