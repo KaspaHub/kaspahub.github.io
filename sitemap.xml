@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-	<loc>https://kaspahub.org</loc>
+	<loc>https://kaspahub.org/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
 	<priority>1.0</priority>
 </url>
 <url>
@@ -69,73 +69,73 @@
 <url>
 	<loc>https://kaspahub.org/article/fastest-cryptocurrencies/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/wallet-safety-basics/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/best-crypto-for-payments/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/best-no-kyc-crypto-exchanges/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/what-is-kaspa-block-time/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/crypto-that-solved-trilemma/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/best-altcoins/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/article/kaspa-vs-cardano/</loc>
-	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/article/cheapest-cryptocurrency-transactions/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/wallet-safety-basics/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/best-crypto-for-payments/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/best-no-kyc-crypto-exchanges/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/what-is-kaspa-block-time/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/crypto-that-solved-trilemma/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/best-altcoins/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/article/kaspa-vs-cardano/</loc>
+	<lastmod>2025-07-31</lastmod>
+	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/article/quadrilemma/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/article/cryptocurrency-comparison/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/article/the-case-for-kaspa/</loc>
 	<lastmod>2025-07-31</lastmod>
-	<changefreq>weekly</changefreq>
+	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
