@@ -606,11 +606,11 @@ const tagInfoMap = {
 	krc20: { name: "KRC-20", type: "feature" },
 	krc721: { name: "KRC-721", type: "feature" },
 	knsDomains: { name: "KNS", type: "feature" },
-	hardware: { name: "Hardware", type: "device", icon: "/icons/hardware.webp" },
-	desktop: { name: "Desktop", type: "device", icon: "/icons/desktop.webp" },
-	mobile: { name: "Mobile", type: "device", icon: "/icons/mobile.webp" },
-	browserExtension: { name: "Browser", type: "device", icon: "/icons/extension.webp" },
-	web: { name: "Web", type: "device", icon: "/icons/web.webp" }
+	hardware: { name: "Hardware", type: "device", icon: "/assets/icons/hardware.webp" },
+	desktop: { name: "Desktop", type: "device", icon: "/assets/icons/desktop.webp" },
+	mobile: { name: "Mobile", type: "device", icon: "/assets/icons/mobile.webp" },
+	browserExtension: { name: "Browser", type: "device", icon: "/assets/icons/extension.webp" },
+	web: { name: "Web", type: "device", icon: "/assets/icons/web.webp" }
 };
 
 function renderWallets(initial = false) {
@@ -634,7 +634,7 @@ function renderWallets(initial = false) {
 					if (tagInfo.type === 'feature') {
 						featureTagsHtml += `<span class="feature-tag">${tagInfo.name}</span>`;
 					} else if (tagInfo.type === 'device') {
-						platformTagsHtml += `<span class="platform-tag"><img src="${tagInfo.icon || '/icons/extension.webp'}" alt="${tagInfo.name} Icon" loading="lazy">${tagInfo.name}</span>`;
+						platformTagsHtml += `<span class="platform-tag"><img src="${tagInfo.icon || '/assets/icons/extension.webp'}" alt="${tagInfo.name} Icon" loading="lazy">${tagInfo.name}</span>`;
 					}
 				}
 			}
