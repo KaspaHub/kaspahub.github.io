@@ -129,13 +129,8 @@
     content: "\ea12";
 }
 
-.note-icon-close {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
+.note-icon-close::before {
+    content: "\ea13";
 }
 
 .note-icon-code::before {
@@ -290,9 +285,6 @@
 .note-frame {
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    color: #000;
-    font-family: sans-serif;
-    border-radius: 4px;
 }
 
 .note-toolbar {
@@ -398,13 +390,10 @@
 .note-btn-primary {
     background: #fa6362;
     color: #fff;
+    filter: brightness(0.9);
 }
 .note-btn-primary:hover, .note-btn-primary:focus, .note-btn-primary.focus {
-    color: #fff;
-    text-decoration: none;
-    border: 1px solid #dae0e5;
-    background-color: #fa6362;
-    border-radius: 1px;
+    filter: brightness(1);
 }
 
 .note-btn-block {
@@ -464,12 +453,11 @@ button.close {
     left: 0;
     z-index: 1000;
     float: left;
-    text-align: left;
-    background: #fff;
-    border: 1px solid #e2e2e2;
+    background: #ffffff61;
+    border-radius: 10px;
     padding: 5px;
     background-clip: padding-box;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 }
 .note-dropdown-menu > *:last-child {
     margin-right: 0;
@@ -530,7 +518,6 @@ a.note-dropdown-item:hover {
 
 .note-modal-header {
     padding: 10px 20px;
-    border: 1px solid #ededef;
 }
 
 .note-modal-body {
@@ -1246,6 +1233,9 @@ a.note-dropdown-item:hover {
 }
 .note-popover .popover-content .note-color .note-dropdown-menu .note-palette .note-holder-custom .note-color-btn, .note-editor .note-toolbar .note-color .note-dropdown-menu .note-palette .note-holder-custom .note-color-btn {
     border: 1px solid #eee;
+}
+.note-holder {
+    display: none !important;
 }
 .note-popover .popover-content .note-para .note-dropdown-menu, .note-editor .note-toolbar .note-para .note-dropdown-menu {
     min-width: 228px;
