@@ -555,49 +555,49 @@ code {
 	margin: 20px 0;
 }
 /* inputs v */
-input::placeholder {
-	opacity: 0.5;
-	color: inherit;
-}
-
-textarea, .note-editable {
-	text-decoration: none;
-	font-family: inherit;
-	white-space: break-spaces;
-}
-
-input, textarea, button, select, .note-editable {
-	background: unset;
-	border: unset;
-}
-
-input, textarea, button, select, a, .note-editable {
-	outline: none;
-}
-
-textarea, input[type="text"], .note-editable {
-	color: inherit;
+button, select, textarea, input[type="text"], div[contenteditable="true"] {
+	background: none;
+	border: none;
 	box-shadow: none;
-	resize: none;
 	outline: none;
-	font-size: 1rem;
-	border-radius: 6px;
-	min-height: 45px;
-	width: 100%;
-	box-sizing: border-box;
-	padding-left: 10px;
-	padding-right: 10px;
-	border:2px solid #757575;
-	font-weight: normal;
-	background-color: rgba(0,0,0, 0.1);
-}
-
-select {
+	padding: 0;
+	margin: 0;
+	font: inherit;
 	color: inherit;
 }
 
 option {
 	color: black;
+}
+
+input::placeholder {
+	opacity: 0.5;
+	color: inherit;
+}
+
+textarea, input[type="text"], div[contenteditable="true"] {
+/*	text-decoration: none;
+	box-shadow: none;
+	resize: none;
+	outline: none;*/
+
+	color: inherit;
+	border:2px solid #757575;
+	background-color: rgba(0,0,0, 0.1);
+	border-radius: 6px;
+	box-sizing: border-box;
+
+	min-height: 300px;
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+
+	white-space: break-spaces;
+	word-wrap: break-word;
+}
+
+textarea:focus, input[type="text"]:focus, div[contenteditable="true"]:focus {
+	border-color: #1C62B9;
 }
 
 .search-sort-controls {
