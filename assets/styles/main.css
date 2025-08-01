@@ -560,9 +560,6 @@ button, select, textarea, input[type="text"], div[contenteditable="true"] {
 	border: none;
 	box-shadow: none;
 	outline: none;
-	padding: 0;
-	margin: 0;
-	font: inherit;
 	color: inherit;
 }
 
@@ -576,12 +573,6 @@ input::placeholder {
 }
 
 textarea, input[type="text"], div[contenteditable="true"] {
-/*	text-decoration: none;
-	box-shadow: none;
-	resize: none;
-	outline: none;*/
-
-	color: inherit;
 	border:2px solid #757575;
 	background-color: rgba(0,0,0, 0.1);
 	border-radius: 6px;
