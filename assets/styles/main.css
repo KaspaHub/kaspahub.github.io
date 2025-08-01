@@ -561,6 +561,7 @@ button, select, textarea, input[type="text"], div[contenteditable="true"] {
 	box-shadow: none;
 	outline: none;
 	color: inherit;
+	font-size: inherit;
 }
 
 option {

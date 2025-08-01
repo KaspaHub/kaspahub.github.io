@@ -129,8 +129,13 @@
     content: "\ea12";
 }
 
-.note-icon-close::before {
-    content: "\ea13";
+.note-icon-close {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .note-icon-code::before {
@@ -344,28 +349,24 @@
     color: black;
 }
 .note-btn:focus, .note-btn.focus {
-    color: #333;
-    background-color: #ebebeb;
-    border-color: #dae0e5;
+    background-color: rgba(0, 0, 0, 0.3);
 }
+
 .note-btn:hover {
-    color: #333;
-    background-color: #ebebeb;
-    border-color: #dae0e5;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 .note-btn.disabled:focus, .note-btn.disabled.focus, .note-btn[disabled]:focus, .note-btn[disabled].focus, fieldset[disabled] .note-btn:focus, fieldset[disabled] .note-btn.focus {
-    background-color: #fff;
-    border-color: #dae0e5;
+    background-color: rgba(0, 0, 0, 0.3);
 }
-.note-btn:hover, .note-btn:focus, .note-btn.focus {
+/*.note-btn:hover, .note-btn:focus, .note-btn.focus {
     color: #333;
     text-decoration: none;
     border: 1px solid #dae0e5;
     background-color: #ebebeb;
     outline: 0;
     border-radius: 1px;
-}
-.note-btn:active, .note-btn.active {
+}*/
+/*.note-btn:active, .note-btn.active {
     outline: 0;
     background-image: none;
     color: #333;
@@ -375,7 +376,7 @@
     outline: 0;
     border-radius: 1px;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
+}*/
 .note-btn.disabled, .note-btn[disabled], fieldset[disabled] .note-btn {
     cursor: not-allowed;
     -webkit-opacity: 0.65;
@@ -1002,9 +1003,6 @@ a.note-dropdown-item:hover {
 .note-editor.note-airframe .note-editing-area .note-codable {
     display: none;
     width: 100%;
-    padding: 10px;
-    font-family: Menlo, Monaco, monospace, sans-serif;
-
 }
 .note-editor.note-frame.fullscreen,
 .note-editor.note-airframe.fullscreen {
