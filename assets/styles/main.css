@@ -555,22 +555,22 @@ input::placeholder {
 	color: inherit;
 }
 
-textarea {
+textarea, .note-editable {
 	text-decoration: none;
 	font-family: inherit;
 	white-space: break-spaces;
 }
 
-input, textarea, button, select {
+input, textarea, button, select, .note-editable {
 	background: unset;
 	border: unset;
 }
 
-input, textarea, button, select, a {
+input, textarea, button, select, a, .note-editable {
 	outline: none;
 }
 
-textarea, input[type="text"] {
+textarea, input[type="text"], .note-editable {
 	color: inherit;
 	box-shadow: none;
 	resize: none;
