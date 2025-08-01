@@ -9437,7 +9437,7 @@ var toolbar = renderer.create('<div class="note-toolbar" role="toolbar"></div>')
 var editingArea = renderer.create('<div class="note-editing-area"></div>');
 var codable = renderer.create('<textarea class="note-codable" aria-multiline="true"></textarea>');
 var editable = renderer.create('<div id="text-editor" class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"></div>');
-var statusbar = renderer.create(['<output class="note-status-output" role="status" aria-live="polite"></output>', '<div class="note-statusbar" role="status">', '<div class="note-resizebar" aria-label="resize">', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', '</div>', '</div>'].join(''));
+var statusbar = renderer.create(['<output class="note-status-output" role="status" aria-live="polite"></output>', '<div class="note-statusbar" role="status">', '<div class="note-resizebar" aria-label="resize">', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', '<div class="note-icon-bar"></div>', '</div>', '</div><p id="htmlCounter" style="font-size: 0.8em; color: #757575; float: right;"><span id="charCount">0</span> characters,<span id="wordCount">0</span> words</p>'].join(''));
 var airEditor = renderer.create('<div class="note-editor note-airframe"></div>');
 var airEditable = renderer.create(['<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"></div>', '<output class="note-status-output" role="status" aria-live="polite"></output>'].join(''));
 var buttonGroup = renderer.create('<div class="note-btn-group"></div>');

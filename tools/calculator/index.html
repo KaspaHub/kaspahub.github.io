@@ -54,11 +54,11 @@ iframe {
 }
 
 .e-button {
-	min-height: 3.5vw; 
-	max-height: 3.5vw; 
-	min-width: 3.5vw; 
-	max-width: 3.5vw; 
-	font-size: 2vw;
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-size: 25px;
 
 	border-radius: 50%;
 	background-color: rgba(192,192,192, 0.4);
@@ -77,49 +77,19 @@ iframe {
 	padding-right: 10px;
 }
 #input {
-	font-size: 2vw;
-	height: 3vw;
+
 	background-color: rgba(192,192,192, 0.7);
 	text-align: right;
 
 }
 #result {
-	font-size: 2vw;
 	background-color: transparent;
 	text-align: center;
 }
-@media (max-width: 1360px) {
-	.rwrap > * {
-		margin: 5px;
-	}
 	#calculator {
 		width: 232px;
 	}
-	.e-button {
-		min-height: 48px;
-		max-height: 48px;
-		min-width: 48px;
-		max-width: 48px;
-		font-size: 1rem;
-
-	}
-	#input {
-		font-size: 1.3rem;
-		height: 40px;
-
-	}
-	#result {
-		font-size: 2rem;
-	}
-}
-@media (max-aspect-ratio: 0.53 / 1) {
-/*	#top-wrapper {
-		display: none;
-	}*/
-
-	.rwrap > * {
-		margin: 3vw;
-	}
+@media (max-aspect-ratio: 0.7 / 1) {
 
 	.e-button {
 		min-height: 19vw;
@@ -129,15 +99,12 @@ iframe {
 		border-radius: 50%;
 	}
 	#calculator {
-		width: 100vw;
-		position: fixed;
-		bottom: 50px;
+    min-width: 100%;
+    max-width: 100%;
 	}
 	.container-0 {
-
-		width: 100vw;
-		min-height: calc(100vh - 50px);
-		/*padding: 0;*/
+	min-width: 100%;
+	max-width: 100%;
 	}
 	.wrapper-1 {
 		margin: 0;
@@ -160,15 +127,13 @@ iframe {
 	  -ms-overflow-style: none;  /* IE and Edge */
 	  scrollbar-width: none;  /* Firefox */
 	}
+	main {
+		min-width: 100%;
+		max-width: 100%;
+		place-content: end;
+	}
 }
-.close {
-	color: inherit !important;
-	opacity: 0.9;
-	float: right;
-	transform: rotate(45deg);
-	min-width: 24px;
-	height: 24px;
-}
+
 </style>
 </head>
 <body class="">

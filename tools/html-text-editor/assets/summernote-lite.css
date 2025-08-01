@@ -952,10 +952,7 @@ a.note-dropdown-item:hover {
 
 /* Frame mode layout
  ------------------------------------------ */
-.note-editor.note-frame,
-.note-editor.note-airframe {
-    border: 1px solid rgba(0, 0, 0, 0.1960784314);
-}
+
 .note-editor.note-frame.codeview .note-editing-area .note-editable,
 .note-editor.note-airframe.codeview .note-editing-area .note-editable {
     display: none;

@@ -72,10 +72,10 @@ time {
 	filter: invert(85%);
 }
 
-input {
+/*input {
 	font-weight: normal;
 	font-size: 1rem;
-}
+}*/
 
 p {
 	line-height: 1.35;
@@ -547,16 +547,21 @@ input[type="radio"]:checked, input[type="checkbox"]:checked {
 	border-color: #0c3f3a;
 }
 
+
 input[type="radio"]:checked::before, input[type="checkbox"]:checked::before {
 	display: block;
 	text-align: center;
-	line-height: 14px;
+	line-height: 1px;
 	color: #fff;
-	font-size: 12px;
 }
 
 input[type="checkbox"]:checked::before {
 	content: '✔';
+}
+
+input[type="radio"]:checked:hover, input[type="checkbox"]:checked:hover {
+	background-color: #0075FF;
+
 }
 
 button, select, textarea, input[type="text"], div[contenteditable="true"] {
@@ -660,4 +665,13 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 #itemGrid {
 	opacity: 0;
 	animation: fadeIn 0.8s ease-out forwards;
+}
+
+.close {
+	color: inherit !important;
+	opacity: 0.9;
+	float: right;
+	transform: rotate(45deg);
+	width: 1.2rem;
+	height: 1.2rem;
 }
