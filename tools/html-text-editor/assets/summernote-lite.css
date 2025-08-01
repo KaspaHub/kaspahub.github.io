@@ -1323,7 +1323,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
 
 
 .note-icon-align-center:before{
-    background-image: url('assets/img/align-center.png');
+    background-image: url('/tools/html-text-editor/assets/img/align-center.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1331,7 +1331,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-align-justify:before{
-    background-image: url('assets/img/align-justify.png');
+    background-image: url('/tools/html-text-editor/assets/img/align-justify.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1339,7 +1339,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-align-left:before{
-    background-image: url('assets/img/align-left.png');
+    background-image: url('/tools/html-text-editor/assets/img/align-left.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1347,7 +1347,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-align-right:before{
-    background-image: url('assets/img/align-right.png');
+    background-image: url('/tools/html-text-editor/assets/img/align-right.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1355,7 +1355,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-bold:before{
-    background-image: url('assets/img/bold.png');
+    background-image: url('/tools/html-text-editor/assets/img/bold.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1363,7 +1363,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-eraser:before{
-    background-image: url('assets/img/eraser.png');
+    background-image: url('/tools/html-text-editor/assets/img/eraser.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1371,7 +1371,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-code:before{
-    background-image: url('assets/img/code.png');
+    background-image: url('/tools/html-text-editor/assets/img/code.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1379,7 +1379,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-italic:before{
-    background-image: url('assets/img/italic.png');
+    background-image: url('/tools/html-text-editor/assets/img/italic.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1387,7 +1387,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-link:before{
-    background-image: url('assets/img/hyperlink.png');
+    background-image: url('/tools/html-text-editor/assets/img/hyperlink.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1395,7 +1395,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-chain-broken::before {
-    background-image: url('assets/img/remove.png');
+    background-image: url('/tools/html-text-editor/assets/img/remove.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1403,7 +1403,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-orderedlist:before{
-    background-image: url('assets/img/list-number.png');
+    background-image: url('/tools/html-text-editor/assets/img/list-number.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1411,7 +1411,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-picture:before{
-    background-image: url('assets/img/photo.png');
+    background-image: url('/tools/html-text-editor/assets/img/photo.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1419,7 +1419,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-strikethrough:before{
-    background-image: url('assets/img/strikethrough.png');
+    background-image: url('/tools/html-text-editor/assets/img/strikethrough.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1427,7 +1427,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-table:before{
-    background-image: url('assets/img/table.png');
+    background-image: url('/tools/html-text-editor/assets/img/table.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1435,7 +1435,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-underline:before{
-    background-image: url('assets/img/underline.png');
+    background-image: url('/tools/html-text-editor/assets/img/underline.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1443,7 +1443,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-unorderedlist:before{
-    background-image: url('assets/img/list-bulletpoint.png');
+    background-image: url('/tools/html-text-editor/assets/img/list-bulletpoint.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1451,7 +1451,7 @@ html .note-fullscreen-body, body .note-fullscreen-body {
     content:"";
 }
 .note-icon-video:before{
-    background-image: url('assets/img/video.png');
+    background-image: url('/tools/html-text-editor/assets/img/video.png');
     background-size: 100% 100%;
     width: 30px; 
     height: 30px;
@@ -1565,20 +1565,20 @@ select.note-btn, select.e-button  {
 
 
 
-.e-removeFormat {background-image: url('assets/img/eraser.png');}
-.e-bold {background-image: url('assets/img/bold.png');}
-.e-italic {background-image: url('assets/img/italic.png');}
-.e-underline {background-image: url('assets/img/underline.png');}
-.e-strikethrough {background-image: url('assets/img/strikethrough.png');}
-.e-unlink {background-image: url('assets/img/unlink.png');}
-.e-insertBullets {background-image: url('assets/img/list-bulletpoint.png');}
-.e-insertOrderedList {background-image: url('assets/img/list-number.png');}
-.e-alignLeft {background-image: url('assets/img/align-left.png');}
-.e-alignCenter {background-image: url('assets/img/align-center.png');}
-.e-alignRight {background-image: url('assets/img/align-right.png');}
-.e-information {background-image: url('assets/img/info.png');}
-.e-code {background-image: url('assets/img/code.png');}
-.e-table {background-image: url('assets/img/table.png');}
+.e-removeFormat {background-image: url('/tools/html-text-editor/assets/img/eraser.png');}
+.e-bold {background-image: url('/tools/html-text-editor/assets/img/bold.png');}
+.e-italic {background-image: url('/tools/html-text-editor/assets/img/italic.png');}
+.e-underline {background-image: url('/tools/html-text-editor/assets/img/underline.png');}
+.e-strikethrough {background-image: url('/tools/html-text-editor/assets/img/strikethrough.png');}
+.e-unlink {background-image: url('/tools/html-text-editor/assets/img/unlink.png');}
+.e-insertBullets {background-image: url('/tools/html-text-editor/assets/img/list-bulletpoint.png');}
+.e-insertOrderedList {background-image: url('/tools/html-text-editor/assets/img/list-number.png');}
+.e-alignLeft {background-image: url('/tools/html-text-editor/assets/img/align-left.png');}
+.e-alignCenter {background-image: url('/tools/html-text-editor/assets/img/align-center.png');}
+.e-alignRight {background-image: url('/tools/html-text-editor/assets/img/align-right.png');}
+.e-information {background-image: url('/tools/html-text-editor/assets/img/info.png');}
+.e-code {background-image: url('/tools/html-text-editor/assets/img/code.png');}
+.e-table {background-image: url('/tools/html-text-editor/assets/img/table.png');}
 
 
 
