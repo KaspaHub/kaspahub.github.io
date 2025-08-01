@@ -25,6 +25,9 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+	<script src="https://kaspahub.org/assets/scripts/jquery.js"></script>
+	<script src="https://kaspahub.org/assets/scripts/jquery-qrcode.js"></script>
 <style>
 main {
 	display: flex;
@@ -72,8 +75,7 @@ main {
 <button class="button" id="copy-button" style="display:none;">Copy Wallet Address</button>
 <a class="button" id="open-button" style="display: none;" href="" target="_blank">Open Wallet</a>
 </main>
-<script src="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/scripts/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/KaspaHub/KaspaHub@latest/assets/scripts/jquery-qrcode-0.18.0.min.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 	const urlParams = new URLSearchParams(window.location.search);
