@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="mobile-web-app-capable" content="yes" />
+
+	<title>Text Editor - Kaspa Hub</title>
+	<meta name="twitter:title" content="Text Editor - Kaspa Hub" />
+	<meta property="og:title" content="Text Editor - Kaspa Hub" />
+
+	<meta name="description" content="Create rich content effortlessly with our Simple Online HTML WYSIWYG text editor. Switch between visual and source editors. No installations, try for free!" />
+	<meta name="twitter:description" content="Create rich content effortlessly with our Simple Online HTML WYSIWYG text editor. Switch between visual and source editors. No installations, try for free!" />
+	<meta property="og:description" content="Create rich content effortlessly with our Simple Online HTML WYSIWYG text editor. Switch between visual and source editors. No installations, try for free!" />
+
+	<link rel="canonical" href="https://kaspahub.org/tools/html-text-editor/" />
+	<meta name="twitter:url" content="https://kaspahub.org/tools/html-text-editor/" />
+	<meta property="og:url" content="https://kaspahub.org/tools/html-text-editor/" />
+
+	<meta name="twitter:site" content="@KaspaHub" />
+	<meta name="twitter:creator" content="@KaspaHub" />
+	<meta property="og:site_name" content="Kaspa Hub" />
+
+	<meta property="og:type" content="website" />
+	<meta name="author" content="Kaspa Hub" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+	<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+	<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
+	<meta name="theme-color" content="#000000" />
+	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+	<link rel="manifest" href="https://kaspahub.org/assets/manifest.json" />
+	<link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+	<link rel="stylesheet" media="all" href="assets/summernote-lite.css" />
+	<script src="assets/summernote-lite.js"></script>
+<style>
+iframe {
+	display: none;
+}
+.rwrap {
+	display: flex;
+	flex-direction:row;
+	position: relative; 
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.rwrap > * {
+	margin: 0.2vw;
+}
+.e-button {
+	min-height: 3.5vw; 
+	max-height: 3.5vw; 
+	min-width: 3.5vw; 
+	max-width: 3.5vw; 
+	font-size: 2vw;
+
+	border-radius: 50%;
+	background-color: rgba(192,192,192, 0.4);
+}
+#calculator {
+	display: flex;
+	flex-direction: column;
+	width: calc(14vw + 2.4vw);
+}
+
+#input, #result {
+	border: none;
+	outline: none;
+	border-radius: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#input {
+	font-size: 2vw;
+	height: 3vw;
+	background-color: rgba(192,192,192, 0.7);
+	text-align: right;
+
+}
+#result {
+	font-size: 2vw;
+	background-color: transparent;
+	text-align: center;
+}
+@media (max-width: 1360px) {
+	.rwrap > * {
+		margin: 5px;
+	}
+	#calculator {
+		width: 232px;
+	}
+	.e-button {
+		min-height: 48px;
+		max-height: 48px;
+		min-width: 48px;
+		max-width: 48px;
+		font-size: 1rem;
+
+	}
+	#input {
+		font-size: 1.3rem;
+		height: 40px;
+
+	}
+	#result {
+		font-size: 2rem;
+	}
+}
+@media (max-aspect-ratio: 0.6 / 1) {
+	#top-wrapper {
+		display: none;
+	}
+
+	.rwrap > * {
+		margin: 3vw;
+	}
+
+	.e-button {
+		min-height: 19vw;
+		max-height: 19vw;
+		min-width: 19vw;
+		font-size: 5vw;
+		border-radius: 50%;
+	}
+	#calculator {
+		width: 100vw;
+		position: fixed;
+		bottom: 50px;
+	}
+	.container-0 {
+
+		width: 100vw;
+		min-height: calc(100vh - 50px);
+		padding: 0;
+	}
+	.wrapper-1 {
+		margin: 0;
+	}
+	#input {
+		font-size: 10vw;
+		height: 16vw;
+	}
+	#result {
+		font-size: 10vw;
+	}
+	footer {
+		display: none;
+	}
+	body {
+		margin:0;
+	}
+}
+.close {
+	color: inherit !important;
+	opacity: 0.9;
+	float: right;
+	transform: rotate(45deg);
+	min-width: 24px;
+	height: 24px;
+}
+
+
+</style>
+</head>
+<body class="">
+
+<header>
+	<nav id="page-nav">
+		<h2><a href="/">Kaspa Hub</a></h2>
+		<div class="toggle-theme">
+			<input type="checkbox" id="toggle-theme-checkbox" aria-label="Toggle theme-1">
+			<label for="toggle-theme-checkbox"></label>
+		</div>
+	</nav>
+	<script>const c=document.getElementById("toggle-theme-checkbox");c.addEventListener("change",()=>{document.cookie="theme="+(c.checked?"dark":"light")+"; path=/; SameSite=Lax";location.reload()}),c.checked=document.cookie.includes("theme=dark"),(()=>{document.body.classList.add("background-"+(document.cookie.includes("theme=dark")?"dark":"light"))})();</script>
+</header>
+
+<main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
+
+<div class="container-0 fade-in theme-1">
+
+	<div id="top-wrapper">
+		<section id="top">
+			<label>Text Editor</label>
+			<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
+		</section>
+		<hr>
+	</div>
+
+<div class="fade-in">
+	<div class="toolbar theme-filter wrap">
+		<input type="button" class="e-button e-removeFormat" tabindex="-1" onclick="removeFormat()" />
+		<input type="button" class="e-button e-bold" tabindex="-1" onclick="bold()" />
+		<input type="button" class="e-button e-italic" tabindex="-1" onclick="italic()" />
+		<input type="button" class="e-button e-underline" tabindex="-1" onclick="underline()" />
+		<input type="button" class="e-button e-strikethrough" tabindex="-1" onclick="strikethrough()" />
+		<input type="button" class="e-button e-insertBullets" tabindex="-1" onclick="insertBullets()" />
+		<input type="button" class="e-button e-insertOrderedList" tabindex="-1" onclick="insertOrderedList()" />
+		<input type="button" class="e-button e-alignLeft" tabindex="-1" onclick="alignLeft()" />
+		<input type="button" class="e-button e-alignCenter" tabindex="-1" onclick="alignCenter()" />
+		<input type="button" class="e-button e-alignRight" tabindex="-1" onclick="alignRight()" />
+	<select class="e-button" tabindex="-1" onchange="formatText(this.value); this.selectedIndex = 0;">
+		<option value="" selected disabled hidden>Format&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
+		<option value="div">Default</option>
+		<option value="p">Paragraph</option>
+		<option value="h2">Heading</option>
+		<option value="h4">Subheading</option>
+		<option value="pre">Code Block</option>
+		<option value="blockquote">Quote</option>
+	</select>
+	<select class="e-button" tabindex="-1" onchange="document.execCommand('fontSize', false, this.value); this.selectedIndex = 0;">
+		<option value="" selected disabled hidden>Size&nbsp;&nbsp;&nbsp;▼</option>
+		<option value="1">80%</option>
+		<option value="2">90%</option>
+		<option value="3">Default</option>
+		<option value="4">110%</option>
+		<option value="5">120%</option>
+		<option value="6">130%</option>
+	</select>
+	<select class="e-button" tabindex="-1" onchange="if(this.value===''){ removeFormat(); } else { document.execCommand('foreColor', false, this.value); } this.selectedIndex = 0; ">
+		<option value="" selected disabled hidden>Color&nbsp;&nbsp;&nbsp;▼</option>
+		<option value="">Default</option>
+		<option value="firebrick">Red</option>
+		<option value="#1C62B9">Blue</option>
+		<option value="forestgreen">Green</option>
+		<option value="chocolate">Orange</option>
+		<option value="darkorchid">Purple</option>
+		<option value="gold">Yellow</option>
+	</select>
+	<!-- <select class="e-button" style="text-align: center;" tabindex="-1" onchange="insertSymbol(this); this.selectedIndex = 0;">
+		<option value="" selected disabled hidden>Symbols ▼</option>
+		<option value="✓">✓</option>
+		<option value="•">•</option>
+		<option value="▲">▲</option>
+		<option value="▼">▼</option>
+		<option value="◄">◄</option>
+		<option value="►">►</option>
+		<option value="₿">₿</option>
+		<option value="Ӿ">Ӿ</option>
+		<option value="Ξ">Ξ</option>
+	</select> -->
+	<input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" />
+	</div>
+	<div id="summernote" class="hide"></div>
+<script>
+$('#summernote').summernote({
+	// placeholder: 'Write your post *',
+	prettifyHtml: true,
+	tooltip: false,
+	linkTargetBlank: false,
+
+	tabsize: 2,
+	toolbar: [
+		['table', ['table']],
+		['insert', ['link']],
+		['insert', ['picture']],
+		['insert', ['video']],
+		// ['insert', ['link', 'picture', 'video']],
+		['view', ['codeview']]
+	],
+	popover: {
+		image: [],
+		link: [],
+		air: []
+	},
+	callbacks: {
+	onImageUpload: function (data) {
+		//alert('no');
+	}
+	}
+});
+//tab
+document.addEventListener("DOMContentLoaded", function() {
+	const contentEditableDiv = document.querySelector(".note-editable");
+
+	if (contentEditableDiv) {
+		contentEditableDiv.addEventListener("keydown", function(event) {
+			if (event.keyCode === 9 && contentEditableDiv.innerHTML !== "") {
+				event.preventDefault();
+				document.execCommand("insertHTML", false, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			}
+		});
+	}
+});
+</script>
+	<div class="title" style="font-size: 0.8em; color: #757575; float: right;">&nbsp;<span id="htmlCounter"><span id="charCount">0</span> /30000 Characters</span><div style="min-height: 10px;"></div>
+<script>
+var editor = document.getElementById("text-editor");
+var charCountLabel = document.getElementById('charCount');
+var maxLength = 30000;
+
+editor.addEventListener('input', function() {
+	var charCount;
+
+	if (editor.innerText.replace(/\n/g, '').length >= 160) {
+		charCount = editor.innerHTML.length;
+	} else {
+		charCount = editor.innerText.replace(/\n/g, '').length;
+	}
+
+	charCountLabel.innerHTML = charCount;
+
+	if (charCount > maxLength) {
+		charCountLabel.style.color = 'red';
+	} else {
+		charCountLabel.style.color = 'inherit';
+	}
+});
+</script>
+</div>
+<script>
+function toggleAdditional() {
+	var additionalOptions = document.getElementById("note-toolbar");
+	additionalOptions.classList.toggle("hidden");
+}
+
+function toggleInformation() {
+	var editorInformation = document.getElementById("information");
+	editorInformation.classList.toggle("hidden");
+}
+
+const element = document.getElementById("text-editor");
+element.addEventListener("paste", function(e) {
+	e.preventDefault();
+	const text = e.clipboardData.getData("text/plain");
+	document.execCommand("insertText", false, text);
+});
+
+function removeFormat() {
+	document.execCommand('removeFormat');
+	document.execCommand("unlink", false, null);
+}
+
+function bold() {
+	document.execCommand("bold", false, null);
+}
+
+function italic() {
+	document.execCommand("italic", false, null);
+}
+
+function underline() {
+	document.execCommand("underline", false, null);
+}
+
+function strikethrough() {
+	document.execCommand("strikethrough", false, null);
+}
+
+function insertBullets() {
+	document.execCommand("insertUnorderedList", false, null);
+}
+
+function insertOrderedList() {
+	document.execCommand("insertOrderedList", false, null);
+}
+
+function alignLeft() {
+	document.execCommand("justifyLeft", false, null);
+}
+
+function alignCenter() {
+	document.execCommand("justifyCenter", false, null);
+}
+
+function alignRight() {
+	document.execCommand("justifyRight", false, null);
+}
+
+function formatText(value) {
+	document.execCommand("formatBlock", false, value);
+}
+
+function insertSymbol(dropdown) {
+	var symbol = dropdown.value;
+	document.execCommand('insertHTML', false, symbol);
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+	const btnCodeViewer = document.querySelector('.btn-codeview');
+	const htmlCounter = document.getElementById("htmlCounter");
+
+	btnCodeViewer.addEventListener('click', function() {
+		if (htmlCounter.classList.toggle("hidden")) {
+			disableButtons();
+		} else {
+			enableButtons();
+		}
+	});
+
+});
+
+
+function disableButtons() {
+	const buttons = document.querySelectorAll(".e-button, .color-button");
+	buttons.forEach(button => {
+		button.disabled = true;
+	});
+}
+
+function enableButtons() {
+	const buttons = document.querySelectorAll(".e-button, .color-button");
+	buttons.forEach(button => {
+		button.disabled = false;
+	});
+}
+</script>
+</div>
+
+
+</div>
+
+</main>
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
+<script>
+const result = document.getElementById("result");
+const input = document.getElementById("input");
+
+function append(value) {
+	input.value += value;
+	updateResult();
+	result.focus();
+}
+
+function clean() {
+	result.value = "";
+	input.value = "";
+}
+
+function backspace() {
+	input.value = input.value.slice(0, -1);
+	updateResult();
+}
+
+function updateResult() {
+ try {
+	result.value = eval(input.value);
+ } catch (error) {
+	result.value = "";
+ }
+}
+
+function calculate() {
+try {
+	input.value = eval(input.value);
+	result.value = "";
+	updateResult();
+ } catch (error) {
+	input.value = "";
+	result.value = "";
+ }
+}
+
+
+
+result.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+	event.preventDefault();
+	calculate();
+		updateResult();
+	}
+}); 
+</script>
+</body>
+</html>
