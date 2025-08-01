@@ -10274,7 +10274,7 @@ var ModalUI = /*#__PURE__*/function () {
 
 
 var editor = renderer.create('<div class="note-editor note-frame"></div>');
-var toolbar = renderer.create('<div id="note-toolbar" class="note-toolbar wrap hidden" role="toolbar"></div>');
+var toolbar = renderer.create('<div id="note-toolbar" class="note-toolbar wrap" role="toolbar"></div>');
 var editingArea = renderer.create('<div class="note-editing-area"></div>');
 var codable = renderer.create('<textarea class="input note-codable" aria-multiline="true" spellcheck="false" autocorrect="false"></textarea>');
 var editable = renderer.create('<div id="text-editor" class="note-editable input" contentEditable="true" role="textbox" aria-multiline="true"></div>');

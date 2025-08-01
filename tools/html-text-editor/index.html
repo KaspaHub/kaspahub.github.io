@@ -81,62 +81,13 @@
 		<hr>
 	</div>
 
-<div class="fade-in">
-	<div class="toolbar theme-filter wrap">
-		<input type="button" class="e-button e-removeFormat" tabindex="-1" onclick="removeFormat()" />
-		<input type="button" class="e-button e-bold" tabindex="-1" onclick="bold()" />
-		<input type="button" class="e-button e-italic" tabindex="-1" onclick="italic()" />
-		<input type="button" class="e-button e-underline" tabindex="-1" onclick="underline()" />
-		<input type="button" class="e-button e-strikethrough" tabindex="-1" onclick="strikethrough()" />
-		<input type="button" class="e-button e-insertBullets" tabindex="-1" onclick="insertBullets()" />
-		<input type="button" class="e-button e-insertOrderedList" tabindex="-1" onclick="insertOrderedList()" />
-		<input type="button" class="e-button e-alignLeft" tabindex="-1" onclick="alignLeft()" />
-		<input type="button" class="e-button e-alignCenter" tabindex="-1" onclick="alignCenter()" />
-		<input type="button" class="e-button e-alignRight" tabindex="-1" onclick="alignRight()" />
-	<select class="e-button" tabindex="-1" onchange="formatText(this.value); this.selectedIndex = 0;">
-		<option value="" selected disabled hidden>Format&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
-		<option value="div">Default</option>
-		<option value="p">Paragraph</option>
-		<option value="h2">Heading</option>
-		<option value="h4">Subheading</option>
-		<option value="pre">Code Block</option>
-		<option value="blockquote">Quote</option>
-	</select>
-	<select class="e-button" tabindex="-1" onchange="document.execCommand('fontSize', false, this.value); this.selectedIndex = 0;">
-		<option value="" selected disabled hidden>Size&nbsp;&nbsp;&nbsp;▼</option>
-		<option value="1">80%</option>
-		<option value="2">90%</option>
-		<option value="3">Default</option>
-		<option value="4">110%</option>
-		<option value="5">120%</option>
-		<option value="6">130%</option>
-	</select>
-	<select class="e-button" tabindex="-1" onchange="if(this.value===''){ removeFormat(); } else { document.execCommand('foreColor', false, this.value); } this.selectedIndex = 0; ">
-		<option value="" selected disabled hidden>Color&nbsp;&nbsp;&nbsp;▼</option>
-		<option value="">Default</option>
-		<option value="firebrick">Red</option>
-		<option value="#1C62B9">Blue</option>
-		<option value="forestgreen">Green</option>
-		<option value="chocolate">Orange</option>
-		<option value="darkorchid">Purple</option>
-		<option value="gold">Yellow</option>
-	</select>
-	<select class="e-button" style="text-align: center;" tabindex="-1" onchange="insertSymbol(this); this.selectedIndex = 0;">
-		<option value="" selected disabled hidden>Symbols ▼</option>
-		<option value="✓">✓</option>
-		<option value="•">•</option>
-		<option value="▲">▲</option>
-		<option value="▼">▼</option>
-		<option value="◄">◄</option>
-		<option value="►">►</option>
-		<option value="₿">₿</option>
-		<option value="𐤊">𐤊</option>
-	</select>
 	<!-- <input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" /> -->
-</div>
 	
-	<div id="summernote" class="hide"></div>
-	<div class="title" style="font-size: 0.8em; color: #757575; float: right;">&nbsp;<span id="htmlCounter"><span id="charCount">0</span></span><div style="min-height: 10px;"></div>
+	<div id="summernote"></div>
+	<p id="htmlCounter" style="font-size: 0.8em; color: #757575; float: right;">
+		<span id="charCount">0</span> characters,
+		<span id="wordCount">0</span> words
+	</p>
 </div>
 
 
@@ -146,31 +97,51 @@
 <footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
 <script>
 $('#summernote').summernote({
-	// placeholder: 'Write your post *',
+	placeholder: 'Start writing...',
 	prettifyHtml: true,
 	tooltip: false,
 	linkTargetBlank: false,
 
 	tabsize: 2,
-	toolbar: [
-		['table', ['table']],
-		['insert', ['link']],
-		['insert', ['picture']],
-		['insert', ['video']],
-		// ['insert', ['link', 'picture', 'video']],
-		['view', ['codeview']]
-	],
-	popover: {
-		image: [],
-		link: [],
-		air: []
-	},
-	callbacks: {
-	onImageUpload: function (data) {
-		//alert('no');
-	}
-	}
+      toolbar: [
+        ['style', ['clear']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough']],
+        ['style', ['ul', 'ol']],
+        ['style', ['alignleft', 'aligncenter', 'alignright']],
+        ['style', ['style']],
+        ['style', ['fontsize']],
+        ['style', ['color']],
+        ['style', ['table']],
+        ['style', ['link', 'picture', 'video']],
+        ['style', ['symbolDropdown']],
+        ['style', ['codeview']]
+      ],
+buttons: {
+  symbolDropdown: function () {
+    return $('<div class="note-btn-group btn-group">').append(`
+      <select class="e-button note-btn" 
+              style="margin: 0 5px; height: 30px; padding: 2px 5px;" 
+              onchange="insertSymbol(this); this.selectedIndex = 0;" tabindex="-1">
+        <option value="" selected disabled hidden>Symbols ▼</option>
+        <option value="✓">✓</option>
+        <option value="•">•</option>
+        <option value="▲">▲</option>
+        <option value="▼">▼</option>
+        <option value="◄">◄</option>
+        <option value="►">►</option>
+        <option value="₿">₿</option>
+        <option value="𐤊">𐤊</option>
+      </select>
+    `);
+  }
+}
 });
+
+function insertSymbol(select) {
+	const symbol = select.value;
+	$('#summernote').summernote('editor.insertText', symbol);
+}
+
 //tab
 document.addEventListener("DOMContentLoaded", function() {
 	const contentEditableDiv = document.querySelector(".note-editable");
@@ -184,141 +155,37 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 });
-</script>
 
-<script>
-var editor = document.getElementById("text-editor");
-var charCountLabel = document.getElementById('charCount');
-// var maxLength = 30000;
+document.addEventListener("DOMContentLoaded", function () {
+  const editor = document.getElementById("text-editor");
+  const charCountLabel = document.getElementById("charCount");
+  const wordCountLabel = document.getElementById("wordCount");
 
-editor.addEventListener('input', function() {
-	var charCount;
+  if (editor && charCountLabel && wordCountLabel) {
+    editor.addEventListener("input", function () {
+      const text = editor.innerText || "";
+      const charCount = text.replace(/\n/g, "").length;
 
-	if (editor.innerText.replace(/\n/g, '').length >= 160) {
-		charCount = editor.innerHTML.length;
-	} else {
-		charCount = editor.innerText.replace(/\n/g, '').length;
-	}
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length;
 
-	charCountLabel.innerHTML = charCount;
-
-	// if (charCount > maxLength) {
-	// 	charCountLabel.style.color = 'red';
-	// } else {
-	// 	charCountLabel.style.color = 'inherit';
-	// }
+      charCountLabel.textContent = charCount;
+      wordCountLabel.textContent = wordCount;
+    });
+  }
 });
-</script>
-</div>
-<script>
+
+
+if (document.cookie.includes("theme=dark")) {
+	document.querySelectorAll(".theme-filter").forEach(elem =>
+		elem.classList.add("filter-dark")
+	);
+}
+
 // function toggleAdditional() {
 // 	var additionalOptions = document.getElementById("note-toolbar");
 // 	additionalOptions.classList.toggle("hidden");
 // }
-
-function toggleInformation() {
-	var editorInformation = document.getElementById("information");
-	editorInformation.classList.toggle("hidden");
-}
-
-const element = document.getElementById("text-editor");
-element.addEventListener("paste", function(e) {
-	e.preventDefault();
-	const text = e.clipboardData.getData("text/plain");
-	document.execCommand("insertText", false, text);
-});
-
-function removeFormat() {
-	document.execCommand('removeFormat');
-	document.execCommand("unlink", false, null);
-}
-
-function bold() {
-	document.execCommand("bold", false, null);
-}
-
-function italic() {
-	document.execCommand("italic", false, null);
-}
-
-function underline() {
-	document.execCommand("underline", false, null);
-}
-
-function strikethrough() {
-	document.execCommand("strikethrough", false, null);
-}
-
-function insertBullets() {
-	document.execCommand("insertUnorderedList", false, null);
-}
-
-function insertOrderedList() {
-	document.execCommand("insertOrderedList", false, null);
-}
-
-function alignLeft() {
-	document.execCommand("justifyLeft", false, null);
-}
-
-function alignCenter() {
-	document.execCommand("justifyCenter", false, null);
-}
-
-function alignRight() {
-	document.execCommand("justifyRight", false, null);
-}
-
-function formatText(value) {
-	document.execCommand("formatBlock", false, value);
-}
-
-function insertSymbol(dropdown) {
-	var symbol = dropdown.value;
-	document.execCommand('insertHTML', false, symbol);
-}
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-	const btnCodeViewer = document.querySelector('.btn-codeview');
-	const htmlCounter = document.getElementById("htmlCounter");
-
-	btnCodeViewer.addEventListener('click', function() {
-		if (htmlCounter.classList.toggle("hidden")) {
-			disableButtons();
-		} else {
-			enableButtons();
-		}
-	});
-
-});
-
-
-function disableButtons() {
-	const buttons = document.querySelectorAll(".e-button, .color-button");
-	buttons.forEach(button => {
-		button.disabled = true;
-	});
-}
-
-function enableButtons() {
-	const buttons = document.querySelectorAll(".e-button, .color-button");
-	buttons.forEach(button => {
-		button.disabled = false;
-	});
-}
-
-if (document.cookie.includes("theme=light")) {
-	document.querySelectorAll(".theme-filter").forEach(elem =>
-		elem.classList.add("filter-1")
-	);
-} else {
-	document.querySelectorAll(".theme-filter").forEach(elem =>
-		elem.classList.add("filter-2")
-	);
-}
-
 </script>
 </body>
 </html>
