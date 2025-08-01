@@ -587,7 +587,7 @@ textarea, input[type="text"], div[contenteditable="true"] {
 	border-radius: 6px;
 	box-sizing: border-box;
 
-	min-height: 300px;
+	min-height: 45px;
 	width: 100%;
 	padding-left: 10px;
 	padding-right: 10px;
