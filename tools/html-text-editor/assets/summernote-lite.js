@@ -7,7 +7,7 @@
  * Summernote may be freely distributed under the MIT license.
  *
  * Date: 2024-10-09T10:22Z
- *
+ * Updated by https://kaspahub.org on 1 August 2025
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')

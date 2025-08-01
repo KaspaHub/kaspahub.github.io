@@ -177,6 +177,41 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+	const btnCodeViewer = document.querySelector('.btn-codeview');
+	const htmlCounter = document.getElementById("htmlCounter");
+
+	btnCodeViewer.addEventListener('click', function() {
+		if (htmlCounter.classList.toggle("hidden")) {
+			disableButtons();
+		} else {
+			enableButtons();
+		}
+	});
+
+});
+
+
+function disableButtons() {
+	const buttons = document.querySelectorAll(".e-button");
+	buttons.forEach(button => {
+		button.disabled = true;
+	});
+}
+
+function enableButtons() {
+	const buttons = document.querySelectorAll(".e-button");
+	buttons.forEach(button => {
+		button.disabled = false;
+	});
+}
+
+
+
 if (document.cookie.includes("theme=dark")) {
 	document.querySelectorAll(".theme-filter").forEach(elem =>
 		elem.classList.add("filter-dark")

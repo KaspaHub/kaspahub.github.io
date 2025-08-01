@@ -575,13 +575,12 @@ input::placeholder {
 textarea, input[type="text"], div[contenteditable="true"] {
 	border:2px solid #757575;
 	background-color: rgba(0,0,0, 0.1);
-	border-radius: 6px;
+	border-radius: 10px;
 	box-sizing: border-box;
 
 	min-height: 45px;
 	width: 100%;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 10px;
 
 	white-space: break-spaces;
 	word-wrap: break-word;

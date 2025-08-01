@@ -7,7 +7,7 @@
  * Summernote may be freely distributed under the MIT license.
  *
  * Date: 2024-10-09T10:22Z
- *
+ * Updated by https://kaspahub.org on 1 August 2025
  */
 @font-face {
     font-family: "summernote";
@@ -332,27 +332,16 @@
 }
 
 .note-btn {
-    display: inline-block;
-    font-weight: 400;
-    margin-bottom: 0;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid #dae0e5;
-    white-space: nowrap;
-    outline: 0;
-    color: #333;
-    background-color: #fff;
-    border-color: #dae0e5;
-    padding: 5px 10px;
-    font-size: 14px;
-    line-height: 1.4;
-    border-radius: 3px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90% auto;
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 48px;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: black;
 }
 .note-btn:focus, .note-btn.focus {
     color: #333;
@@ -526,12 +515,16 @@ a.note-dropdown-item:hover {
     position: relative;
     width: auto;
     margin: 30px 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    background: #fff;
     background-clip: border-box;
-    outline: 0;
-    border-radius: 5px;
+    font-size: 120%;
+    color: black;
+    background-color: rgba(192, 192, 192, 0.95);
+    border-radius: 15px;
+    border: 2px solid black;
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    padding: 2%;
+    outline: 0;
+    overflow: hidden;
 }
 
 .note-modal-header {
@@ -587,7 +580,7 @@ a.note-dropdown-item:hover {
     right: 0;
     bottom: 0;
     top: 0;
-    z-index: 1040;
+    z-index: -1;
     background: #000;
     -webkit-opacity: 0.5;
     -khtml-opacity: 0.5;
@@ -684,6 +677,10 @@ a.note-dropdown-item:hover {
 
 .note-form-group:last-child {
     padding-bottom: 0;
+}
+
+.note-group-select-from-files {
+    display: none !important;
 }
 
 .note-form-label {
@@ -1006,18 +1003,8 @@ a.note-dropdown-item:hover {
     display: none;
     width: 100%;
     padding: 10px;
-    border: none;
-    box-shadow: none;
     font-family: Menlo, Monaco, monospace, sans-serif;
-    font-size: 14px;
-    color: #ccc;
-    background-color: #222;
-    resize: none;
-    outline: none;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 0;
-    margin-bottom: 0;
+
 }
 .note-editor.note-frame.fullscreen,
 .note-editor.note-airframe.fullscreen {
@@ -1218,7 +1205,7 @@ a.note-dropdown-item:hover {
     padding: 0;
 }
 .note-popover .popover-content .note-color-all .note-dropdown-menu, .note-editor .note-toolbar .note-color-all .note-dropdown-menu {
-    min-width: 337px;
+    min-width: 345px;
 }
 .note-popover .popover-content .note-color .dropdown-toggle, .note-editor .note-toolbar .note-color .dropdown-toggle {
     width: 20px;
