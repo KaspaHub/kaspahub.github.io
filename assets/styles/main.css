@@ -64,8 +64,8 @@ time {
 	border-radius: 25px;
 	padding: 17px;
 	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(7px);
+	-webkit-backdrop-filter: blur(7px);
 }
 
 .filter-dark {
@@ -168,38 +168,6 @@ hr {
 .filter-group label:hover {
 	filter: invert(0.2);
 	background-color: rgba(0, 0, 0, 0.05);
-}
-
-.filter-group input[type="radio"], .filter-group input[type="checkbox"] {
-	width: 18px;
-	height: 18px;
-	appearance: none;
-	border: 2px solid #757575;
-	border-radius: 6px;
-	background-color: rgba(0, 0, 0, 0.1);
-	position: relative;
-	cursor: pointer;
-}
-
-.filter-group input[type="radio"] {
-	border-radius: 50%;
-}
-
-.filter-group input[type="radio"]:checked, .filter-group input[type="checkbox"]:checked {
-	background-color: #005d54;
-	border-color: #0c3f3a;
-}
-
-.filter-group input[type="radio"]:checked::before, .filter-group input[type="checkbox"]:checked::before {
-	display: block;
-	text-align: center;
-	line-height: 14px;
-	color: #fff;
-	font-size: 12px;
-}
-
-.filter-group input[type="checkbox"]:checked::before {
-	content: '✔';
 }
 
 .filter-list-main {
@@ -556,6 +524,41 @@ code {
 	margin: 20px 0;
 }
 /* inputs v */
+
+input[type="radio"], input[type="checkbox"] {
+	position: relative;
+	cursor: pointer;
+	place-content: center;
+	width: 20px;
+	height: 20px;
+	appearance: none;
+	border: 1px solid #757575;
+	border-radius: 6px;
+	background-color: rgba(0, 0, 0, 0.1);
+
+}
+
+input[type="radio"] {
+	border-radius: 50%;
+}
+
+input[type="radio"]:checked, input[type="checkbox"]:checked {
+	background-color: #0075FF;
+	border-color: #0c3f3a;
+}
+
+input[type="radio"]:checked::before, input[type="checkbox"]:checked::before {
+	display: block;
+	text-align: center;
+	line-height: 14px;
+	color: #fff;
+	font-size: 12px;
+}
+
+input[type="checkbox"]:checked::before {
+	content: '✔';
+}
+
 button, select, textarea, input[type="text"], div[contenteditable="true"] {
 	background: none;
 	border: none;
