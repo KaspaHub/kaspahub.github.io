@@ -170,11 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function() {
 	const btnCodeViewer = document.querySelector('.btn-codeview');
 	const htmlCounter = document.getElementById("htmlCounter");
+	const toggleClean = document.getElementById("toggle-paste-mode");
 
 	btnCodeViewer.addEventListener('click', function() {
 		if (htmlCounter.classList.toggle("hidden")) {
 			disableButtons();
+			toggleClean.classList.add("hidden");
+
 		} else {
+			toggleClean.classList.remove("hidden");
 			enableButtons();
 		}
 	});

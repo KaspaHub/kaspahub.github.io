@@ -450,9 +450,7 @@ code {
 }
 
 .toggle-theme input {
-	position: absolute;
-	opacity: 0;
-	pointer-events: none;
+	display: none;
 }
 
 .toggle-theme label {
