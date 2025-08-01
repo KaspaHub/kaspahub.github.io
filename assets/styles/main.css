@@ -403,7 +403,9 @@ code {
 	font-size: 1.05rem;
 	border-radius: 6px;
 }
-
+.hidden {
+	display: none !important;
+}
 .grid-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
