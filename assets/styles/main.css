@@ -559,8 +559,8 @@ input[type="checkbox"]:checked::before {
 	content: '✔';
 }
 
-input[type="radio"]:checked:hover, input[type="checkbox"]:checked:hover {
-	background-color: #0075FF;
+input[type="radio"]:hover, input[type="checkbox"]:hover {
+	filter: brightness(0.9);
 
 }
 

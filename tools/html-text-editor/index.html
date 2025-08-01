@@ -56,12 +56,12 @@
 
 <main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
 
-<div class="container-0 fade-in theme-1">
+<div class="fade-in theme-1">
 
 	<div id="top-wrapper">
 		<section id="top">
 			<label>Text Editor</label>
-			<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
+			<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
 		</section>
 		<hr>
 	</div>
@@ -69,7 +69,11 @@
 	<!-- <input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" /> -->
 	
 	<div id="summernote"></div>
-	
+	<div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #757575;">
+		<p id="htmlCounter"><span id="charCount">0</span> characters, <span id="wordCount">0</span> words</p>
+		<button id="toggle-paste-mode">Paste as Plain Text: ON</button>
+	</div>
+
 </div>
 
 
@@ -79,7 +83,7 @@
 <footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
 <script>
 $('#summernote').summernote({
-	placeholder: 'Start writing...',
+	// placeholder: 'Start writing...',
 	prettifyHtml: true,
 	tooltip: false,
 	linkTargetBlank: false,
@@ -204,6 +208,28 @@ if (document.cookie.includes("theme=dark")) {
 // 	var additionalOptions = document.getElementById("note-toolbar");
 // 	additionalOptions.classList.toggle("hidden");
 // }
+
+
+
+
+// clean paste
+let cleanPaste = true;
+
+const toggleButton = document.getElementById("toggle-paste-mode");
+const editor = document.getElementById("text-editor");
+
+toggleButton.addEventListener("click", () => {
+	cleanPaste = !cleanPaste;
+	toggleButton.textContent = `Clean Paste: ${cleanPaste ? "ON" : "OFF"}`;
+});
+
+editor.addEventListener("paste", function(e) {
+	if (cleanPaste) {
+		e.preventDefault();
+		const text = e.clipboardData.getData("text/plain");
+		document.execCommand("insertText", false, text);
+	}
+});
 </script>
 </body>
 </html>

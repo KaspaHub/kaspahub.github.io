@@ -30,6 +30,9 @@
     -webkit-font-smoothing: antialiased;
     speak: none;
 }
+.container-0 {
+    padding-bottom: 50px;
+}
 
 .note-icon-fw {
     text-align: center;
@@ -415,12 +418,6 @@ button.close {
     background: transparent;
     border: 0;
     -webkit-appearance: none;
-}
-
-.close {
-    float: right;
-    line-height: 1;
-    opacity: 0.2;
 }
 
 .close:hover {
