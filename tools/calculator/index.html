@@ -42,16 +42,17 @@ iframe {
 	display: none;
 }
 .rwrap {
-	display: flex;
-	flex-direction:row;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	gap: 7px;
 	position: relative; 
-	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+
+
 }
-.rwrap > * {
-	margin: 0.2vw;
-}
+
 .e-button {
 	min-height: 3.5vw; 
 	max-height: 3.5vw; 
@@ -111,10 +112,10 @@ iframe {
 		font-size: 2rem;
 	}
 }
-@media (max-aspect-ratio: 0.6 / 1) {
-	#top-wrapper {
+@media (max-aspect-ratio: 0.53 / 1) {
+/*	#top-wrapper {
 		display: none;
-	}
+	}*/
 
 	.rwrap > * {
 		margin: 3vw;
@@ -136,7 +137,7 @@ iframe {
 
 		width: 100vw;
 		min-height: calc(100vh - 50px);
-		padding: 0;
+		/*padding: 0;*/
 	}
 	.wrapper-1 {
 		margin: 0;
@@ -151,8 +152,13 @@ iframe {
 	footer {
 		display: none;
 	}
-	body {
-		margin:0;
+	html::-webkit-scrollbar {
+	    display: none;
+	}
+
+	html {
+	  -ms-overflow-style: none;  /* IE and Edge */
+	  scrollbar-width: none;  /* Firefox */
 	}
 }
 .close {
@@ -178,7 +184,7 @@ iframe {
 	<script>const c=document.getElementById("toggle-theme-checkbox");c.addEventListener("change",()=>{document.cookie="theme="+(c.checked?"dark":"light")+"; path=/; SameSite=Lax";location.reload()}),c.checked=document.cookie.includes("theme=dark"),(()=>{document.body.classList.add("background-"+(document.cookie.includes("theme=dark")?"dark":"light"))})();</script>
 </header>
 
-<main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
+<main style="margin: 0 auto; padding-bottom: 0;">
 
 <div class="container-0 fade-in theme-1">
 <div id="top-wrapper">

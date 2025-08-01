@@ -289,7 +289,6 @@
 
 .note-toolbar {
     padding: 10px 5px;
-    border-bottom: 1px solid #e2e2e2;
     color: #333;
     background-color: #f5f5f5;
     border-color: #ddd;
@@ -388,12 +387,12 @@
 }
 
 .note-btn-primary {
-    background: #fa6362;
+    background: #4caf50;
     color: #fff;
-    filter: brightness(0.9);
+    filter: brightness(1);
 }
 .note-btn-primary:hover, .note-btn-primary:focus, .note-btn-primary.focus {
-    filter: brightness(1);
+    filter: brightness(0.9);
 }
 
 .note-btn-block {
@@ -421,9 +420,7 @@ button.close {
 
 .close {
     float: right;
-    font-size: 21px;
     line-height: 1;
-    color: #000;
     opacity: 0.2;
 }
 
@@ -507,10 +504,6 @@ a.note-dropdown-item:hover {
     background-clip: border-box;
     font-size: 120%;
     color: black;
-    background-color: rgba(192, 192, 192, 0.95);
-    border-radius: 15px;
-    border: 2px solid black;
-    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
     padding: 2%;
     outline: 0;
     overflow: hidden;
@@ -1144,7 +1137,7 @@ a.note-dropdown-item:hover {
     position: relative;
 }
 
-.note-popover .popover-content, .note-editor .note-toolbar {
+.note-popover .popover-content {
     margin: 0;
     padding: 0 0 5px 5px;
 }
