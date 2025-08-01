@@ -9738,7 +9738,7 @@ var dialog = renderer.create('<div class="note-modal" aria-hidden="false" tabind
   $node.attr({
     'aria-label': options.title
   });
-  $node.html(['<div class="note-modal-content theme-1">', options.title ? '<div class="note-modal-header"><button type="button" class="close" aria-label="Close" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></button><h4 class="note-modal-title">' + options.title + '</h4></div>' : '', '<div class="note-modal-body">' + options.body + '</div>', options.footer ? '<div class="note-modal-footer">' + options.footer + '</div>' : '', '</div>'].join(''));
+  $node.html(['<div class="note-modal-content">', options.title ? '<div class="note-modal-header"><button type="button" class="close" aria-label="Close" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></button><h4 class="note-modal-title">' + options.title + '</h4></div>' : '', '<div class="note-modal-body">' + options.body + '</div>', options.footer ? '<div class="note-modal-footer">' + options.footer + '</div>' : '', '</div>'].join(''));
   $node.data('modal', new js_ModalUI($node, options));
 });
 var videoDialog = function videoDialog(opt) {

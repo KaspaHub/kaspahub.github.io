@@ -494,15 +494,20 @@ a.note-dropdown-item:hover {
 }
 
 .note-modal-content {
+    border-radius: 25px;
+    padding: 17px;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     position: relative;
-    width: auto;
-    margin: 30px 20px;
-    background-clip: border-box;
-    font-size: 120%;
-    color: black;
-    padding: 2%;
-    outline: 0;
     overflow: hidden;
+    width: auto;
+    background-clip: border-box;
+    color: black;
+    margin: 30px 20px;
+    background-color: rgba(192, 192, 192, 0.95);
+    border: 2px solid black;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    outline: 0;
 }
 
 .note-modal-header {
@@ -545,7 +550,7 @@ a.note-dropdown-item:hover {
 }
 
 .note-modal-title {
-    font-size: 20px;
+    font-size: 1.2rem;
     color: #42515f;
     margin: 0;
     line-height: 1.4;
@@ -663,7 +668,7 @@ a.note-dropdown-item:hover {
 .note-form-label {
     display: block;
     width: 100%;
-    font-size: 16px;
+    font-size: 1rem;
     color: #42515f;
     margin-bottom: 10px;
     font-weight: 700;

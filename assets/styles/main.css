@@ -569,6 +569,7 @@ button, select, textarea, input[type="text"], div[contenteditable="true"] {
 	outline: none;
 	color: inherit;
 	font-size: inherit;
+	font-family: inherit;
 }
 
 option {
@@ -672,4 +673,8 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	transform: rotate(45deg);
 	width: 1.2rem;
 	height: 1.2rem;
+}
+
+#sortSelect {
+	font-size: 1rem;
 }
