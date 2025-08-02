@@ -58,12 +58,10 @@
 
 <div class="fade-in theme-1">
 
-	<div id="top-wrapper">
-		<section id="top">
-			<label>Text Editor</label>
-			<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
-		</section>
-		<hr>
+	<div class="top-bar">
+		<a draggable="false" href="/tools/"><svg width="20px" height="20px" fill="#FF5F58"><circle cx="10" cy="10" r="10"></circle></svg></a>
+		<label>Text Editor</label>
+		<div></div>
 	</div>
 
 	<!-- <input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" /> -->
@@ -71,7 +69,7 @@
 	<div id="summernote"></div>
 	<div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #757575;">
 		<p id="htmlCounter"><span id="charCount">0</span> characters, <span id="wordCount">0</span> words</p>
-		<button id="toggle-paste-mode">Paste as Plain Text: ON</button>
+		<button id="toggle-paste-mode">Plain Text Paste: ON</button>
 	</div>
 
 </div>
@@ -89,7 +87,6 @@ $('#summernote').summernote({
 	linkTargetBlank: false,
 	styleWithSpan: true,
 	styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3'],
-	height: 400,
       toolbar: [
         ['style', ['clear']],
         ['style', ['bold', 'italic', 'underline', 'strikethrough']],
@@ -224,7 +221,7 @@ const editor = document.getElementById("text-editor");
 
 toggleButton.addEventListener("click", () => {
 	cleanPaste = !cleanPaste;
-	toggleButton.textContent = `Clean Paste: ${cleanPaste ? "ON" : "OFF"}`;
+	toggleButton.textContent = `Plain Text Paste: ${cleanPaste ? "ON" : "OFF"}`;
 });
 
 editor.addEventListener("paste", function(e) {

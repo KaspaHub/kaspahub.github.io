@@ -955,6 +955,11 @@ a.note-dropdown-item:hover {
 /* Frame mode layout
  ------------------------------------------ */
 
+.note-codable, .note-editable {
+    min-height: 50vh; 
+    height: auto; 
+}
+
 .note-editor.note-frame.codeview .note-editing-area .note-editable,
 .note-editor.note-airframe.codeview .note-editing-area .note-editable {
     display: none;
