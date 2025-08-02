@@ -1,5 +1,4 @@
-const CACHE_VERSION = 'v1';
-
+const CACHE_VERSION = 'v2';
 const PRECACHE_ASSETS = [
   '/app/calculator/',
   '/app/calculator/assets/img/logo-192.png',
@@ -9,33 +8,26 @@ const PRECACHE_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
-      .then((cache) => {
-        return cache.addAll(PRECACHE_ASSETS)
-          .catch((err) => {
-            console.error('Failed to precache assets:', err);
-          });
-      })
-      .then(() => {
-        return self.skipWaiting();
+      .then((cache) => cache.addAll(PRECACHE_ASSETS))
+      .then(() => self.skipWaiting())
+      .catch((err) => {
+        console.error('Failed to precache assets:', err);
       })
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.keys().then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_VERSION) {
-              console.log('Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      }),
-      self.clients.claim()
-    ])
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_VERSION) {
+            console.log('Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
@@ -47,29 +39,25 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+        if (
+          networkResponse &&
+          networkResponse.status === 200 &&
+          networkResponse.type === 'basic'
+        ) {
           const responseClone = networkResponse.clone();
-          caches.open(CACHE_VERSION)
-            .then((cache) => {
-              cache.put(event.request, responseClone);
-            });
+          caches.open(CACHE_VERSION).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
         }
         return networkResponse;
       })
-      .catch(() => {
-        return caches.match(event.request)
-          .then((cachedResponse) => {
-            if (cachedResponse) {
-              return cachedResponse;
-            }
-            return caches.match('/');
-          })
-          .catch((err) => {
-            console.error('Cache fallback failed:', err);
-            return new Response('<h1>Offline</h1><p>Connect to the internet to load this page.</p>', {
-              headers: { 'Content-Type': 'text/html' }
-            });
-          });
-      })
+      .catch(() =>
+        caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          return caches.match('/app/calculator/');
+        })
+      )
   );
 });
