@@ -143,13 +143,7 @@ iframe {
 <body class="">
 
 <header>
-<nav id="page-nav">
-	<h2><a href="/">Kaspa Hub</a></h2>
-	<div class="toggle-theme">
-		<input type="checkbox" id="theme-toggle">
-		<label for="theme-toggle"></label>
-	</div>
-</nav>
+<nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
 <script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
 </header>
 
