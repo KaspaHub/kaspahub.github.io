@@ -10,9 +10,9 @@
 	<meta name="twitter:title" content="Text Editor - Kaspa Hub" />
 	<meta property="og:title" content="Text Editor - Kaspa Hub" />
 
-	<meta name="description" content="Free online HTML editor with visual and code editing modes, live preview, and full PWA support. Use it directly in your browser without installing anything." />
-	<meta name="twitter:description" content="Edit HTML online using a fast and easy WYSIWYG editor. Switch between visual and source view, preview changes instantly, and install as a web app." />
-	<meta property="og:description" content="Use our free online HTML editor to write, edit, and preview HTML in real time. No installation needed. Fully supports modern browsers and PWA features." />
+	<meta name="description" content="Use our free online HTML editor to write, edit, and preview HTML in real time. No installation needed. Fully supports modern browsers and PWA features." />
+	<meta name="twitter:description" content="Edit HTML online using a fast and professional WYSIWYG Text Editor. Switch between visual and source view, preview changes instantly, and install as a web app." />
+	<meta property="og:description" content="Free online HTML editor with visual and code editing modes, live preview, and full PWA support. Use it directly in your browser without installing anything." />
 
 	<link rel="canonical" href="https://kaspahub.org/tools/html-text-editor/" />
 	<meta name="twitter:url" content="https://kaspahub.org/tools/html-text-editor/" />
@@ -36,9 +36,59 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-	<link rel="stylesheet" media="all" href="https://kaspahub.org/tools/html-text-editor/assets/summernote-lite.css" />
 	<script src="https://kaspahub.org/assets/scripts/jquery.js"></script>
-	<script src="https://kaspahub.org/tools/html-text-editor/assets/summernote-lite.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        #toolbar {
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+        }
+        #toolbar button, #toolbar select, #toolbar input {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+        #toolbar button:hover, #toolbar select:hover, #toolbar input:hover {
+            background-color: #e9e9e9;
+        }
+        #toolbar .color-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        #editor {
+            min-height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+        #code-view {
+            display: none;
+            width: 100%;
+            min-height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        @media (max-width: 600px) {
+            #toolbar {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body class="">
@@ -56,21 +106,74 @@
 
 <main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
 
-<div class="fade-in theme-1">
+<div class="theme-1">
 
-	<div class="top-bar">
-		<a draggable="false" href="/tools/"><svg width="20px" height="20px" fill="#FF5F58"><circle cx="10" cy="10" r="10"></circle></svg></a>
-		<label>Text Editor</label>
-		<div></div>
-	</div>
+<div class="top-bar">
+	<a draggable="false" href="/tools/">
+		<svg width="1em" height="1em" viewBox="0 0 20 20" fill="#FF5F58" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" /></svg>
+	</a>
+	<label>Text Editor</label>
+  <button id="save">Save</button>
+</div>
 
-	<!-- <input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" /> -->
-	
-	<div id="summernote"></div>
-	<div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #757575;">
-		<p id="htmlCounter"><span id="charCount">0</span> characters, <span id="wordCount">0</span> words</p>
-		<button id="toggle-paste-mode">Plain Text Paste: ON</button>
-	</div>
+
+    <div id="toolbar">
+        <button id="clear">Clear Styling</button>
+        <button id="bold">Bold</button>
+        <button id="italic">Italic</button>
+        <button id="underline">Underline</button>
+        <button id="strikethrough">Strikethrough</button>
+        <button id="bulletList">Bullet List</button>
+        <button id="numberedList">Numbered List</button>
+        <button id="alignLeft">Align Left</button>
+        <button id="alignCenter">Align Center</button>
+        <button id="alignRight">Align Right</button>
+        <select id="format">
+            <option value="">Text Format</option>
+            <option value="p">Paragraph</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+            <option value="h5">Heading 5</option>
+            <option value="h6">Heading 6</option>
+        </select>
+        <div class="size-group">
+            <input type="number" id="textSize" placeholder="Size in rem" value="1.2" step="0.1" min="0.1" style="width: 100px;">
+            <button id="applySize">Apply Size</button>
+        </div>
+        <select id="fontFamily">
+            <option value="">Font Family</option>
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Verdana">Verdana</option>
+        </select>
+        <div class="color-group">
+            <input type="color" id="textColor">
+            <button id="applyTextColor">Apply Text Color</button>
+        </div>
+        <div class="color-group">
+            <input type="color" id="bgColor">
+            <button id="applyBgColor">Apply Background Color</button>
+        </div>
+        <select id="insertTable">
+            <option value="">Insert Table</option>
+            <option value="2x2">2x2 Table</option>
+            <option value="3x3">3x3 Table</option>
+            <option value="4x4">4x4 Table</option>
+        </select>
+        <button id="insertLink">Insert Link</button>
+        <button id="insertImage">Insert Image</button>
+        <button id="toggleCode">Toggle HTML View</button>
+        <button id="undo">Undo</button>
+        <button id="redo">Redo</button>
+    </div>
+    <div id="editor" contenteditable="true"><p><br><p></div>
+    <textarea id="code-view"></textarea>
+
+
 
 </div>
 
@@ -80,156 +183,202 @@
 </main>
 <footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
 <script>
-$('#summernote').summernote({
-	// placeholder: 'Start writing...',
-	prettifyHtml: true,
-	tooltip: false,
-	linkTargetBlank: false,
-	styleWithSpan: true,
-	styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3'],
-      toolbar: [
-        ['style', ['clear']],
-        ['style', ['bold', 'italic', 'underline', 'strikethrough']],
-        ['style', ['ul', 'ol']],
-        ['style', ['alignleft', 'aligncenter', 'alignright']],
-        ['style', ['style']],
-        ['style', ['fontsize']],
-        ['style', ['color']],
-        ['style', ['table']],
-        ['style', ['link', 'picture', 'video']],
-        ['style', ['symbolDropdown']],
-        ['style', ['codeview']]
-      ],
-buttons: {
-  symbolDropdown: function () {
-    return $('<div class="note-btn-group btn-group">').append(`
-      <select class="e-button note-btn" 
-              style="margin: 0 5px; height: 30px; padding: 2px 5px;" 
-              onchange="insertSymbol(this); this.selectedIndex = 0;" tabindex="-1">
-        <option value="" selected disabled hidden>Symbols ▼</option>
-        <option value="✓">✓</option>
-        <option value="•">•</option>
-        <option value="▲">▲</option>
-        <option value="▼">▼</option>
-        <option value="◄">◄</option>
-        <option value="►">►</option>
-        <option value="₿">₿</option>
-        <option value="𐤊">𐤊</option>
-      </select>
-    `);
-  }
-}
-});
+$(document).ready(function() {
+    const editor = $('#editor')[0];
+    const codeView = $('#code-view')[0];
+    let isCodeView = false;
 
-function insertSymbol(select) {
-	const symbol = select.value;
-	$('#summernote').summernote('editor.insertText', symbol);
-}
+    // Load saved content from localStorage on page load
+    if (localStorage.getItem('KaspaHubEditor')) {
+        editor.innerHTML = localStorage.getItem('KaspaHubEditor');
+    }
 
-//tab
-document.addEventListener("DOMContentLoaded", function() {
-	const contentEditableDiv = document.querySelector(".note-editable");
+    // Helper function to execute commands
+    function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+    }
 
-	if (contentEditableDiv) {
-		contentEditableDiv.addEventListener("keydown", function(event) {
-			if (event.keyCode === 9 && contentEditableDiv.innerHTML !== "") {
-				event.preventDefault();
-				document.execCommand("insertHTML", false, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-			}
-		});
-	}
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const editor = document.getElementById("text-editor");
-  const charCountLabel = document.getElementById("charCount");
-  const wordCountLabel = document.getElementById("wordCount");
-
-  if (editor && charCountLabel && wordCountLabel) {
-    editor.addEventListener("input", function () {
-      const text = editor.innerText || "";
-      const charCount = text.replace(/\n/g, "").length;
-
-      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
-      const wordCount = words.length;
-
-      charCountLabel.textContent = charCount;
-      wordCountLabel.textContent = wordCount;
+    // Clear styling
+    $('#clear').on('click', function() {
+        execCmd('removeFormat');
     });
-  }
-});
 
+    // Bold
+    $('#bold').on('click', function() {
+        execCmd('bold');
+    });
 
+    // Italic
+    $('#italic').on('click', function() {
+        execCmd('italic');
+    });
 
+    // Underline
+    $('#underline').on('click', function() {
+        execCmd('underline');
+    });
 
+    // Strikethrough
+    $('#strikethrough').on('click', function() {
+        execCmd('strikethrough');
+    });
 
+    // Bullet List
+    $('#bulletList').on('click', function() {
+        execCmd('insertUnorderedList');
+    });
 
-document.addEventListener("DOMContentLoaded", function() {
-	const btnCodeViewer = document.querySelector('.btn-codeview');
-	const htmlCounter = document.getElementById("htmlCounter");
-	const toggleClean = document.getElementById("toggle-paste-mode");
+    // Numbered List
+    $('#numberedList').on('click', function() {
+        execCmd('insertOrderedList');
+    });
 
-	btnCodeViewer.addEventListener('click', function() {
-		if (htmlCounter.classList.toggle("hidden")) {
-			disableButtons();
-			toggleClean.classList.add("hidden");
+    // Align Left
+    $('#alignLeft').on('click', function() {
+        execCmd('justifyLeft');
+    });
 
-		} else {
-			toggleClean.classList.remove("hidden");
-			enableButtons();
-		}
-	});
+    // Align Center
+    $('#alignCenter').on('click', function() {
+        execCmd('justifyCenter');
+    });
 
-});
+    // Align Right
+    $('#alignRight').on('click', function() {
+        execCmd('justifyRight');
+    });
 
+    // Text Format
+    $('#format').on('change', function() {
+        const value = $(this).val();
+        if (value) {
+            execCmd('formatBlock', value);
+            $(this).val('');
+        }
+    });
 
-function disableButtons() {
-	const buttons = document.querySelectorAll(".e-button");
-	buttons.forEach(button => {
-		button.disabled = true;
-	});
-}
+    // Text Size
+    $('#applySize').on('click', function() {
+        const size = $('#textSize').val();
+        if (size) {
+            execCmd('fontSize', 4);
+            const selection = window.getSelection();
+            if (selection.rangeCount) {
+                const range = selection.getRangeAt(0);
+                const spans = $(editor).find('font[size="4"]');
+                spans.css('font-size', `${size}rem`).removeAttr('size');
+            }
+        }
+    });
 
-function enableButtons() {
-	const buttons = document.querySelectorAll(".e-button");
-	buttons.forEach(button => {
-		button.disabled = false;
-	});
-}
+    // Font Family
+    $('#fontFamily').on('change', function() {
+        const family = $(this).val();
+        if (family) {
+            execCmd('fontName', family);
+            $(this).val('');
+        }
+    });
 
+    // Text Color
+    $('#applyTextColor').on('click', function() {
+        const color = $('#textColor').val();
+        execCmd('foreColor', color);
+    });
 
+    // Background Color
+    $('#applyBgColor').on('click', function() {
+        const color = $('#bgColor').val();
+        execCmd('hiliteColor', color);
+    });
 
-if (document.cookie.includes("theme=dark")) {
-	document.querySelectorAll(".theme-filter").forEach(elem =>
-		elem.classList.add("filter-dark")
-	);
-}
+    // Insert Table
+    $('#insertTable').on('change', function() {
+        const value = $(this).val();
+        if (value) {
+            const [rows, cols] = value.split('x').map(Number);
+            let tableHtml = '<table border="1">';
+            for (let i = 0; i < rows; i++) {
+                tableHtml += '<tr>';
+                for (let j = 0; j < cols; j++) {
+                    tableHtml += '<td>&nbsp;</td>';
+                }
+                tableHtml += '</tr>';
+            }
+            tableHtml += '</table>';
+            execCmd('insertHTML', tableHtml);
+            $(this).val('');
+        }
+    });
 
-// function toggleAdditional() {
-// 	var additionalOptions = document.getElementById("note-toolbar");
-// 	additionalOptions.classList.toggle("hidden");
-// }
+    // Insert Link
+    $('#insertLink').on('click', function() {
+        const url = prompt('Enter the URL:');
+        if (url) {
+            execCmd('createLink', url);
+        }
+    });
 
+    // Insert Image
+    $('#insertImage').on('click', function() {
+        const url = prompt('Enter the image URL:');
+        if (url) {
+            execCmd('insertImage', url);
+        }
+    });
 
+    // Toggle HTML Code View
+    $('#toggleCode').on('click', function() {
+        if (isCodeView) {
+            // Switch back to editor
+            editor.innerHTML = codeView.value;
+            $(editor).show();
+            $(codeView).hide();
+            isCodeView = false;
+        } else {
+            // Switch to code view
+            codeView.value = editor.innerHTML;
+            $(editor).hide();
+            $(codeView).show();
+            isCodeView = true;
+        }
+    });
 
+    // Undo
+    $('#undo').on('click', function() {
+        execCmd('undo');
+    });
 
-// clean paste
-let cleanPaste = true;
+    // Redo
+    $('#redo').on('click', function() {
+        execCmd('redo');
+    });
 
-const toggleButton = document.getElementById("toggle-paste-mode");
-const editor = document.getElementById("text-editor");
+    // Save to localStorage
+    $('#save').on('click', function() {
+        let contentToSave;
+        if (isCodeView) {
+            contentToSave = codeView.value;
+            // Also sync back to editor for consistency
+            editor.innerHTML = contentToSave;
+        } else {
+            contentToSave = editor.innerHTML;
+        }
 
-toggleButton.addEventListener("click", () => {
-	cleanPaste = !cleanPaste;
-	toggleButton.textContent = `Plain Text Paste: ${cleanPaste ? "ON" : "OFF"}`;
-});
+        const saveButton = document.getElementById("save");
+        const originalText = saveButton.textContent;
+        localStorage.setItem('KaspaHubEditor', contentToSave);
 
-editor.addEventListener("paste", function(e) {
-	if (cleanPaste) {
-		e.preventDefault();
-		const text = e.clipboardData.getData("text/plain");
-		document.execCommand("insertText", false, text);
-	}
+        saveButton.textContent = 'Saved ✔';
+
+        setTimeout(() => {
+          saveButton.textContent = originalText;
+        }, 2000);
+
+      });
+
+    // Focus on editor
+    $(editor).focus();
 });
 </script>
 </body>

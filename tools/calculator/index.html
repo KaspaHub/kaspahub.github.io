@@ -130,7 +130,6 @@ iframe {
 	main {
 		min-width: 100%;
 		max-width: 100%;
-		place-content: end;
 	}
 }
 
@@ -152,13 +151,15 @@ iframe {
 <main style="margin: 0 auto; padding-bottom: 0;">
 
 <div class="container-0 fade-in theme-1">
-<div id="top-wrapper">
-	<section id="top">
-		<label>Calculator</label>
-		<a draggable="false" class="close" href="/tools/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
-	</section>
-	<hr>
+
+<div class="top-bar">
+	<a draggable="false" href="/tools/">
+		<svg width="1em" height="1em" viewBox="0 0 20 20" fill="#FF5F58" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" /></svg>
+	</a>
+	<label>Calculator</label>
+	<div></div>
 </div>
+
 <section id="calculator">
 	<input type="text" id="input" oninput="updateResult()" placeholder="" />
 	<input type="text" id="result" disabled />
