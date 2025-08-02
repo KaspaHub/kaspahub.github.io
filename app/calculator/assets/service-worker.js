@@ -1,10 +1,11 @@
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const PRECACHE_ASSETS = [
-  '/app/calculator/',
+  '/app/calculator/index.html',
   '/app/calculator/assets/img/logo-192.png',
   '/app/calculator/assets/img/logo-96.png',
 ];
 
+// Install event — pre-cache assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
@@ -16,6 +17,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Activate event — clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) =>
@@ -31,6 +33,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Fetch event — cache-first with network update fallback
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
     return;
@@ -51,13 +54,12 @@ self.addEventListener('fetch', (event) => {
         }
         return networkResponse;
       })
-      .catch(() =>
-        caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          return caches.match('/app/calculator/');
-        })
-      )
+      .catch(() => {
+        // Serve from cache on failure
+        return caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) return cachedResponse;
+          return caches.match('/app/calculator/index.html');
+        });
+      })
   );
 });

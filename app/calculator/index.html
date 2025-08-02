@@ -162,7 +162,41 @@ iframe {
 </header>
 
 <main style="margin: 0 auto; padding-bottom: 0;">
+  <script>
+    // Wait for service worker to cache assets, then hide splash and show app
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then(registration => {
+        // We can listen for when the SW has finished caching, but here
+        // let's just wait a bit or listen for a custom message if you want to get fancy
 
+        // Simple approach: wait a fixed delay to simulate caching
+        setTimeout(() => {
+          document.getElementById('splash').style.display = 'none';
+          document.getElementById('app').style.display = 'block';
+        }, 3000); // adjust timing as needed
+      });
+    } else {
+      // No SW support: just show app
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+    }
+  </script>
+    <div id="splash" style="
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    z-index: 9999;
+  ">
+    <div>Loading Calculator...</div>
+    <div id="cache-status" style="margin-top: 1rem; font-size: 1rem;">Caching offline assets…</div>
+  </div>
 <div class="container-0 fade-in theme-1">
 
 <div class="top-bar">

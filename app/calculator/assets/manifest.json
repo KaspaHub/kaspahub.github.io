@@ -3,7 +3,7 @@
   "short_name": "Calculator",
   "description": "Calculator by Kaspa Hub",
   "lang": "en",
-  "start_url": "/app/calculator/",
+  "start_url": "/app/calculator/index.html",
   "scope": "/app/calculator/",
   "id": "/app/calculator/",
   "display": "standalone",
