@@ -13,7 +13,6 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 Have a project to share? We’d love to feature it on the Kaspa Hub! You can:
 - Send us a DM on X: [https://x.com/KaspaHub](https://x.com/KaspaHub)
 - Share it in our Discord server: [https://discord.gg/7umFvjcANE](https://discord.gg/7umFvjcANE)
-- Fill out this Google Form: [https://forms.gle/ekT9nbkWzLux63U99](https://forms.gle/ekT9nbkWzLux63U99)
 - Or submit your project directly on GitHub via a pull request.
 
 ## License
