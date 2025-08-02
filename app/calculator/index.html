@@ -151,56 +151,22 @@ iframe {
 <body class="">
 
 <header>
-	<nav id="page-nav">
-		<h2><a href="/">Kaspa Hub</a></h2>
-		<div class="toggle-theme">
-			<input type="checkbox" id="toggle-theme-checkbox" aria-label="Toggle theme-1">
-			<label for="toggle-theme-checkbox"></label>
-		</div>
-	</nav>
-	<script>const c=document.getElementById("toggle-theme-checkbox");c.addEventListener("change",()=>{document.cookie="theme="+(c.checked?"dark":"light")+"; path=/; SameSite=Lax";location.reload()}),c.checked=document.cookie.includes("theme=dark"),(()=>{document.body.classList.add("background-"+(document.cookie.includes("theme=dark")?"dark":"light"))})();</script>
+<nav id="page-nav">
+	<h2><a href="/">Kaspa Hub</a></h2>
+	<div class="toggle-theme">
+		<input type="checkbox" id="theme-toggle">
+		<label for="theme-toggle"></label>
+	</div>
+</nav>
+<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
 </header>
 
 <main style="margin: 0 auto; padding-bottom: 0;">
-  <script>
-    // Wait for service worker to cache assets, then hide splash and show app
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.ready.then(registration => {
-        // We can listen for when the SW has finished caching, but here
-        // let's just wait a bit or listen for a custom message if you want to get fancy
 
-        // Simple approach: wait a fixed delay to simulate caching
-        setTimeout(() => {
-          document.getElementById('splash').style.display = 'none';
-          document.getElementById('app').style.display = 'block';
-        }, 3000); // adjust timing as needed
-      });
-    } else {
-      // No SW support: just show app
-      document.getElementById('splash').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-    }
-  </script>
-    <div id="splash" style="
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    font-size: 1.5rem;
-    z-index: 9999;
-  ">
-    <div>Loading Calculator...</div>
-    <div id="cache-status" style="margin-top: 1rem; font-size: 1rem;">Caching offline assets…</div>
-  </div>
 <div class="container-0 fade-in theme-1">
 
 <div class="top-bar">
-    <a draggable="false" href="/apps/"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="#FF5F58"><circle cx="10" cy="10" r="10" /></svg></a>
+    <a draggable="false" href="/apps/"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10" /></svg></a>
     <label>Text Editor</label>
     <button id="save"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="gray"><circle cx="10" cy="10" r="10" /></svg></button>
 </div>
@@ -313,7 +279,7 @@ saveButton.addEventListener('click', function () {
 });
 
 function setButtonGreen() {
-	saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="green"><circle cx="10" cy="10" r="10" /></svg>';
+	saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="#61C554"><circle cx="10" cy="10" r="10" /></svg>';
 }
 
 function setButtonGray() {

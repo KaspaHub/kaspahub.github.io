@@ -77,14 +77,14 @@
 <body class="">
 
 <header>
-	<nav id="page-nav">
-		<h2><a href="/">Kaspa Hub</a></h2>
-		<div class="toggle-theme">
-			<input type="checkbox" id="toggle-theme-checkbox" aria-label="Toggle theme-1">
-			<label for="toggle-theme-checkbox"></label>
-		</div>
-	</nav>
-	<script>const c=document.getElementById("toggle-theme-checkbox");c.addEventListener("change",()=>{document.cookie="theme="+(c.checked?"dark":"light")+"; path=/; SameSite=Lax";location.reload()}),c.checked=document.cookie.includes("theme=dark"),(()=>{document.body.classList.add("background-"+(document.cookie.includes("theme=dark")?"dark":"light"))})();</script>
+<nav id="page-nav">
+	<h2><a href="/">Kaspa Hub</a></h2>
+	<div class="toggle-theme">
+		<input type="checkbox" id="theme-toggle">
+		<label for="theme-toggle"></label>
+	</div>
+</nav>
+<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
 </header>
 
 <main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
@@ -92,7 +92,7 @@
 <div class="theme-1">
 
 <div class="top-bar">
-    <a draggable="false" href="/apps/"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="#FF5F58"><circle cx="10" cy="10" r="10" /></svg></a>
+    <a draggable="false" href="/apps/"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10" /></svg></a>
     <label>Text Editor</label>
     <button id="save"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="gray"><circle cx="10" cy="10" r="10" /></svg></button>
 </div>
@@ -349,7 +349,7 @@ $(document).ready(function() {
         const saveButton = document.getElementById("save");
         localStorage.setItem('KaspaHubEditor', contentToSave);
 
-        saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="green"><circle cx="10" cy="10" r="10" /></svg>';
+        saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="#61C554"><circle cx="10" cy="10" r="10" /></svg>';
 
         // setTimeout(() => {
         //   saveButton.textContent = originalText;
