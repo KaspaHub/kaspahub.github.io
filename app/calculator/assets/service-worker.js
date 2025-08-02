@@ -1,9 +1,9 @@
-const CACHE_NAME = 'v1';
+const CACHE_NAME = 'v2';
 
 const urlsToCache = [
-  '/tools/calculator/',
-  '/tools/calculator/assets/img/logo-192.png',
-  '/tools/calculator/assets/img/logo-96.png',
+  '/app/calculator/',
+  '/app/calculator/assets/img/logo-192.png',
+  '/app/calculator/assets/img/logo-96.png',
 ];
 
 self.addEventListener('install', event => {
