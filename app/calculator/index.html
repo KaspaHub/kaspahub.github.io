@@ -37,15 +37,7 @@
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <script>
 if ('serviceWorker' in navigator) {
-window.addEventListener('load', () => {
- navigator.serviceWorker.register('https://kaspahub.org/app/calculator/assets/service-worker.js')
-	.then(registration => {
-		console.log('Service Worker registered');
-		// Optional: Force check for updates on every load
-		registration.update();
-	})
-	.catch(err => console.error('Service Worker registration failed:', err));
-});
+	navigator.serviceWorker.register("https://kaspahub.org/app/calculator/assets/service-worker.js");
 }
 </script>
 </head>

@@ -38,28 +38,49 @@
 
 	<script src="https://kaspahub.org/assets/scripts/jquery.js"></script>
 <style>
+
 #toolbar {
 	padding: 10px;
 	margin-bottom: 10px;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 5px;
+	gap: 10px;
 	align-items: center;
 }
+
 #toolbar button, #toolbar select, #toolbar input {
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	background-color: #f9f9f9;
-	cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 40px;
+    min-width: 48px;
+    /*border: 2px solid black;*/
+    border-radius: 10px;
+    color: black;
+    font-size: inherit;
 }
+/*#toolbar input[type="color"] {
+     max-height: 40px;
+    
+
+}*/
+.tool-group > :first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: 0 !important;
+}
+.tool-group > :last-child {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
 #toolbar button:hover, #toolbar select:hover, #toolbar input:hover {
 	background-color: #e9e9e9;
 }
-#toolbar .color-group {
+#toolbar .tool-group {
 	display: flex;
 	align-items: center;
-	gap: 5px;
 }
 #editor, #code-view {
 	min-height: 50vh; 
@@ -70,20 +91,38 @@
 #code-view {
 	display: none;
 }
+.class {
+    display: none;
+}
+.advanced {
+    display: none;
+}
+
+#clear {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/clear.png);}
+#bold {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/bold.png);}
+#italic {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/italic.png);}
+#underline {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/underline.png);}
+#strikethrough {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/strikethrough.png);}
+#bulletList {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/bulletList.png);}
+#numberedList {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/numberedList.png);}
+#alignLeft {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/alignLeft.png);}
+#alignCenter {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/alignCenter.png);}
+#alignRight {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/alignRight.png);}
+#alignJustify {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/alignJustify.png);}
+#insertTable {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/insertTable.png);}
+#insertLink {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/insertLink.png);}
+#insertImage {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/insertImage.png);}
+#toggleCode {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/toggleCode.png);}
+/*#undo {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/undo.png);}
+#redo {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/redo.png);}*/
 
 </style>
 </head>
-
+    
 <body class="">
-
+ 
 <header>
-<nav id="page-nav">
-	<h2><a href="/">Kaspa Hub</a></h2>
-	<div class="toggle-theme">
-		<input type="checkbox" id="theme-toggle">
-		<label for="theme-toggle"></label>
-	</div>
-</nav>
+    <nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
 <script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
 </header>
 
@@ -99,29 +138,30 @@
 
 
     <div id="toolbar">
-        <button id="clear">Clear Styling</button>
-        <button id="bold">Bold</button>
-        <button id="italic">Italic</button>
-        <button id="underline">Underline</button>
-        <button id="strikethrough">Strikethrough</button>
-        <button id="bulletList">Bullet List</button>
-        <button id="numberedList">Numbered List</button>
-        <button id="alignLeft">Align Left</button>
-        <button id="alignCenter">Align Center</button>
-        <button id="alignRight">Align Right</button>
+        <button id="clear"></button>
+        <button id="bold"></button>
+        <button id="italic"></button>
+        <button id="underline"></button>
+        <button id="strikethrough"></button>
+        <button id="bulletList"></button>
+        <button id="numberedList"></button>
+        <button id="alignLeft"></button>
+        <button id="alignCenter"></button>
+        <button id="alignRight"></button>
+        <button class="advanced" id="alignJustify"></button>
         <select id="format">
             <option value="">Text Format</option>
             <option value="p">Paragraph</option>
-            <option value="h1">Heading 1</option>
+            <option class="advanced" value="h1">Heading 1</option>
             <option value="h2">Heading 2</option>
             <option value="h3">Heading 3</option>
             <option value="h4">Heading 4</option>
             <option value="h5">Heading 5</option>
             <option value="h6">Heading 6</option>
         </select>
-        <div class="size-group">
-            <input type="number" id="textSize" placeholder="Size in rem" value="1.2" step="0.1" min="0.1" style="width: 100px;">
-            <button id="applySize">Apply Size</button>
+        <div class="tool-group">
+            <input type="number" id="textSize" placeholder="Size in rem" value="1.2" step="0.1" min="0.1" style="width: 70px; padding: 7px;">
+            <button id="applySize">✔</button>
         </div>
         <select id="fontFamily">
             <option value="">Font Family</option>
@@ -131,13 +171,13 @@
             <option value="Courier New">Courier New</option>
             <option value="Verdana">Verdana</option>
         </select>
-        <div class="color-group">
-            <input type="color" id="textColor">
-            <button id="applyTextColor">Apply Text Color</button>
+        <div class="tool-group">
+            <input type="color" id="textColor" style="max-width: 40px;">
+            <button id="applyTextColor">✔</button>
         </div>
-        <div class="color-group">
-            <input type="color" id="bgColor">
-            <button id="applyBgColor">Apply Background Color</button>
+        <div class="tool-group">
+            <input type="color" id="bgColor" style="max-width: 40px;">
+            <button id="applyBgColor">✔</button>
         </div>
         <select id="insertTable">
             <option value="">Insert Table</option>
@@ -227,6 +267,11 @@ $(document).ready(function() {
     // Align Right
     $('#alignRight').on('click', function() {
         execCmd('justifyRight');
+    });
+
+    // Align Justify
+    $('#alignJustify').on('click', function() {
+        execCmd('justifyFull');
     });
 
     // Text Format

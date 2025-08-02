@@ -564,7 +564,7 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 
 }
 
-button, select, textarea, input[type="text"], div[contenteditable="true"] {
+button, select, textarea, input, div[contenteditable="true"] {
 	background: none;
 	border: none;
 	box-shadow: none;
