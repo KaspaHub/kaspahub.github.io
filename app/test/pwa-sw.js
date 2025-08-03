@@ -1,18 +1,21 @@
 'use strict';
 
-var cache_storage_name = 'pwa-0.2';
-var cachedUrls = [
-  start_page,
-  offline_page,
+var version = 'pwa-0.3';
+var start_url = '/app/test/';
+var offline_url = '/app/test/offline/';
+
+var whitelist = [
+  start_url,
+  offline_url,
   'pwa-manifest.json'
 ];
 
 // Install 
 self.addEventListener('install', function (e) {
 	console.log('PWA sw installation');
-	e.waitUntil(caches.open(cache_storage_name).then(function (cache) {
+	e.waitUntil(caches.open(version).then(function (cache) {
 		console.log('PWA sw caching first urls');
-		cachedUrls.map(function (url) {
+		whitelist.map(function (url) {
 			return cache.add(url).catch(function (res) {
 				return console.log('PWA: ' + String(res) + ' ' + url);
 			});
@@ -25,7 +28,7 @@ self.addEventListener('activate', function (e) {
 	console.log('PWA sw activation');
 	e.waitUntil(caches.keys().then(function (kl) {
 		return Promise.all(kl.map(function (key) {
-			if (key !== cache_storage_name) {
+			if (key !== version) {
 				console.log('PWA old cache removed', key);
 				return caches.delete(key);
 			}
@@ -42,7 +45,7 @@ self.addEventListener('fetch', function (e) {
 	// Online
 	if (e.request.mode === 'navigate' && navigator.onLine) {
 		e.respondWith(fetch(e.request).then(function (response) {
-			return caches.open(cache_storage_name).then(function (cache) {
+			return caches.open(version).then(function (cache) {
 				cache.put(e.request, response.clone());
 				return response;
 			});
@@ -53,13 +56,13 @@ self.addEventListener('fetch', function (e) {
 	// Offline
 	e.respondWith(caches.match(e.request).then(function (response) {
 		return response || fetch(e.request).then(function (response) {
-			return caches.open(cache_storage_name).then(function (cache) {
+			return caches.open(version).then(function (cache) {
 				cache.put(e.request, response.clone());
 				return response;
 			});
 		});
 	}).catch(function () {
-		return caches.match(offline_page);
+		return caches.match(offline_url);
 	}));
 });
 
@@ -71,7 +74,7 @@ function fetchRules(e) {
 	if (!e.request.url.startsWith('https://')) return;
 
 	if (e.request.method !== 'GET') {
-		return caches.match(offline_page);
+		return caches.match(offline_url);
 	}
 
 	return true;
