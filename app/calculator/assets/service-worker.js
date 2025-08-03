@@ -1,36 +1,27 @@
-const CACHE_NAME = 'v1';
+//minimalistic worker with the only goal to fulfill Chrome/Edge's PWA install requests
+//no service worker caches are used, only the browser cache
+//(test2.html is pre loaded in 'simple.js' via fetch API,it could be of course also loaded here)
+let _isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+console.log(">>>service worker loading,isSafari:"+_isSafari);
 
-const urlsToCache = [
-  '/app/calculator/',
-  '/app/calculator/assets/img/logo-192.png',
-  '/app/calculator/assets/img/logo-96.png',
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
-  );
+self.addEventListener('activate', function (event) {
+  console.log("!!!!!sw activate");
+  event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    fetch(event.request)
-      .then(networkResponse => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      })
-      .catch(() => caches.match(event.request))
-  );
+self.addEventListener('install', function(event) {
+  console.log("!!!!!!sw install");
+  event.waitUntil(self.skipWaiting()); // Activate worker immediately
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      );
-    })
-  );
+self.addEventListener('fetch', function (event) {
+  console.info('!!!!sw fetch :' + event.request.url + ",mode:" +event.request.mode);
+  if (_isSafari) {
+    //in case one wants to use the service worker too for Safari
+    //safari works different from Chrome and FF:
+    //it needs to explicitly request from network when being offline
+    //otherwise loading test2.html doesn't work
+    //Chrome and FF do the right thing by default
+    event.respondWith(fetch(event.request));
+  }
 });
