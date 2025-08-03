@@ -1,8 +1,8 @@
 'use strict';
 
 var cache_storage_name = 'pwa-0.1';
-var start_page = '/app/template/';
-var offline_page = '/app/template/offline/';
+var start_page = '/app/test/';
+var offline_page = '/app/test/offline/';
 var first_cache_urls = [start_page, offline_page];
 var never_cache_urls = [/\/private.html/, /\/panel/, /\/custom-url/];
 
