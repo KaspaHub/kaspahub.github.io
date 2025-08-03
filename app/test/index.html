@@ -14,12 +14,22 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="img/fav-114.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="img/fav-72.png">
 	<link rel="apple-touch-icon" sizes="144x144" href="img/fav-144.png">
-	<link rel="manifest" href="pwa-manifest.json">
 	<link rel="stylesheet" href="css/style.css">
-	<script type='text/javascript' src="js/main.js"></script>
-
 	<link rel="stylesheet" href="/assets/styles/main.css" />
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <link rel="manifest" href="wm.json">
+    <script>
+    'use strict';
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('scripts/sw.js').then(function (register) {
+                register.update();
+            });
+        });
+    }
+    </script>
+
 </head>
 
 <style>
