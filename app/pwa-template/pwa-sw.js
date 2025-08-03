@@ -6,8 +6,8 @@
  * learn more in Github : https://github.com/alirahimi818/simple-PWA
  */
 
-var cache_storage_name = 'redcherry-pwa-1.1';
-var start_page = '/pwa-template/';
+var cache_storage_name = 'redcherry-pwa-1.2';
+var start_page = 'pwa.html';
 var offline_page = 'offline.html';
 var first_cache_urls = [start_page, offline_page];
 var never_cache_urls = [/\/private.html/, /\/panel/, /\/custom-url/];
@@ -95,13 +95,4 @@ function checkFetchRules(e) {
 	}
 
 	return true;
-}
-
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
-if (workbox.googleAnalytics) {
-	try {
-		workbox.googleAnalytics.initialize();
-	} catch (e) {
-		console.log(e.message);
-	}
 }
