@@ -1,7 +1,7 @@
 {
-    "name": "Template",
-    "short_name": "Template",
-    "description": "PWA Template by Kaspa Hub",
+    "name": "Test",
+    "short_name": "Test",
+    "description": "PWA Test by Kaspa Hub",
     "icons": [
         {
             "src": "img/fav-192.png",
