@@ -1,8 +1,8 @@
 'use strict';
 
 
-var cache_storage_name = 'redcherry-pwa-v1';
-var start_page = '/test/';
+var cache_storage_name = 'redcherry-pwa-v2';
+var start_page = '/app/test/';
 var offline_page = 'offline.html';
 var first_cache_urls = [start_page, offline_page];
 var never_cache_urls = [/\/private.html/, /\/panel/, /\/custom-url/];
