@@ -42,7 +42,7 @@ self.addEventListener('fetch', function(e) {
     e.respondWith(
       fetch(e.request)
         .then(function(response) {
-          return caches.open(cache_storage_name).then(function(cache) {
+          return caches.open(version).then(function(cache) {
             cache.put(e.request, response.clone());
             return response;
           });
@@ -50,7 +50,7 @@ self.addEventListener('fetch', function(e) {
         .catch(function() {
           // fetch failed (offline), try cache fallback
           return caches.match(e.request).then(function(response) {
-            return response || caches.match(offline_page);
+            return response || caches.match(offline_url);
           });
         })
     );
@@ -61,13 +61,13 @@ self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.match(e.request).then(function(response) {
       return response || fetch(e.request).then(function(response) {
-        return caches.open(cache_storage_name).then(function(cache) {
+        return caches.open(version).then(function(cache) {
           cache.put(e.request, response.clone());
           return response;
         });
       });
     }).catch(function() {
-      return caches.match(offline_page);
+      return caches.match(offline_url);
     })
   );
 });
