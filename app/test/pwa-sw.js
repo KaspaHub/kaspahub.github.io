@@ -1,16 +1,18 @@
 'use strict';
 
-var cache_storage_name = 'pwa-0.1';
-var start_page = '/app/test/';
-var offline_page = '/app/test/offline/';
-var first_cache_urls = [start_page, offline_page];
+var cache_storage_name = 'pwa-0.2';
+var cachedUrls = [
+  start_page,
+  offline_page,
+  'pwa-manifest.json'
+];
 
 // Install 
 self.addEventListener('install', function (e) {
 	console.log('PWA sw installation');
 	e.waitUntil(caches.open(cache_storage_name).then(function (cache) {
 		console.log('PWA sw caching first urls');
-		first_cache_urls.map(function (url) {
+		cachedUrls.map(function (url) {
 			return cache.add(url).catch(function (res) {
 				return console.log('PWA: ' + String(res) + ' ' + url);
 			});
@@ -35,7 +37,7 @@ self.addEventListener('activate', function (e) {
 // Fetch
 self.addEventListener('fetch', function (e) {
 
-	if (!checkFetchRules(e)) return;
+	if (!fetchRules(e)) return;
 
 	// Online
 	if (e.request.mode === 'navigate' && navigator.onLine) {
@@ -62,7 +64,7 @@ self.addEventListener('fetch', function (e) {
 });
 
 // Rules
-function checkFetchRules(e) {
+function fetchRules(e) {
 
 	if (new URL(e.request.url).origin !== location.origin) return;
 

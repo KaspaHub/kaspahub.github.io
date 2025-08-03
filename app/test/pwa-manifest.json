@@ -1,7 +1,7 @@
 {
-    "name": "Test",
-    "short_name": "Test",
-    "description": "PWA Test by Kaspa Hub",
+    "name": "Calculator",
+    "short_name": "Calculator",
+    "description": "Calculator Kaspa Hub",
     "icons": [
         {
             "src": "img/fav-192.png",
