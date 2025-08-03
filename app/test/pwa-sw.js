@@ -1,18 +1,18 @@
 'use strict';
 
-var cache_storage_name = 'pwa-0.2';
+var cache_storage_name = 'pwa-0.1';
 var start_page = '/app/test/';
 var offline_page = '/app/test/offline/';
 var first_cache_urls = [start_page, offline_page];
 
-// Install
+// Install 
 self.addEventListener('install', function (e) {
 	console.log('PWA sw installation');
 	e.waitUntil(caches.open(cache_storage_name).then(function (cache) {
 		console.log('PWA sw caching first urls');
 		first_cache_urls.map(function (url) {
 			return cache.add(url).catch(function (res) {
-				console.log('PWA: ' + String(res) + ' ' + url);
+				return console.log('PWA: ' + String(res) + ' ' + url);
 			});
 		});
 	}));
@@ -29,11 +29,14 @@ self.addEventListener('activate', function (e) {
 			}
 		}));
 	}));
-	self.clients.claim();
+	return self.clients.claim();
 });
 
 // Fetch
 self.addEventListener('fetch', function (e) {
+
+	if (!checkFetchRules(e)) return;
+
 	// Online
 	if (e.request.mode === 'navigate' && navigator.onLine) {
 		e.respondWith(fetch(e.request).then(function (response) {
@@ -57,3 +60,17 @@ self.addEventListener('fetch', function (e) {
 		return caches.match(offline_page);
 	}));
 });
+
+// Rules
+function checkFetchRules(e) {
+
+	if (new URL(e.request.url).origin !== location.origin) return;
+
+	if (!e.request.url.startsWith('https://')) return;
+
+	if (e.request.method !== 'GET') {
+		return caches.match(offline_page);
+	}
+
+	return true;
+}
