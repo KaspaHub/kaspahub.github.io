@@ -1,7 +1,7 @@
 'use strict';
 
 
-var cache_storage_name = 'redcherry-pwa-v2';
+var cache_storage_name = 'redcherry-pwa-v3';
 var start_page = '/app/test/';
 var offline_page = 'offline.html';
 var first_cache_urls = [start_page, offline_page];
@@ -95,12 +95,12 @@ function checkFetchRules(e) {
 
 
 
-// Check user internet status (online/offline)
-function updateOnlineStatus(event) {
-   if (!navigator.onLine) {
-       alert('Internet access is not possible!')
-   }
-}
+// // Check user internet status (online/offline)
+// function updateOnlineStatus(event) {
+//    if (!navigator.onLine) {
+//        alert('Internet access is not possible!')
+//    }
+// }
 
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
+// window.addEventListener('online', updateOnlineStatus);
+// window.addEventListener('offline', updateOnlineStatus);
