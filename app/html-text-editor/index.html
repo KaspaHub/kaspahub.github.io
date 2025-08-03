@@ -49,7 +49,7 @@
 }
 
 #toolbar button, #toolbar select, #toolbar input {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.15);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -76,7 +76,7 @@
 }
 
 #toolbar button:hover, #toolbar select:hover, #toolbar input:hover {
-	background-color: #e9e9e9;
+	filter: opacity(0.7);
 }
 #toolbar .tool-group {
 	display: flex;
@@ -96,6 +96,13 @@
 }
 .advanced {
     display: none;
+}
+
+select:disabled, button:disabled, input:disabled {
+    opacity: 30%;
+    pointer-events: none;
+    transition: all 0.1s linear;
+    /*cursor: no-drop;*/
 }
 
 #clear {background-image: url(https://kaspahub.org/app/html-text-editor/assets/img/clear.png);}
@@ -138,18 +145,24 @@
 
 
     <div id="toolbar">
-        <button id="clear"></button>
-        <button id="bold"></button>
-        <button id="italic"></button>
-        <button id="underline"></button>
-        <button id="strikethrough"></button>
-        <button id="bulletList"></button>
-        <button id="numberedList"></button>
-        <button id="alignLeft"></button>
-        <button id="alignCenter"></button>
-        <button id="alignRight"></button>
-        <button class="advanced" id="alignJustify"></button>
-        <select id="format">
+        <button class="ebtn" id="clear"></button>
+        <button class="ebtn" id="undo"><</button>
+        <button class="ebtn" id="redo">></button>
+        <button id="toggleCode"></button>
+    </div>
+    <div id="toolbar">
+
+        <button class="ebtn" id="bold"></button>
+        <button class="ebtn" id="italic"></button>
+        <button class="ebtn" id="underline"></button>
+        <button class="ebtn" id="strikethrough"></button>
+        <button class="ebtn" id="bulletList"></button>
+        <button class="ebtn" id="numberedList"></button>
+        <button class="ebtn" id="alignLeft"></button>
+        <button class="ebtn" id="alignCenter"></button>
+        <button class="ebtn" id="alignRight"></button>
+        <button class="ebtn" class="advanced" id="alignJustify"></button>
+        <select class="ebtn" id="format">
             <option value="">Text Format</option>
             <option value="p">Paragraph</option>
             <option class="advanced" value="h1">Heading 1</option>
@@ -160,40 +173,40 @@
             <option value="h6">Heading 6</option>
         </select>
         <div class="tool-group">
-            <input type="number" id="textSize" placeholder="Size in rem" value="1.2" step="0.1" min="0.1" style="width: 70px; padding: 7px;">
-            <button id="applySize">✔</button>
+            <input class="ebtn" type="number" id="textSize" placeholder="Size in rem" value="1.2" step="0.1" min="0.1" style="width: 70px; padding: 7px;">
+            <button class="ebtn" id="applySize">✔</button>
         </div>
-        <select id="fontFamily">
+        <select class="ebtn" id="fontFamily">
             <option value="">Font Family</option>
             <option value="Arial">Arial</option>
             <option value="Helvetica">Helvetica</option>
-            <option value="Times New Roman">Times New Roman</option>
+            <option value="Times New Roman">Times Roman</option>
             <option value="Courier New">Courier New</option>
             <option value="Verdana">Verdana</option>
         </select>
         <div class="tool-group">
-            <input type="color" id="textColor" style="max-width: 40px;">
-            <button id="applyTextColor">✔</button>
+            <input class="ebtn" type="color" id="textColor" style="max-width: 40px;">
+            <button class="ebtn" id="applyTextColor">✔</button>
         </div>
         <div class="tool-group">
-            <input type="color" id="bgColor" style="max-width: 40px;">
-            <button id="applyBgColor">✔</button>
+            <input class="ebtn" type="color" id="bgColor" style="max-width: 40px;">
+            <button class="ebtn" id="applyBgColor">✔</button>
         </div>
-        <select id="insertTable">
-            <option value="">Insert Table</option>
-            <option value="2x2">2x2 Table</option>
-            <option value="3x3">3x3 Table</option>
-            <option value="4x4">4x4 Table</option>
+        <select class="ebtn" id="insertTable">
+            <option value=""></option>
+            <option value="2x2">2 x 2</option>
+            <option value="3x3">3 x 3</option>
+            <option value="4x4">4 x 4</option>
         </select>
-        <button id="insertLink">Insert Link</button>
-        <button id="insertImage">Insert Image</button>
-        <button id="toggleCode">Toggle HTML View</button>
-        <button id="undo">Undo</button>
-        <button id="redo">Redo</button>
+        <button class="ebtn" id="insertLink"></button>
+        <button class="ebtn" id="insertImage"></button>
     </div>
     <div id="editor" contenteditable="true"><p><br><p></div>
     <textarea id="code-view"></textarea>
-
+    <p id="htmlCounter" style="font-size: 0.8em; color: #757575; float: right;">
+        <span id="charCount">0</span> characters,
+        <span id="wordCount">0</span> words
+    </p>
 
 
 </div>
@@ -404,6 +417,64 @@ $(document).ready(function() {
 
     // Focus on editor
     $(editor).focus();
+});
+
+
+
+
+
+
+
+
+
+
+///////////////
+document.addEventListener("DOMContentLoaded", function() {
+    const btnCodeViewer = document.getElementById("code-view");
+    // const htmlCounter = document.getElementById("htmlCounter");
+
+    toggleCode.addEventListener('click', function() {
+        if (htmlCounter.classList.toggle("hidden")) {
+            disableButtons();
+        } else {
+            enableButtons();
+        }
+    });
+
+});
+
+
+function disableButtons() {
+    const buttons = document.querySelectorAll(".ebtn");
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+}
+
+function enableButtons() {
+    const buttons = document.querySelectorAll(".ebtn");
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
+}
+//////////count
+document.addEventListener("DOMContentLoaded", function () {
+  const editor = document.getElementById("editor");
+  const charCountLabel = document.getElementById("charCount");
+  const wordCountLabel = document.getElementById("wordCount");
+
+  if (editor && charCountLabel && wordCountLabel) {
+    editor.addEventListener("input", function () {
+      const text = editor.innerText || "";
+      const charCount = text.replace(/\n/g, "").length;
+
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length;
+
+      charCountLabel.textContent = charCount;
+      wordCountLabel.textContent = wordCount;
+    });
+  }
 });
 </script>
 </body>
