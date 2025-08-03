@@ -1,28 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Progressive Web App</title>
-    <meta name="msapplication-TileColor" content="#af0a1a">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="shortcut icon" href="img/fav-16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/fav-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/fav-16.png">
-    <link rel="apple-touch-icon" href="img/fav-57.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/fav-114.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/fav-72.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/fav-144.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-color" content="#000000" />
+
+    <title>Offline</title>
+    <meta name="twitter:title" content="Calculator - Kaspa Hub" />
+    <meta property="og:title" content="Calculator - Kaspa Hub" />
+
+    <meta name="description" content="Free and simple online calculator for quick math. Use it directly in your browser or install it as a Progressive Web App (PWA) for offline access anytime." />
+    <meta name="twitter:description" content="A clean and easy-to-use calculator app. Works online or offline, mobile-ready, and no installation required—perfect for basic math on the go." />
+    <meta property="og:description" content="Perform everyday calculations effortlessly with our simple online calculator. Fast, intuitive, and accessible on any device—installable as a PWA too!" />
+
+    <link rel="canonical" href="https://kaspahub.org/app/calculator/" />
+    <meta name="twitter:url" content="https://kaspahub.org/app/calculator/" />
+    <meta property="og:url" content="https://kaspahub.org/app/calculator/" />
+
+    <meta name="twitter:site" content="@KaspaHub" />
+    <meta name="twitter:creator" content="@KaspaHub" />
+    <meta property="og:site_name" content="Kaspa Hub" />
+
+    <meta property="og:type" content="website" />
+    <meta name="author" content="Kaspa Hub" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+    <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+    <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+    <meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+    <link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
     <link rel="manifest" href="pwa-manifest.json">
-    <link rel="stylesheet" href="css/style.css">
-    <script type='text/javascript' src="js/main.js"></script>
+    <script type='text/javascript' src="main.js"></script>
 </head>
-<body>
-    <div class="content">
-        <img src="img/offline.jpg" alt="Red Cherry is offline">
-        <br>
-        <span class="reload-btn" onclick="return window.location.reload()">Reload</span>
-    </div>
+
+</head>
+<body class="">
+
+<header>
+<nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
+<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
+</header>
+
+<main style="margin: 0 auto; padding-bottom: 0;">
+<h1>You're offline</h1>
+</main>
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
 </body>
 </html>

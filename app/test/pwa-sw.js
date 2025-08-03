@@ -1,6 +1,6 @@
 'use strict';
 
-var version = 'pwa-0.3';
+var version = 'pwa-0.4';
 var start_url = '/app/test/';
 var offline_url = '/app/test/offline/';
 
