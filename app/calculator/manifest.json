@@ -7,9 +7,11 @@
     { "src": "/app/calculator/assets/img/logo-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/app/calculator/assets/img/logo-96.png", "sizes": "96x96", "type": "image/png" }
   ],
-    "start_url": "/app/calculator/",
+    "start_url": ".",
+    "url": "index.html",
+    "scope": ".",
     "display": "standalone",
-    "orientation": "portrait",
+    "orientation": "any",
     "background_color": "#000000",
     "theme_color": "#000000"
 }
