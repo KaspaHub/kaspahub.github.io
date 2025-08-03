@@ -36,28 +36,6 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <script>
-
-
-let _isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-var _isFirefox = typeof InstallTrigger !== 'undefined';
-console.log("isSafari:"+_isSafari+",isFirefox:"+_isFirefox);
-if (navigator && navigator.serviceWorker) {
-  if (_isFirefox) {
-    console.log("omit service worker (not needed)");
-  } else {
-    console.log("register service worker for edge and chrome (and the rest)");
-    navigator.serviceWorker.register('https://kaspahub.org/app/calculator/assets/service-worker.js').then(function(reg) {
-      // registration worked
-      console.log('Registration succeeded. Scope:' + reg.scope + ",installing:"+reg.installing+",waiting:"+reg.waiting+",active:"+reg.active);
-    }).catch(function(error) {
-      // registration failed
-      console.warn('Registration failed with ' + error);
-    });
-  }
-} else {
-  console.log("no serviceWorker available");
-}
-
 </script>
 </head>
 
