@@ -19,16 +19,7 @@
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <link rel="manifest" href="wm.json">
-    <script>
-    'use strict';
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('scripts/sw.js').then(function (register) {
-                register.update();
-            });
-        });
-    }
-    </script>
+    <script type='text/javascript' src="scripts/main.js"></script>
 
 </head>
 
