@@ -4,25 +4,25 @@
     "description": "RedCherry Simple PWA",
     "icons": [
         {
-            "src": "img/fav-192.png",
+            "src": "/app/test/assets/images/fav-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "img/fav-512.png",
+            "src": "/app/test/assets/images/fav-512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
     "screenshots": [
         {
-            "src": "img/screenshot-1.jpg",
+            "src": "/app/test/assets/images/screenshot-1.jpg",
             "sizes": "1000x1600",
             "type": "image/jpeg"
         },
         {
-            "src": "img/screenshot-2.jpg",
+            "src": "/app/test/assets/images/screenshot-2.jpg",
             "sizes": "1000x1600",
             "type": "image/jpeg"
         }
