@@ -32,5 +32,5 @@
     "display": "standalone",
     "orientation": "any",
     "start_url": "/app/template/",
-    "scope": "/app/template/",
+    "scope": "/app/template/"
 }
