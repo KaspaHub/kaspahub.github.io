@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox
 
 const CACHE = "v0";
 
-const offlineFallbackPage = "https://kaspahub.org/app/calculator/offline.html";
+const offlineFallbackPage = "/app/calculator/offline.html";
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {

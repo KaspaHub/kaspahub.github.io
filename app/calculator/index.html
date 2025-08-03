@@ -36,6 +36,9 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <script>
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register("/app/calculator/assets/service-worker.js");
+}
 </script>
 </head>
 
