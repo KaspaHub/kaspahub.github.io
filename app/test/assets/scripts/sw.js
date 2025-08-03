@@ -6,7 +6,7 @@
  * learn more in Github : https://github.com/alirahimi818/simple-PWA
  */
 
-var cache_storage_name = 'redcherry-pwa-1.0';
+var cache_storage_name = 'redcherry-pwa-1.1';
 var start_page = '/app/test/';
 var offline_page = '/app/test/offline/';
 var first_cache_urls = [start_page, offline_page];
@@ -97,11 +97,3 @@ function checkFetchRules(e) {
 	return true;
 }
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
-if (workbox.googleAnalytics) {
-	try {
-		workbox.googleAnalytics.initialize();
-	} catch (e) {
-		console.log(e.message);
-	}
-}
