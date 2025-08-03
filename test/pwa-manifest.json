@@ -32,7 +32,7 @@
     "display": "fullscreen",
     "orientation": "any",
     "start_url": ".",
-    "url": "index.html",
+    "url": "/test/",
     "scope": ".",
     "lang": "fa-IR",
     "dir": "rtl"
