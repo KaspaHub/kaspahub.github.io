@@ -1,0 +1,25 @@
+{
+    "name": "Calculator",
+    "short_name": "Calculator",
+    "description": "Calculator by Kaspa Hub",
+    "start_url": "/app/html-text-editor/",
+    "scope": "/app/html-text-editor/",
+    "id": "/app/html-text-editor/",
+    "icons": [
+        {
+            "src": "img/fav-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/fav-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#000000",
+    "theme_color": "#000000"
+}

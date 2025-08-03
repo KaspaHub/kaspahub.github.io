@@ -1,10 +1,7 @@
 {
-    "name": "Calculator",
-    "short_name": "Calculator",
-    "description": "Calculator by Kaspa Hub",
-    "start_url": "/app/html-text-editor/",
-    "scope": "/app/html-text-editor/",
-    "id": "/app/html-text-editor/",
+    "name": "RedCherry",
+    "short_name": "RedCherry",
+    "description": "RedCherry Simple PWA",
     "icons": [
         {
             "src": "img/fav-192.png",
@@ -18,8 +15,25 @@
             "type": "image/png"
         }
     ],
-    "display": "standalone",
+    "screenshots": [
+        {
+            "src": "img/screenshot-1.jpg",
+            "sizes": "1000x1600",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "img/screenshot-2.jpg",
+            "sizes": "1000x1600",
+            "type": "image/jpeg"
+        }
+    ],
+    "background_color": "#af0a1a",
+    "theme_color": "#af0a1a",
+    "display": "fullscreen",
     "orientation": "any",
-    "background_color": "#000000",
-    "theme_color": "#000000"
+    "start_url": ".",
+    "url": "/test/",
+    "scope": ".",
+    "lang": "fa-IR",
+    "dir": "rtl"
 }
