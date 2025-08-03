@@ -11,7 +11,12 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Check user internet status (online/offline)
+// function updateOnlineStatus(event) {
+//    if (!navigator.onLine) {
+//        alert('No internet.')
+//    }
+// }
 
-
-
-
+// window.addEventListener('online', updateOnlineStatus);
+// window.addEventListener('offline', updateOnlineStatus);
