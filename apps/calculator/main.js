@@ -16,17 +16,18 @@ function initServiceWorker() {
                 console.log('[Main] Service worker registration failed. Error: ' + error);
             });
 
-        window.addEventListener('online', handleNetworkChange);
-        window.addEventListener('offline', handleNetworkChange);
+        window.addEventListener('online', networkChange);
+        window.addEventListener('offline', networkChange);
     });
 }
 
-function handleNetworkChange() {
+function networkChange(event) {
     if (navigator.onLine) {
         console.log('[Main] Internet connection restored.');
     } else {
         console.log('[Main] No internet connection.');
     }
 }
+
 
 initServiceWorker();

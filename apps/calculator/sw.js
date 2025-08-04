@@ -58,7 +58,6 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  console.log(`[ServiceWorker] Loading resource: ${event.request.url}`);
   event.respondWith(handleResourceRequest(event));
 });
 
