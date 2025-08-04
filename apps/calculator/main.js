@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('pwa-sw.js', { scope: '/apps/' })
+        navigator.serviceWorker.register('pwa-sw.js')
             .then(function (register) {
                 console.log('[Main] SW Registered');
                 register.update();
