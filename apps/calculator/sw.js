@@ -27,7 +27,7 @@ self.skipWaiting();
 
   event.waitUntil(
     preCache.then(() => {
-      console.log('%c[ServiceWorker] Installation completed successfully.', 'color: #42A611;');
+      console.log('%c[ServiceWorker] Installed successfully.', 'color: #42A611;');
     })
   );
 });
@@ -35,18 +35,19 @@ self.skipWaiting();
 self.addEventListener('activate', function (event) {
   const cleanOldCaches = caches.keys().then(function (keys) {
     return Promise.all(
-      keys.map(function (key) {
-        if (key !== CACHE_VERSION) {
-          console.log(`[ServiceWorker] Removing outdated files from cache: ${key}`);
-          return caches.delete(key);
-        }
+    keys
+      .filter(function (key) {
+        return key !== CACHE_VERSION;
+      })
+      .map(function (key) {
+        return caches.delete(key);
       })
     );
   });
 
   event.waitUntil(
     cleanOldCaches.then(() => {
-      console.log('[ServiceWorker] Activation completed successfully.');
+      console.log('[ServiceWorker] Activated successfully.');
     })
   );
 

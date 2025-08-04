@@ -22,7 +22,7 @@
     ],
     "url_handlers": [
       {
-        "origin": "https://kaspahub.org/apps/calculator/"
+        "origin": "https://kaspahub.org/"
       }
     ]
 }
