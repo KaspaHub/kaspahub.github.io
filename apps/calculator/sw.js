@@ -6,6 +6,7 @@ const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
+  '/favicon.ico',
   '/apps/calculator/wm.json',
   '/assets/styles/main.css',
   '/assets/fonts/mulish.woff2'
@@ -25,7 +26,7 @@ self.addEventListener('install', function (event) {
 
   event.waitUntil(
     preCache.then(() => {
-      console.log(`[ServiceWorker] Installation completed successfully.`, `color: #42A611;`);
+      console.log('%c[ServiceWorker] Installation completed successfully.', 'color: #42A611;');
     })
   );
 });
@@ -44,7 +45,7 @@ self.addEventListener('activate', function (event) {
 
   event.waitUntil(
     cleanOldCaches.then(() => {
-      console.log(`[ServiceWorker] Activation completed successfully.`, `color: #42A611;`);
+      console.log('%c[ServiceWorker] Activation completed successfully.', 'color: #42A611;');
     })
   );
 
@@ -114,7 +115,8 @@ function handlePageRequest(event) {
 }
 
 function handleResourceRequest(event) {
-  return caches.match(event.request)
+  const url = new URL(event.request.url);
+  return caches.match(url.pathname) // or url.href if needed
     .then(function (response) {
       if (response) {
         console.log(`[ServiceWorker] Loaded resource from cache: ${event.request.url}`);
@@ -134,3 +136,4 @@ function handleResourceRequest(event) {
       return caches.match(OFFLINE_URL);
     });
 }
+
