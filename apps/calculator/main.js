@@ -2,22 +2,21 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('pwa-sw.js')
             .then(function (register) {
-                console.log('PWA service worker ready');
+                console.log('[Main] SW Registered');
                 register.update();
             })
             .catch(function (error) {
-                console.log('Register failed! Error:' + error);
+                console.log('[Main] SW Registration failed. Error:' + error);
             });
 
-        // Check user internet status (online/offline)
-        // function updateOnlineStatus(event) {
-        //     if (!navigator.onLine) {
-        //         alert('Internet access is not possible!')
-        //     }
-        // }
+        function updateOnlineStatus(event) {
+            if (!navigator.onLine) {
+                console.log('[Main] No Internet connection');
+            }
+        }
 
-        // window.addEventListener('online', updateOnlineStatus);
-        // window.addEventListener('offline', updateOnlineStatus);
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
 
     });
 }

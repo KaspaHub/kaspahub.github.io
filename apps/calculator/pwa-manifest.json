@@ -32,6 +32,6 @@
     "display": "standalone",
     "orientation": "any",
     "start_url": "/apps/test/",
-    "scope": "/apps/test/",
+    "scope": "/apps/",
     "id": "/apps/test/"
 }

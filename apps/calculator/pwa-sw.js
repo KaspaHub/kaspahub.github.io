@@ -1,14 +1,15 @@
 'use strict';
 
 const CACHE_VERSION = 'pwa-0.7';
-const START_URL = '/apps/test/';
-const OFFLINE_URL = '/apps/test/offline/';
+const START_URL = '/apps/calculator/';
+const OFFLINE_URL = '/apps/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  '/apps/',
   'pwa-manifest.json',
+  '/apps/',
   '/assets/styles/main.css',
+  '/assets/fonts/mulish.woff2'
 ];
 
 self.addEventListener('install', function (e) {

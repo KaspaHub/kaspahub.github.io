@@ -5,20 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="msapplication-TileColor" content="#000000" />
-    <meta name="theme-color" content="#000000" />
 
-    <title>Offline</title>
-    <meta name="twitter:title" content="Calculator - Kaspa Hub" />
-    <meta property="og:title" content="Calculator - Kaspa Hub" />
-
-    <meta name="description" content="Free and simple online calculator for quick math. Use it directly in your browser or install it as a Progressive Web App (PWA) for offline access anytime." />
-    <meta name="twitter:description" content="A clean and easy-to-use calculator app. Works online or offline, mobile-ready, and no installation required—perfect for basic math on the go." />
-    <meta property="og:description" content="Perform everyday calculations effortlessly with our simple online calculator. Fast, intuitive, and accessible on any device—installable as a PWA too!" />
-
-    <link rel="canonical" href="https://kaspahub.org/apps/calculator/" />
-    <meta name="twitter:url" content="https://kaspahub.org/apps/calculator/" />
-    <meta property="og:url" content="https://kaspahub.org/apps/calculator/" />
+    <title>Offline - Kaspa Hub</title>
 
     <meta name="twitter:site" content="@KaspaHub" />
     <meta name="twitter:creator" content="@KaspaHub" />
@@ -29,20 +17,16 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
     <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
-    <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+    <meta name="kaspa:title" content="Thanks for being here - your support is appreciated more than you know." />
     <meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
-
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
+    <link rel="manifest" href="https://kaspahub.org/assets/manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-
-    <link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
-    <link rel="manifest" href="pwa-manifest.json">
-    <script type='text/javascript' src="main.js"></script>
 </head>
 
-</head>
 <body class="">
 
 <header>
@@ -50,9 +34,9 @@
 <script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
 </header>
 
-<main style="margin: 0 auto; padding-bottom: 0;">
+<main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
 <h1>You're offline</h1>
 </main>
-<footer><a href="https://kaspahub.org">Kaspa Community Hub</a>© 2025</footer>
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
 </body>
 </html>
