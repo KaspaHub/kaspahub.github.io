@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 'v0.5';
+const CACHE_VERSION = 'v0.6';
 const START_URL = '/apps/calculator/';
 const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
@@ -13,6 +13,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', function (event) {
+self.skipWaiting();
   const preCache = caches.open(CACHE_VERSION).then(function (cache) {
 
     return Promise.all(
