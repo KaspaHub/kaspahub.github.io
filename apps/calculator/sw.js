@@ -1,12 +1,12 @@
 'use strict';
 
-const CACHE_VERSION = 'pwa-0.9';
+const CACHE_VERSION = 'v0.1';
 const START_URL = '/apps/calculator/';
 const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  'pwa-manifest.json',
+  'wm.json',
   '/assets/styles/main.css',
   '/assets/fonts/mulish.woff3',
   '/assets/fonts/mulish.woff2'
