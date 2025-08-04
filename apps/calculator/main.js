@@ -13,7 +13,7 @@ function initServiceWorker() {
 
         navigator.serviceWorker.register('sw.js')
             .then(function (registration) {
-                console.log('[Main] Service worker registration successful.');
+                console.log(`[Main] Service worker registered successfully.`, `color: #42A611;`);
             })
             .catch(function (error) {
                 console.log('[Main] Service worker registration failed:', error);
