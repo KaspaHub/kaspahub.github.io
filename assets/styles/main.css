@@ -660,7 +660,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 
 /* fade v */
 .fade-in {
-  animation: fadeIn 0.8s ease;
+  animation: fadeIn ease 2s;
 }
 
 @keyframes fadeIn {
