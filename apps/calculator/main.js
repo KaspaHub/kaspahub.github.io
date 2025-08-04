@@ -7,18 +7,22 @@ function initServiceWorker() {
     }
 
     window.addEventListener('load', function () {
+        if (navigator.serviceWorker.controller) {
+            console.log('[Main] A service worker is already controlling this page.');
+        }
+
         navigator.serviceWorker.register('sw.js')
-            .then(function (register) {
-                register.update();
-                console.log('[Main] Service worker registered.');
+            .then(function (registration) {
+                console.log('[Main] Service worker registration successful.');
             })
             .catch(function (error) {
-                console.log('[Main] Service worker registration failed. Error: ' + error);
+                console.log('[Main] Service worker registration failed:', error);
             });
 
         window.addEventListener('online', networkChange);
         window.addEventListener('offline', networkChange);
     });
+
 }
 
 function networkChange(event) {
@@ -28,6 +32,5 @@ function networkChange(event) {
         console.log('[Main] No internet connection.');
     }
 }
-
 
 initServiceWorker();

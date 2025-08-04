@@ -1,21 +1,18 @@
-'use strict';
+`use strict`;
 
-const CACHE_VERSION = 'v0.1';
-const START_URL = '/apps/calculator/';
-const OFFLINE_URL = '/apps/calculator/offline/';
+const CACHE_VERSION = `v0.1`;
+const START_URL = `/apps/calculator/`;
+const OFFLINE_URL = `/apps/calculator/offline/`;
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  '/apps/calculator/wm.json',
-  '/assets/styles/main.css',
-  '/assets/fonts/mulish.woff2'
+  `/apps/calculator/wm.json`,
+  `/assets/styles/main.css`,
+  `/assets/fonts/mulish.woff2`
 ];
 
-self.addEventListener('install', function (event) {
-  console.log('[ServiceWorker] Installing...');
-
+self.addEventListener(`install`, function (event) {
   const preCache = caches.open(CACHE_VERSION).then(function (cache) {
-    console.log('[ServiceWorker] Caching assets...');
 
     return Promise.all(
       ASSETS.map(function (url) {
@@ -26,12 +23,14 @@ self.addEventListener('install', function (event) {
     );
   });
 
-  event.waitUntil(preCache);
+  event.waitUntil(
+    preCache.then(() => {
+      console.log(`[ServiceWorker] Installation completed successfully.`);
+    })
+  );
 });
 
-self.addEventListener('activate', function (event) {
-  console.log('[ServiceWorker] Activating...');
-
+self.addEventListener(`activate`, function (event) {
   const cleanOldCaches = caches.keys().then(function (keys) {
     return Promise.all(
       keys.map(function (key) {
@@ -43,30 +42,36 @@ self.addEventListener('activate', function (event) {
     );
   });
 
-  event.waitUntil(cleanOldCaches);
+  event.waitUntil(
+    cleanOldCaches.then(() => {
+      console.log(`[ServiceWorker] Service worker activated successfully.`);
+    })
+  );
+
   self.clients.claim();
 });
 
-self.addEventListener('fetch', function (event) {
+self.addEventListener(`fetch`, function (event) {
   if (!isRequestValid(event)) {
     return;
   }
 
-  if (event.request.mode === 'navigate') {
-    console.log(`[ServiceWorker] Loading page: ${event.request.url}`);
+  if (event.request.mode === `navigate`) {
+    console.log(`[ServiceWorker] Downloading page: ${event.request.url}`);
+    console.log(`%c[ServiceWorker] Downloading page: ${event.request.url}`, `color: green;`);
     event.respondWith(handlePageRequest(event));
     return;
   }
 
+  console.log(`[ServiceWorker] Downloading resource: ${event.request.url}`);
   event.respondWith(handleResourceRequest(event));
 });
-
 
 function isRequestValid(event) {
   const url = new URL(event.request.url);
   const isSameOrigin = url.origin === self.location.origin;
-  const isSecure = url.protocol.startsWith('https');
-  const isGet = event.request.method === 'GET';
+  const isSecure = url.protocol.startsWith(`https`);
+  const isGet = event.request.method === `GET`;
   const isCacheablePath = ASSETS.includes(url.pathname);
 
   if (!isSameOrigin) {
@@ -122,7 +127,7 @@ function handleResourceRequest(event) {
       return fetch(event.request).then(function (response) {
         return caches.open(CACHE_VERSION).then(function (cache) {
           cache.put(event.request, response.clone());
-          console.log(`[ServiceWorker] Downloaded and saved resource: ${event.request.url}`);
+          console.log(`[ServiceWorker] Downloaded and cached resource: ${event.request.url}`);
           return response;
         });
       });
