@@ -1,13 +1,13 @@
 'use strict';
 
-const CACHE_VERSION = 'v0.4';
+const CACHE_VERSION = 'v0.5';
 const START_URL = '/apps/calculator/';
 const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  '/favicon.ico',
-  '/apps/calculator/wm.json',
+  // '/favicon.ico',
+  // '/apps/calculator/wm.json',
   '/assets/styles/main.css',
   '/assets/fonts/mulish.woff2'
 ];
@@ -45,7 +45,7 @@ self.addEventListener('activate', function (event) {
 
   event.waitUntil(
     cleanOldCaches.then(() => {
-      console.log('%c[ServiceWorker] Activation completed successfully.', 'color: #42A611;');
+      console.log('[ServiceWorker] Activation completed successfully.');
     })
   );
 
@@ -70,7 +70,7 @@ function isRequestValid(event) {
   const isSameOrigin = url.origin === self.location.origin;
   const isSecure = url.protocol.startsWith('https');
   const isGet = event.request.method === 'GET';
-  const isCacheablePath = ASSETS.includes(url.pathname);
+  // const isCacheablePath = ASSETS.includes(url.pathname);
 
   if (!isSameOrigin) {
     console.log(`[ServiceWorker] Skipping request: different origin → ${url.origin}`);
@@ -83,7 +83,7 @@ function isRequestValid(event) {
   }
 
   if (!isGet) {
-    console.log(`[ServiceWorker] Skipping request: non-GET method → ${event.request.method}`);
+    console.log(`[ServiceWorker] Skipping request: non-GET method → ${event.request.method} → ${event.request.url}`);
     return false;
   }
 
