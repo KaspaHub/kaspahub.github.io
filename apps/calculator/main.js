@@ -21,15 +21,14 @@ function registerServiceWorker() {
 function cleanupOldServiceWorkers(currentRegistration) {
     navigator.serviceWorker.getRegistrations().then((registrations) => {
         registrations.forEach((reg) => {
-            if (reg !== currentRegistration) {
+            if (reg.scope !== currentRegistration.scope) {
                 reg.unregister().then((ok) => {
-                    console.log(`[Main] Unregistered SW "${reg.scope}" (not latest) — success: ${ok}`);
+                    console.log(`[Main] Unregistered SW at "${reg.scope}" (not current) — success: ${ok}`);
                 });
             }
         });
     });
 }
-
 
 
 function setupNetworkStatusListeners() {
