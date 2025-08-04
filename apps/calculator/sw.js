@@ -85,10 +85,10 @@ function isRequestValid(event) {
     return false;
   }
 
-  if (!isCacheablePath) {
-    console.log(`[ServiceWorker] Skipping request: not in cacheable paths → ${url.pathname}`);
-    return false;
-  }
+  // if (!isCacheablePath) {
+  //   console.log(`[ServiceWorker] Skipping request: not in cacheable paths → ${url.pathname}`);
+  //   return false;
+  // }
 
   return true;
 }
