@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 'v0.3';
+const CACHE_VERSION = 'v0.4';
 const START_URL = '/apps/calculator/';
 const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
@@ -100,7 +100,7 @@ function handlePageRequest(event) {
     .then(function (response) {
       return caches.open(CACHE_VERSION).then(function (cache) {
         cache.put(event.request, response.clone());
-        console.log(`[ServiceWorker] Saved page for offline access: ${event.request.url}`);
+        console.log(`[ServiceWorker] Downloaded and cached page: ${event.request.url}`);
         return response;
       });
     })
