@@ -49,7 +49,6 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   if (!isRequestValid(event)) {
-    console.log(`[ServiceWorker] Skipping non-cacheable request: ${event.request.url}`);
     return;
   }
 
@@ -69,11 +68,31 @@ function isRequestValid(event) {
   const isSameOrigin = url.origin === self.location.origin;
   const isSecure = url.protocol.startsWith('https');
   const isGet = event.request.method === 'GET';
-
   const isCacheablePath = ASSETS.includes(url.pathname);
 
-  return isSameOrigin && isSecure && isGet && isCacheablePath;
+  if (!isSameOrigin) {
+    console.log(`[ServiceWorker] Skipping request: different origin → ${url.origin}`);
+    return false;
+  }
+
+  if (!isSecure) {
+    console.log(`[ServiceWorker] Skipping request: insecure protocol → ${url.protocol}`);
+    return false;
+  }
+
+  if (!isGet) {
+    console.log(`[ServiceWorker] Skipping request: non-GET method → ${event.request.method}`);
+    return false;
+  }
+
+  if (!isCacheablePath) {
+    console.log(`[ServiceWorker] Skipping request: not in cacheable paths → ${url.pathname}`);
+    return false;
+  }
+
+  return true;
 }
+
 
 
 function handlePageRequest(event) {
