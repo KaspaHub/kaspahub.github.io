@@ -1,4 +1,6 @@
 'use strict';
+// TO DO - make it not fetch files every time its used, test only cache ASSETS
+
 
 const CACHE_VERSION = 'v0.6';
 const START_URL = '/apps/calculator/';
@@ -64,21 +66,32 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  event.respondWith(
-    (function () {
-      if (event.request.mode === 'navigate') {
-        return handlePageRequest(event);
-      } else {
-        return handleResourceRequest(event);
-      }
-    })().catch(error => {
-      console.error('Fetch handler error:', error);
-    })
-  );
+  event.respondWith(handleFetchRequest(event).catch(error => {
+    console.error('Fetch handler error:', error);
+  }));
 });
 
+function handleFetchRequest(event) {
+  return caches.match(event.request)
+    .then(function (response) {
+      if (response) {
+        // console.log(`[ServiceWorker] Loaded resource from cache: ${event.request.url}`);
+        return response;
+      }
 
-
+      return fetch(event.request).then(function (response) {
+        return caches.open(CACHE_VERSION).then(function (cache) {
+          cache.put(event.request, response.clone());
+          console.log(`[ServiceWorker] Downloaded and cached: ${event.request.url}`);
+          return response;
+        });
+      });
+    })
+    .catch(function () {
+      console.log(`[ServiceWorker] Could not load: ${event.request.url}. Serving offline fallback.`);
+      return caches.match(OFFLINE_URL);
+    });
+}
 
 function isRequestValid(event) {
   const url = new URL(event.request.url);
@@ -108,43 +121,4 @@ function isRequestValid(event) {
   // }
 
   return true;
-}
-
-function handlePageRequest(event) {
-  return fetch(event.request)
-    .then(function (response) {
-      return caches.open(CACHE_VERSION).then(function (cache) {
-        cache.put(event.request, response.clone());
-        console.log(`[ServiceWorker] Downloaded and cached page: ${event.request.url}`);
-        return response;
-      });
-    })
-    .catch(function () {
-      console.log(`[ServiceWorker] Could not load page: ${event.request.url}. Serving offline page instead.`);
-      return caches.match(event.request).then(function (response) {
-        return response || caches.match(OFFLINE_URL);
-      });
-    });
-}
-
-function handleResourceRequest(event) {
-  return caches.match(event.request)
-    .then(function (response) {
-      if (response) {
-        console.log(`[ServiceWorker] Loaded resource from cache: ${event.request.url}`);
-        return response;
-      }
-
-      return fetch(event.request).then(function (response) {
-        return caches.open(CACHE_VERSION).then(function (cache) {
-          cache.put(event.request, response.clone());
-          console.log(`[ServiceWorker] Downloaded and cached resource: ${event.request.url}`);
-          return response;
-        });
-      });
-    })
-    .catch(function () {
-      console.log(`[ServiceWorker] Could not load resource: ${event.request.url}. Serving offline fallback.`);
-      return caches.match(OFFLINE_URL);
-    });
 }
