@@ -1,8 +1,8 @@
 'use strict';
 
-const CACHE_VERSION = 'pwa-0.6';
-const START_URL = '/app/test/';
-const OFFLINE_URL = '/app/test/offline/';
+const CACHE_VERSION = 'pwa-0.7';
+const START_URL = '/apps/test/';
+const OFFLINE_URL = '/apps/test/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,

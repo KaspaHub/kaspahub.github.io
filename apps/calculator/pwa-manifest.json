@@ -31,7 +31,7 @@
     "theme_color": "#000000",
     "display": "standalone",
     "orientation": "any",
-    "start_url": "/app/test/",
-    "scope": "/app/test/",
-    "id": "/app/test/"
+    "start_url": "/apps/test/",
+    "scope": "/apps/test/",
+    "id": "/apps/test/"
 }

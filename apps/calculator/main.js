@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./pwa-sw.js')
+        navigator.serviceWorker.register('pwa-sw.js')
             .then(function (register) {
                 console.log('PWA service worker ready');
                 register.update();
@@ -9,14 +9,15 @@ if ('serviceWorker' in navigator) {
                 console.log('Register failed! Error:' + error);
             });
 
-        // function status(event) {
+        // Check user internet status (online/offline)
+        // function updateOnlineStatus(event) {
         //     if (!navigator.onLine) {
         //         alert('Internet access is not possible!')
         //     }
         // }
 
-        // window.addEventListener('online', status);
-        // window.addEventListener('offline', status);
+        // window.addEventListener('online', updateOnlineStatus);
+        // window.addEventListener('offline', updateOnlineStatus);
 
     });
 }
