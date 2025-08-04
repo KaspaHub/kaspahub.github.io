@@ -1,69 +1,83 @@
 'use strict';
 
-const CACHE_VERSION = 'pwa-0.5';
+const CACHE_VERSION = 'pwa-0.6';
 const START_URL = '/app/test/';
 const OFFLINE_URL = '/app/test/offline/';
-const PRECACHE_URLS = [START_URL, OFFLINE_URL, 'pwa-manifest.json', 'https://kaspahub.org/assets/styles/main.css'];
+const ASSETS = [
+  START_URL,
+  OFFLINE_URL,
+  '/apps/',
+  'pwa-manifest.json',
+  '/assets/styles/main.css',
+];
 
-// Install Event: Cache essential files during installation
-self.addEventListener('install', event => {
-  console.log('[ServiceWorker] Install');
-
-  event.waitUntil(
-    caches.open(CACHE_VERSION)
-      .then(cache => {
-        console.log('[ServiceWorker] Pre-caching assets');
-        return Promise.all(
-          PRECACHE_URLS.map(url =>
-            cache.add(url).catch(err => {
-              console.warn(`[ServiceWorker] Failed to cache ${url}:`, err);
-            })
-          )
-        );
-      })
-  );
+self.addEventListener('install', function (e) {
+  console.log('[ServiceWorker] Installation');
+  e.waitUntil(caches.open(CACHE_VERSION).then(function (cache) {
+    console.log('[ServiceWorker] Pre-caching assets');
+    ASSETS.map(function (url) {
+      return cache.add(url).catch(function (res) {
+        console.log('[ServiceWorker]  ' + String(res) + ' ' + url);
+      });
+    });
+  }));
 });
 
-// Activate Event: Clean up old caches
-self.addEventListener('activate', event => {
-  console.log('[ServiceWorker] Activate');
-
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_VERSION) {
-            console.log('[ServiceWorker] Removing old cache:', key);
-            return caches.delete(key);
-          }
-        })
-      )
-    )
-  );
-
+self.addEventListener('activate', function (e) {
+  console.log('[ServiceWorker] Activation');
+  e.waitUntil(caches.keys().then(function (kl) {
+    return Promise.all(kl.map(function (key) {
+      if (key !== CACHE_VERSION) {
+        console.log('[ServiceWorker] Removing old cache', key);
+        return caches.delete(key);
+      }
+    }));
+  }));
   return self.clients.claim();
 });
 
-// Fetch Event: Serve cached assets when available, fallback to network
-self.addEventListener('fetch', event => {
-  if (!fetchRules(event)) return;
+self.addEventListener('fetch', function (e) {
+  if (!fetchRules(e)) return;
 
-  event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) return cachedResponse;
-
-        // Try fetching from network
-        return fetch(event.request)
-          .catch(() => {
-            // For navigation requests, serve offline page as fallback
-            if (event.request.mode === 'navigate') {
-              return caches.match(OFFLINE_URL);
-            }
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request)
+        .then(function (response) {
+          return caches.open(CACHE_VERSION).then(function (cache) {
+            cache.put(e.request, response.clone());
+            return response;
           });
+        })
+        .catch(function () {
+          return caches.match(e.request).then(function (response) {
+            return response || caches.match(OFFLINE_URL);
+          });
+        })
+    );
+    return;
+  }
+
+  // Non-navigation requests
+  e.respondWith(
+    caches.match(e.request)
+      .then(function (response) {
+        return (
+          response ||
+          fetch(e.request)
+            .then(function (response) {
+              return caches.open(CACHE_VERSION).then(function (cache) {
+                cache.put(e.request, response.clone());
+                return response;
+              });
+            })
+        );
+      })
+      .catch(function () {
+        return caches.match(OFFLINE_URL);
       })
   );
 });
+
 
 // Rules
 function fetchRules(e) {
