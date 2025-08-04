@@ -22,7 +22,7 @@
     ],
     "url_handlers": [
       {
-        "origin": "https://kaspahub.org/"
+        "origin": "https://kaspahub.org"
       }
     ]
 }

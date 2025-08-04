@@ -13,21 +13,26 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', function (event) {
-self.skipWaiting();
+// self.skipWaiting();
   const preCache = caches.open(CACHE_VERSION).then(function (cache) {
 
-    return Promise.all(
-      ASSETS.map(function (url) {
-        return cache.add(url).catch(function (error) {
-          console.log(`[ServiceWorker] Could not save ${url}. Error: ${String(error)}`);
-        });
+return Promise.all(
+  ASSETS.map(function (url) {
+    return cache.add(url)
+      .then(() => {
+        console.log(`[ServiceWorker] Pre-cached: ${url}`);
       })
-    );
+      .catch(function (error) {
+        console.log(`[ServiceWorker] Could not save ${url}. Error: ${String(error)}`);
+      });
+  })
+);
+
   });
 
   event.waitUntil(
     preCache.then(() => {
-      console.log('%c[ServiceWorker] Installed successfully.', 'color: #42A611;');
+      console.log('%c[ServiceWorker] Installed successfully.', 'color: #61C554;');
     })
   );
 });

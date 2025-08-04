@@ -2,8 +2,7 @@
 
 function initServiceWorker() {
     if (!('serviceWorker' in navigator)) {
-        console.log('[Main] Service workers are not supported in this browser.');
-        console.log('%c[Main] A service worker is already controlling this page.', 'color: #EC6A5E;');
+        console.log('%c[Main] Service workers are not supported in this browser.', 'color: #EC6A5E;');
         return;
     }
 
@@ -16,7 +15,7 @@ function initServiceWorker() {
             console.log('%c[Main] Service worker registered successfully.', 'color: #61C554;');
         })
         .catch(function (error) {
-            console.log('[Main] Service worker registration failed:', error);
+            console.log('%c[Main] Service worker registration failed: ' + error, 'color: #EC6A5E;');
         });
 
     window.addEventListener('online', networkChange);
