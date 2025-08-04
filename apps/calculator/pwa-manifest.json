@@ -31,7 +31,7 @@
     "theme_color": "#000000",
     "display": "standalone",
     "orientation": "any",
-    "start_url": "/apps/test/",
+    "start_url": "/apps/calculator/",
     "scope": "/apps/",
-    "id": "/apps/test/"
+    "id": "/apps/calculator/"
 }
