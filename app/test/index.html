@@ -66,7 +66,8 @@ iframe {
     font-size: 25px;
 
     border-radius: 50%;
-    background-color: rgba(192,192,192, 0.4);
+    background-color: #8080801f;
+    font-weight: bold;
 }
 #calculator {
     display: flex;
@@ -161,30 +162,31 @@ iframe {
     <input type="text" id="input" oninput="updateResult()" placeholder="" />
     <input type="text" id="result" disabled />
 <div class="rwrap theme-filter">
-    <button class="e-button" style="color: orange;" onclick="clean()">C</button>
-    <button class="e-button" onclick="append('(')">(</button>
-    <button class="e-button" onclick="append(')')">)</button>
-    <button class="e-button" onclick="backspace()">⌫</button>
+    <button class="e-button" style="color: #D93E36;" onclick="clean()">C</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('(')">(</button>
+    <button class="e-button" style="color: #42A611;" onclick="append(')')">)</button>
+    <button class="e-button" style="color: #42A611;" onclick="backspace()">⌫</button>
 
     <button class="e-button" onclick="append('7')">7</button>
     <button class="e-button" onclick="append('8')">8</button>
     <button class="e-button" onclick="append('9')">9</button>
-    <button class="e-button" onclick="append('/')">÷</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('/')">÷</button>
 
     <button class="e-button" onclick="append('4')">4</button>
     <button class="e-button" onclick="append('5')">5</button>
     <button class="e-button" onclick="append('6')">6</button>
-    <button class="e-button" onclick="append('+')">+</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('*')">x</button>
     <button class="e-button" onclick="append('1')">1</button>
     <button class="e-button" onclick="append('2')">2</button>
     <button class="e-button" onclick="append('3')">3</button>
-    <button class="e-button" onclick="append('*')">x</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('+')">+</button>
+
 
     <button class="e-button" onclick="append('0')">0</button>
     <button class="e-button" onclick="append('.')">.</button>
     <button class="e-button" onclick="append('-')">-</button>
 
-    <button class="e-button" onclick="calculate()">=</button>
+    <button class="e-button" style="background: #42A611; color: #E1E1E1;" onclick="calculate()">=</button>
 </div>
 </section>
 </div>

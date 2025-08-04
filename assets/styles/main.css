@@ -53,12 +53,12 @@ time, button {
 
 .background-light {
 	background: linear-gradient(to bottom right, #8BAFC4, #8BC6BD);
-	color: #3d3d3d;
+	color: #3D3D3D;
 }
 
 .background-dark {
 	background: linear-gradient(to bottom right, #1a1a2e, #0c3f3a);
-	color: #e1e1e1;
+	color: #E1E1E1;
 }
 
 .background-light, .background-dark {
@@ -658,23 +658,22 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	display: none !important;
 }
 
-/* cosmetic v */
+/* fade v */
+.fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-#itemGrid {
-	opacity: 0;
-	animation: fadeIn 0.8s ease-out forwards;
-}
 
+/* w */
 .close {
 	color: inherit !important;
 	opacity: 0.9;
