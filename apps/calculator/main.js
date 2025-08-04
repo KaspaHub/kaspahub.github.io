@@ -2,7 +2,7 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
 
         navigator.serviceWorker.register('/assets/scripts/sw.js', {
-          scope: '/calculator/'
+          scope: '/apps/calculator/'
         })
             .then(function (register) {
                 console.log('[Main] SW Registered');
