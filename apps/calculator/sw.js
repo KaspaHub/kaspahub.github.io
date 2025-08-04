@@ -58,12 +58,10 @@ self.addEventListener('fetch', function (event) {
   }
 
   if (event.request.mode === 'navigate') {
-    console.log(`[ServiceWorker] Downloading page: ${event.request.url}`);
     event.respondWith(handlePageRequest(event));
     return;
   }
 
-  console.log(`[ServiceWorker] Downloading resource: ${event.request.url}`);
   event.respondWith(handleResourceRequest(event));
 });
 
@@ -115,8 +113,7 @@ function handlePageRequest(event) {
 }
 
 function handleResourceRequest(event) {
-  const url = new URL(event.request.url);
-  return caches.match(url.pathname) // or url.href if needed
+  return caches.match(event.request)
     .then(function (response) {
       if (response) {
         console.log(`[ServiceWorker] Loaded resource from cache: ${event.request.url}`);
@@ -136,4 +133,3 @@ function handleResourceRequest(event) {
       return caches.match(OFFLINE_URL);
     });
 }
-
