@@ -22,7 +22,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	margin: 0 7px;
+	margin: 7px;
 	padding: 0;
 	
 	overflow-y: scroll;

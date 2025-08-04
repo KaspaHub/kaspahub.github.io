@@ -19,5 +19,10 @@
             "sizes": "720x720",
             "type": "image/jpeg"
         }
+    ],
+    "url_handlers": [
+      {
+        "origin": "https://kaspahub.org/apps/calculator/"
+      }
     ]
 }
