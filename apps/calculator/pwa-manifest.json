@@ -16,7 +16,7 @@
     "screenshots": [
         {
             "src": "assets/images/screenshot-1.jpg",
-            "sizes": "1280x720",
+            "sizes": "720x720",
             "type": "image/jpeg"
         }
     ]
