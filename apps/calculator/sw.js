@@ -63,14 +63,18 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(handleResourceRequest(event));
 });
 
+
 function isRequestValid(event) {
   const url = new URL(event.request.url);
   const isSameOrigin = url.origin === self.location.origin;
   const isSecure = url.protocol.startsWith('https');
   const isGet = event.request.method === 'GET';
 
-  return isSameOrigin && isSecure && isGet;
+  const isCacheablePath = ASSETS.includes(url.pathname);
+
+  return isSameOrigin && isSecure && isGet && isCacheablePath;
 }
+
 
 function handlePageRequest(event) {
   return fetch(event.request)
