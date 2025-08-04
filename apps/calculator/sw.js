@@ -64,13 +64,21 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  if (event.request.mode === 'navigate') {
-    event.respondWith(handlePageRequest(event));
-    return;
-  }
-
-  event.respondWith(handleResourceRequest(event));
+  event.respondWith(
+    (function () {
+      if (event.request.mode === 'navigate') {
+        return handlePageRequest(event);
+      } else {
+        return handleResourceRequest(event);
+      }
+    })().catch(error => {
+      console.error('Fetch handler error:', error);
+    })
+  );
 });
+
+
+
 
 function isRequestValid(event) {
   const url = new URL(event.request.url);
