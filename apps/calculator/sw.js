@@ -1,5 +1,5 @@
 'use strict';
-// TO DO - make it not fetch files every time its used, test only cache ASSETS
+// TO DO - make it not fetch files every time its used, test only cache ASSETS, then test only run sw on install manual
 
 
 const CACHE_VERSION = 'v0.6';
@@ -9,13 +9,13 @@ const ASSETS = [
   START_URL,
   OFFLINE_URL,
   '/favicon.ico',
-  // '/apps/calculator/wm.json',
+  '/apps/calculator/wm.json',
   '/assets/styles/main.css',
   '/assets/fonts/mulish.woff2'
 ];
 
 self.addEventListener('install', function (event) {
-// self.skipWaiting();
+self.skipWaiting();
   const preCache = caches.open(CACHE_VERSION).then(function (cache) {
 
 return Promise.all(
