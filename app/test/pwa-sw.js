@@ -34,32 +34,47 @@ self.addEventListener('activate', function (e) {
 
 // Fetch
 self.addEventListener('fetch', function (e) {
-
   if (!fetchRules(e)) return;
 
-  // Online
-  if (e.request.mode === 'navigate' && navigator.onLine) {
-    e.respondWith(fetch(e.request).then(function (response) {
-      return caches.open(version).then(function (cache) {
-        cache.put(e.request, response.clone());
-        return response;
-      });
-    }));
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request)
+        .then(function (response) {
+          return caches.open(version).then(function (cache) {
+            cache.put(e.request, response.clone());
+            return response;
+          });
+        })
+        .catch(function () {
+          return caches.match(e.request).then(function (response) {
+            return response || caches.match(offline_url);
+          });
+        })
+    );
     return;
   }
 
-  // Offline user
-  e.respondWith(caches.match(e.request).then(function (response) {
-    return response || fetch(e.request).then(function (response) {
-      return caches.open(version).then(function (cache) {
-        cache.put(e.request, response.clone());
-        return response;
-      });
-    });
-  }).catch(function () {
-    return caches.match(offline_url);
-  }));
+  // Non-navigation requests
+  e.respondWith(
+    caches.match(e.request)
+      .then(function (response) {
+        return (
+          response ||
+          fetch(e.request)
+            .then(function (response) {
+              return caches.open(version).then(function (cache) {
+                cache.put(e.request, response.clone());
+                return response;
+              });
+            })
+        );
+      })
+      .catch(function () {
+        return caches.match(offline_url);
+      })
+  );
 });
+
 
 // Rules
 function fetchRules(e) {
