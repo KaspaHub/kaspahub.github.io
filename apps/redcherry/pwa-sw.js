@@ -1,8 +1,14 @@
 'use strict';
 
-var cache_storage_name = 'pwa-0.1';
-var start_page = '/apps/template/';
-var offline_page = '/apps/template/offline/';
+/**
+ * PWA service worker of Red Cherry (https://redcherry.ir)
+ * Code By : Ali Rahimi (https://alirahimi818.ir)
+ * learn more in Github : https://github.com/alirahimi818/simple-PWA
+ */
+
+var cache_storage_name = 'redcherry-pwa-1.0';
+var start_page = 'index.html';
+var offline_page = 'offline.html';
 var first_cache_urls = [start_page, offline_page];
 var never_cache_urls = [/\/private.html/, /\/panel/, /\/custom-url/];
 
@@ -89,4 +95,13 @@ function checkFetchRules(e) {
 	}
 
 	return true;
+}
+
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
+if (workbox.googleAnalytics) {
+	try {
+		workbox.googleAnalytics.initialize();
+	} catch (e) {
+		console.log(e.message);
+	}
 }
