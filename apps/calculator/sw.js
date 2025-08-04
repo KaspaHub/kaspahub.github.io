@@ -8,7 +8,6 @@ const ASSETS = [
   OFFLINE_URL,
   'wm.json',
   '/assets/styles/main.css',
-  '/assets/fonts/mulish.woff3',
   '/assets/fonts/mulish.woff2'
 ];
 

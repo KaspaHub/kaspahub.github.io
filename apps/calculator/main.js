@@ -1,22 +1,46 @@
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-        navigator.serviceWorker.register('sw.js')
-            .then(function (register) {
-                console.log('[Main] SW Registered');
-                register.update();
-            })
-            .catch(function (error) {
-                console.log('[Main] SW Registration failed. Error:' + error);
-            });
-
-        function updateOnlineStatus(event) {
-            if (!navigator.onLine) {
-                console.log('[Main] No Internet connection');
-            }
-        }
-
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-
+    window.addEventListener('load', () => {
+        registerServiceWorker();
+        setupNetworkStatusListeners();
     });
+}
+
+function registerServiceWorker() {
+    navigator.serviceWorker.register('sw.js')
+        .then((registration) => {
+            console.log('[Main] SW Registered:', registration.scope);
+            registration.update();
+
+            cleanupOldServiceWorkers(registration);
+        })
+        .catch((error) => {
+            console.error('[Main] SW Registration failed. Error:', error);
+        });
+}
+
+function cleanupOldServiceWorkers(currentRegistration) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((reg) => {
+            if (reg !== currentRegistration) {
+                reg.unregister().then((ok) => {
+                    console.log(`[Main] Unregistered SW "${reg.scope}" (not latest) — success: ${ok}`);
+                });
+            }
+        });
+    });
+}
+
+
+
+function setupNetworkStatusListeners() {
+    window.addEventListener('online', handleNetworkChange);
+    window.addEventListener('offline', handleNetworkChange);
+}
+
+function handleNetworkChange() {
+    if (navigator.onLine) {
+        console.log('[Main] Internet connection restored');
+    } else {
+        console.log('[Main] No Internet connection');
+    }
 }
