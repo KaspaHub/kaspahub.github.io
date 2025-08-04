@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
 
-        navigator.serviceWorker.register('/assets/scripts/sw.js', {
+        navigator.serviceWorker.register('assets/scripts/sw.js', {
           scope: '/apps/calculator/'
         })
             .then(function (register) {
