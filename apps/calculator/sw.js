@@ -6,7 +6,7 @@ const OFFLINE_URL = '/apps/calculator/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  'wm.json',
+  '/apps/calculator/wm.json',
   '/assets/styles/main.css',
   '/assets/fonts/mulish.woff2'
 ];
