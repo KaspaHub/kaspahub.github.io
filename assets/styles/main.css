@@ -163,23 +163,24 @@ li {
 }
 
 #thumbnail {
-  border-radius: 20px;
-  width: 80vw;
-  height: calc(80vw * 5 / 16);
-  object-fit: cover;
-  transition: height 0.7s ease 0s;
-  display: block;
+	border-radius: 20px;
+	width: 100%;
+	aspect-ratio: 16 / 5;
+	/*height: calc(80vw * 5 / 16);*/
+	object-fit: cover;
+	transition: height 0.7s ease 0s;
+	display: block;
+	cursor: zoom-in;
 }
 
-#thumbnail:hover {
-  height: calc(80vw * 9 / 16);
-  transition-delay: 0.3s;
+/*#thumbnail:hover {
+	height: calc(80vw * 9 / 16);
+	transition-delay: 0.3s;
 }
-
-
+*/
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
-	background-size: 90%;
+	background-size: 1280px auto;
 	width: 100%;
 	height: 100%;
 	position: fixed;

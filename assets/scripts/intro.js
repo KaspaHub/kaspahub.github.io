@@ -28,7 +28,7 @@ if (schemaTag) {
     const introEl = document.getElementById("intro");
     if (introEl) {
       introEl.innerHTML = html;
-      // enlargeImages();
+      enlargeImages();
     }
   } catch (err) {
     console.error("Invalid JSON-LD schema:", err);
