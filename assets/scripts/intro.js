@@ -17,7 +17,7 @@ if (schemaTag) {
     const modDate = schema.dateModified ? new Date(schema.dateModified) : null;
     const modLong = modDate ? modDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "";
 
-    const thumbnailHtml = thumbnailImg ? `<img id="thumbnail" src="${thumbnailImg}" data-enlargeable>` : "";
+    const thumbnailHtml = thumbnailImg ? `<img alt="thumbnail image" id="thumbnail" src="${thumbnailImg}" data-enlargeable>` : "";
 
     const editSpan = modDate ? ` <span title="Edited: ${modLong}">✏️</span>` : "";
 

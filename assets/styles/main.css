@@ -180,7 +180,7 @@ li {
 */
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
-	background-size: 1280px auto;
+	background-size: 100% auto;
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -335,8 +335,8 @@ hr {
 	white-space: nowrap;
 	font-size: 0.8rem;
 
-	background-color: #a0e3d1;
-	color: #006D5D;
+	background-color: #a0e3d1e6;
+	color: #004c41;
 }
 
 .verified::before {
