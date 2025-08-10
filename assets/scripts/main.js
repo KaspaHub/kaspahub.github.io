@@ -1,5 +1,7 @@
+'use strict';
+
 const isDarkTheme = localStorage.getItem('dark') !== null;
-document.documentElement.id = isDarkTheme ? 'dark' : 'light';
+// document.documentElement.id = isDarkTheme ? 'dark' : 'light';
 
 const checkbox = document.getElementById('theme');
 checkbox.checked = isDarkTheme;
