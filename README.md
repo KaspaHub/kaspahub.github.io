@@ -2,7 +2,7 @@
 Dive into the Kaspa universe with Kaspa Hub - an independent community-driven platform bringing together resources, tools, and connections for anyone interested in the Kaspa network.
 
 - https://kaspahub.org/
-- https://kaspahub.org/articles/
+- https://kaspahub.org/posts/
 - https://kaspahub.org/projects/
 - https://kaspahub.org/communities/
 - https://kaspahub.org/resources/
@@ -11,10 +11,9 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 - https://kaspahub.org/comparison/
 - https://kaspahub.org/solutions/
 - https://kaspahub.org/developers/
-- https://kaspahub.org/kaspa-donations/
-- https://kaspahub.org/donations/setup/
+- https://kaspahub.org/page/kaspa-donations-extension/
+- https://kaspahub.org/k/setup/
 - https://kaspahub.org/price/
-- https://kaspahub.org/hashrate-ratio/
 
 ## Important Notice
 This version of Kaspa Hub contains personal content and custom changes specific to our team. It is **not intended to be forked, used, or modified**. 
