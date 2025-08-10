@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<!-- <link rel="manifest" href="wm.json" />
+<script defer type='text/javascript' src="app.js"></script> -->
+<link rel="stylesheet" href="simditor.css" />
+
+<title>Text Editor - Kaspa Hub</title>
+<meta name="twitter:title" content="Text Editor - Kaspa Hub" />
+<meta property="og:title" content="Text Editor - Kaspa Hub" />
+
+<meta name="description" content="Use our free online HTML editor to write, edit, and preview HTML in real time. No installation needed. Fully supports modern browsers and PWA features." />
+<meta name="twitter:description" content="Edit HTML online using a fast and professional WYSIWYG Text Editor. Switch between visual and source view, preview changes instantly, and install as a web app." />
+<meta property="og:description" content="Free online HTML editor with visual and code editing modes, live preview, and full PWA support. Use it directly in your browser without installing anything." />
+
+<link rel="canonical" href="https://kaspahub.org/apps/text-editor-simditor/" />
+<meta name="twitter:url" content="https://kaspahub.org/apps/text-editor-simditor/" />
+<meta property="og:url" content="https://kaspahub.org/apps/text-editor-simditor/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text Editor - Kaspa Hub",
+    "url": "https://kaspahub.org/apps/text-editor-simditor/",
+    "description": "Edit HTML online using a fast and professional WYSIWYG Text Editor. Switch between visual and source view, preview changes instantly, and install as a web app.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Kaspa Hub",
+        "url": "https://kaspahub.org/",
+        "logo": "https://kaspahub.org/assets/logo.jpg",
+        "sameAs": [
+            "https://x.com/KaspaHub",
+            "https://discord.gg/7umFvjcANE",
+            "https://bsky.app/profile/kaspahub.org",
+            "https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+            "https://t.me/Kaspahuborg"
+        ]
+    },
+    "applicationCategory": "Utilities",
+    "operatingSystem": "Any"
+}
+</script>
+
+</head>
+
+<body class="">
+ 
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+
+
+  <h2>Simditor with Code View Toggle</h2>
+  <textarea id="editor" placeholder="Write rich text here..."></textarea>
+  <pre id="code-view" contenteditable="true"></pre>
+
+  <button id="toggle-code" class="button">Toggle Code View</button>
+
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<style>
+  body {
+  #editor {
+    height: 400px;
+  }
+  #code-view {
+    display: none;
+    width: 100%;
+    height: 400px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  .button {
+    margin-top: 10px;
+  }
+</style>
+
+<script src="/assets/scripts/jquery.js"></script>
+<script src="module.js"></script>
+<script src="hotkeys.js"></script>
+<script src="uploader.js"></script>
+<script src="simditor.js"></script>
+
+<script>
+  var editor;
+  var codeVisible = false;
+
+  $(function () {
+    editor = new Simditor({
+      textarea: $('#editor'),
+      toolbar: [
+        'title', 'bold', 'italic', 'underline', 'strikethrough',
+        'color', 'ol', 'ul', 'blockquote', 'code', 'table',
+        'link', 'image', 'hr', 'indent', 'outdent', 'alignment'
+      ]
+    });
+
+    $('#toggle-code').on('click', function () {
+      if (!codeVisible) {
+        // Show code view
+        var html = editor.getValue();
+        $('#code-view').text(html).show();
+        $('.simditor').hide();
+        $(this).text('Toggle WYSIWYG View');
+      } else {
+        // Save code view changes back into editor
+        var rawHtml = $('#code-view').text();
+        editor.setValue(rawHtml);
+        $('#code-view').hide();
+        $('.simditor').show();
+        $(this).text('Toggle Code View');
+      }
+      codeVisible = !codeVisible;
+    });
+  });
+</script>
+
+</body>
+</html>

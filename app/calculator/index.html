@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="wm.json" />
+<script defer type='text/javascript' src="app.js"></script>
+
+<title>Calculator - Kaspa Hub</title>
+<meta name="twitter:title" content="Calculator - Kaspa Hub" />
+<meta property="og:title" content="Calculator - Kaspa Hub" />
+
+<meta name="description" content="Free and simple online calculator for quick math. Use it directly in your browser or install it as a Progressive Web App (PWA) for offline access anytime." />
+<meta name="twitter:description" content="A clean and easy-to-use calculator app. Works online or offline, mobile-ready, and no installation required—perfect for basic math on the go." />
+<meta property="og:description" content="Perform everyday calculations effortlessly with our simple online calculator. Fast, intuitive, and accessible on any device—installable as a PWA too!" />
+
+<link rel="canonical" href="https://kaspahub.org/app/calculator/" />
+<meta name="twitter:url" content="https://kaspahub.org/app/calculator/" />
+<meta property="og:url" content="https://kaspahub.org/app/calculator/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+
+<script id="schema" type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculator - Kaspa Hub",
+    "url": "https://kaspahub.org/app/calculator/",
+    "description": "A clean and easy-to-use calculator app. Works online or offline, mobile-ready, and no installation required—perfect for basic math on the go.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Kaspa Hub",
+        "url": "https://kaspahub.org/",
+        "logo": "https://kaspahub.org/assets/logo.jpg",
+        "sameAs": [
+            "https://x.com/KaspaHub",
+            "https://discord.gg/7umFvjcANE",
+            "https://bsky.app/profile/kaspahub.org",
+            "https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+            "https://t.me/Kaspahuborg"
+        ]
+    },
+    "applicationCategory": "Utilities",
+    "operatingSystem": "Any"
+}
+</script>
+
+
+
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main style="justify-items: center; padding-bottom: 0;">
+
+<div class="fade-in theme-1" id="container-calculator">
+
+<div class="top-bar">
+    <a draggable="false" href="/apps/"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10" /></svg></a>
+    <label>Calculator</label>
+    <button id="save"><svg width="1em" height="1em" viewBox="0 0 20 20" fill="gray"><circle cx="10" cy="10" r="10" /></svg></button>
+</div>
+
+<section id="calculator">
+    <input type="text" id="input" oninput="updateResult()" placeholder="" />
+    <input type="text" id="result" disabled />
+<div class="rwrap theme-filter">
+    <button class="e-button" style="color: #D93E36;" onclick="clean()">C</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('(')">(</button>
+    <button class="e-button" style="color: #42A611;" onclick="append(')')">)</button>
+    <button class="e-button" style="color: #42A611;" onclick="backspace()">⌫</button>
+
+    <button class="e-button" onclick="append('7')">7</button>
+    <button class="e-button" onclick="append('8')">8</button>
+    <button class="e-button" onclick="append('9')">9</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('/')">÷</button>
+
+    <button class="e-button" onclick="append('4')">4</button>
+    <button class="e-button" onclick="append('5')">5</button>
+    <button class="e-button" onclick="append('6')">6</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('*')">x</button>
+    <button class="e-button" onclick="append('1')">1</button>
+    <button class="e-button" onclick="append('2')">2</button>
+    <button class="e-button" onclick="append('3')">3</button>
+    <button class="e-button" style="color: #42A611;" onclick="append('+')">+</button>
+
+
+    <button class="e-button" onclick="append('0')">0</button>
+    <button class="e-button" onclick="append('.')">.</button>
+    <button class="e-button" onclick="append('-')">-</button>
+
+    <button class="e-button" style="background: #42A611; color: #E1E1E1;" onclick="calculate()">=</button>
+</div>
+</section>
+</div>
+
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<style type="text/css">
+iframe {
+    display: none;
+}
+.rwrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 7px;
+    position: relative; 
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.e-button {
+    min-height: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-size: 25px;
+
+    border-radius: 50%;
+    background-color: #8080801f;
+    font-weight: bold;
+    font-family: sans-serif;
+
+    border: 2px solid #00000094;
+}
+#calculator {
+    display: flex;
+    flex-direction: column;
+    width: calc(14vw + 2.4vw);
+}
+
+#input, #result {
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#input {
+    background-color: rgba(192,192,192, 0.7);
+    text-align: right;
+
+}
+#result {
+    background-color: transparent;
+    text-align: center;
+}
+
+#calculator {
+    width: 232px;
+}
+
+@media (max-width: 600px) {
+    .e-button {
+        min-height: 19vw;
+        max-height: 19vw;
+        min-width: 19vw;
+        font-size: 5vw;
+        border-radius: 50%;
+    }
+    #calculator {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    #container-calculator {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    .wrapper-1 {
+        margin: 0;
+    }
+    #input {
+        font-size: 10vw;
+        height: 16vw;
+    }
+    #result {
+        font-size: 10vw;
+    }
+    footer {
+        display: none;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+
+    main {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+</style>
+
+<script type="text/javascript">
+'use strict';
+
+const result = document.getElementById("result");
+const input = document.getElementById("input");
+const inputField = document.getElementById('input');
+const saveButton = document.getElementById('save');
+
+
+
+function append(value) {
+    input.value += value;
+    updateResult();
+    result.focus();
+}
+
+function clean() {
+    result.value = "";
+    input.value = "";
+}
+
+function backspace() {
+    input.value = input.value.slice(0, -1);
+    updateResult();
+}
+
+function updateResult() {
+ try {
+    result.value = eval(input.value);
+ } catch (error) {
+    result.value = "";
+ }
+}
+
+function calculate() {
+try {
+    input.value = eval(input.value);
+    result.value = "";
+    updateResult();
+ } catch (error) {
+    input.value = "";
+    result.value = "";
+ }
+}
+
+
+
+result.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+    event.preventDefault();
+    calculate();
+        updateResult();
+    }
+}); 
+
+
+//save
+
+window.onload = function () {
+    const savedValue = localStorage.getItem('myInputValue');
+    if (savedValue) {
+        inputField.value = savedValue;
+        setButtonGreen();
+        updateResult();
+        waitForAnyChange();
+    }
+};
+
+saveButton.addEventListener('click', function () {
+    const inputValue = inputField.value;
+    localStorage.setItem('myInputValue', inputValue);
+    setButtonGreen();
+    waitForAnyChange();
+});
+
+function setButtonGreen() {
+    saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="#61C554"><circle cx="10" cy="10" r="10" /></svg>';
+}
+
+function setButtonGray() {
+    saveButton.innerHTML = '<svg width="1em" height="1em" viewBox="0 0 20 20" fill="gray"><circle cx="10" cy="10" r="10" /></svg>';
+}
+
+function waitForAnyChange() {
+    const input = document.getElementById('input');
+    let lastValue = input.value;
+
+    const intervalId = setInterval(() => {
+        if (input.value !== lastValue) {
+            clearInterval(intervalId);
+            setButtonGray();
+        }
+    }, 1000);
+}
+
+</script>
+</body>
+</html>

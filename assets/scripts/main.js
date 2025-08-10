@@ -1,1 +1,28 @@
-'use strict'; const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});
+'use strict';
+
+const isDarkTheme = localStorage.getItem('dark') !== null;
+document.documentElement.id = isDarkTheme ? 'dark' : 'light';
+
+const checkbox = document.getElementById('theme');
+checkbox.checked = isDarkTheme;
+
+function theme() {
+  if (checkbox.checked) {
+    localStorage.setItem('dark', '');
+    document.documentElement.id = 'dark';
+  } else {
+    localStorage.removeItem('dark');
+    document.documentElement.id = 'light';
+  }
+}
+
+function share() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    }).catch(console.error);
+  } else {
+    alert("Sharing not supported in this browser.");
+  }
+}

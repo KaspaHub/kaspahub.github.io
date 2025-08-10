@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<!-- <link rel="manifest" href="wm.json" /> -->
+<!-- <script defer type='text/javascript' src="app.js"></script> -->
+<link rel="stylesheet" media="all" href="/app/text-editor-summernote/assets/summernote-lite.css" />
+
+<title>Text Editor - Kaspa Hub</title>
+<meta name="twitter:title" content="Text Editor - Kaspa Hub" />
+<meta property="og:title" content="Text Editor - Kaspa Hub" />
+
+<meta name="description" content="Custom Summernote Text Editor - Free online HTML editor with visual and code editing modes, live preview, and full PWA support. Use it directly in your browser without installing anything." />
+<meta name="twitter:description" content="Custom Summernote Text Editor - Edit HTML online using a fast and easy WYSIWYG editor. Switch between visual and source view, preview changes instantly, and install as a web app." />
+<meta property="og:description" content="Custom Summernote Text Editor - Use our free online HTML editor to write, edit, and preview HTML in real time. No installation needed. Fully supports modern browsers and PWA features." />
+
+<link rel="canonical" href="https://kaspahub.org/app/text-editor-summernote/" />
+<meta name="twitter:url" content="https://kaspahub.org/app/text-editor-summernote/" />
+<meta property="og:url" content="https://kaspahub.org/app/text-editor-summernote/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text Editor - Kaspa Hub",
+    "url": "https://kaspahub.org/app/text-editor-summernote/",
+    "description": "Edit HTML online using a fast and professional WYSIWYG Text Editor. Switch between visual and source view, preview changes instantly, and install as a web app.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Kaspa Hub",
+        "url": "https://kaspahub.org/",
+        "logo": "https://kaspahub.org/assets/logo.jpg",
+        "sameAs": [
+            "https://x.com/KaspaHub",
+            "https://discord.gg/7umFvjcANE",
+            "https://bsky.app/profile/kaspahub.org",
+            "https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+            "https://t.me/Kaspahuborg"
+        ]
+    },
+    "applicationCategory": "Utilities",
+    "operatingSystem": "Any"
+}
+</script>
+
+</head>
+
+<body class="">
+ 
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+
+<div class="container-0 fade-in theme-1">
+
+	<div id="top-wrapper">
+		<section id="top">
+			<label>Text Editor</label>
+			<a draggable="false" class="close" href="/apps/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M24 10H14V0h-4v10H0v4h10v10h4V14h10z"/></svg></a>
+		</section>
+		<hr>
+	</div>
+
+	<!-- <input type="button" class="e-button" value="Advanced ▽" tabindex="-1" onclick="toggleAdditional()" /> -->
+	
+	<div id="summernote"></div>
+	<p id="htmlCounter" style="font-size: 0.8em; color: #757575; float: right;">
+		<span id="charCount">0</span> characters,
+		<span id="wordCount">0</span> words
+	</p>
+</div>
+
+
+</div>
+
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script src="/assets/scripts/jquery.js"></script>
+<script src="assets/summernote-lite.js"></script>
+<script type="text/javascript">
+'use strict';
+$('#summernote').summernote({
+	placeholder: 'Start writing...',
+	prettifyHtml: true,
+	tooltip: false,
+	linkTargetBlank: false,
+
+	tabsize: 2,
+      toolbar: [
+        ['style', ['clear']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough']],
+        ['style', ['ul', 'ol']],
+        ['style', ['alignleft', 'aligncenter', 'alignright']],
+        ['style', ['style']],
+        ['style', ['fontsize']],
+        ['style', ['color']],
+        ['style', ['table']],
+        ['style', ['link', 'picture', 'video']],
+        ['style', ['symbolDropdown']],
+        ['style', ['codeview']]
+      ],
+buttons: {
+  symbolDropdown: function () {
+    return $('<div class="note-btn-group btn-group">').append(`
+      <select class="e-button note-btn" 
+              style="margin: 0 5px; height: 30px; padding: 2px 5px;" 
+              onchange="insertSymbol(this); this.selectedIndex = 0;" tabindex="-1">
+        <option value="" selected disabled hidden>Symbols ▼</option>
+        <option value="✓">✓</option>
+        <option value="•">•</option>
+        <option value="▲">▲</option>
+        <option value="▼">▼</option>
+        <option value="◄">◄</option>
+        <option value="►">►</option>
+        <option value="₿">₿</option>
+        <option value="𐤊">𐤊</option>
+      </select>
+    `);
+  }
+}
+});
+
+function insertSymbol(select) {
+	const symbol = select.value;
+	$('#summernote').summernote('editor.insertText', symbol);
+}
+
+//tab
+document.addEventListener("DOMContentLoaded", function() {
+	const contentEditableDiv = document.querySelector(".note-editable");
+
+	if (contentEditableDiv) {
+		contentEditableDiv.addEventListener("keydown", function(event) {
+			if (event.keyCode === 9 && contentEditableDiv.innerHTML !== "") {
+				event.preventDefault();
+				document.execCommand("insertHTML", false, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			}
+		});
+	}
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const editor = document.getElementById("text-editor");
+  const charCountLabel = document.getElementById("charCount");
+  const wordCountLabel = document.getElementById("wordCount");
+
+  if (editor && charCountLabel && wordCountLabel) {
+    editor.addEventListener("input", function () {
+      const text = editor.innerText || "";
+      const charCount = text.replace(/\n/g, "").length;
+
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length;
+
+      charCountLabel.textContent = charCount;
+      wordCountLabel.textContent = wordCount;
+    });
+  }
+});
+
+
+if (document.cookie.includes("theme=dark")) {
+	document.querySelectorAll(".theme-filter").forEach(elem =>
+		elem.classList.add("filter-dark")
+	);
+}
+
+// function toggleAdditional() {
+// 	var additionalOptions = document.getElementById("note-toolbar");
+// 	additionalOptions.classList.toggle("hidden");
+// }
+</script>
+
+<style type="text/css">
+.close {
+	color: inherit !important;
+	opacity: 0.9;
+	float: right;
+	transform: rotate(45deg);
+	min-width: 24px;
+	height: 24px;
+}
+.wrap > * {
+	margin-inline-start: 3px;
+	margin-inline-end: 3px;
+	margin-block-start: 3px;
+	margin-block-end: 3px;
+}
+.note-codable, .text-editor {
+	min-height: 50vh;
+}
+</style>
+
+</body>
+</html>

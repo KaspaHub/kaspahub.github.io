@@ -1,99 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="mobile-web-app-capable" content="yes" />
 
-	<title>Home - Kaspa Hub</title>
-	<meta name="twitter:title" content="Home - Kaspa Hub" />
-	<meta property="og:title" content="Home - Kaspa Hub" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
 
-	<meta name="description" content="Kaspa Hub is the vibrant heart of a decentralized movement, connecting you with essential resources to engage, secure, and contribute to the Kaspa network." />
-	<meta name="twitter:description" content="Kaspa Hub is the vibrant heart of a decentralized movement, connecting you with essential resources to engage, secure, and contribute to the Kaspa network." />
-	<meta property="og:description" content="Kaspa Hub is the vibrant heart of a decentralized movement, connecting you with essential resources to engage, secure, and contribute to the Kaspa network." />
+<title>Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Hub" />
+<meta property="og:title" content="Kaspa Hub" />
 
-	<link rel="canonical" href="https://kaspahub.org/" />
-	<meta name="twitter:url" content="https://kaspahub.org/" />
-	<meta property="og:url" content="https://kaspahub.org/" />
+<meta name="description" content="Kaspa Hub is your gateway to the Kaspa ecosystem, offering a streamlined way to connect, participate, and stay informed in a growing decentralized network." />
+<meta name="twitter:description" content="Discover Kaspa Hub, a community-driven platform designed to help you engage with the Kaspa ecosystem and be part of its evolving journey." />
+<meta property="og:description" content="Kaspa Hub empowers users to explore the Kaspa network through an open, decentralized platform built for learning, collaboration, and growth." />
 
-	<meta name="twitter:site" content="@KaspaHub" />
-	<meta name="twitter:creator" content="@KaspaHub" />
-	<meta property="og:site_name" content="Kaspa Hub" />
+<link rel="canonical" href="https://kaspahub.org/" />
+<meta name="twitter:url" content="https://kaspahub.org/" />
+<meta property="og:url" content="https://kaspahub.org/" />
 
-	<meta property="og:type" content="website" />
-	<meta name="author" content="Kaspa Hub" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta name="kaspa:title" content="Thanks for being here - your support is appreciated more than you know." />
-	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
-	<meta name="theme-color" content="#000000" />
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
-	<link rel="manifest" href="https://kaspahub.org/assets/manifest.json" />
-	<link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
-	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="Thanks for being here - your support is appreciated more than you know." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org/",
+	"description": "Kaspa Hub is a community-led platform designed to support and grow the Kaspa ecosystem. It provides a central space for discovery, education, and engagement within the decentralized network.",
+	"publisher": {
+		"@type": "Organization",
+		"name": "Kaspa Hub",
+		"url": "https://kaspahub.org/",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://kaspahub.org/assets/logo.jpg"
+		},
+		"sameAs": [
+			"https://x.com/KaspaHub",
+			"https://discord.gg/7umFvjcANE",
+			"https://bsky.app/profile/kaspahub.org",
+			"https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+			"https://t.me/Kaspahuborg"
+		]
+	}
+}
+</script>
+
 </head>
 
-<body class="">
+<body>
 
-<header>
-<nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
-<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
-</header>
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
 
-<main style="max-width: 1200px; margin: 0 auto; padding-bottom: 0;">
+<main id="container-2" style="padding-bottom: 0;">
 
-	<div style="text-align: center; margin-bottom: 70px;">
-		<h1 style="font-size: 3em; filter: brightness(0.7);">Kaspa Hub</h1>
-		<p style="font-weight: bold;">Your central resource for the Kaspa ecosystem.</p>
-	</div>
+<div style="text-align: center; margin-bottom: 70px;">
+	<h1 style="font-size: 3em; filter: brightness(0.7);">Kaspa Hub</h1>
+	<p style="font-weight: bold;">Your central resource for the Kaspa ecosystem.</p>
+</div>
 
 	<div class="grid-container">
 		
-		<a href="https://kaspahub.org/resources/" class="card theme-1">
+		<a href="/resources/" class="card theme-1">
 		    <h2 class="card-title">Resources </h2>
 		    <p class="card-description">Find essential resources for researching Kaspa, including whitepapers, articles, block explorers, and real-time BlockDAG visualizers to track performance and trends.</p>
 		</a>
 		
-		<a href="https://kaspahub.org/wallets/" class="card theme-1">
+		<a href="/wallets/" class="card theme-1">
 			<h2 class="card-title">Wallets</h2>
 			<p class="card-description">Explore a selection of wallets supporting the Kaspa cryptocurrency. Filter by various features and supported devices to find the perfect wallet for your needs.</p>
 		</a>
 
-		<a href="https://kaspahub.org/exchanges/" class="card theme-1">
+		<a href="/exchanges/" class="card theme-1">
 			<h2 class="card-title">Exchanges</h2>
 			<p class="card-description">Discover where to buy, sell, and trade Kaspa cryptocurrency. Find a list of reputable exchanges supporting KAS with various trading pairs.</p>
 		</a>
 
-		<a href="https://kaspahub.org/projects/" class="card theme-1">
+		<a href="/projects/" class="card theme-1">
 			<h2 class="card-title">Projects</h2>
 			<p class="card-description">Explore a variety of innovative, community-driven projects that actively contribute to and expand the Kaspa ecosystem across tools, apps, and services.</p>
 		</a>
 
-		<a href="https://kaspahub.org/communities/" class="card theme-1">
+		<a href="/communities/" class="card theme-1">
 			<h2 class="card-title">Chats</h2>
 			<p class="card-description">Join vibrant Kaspa community chats to connect with enthusiasts and developers worldwide, make new friends, get help integrating Kaspa, and engage in discussions.</p>
 		</a>
 		
-		<a href="https://kaspa.org/all-listings/" class="card theme-1">
+		<a href="/all-listings/" class="card theme-1">
 			<h2 class="card-title">Merchants <span style="font-size: 0.8em;">🔗</span></h2>
 			<p class="card-description">Discover businesses and merchants worldwide that already accept Kaspa as a payment method for goods and services.</p>
 		</a>
 		
-		<a href="https://kaspahub.org/solutions/" class="card theme-1">
+		<a href="/solutions/" class="card theme-1">
 			<h2 class="card-title">Merchant Solutions</h2>
 			<p class="card-description">Integrate Kaspa payments into your business. Learn how to accept KAS for goods and services with easy-to-use tools and plugins.</p>
 		</a>
 
-		<a href="https://kaspahub.org/developers/" class="card theme-1">
+		<a href="/developers/" class="card theme-1">
 			<h2 class="card-title">Developer Tools</h2>
 			<p class="card-description">Find the best software and tools to help you develop with Kaspa, start developing apps, wallets, and integrations today.</p>
 		</a>
 		
-		<a href="https://kaspahub.org/sources/" class="card coming-soon theme-1">
+		<a href="/sources/" class="card coming-soon theme-1">
 		    <h2 class="card-title">News Sources</h2>
 		    <p class="card-description">Stay updated with the latest Kaspa news, announcements, and insights from trusted sources covering developments, partnerships, and ecosystem updates.</p>
 		</a>
@@ -103,17 +123,17 @@
 	<h2 style="margin: 60px 20px 20px;">Made by Kaspa Hub</h2>
 	<div class="grid-container">
 
-		<a href="https://kaspahub.org/articles/" class="card theme-1">
+		<a href="/articles/" class="card theme-1">
 		    <h2 class="card-title">Articles</h2>
 		    <p class="card-description">Explore original articles, explainers, and insights created by the Kaspa Hub team to help educate and inform the community.</p>
 		</a>
 
-		<a href="https://kaspahub.org/kaspa-donations/" class="card theme-1">
+		<a href="/post/kaspa-donations-extension/" class="card theme-1">
 		    <h2 class="card-title">Donation Extension</h2>
 		    <p class="card-description">Contribute Kaspa cryptocurrency to websites that accept it. A simple browser extension that makes donations easy.</p>
 		</a>
 
-    <a href="https://kaspahub.org/price/" class="card theme-1">
+    <a href="/price/" class="card theme-1">
         <h2 class="card-title">Price Tracker</h2>
         <p class="card-description">Track Kaspa price with real-time updates. View market cap, fully diluted valuation, circulating and max supply, and interactive charts.</p>
     </a>
@@ -129,17 +149,11 @@
 		</a> -->
 
 	</div>
-<section class="footer" style="margin-top: 70px">
+<section id="footer" style="margin-top: 70px; text-align: left;">
 	<p><strong>Built with ❤️ by Kaspa community, for the Kaspa community. We're <a href="https://github.com/KaspaHub/kaspahub.github.io">open-source</a>, and contributions are always welcome!</strong></p>
-	<p>
-	Disclaimer: Kaspa Hub is a community-run project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the official Kaspa project or its core development team.
-	The content provided on this site is for informational purposes only and does not constitute financial or investment advice.
-	Links to external websites are provided for convenience and informational purposes only, and we make no representations regarding their content or reliability.
-	Always do your own research before making any decisions.<br>
-	<a href="https://kaspahub.org/x/?user=KaspaHub">Support us</a> | <a href="https://x.com/KaspaHub">Contact us</a> | <a href="https://kaspahub.org/credits/">Acknowledgements</a>
-	</p>
+	<p>	Disclaimer: Kaspa Hub is a community-run project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the official Kaspa project or its core development team. The content provided on this site is for informational purposes only and does not constitute financial or investment advice. Links to external websites are provided for convenience and informational purposes only, and we make no representations regarding their content or reliability. Always perform your own due diligence before making any decisions.</p>
+	<p><a href="/donations/?handle=KaspaHub">Support us</a> · <a href="https://x.com/KaspaHub">Contact us</a> · <a href="https://discord.gg/7umFvjcANE">Join us</a> · <a href="/post/credits/">Acknowledgements</a> · © 2025 Kaspa Community Hub. All rights reserved.</p>
 </section>
 </main>
-<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
 </body>
 </html>

@@ -1,0 +1,128 @@
+debouncer
+
+// searchInput.addEventListener('input', debounce(filterItems, 300));
+// function debounce(fn, delay = 300) {
+//  let timer;
+//  return (...args) => {
+//    clearTimeout(timer);
+//    timer = setTimeout(() => fn.apply(this, args), delay);
+//  };
+// }
+
+
+<!-- articles -->
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "___TITLE___",
+"description": "___DESCRIPTION___",
+"url": "https://kaspahub.org/article/___PATH___/",
+"image": "https://kaspahub.org/assets/logo.jpg",
+"publisher": {
+  "@type": "Organization",
+  "name": "Kaspa Hub",
+  "url": "https://kaspahub.org/articles/",
+  "sameAs": ["https://x.com/KaspaHub"],
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://kaspahub.org/assets/logo.jpg"
+  }
+},
+"author": {
+  "@type": "Person",
+  "name": "Classic",
+  "url": "https://x.com/Classicgyt",
+  "image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2025-07-22T08:00:00+08:00"
+}
+</script>
+
+
+
+SCHEMAS v
+
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebSite",
+"name": "___TITLE___",
+"url": "___LINK___",
+"description": "___DESCRIPTION___"
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kaspa Wallet",
+  "url": "https://wallet.kaspa.org",
+  "description": "A progressive web wallet for sending and receiving Kaspa."
+}
+
+</script>
+
+<!-- HOMEPAGE -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kaspa Hub",
+  "url": "https://kaspahub.org/"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kaspa Projects & PWAs",
+  "url": "https://example.com/projects",
+  "description": "Explore third-party apps and tools built around the Kaspa ecosystem."
+}
+</script>
+
+<!-- HUBS -->
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your Article Title Here",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name"
+  },
+  "datePublished": "2025-08-06",
+  "mainEntityOfPage": "https://example.com/your-article-url"
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "News Article Title Here",
+  "datePublished": "2025-08-06T12:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Publisher Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": "https://example.com/news-article-url"
+}
+</script>
+

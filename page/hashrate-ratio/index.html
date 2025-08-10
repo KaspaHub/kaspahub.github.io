@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa vs Bitcoin: Hashrate to Marketcap Ratio</title>
+<meta name="twitter:title" content="Kaspa vs Bitcoin - Hashrate to Marketcap Ratio" />
+<meta property="og:title" content="Kaspa vs Bitcoin: Hashrate to Market Cap Efficiency" />
+
+<meta name="description" content="Compare Kaspa (KAS) and Bitcoin (BTC) by analyzing their hashrate-to-market cap efficiency." />
+<meta name="twitter:description" content="Compare real-time hashrate efficiency of Kaspa and Bitcoin." />
+<meta property="og:description" content="Explore which crypto is more efficient by comparing hashrate to market cap. Live metrics for Kaspa and Bitcoin." />
+
+<link rel="canonical" href="https://kaspahub.org/page/hashrate-ratio/" />
+<meta name="twitter:url" content="https://kaspahub.org/page/hashrate-ratio/" />
+<meta property="og:url" content="https://kaspahub.org/page/hashrate-ratio/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+
+<header id="intro"></header><script async src="/assets/scripts/author.js"></script>
+
+<article class="theme-1">
+<h1>Kaspa vs Bitcoin Hashrate to Marketcap Ratio</h1>
+<p>
+The "Ratio (EH/s ÷ Marketcap)" is calculated by dividing the network hashrate (in exahashes per second) by the market capitalization (in USD). This metric helps compare the efficiency of each cryptocurrency relative to its market value.
+</p>
+<h2></h2>
+<div class="table-container">
+<table id="comparison-table" style="width: 800px;">
+<thead>
+<tr>
+<th>Metric</th>
+<th>Kaspa (KAS)</th>
+<th>Bitcoin (BTC)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Price (USD)</td><td id="kas-price">...</td><td id="btc-price">...</td></tr>
+<tr><td>Circulating Supply</td><td id="kas-circ">...</td><td>19,895,478</td></tr>
+<tr><td>Market Cap (USD)</td><td id="kas-cap">...</td><td id="btc-cap">...</td></tr>
+<tr><td>Hashrate (EH/s)</td><td>0.85</td><td>900.52</td></tr>
+<tr><td>Ratio (EH/s ÷ Marketcap)</td><td id="kas-ratio">...</td><td id="btc-ratio">-</td></tr>
+<tr><td>Ratio (Normalized)</td><td id="kas-normalized">...</td><td id="btc-normalized">-</td></tr>
+</tbody>
+</table>
+</div>
+<!-- <p style="text-align: center; font-size: 0.9rem;">Prices update every 30 seconds using CoinGecko.</p> -->
+</article>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+let fallbackKasPrice = 0.10;
+let fallbackBtcPrice = 118000;
+let circSupply = 26556591412; // fallback circulating supply
+
+const data = {
+	kas: {
+		supply: circSupply,
+		hashrate: 0.85,
+		price: fallbackKasPrice,
+		marketcap: null,
+		ratio: null,
+		normalized: null,
+	},
+	btc: {
+		supply: 19895478,
+		hashrate: 900.52,
+		price: fallbackBtcPrice,
+		marketcap: null,
+		ratio: null,
+		normalized: null,
+	}
+};
+
+const pricesUrl = "https://api.coingecko.com/api/v3/simple/price?ids=kaspa,bitcoin&vs_currencies=usd";
+
+function format(num, decimals = 4) {
+	return Number(num).toLocaleString("en-US", {
+		minimumFractionDigits: decimals,
+		maximumFractionDigits: decimals
+	});
+}
+
+async function getCirculatingSupply() {
+	try {
+		const res = await fetch("https://api.kaspa.org/info/coinsupply/circulating");
+		const num = await res.json();
+		if (typeof num === "number" && !isNaN(num)) {
+			circSupply = num;
+			data.kas.supply = circSupply;
+			console.log("Circulating Supply:", circSupply);
+		}
+	} catch (err) {
+		console.warn("Using fallback circulating supply:", circSupply, err);
+	}
+	updateUI();
+	await updateData();
+}
+
+async function fetchPrices() {
+	try {
+		const res = await fetch(pricesUrl);
+		const json = await res.json();
+		const kasPrice = json.kaspa?.usd ?? fallbackKasPrice;
+		const btcPrice = json.bitcoin?.usd ?? fallbackBtcPrice;
+
+		if (json.kaspa?.usd !== undefined && json.bitcoin?.usd !== undefined) {
+			console.log(`Kaspa: $${kasPrice}, Bitcoin: $${btcPrice}`);
+		}
+
+		return { kasPrice, btcPrice };
+	} catch (e) {
+		console.error("Failed to fetch prices, using fallback values", e);
+		return {
+			kasPrice: fallbackKasPrice,
+			btcPrice: fallbackBtcPrice,
+		};
+	}
+}
+
+
+async function updateData() {
+	const { kasPrice, btcPrice } = await fetchPrices();
+
+	data.kas.price = kasPrice;
+	data.btc.price = btcPrice;
+
+	data.kas.marketcap = data.kas.price * data.kas.supply;
+	data.btc.marketcap = data.btc.price * data.btc.supply;
+
+	data.kas.ratio = data.kas.hashrate / data.kas.marketcap;
+	data.btc.ratio = data.btc.hashrate / data.btc.marketcap;
+
+	const base = 0.000000001;
+	data.kas.normalized = data.kas.ratio / base;
+	data.btc.normalized = data.btc.ratio / base;
+
+	updateUI();
+}
+
+function updateUI() {
+	document.getElementById("kas-price").textContent = data.kas.price ? `$${format(data.kas.price, 6)}` : "...";
+	document.getElementById("btc-price").textContent = data.btc.price ? `$${format(data.btc.price, 2)}` : "...";
+	
+	document.getElementById("kas-circ").textContent = format(data.kas.supply, 0);
+	
+	if (data.kas.marketcap !== null) document.getElementById("kas-cap").textContent = `$${format(data.kas.marketcap, 0)}`;
+	if (data.btc.marketcap !== null) document.getElementById("btc-cap").textContent = `$${format(data.btc.marketcap, 0)}`;
+	
+	if (data.kas.ratio !== null) document.getElementById("kas-ratio").textContent = format(data.kas.ratio, 12);
+	if (data.btc.ratio !== null) document.getElementById("btc-ratio").textContent = format(data.btc.ratio, 12);
+	
+	if (data.kas.normalized !== null) document.getElementById("kas-normalized").textContent = format(data.kas.normalized, 2);
+	if (data.btc.normalized !== null) document.getElementById("btc-normalized").textContent = format(data.btc.normalized, 2);
+	
+	document.getElementById("comparison-table").classList.add("updated");
+}
+
+getCirculatingSupply();
+</script>
+
+
+
+
+</body>
+</html>

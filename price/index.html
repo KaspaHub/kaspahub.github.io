@@ -1,43 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="mobile-web-app-capable" content="yes" />
-	
-	<title>Kaspa Price Tracker</title>
-	<meta name="twitter:title" content="Live Kaspa Price Tracker and Market Data" />
-	<meta property="og:title" content="Live Kaspa Price Tracker and Market Data" />
-	
-	<meta name="description" content="Follow the live price of Kaspa with real-time updates. View market cap, fully diluted valuation, circulating and max supply, and more." />
-	<meta name="twitter:description" content="Track Kaspa price movements in real time. See updated market cap, supply metrics, and valuation data." />
-	<meta property="og:description" content="Real-time price and supply metrics for Kaspa including market cap and valuation updates." />
-	
-	<link rel="canonical" href="https://kaspahub.org/price/" />
-	<meta name="twitter:url" content="https://kaspahub.org/price/" />
-	<meta property="og:url" content="https://kaspahub.org/price/" />
-	
-	<meta name="twitter:site" content="@KaspaHub" />
-	<meta name="twitter:creator" content="@KaspaHub" />
-	<meta property="og:site_name" content="Kaspa Hub" />
-	
-	<meta property="og:type" content="website" />
-	<meta name="author" content="Kaspa Hub" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
-	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
-	<meta name="theme-color" content="#000000" />
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
-	<link rel="manifest" href="https://kaspahub.org/assets/manifest.json" />
-	<link rel="apple-touch-icon" sizes="180x180" href="https://kaspahub.org/assets/logo-180.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="https://kaspahub.org/assets/logo-32.png">
-	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa Price Tracker</title>
+<meta name="twitter:title" content="Live Kaspa Price Tracker and Market Data" />
+<meta property="og:title" content="Live Kaspa Price Tracker and Market Data" />
+
+<meta name="description" content="Follow the live price of Kaspa with real-time updates. View market cap, fully diluted valuation, circulating and max supply, and more." />
+<meta name="twitter:description" content="Track Kaspa price movements in real time. See updated market cap, supply metrics, and valuation data." />
+<meta property="og:description" content="Real-time price and supply metrics for Kaspa including market cap and valuation updates." />
+
+<link rel="canonical" href="https://kaspahub.org/price/" />
+<meta name="twitter:url" content="https://kaspahub.org/price/" />
+<meta property="og:url" content="https://kaspahub.org/price/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
 </head>
 
-<style>
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+<div style="text-align: center; margin-top: 100px;">
+<p id="price">Loading...</p>
+
+<div id="market-stats" style="text-align: center; margin-top: 30px;">
+<div class="stats-container">
+	<div class="stat-item">
+		<div class="label">Market Cap</div>
+		<div class="value" id="market-cap">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Fully Diluted Valuation</div>
+		<div class="value" id="fdv">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Circulating Supply</div>
+		<div class="value" id="circ-supply">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Max Supply</div>
+		<div class="value" id="max-supply">...</div>
+	</div>
+</div>
+</div>
+</div>
+<div style="text-align: center; margin-bottom: 20px;">
+<button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">📈 Open Chart</button>
+</div>
+<div id="chart-container"></div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<style type="text/css">
 #chart-container { height: 700px; }
 @media (max-width: 800px) and (max-aspect-ratio: 1/1) {
 #chart-container { height: 500px; }
@@ -85,47 +120,9 @@ margin-bottom: 6px;
 margin: 0;
 }
 </style>
-</head>
-<body class="">
-	
-<header>
-<nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
-<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
-</header>
 
-<main class="page-wrapper">
-<div style="text-align: center; margin-top: 100px;">
-<p id="price">Loading...</p>
-
-<div id="market-stats" style="text-align: center; margin-top: 30px;">
-<div class="stats-container">
-	<div class="stat-item">
-		<div class="label">Market Cap</div>
-		<div class="value" id="market-cap">Loading...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Fully Diluted Valuation</div>
-		<div class="value" id="fdv">Loading...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Circulating Supply</div>
-		<div class="value" id="circ-supply">Loading...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Max Supply</div>
-		<div class="value" id="max-supply">Loading...</div>
-	</div>
-</div>
-</div>
-</div>
-<div style="text-align: center; margin-bottom: 20px;">
-<button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">📈 Open Chart</button>
-</div>
-<div id="chart-container"></div>
-</main>
-<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a>© 2025</footer>
-
-<script>
+<script type="text/javascript">
+'use strict';
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("load-chart-btn");
   const container = document.getElementById("chart-container");
@@ -181,82 +178,110 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script defer>
-document.addEventListener("DOMContentLoaded", () => {
-  const priceEl = document.getElementById("price");
-  const marketCapEl = document.getElementById("market-cap");
-  const fdvEl = document.getElementById("fdv");
-  const circEl = document.getElementById("circ-supply");
-  const maxEl = document.getElementById("max-supply");
+<script type="text/javascript">
+'use strict';
 
-  const supply = {
-    circulating: 26476089441,
-    max: 28704026601
-  };
+const priceBox = document.getElementById("price");
+const marketCapBox = document.getElementById("market-cap");
+const fdvBox = document.getElementById("fdv");
+const circBox = document.getElementById("circ-supply");
+const maxBox = document.getElementById("max-supply");
 
-  function updateMetaTags(title) {
-    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (!twitterTitle) {
-      twitterTitle = document.createElement("meta");
-      twitterTitle.setAttribute("name", "twitter:title");
-      document.head.appendChild(twitterTitle);
-    }
-    twitterTitle.setAttribute("content", title);
+const maxSupply = 28704026601;
+let circSupply = 26476089441;
+let price = 0.10;
 
-    let ogTitle = document.querySelector('meta[property="og:title"]');
-    if (!ogTitle) {
-      ogTitle = document.createElement("meta");
-      ogTitle.setAttribute("property", "og:title");
-      document.head.appendChild(ogTitle);
-    }
-    ogTitle.setAttribute("content", title);
+function getCirculatingSupply() {
+  fetch("https://api.kaspa.org/info/coinsupply/circulating")
+    .then(res => res.json())
+    .then(data => {
+      if (typeof data === "number" && !isNaN(data)) {
+        circSupply = data;
+        console.log("Circulating Supply:", circSupply);
+      }
+    })
+    .catch(err => {
+      console.warn("Using fallback circulating supply:", err);
+    });
+}
+
+
+
+
+function getPrice() {
+  fetch("https://api.kaspa.org/info/price")
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (!data || typeof data.price !== 'number' || isNaN(data.price)) {
+        throw new Error("Invalid price data");
+      }
+      price = data.price;
+      console.log("Price:", price);
+      updatePage(price);
+    })
+    .catch(err => {
+      console.error("Failed to fetch Kaspa price:", err);
+      if (price !== null) {
+        updatePage(price);
+      } else {
+        priceBox.textContent = "Error loading price";
+      }
+    });
+}
+
+function updatePage(price) {
+  const price6 = price.toFixed(6);
+  const pageTitle = `$${price.toFixed(4)} - KAS/USD`;
+  document.title = pageTitle;
+
+  // Price
+  priceBox.textContent = `$${price6}`;
+  priceBox.classList.remove("updated");
+  void priceBox.offsetWidth;
+  priceBox.classList.add("updated");
+
+  // Market stats
+  const marketCap = price * circSupply;
+  const fdv = price * maxSupply;
+  marketCapBox.textContent = formatNumber(marketCap);
+  fdvBox.textContent = formatNumber(fdv);
+  circBox.textContent = `${(circSupply / 1e9).toFixed(2)}B KAS`;
+  maxBox.textContent = `${(maxSupply / 1e9).toFixed(2)}B KAS`;
+
+  // Meta tags
+  let twitterMeta = document.querySelector('meta[name="twitter:title"]');
+  if (!twitterMeta) {
+    twitterMeta = document.createElement("meta");
+    twitterMeta.setAttribute("name", "twitter:title");
+    document.head.appendChild(twitterMeta);
   }
+  twitterMeta.setAttribute("content", pageTitle);
 
-  async function fetchPrice() {
-    try {
-      const res = await fetch("https://api.kaspa.org/info/price");
-      if (!res.ok) throw new Error("API error");
-      const { price } = await res.json();
-      updateUI(price);
-    } catch (e) {
-      console.error("Failed to fetch Kaspa price:", e);
-      priceEl.textContent = "Error loading price";
-    }
+  let ogMeta = document.querySelector('meta[property="og:title"]');
+  if (!ogMeta) {
+    ogMeta = document.createElement("meta");
+    ogMeta.setAttribute("property", "og:title");
+    document.head.appendChild(ogMeta);
   }
+  ogMeta.setAttribute("content", pageTitle);
+}
 
-  function updateUI(price) {
-    const priceFormatted = price.toFixed(6);
-    const title = `$${price.toFixed(4)} - KAS/USD`;
-    document.title = title;
+function formatNumber(value) {
+  if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
+  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+  return `$${value.toFixed(2)}`;
+}
 
-    priceEl.textContent = `$${priceFormatted}`;
-    priceEl.classList.remove("updated");
-    void priceEl.offsetWidth;
-    priceEl.classList.add("updated");
-
-    const marketCap = price * supply.circulating;
-    const fdv = price * supply.max;
-
-    marketCapEl.textContent = formatLargeNumber(marketCap);
-    fdvEl.textContent = formatLargeNumber(fdv);
-    circEl.textContent = `${(supply.circulating / 1e9).toFixed(2)}B KAS`;
-    maxEl.textContent = `${(supply.max / 1e9).toFixed(2)}B KAS`;
-  }
-
-  function formatLargeNumber(value) {
-    if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
-    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
-    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
-    return `$${value.toFixed(2)}`;
-  }
-
-  fetchPrice().then(() => {
-    const title = document.title;
-    updateMetaTags(title);
-  });
-
-  setInterval(fetchPrice, 15000);
-});
+getCirculatingSupply();
+getPrice();
+setInterval(getPrice, 15000);
 </script>
+
+
+
 </body>
 </html>
