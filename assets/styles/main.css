@@ -30,8 +30,6 @@ html {
 	overflow: hidden;
 	overflow-y: scroll;
 	overflow-x: hidden;
-
-	background-color: #6598BD;
 }
 
 body {
@@ -66,6 +64,7 @@ time {
 
 #light {
 	/*background: linear-gradient(to bottom right, #8BAFC4, #8BC6BD);*/
+	background-color: #6598BD;
 	color: #0f0f0f;
 	background-image: url(/assets/bg-light.webp);
 }
