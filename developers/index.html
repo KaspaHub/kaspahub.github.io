@@ -1,50 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="mobile-web-app-capable" content="yes" />
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
 
-	<title>Developer Tools - Kaspa Hub</title>
-	<meta name="twitter:title" content="Developer Tools - Kaspa Hub" />
-	<meta property="og:title" content="Developer Tools - Kaspa Hub" />
+<title>Developer Tools - Kaspa Hub</title>
+<meta name="twitter:title" content="Developer Tools - Kaspa Hub" />
+<meta property="og:title" content="Developer Tools - Kaspa Hub" />
 
-	<meta name="description" content="Explore open-source Kaspa developer tools on GitHub. Filter by programming languages like Rust, JavaScript, Dart, Go, and PHP to find tools for nodes, wallets, visualization, and community support." />
-	<meta name="twitter:description" content="Explore open-source Kaspa developer tools on GitHub. Filter by programming languages like Rust, JavaScript, Dart, Go, and PHP to find tools for nodes, wallets, visualization, and community support." />
-	<meta property="og:description" content="Explore open-source Kaspa developer tools on GitHub. Filter by programming languages like Rust, JavaScript, Dart, Go, and PHP to find tools for nodes, wallets, visualization, and community support." />
+<meta name="description" content="Discover a comprehensive collection of open-source developer tools for Kaspa on GitHub. Easily browse tools designed for node management, wallet integration, data visualization, and active community collaboration." />
+<meta name="twitter:description" content="Access a wide range of Kaspa developer tools available on GitHub. Find resources for node operation, wallet development, visual analytics, and community-driven projects all in one place." />
+<meta property="og:description" content="Browse Kaspa developer tools hosted on GitHub, offering solutions for node functionality, wallet applications, data visualization, and support through a vibrant developer community." />
 
-	<link rel="canonical" href="https://kaspahub.github.io/developers/" />
-	<meta name="twitter:url" content="https://kaspahub.github.io/developers/" />
-	<meta property="og:url" content="https://kaspahub.github.io/developers/" />
+<link rel="canonical" href="https://kaspahub.org/developers/" />
+<meta name="twitter:url" content="https://kaspahub.org/developers/" />
+<meta property="og:url" content="https://kaspahub.org/developers/" />
 
-	<meta name="twitter:site" content="@KaspaHub" />
-	<meta name="twitter:creator" content="@KaspaHub" />
-	<meta property="og:site_name" content="Kaspa Hub" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
-	<meta property="og:type" content="website" />
-	<meta name="author" content="Kaspa Hub" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
-	<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
-	<meta name="kaspa:wallet" content="kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm" />
-	<meta name="theme-color" content="#000000" />
-	<link rel="stylesheet" href="https://kaspahub.org/assets/styles/main.css" />
-	<link rel="manifest" href="/assets/manifest.json" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-180.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-32.png">
-	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
 </head>
 
-<body class="">
-	
-<header>
-<nav id="page-nav"><h2><a href="/">Kaspa Hub</a></h2><div class="toggle-theme"><input type="checkbox" id="theme-toggle"><label for="theme-toggle"></label></div></nav>
-<script>const c=document.getElementById("theme-toggle");if(localStorage.getItem("dark")===null){c.checked=false;document.body.className="background-light"}else{c.checked=true;document.body.className="background-dark"}c.addEventListener("change",()=>{if(c.checked){localStorage.setItem("dark","");document.body.className="background-dark"}else{localStorage.removeItem("dark");document.body.className="background-light"}});</script>
-</header>
-	
-<main class="page-wrapper">
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
 <div class="intro">
 	<h1>Build on Kaspa</h1>
 	<p>Discover open-source tools for building on Kaspa, including nodes, wallets, visualization tools, and community support applications. <br>Filter by programming language to find the right tool for your development needs.</p>
@@ -89,7 +84,7 @@
 <section class="filter-list-main">
 	<div class="theme-1 search-sort-controls">
 		<input type="text" id="searchInput" placeholder="Search..."/>
-		<select id="sortSelect">
+		<select id="sortSelect" aria-label="Sort Menu">
 			<option value="default">Default</option>
 			<option value="az">A - Z</option>
 			<option value="za">Z - A</option>
@@ -101,15 +96,18 @@
 
 </div>
 </main>
+
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
-<script>
+
+<script type="text/javascript">
+'use strict';
 const toolsPerPage = 30;
 let currentIndex = 0;
 
 const tools = [
 {
 	name: "Kasplex",
-	description: "Protocol on Kaspa for KRC20 tokens & KRC721 NFTs, enabling easy asset creation with open-source indexer & APIs for scalable ecosystem interoperability.",
+	description: "First EVM-compatible programmable Layer 2 on Kaspa L1, enabling KRC20 tokens, KRC721 NFTs, and smart contracts with open-source indexer and APIs for scalable dApps.",
 	githubUrl: "https://kasplex.org/",
 	features: {
 		rust: false,
@@ -304,20 +302,6 @@ const tools = [
 	}
 },
 {
-	name: "KaspaHub Donations",
-	description: "A simple HTML and JavaScript-based web page that enables anyone to create a personalized donation page for the Kaspa. It automatically generates QR codes for seamless KAS payments, requiring no coding skills - just replace the wallet address to start accepting tips. Ideal non-technical users looking to integrate or promote community-driven donation features within Kaspa-based projects.",
-	githubUrl: "https://github.com/KaspaHub/donations",
-	features: {
-		rust: false,
-		javascript: true,
-		typescript: false,
-		dart: false,
-		go: false,
-		php: false,
-		python: false
-	}
-},
-{
 	name: "KaspaCom Wallet",
 	description: "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps). Ideal for developers building web-based Kaspa solutions or users seeking a browser-based wallet.",
 	githubUrl: "https://github.com/KASPACOM/kaspacom-web-wallet",
@@ -398,7 +382,7 @@ function filterTools() {
 	}
 	
 	if (filteredTools.length === 0) {
-		itemGrid.innerHTML = '<p class="no-items-message">No tools match your search and filters.</p>';
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
 		counter.textContent = `(0 of ${tools.length})`;
 		return;
