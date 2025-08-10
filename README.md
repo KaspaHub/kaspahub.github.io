@@ -11,7 +11,7 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 - https://kaspahub.org/comparison/
 - https://kaspahub.org/solutions/
 - https://kaspahub.org/developers/
-- https://kaspahub.org/page/kaspa-donations-extension/
+- https://kaspahub.org/post/kaspa-donations-extension/
 - https://kaspahub.org/k/setup/
 - https://kaspahub.org/price/
 
