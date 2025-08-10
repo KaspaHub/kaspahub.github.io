@@ -61,13 +61,13 @@
 	<priority>0.8</priority>
 </url>
 <url>
-	<loc>https://kaspahub.org/donations/setup/</loc>
+	<loc>https://kaspahub.org/k/setup/</loc>
 	<lastmod>2025-08-08</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
-	<loc>https://kaspahub.org/kaspa-donations/</loc>
+	<loc>https://kaspahub.org/post/kaspa-donations-extension/</loc>
 	<lastmod>2025-08-08</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
@@ -157,7 +157,7 @@
 	<priority>0.7</priority>
 </url>
 <url>
-	<loc>https://kaspahub.org/sitemap-html/</loc>
+	<loc>https://kaspahub.org/post/sitemap/</loc>
 	<lastmod>2025-08-08</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.6</priority>
