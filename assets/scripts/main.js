@@ -1,5 +1,3 @@
-'use strict';
-
 const isDarkTheme = localStorage.getItem('dark') !== null;
 document.documentElement.id = isDarkTheme ? 'dark' : 'light';
 
