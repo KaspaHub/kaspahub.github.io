@@ -162,8 +162,31 @@ li {
 	text-align: center;
 }
 
-#intro img {
-	border-radius: 10px;
+#thumbnail {
+  border-radius: 20px;
+  width: 80vw;
+  height: calc(80vw * 5 / 16);
+  object-fit: cover;
+  transition: height 0.7s ease 0s;
+  display: block;
+}
+
+#thumbnail:hover {
+  height: calc(80vw * 9 / 16);
+  transition-delay: 0.3s;
+}
+
+
+.enlarged-image {
+	background: rgba(0,0,0,0.6) no-repeat center;
+	background-size: 90%;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	cursor: zoom-out;
 }
 
 .intro {
@@ -310,11 +333,9 @@ hr {
 	border-radius: 20px;
 	white-space: nowrap;
 	font-size: 0.8rem;
-}
 
-.feature-tag {
 	background-color: #a0e3d1;
-	color: #00796b;
+	color: #006D5D;
 }
 
 .verified::before {

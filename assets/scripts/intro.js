@@ -17,7 +17,7 @@ if (schemaTag) {
     const modDate = schema.dateModified ? new Date(schema.dateModified) : null;
     const modLong = modDate ? modDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "";
 
-    const thumbnailHtml = thumbnailImg ? `<img src="${thumbnailImg}">` : "";
+    const thumbnailHtml = thumbnailImg ? `<img id="thumbnail" src="${thumbnailImg}" data-enlargeable>` : "";
 
     const editSpan = modDate ? ` <span title="Edited: ${modLong}">✏️</span>` : "";
 
@@ -28,8 +28,38 @@ if (schemaTag) {
     const introEl = document.getElementById("intro");
     if (introEl) {
       introEl.innerHTML = html;
+      // enlargeImages();
     }
   } catch (err) {
     console.error("Invalid JSON-LD schema:", err);
   }
+}
+
+function enlargeImages() {
+
+  const images = document.querySelectorAll('img[data-enlargeable]');
+
+  images.forEach((img) => {
+    if (img.dataset.enlargeable === 'false') return;
+
+    img.addEventListener('click', () => {
+      const modal = document.createElement('div');
+      modal.className = 'enlarged-image';
+      modal.style.backgroundImage = `url(${img.src})`;
+
+      const removeModal = () => {
+        modal.remove();
+        document.removeEventListener('keyup', escHandler);
+      };
+
+      const escHandler = (e) => {
+        if (e.key === 'Escape') removeModal();
+      };
+
+      modal.addEventListener('click', removeModal);
+      document.addEventListener('keyup', escHandler);
+
+      document.body.appendChild(modal);
+    });
+  });
 }
