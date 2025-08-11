@@ -23,6 +23,6 @@ function share() {
       url: window.location.href
     }).catch(console.error);
   } else {
-    alert("Sharing not supported in this browser.");
+    alert("Sharing is not supported in this browser.");
   }
 }
