@@ -443,7 +443,6 @@ a:hover {color: #3952C6; text-decoration: underline; }
 a:active {color: #D8B234; text-decoration: underline; }
 
 pre {
-	font-family: Consolas,"courier new";
 	background-color: rgba(45,55,60, 0.9);
 	color: #CED7E5;
 	font-size: 1.1rem;
