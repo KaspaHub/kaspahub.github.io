@@ -55,7 +55,7 @@
 
 <main id="container-2">
 <div class="intro">
-    <h1>Stay Updated</h1>
+    <h1>Stay Updated WIP</h1>
     <p>To stay informed about the Kaspa ecosystem, follow news sources across social platforms and communication channels. Discover and filter sources by platform to find the ones that deliver reliable, timely updates for you.</p>
 </div>
 <div class="main-content-area">
@@ -64,14 +64,13 @@
     <h2 id="counter"></h2>
     <h3>Filter</h3>
     <div class="filter-category">
-        <div class="filter-group"><input type="radio" name="feature" id="checked" data-feature="checked"><label for="checked">Verified</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="x" data-feature="x"><label for="x">X</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="bluesky" data-feature="bluesky"><label for="bluesky">Bluesky</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="nostr" data-feature="nostr"><label for="nostr">Nostr</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="telegram" data-feature="telegram"><label for="telegram">Telegram</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="facebook" data-feature="facebook"><label for="facebook">Facebook</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="instagram" data-feature="instagram"><label for="instagram">Instagram</label></div>
         <div class="filter-group"><input type="radio" name="feature" id="threads" data-feature="threads"><label for="threads">Threads</label></div>
-        <div class="filter-group"><input type="radio" name="feature" id="mastodon" data-feature="mastodon"><label for="mastodon">Mastodon</label></div>
     </div>
 </aside>
 
@@ -98,26 +97,658 @@
 
 const items = [
 {
-    name: "Kaspa Commons X",
-    description: "Kaspa Commons is a new channel focused on real-world impacts of Kaspa - not just the technical advancements and upgrades, but how those innovations touch everyday life.  ",
+    name: "Kaspa",
+    description: "",
+    link: "https://www.instagram.com/kaspa_currency/",
+    logo: "/assets/logos/instagram.webp",
+    features: { instagram: true }
+},
+{
+    name: "Kaspa",
+    description: "",
+    link: "https://www.threads.com/@kaspa_currency",
+    logo: "/assets/logos/threads.webp",
+    features: { threads: true }
+},
+{
+    name: "Kaspa Hub",
+    description: "",
+    link: "https://bsky.app/profile/kaspahub.org",
+    logo: "/assets/logos/bluesky.webp",
+    features: { bluesky: true }
+},
+{
+    name: "Kaspa Report",
+    description: "",
+    link: "https://bsky.app/profile/kaspa.report",
+    logo: "/assets/logos/bluesky.webp",
+    features: { bluesky: true }
+},
+{
+    name: "NETrunner 𐤊",
+    description: "",
+    link: "https://primal.net/p/nprofile1qqstevggytrxu8xmk9kdvtd2jxas7gndepf7nsslzu3za2nglxuwlhqd9cy3m",
+    logo: "/assets/logos/nostr.webp",
+    features: { nostr: true }
+},
+{
+    name: "Kaspa Hub",
+    description: "",
+    link: "https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+    logo: "/assets/logos/nostr.webp",
+    features: { nostr: true }
+},
+{
+    name: "Kaspa Calls",
+    description: "",
+    link: "https://t.me/kaspacalls",
+    logo: "/assets/logos/telegram.webp",
+    features: { telegram: true }
+},
+{
+    name: "KRC20 HUB",
+    description: "",
+    link: "https://t.me/KRC20HUB",
+    logo: "/assets/logos/telegram.webp",
+    features: { telegram: true }
+},
+{
+    name: "Kaspa Currency",
+    description: "Community-driven account sharing insights, updates, and knowledge on Kaspa's ecosystem projects, empowering adoption.",
+    link: "https://www.facebook.com/KaspaCurrency",
+    logo: "/assets/logos/facebook.webp",
+    features: { facebook: true }
+},
+{
+    name: "Kaspa Commons",
+    description: "A community-centric channel amplifying the real-world impact, everyday benefits, & the people powering adoption with fresh updates.",
     link: "https://x.com/Kaspa_Commons",
     logo: "/assets/logos/x.webp",
     features: { x: true }
 },
 {
-    name: "Kaspa X",
-    description: "Bluesky account sharing timely news and ecosystem developments.",
+    name: "Kaspa Unchained",
+    description: "Community-driven account sharing updates, insights, and news about kaspa cryptocurrency, focusing on its adoption and real-world applications.",
     link: "https://x.com/kaspaunchained",
-    logo: "/assets/logos/bluesky.webp",
-    features: { bluesky: true }
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
 },
 {
-    name: "Kaspa Currency Facebook",
-    description: "Telegram group with official news and community discussions.",
-    link: "https://www.facebook.com/KaspaCurrency",
-    logo: "/assets/logos/facebook.webp",
-    features: { facebook: true }
-}
+    name: "Captain Sats 𐤊",
+    description: "",
+    link: "https://x.com/plzsats",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Wolfie",
+    description: "",
+    link: "https://x.com/Kaspa_HypeMan",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "The 𐤊aspa Leidy",
+    description: "",
+    link: "https://x.com/kaspaleidy",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Unofficial Kaspa View",
+    description: "",
+    link: "https://x.com/UnofficialKas",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "BaN𐤊ℚuOτE",
+    description: "",
+    link: "https://x.com/BankQuote_DAG",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "𐤊Kaspasaurus",
+    description: "",
+    link: "https://x.com/kaspasaurus",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "moose.kas 𐤊 Themooseisloose",
+    description: "",
+    link: "https://x.com/Themooseisloos5",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Daily Pulse",
+    description: "Your daily $KAS briefing, quick, AI-powered updates on market sentiment, news, and chart trends. Stay informed in under 2 minutes, every day. ",
+    link: "https://x.com/KaspaDailyPulse",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Central",
+    description: "Community-driven account sharing updates, insights, and news about kaspa cryptocurrency, focusing on its adoption and real-world applications.",
+    link: "https://x.com/KaspaCentral",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Alliance for Transparency",
+    description: "Empowering transparency across the #Kaspa ecosystem. The Kaspa Experience 2025 – book your ticket today.",
+    link: "https://x.com/Kaspa_KAT",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Class",
+    description: "Kaspa Class : Learn How Kaspa is building the Future of Crypto with Innovation, Speed and Security",
+    link: "https://x.com/KaspaClass",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Daily",
+    description: "Kaspa Daily - news and insights. Stay ahead with all the latest updates and developments from the fastest PoW blockchain and its growing ecosystem.",
+    link: "https://x.com/DailyKaspa",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "The Kaspa Onion",
+    description: "",
+    link: "https://x.com/thekaspaonion",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kasparus",
+    description: "",
+    link: "https://x.com/Kasparus1",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Rover of Kaspa",
+    description: "",
+    link: "https://x.com/RoverofKaspa",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KASperience❄️🌍",
+    description: "",
+    link: "https://x.com/KASperiencexyz",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Hub",
+    description: "",
+    link: "https://x.com/KaspaHub",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Report",
+    description: "",
+    link: "https://x.com/KaspaReport",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Proof-of-Work: the Novel",
+    description: "",
+    link: "https://x.com/UGhostdag",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Calls",
+    description: "",
+    link: "https://x.com/KaspaCalls",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "NakaSompo",
+    description: "",
+    link: "https://x.com/NakaSompo",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KAStastic News",
+    description: "",
+    link: "https://x.com/KAStasticNews",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa King",
+    description: "",
+    link: "https://x.com/KaspaKing1",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Kii",
+    description: "",
+    link: "https://x.com/KaspaKii",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa.com",
+    description: "",
+    link: "https://x.com/KaspaCom",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "DOH!MER.𐤊AS",
+    description: "",
+    link: "https://x.com/DOHMER_",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspalife",
+    description: "",
+    link: "https://x.com/kaspalife",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KASmedia",
+    description: "",
+    link: "https://x.com/kasmediadotcom",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Luigi ✨𐤊",
+    description: "",
+    link: "https://x.com/luke_coval",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "GoonBoyCrypto 𐤊 👽",
+    description: "",
+    link: "https://x.com/GoonBoyCrypto",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Mr 𐤊iri",
+    description: "",
+    link: "https://x.com/MrKiri_x",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspador",
+    description: "",
+    link: "https://x.com/kaspador_",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kasthusiast",
+    description: "",
+    link: "https://x.com/kasthusiast",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "YᵉS",
+    description: "",
+    link: "https://x.com/Yestronaut",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Rock the Kaspa",
+    description: "",
+    link: "https://x.com/rock_the_kaspa",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Eco Foundation",
+    description: "",
+    link: "https://x.com/Kaspa_KEF",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KaspaFacts 𐤊",
+    description: "",
+    link: "https://x.com/KaspaFacts",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "p4bpj",
+    description: "",
+    link: "https://x.com/p4bpj",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Bock.kas",
+    description: "",
+    link: "https://x.com/BockTor_crypto",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KaspaFunding",
+    description: "",
+    link: "https://x.com/FundingKaspa",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Fluxkz",
+    description: "",
+    link: "https://x.com/Fluxkz10",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Captain Dwork 𐤊",
+    description: "",
+    link: "https://x.com/captaindwork",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Mr. Kaspa",
+    description: "",
+    link: "https://x.com/KaspaGuru",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "The ꓘaspa Maxi.kas",
+    description: "",
+    link: "https://x.com/TheKaspaMaxi",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa Silver 𐤊",
+    description: "",
+    link: "https://x.com/KaspaSilver",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "coderofstuff",
+    description: "",
+    link: "https://x.com/coderofstuff_",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa𐤊Fox",
+    description: "",
+    link: "https://x.com/KaspaFox",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "TheFutureIsKaspa 𐤊",
+    description: "",
+    link: "https://x.com/KaspaFuture",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa",
+    description: "",
+    link: "https://x.com/Kaspa_BlockDAG",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Usdorex",
+    description: "",
+    link: "https://x.com/Usdorex",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Fran𐤊Saint",
+    description: "",
+    link: "https://x.com/saint1v",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "425crypto.kas",
+    description: "",
+    link: "https://x.com/Brand425Coffee",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "IzioDev",
+    description: "",
+    link: "https://x.com/IzioDev",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "imalfect",
+    description: "",
+    link: "https://x.com/imaldev",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "s c a p e . 𐤊",
+    description: "",
+    link: "https://x.com/ScapeSquad",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Shai𐤊ulud.kas",
+    description: "",
+    link: "https://x.com/shai_hulud_kas",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Dave 𐤊",
+    description: "",
+    link: "https://x.com/Daveyboy230",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KASPA Enthusiast 𐤊",
+    description: "",
+    link: "https://x.com/KASPAEnthusiast",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Ray",
+    description: "",
+    link: "https://x.com/kaspa_Ray",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KRC Gems Alert",
+    description: "",
+    link: "https://x.com/KRCGemsAlert",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "CryptoGrodd",
+    description: "",
+    link: "https://x.com/groddofcrypto",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "goldenSparrow 𐤊",
+    description: "",
+    link: "https://x.com/KaspaIntern",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "auzghosty👻𐤊",
+    description: "",
+    link: "https://x.com/auzghosty",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "ᗪΛVIᗪ ∿ 𐤊",
+    description: "",
+    link: "https://x.com/davevw_",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "16bit.kas 𐤊",
+    description: "",
+    link: "https://x.com/16bit_kaspa",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Michael Sutton",
+    description: "",
+    link: "https://x.com/michaelsuttonil",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Fuzion",
+    description: "",
+    link: "https://x.com/TheFuzionHQ",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "RussT",
+    description: "",
+    link: "https://x.com/RussT142",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "cryptopeople.kas",
+    description: "",
+    link: "https://x.com/cryptopeoplekas",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Gonzo.𐤊as",
+    description: "",
+    link: "https://x.com/Dr_Gonzo_K",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspion 𐤊",
+    description: "",
+    link: "https://x.com/Kaspionkas",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "CryptoK",
+    description: "",
+    link: "https://x.com/cryptok777",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Ashton",
+    description: "",
+    link: "https://x.com/argonmining",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "coinco",
+    description: "",
+    link: "https://x.com/coinco041",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Yonatan Sompolinsky",
+    description: "",
+    link: "https://x.com/hashdag",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Bloc𐤊Zero",
+    description: "",
+    link: "https://x.com/gotorosario",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "KaspaUK",
+    description: "",
+    link: "https://x.com/KaspaUK",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "",
+    description: "",
+    link: "https://x.com/",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "",
+    description: "",
+    link: "https://x.com/",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "",
+    description: "",
+    link: "https://x.com/",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "",
+    description: "",
+    link: "https://x.com/",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "",
+    description: "",
+    link: "https://x.com/",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+
+
 ];
 
 const featureTags = {
@@ -157,7 +788,7 @@ function renderItems(reset = false) {
 <h3>${item.name}</h3>
 <p class="filter-description">${item.description}</p>
 <div class="filter-features-container">${featuresHtml}</div>
-<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit</a>
+<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Follow</a>
 `;
         itemGrid.appendChild(card);
     });
