@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>News Sources - Kaspa Hub</title>
+<meta name="twitter:title" content="News Sources - Kaspa Hub" />
+<meta property="og:title" content="News Sources - Kaspa Hub" />
+
+<meta name="description" content="Who to follow? News sources. Stay updated with the latest Kaspa news, announcements, and insights from trusted sources covering developments, partnerships, and ecosystem updates." />
+<meta name="twitter:description" content="Looking for legit information sources to follow? Discover trusted Kaspa news accounts on X, Bluesky, Nostr, Telegram, Facebook, Threads, and Mastodon." />
+<meta property="og:description" content="Follow verified and trusted Kaspa news outlets for the latest updates, partnerships, and insights from the ecosystem." />
+
+<link rel="canonical" href="https://kaspahub.org/news-sources/" />
+<meta name="twitter:url" content="https://kaspahub.org/news-sources/" />
+<meta property="og:url" content="https://kaspahub.org/news-sources/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Kaspa News Sources",
+"url": "https://kaspahub.org/news-sources/",
+"description": "Trusted and verified Kaspa news sources to follow for real updates on developments, partnerships, and the ecosystem.",
+"itemListElement": [
+    {"@type": "ListItem","position": 1,"name": "Kaspa Official (X)","url": "https://x.com/KaspaCurrency"},
+    {"@type": "ListItem","position": 2,"name": "Kaspa News (Bluesky)","url": "https://bsky.app/profile/kaspanews.bsky.social"},
+    {"@type": "ListItem","position": 3,"name": "Kaspa Community Telegram","url": "https://t.me/kaspaenglish"}
+]
+}
+</script>
+</head>
+
+<body>
+<nav id="navBar">
+  <input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" />
+  <a id="title" href="/">Kaspa Hub</a>
+  <input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" />
+</nav>
+<script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+    <h1>Stay Updated</h1>
+    <p>To stay informed about the Kaspa ecosystem, follow news sources across social platforms and communication channels. Discover and filter sources by platform to find the ones that deliver reliable, timely updates for you.</p>
+</div>
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+    <h2 id="counter"></h2>
+    <h3>Filter</h3>
+    <div class="filter-category">
+        <div class="filter-group"><input type="radio" name="feature" id="checked" data-feature="checked"><label for="checked">Verified</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="x" data-feature="x"><label for="x">X</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="bluesky" data-feature="bluesky"><label for="bluesky">Bluesky</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="nostr" data-feature="nostr"><label for="nostr">Nostr</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="telegram" data-feature="telegram"><label for="telegram">Telegram</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="facebook" data-feature="facebook"><label for="facebook">Facebook</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="threads" data-feature="threads"><label for="threads">Threads</label></div>
+        <div class="filter-group"><input type="radio" name="feature" id="mastodon" data-feature="mastodon"><label for="mastodon">Mastodon</label></div>
+    </div>
+</aside>
+
+<section class="filter-list-main">
+    <div class="theme-1 search-sort-controls">
+        <input type="text" id="searchInput" placeholder="Search..."/>
+        <select id="sortSelect" aria-label="Sort Menu">
+            <option value="default">Default</option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+        </select>
+    </div>
+    <div class="filter-grid" id="itemGrid"></div>
+    <button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+    name: "Kaspa Commons X",
+    description: "Kaspa Commons is a new channel focused on real-world impacts of Kaspa - not just the technical advancements and upgrades, but how those innovations touch everyday life.  ",
+    link: "https://x.com/Kaspa_Commons",
+    logo: "/assets/logos/x.webp",
+    features: { x: true }
+},
+{
+    name: "Kaspa X",
+    description: "Bluesky account sharing timely news and ecosystem developments.",
+    link: "https://x.com/kaspaunchained",
+    logo: "/assets/logos/bluesky.webp",
+    features: { bluesky: true }
+},
+{
+    name: "Kaspa Currency Facebook",
+    description: "Telegram group with official news and community discussions.",
+    link: "https://www.facebook.com/KaspaCurrency",
+    logo: "/assets/logos/facebook.webp",
+    features: { facebook: true }
+}
+];
+
+const featureTags = {
+    reviewed: { label: 'Verified', class: 'checked' },
+    verified: { label: 'Verified', class: 'verified' },
+};
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 30;
+let currentIndex = 0;
+let lastCheckedRadio = null;
+let filteredItems = [...items];
+
+function renderItems(reset = false) {
+    if (reset) { itemGrid.innerHTML = ''; currentIndex = 0; }
+
+    const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+    slice.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('filter-card', 'theme-1');
+
+        const featuresHtml = Object.entries(item.features)
+            .filter(([k,v]) => v && featureTags[k])
+            .map(([k]) => `<span class="feature-tag ${featureTags[k].class}">${featureTags[k].label}</span>`)
+            .join('');
+
+        card.innerHTML = `
+<div class="filter-logo">
+    <img src="${item.logo}" alt="${item.name} Logo" loading="lazy">
+</div>
+<h3>${item.name}</h3>
+<p class="filter-description">${item.description}</p>
+<div class="filter-features-container">${featuresHtml}</div>
+<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit</a>
+`;
+        itemGrid.appendChild(card);
+    });
+
+    currentIndex += slice.length;
+    counter.textContent = `(${filteredItems.length} of ${items.length})`;
+    loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+    const selectedFeature = Array.from(filterRadios).find(r => r.checked)?.dataset.feature;
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    const defaultOrder = [...items];
+
+    filteredItems = defaultOrder.filter(item => {
+        if (selectedFeature && !item.features[selectedFeature]) return false;
+        return !searchTerm || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+    });
+
+    const sortMode = sortSelect.value;
+    if (sortMode === 'az') filteredItems.sort((a,b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+    else if (sortMode === 'za') filteredItems.sort((a,b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+
+    if (!filteredItems.length) {
+        itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+        counter.textContent = `(0 of ${items.length})`;
+        loadMoreBtn.style.display = 'none';
+        return;
+    }
+
+    renderItems(true);
+}
+
+filterRadios.forEach(radio => {
+    radio.addEventListener('click', function () {
+        if (lastCheckedRadio === this) { this.checked = false; lastCheckedRadio = null; }
+        else { lastCheckedRadio = this; }
+        filterItems();
+    });
+});
+
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+loadMoreBtn.addEventListener('click', () => renderItems());
+
+renderItems(true);
+</script>
+</body>
+</html>
