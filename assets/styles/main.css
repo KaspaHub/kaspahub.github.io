@@ -930,8 +930,8 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 		margin-bottom: 0;
 	}
 	
-	#lightbg {
-		background-attachment: scroll;
+	#light, #dark {
+    background-image: none;
 	}
 }
 
