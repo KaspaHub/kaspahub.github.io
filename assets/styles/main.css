@@ -247,9 +247,11 @@ hr {
 .sidebar h3 {
 	border-bottom: 2px solid #757575;
 	margin-bottom: 15px;
-	padding-bottom: 10px;
 	font-weight: 600;
 	opacity: 0.75;
+	padding-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .filter-category {
@@ -405,11 +407,6 @@ img {
 	border-radius: 15px;
 	height: auto;
 	aspect-ratio: 16 / 9;
-}
-
-#counter {
-	margin-bottom: 15px;
-	margin-top: 0;
 }
 
 footer {
@@ -901,10 +898,6 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	.articleVid {
 		min-width: 100%;
 		max-width: 100%;
-	}
-	
-	#counter {
-		display: none;
 	}
 	
 	.main-content-area {
