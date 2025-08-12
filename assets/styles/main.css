@@ -341,31 +341,26 @@ hr {
 	color: #004c41;
 }
 
+.checked::before {
+	content: url('/assets/icons/checked.svg');
+}
 .verified::before {
 	content: url('/assets/icons/verified.svg');
-	margin-right: 5px;
-	height: 1em;
-	width: 1em;
 }
 
-/*.verified::after {
-	content: "Kaspa Hub team has reviewed this project firsthand and trusts its integrity.";
-}*/
-
-.checked {
+.checked, .reviewed, .verified {
 	position: relative;
 	cursor: pointer;
 }
 
-.checked::before {
-	content: url('/assets/icons/checked.svg');
+.checked::before, .reviewed::before, .verified::before {
 	margin-right: 5px;
 	height: 1em;
 	width: 1em;
 }
 
-.checked::after {
-	content: "Reviewed by Kaspa Hub team.";
+.checked::after, .reviewed::after, .verified::after {
+	content: "Reviewed by Kaspa Hub Team.";
 	position: absolute;
 	bottom: 125%;
 	left: 50%;
@@ -381,7 +376,7 @@ hr {
 	transition: opacity 0.3s ease;
 }
 
-.checked:hover::after {
+.checked:hover::after, .reviewed:hover::after, .verified:hover::after {
 	opacity: 1;
 }
 
