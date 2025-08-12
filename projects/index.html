@@ -94,10 +94,8 @@
 		<div class="filter-group"><input type="radio" name="feature" id="ai" data-feature="ai"><label for="ai">AI</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="analytics" data-feature="analytics"><label for="analytics">Analytics</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="defi" data-feature="defi"><label for="defi">DeFi</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="gambling" data-feature="gambling"><label for="gambling">Gambling</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="gaming" data-feature="gaming"><label for="gaming">Gaming</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="jobs" data-feature="jobs"><label for="jobs">Jobs</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="launchpad" data-feature="launchpad"><label for="launchpad">Launchpad</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="marketplace" data-feature="marketplace"><label for="marketplace">Marketplace</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="mining" data-feature="mining"><label for="mining">Mining</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="privacy" data-feature="privacy"><label for="privacy">Privacy</label></div>
@@ -182,6 +180,7 @@ const items = [
 	logo: "/assets/logos/kns.webp",
 	features: {
 		checked: true,
+		defi: true,
 		marketplace: true
 	}
 },
@@ -239,7 +238,7 @@ const items = [
 	name: "K",
 	description: "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
 	link: "https://ksocialnetwork.pages.dev/",
-	logo: "/assets/logos/k.webp",
+	logo: "/assets/logos/kaspa-black.webp",
 	features: {
 		social: true
 	}
@@ -345,6 +344,15 @@ const items = [
 	logo: "/assets/logos/kaspafaq.webp",
 	features: {
 		checked: true,
+		social: true
+	}
+},
+{
+	name: "KaspaTips",
+	description: "A platform for creating private, expiring tip pages with QR codes to share Kaspa addresses for requesting tips, donations, invoices, and more via SMS, email, or social media.",
+	link: "https://www.kaspatips.com",
+	logo: "/assets/logos/kaspa-white.webp",
+	features: {
 		social: true
 	}
 },
@@ -522,24 +530,24 @@ const items = [
 // 		defi: true
 // 	}
 // },
-{
-	name: "KasPortal",
-	description: "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
-	link: "https://kasportal.com",
-	logo: "/assets/logos/kasportal.webp",
-	features: {
-		cex: true
-	}
-},
-{
-	name: "Kastra",
-	description: "A travel platform offering stays, flights, car rentals, and experiences worldwide. Book smart, earn rewards, and enjoy secure, low-fee payments on Kaspa network.",
-	link: "https://www.kastra.org",
-	logo: "/assets/logos/kastra.webp",
-	features: {
+// {
+// 	name: "KasPortal",
+// 	description: "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
+// 	link: "https://kasportal.com",
+// 	logo: "/assets/logos/kasportal.webp",
+// 	features: {
+// 		cex: true
+// 	}
+// },
+// {
+// 	name: "Kastra",
+// 	description: "A travel platform offering stays, flights, car rentals, and experiences worldwide. Book smart, earn rewards, and enjoy secure, low-fee payments on Kaspa network.",
+// 	link: "https://www.kastra.org",
+// 	logo: "/assets/logos/kastra.webp",
+// 	features: {
 
-	}
-},
+// 	}
+// },
 {
 	name: "Mining Blocks",
 	description: "A mining operation for Kaspa using Bitmain KS5 Pro machines, with a phased reinvestment plan and monthly rewards for token holders.",
