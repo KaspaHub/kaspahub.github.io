@@ -256,6 +256,7 @@ hr {
 
 .filter-category {
 	margin-bottom: 25px;
+	font-size: 0.9rem;
 }
 
 .filter-group {
@@ -904,7 +905,6 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	}
 	
 	.filter-category {
-		font-size: 0.9em;
 		margin-bottom: 15px;
 	}
 	
