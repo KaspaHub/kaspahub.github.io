@@ -252,6 +252,7 @@ hr {
 	padding-bottom: 10px;
 	display: flex;
 	justify-content: space-between;
+	font-size: 1.1rem;
 }
 
 .filter-category {
