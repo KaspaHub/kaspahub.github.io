@@ -904,10 +904,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	}
 	
 	.filter-category {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 7px;
+		font-size: 0.9em;
 		margin-bottom: 15px;
 	}
 	
