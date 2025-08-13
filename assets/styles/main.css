@@ -344,7 +344,10 @@ hr {
 }
 
 .checked::before {
-	content: url('/assets/icons/checked.svg');
+	content: url('/assets/icons/reviewed.svg');
+}
+.reviewed::before {
+	content: url('/assets/icons/reviewed.svg');
 }
 .verified::before {
 	content: url('/assets/icons/verified.svg');
