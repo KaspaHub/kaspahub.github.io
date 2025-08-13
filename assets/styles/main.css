@@ -560,7 +560,7 @@ code {
   cursor: pointer;
   border: none;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center 3px;
   background-size: 1.5rem 1.5rem;
   transition: background-image 0.3s ease;
   outline: none;
