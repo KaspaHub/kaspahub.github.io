@@ -560,7 +560,7 @@ code {
   cursor: pointer;
   border: none;
   background-repeat: no-repeat;
-  background-position: center 3px;
+  background-position: center;
   background-size: 1.5rem 1.5rem;
   transition: background-image 0.3s ease;
   outline: none;
@@ -663,7 +663,7 @@ input[type=checkbox]:checked + label:before {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: 75% auto;
-	background-position: center;
+	background-position: center 3px;
 	transform: scale(1.05);
 }
 
