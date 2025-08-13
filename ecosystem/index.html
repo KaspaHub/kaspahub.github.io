@@ -11,17 +11,17 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 
-<title>Projects - Kaspa Hub</title>
-<meta name="twitter:title" content="Projects - Kaspa Hub" />
-<meta property="og:title" content="Projects - Kaspa Hub" />
+<title>Ecosystem - Kaspa Hub</title>
+<meta name="twitter:title" content="Ecosystem - Kaspa Hub" />
+<meta property="og:title" content="Kaspa Projects - Kaspa Hub" />
 
 <meta name="description" content="Discover innovative community projects and initiatives within the Kaspa ecosystem, crafted to support creators, developers, and blockchain enthusiasts." />
 <meta name="twitter:description" content="Explore unique projects and community-driven efforts in Kaspa, fueling growth and creativity across developers and enthusiasts alike." />
 <meta property="og:description" content="Join the Kaspa ecosystem’s vibrant community through diverse projects designed to empower developers, creators, and network supporters." />
 
-<link rel="canonical" href="https://kaspahub.org/projects/" />
-<meta name="twitter:url" content="https://kaspahub.org/projects/" />
-<meta property="og:url" content="https://kaspahub.org/projects/" />
+<link rel="canonical" href="https://kaspahub.org/ecosystem/" />
+<meta name="twitter:url" content="https://kaspahub.org/ecosystem/" />
+<meta property="og:url" content="https://kaspahub.org/ecosystem/" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
@@ -41,24 +41,20 @@
 
 <main id="container-2">
 <div class="intro">
-	<h1>Explore Kaspa Ecosystem</h1>
+	<h1>Join the Ecosystem</h1>
 	<p>Explore a diverse range of community projects and initiatives in the Kaspa ecosystem, designed to empower creators, developers, and enthusiasts on the network.</p>
 </div>
 <div class="main-content-area">
-	
+
 <aside class="sidebar theme-1">
-	<h2 id="counter"></h2>
-	<h3>Category</h3>
+	<h3>Category<span id="counter"></span></h3>
 	<div class="filter-category">
 		<div class="filter-group"><input type="radio" name="feature" id="ai" data-feature="ai"><label for="ai">AI</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="analytics" data-feature="analytics"><label for="analytics">Analytics</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="cex" data-feature="cex"><label for="cex">CEX</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="dex" data-feature="dex"><label for="dex">DEX</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="gambling" data-feature="gambling"><label for="gambling">Gambling</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="defi" data-feature="defi"><label for="defi">DeFi</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="blockExplorer" data-feature="blockExplorer"><label for="blockExplorer">Explorers</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="gaming" data-feature="gaming"><label for="gaming">Gaming</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="jobs" data-feature="jobs"><label for="jobs">Jobs</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="launchpad" data-feature="launchpad"><label for="launchpad">Launchpad</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="marketplace" data-feature="marketplace"><label for="marketplace">Marketplace</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="marketplace" data-feature="marketplace"><label for="marketplace">Shops</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="mining" data-feature="mining"><label for="mining">Mining</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="privacy" data-feature="privacy"><label for="privacy">Privacy</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="rwa" data-feature="rwa"><label for="rwa">RWA</label></div>
@@ -90,13 +86,51 @@
 
 const items = [
 {
+	name: "Kaspa.org",
+	description: "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
+	link: "https://kaspa.org/",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		reviewed: true
+	}
+},
+{
+	name: "Kaspa.com",
+	description: "Leading Kaspa marketplace and DeFi platform for minting, trading KRC-20 tokens & KRC-721 NFTs on Kaspa’s blockDAG with portfolio tools to explore the ecosystem.",
+	link: "https://www.kaspa.com",
+	logo: "/assets/logos/kaspacom.webp",
+	features: {
+		reviewed: true,
+		defi: true,
+		marketplace: true
+	}
+},
+{
 	name: "Kasplex",
 	description: "First EVM-compatible programmable Layer 2 on Kaspa L1, enabling KRC20 tokens, KRC721 NFTs, and smart contracts with open-source indexer and APIs for scalable dApps.",
 	link: "https://kasplex.org",
 	logo: "/assets/logos/kasplex.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		defi: true
+	}
+},
+{
+	name: "Kaspa Ecosystem Foundation",
+	description: "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
+	link: "https://www.kaspafoundation.org",
+	logo: "/assets/logos/kef.webp",
+	features: {
+		reviewed: true
+	}
+},
+{
+	name: "Kaspa Industrial Initiative",
+	description: "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
+	link: "https://kaspa-kii.org",
+	logo: "/assets/logos/kii.webp",
+	features: {
+		reviewed: true
 	}
 },
 {
@@ -114,7 +148,6 @@ const items = [
 	link: "https://www.zealousswap.com",
 	logo: "/assets/logos/zealous.webp",
 	features: {
-		dex: true,
 		defi: true
 	}
 },
@@ -124,7 +157,6 @@ const items = [
 	link: "https://kaspafinance.io",
 	logo: "/assets/logos/kaspafinance.webp",
 	features: {
-		dex: true,
 		defi: true
 	}
 },
@@ -134,7 +166,6 @@ const items = [
 	link: "https://seaswap.xyz/",
 	logo: "/assets/logos/seaswap.webp",
 	features: {
-		dex: true,
 		defi: true
 	}
 },
@@ -144,7 +175,7 @@ const items = [
 	link: "https://app.knsdomains.org",
 	logo: "/assets/logos/kns.webp",
 	features: {
-		checked: true,
+		defi: true,
 		marketplace: true
 	}
 },
@@ -158,23 +189,85 @@ const items = [
 	}
 },
 {
-	name: "Kaspa.com",
-	description: "A platform for minting and trading KRC-20 tokens and KRC-721 NFTs on Kaspa’s blockDAG, with portfolio tools to explore the token ecosystem.",
-	link: "https://www.kaspa.com",
-	logo: "/assets/logos/kaspacom.webp",
-	features: {
-		checked: true,
-		defi: true,
-		marketplace: true
-	}
-},
-{
 	name: "Kasway",
 	description: "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	link: "https://kasway.xyz",
 	logo: "/assets/logos/kasway.webp",
 	features: {
-		checked: true,
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "KASmedia",
+	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
+	link: "https://www.kasmedia.com",
+	logo: "/assets/logos/kasmedia.webp",
+	features: {
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "Kasia",
+	description: "A peer-to-peer encrypted messaging app on Kaspa, offering secure text, file transfers, and backups, fully open-source for community trust.",
+	link: "https://kasia.fyi",
+	logo: "/assets/logos/kasia.webp",
+	features: {
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "K",
+	description: "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
+	link: "https://ksocialnetwork.pages.dev/",
+	logo: "/assets/logos/kaspa-black.webp",
+	features: {
+		social: true
+	}
+},
+{
+	name: "Verum",
+	description: "A decentralized social network on the Kaspa, enabling direct creator support through KAS transactions for actions like following, commenting, and liking, with a fully open-source protocol and frontend.",
+	link: "https://verumonkas.com",
+	logo: "/assets/logos/verum.webp",
+	features: {
+		social: true
+	}
+},
+{
+	name: "KasBay",
+	description: "A comprehensive resource hub for the Kaspa ecosystem, featuring projects and dApps across the network to showcase innovation, utility, and growth within the community.",
+	link: "https://kasbay.org",
+	logo: "/assets/logos/kasbay.webp",
+	features: {
+	}
+},
+{
+	name: "kas.coffee",
+	description: "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	link: "https://kas.coffee/",
+	logo: "/assets/logos/kascoffee.webp",
+	features: {
+		social: true
+	}
+},
+{
+	name: "KaspaTips",
+	description: "A platform for creating private, expiring tip pages with QR codes to share Kaspa addresses for requesting tips, donations, invoices, and more via SMS, email, or social media.",
+	link: "https://www.kaspatips.com",
+	logo: "/assets/logos/kaspa-white.webp",
+	features: {
+		social: true
+	}
+},
+{
+	name: "KasClean",
+	description: "A token approval management tool for the Kaspa ecosystem, enabling users to scan, inspect, and revoke approvals for dApps to secure tokens and NFTs from exploits, hacks, and phishing scams.",
+	link: "https://kasclean.app/",
+	logo: "/assets/logos/kasclean.webp",
+	features: {
 		defi: true
 	}
 },
@@ -199,59 +292,51 @@ const items = [
 	}
 },
 {
-	name: "KASmedia",
-	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
-	link: "https://www.kasmedia.com",
-	logo: "/assets/logos/kasmedia.webp",
-	features: {
-		checked: true,
-		social: true
-	}
-},
-{
-	name: "Kasia",
-	description: "A peer-to-peer encrypted messaging app on Kaspa, offering secure text, file transfers, and backups, fully open-source for community trust.",
-	link: "https://kasia.fyi",
-	logo: "/assets/logos/kasia.webp",
-	features: {
-		checked: true,
-		social: true
-	}
-},
-{
-	name: "K",
-	description: "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
-	link: "https://ksocialnetwork.pages.dev/",
-	logo: "/assets/logos/k.webp",
-	features: {
-		social: true
-	}
-},
-{
-	name: "Verum",
-	description: "A decentralized social network on the Kaspa, enabling direct creator support through KAS transactions for actions like following, commenting, and liking, with a fully open-source protocol and frontend.",
-	link: "https://verumonkas.com",
-	logo: "/assets/logos/verum.webp",
-	features: {
-		social: true
-	}
-},
-{
-	name: "kas.coffee",
-	description: "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
-	link: "https://kas.coffee/",
-	logo: "/assets/logos/kascoffee.webp",
-	features: {
-		social: true
-	}
-},
-{
 	name: "Kaspa Life",
 	description: "A platform empowering users to create impactful Kaspa social media content, offering high-quality logos, color palettes, real-time data, key information, and a community leaderboard to boost engagement.",
 	link: "https://www.kaspalife.org",
 	logo: "/assets/logos/kaspalife.webp",
 	features: {
-		checked: true,
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "Kaspa Daily",
+	description: "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
+	link: "https://kaspadaily.com/",
+	logo: "/assets/logos/kaspadaily.webp",
+	features: {
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "Kasbun",
+	description: "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
+	link: "https://kasbun.vercel.app/",
+	logo: "/assets/logos/kasbun.webp",
+	features: {
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "Kaspa FAQ",
+	description: "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
+	link: "https://www.kaspafaq.com/",
+	logo: "/assets/logos/kaspafaq.webp",
+	features: {
+		reviewed: true,
+		social: true
+	}
+},
+{
+	name: "Burno",
+	description: "Community-driven platform for Kaspa’s ecosystem, covering KRC-20 tokens, projects, wallets, news, and insights with curated posts for traders and enthusiasts.",
+	link: "https://burno.xyz/",
+	logo: "/assets/logos/burno.webp",
+	features: {
 		social: true
 	}
 },
@@ -265,22 +350,21 @@ const items = [
 	}
 },
 {
-	name: "Rock The Kaspa",
-	description: "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
-	link: "https://www.rockthekaspa.com/",
-	logo: "/assets/logos/rockthekaspa.webp",
-	features: {
-		marketplace: true
-	}
-},
-{
 	name: "TheCryptoSky",
 	description: "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
 	link: "https://thecryptosky.com",
 	logo: "/assets/logos/thecryptosky.webp",
 	features: {
-		checked: true,
 		jobs: true,
+		marketplace: true
+	}
+},
+{
+	name: "Rock The Kaspa",
+	description: "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
+	link: "https://www.rockthekaspa.com/",
+	logo: "/assets/logos/rockthekaspa.webp",
+	features: {
 		marketplace: true
 	}
 },
@@ -321,10 +405,10 @@ const items = [
 	}
 },
 {
-	name: "KASPAVIS",
-	description: "Premium clothing brand, crypto-inspired, high-quality fabrics, clear designs, sustainable, for Kaspa fans.",
-	link: "https://kaspavis.com/",
-	logo: "/assets/logos/kaspavis.webp",
+	name: "KaspaShirts",
+	description: "High-quality, durable Kaspa-themed T-shirts, polos, and hoodies for men and women, available in sizes S-5XL, featuring a wide range of designs from trendy to minimalistic.",
+	link: "https://kaspashirts.com/",
+	logo: "/assets/logos/kaspashirts.webp",
 	features: {
 		marketplace: true
 	}
@@ -338,6 +422,15 @@ const items = [
 		marketplace: true
 	}
 },
+// {
+// 	name: "KASPAVIS",
+// 	description: "Premium clothing brand, crypto-inspired, high-quality fabrics, clear designs, sustainable, for Kaspa fans.",
+// 	link: "https://kaspavis.com/",
+// 	logo: "/assets/logos/kaspavis.webp",
+// 	features: {
+// 		marketplace: true
+// 	}
+// },
 // {
 // 	name: "Bucks",
 // 	description: "An online store offering Kaspa-themed merchandise and Bucks-branded clothing, payable with Kaspa.",
@@ -389,7 +482,7 @@ const items = [
 	link: "https://kaspa-ai.com",
 	logo: "/assets/logos/kaspaai.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		ai: true
 	}
 },
@@ -417,7 +510,6 @@ const items = [
 //     link: "https://www.klearswap.com",
 //     logo: "/assets/logos/klearswap.webp",
 //     features: {
-//         dex: true,
 //         defi: true
 //     }
 // },
@@ -427,28 +519,27 @@ const items = [
 // 	link: "https://dex.cc/",
 // 	logo: "/assets/logos/dexcc.webp",
 // 	features: {
-// 		dex: true,
 // 		defi: true
 // 	}
 // },
-{
-	name: "KasPortal",
-	description: "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
-	link: "https://kasportal.com",
-	logo: "/assets/logos/kasportal.webp",
-	features: {
-		cex: true
-	}
-},
-{
-	name: "Kastra",
-	description: "A travel platform offering stays, flights, car rentals, and experiences worldwide. Book smart, earn rewards, and enjoy secure, low-fee payments on Kaspa network.",
-	link: "https://www.kastra.org",
-	logo: "/assets/logos/kastra.webp",
-	features: {
+// {
+// 	name: "KasPortal",
+// 	description: "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
+// 	link: "https://kasportal.com",
+// 	logo: "/assets/logos/kasportal.webp",
+// 	features: {
+// 		cex: true
+// 	}
+// },
+// {
+// 	name: "Kastra",
+// 	description: "A travel platform offering stays, flights, car rentals, and experiences worldwide. Book smart, earn rewards, and enjoy secure, low-fee payments on Kaspa network.",
+// 	link: "https://www.kastra.org",
+// 	logo: "/assets/logos/kastra.webp",
+// 	features: {
 
-	}
-},
+// 	}
+// },
 {
 	name: "Mining Blocks",
 	description: "A mining operation for Kaspa using Bitmain KS5 Pro machines, with a phased reinvestment plan and monthly rewards for token holders.",
@@ -485,54 +576,49 @@ const items = [
 		mining: true
 	}
 },
+
+
 {
-	name: "Kaspa Explorer",
-	description: "The Kaspa Block Explorer allows querying addresses, blocks, and transactions, including KRC-20 token transactions, providing essential on-chain data for researchers analyzing Kaspa's blockDAG structure.",
-	link: "https://explorer.kaspa.org/",
-	logo: "/assets/logos/kaspaexplorer.webp",
+	name: "KaspHub",
+	description: "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
+	link: "https://kasphub.com",
+	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
+		reviewed: true,
+		articles: true,
 		analytics: true
 	}
 },
 {
+	name: "Kaspa Explorer",
+	description: "The Kaspa Block Explorer allows querying addresses, blocks, and transactions, including KRC-20 token transactions, providing essential on-chain data for researchers analyzing Kaspa's blockDAG structure.",
+	link: "https://explorer.kaspa.org",
+	logo: "/assets/logos/kaspaexplorer.webp",
+	features: {
+		reviewed: true,
+		blockExplorer: true
+	}
+},
+{
 	name: "Kas.fyi",
-	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data—perfect for exploring blocks, addresses, and on-chain activity.",
-	link: "https://kas.fyi/",
+	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data - perfect for exploring blocks, addresses, and on-chain activity.",
+	link: "https://kas.fyi",
 	logo: "/assets/logos/kasfyi.webp",
 	features: {
-		checked: true,
-		analytics: true
+		reviewed: true,
+		analytics: true,
+		blockExplorer: true
 	}
 },
 {
 	name: "Kaspalytics",
 	description: "Kaspalytics provides on-chain analysis with a DAG Tip Visualizer, market data (price, market cap, volume), and network statistics (DAA Score, hashrate, supply). It includes tools like Circulating Supply Aging and Addresses by KAS Balance.",
-	link: "https://www.kaspalytics.com/",
+	link: "https://www.kaspalytics.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
-		analytics: true
-	}
-},
-{
-	name: "Kasunder",
-	description: "Kaspa's first on-chain visual analytics tool, offering dazzling visual representations of on-chain data to help users understand and navigate the Kaspa blockchain.",
-	link: "https://kasunder.com/",
-	logo: "/assets/logos/kasunder.webp",
-	features: {
-		checked: true,
-		analytics: true
-	}
-},
-{
-	name: "Kasplore",
-	description: "A comprehensive Kaspa explorer providing real-time data on blocks, transactions, and addresses, with support for KRC20 tokens.",
-	link: "https://www.kasplore.com/",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		checked: true,
-		analytics: true
+		reviewed: true,
+		analytics: true,
+		visualizer: true
 	}
 },
 {
@@ -541,43 +627,106 @@ const items = [
 	link: "https://www.dagscan.xyz/",
 	logo: "/assets/logos/dagscan.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		analytics: true,
-		blockExplorer: true,
+		blockExplorer: true
 	}
 },
 {
 	name: "KatScan",
 	description: "KatScan is a KRC-20 token explorer for the Kaspa ecosystem, offering real-time tracking, market analysis, and a mint heatmap for visualizing token activity.",
-	link: "https://katscan.xyz/",
+	link: "https://katscan.xyz",
 	logo: "/assets/logos/katscan.webp",
 	features: {
-		checked: true,
+		reviewed: true,
+		analytics: true,
+		blockExplorer: true
+	}
+},
+{
+	name: "Kaspa Globe",
+	description: "An interactive globe displaying Kaspa network peers in real-time, providing insights into the distribution and connectivity of the Kaspa network.",
+	link: "https://kaspaglo.be",
+	logo: "/assets/logos/kaspaglobe.webp",
+	features: {
+		reviewed: true,
+		analytics: true,
+		visualizer: true
+	}
+},
+{
+	name: "Kaspa Network Hashrate",
+	description: "An interactive visualization tool displaying accurate Kaspa network hashrate data, providing real-time insights and historical measurements since genesis.",
+	link: "https://hashrate.kaspa.ws/",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		reviewed: true,
+		analytics: true,
+		visualizer: true
+	}
+},
+{
+	name: "Kasunder",
+	description: "Kaspa's first on-chain visual analytics tool, offering dazzling visual representations of on-chain data to help users understand and navigate the Kaspa blockchain.",
+	link: "https://kasunder.com",
+	logo: "/assets/logos/kasunder.webp",
+	features: {
+		reviewed: true,
+		analytics: true,
+		visualizer: true
+	}
+},
+{
+	name: "KasNodes",
+	description: "KasNodes tracks Kaspa network nodes, providing performance metrics and geographic distribution data to monitor network health and decentralization for researchers and node operators.",
+	link: "https://kasnodes.com",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		reviewed: true,
 		analytics: true
 	}
 },
 {
-	name: "KaspHub",
-	description: "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
-	link: "https://kasphub.com",
+	name: "Kaspa Insights",
+	description: "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
+	link: "https://www.kaspainsights.com",
+	logo: "/assets/logos/kaspainsights.webp",
+	features: {
+		reviewed: true,
+		analytics: true
+	}
+},
+{
+	name: "Kasplore",
+	description: "A comprehensive Kaspa explorer providing real-time data on blocks, transactions, and addresses, with support for KRC20 tokens.",
+	link: "https://www.kasplore.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
+		reviewed: true,
+		blockExplorer: true,
+		visualizer: true
+	}
+},
+{
+	name: "Look into Kaspa",
+	description: "A platform for Kaspa network interaction, offering a DM Slider to send messages with KAS, a mempool visualizer, and energy trading simulations with real-time network stats like transactions and blocks per second.",
+	link: "https://www.lookintokaspa.com",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
 		analytics: true
 	}
 },
 {
 	name: "KaspaWave",
 	description: "KaspaWave is a community platform for Kaspa cryptocurrency, offering tools to track wallets, monitor KRC20 tokens, and stay updated with the latest news and discussions in the Kaspa ecosystem.",
-	link: "https://kaspawave.com/",
+	link: "https://kaspawave.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
 		analytics: true
 	}
 },
 {
-	name: "KRC-20.com",
+	name: "KRC-20.org",
 	description: "KaspaDash is an app for exploring KRC-20 tokens on Kaspa, featuring a token directory and a dashboard for portfolio management and transaction tracking using the Kasware wallet.",
 	link: "https://krc-20.org",
 	logo: "/assets/logos/kaspa.webp",
@@ -585,13 +734,14 @@ const items = [
 		analytics: true
 	}
 },
+
 {
 	name: "Kasware",
 	description: "The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains.",
 	link: "https://www.kasware.xyz",
 	logo: "/assets/logos/kaswarewallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -601,6 +751,7 @@ const items = [
 	link: "https://kaspa-ng.org",
 	logo: "/assets/logos/kaspang.webp",
 	features: {
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -610,7 +761,7 @@ const items = [
 	link: "https://kaspium.io",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -620,6 +771,7 @@ const items = [
 	link: "https://kaskeeper.vercel.app",
 	logo: "/assets/logos/kaskeeperwallet.webp",
 	features: {
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -629,25 +781,17 @@ const items = [
 	link: "https://kastle.cc",
 	logo: "/assets/logos/kastlewallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		wallet: true
 	}
 },
 {
 	name: "Kurncy",
-	description: "Lightweight custodial Kaspa wallet with self-custody option on iOS & Android, supporting KRC20, KRC721 tokens and KNS domains.",
+	description: "Lightweight and user-friendly Kaspa wallet for iOS & Android with optional custody, supporting KRC20, KRC721, KNS, and seamless integration with the ecosystem.",
 	link: "https://www.kurncy.com",
 	logo: "/assets/logos/kurncywallet.webp",
 	features: {
-		wallet: true
-	}
-},
-{
-	name: "Ghost Wallet",
-	description: "Non-custodial, open-source Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, swapping, and transfers.",
-	link: "https://www.ghostwallet.org",
-	logo: "/assets/logos/ghostwallet.webp",
-	features: {
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -656,6 +800,15 @@ const items = [
 	description: "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
 	link: "https://wallet.kaspanet.io",
 	logo: "/assets/logos/kaspa.webp",
+	features: {
+		wallet: true
+	}
+},
+{
+	name: "Ghost Wallet",
+	description: "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
+	link: "https://www.ghostwallet.org",
+	logo: "/assets/logos/ghostwallet.webp",
 	features: {
 		wallet: true
 	}
@@ -675,7 +828,7 @@ const items = [
 	link: "https://github.com/Atomik-Global/atomik-wallet",
 	logo: "/assets/logos/atomikwallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		wallet: true
 	}
 },
@@ -685,7 +838,7 @@ const items = [
 	link: "https://github.com/KASPACOM/kaspacom-web-wallet",
 	logo: "/assets/logos/kaspacom.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		wallet: true
 	}
 }
@@ -705,7 +858,7 @@ let lastCheckedRadio = null;
 let filteredItems = [...items];
 
 const featureTags = {
-  checked: { label: 'Verified', class: 'checked' },
+  reviewed: { label: 'Verified', class: 'checked' },
   verified: { label: 'Verified', class: 'verified' }
 };
 

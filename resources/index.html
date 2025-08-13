@@ -47,29 +47,13 @@
 <div class="main-content-area">
 
 <aside class="sidebar theme-1">
-	<h2 id="counter"></h2>
-	<h3>Features</h3>
+	<h3>Features<span id="counter"></span></h3>
 	<div class="filter-category">
-		<div class="filter-group">
-			<input type="radio" name="feature" id="articles" data-feature="articles">
-			<label for="articles">Articles</label>
-		</div>
-		<div class="filter-group">
-			<input type="radio" name="feature" id="analytics" data-feature="analytics">
-			<label for="analytics">Analytics</label>
-		</div>
-		<div class="filter-group">
-			<input type="radio" name="feature" id="blockExplorer" data-feature="blockExplorer">
-			<label for="blockExplorer">Block Explorers</label>
-		</div>
-		<div class="filter-group">
-			<input type="radio" name="feature" id="videos" data-feature="videos">
-			<label for="videos">Videos</label>
-		</div>
-		<div class="filter-group">
-			<input type="radio" name="feature" id="visualizer" data-feature="visualizer">
-			<label for="visualizer">Visualizers</label>
-		</div>
+		<div class="filter-group"><input type="radio" name="feature" id="articles" data-feature="articles"><label for="articles">Articles</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="analytics" data-feature="analytics"><label for="analytics">Analytics</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="calculator" data-feature="calculator"><label for="calculator">Calculators</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="videos" data-feature="videos"><label for="videos">Videos</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="visualizer" data-feature="visualizer"><label for="visualizer">Visualizers</label></div>
 	</div>
 </aside>
 
@@ -117,49 +101,19 @@ const items = [
 	}
 },
 {
-	name: "Kaspa.org",
-	description: "The main Kaspa website provides comprehensive information on Kaspa’s GHOSTDAG protocol, blockDAG architecture, and ecosystem resources, including links to wallets, explorers, and development tools for network analysis.",
-	link: "https://kaspa.org",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		articles: true,
-		videos: true,
-	}
+    name: "The Book of Kaspa",
+    description: "A book by N.R. Crowningshield exploring Kaspa’s BlockDAG architecture, GHOSTDAG protocol, and its role in advancing digital finance, offering insights into its technology and community.",
+    link: "https://www.amazon.com/Book-Kaspa-Realizing-Nakamoto-Dream-ebook/dp/B0CCVTFM2N",
+    logo: "/assets/logos/B0CCVTFM2N.webp",
+    features: {
+    }
 },
 {
-	name: "Kaspa.com",
-	description: "Community-driven platform for minting and trading KRC-20 tokens, KRC-721 NFTs, and KNS domains on Kaspa’s blockDAG, with educational blog posts, portfolio tools, and token ecosystem analytics.",
-	link: "https://kaspa.com",
-	logo: "/assets/logos/kaspacom.webp",
+	name: "From Ghost to Knight",
+	description: "A book by Mickey Maler exploring Kaspa’s block-DAG tech and Dr. Sompolinsky’s vision to solve blockchain scalability, security, and decentralization.",
+	link: "https://www.amazon.com/Kaspa-Ghost-Knight-blockchains-plight-ebook/dp/B0D2VK4PVR",
+	logo: "/assets/logos/B0D2VK4PVR.webp",
 	features: {
-		articles: true,
-	}
-},
-{
-	name: "KASmedia",
-	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
-	link: "https://www.kasmedia.com",
-	logo: "/assets/logos/kasmedia.webp",
-	features: {
-		articles: true,
-	}
-},
-{
-	name: "Kaspa Ecosystem Foundation",
-	description: "Supports the growth and development of the Kaspa ecosystem through grants, events, and community initiatives, publishing monthly reports and news to build a thriving ecosystem.",
-	link: "https://www.kaspafoundation.org",
-	logo: "/assets/logos/kef.webp",
-	features: {
-		videos: true,
-	}
-},
-{
-	name: "Kaspa Industrial Initiative",
-	description: "A foundation leveraging Kaspa’s high-performance DAG-based DLT to drive innovation and efficiency across industrial and enterprise sectors, fostering a robust ecosystem through events and educational campaigns.",
-	link: "https://kaspa-kii.org",
-	logo: "/assets/logos/kii.webp",
-	features: {
-		videos: true,
 	}
 },
 {
@@ -184,7 +138,7 @@ const items = [
 	link: "https://hashdag.medium.com",
 	logo: "/assets/logos/medium.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -193,7 +147,7 @@ const items = [
 	link: "https://medium.com/@shai.wyborski",
 	logo: "/assets/logos/medium.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -202,7 +156,7 @@ const items = [
 	link: "https://medium.com/@michaelsuttonil",
 	logo: "/assets/logos/medium.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -211,7 +165,7 @@ const items = [
 	link: "https://medium.com/@avivzohar",
 	logo: "/assets/logos/medium.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -220,7 +174,7 @@ const items = [
 	link: "https://someone235.medium.com/",
 	logo: "/assets/logos/medium.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -229,7 +183,26 @@ const items = [
 	link: "https://medium.com/@coderofstuff",
 	logo: "/assets/logos/medium.webp",
 	features: {
+		articles: true
+	}
+},
+{
+	name: "The Crypto Chronicles of Yonatan Sompolinsky",
+	description: "A Medium post detailing Yonatan Sompolinsky's contributions to cryptocurrency, emphasizing his citations and involvement in Ethereum, Polkadot, Avalanche, and others, based on extensive online research.",
+	link: "https://nrcrowningshield.medium.com/the-crypto-chronicles-of-yonatan-sompolinsky-a-retelling-by-captain-sats-452c73077388",
+	logo: "/assets/logos/medium.webp",
+	features: {
+		articles: true
+	}
+},
+{
+	name: "KaspaSilver",
+	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
+	link: "https://linktr.ee/KaspaSilver",
+	logo: "/assets/logos/kaspasilver.webp",
+	features: {
 		articles: true,
+		videos: true
 	}
 },
 {
@@ -241,22 +214,52 @@ const items = [
 	}
 },
 {
-	name: "KaspaSilver",
-	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
-	link: "https://linktr.ee/KaspaSilver",
-	logo: "/assets/logos/kaspasilver.webp",
+	name: "Kaspa.org",
+	description: "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
+	link: "https://kaspa.org",
+	logo: "/assets/logos/kaspa.webp",
 	features: {
 		articles: true,
-		videos: true,
+		videos: true
 	}
 },
 {
-    name: "The Book of Kaspa",
-    description: "A book by N.R. Crowningshield exploring Kaspa’s BlockDAG architecture, GHOSTDAG protocol, and its role in advancing digital finance, offering insights into its technology and community.",
-    link: "https://www.amazon.com/Book-Kaspa-Realizing-Nakamoto-Dream-ebook/dp/B0CCVTFM2N",
-    logo: "/assets/logos/kaspa.webp",
-    features: {
-    }
+	name: "Kaspa.com",
+	description: "Leading Kaspa marketplace and DeFi platform for minting & trading KRC-20 tokens and KRC-721 NFTs on Kaspa’s blockDAG, with portfolio tools and educational blog posts.",
+	link: "https://kaspa.com",
+	logo: "/assets/logos/kaspacom.webp",
+	features: {
+		articles: true
+	}
+},
+{
+	name: "KASmedia",
+	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
+	link: "https://www.kasmedia.com",
+	logo: "/assets/logos/kasmedia.webp",
+	features: {
+		articles: true
+	}
+},
+{
+	name: "Kaspa Ecosystem Foundation",
+	description: "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
+	link: "https://www.kaspafoundation.org",
+	logo: "/assets/logos/kef.webp",
+	features: {
+		articles: true,
+		videos: true
+	}
+},
+{
+	name: "Kaspa Industrial Initiative",
+	description: "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
+	link: "https://kaspa-kii.org",
+	logo: "/assets/logos/kii.webp",
+	features: {
+		articles: true,
+		videos: true
+	}
 },
 {
 	name: "KaspArchive",
@@ -272,7 +275,7 @@ const items = [
 	link: "https://kaspadaily.com/",
 	logo: "/assets/logos/kaspadaily.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -281,7 +284,7 @@ const items = [
 	link: "https://kaspa-ai.com/daily-pulse/",
 	logo: "/assets/logos/kaspaai.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -290,20 +293,12 @@ const items = [
 	link: "https://kasbun.vercel.app/",
 	logo: "/assets/logos/kasbun.webp",
 	features: {
-		articles: true,
-	}
-},
-{
-	name: "Mineable Money",
-	description: "Mineable.money provides Kaspa resources for developers and miners, offering links to mining tools, developer APIs, and network data for the decentralized Kaspa cryptocurrency.",
-	link: "https://mineable.money",
-	logo: "/assets/logos/mineablemoney.webp",
-	features: {
+		articles: true
 	}
 },
 {
 	name: "KasBay",
-	description: "A comprehensive resource hub for the Kaspa ecosystem, offering information on cutting-edge technology, latest news, innovative tools, and community resources, including educational content and access to explorers and KRC20 tools.",
+	description: "A comprehensive resource hub for the Kaspa ecosystem, featuring projects and dApps across the network to showcase innovation, utility, and growth within the community.",
 	link: "https://kasbay.org",
 	logo: "/assets/logos/kasbay.webp",
 	features: {
@@ -315,7 +310,7 @@ const items = [
 	link: "https://burno.xyz/",
 	logo: "/assets/logos/burno.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
@@ -324,16 +319,15 @@ const items = [
 	link: "https://www.kaspafaq.com/",
 	logo: "/assets/logos/kaspafaq.webp",
 	features: {
-		articles: true,
+		articles: true
 	}
 },
 {
-	name: "The Crypto Chronicles of Yonatan Sompolinsky",
-	description: "A Medium post detailing Yonatan Sompolinsky's contributions to cryptocurrency, emphasizing his citations and involvement in Ethereum, Polkadot, Avalanche, and others, based on extensive online research.",
-	link: "https://nrcrowningshield.medium.com/the-crypto-chronicles-of-yonatan-sompolinsky-a-retelling-by-captain-sats-452c73077388",
-	logo: "/assets/logos/medium.webp",
+	name: "Mineable Money",
+	description: "Mineable.money provides Kaspa resources for developers and miners, offering links to mining tools, developer APIs, and network data for the decentralized Kaspa cryptocurrency.",
+	link: "https://mineable.money",
+	logo: "/assets/logos/mineablemoney.webp",
 	features: {
-		articles: true,
 	}
 },
 {
@@ -342,7 +336,16 @@ const items = [
 	link: "https://kaspahub.org/posts/",
 	logo: "/assets/logos/kaspahub.webp",
 	features: {
-		articles: true,
+		articles: true
+	}
+},
+{
+	name: "Kaspa NG",
+	description: "KNG is a p2p node, wallet, and BlockDAG visualizer built on Rusty Kaspa. Its visualizer displays Kaspa’s blockDAG topology, aiding researchers in analyzing network structure and performance.",
+	link: "https://kaspa-ng.org",
+	logo: "/assets/logos/kaspang.webp",
+	features: {
+		visualizer: true
 	}
 },
 {
@@ -352,7 +355,7 @@ const items = [
 	logo: "/assets/logos/kaspa.webp",
 	features: {
 		articles: true,
-		analytics: true,
+		analytics: true
 	}
 },
 {
@@ -361,17 +364,17 @@ const items = [
 	link: "https://explorer.kaspa.org",
 	logo: "/assets/logos/kaspaexplorer.webp",
 	features: {
-		blockExplorer: true,
+		blockExplorer: true
 	}
 },
 {
 	name: "Kas.fyi",
-	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data—perfect for exploring blocks, addresses, and on-chain activity.",
+	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data - perfect for exploring blocks, addresses, and on-chain activity.",
 	link: "https://kas.fyi",
 	logo: "/assets/logos/kasfyi.webp",
 	features: {
 		analytics: true,
-		blockExplorer: true,
+		blockExplorer: true
 	}
 },
 {
@@ -385,21 +388,12 @@ const items = [
 	}
 },
 {
-	name: "Kaspa NG",
-	description: "KNG is a p2p node, wallet, and BlockDAG visualizer built on Rusty Kaspa. Its visualizer displays Kaspa’s blockDAG topology, aiding researchers in analyzing network structure and performance.",
-	link: "https://kaspa-ng.org",
-	logo: "/assets/logos/kaspang.webp",
-	features: {
-		visualizer: true
-	}
-},
-{
 	name: "KRC-20.org",
 	description: "KaspaDash is an app for exploring KRC-20 tokens on Kaspa, featuring a token directory and a dashboard for portfolio management and transaction tracking using the Kasware wallet.",
 	link: "https://krc-20.org",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		analytics: true,
+		analytics: true
 	}
 },
 {
@@ -409,7 +403,7 @@ const items = [
 	logo: "/assets/logos/dagscan.webp",
 	features: {
 		analytics: true,
-		blockExplorer: true,
+		blockExplorer: true
 	}
 },
 {
@@ -419,17 +413,7 @@ const items = [
 	logo: "/assets/logos/katscan.webp",
 	features: {
 		analytics: true,
-		blockExplorer: true,
-	}
-},
-{
-	name: "Kaspa Node Map",
-	description: "A map of public Kaspa nodes providing real-time data on node distribution and status, useful for monitoring network health and launching new nodes.",
-	link: "https://nodes.kaspa.ws",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		analytics: true,
-		visualizer: true
+		blockExplorer: true
 	}
 },
 {
@@ -463,21 +447,12 @@ const items = [
 	}
 },
 {
-	name: "Kaspa Graph Inspector",
-	description: "The KGI BlockDAG Visualizer is designed to display Kaspa’s blockDAG topology, helping researchers understand the structure and relationships of parallel blocks in the network.",
-	link: "https://kgi.kaspad.net",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		visualizer: true
-	}
-},
-{
 	name: "KasNodes",
 	description: "KasNodes tracks Kaspa network nodes, providing performance metrics and geographic distribution data to monitor network health and decentralization for researchers and node operators.",
 	link: "https://kasnodes.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		analytics: true,
+		analytics: true
 	}
 },
 {
@@ -486,26 +461,7 @@ const items = [
 	link: "https://www.kaspainsights.com",
 	logo: "/assets/logos/kaspainsights.webp",
 	features: {
-		analytics: true,
-	}
-},
-{
-	name: "Kaspa Rainbow Chart",
-	description: "A visualization tool that plots Kaspa's price trend using the power law on a rainbow chart, helping users understand potential price movements based on historical data.",
-	link: "https://www.kasparainbowchart.com",
-	logo: "/assets/logos/kasparainbowchart.webp",
-	features: {
-		analytics: true,
-		visualizer: true
-	}
-},
-{
-	name: "KasMap",
-	description: "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
-	link: "https://kasmap.xyz/",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		visualizer: true
+		analytics: true
 	}
 },
 {
@@ -519,30 +475,59 @@ const items = [
 	}
 },
 {
-	name: "Look into Kaspa",
-	description: "A platform for Kaspa network interaction, offering a DM Slider to send messages with KAS, a mempool visualizer, and energy trading simulations with real-time network stats like transactions and blocks per second.",
-	link: "https://www.lookintokaspa.com",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		analytics: true,
-	}
-},
-{
 	name: "KaspaWave",
 	description: "KaspaWave is a community platform for Kaspa cryptocurrency, offering tools to track wallets, monitor KRC20 tokens, and stay updated with the latest news and discussions in the Kaspa ecosystem.",
 	link: "https://kaspawave.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		analytics: true,
+		analytics: true
 	}
 },
 {
-	name: "KasView",
-	description: "A comprehensive tool for tracking Kaspa's price, converting currencies, simulating investments, and monitoring live rates and portfolio performance.",
-	link: "https://kasview.netlify.app",
+	name: "Look into Kaspa",
+	description: "A platform for Kaspa network interaction, offering a DM Slider to send messages with KAS, a mempool visualizer, and energy trading simulations with real-time network stats like transactions and blocks per second.",
+	link: "https://www.lookintokaspa.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		analytics: true,
+		analytics: true
+	}
+},
+
+
+{
+	name: "Kaspa Node Map",
+	description: "A map of public Kaspa nodes providing real-time data on node distribution and status, useful for monitoring network health and launching new nodes.",
+	link: "https://nodes.kaspa.ws",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		visualizer: true
+	}
+},
+{
+	name: "Kaspa Graph Inspector",
+	description: "The KGI BlockDAG Visualizer is designed to display Kaspa’s blockDAG topology, helping researchers understand the structure and relationships of parallel blocks in the network.",
+	link: "https://kgi.kaspad.net",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		visualizer: true
+	}
+},
+{
+	name: "Kaspa Rainbow Chart",
+	description: "A visualization tool that plots Kaspa's price trend using the power law on a rainbow chart, helping users understand potential price movements based on historical data.",
+	link: "https://www.kasparainbowchart.com",
+	logo: "/assets/logos/kasparainbowchart.webp",
+	features: {
+		visualizer: true
+	}
+},
+{
+	name: "KasMap",
+	description: "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
+	link: "https://kasmap.xyz/",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		visualizer: true
 	}
 },
 {
@@ -551,6 +536,16 @@ const items = [
 	link: "https://cryptoodie.github.io/KASPA-VS.-BITCOIN-MINER-REVENUE-/",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
+		calculator: true
+	}
+},
+{
+	name: "KasView",
+	description: "A comprehensive tool for tracking Kaspa's price, converting currencies, simulating investments, and monitoring live rates and portfolio performance.",
+	link: "https://kasview.netlify.app",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		calculator: true
 	}
 },
 {
@@ -559,6 +554,7 @@ const items = [
 	link: "https://kas-breakeven-calc.vercel.app",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
+		calculator: true
 	}
 },
 {

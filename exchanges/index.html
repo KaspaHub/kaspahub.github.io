@@ -47,8 +47,7 @@
 <div class="main-content-area">
 
 <aside class="sidebar theme-1">
-	<h2 id="counter"></h2>
-	<h3>Features</h3>
+	<h3>Features<span id="counter"></span></h3>
 	<div class="filter-category">
 		<div class="filter-group">
 			<input type="checkbox" id="noKyc" data-feature="noKyc">
@@ -97,7 +96,7 @@ const items = [
 	link: "https://www.kraken.com",
 	logo: "/assets/logos/kraken.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		dex: false,
 		noKyc: false,
 		cryptoCard: true,
@@ -111,7 +110,7 @@ const items = [
 	link: "https://uphold.com",
 	logo: "/assets/logos/uphold.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		cryptoCard: true,
 		googleApplePay: true
 	}
@@ -122,7 +121,7 @@ const items = [
 	link: "https://www.topperpay.com",
 	logo: "/assets/logos/topper.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		googleApplePay: true
 	}
 },
@@ -142,7 +141,7 @@ const items = [
 	link: "https://www.bybit.com",
 	logo: "/assets/logos/bybit.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		cryptoCard: true,
 		googleApplePay: true,
 		futuresTrading: true
@@ -151,10 +150,10 @@ const items = [
 {
 	name: "MEXC",
 	description: "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
-	link: "https://promote.mexc.com/",
+	link: "https://www.mexc.com/",
 	logo: "/assets/logos/mexc.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		cryptoCard: true,
 		futuresTrading: true
@@ -166,7 +165,7 @@ const items = [
 	link: "https://bingx.com/",
 	logo: "/assets/logos/bingx.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		cryptoCard: true,
 		futuresTrading: true
@@ -178,7 +177,7 @@ const items = [
 	link: "https://www.coinex.com/",
 	logo: "/assets/logos/coinex.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		futuresTrading: true
 	}
@@ -189,7 +188,7 @@ const items = [
 	link: "https://www.kucoin.com",
 	logo: "/assets/logos/kucoin.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		cryptoCard: true,
 		futuresTrading: true
 	}
@@ -200,7 +199,7 @@ const items = [
 	link: "https://www.bitget.com",
 	logo: "/assets/logos/bitget.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		cryptoCard: true,
 		googleApplePay: true,
 		futuresTrading: true
@@ -212,7 +211,7 @@ const items = [
 	link: "https://btcc.com/",
 	logo: "/assets/logos/btcc.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		futuresTrading: true
 	}
@@ -278,7 +277,7 @@ const items = [
 	link: "https://www.poloniex.com",
 	logo: "/assets/logos/poloniex.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		futuresTrading: true
 	}
 },
@@ -297,7 +296,7 @@ const items = [
 	link: "https://changelly.com",
 	logo: "/assets/logos/changelly.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true
 	}
 },
@@ -331,7 +330,7 @@ const items = [
 	link: "https://www.coinw.com/",
 	logo: "/assets/logos/coinw.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		cryptoCard: true,
 		futuresTrading: true
@@ -343,7 +342,7 @@ const items = [
 	link: "https://changenow.io",
 	logo: "/assets/logos/changenow.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		googleApplePay: true
 	}
@@ -441,7 +440,6 @@ const items = [
 	link: "https://www.xt.com",
 	logo: "/assets/logos/xt.webp",
 	features: {
-		checked: true,
 		noKyc: true,
 		cryptoCard: true,
 		futuresTrading: true
@@ -458,10 +456,10 @@ const items = [
 {
 	name: "AscendEX",
 	description: "AscendEX is a Singapore-based trading platform founded in 2018, offering crypto spot and futures trading.",
-	link: "https://ascendex.com/en-us/register?inviteCode=UMTRUCRCV",
+	link: "https://ascendex.com/",
 	logo: "/assets/logos/ascendex.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		noKyc: true,
 		cryptoCard: true,
 		futuresTrading: true
@@ -735,7 +733,6 @@ const items = [
 	link: "https://neverless.com",
 	logo: "/assets/logos/neverless.webp",
 	features: {
-		checked: true,
 		googleApplePay: true
 	}
 },
@@ -806,7 +803,6 @@ const items = [
 	link: "https://nonkyc.io",
 	logo: "/assets/logos/nonkyc.webp",
 	features: {
-		checked: true,
 		noKyc: true
 	}
 },
@@ -816,7 +812,6 @@ const items = [
 	link: "https://wirexapp.com",
 	logo: "/assets/logos/wirex.webp",
 	features: {
-		checked: true,
 		cryptoCard: true,
 		googleApplePay: true
 	}
@@ -862,7 +857,6 @@ const items = [
 	link: "https://www.bitmart.com",
 	logo: "/assets/logos/bitmart.webp",
 	features: {
-		checked: true,
 		futuresTrading: true
 	}
 }
@@ -881,7 +875,7 @@ let currentIndex = 0;
 let filteredItems = [...items];
 
 const featureTags = {
-  checked: { label: 'Verified', class: 'checked' },
+  reviewed: { label: 'Verified', class: 'checked' },
   verified: { label: 'Verified', class: 'verified' }
 };
 

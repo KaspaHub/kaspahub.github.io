@@ -47,8 +47,7 @@
 <div class="main-content-area">
 	
 <aside class="sidebar theme-1">
-	<h2 id="counter"></h2>
-	<h3>Features</h3>
+	<h3>Features<span id="counter"></span></h3>
 	<div class="filter-category">
 		<div class="filter-group">
 			<input type="checkbox" id="openSource" data-feature="openSource">
@@ -124,11 +123,11 @@
 const items = [
 {
 	name: "OneKey",
-	description: "Secure hardware DeFi wallet for advanced users, offering multi-chain support across devices, and browsers.",
+	description: "Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices.",
 	link: "https://onekey.so/",
 	logo: "/assets/logos/onekeywallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		openSource: true,
 		multiChain: true,
 		selfCustodial: true,
@@ -144,7 +143,7 @@ const items = [
 	link: "https://tangem.com/",
 	logo: "/assets/logos/tangemwallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		verified: null,
 		openSource: false,
 		multiChain: true,
@@ -165,7 +164,7 @@ const items = [
 	link: "https://kaspium.io",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		openSource: true,
 		selfCustodial: true,
 		mobile: true
@@ -177,7 +176,7 @@ const items = [
 	link: "https://www.kasware.xyz",
 	logo: "/assets/logos/kaswarewallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		openSource: true,
 		selfCustodial: true,
 		krc20: true,
@@ -193,6 +192,7 @@ const items = [
 	link: "https://kaskeeper.vercel.app",
 	logo: "/assets/logos/kaskeeperwallet.webp",
 	features: {
+		reviewed: true,
 		selfCustodial: true,
 		krc20: true,
 		mobile: true,
@@ -200,12 +200,12 @@ const items = [
 	}
 },
 {
-	name: "Kastle Wallet",
-	description: "Kastle Wallet is a secure, user-friendly wallet for the Kaspa network, supporting KRC-20 tokens, KRC-721 NFTs, KNS domains, and Ledger integration.",
+	name: "Kastle",
+	description: "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
 	link: "https://kastle.cc",
 	logo: "/assets/logos/kastlewallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		selfCustodial: true,
 		krc20: true,
 		krc721: true,
@@ -215,23 +215,12 @@ const items = [
 	}
 },
 {
-	name: "Ghost Wallet",
-	description: "Non-custodial, open-source Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, swapping, and transfers.",
-	link: "https://www.ghostwallet.org",
-	logo: "/assets/logos/ghostwallet.webp",
-	features: {
-		openSource: true,
-		selfCustodial: true,
-		krc20: true,
-		browserExtension: true
-	}
-},
-{
 	name: "Kurncy",
-	description: "Lightweight custodial Kaspa wallet with self-custody option on iOS & Android, supporting KRC20, KRC721 tokens and KNS domains.",
+	description: "Lightweight and user-friendly Kaspa wallet for iOS & Android with optional custody, supporting KRC20, KRC721, KNS, and seamless integration with the ecosystem.",
 	link: "https://www.kurncy.com",
 	logo: "/assets/logos/kurncywallet.webp",
 	features: {
+		reviewed: true,
 		selfCustodial: true,
 		krc20: true,
 		krc721: true,
@@ -245,10 +234,34 @@ const items = [
 	link: "https://kaspa-ng.org",
 	logo: "/assets/logos/kaspang.webp",
 	features: {
+		reviewed: true,
 		openSource: true,
 		selfCustodial: true,
 		desktop: true,
 		web: true
+	}
+},
+{
+	name: "Kaspanet",
+	description: "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
+	link: "https://wallet.kaspanet.io",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		openSource: true,
+		selfCustodial: true,
+		web: true
+	}
+},
+{
+	name: "Ghost Wallet",
+	description: "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
+	link: "https://www.ghostwallet.org",
+	logo: "/assets/logos/ghostwallet.webp",
+	features: {
+		openSource: true,
+		selfCustodial: true,
+		krc20: true,
+		browserExtension: true
 	}
 },
 {
@@ -265,7 +278,7 @@ const items = [
 	}
 },
 {
-	name: "Goldshell Wallet",
+	name: "Goldshell",
 	description: "Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring.",
 	link: "https://www.goldshell.com/product/goldshell-wallet/",
 	logo: "/assets/logos/goldshellwallet.webp",
@@ -286,17 +299,6 @@ const items = [
 		selfCustodial: true,
 		hardware: true,
 		mobile: true
-	}
-},
-{
-	name: "Kaspanet",
-	description: "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
-	link: "https://wallet.kaspanet.io",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		openSource: true,
-		selfCustodial: true,
-		web: true
 	}
 },
 {
@@ -376,7 +378,7 @@ const items = [
 	link: "https://github.com/Atomik-Global/atomik-wallet",
 	logo: "/assets/logos/atomikwallet.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		openSource: true,
 		selfCustodial: true,
 		mobile: true
@@ -388,7 +390,7 @@ const items = [
 	link: "https://github.com/KASPACOM/kaspacom-web-wallet",
 	logo: "/assets/logos/kaspacom.webp",
 	features: {
-		checked: true,
+		reviewed: true,
 		openSource: true,
 		selfCustodial: true
 	}
@@ -446,7 +448,7 @@ let currentIndex = 0;
 let filteredItems = [...items];
 
 const featureTags = {
-  checked: { label: 'Verified', class: 'checked' },
+  reviewed: { label: 'Verified', class: 'checked' },
   verified: { label: 'Verified', class: 'verified' },
   openSource: { label: 'Open Source' },
   selfCustodial: { label: 'Self-Custodial' }

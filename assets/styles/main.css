@@ -180,9 +180,9 @@ li {
 */
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
-	background-size: 100% auto;
-	width: 100%;
-	height: 100%;
+	background-size: 80%;
+	width: 100vw;
+	height: 100vh;
 	position: fixed;
 	z-index: 100;
 	top: 0;
@@ -247,19 +247,23 @@ hr {
 .sidebar h3 {
 	border-bottom: 2px solid #757575;
 	margin-bottom: 15px;
-	padding-bottom: 10px;
 	font-weight: 600;
 	opacity: 0.75;
+	padding-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.1rem;
 }
 
 .filter-category {
-	margin-bottom: 25px;
+	margin-bottom: 20px;
+	font-size: 0.95rem;
 }
 
 .filter-group {
 	display: flex;
 	align-items: center;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	user-select: none;
 }
 
@@ -339,31 +343,29 @@ hr {
 	color: #004c41;
 }
 
+.checked::before {
+	content: url('/assets/icons/reviewed.svg');
+}
+.reviewed::before {
+	content: url('/assets/icons/reviewed.svg');
+}
 .verified::before {
 	content: url('/assets/icons/verified.svg');
-	margin-right: 5px;
-	height: 1em;
-	width: 1em;
 }
 
-/*.verified::after {
-	content: "Kaspa Hub team has reviewed this project firsthand and trusts its integrity.";
-}*/
-
-.checked {
+.checked, .reviewed, .verified {
 	position: relative;
 	cursor: pointer;
 }
 
-.checked::before {
-	content: url('/assets/icons/checked.svg');
+.checked::before, .reviewed::before, .verified::before {
 	margin-right: 5px;
 	height: 1em;
 	width: 1em;
 }
 
-.checked::after {
-	content: "Reviewed by Kaspa Hub team.";
+.checked::after, .reviewed::after, .verified::after {
+	content: "Reviewed by Kaspa Hub Team.";
 	position: absolute;
 	bottom: 125%;
 	left: 50%;
@@ -379,7 +381,7 @@ hr {
 	transition: opacity 0.3s ease;
 }
 
-.checked:hover::after {
+.checked:hover::after, .reviewed:hover::after, .verified:hover::after {
 	opacity: 1;
 }
 
@@ -405,11 +407,6 @@ img {
 	border-radius: 15px;
 	height: auto;
 	aspect-ratio: 16 / 9;
-}
-
-#counter {
-	margin-bottom: 15px;
-	margin-top: 0;
 }
 
 footer {
@@ -443,14 +440,11 @@ a:hover {color: #3952C6; text-decoration: underline; }
 a:active {color: #D8B234; text-decoration: underline; }
 
 pre {
-	font-family: Consolas,"courier new";
 	background-color: rgba(45,55,60, 0.9);
 	color: #CED7E5;
 	font-size: 1.1rem;
 	border-radius: 6px;
 	padding: 10px;
-	margin-left: 10%;
-	margin-right: 10%;
 	position: relative;
 	word-wrap: break-word;
 	white-space: pre-wrap;
@@ -644,10 +638,9 @@ input[type=checkbox] + label {
 
 input[type=checkbox] + label:before {
 	content: "";
-	display: flex;
+	/*display: flex;*/
 	align-items: center;
 	justify-content: center;
-
 	width: 1.2em;
 	height: 1.2em;
 	margin-right: 0.5em;
@@ -660,15 +653,18 @@ input[type=checkbox] + label:before {
 
 	transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 	transform-origin: center center;
-	transform: scale(0.8);
+	transform: scale(0.9);
 	flex-shrink: 0;
 }
 
 input[type=checkbox]:checked + label:before {
-	content: "\2714";
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 78" height="0.7em" width="0.7em" fill="white"><path d="M78 19 29 68a1 1 0 0 1-1.5 0L.3 40a1 1 0 0 1 0-1.5l6.7-6.7a1 1 0 0 1 1.5 0l20 20 41-41a1 1 0 0 1 1.5 0l6.7 6.7z"/></svg>');
 	background-color: #0075FF;
-	color: #fff;
-	transform: scale(1);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: 75% auto;
+	background-position: center;
+	transform: scale(1.05);
 }
 
 input[type=checkbox]:disabled + label:before {
@@ -904,10 +900,6 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 		max-width: 100%;
 	}
 	
-	#counter {
-		display: none;
-	}
-	
 	.main-content-area {
 		flex-direction: column;
 	}
@@ -916,23 +908,10 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 		width: 100%;
 	}
 	
-	.filter-category {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 7px;
-		margin-bottom: 15px;
+	#light, #dark {
+    background-image: none;
 	}
-	
-	.filter-group {
-		margin-bottom: 0;
-	}
-	
-/*	#light, #dark {
-		background-attachment: scroll;
-	}*/
 }
-
 
 .thumbnail {
 	margin-top: -20px;
