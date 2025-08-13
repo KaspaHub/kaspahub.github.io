@@ -228,6 +228,7 @@ li {
 
 #container-2 {
 	max-width: 1300px;
+	min-height: 1300px;
 }
 
 .main-content-area {
