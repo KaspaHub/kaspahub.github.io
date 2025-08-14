@@ -622,7 +622,6 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 	filter: brightness(0.9);
 }
 
-
 /* checkbox v */
 
 input[type=checkbox] {
@@ -639,19 +638,16 @@ input[type=checkbox] + label {
 
 input[type=checkbox] + label:before {
 	content: "";
-	/*display: flex;*/
 	align-items: center;
 	justify-content: center;
-	width: 1.2em;
-	height: 1.2em;
+	width: 1.1em;
+	height: 1.1em;
 	margin-right: 0.5em;
 	border: 1px solid #757575;
 	border-radius: 6px;
 	background-color: rgba(0, 0, 0, 0.1);
-
 	color: transparent;
 	font-size: 1em;
-
 	transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 	transform-origin: center center;
 	transform: scale(0.9);
