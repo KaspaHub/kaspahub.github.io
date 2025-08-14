@@ -8,8 +8,8 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 - [Resources](https://kaspahub.github.io/resources/)
 - [Solutions](https://kaspahub.github.io/solutions/)
 - [Wallets](https://kaspahub.github.io/wallets/)
-- [Donations](https://kaspahub.github.io/k/?wallet=kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5)
-- [K Donations](https://kaspahub.github.io/donations/?handle=KaspaHub)
+- [Donations (directory)](https://kaspahub.github.io/donations/?handle=KaspaHub)
+- [Donations](https://kaspahub.github.io/k/setup)
 
 ## New Project Submissions & Updates
 Have a project to share? We’d love to feature it on the Kaspa Hub! You can:
