@@ -13,7 +13,7 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 
 ## New Project Submissions & Updates
 Have a project to share? We’d love to feature it on the Kaspa Hub! You can:
-- Submit your project on our [Discord](https://discord.gg/7umFvjcANE) server or by opening a GitHub [issue](https://github.com/KaspaHub/kaspahub.github.io/issues.
+- Submit your project on our [Discord](https://discord.gg/7umFvjcANE) server or by opening a GitHub [issue](https://github.com/KaspaHub/kaspahub.github.io/issues).
 
 ## License
 Kaspa Hub is licensed under the MIT License with a **custom clause**. See the [LICENSE](LICENSE) file for details.
