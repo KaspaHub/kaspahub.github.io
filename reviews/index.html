@@ -153,7 +153,7 @@ async function runSearch() {
 
     const validation = validateDomain(query);
     if (!validation.valid) {
-        document.getElementById("results").innerHTML = `<span style="margin: 10px; color:orange">${validation.reason}</span>`;
+        document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
         return;
     }
 
