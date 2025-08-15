@@ -168,15 +168,19 @@ async function runSearch() {
             continue;
         }
         const match = data.find(p => p.url.toLowerCase() === query);
+
         if (!match || match.review === 0) {
             allResults.push({ name: reviewer.name, review: 0 });
         } else if (match.review >= 1) {
             allResults.push({ name: reviewer.name, review: 1 });
         } else if (match.review === -1) {
             allResults.push({ name: reviewer.name, review: -1 });
+        } else if (match.review === -2) {
+            allResults.push({ name: reviewer.name, review: -2 });
         } else {
             allResults.push({ name: reviewer.name, review: 0 });
         }
+
     }
 
     let html = `<table>
@@ -184,7 +188,8 @@ async function runSearch() {
     for (let r of allResults) {
         let status;
         if (r.review === 1) status = `<span class="positive">✅ Reviewed</span>`;
-        else if (r.review === -1) status = `<span class="negative">❌ Malicious</span>`;
+        else if (r.review === -1) status = `<span class="warning">⚠️ Suspicious</span>`;
+        else if (r.review === -2) status = `<span class="negative">❌ Malicious</span>`;
         else status = `<span class="neutral">N/A</span>`;
         html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
     }
