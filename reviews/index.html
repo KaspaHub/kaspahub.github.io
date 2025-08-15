@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Review Checker - Kaspa Hub</title>
+<meta name="twitter:title" content="Review Checker - Kaspa Hub" />
+<meta property="og:title" content="Review Checker - Kaspa Hub" />
+
+<meta name="description" content="Check the trust score of any Kaspa project from multiple independent reviewers. Identify safe, unreviewed, or malicious projects instantly.">
+<meta name="twitter:description" content="Analyse any Kaspa project to see if it's reviewed, unreviewed, or malicious using multiple independent reviewers.">
+<meta property="og:description" content="Check if a Kaspa project is reviewed, unreviewed, or malicious using independent data sources.">
+
+<link rel="canonical" href="https://kaspahub.org/reviews/" />
+<meta name="twitter:url" content="https://kaspahub.org/reviews/" />
+<meta property="og:url" content="https://kaspahub.org/reviews/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="@KaspaHub is accepting donations!" />
+<meta name="kaspa:wallet" content="kaspa:qrqg5eteekhucatdwz3xn4k76d70ykl4e3jnt88pe6dmfzjwv20gzcwjrwye6" />
+
+<style>
+
+input[type=text] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 15px;
+}
+
+article {
+    margin: 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #b3b3b3;
+}
+table tr:nth-child(odd) {
+    background-color: #dddddd0f;
+}
+table tr:nth-child(even) {
+    background-color: #dddddd2e;
+}
+
+table tr:hover {
+    background-color: rgba(100, 100, 100, 0.1);
+}
+
+.positive { color: green; font-weight: bold; }
+.negative { color: red; font-weight: bold; }
+/*.neutral  { color: gray; }*/
+
+#searchContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#searchContainer > * {
+    margin: 10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+<div class="intro">
+    <h1>Check Kaspa Project Reviews</h1>
+    <p>Analyse any Kaspa project to see if it's reviewed, unreviewed, or malicious using data from multiple independent reviewers.</p>
+</div>
+
+
+<div id="searchContainer">
+  <input 
+    type="text" 
+    id="searchBox" 
+    placeholder="example.com" 
+    required
+  >
+  <button class="button" id="searchBtn">Search</button>
+</div>
+
+<div id="results"></div>
+
+<script type="module">
+const reviewers = [
+    { name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.js" },
+    { name: "Kaspa Hub Test", url: "https://kaspahub.github.io/directory/reviews-test.js" },
+    { name: "invalid array test", url: "https://kaspahub.github.io/directory/users.js" }
+];
+
+function validateDomain(input) {
+    const domainPattern = /^(https:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    if (!domainPattern.test(input)) {
+        return { valid: false, reason: "Invalid domain. Use example.com or https://example.com" };
+    }
+    return { valid: true };
+}
+
+async function loadReviewerData(reviewer) {
+    try {
+        const module = await import(reviewer.url + `?t=${Date.now()}`);
+        if (!Array.isArray(module.items)) {
+            console.error(`Reviewer ${reviewer.name} has invalid format (no 'items' array)`);
+            return null;
+        }
+        for (let entry of module.items) {
+            if (typeof entry.url !== "string" || typeof entry.review !== "number") {
+                console.error(`Reviewer ${reviewer.name} has invalid entry:`, entry);
+                return null;
+            }
+        }
+        return module.items;
+    } catch (err) {
+        console.error(`Failed to load reviewer ${reviewer.name}:`, err);
+        return null;
+    }
+}
+
+async function runSearch() {
+    const query = document.getElementById("searchBox").value.trim().toLowerCase();
+    if (!query) return;
+
+    const validation = validateDomain(query);
+    if (!validation.valid) {
+        document.getElementById("results").innerHTML = `<span style="margin: 10px; color:orange">${validation.reason}</span>`;
+        return;
+    }
+
+    document.getElementById("results").innerHTML = "Loading...";
+    
+    const allResults = [];
+
+    for (let reviewer of reviewers) {
+        const data = await loadReviewerData(reviewer);
+        if (!data) {
+            allResults.push({ name: reviewer.name, review: null });
+            continue;
+        }
+        const match = data.find(p => p.url.toLowerCase() === query);
+        if (!match || match.review === 0) {
+            allResults.push({ name: reviewer.name, review: 0 });
+        } else if (match.review >= 1) {
+            allResults.push({ name: reviewer.name, review: 1 });
+        } else if (match.review === -1) {
+            allResults.push({ name: reviewer.name, review: -1 });
+        } else {
+            allResults.push({ name: reviewer.name, review: 0 });
+        }
+    }
+
+    let html = `<table>
+        <tr><th>Reviewer</th><th>Status</th></tr>`;
+    for (let r of allResults) {
+        let status;
+        if (r.review === 1) status = `<span class="positive">✅ Reviewed</span>`;
+        else if (r.review === -1) status = `<span class="negative">❌ Malicious</span>`;
+        else status = `<span class="neutral">N/A</span>`;
+        html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
+    }
+    html += `</table>`;
+
+    document.getElementById("results").innerHTML = html;
+}
+
+document.getElementById("searchBtn").addEventListener("click", runSearch);
+
+document.getElementById("searchBox").addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        runSearch();
+    }
+});
+</script>
+
+
+
+
+</main>
+
+
+<footer><p><a href="/posts/">Read More Posts</a> | <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">Scroll to Top</a></p></footer>
+
+</body>
+</html>
