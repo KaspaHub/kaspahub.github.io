@@ -151,7 +151,10 @@ async function loadReviewerData(reviewer) {
 }
 
 async function runSearch() {
-    const query = document.getElementById("searchBox").value.trim().toLowerCase();
+    let query = document.getElementById("searchBox").value.trim().toLowerCase();
+    if (query.endsWith("/")) {
+        query = query.slice(0, -1);
+    }
     if (!query) return;
 
     const validation = validateDomain(query);
@@ -171,7 +174,7 @@ async function runSearch() {
             continue;
         }
 
-        const reviewScore = data[query] ?? 0; // direct O(1) lookup
+        const reviewScore = data[query] ?? 0;
 
         if (reviewScore >= 1) {
             allResults.push({ name: reviewer.name, review: 1 });
@@ -207,6 +210,7 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
     }
 });
 </script>
+
 
 
 </main>
