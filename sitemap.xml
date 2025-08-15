@@ -43,12 +43,6 @@
 	<priority>0.8</priority>
 </url>
 <url>
-	<loc>https://kaspahub.org/news/</loc>
-	<lastmod>2025-08-13</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
 	<loc>https://kaspahub.org/communities/</loc>
 	<lastmod>2025-08-08</lastmod>
 	<changefreq>weekly</changefreq>
@@ -63,6 +57,18 @@
 <url>
 	<loc>https://kaspahub.org/developers/</loc>
 	<lastmod>2025-08-08</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/news/</loc>
+	<lastmod>2025-08-13</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://kaspahub.org/reviews/</loc>
+	<lastmod>2025-08-15</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
