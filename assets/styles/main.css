@@ -794,6 +794,8 @@ textarea, input[type="text"], div[contenteditable="true"] {
 
 	white-space: break-spaces;
 	word-wrap: break-word;
+
+	cursor: default;
 }
 
 textarea:focus, input[type="text"]:focus, div[contenteditable="true"]:focus {
