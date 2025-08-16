@@ -49,22 +49,11 @@
 <aside class="sidebar theme-1">
 	<h3>Features<span id="counter"></span></h3>
 	<div class="filter-category">
-		<div class="filter-group">
-			<input type="checkbox" id="noKyc" data-feature="noKyc">
-			<label for="noKyc">No KYC</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="cryptoCard" data-feature="cryptoCard">
-			<label for="cryptoCard">Crypto Card</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="futuresTrading" data-feature="futuresTrading">
-			<label for="futuresTrading">Futures Trading</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="googleApplePay" data-feature="googleApplePay">
-			<label for="googleApplePay">Google & Apple Pay</label>
-		</div>
+		<div class="filter-group"><input type="checkbox" id="noKyc" data-feature="noKyc"><label for="noKyc">No KYC</label></div>
+		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
+		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
+		<div class="filter-group"><input type="checkbox" id="googleApplePay" data-feature="googleApplePay"><label for="googleApplePay">Google & Apple Pay</label></div>
+		<div class="filter-group"><input type="checkbox" id="withdrawals" data-feature="withdrawals"><label for="withdrawals">Withdrawals</label></div>
 	</div>
 </aside>
 
@@ -101,7 +90,8 @@ const items = [
 		noKyc: false,
 		cryptoCard: true,
 		googleApplePay: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -112,7 +102,8 @@ const items = [
 	features: {
 		reviewed: true,
 		cryptoCard: true,
-		googleApplePay: true
+		googleApplePay: true,
+		withdrawals: true
 	}
 },
 {
@@ -122,7 +113,21 @@ const items = [
 	logo: "/assets/logos/topper.webp",
 	features: {
 		reviewed: true,
-		googleApplePay: true
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Bybit",
+	description: "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
+	link: "https://www.bybit.com",
+	logo: "/assets/logos/bybit.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		googleApplePay: true,
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -136,33 +141,33 @@ const items = [
 	}
 },
 {
-	name: "Bybit",
-	description: "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
-	link: "https://www.bybit.com",
-	logo: "/assets/logos/bybit.webp",
+	name: "Bitget",
+	description: "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
+	link: "https://www.bitget.com",
+	logo: "/assets/logos/bitget.webp",
 	features: {
 		reviewed: true,
 		cryptoCard: true,
 		googleApplePay: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
-	name: "MEXC",
-	description: "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
-	link: "https://www.mexc.com/",
-	logo: "/assets/logos/mexc.webp",
+	name: "Poloniex",
+	description: "Poloniex is a Seychelles-based trading platform established in 2014, offering crypto spot and futures trading.",
+	link: "https://www.poloniex.com",
+	logo: "/assets/logos/poloniex.webp",
 	features: {
 		reviewed: true,
-		noKyc: true,
-		cryptoCard: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
 	name: "BingX",
 	description: "BingX is a Singapore-based trading platform founded in 2018, offering crypto and copy trading services.",
-	link: "https://bingx.com/",
+	link: "https://bingx.com",
 	logo: "/assets/logos/bingx.webp",
 	features: {
 		reviewed: true,
@@ -174,11 +179,46 @@ const items = [
 {
 	name: "CoinEx",
 	description: "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
-	link: "https://www.coinex.com/",
+	link: "https://www.coinex.com",
 	logo: "/assets/logos/coinex.webp",
 	features: {
 		reviewed: true,
 		noKyc: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "CoinW",
+	description: "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
+	link: "https://www.coinw.com",
+	logo: "/assets/logos/coinw.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Neverless",
+	description: "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
+	link: "https://neverless.com",
+	logo: "/assets/logos/neverless.webp",
+	features: {
+		reviewed: true,
+		googleApplePay: true
+	}
+},
+{
+	name: "MEXC",
+	description: "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
+	link: "https://promote.mexc.com/r/7Ex9qkU0",
+	logo: "/assets/logos/mexc.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
 		futuresTrading: true
 	}
 },
@@ -194,26 +234,14 @@ const items = [
 	}
 },
 {
-	name: "Bitget",
-	description: "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
-	link: "https://www.bitget.com",
-	logo: "/assets/logos/bitget.webp",
-	features: {
-		reviewed: true,
-		cryptoCard: true,
-		googleApplePay: true,
-		futuresTrading: true
-	}
-},
-{
 	name: "BTCC",
 	description: "BTCC is a UK-based trading platform established in 2011, offering crypto futures and spot trading services.",
-	link: "https://btcc.com/",
+	link: "https://btcc.com",
 	logo: "/assets/logos/btcc.webp",
 	features: {
-		reviewed: true,
 		noKyc: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -261,6 +289,7 @@ const items = [
 	features: {
 		cryptoCard: true,
 		googleApplePay: true,
+		withdrawals: true
 	}
 },
 {
@@ -269,16 +298,6 @@ const items = [
 	link: "https://coinone.co.kr",
 	logo: "/assets/logos/coinone.webp",
 	features: {
-	}
-},
-{
-	name: "Poloniex",
-	description: "Poloniex is a Seychelles-based trading platform established in 2014, offering crypto spot and futures trading.",
-	link: "https://www.poloniex.com",
-	logo: "/assets/logos/poloniex.webp",
-	features: {
-		reviewed: true,
-		futuresTrading: true
 	}
 },
 {
@@ -297,7 +316,8 @@ const items = [
 	logo: "/assets/logos/changelly.webp",
 	features: {
 		reviewed: true,
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -325,18 +345,6 @@ const items = [
 	}
 },
 {
-	name: "CoinW",
-	description: "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
-	link: "https://www.coinw.com/",
-	logo: "/assets/logos/coinw.webp",
-	features: {
-		reviewed: true,
-		noKyc: true,
-		cryptoCard: true,
-		futuresTrading: true
-	}
-},
-{
 	name: "ChangeNOW",
 	description: "ChangeNOW is a Seychelles-based crypto swap platform established in 2017, offering non-custodial exchanges without registration.",
 	link: "https://changenow.io",
@@ -344,7 +352,8 @@ const items = [
 	features: {
 		reviewed: true,
 		noKyc: true,
-		googleApplePay: true
+		googleApplePay: true,
+		withdrawals: true
 	}
 },
 {
@@ -353,7 +362,8 @@ const items = [
 	link: "https://changehero.io",
 	logo: "/assets/logos/changehero.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -414,7 +424,8 @@ const items = [
 	logo: "/assets/logos/swapspace.webp",
 	features: {
 		noKyc: true,
-		googleApplePay: true
+		googleApplePay: true,
+		withdrawals: true
 	}
 },
 {
@@ -431,7 +442,8 @@ const items = [
 	link: "https://simpleswap.io",
 	logo: "/assets/logos/simpleswap.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -442,7 +454,8 @@ const items = [
 	features: {
 		noKyc: true,
 		cryptoCard: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -456,12 +469,13 @@ const items = [
 {
 	name: "AscendEX",
 	description: "AscendEX is a Singapore-based trading platform founded in 2018, offering crypto spot and futures trading.",
-	link: "https://ascendex.com/",
+	link: "https://ascendex.com/en-us/register?inviteCode=UMTRUCRCV",
 	logo: "/assets/logos/ascendex.webp",
 	features: {
 		noKyc: true,
 		cryptoCard: true,
-		futuresTrading: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -488,7 +502,8 @@ const items = [
 	link: "https://stealthex.io",
 	logo: "/assets/logos/stealthex.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -582,7 +597,8 @@ const items = [
 	link: "https://exolix.com",
 	logo: "/assets/logos/exolix.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -591,7 +607,8 @@ const items = [
 	link: "https://quickex.io",
 	logo: "/assets/logos/quickex.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -601,15 +618,6 @@ const items = [
 	logo: "/assets/logos/biconomy.webp",
 	features: {
 		futuresTrading: true
-	}
-},
-{
-	name: "Tapbit",
-	description: "Tapbit is a US-based trading platform founded in 2019, offering crypto spot and futures trading services.",
-	link: "https://www.tapbit.com",
-	logo: "/assets/logos/tapbit.webp",
-	features: {
-		noKyc: true
 	}
 },
 {
@@ -637,7 +645,8 @@ const items = [
 	link: "https://swapzone.io",
 	logo: "/assets/logos/swapzone.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -690,7 +699,8 @@ const items = [
 	link: "https://letsexchange.io",
 	logo: "/assets/logos/letsexchange.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -727,15 +737,6 @@ const items = [
 	}
 },
 {
-	name: "Neverless",
-	description: "Neverless is a UK-based crypto trading platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
-	link: "https://neverless.com",
-	logo: "/assets/logos/neverless.webp",
-	features: {
-		googleApplePay: true
-	}
-},
-{
 	name: "SuperEx",
 	description: "SuperEx is a Canada-based Web 3.0 cryptocurrency exchange founded in 2022, offering spot, futures, and margin trading.",
 	link: "https://www.superex.com",
@@ -749,7 +750,8 @@ const items = [
 	link: "https://houdiniswap.com",
 	logo: "/assets/logos/houdiniswap.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -766,7 +768,8 @@ const items = [
 	link: "https://onramp.money",
 	logo: "/assets/logos/onrampmoney.webp",
 	features: {
-		googleApplePay: true
+		googleApplePay: true,
+		withdrawals: true
 	}
 },
 {
@@ -775,7 +778,8 @@ const items = [
 	link: "https://www.coinoswap.com",
 	logo: "/assets/logos/coinoswap.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -784,7 +788,8 @@ const items = [
 	link: "https://nanswap.com",
 	logo: "/assets/logos/nanswap.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -793,7 +798,8 @@ const items = [
 	link: "https://exchang.io",
 	logo: "/assets/logos/exchang.webp",
 	features: {
-		noKyc: true
+		noKyc: true,
+		withdrawals: true
 	}
 },
 {
@@ -806,13 +812,13 @@ const items = [
 	}
 },
 {
-	name: "Wirex",
-	description: "Wirex, based in the United Kingdom, launched 2016 and offers crypto trading, a multi-currency debit card, and wallet services.",
-	link: "https://wirexapp.com",
-	logo: "/assets/logos/wirex.webp",
+	name: "BigONE",
+	description: "BigONE is a Seychelles-based trading platform founded in 2017, providing crypto trading and investment services.",
+	link: "https://www.bigone.com",
+	logo: "/assets/logos/bigone.webp",
 	features: {
-		cryptoCard: true,
-		googleApplePay: true
+		futuresTrading: true,
+		withdrawals: true
 	}
 },
 {
@@ -842,21 +848,31 @@ const items = [
 	}
 },
 {
-	name: "BigONE",
-	description: "BigONE is a Seychelles-based trading platform founded in 2017, providing crypto trading and investment services.",
-	link: "https://www.bigone.com",
-	logo: "/assets/logos/bigone.webp",
-	features: {
-		futuresTrading: true
-	}
-},
-{
 	name: "BitMart",
 	description: "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
 	link: "https://www.bitmart.com",
 	logo: "/assets/logos/bitmart.webp",
 	features: {
+		noKyc: true,
 		futuresTrading: true
+	}
+},
+{
+	name: "Tapbit",
+	description: "Tapbit is a US-based trading platform founded in 2019, offering crypto spot and futures trading services.",
+	link: "https://www.tapbit.com",
+	logo: "/assets/logos/tapbit.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+	name: "Wirex",
+	description: "Wirex, based in the United Kingdom, launched 2016 and offers crypto trading, a multi-currency debit card, and wallet services.",
+	link: "https://wirexapp.com",
+	logo: "/assets/logos/wirex.webp",
+	features: {
+		cryptoCard: true
 	}
 }
 ];
