@@ -171,7 +171,6 @@ async function runSearch() {
     let query = document.getElementById("searchBox").value.trim();
     if (!query) return;
 
-    // sanitize first
     query = sanitizeDomain(query);
 
     const validation = validateDomain(query);
