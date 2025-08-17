@@ -189,7 +189,7 @@ async function runSearch() {
     }
 
     let html = `<table>
-        <tr><th>Reviewer</th><th>Status</th></tr>`;
+        <tr><th>Source</th><th>Status</th></tr>`;
     for (let r of allResults) {
         let status;
         if (r.review === 1) status = `<span class="positive">✅ Reviewed</span>`;
