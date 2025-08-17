@@ -115,9 +115,14 @@ table tr:hover {
 <script type="module">
 const reviewers = [
     { name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.js" },
-    { name: "Reviewer 1", url: "https://kaspahub.github.io/directory/reviews-test.js" },
-    { name: "missing test", url: "https://kaspahub.github.io/directory/users.js" }
+    { name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.js" }
 ];
+
+async function preloadReviewers() {
+    for (let reviewer of reviewers) {
+        reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
+    }
+}
 
 function validateDomain(input) {
     const domainPattern = /^(https:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -127,34 +132,29 @@ function validateDomain(input) {
     return { valid: true };
 }
 
-async function loadReviewerData(reviewer) {
+async function loadReviewerData(url, name) {
     try {
-        const module = await import(reviewer.url + `?t=${Date.now()}`);
-
+        const module = await import(url);
         if (typeof module.items !== "object" || module.items === null || Array.isArray(module.items)) {
-            console.error(`Reviewer ${reviewer.name} has invalid format (should be an object map)`);
+            console.error(`Reviewer ${name} has invalid format (should be an object map)`);
             return null;
         }
-
-        for (let [url, review] of Object.entries(module.items)) {
-            if (typeof url !== "string" || typeof review !== "number") {
-                console.error(`Reviewer ${reviewer.name} has invalid entry:`, url, review);
+        for (let [key, review] of Object.entries(module.items)) {
+            if (typeof key !== "string" || typeof review !== "number") {
+                console.error(`Reviewer ${name} has invalid entry:`, key, review);
                 return null;
             }
         }
         return module.items;
-
     } catch (err) {
-        console.error(`Failed to load reviewer ${reviewer.name}:`, err);
+        console.error(`Failed to load reviewer ${name}:`, err);
         return null;
     }
 }
 
 async function runSearch() {
     let query = document.getElementById("searchBox").value.trim().toLowerCase();
-    if (query.endsWith("/")) {
-        query = query.slice(0, -1);
-    }
+    if (query.endsWith("/")) query = query.slice(0, -1);
     if (!query) return;
 
     const validation = validateDomain(query);
@@ -164,11 +164,11 @@ async function runSearch() {
     }
 
     document.getElementById("results").innerHTML = "Loading...";
-    
+
     const allResults = [];
 
     for (let reviewer of reviewers) {
-        const data = await loadReviewerData(reviewer);
+        const data = reviewer.cache;
         if (!data) {
             allResults.push({ name: reviewer.name, review: null });
             continue;
@@ -202,14 +202,14 @@ async function runSearch() {
     document.getElementById("results").innerHTML = html;
 }
 
-document.getElementById("searchBtn").addEventListener("click", runSearch);
+preloadReviewers();
 
+document.getElementById("searchBtn").addEventListener("click", runSearch);
 document.getElementById("searchBox").addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-        runSearch();
-    }
+    if (e.key === "Enter") runSearch();
 });
 </script>
+
 
 
 </main>
