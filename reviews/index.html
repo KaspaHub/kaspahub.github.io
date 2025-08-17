@@ -203,11 +203,10 @@ async function runSearch() {
         }
     }
 
-const validReviews = allResults.filter(r => r.review !== null);
+const validReviews = allResults.filter(r => r.review !== null && r.review >= -2 && r.review <= 2);
 const combined = validReviews.length > 0 
     ? validReviews.reduce((acc, r) => acc + r.review, 0) 
     : "N/A";
-
 
     let html = `<center><h2>${query} (Score: ${combined})</h2></center><table>
         <tr><th>Source</th><th>Status</th></tr>`;
