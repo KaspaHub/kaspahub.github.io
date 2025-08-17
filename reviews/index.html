@@ -125,10 +125,24 @@ async function preloadReviewers() {
     }
 }
 
+function sanitizeDomain(input) {
+    try {
+        const normalized = input.startsWith("http://") || input.startsWith("https://")
+            ? input
+            : `https://${input}`;
+        const url = new URL(normalized);
+
+        let hostname = url.hostname.replace(/^www\./i, "");
+        return hostname.toLowerCase();
+    } catch {
+        return "";
+    }
+}
+
 function validateDomain(input) {
-    const domainPattern = /^(https:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
     if (!domainPattern.test(input)) {
-        return { valid: false, reason: "Invalid domain. Use example.com or https://example.com" };
+        return { valid: false, reason: "Invalid domain. Use example.com" };
     }
     return { valid: true };
 }
@@ -154,9 +168,11 @@ async function loadReviewerData(url, name) {
 }
 
 async function runSearch() {
-    let query = document.getElementById("searchBox").value.trim().toLowerCase();
-    if (query.endsWith("/")) query = query.slice(0, -1);
+    let query = document.getElementById("searchBox").value.trim();
     if (!query) return;
+
+    // sanitize first
+    query = sanitizeDomain(query);
 
     const validation = validateDomain(query);
     if (!validation.valid) {
@@ -210,6 +226,7 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
     if (e.key === "Enter") runSearch();
 });
 </script>
+
 
 
 
