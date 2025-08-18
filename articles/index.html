@@ -41,9 +41,10 @@
 
 <main id="container-reels">
 
-<script async src="https://cse.google.com/cse.js?cx=f372e74a6f56f4f27">
-</script>
-<div class="gcse-search"></div>
+<div id="searchBar">
+	<script async src="https://cse.google.com/cse.js?cx=f372e74a6f56f4f27"></script>
+	<div class="gcse-search"></div>
+</div>
 	<article class="theme-1 short">
 		<h2><a href="https://kaspahub.org/article/crypto-that-solved-trilemma/">How Kaspa Solves the Blockchain Trilemma</a></h2>
 		<p>For a long time, the crypto community, as articulated by Vitalik Buterin, believed in the "<strong>Blockchain Trilemma</strong>", the idea that achieving scalability, security, and decentralization together was impossible, forcing a trade-off where only two could be prioritized. Many sacrificed decentralization by using Proof-of-Stake, some compromised security with sharding, and others opted for layer 2 solutions, until a new approach challenged this fundamental notion.</p>
@@ -182,13 +183,18 @@
 	display: none;
 }
 
+#searchBar {
+	min-height: 100px;
+	margin: 40px;
+}
+
 #___gcse_0 {
 	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.17);
 	border-radius: 20px;
 	overflow: hidden;
-	margin: 40px;
 	width: 600px;
+	animation: fadeIn ease 0.8s;
 }
 
 .gs-image {

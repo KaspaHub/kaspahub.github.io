@@ -434,11 +434,24 @@ footer::after {
 	content: "© 2025";
 }
 
-a {cursor: pointer; font-weight: bold; text-decoration: none; transition: color 0.2s linear; }
-a:link {color: #0000CC; }
-/*a:visited {color: #1C62B9; }*/
-a:hover {color: #3952C6; text-decoration: underline; }
-a:active {color: #D8B234; text-decoration: underline; }
+a:link {
+  text-decoration: none;
+  font-weight: 650;
+  transition: color 0.3s linear;
+  color: #0000B2;
+}
+
+a:visited {
+  color: #0000B2;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: #e1bb34;
+}
 
 pre {
 	background-color: rgba(45,55,60, 0.9);
