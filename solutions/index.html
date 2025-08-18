@@ -134,10 +134,8 @@
 
 <script type="text/javascript">
 'use strict';
-const merchantsPerPage = 30;
-let currentIndex = 0;
 
-const merchantSolutions = [
+const items = [
 {
 	name: "Kasway",
 	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
@@ -410,72 +408,70 @@ const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
 
-let filteredMerchants = [...merchantSolutions];
+const itemsPerPage = 30;
+let currentIndex = 0;
 
-function renderMerchants(initial = false) {
+let filteredItems = [...items];
+
+function renderItems(initial = false) {
 	if (initial) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 	
-	const slice = filteredMerchants.slice(currentIndex, currentIndex + merchantsPerPage);
-	slice.forEach(merchant => {
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
 		const card = document.createElement('div');
 		card.classList.add('filter-card', 'theme-1');
-		card.innerHTML = `
-<div class="filter-logo">
-<img src="${merchant.logo}" alt="${merchant.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy">
-</div>
-<h3>${merchant.name}</h3>
-<p class="filter-description">${merchant.description}</p>
-<a href="${merchant.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>
-`;
+
+	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
 	itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
-	counter.textContent = `(${filteredMerchants.length} of ${merchantSolutions.length})`;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
 	
-	loadMoreBtn.style.display = currentIndex < filteredMerchants.length ? 'block' : 'none';
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
-function filterMerchants() {
+function filterItems() {
 	const activeFeatures = new Set();
 	filterCheckboxes.forEach(cb => cb.checked && activeFeatures.add(cb.dataset.feature));
 	
 	const searchTerm = searchInput.value.trim().toLowerCase();
-	const defaultOrder = [...merchantSolutions];
+	const defaultOrder = [...items];
 	
-	filteredMerchants = defaultOrder.filter(merchant => {
+	filteredItems = defaultOrder.filter(item => {
 	for (let feature of activeFeatures) {
-		if (!merchant.features[feature]) return false;
+		if (!item.features[feature]) return false;
 	}
-	return searchTerm === "" || merchant.name.toLowerCase().includes(searchTerm) || merchant.description.toLowerCase().includes(searchTerm);
+	return searchTerm === "" || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
 	});
 	
 	const sortMode = sortSelect.value;
 	if (sortMode === 'az') {
-	filteredMerchants.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
 	} else if (sortMode === 'za') {
-	filteredMerchants.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
 	}
 	
-	if (filteredMerchants.length === 0) {
+	if (filteredItems.length === 0) {
 	itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
 	loadMoreBtn.style.display = 'none';
-	counter.textContent = `(0 of ${merchantSolutions.length})`;
+	counter.textContent = `(0 of ${items.length})`;
 	return;
 	}
 	
-	renderMerchants(true);
+	renderItems(true);
 }
 
-filterCheckboxes.forEach(cb => cb.addEventListener('change', filterMerchants));
-loadMoreBtn.addEventListener('click', () => renderMerchants());
-searchInput.addEventListener('input', filterMerchants);
-sortSelect.addEventListener('change', filterMerchants);
+filterCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
 
-renderMerchants(true);
+renderItems(true);
 </script>
 </body>
 </html>

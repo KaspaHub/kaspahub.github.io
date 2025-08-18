@@ -818,15 +818,9 @@ function renderItems(reset = false) {
             .map(([k]) => `<span class="feature-tag ${featureTags[k].class}">${featureTags[k].label}</span>`)
             .join('');
 
-        card.innerHTML = `
-<div class="filter-logo">
-    <img src="${item.logo}" alt="${item.name} Logo" loading="lazy">
-</div>
-<h3>${item.name}</h3>
-<p class="filter-description">${item.description}</p>
-<div class="filter-features-container">${featuresHtml}</div>
-<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Follow</a>
-`;
+
+        card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
         itemGrid.appendChild(card);
     });
 

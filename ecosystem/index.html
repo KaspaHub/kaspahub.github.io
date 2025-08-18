@@ -294,6 +294,7 @@ const items = [
 	link: "https://kasbay.org",
 	logo: "/assets/logos/kasbay.webp",
 	features: {
+		reviewed: true,
 	}
 },
 {
@@ -974,7 +975,7 @@ function renderItems(reset = false) {
 	})
 	.join('');
 
-	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="filter-features-container">${featuresHtml}</div><a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
+	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="filter-features-container">${featuresHtml}</div><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
 
 		itemGrid.appendChild(card);
 	});

@@ -938,69 +938,69 @@ let currentIndex = 0;
 let filteredItems = [...items];
 
 const featureTags = {
-  reviewed: { label: 'Verified', class: 'checked' },
-  verified: { label: 'Verified', class: 'verified' }
+	reviewed: { label: 'Verified', class: 'checked' },
+	verified: { label: 'Verified', class: 'verified' }
 };
 
 function renderItems(reset = false) {
-  if (reset) {
-    itemGrid.innerHTML = '';
-    currentIndex = 0;
-  }
+	if (reset) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
 
-  const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
-  slice.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('filter-card', 'theme-1');
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
 
-    const featuresHtml = Object.entries(item.features)
-      .filter(([key, value]) => value && featureTags[key])
-      .map(([key]) => {
-        const { label, class: extraClass = '' } = featureTags[key];
-        return `<span class="feature-tag ${extraClass}">${label}</span>`;
-      })
-      .join('');
+	const featuresHtml = Object.entries(item.features)
+		.filter(([key, value]) => value && featureTags[key])
+		.map(([key]) => {
+			const { label, class: extraClass = '' } = featureTags[key];
+			return `<span class="feature-tag ${extraClass}">${label}</span>`;
+		})
+		.join('');
 
-    card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="filter-features-container">${featuresHtml}</div><a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
+	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="filter-features-container">${featuresHtml}</div><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
 
-    itemGrid.appendChild(card);
-  });
+	itemGrid.appendChild(card);
+	});
 
-  currentIndex += slice.length;
-  counter.textContent = `(${filteredItems.length} of ${items.length})`;
-  loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
 function filterItems() {
-  const activeFilters = [...filterCheckboxes]
-    .filter(cb => cb.checked)
-    .map(cb => cb.dataset.feature);
+	const activeFilters = [...filterCheckboxes]
+		.filter(cb => cb.checked)
+		.map(cb => cb.dataset.feature);
 
-  const searchTerm = searchInput.value.trim().toLowerCase();
+	const searchTerm = searchInput.value.trim().toLowerCase();
 
-  filteredItems = items.filter(item =>
-    activeFilters.every(f => item.features[f]) &&
-    (!searchTerm ||
-      item.name.toLowerCase().includes(searchTerm) ||
-      item.description.toLowerCase().includes(searchTerm))
-  );
+	filteredItems = items.filter(item =>
+	activeFilters.every(f => item.features[f]) &&
+	(!searchTerm ||
+		item.name.toLowerCase().includes(searchTerm) ||
+		item.description.toLowerCase().includes(searchTerm))
+	);
 
-  const sortMode = sortSelect.value;
-  filteredItems.sort((a, b) => sortMode === 'az'
-    ? a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-    : sortMode === 'za'
-      ? b.name.localeCompare(a.name, 'en', { sensitivity: 'base' })
-      : 0
-  );
+	const sortMode = sortSelect.value;
+	filteredItems.sort((a, b) => sortMode === 'az'
+	? a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+	: sortMode === 'za'
+		? b.name.localeCompare(a.name, 'en', { sensitivity: 'base' })
+		: 0
+	);
 
-  if (!filteredItems.length) {
-    itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
-    loadMoreBtn.style.display = 'none';
-    counter.textContent = `(0 of ${items.length})`;
-    return;
-  }
+	if (!filteredItems.length) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${items.length})`;
+		return;
+	}
 
-  renderItems(true);
+	renderItems(true);
 }
 
 filterCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));

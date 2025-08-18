@@ -70,12 +70,12 @@
 	<h1 style="font-size: 3em; filter: brightness(0.7);">Kaspa Hub</h1>
 	<p style="font-weight: bold;">Where your Kaspa journey begins.</p>
 </div>
-
+<div id="bookmarks-wrapper"></div>
 	<div class="grid-container">
 		
 		<a href="/resources/" class="card theme-1">
-		    <h2 class="card-title">Resources </h2>
-		    <p class="card-description">Find essential resources for researching Kaspa, including whitepapers, articles, block explorers, and real-time BlockDAG visualizers to track performance and trends.</p>
+			<h2 class="card-title">Resources </h2>
+			<p class="card-description">Find essential resources for researching Kaspa, including whitepapers, articles, block explorers, and real-time BlockDAG visualizers to track performance and trends.</p>
 		</a>
 		
 		<a href="/wallets/" class="card theme-1">
@@ -154,6 +154,77 @@
 		</a> -->
 
 	</div>
+<script>
+function removeBookmark(index) {
+  const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  data.splice(index, 1);
+  localStorage.setItem("bookmarks", JSON.stringify(data));
+  renderBookmarks();
+}
+
+function renderBookmarks() {
+  const wrapper = document.getElementById("bookmarks-wrapper");
+  const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+  if (!wrapper) return;
+
+  if (!data.length) {
+    wrapper.innerHTML = "";
+    return;
+  }
+
+  let html = `<h2 style="margin:60px 20px 20px;">Bookmarks</h2><div class="bookmarks-grid">`;
+
+  data.forEach(({ name, link }, index) => {
+    html += `
+      <a href="${link}" class="card theme-1">
+        <button class="remove-btn" onclick="removeBookmark(${index}); return false;">✕</button>
+        <h2 class="bookmark-title">${name}</h2>
+      </a>`;
+  });
+
+  html += `</div>`;
+  wrapper.innerHTML = html;
+}
+
+renderBookmarks();
+</script>
+
+<style>
+
+.bookmarks-title {
+    filter: brightness(0.9);
+    font-size: 1.5rem;
+}
+
+.bookmarks-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 50px 0;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  color: #c00;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: background 0.2s;
+}
+.remove-btn:hover {
+  background: #ffe5e5;
+}
+</style>
+
 <section id="footer" style="margin-top: 70px; text-align: left;">
 	<p><strong>Built with ❤️ by Kaspa community, for the Kaspa community. We're <a href="https://github.com/KaspaHub/kaspahub.github.io">open-source</a>, and contributions are always welcome!</strong></p>
 	<p>	Disclaimer: Kaspa Hub is a community-run project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the official Kaspa project or its core development team. The content provided on this site is for informational purposes only and does not constitute financial or investment advice. Links to external websites are provided for convenience and informational purposes only, and we make no representations regarding their content or reliability. Always perform your own due diligence before making any decisions.</p>

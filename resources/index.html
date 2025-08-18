@@ -712,13 +712,9 @@ function renderItems(initial = false) {
 	slice.forEach(item => {
 		const card = document.createElement('div');
 		card.classList.add('filter-card', 'theme-1');
-		card.innerHTML = `
-<div class="filter-logo">
-<img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy">
-</div>
-<h3>${item.name}</h3>
-<p class="filter-description">${item.description}</p>
-<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="link-button">Visit Website</a>`;
+
+		card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
 		itemGrid.appendChild(card);
 	});
 
