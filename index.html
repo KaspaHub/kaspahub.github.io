@@ -154,74 +154,75 @@
 		</a> -->
 
 	</div>
-<script>
+<script type="text/javascript">
+'use strict';
 function removeBookmark(index) {
-  const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  data.splice(index, 1);
-  localStorage.setItem("bookmarks", JSON.stringify(data));
-  renderBookmarks();
+	const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
+	data.splice(index, 1);
+	localStorage.setItem("bookmarks", JSON.stringify(data));
+	renderBookmarks();
 }
 
 function renderBookmarks() {
-  const wrapper = document.getElementById("bookmarks-wrapper");
-  const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
+	const wrapper = document.getElementById("bookmarks-wrapper");
+	const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
-  if (!wrapper) return;
+	if (!wrapper) return;
 
-  if (!data.length) {
-    wrapper.innerHTML = "";
-    return;
-  }
+	if (!data.length) {
+		wrapper.innerHTML = "";
+		return;
+	}
 
-  let html = `<h2 style="margin:60px 20px 20px;">Bookmarks</h2><div class="bookmarks-grid">`;
+	let html = `<h2 style="margin:60px 20px 20px;">Bookmarks</h2><div class="bookmarks-grid">`;
 
-  data.forEach(({ name, link }, index) => {
-    html += `
-      <a href="${link}" class="card theme-1">
-        <button class="remove-btn" onclick="removeBookmark(${index}); return false;">✕</button>
-        <h2 class="bookmark-title">${name}</h2>
-      </a>`;
-  });
+	data.forEach(({ name, link }, index) => {
+	html += `
+<a href="${link}" class="card theme-1">
+<button class="remove-btn" onclick="removeBookmark(${index}); return false;">✕</button>
+<h2 class="bookmark-title">${name}</h2>
+</a>`;
+	});
 
-  html += `</div>`;
-  wrapper.innerHTML = html;
+	html += `</div>`;
+	wrapper.innerHTML = html;
 }
 
 renderBookmarks();
 </script>
-
-<style>
+<style type="text/css">
 
 .bookmarks-title {
-    filter: brightness(0.9);
-    font-size: 1.5rem;
+	filter: brightness(0.9);
+	font-size: 1.5rem;
 }
 
 .bookmarks-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 50px 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	margin: 50px 0;
+	justify-content: center;
 }
 
 .remove-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(255,255,255,0.3);
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
-  line-height: 1;
-  cursor: pointer;
-  color: #c00;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  transition: background 0.2s;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: rgba(255,255,255,0.3);
+	border: none;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	font-size: 16px;
+	line-height: 1;
+	cursor: pointer;
+	color: #c00;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	transition: background 0.2s;
 }
 .remove-btn:hover {
-  background: #ffe5e5;
+	background: #ffe5e5;
 }
 </style>
 
