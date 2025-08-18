@@ -285,7 +285,7 @@ hr {
 	flex-grow: 1;
 }
 
-.filter-grid {
+#itemGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 25px;
@@ -866,8 +866,8 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 }
 
 /* fade v */
-.fade-in {
-  animation: fadeIn ease 0.8s;
+.fade-in, #itemGrid {
+  animation: fadeIn ease 0.7s;
 }
 
 @keyframes fadeIn {
