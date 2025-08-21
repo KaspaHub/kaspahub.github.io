@@ -75,7 +75,7 @@ table tr:hover {
 
 .positive { color: green; font-weight: bold; }
 .negative { color: red; font-weight: bold; }
-/*.neutral  { color: gray; }*/
+/*.neutral	{ color: gray; }*/
 
 #searchContainer {
 	display: flex;
@@ -84,6 +84,20 @@ table tr:hover {
 
 #searchContainer > * {
 	margin: 10px;
+}
+
+.star {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background: url(/assets/icons/star.svg) no-repeat center;
+	background-size: contain;
+	margin-right: 0.2em;
+	vertical-align: middle;
+}
+
+.star.empty {
+	filter: grayscale(100%) brightness(65%);
 }
 
 </style>
@@ -112,23 +126,6 @@ table tr:hover {
 
 <div id="results"></div>
 
-<style>
-.star {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	background: url(/assets/icons/star.svg) no-repeat center;
-	background-size: contain;
-	margin-right: 0.2em;
-	vertical-align: middle;
-}
-
-.star.empty {
-	filter: grayscale(100%) brightness(65%);
-}
-
-</style>
-
 <script type="module">
 const reviewers = [
 	{ name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.json" },
@@ -156,11 +153,11 @@ function sanitizeDomain(input) {
 }
 
 function validateDomain(input) {
-	const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-	if (!domainPattern.test(input)) {
-		return { valid: false, reason: "Invalid domain. Use example.com" };
-	}
-	return { valid: true };
+    const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,}$/;
+    if (!domainPattern.test(input)) {
+        return { valid: false, reason: "Invalid domain. Use example.com" };
+    }
+    return { valid: true };
 }
 
 async function loadReviewerData(url, name) {
