@@ -60,7 +60,7 @@ th, td {
 }
 th {
 	background-color: #b3b3b3;
-	width: 50%;
+	width: 33%;
 }
 table tr:nth-child(odd) {
 	background-color: #dddddd0f;
@@ -134,16 +134,11 @@ const reviewers = [
 
 let dataReady = false;
 
-
-
 async function preloadReviewers() {
 	const resultsEl = document.getElementById("results");
-
-
 	for (let reviewer of reviewers) {
 		reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
 	}
-
 	dataReady = true;
 	document.getElementById("searchBtn").disabled = false;
 	resultsEl.innerHTML = ``;
@@ -155,7 +150,6 @@ function sanitizeDomain(input) {
 			? input
 			: `https://${input}`;
 		const url = new URL(normalized);
-	
 		let hostname = url.hostname.replace(/^www\./i, "");
 		return hostname.toLowerCase();
 	} catch {
@@ -176,12 +170,10 @@ async function loadReviewerData(url, name) {
 		const res = await fetch(url);
 		if (!res.ok) throw new Error(`HTTP ${res.status}`);
 		const data = await res.json();
-	
 		if (typeof data !== "object" || data === null || Array.isArray(data)) {
 			console.error(`Reviewer ${name} JSON is invalid (should be an object map)`);
 			return null;
 		}
-	
 		return data;
 	} catch (err) {
 		console.error(`Failed to load reviewer ${name}:`, err);
@@ -206,68 +198,71 @@ function formatAverage(avg) {
 }
 
 async function runSearch() {
-    if (!dataReady) return;
+	if (!dataReady) return;
 
-    let query = document.getElementById("searchBox").value.trim();
-    if (!query) return;
+	let query = document.getElementById("searchBox").value.trim();
+	if (!query) return;
+	query = sanitizeDomain(query);
 
-    query = sanitizeDomain(query);
+	const validation = validateDomain(query);
+	if (!validation.valid) {
+		document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
+		return;
+	}
 
-    const validation = validateDomain(query);
-    if (!validation.valid) {
-        document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
-        return;
-    }
+	document.getElementById("results").innerHTML = "Loading...";
+	const allResults = [];
 
-    document.getElementById("results").innerHTML = "Loading...";
+	for (let reviewer of reviewers) {
+		const data = reviewer.cache;
+		if (!data) {
+			allResults.push({ name: reviewer.name, review: null, comment: null });
+			continue;
+		}
 
-    const allResults = [];
+		let entry = data[query];
+		if (entry === undefined) {
+			allResults.push({ name: reviewer.name, review: null, comment: null });
+			continue;
+		}
 
-    for (let reviewer of reviewers) {
-        const data = reviewer.cache;
-        if (!data) {
-            allResults.push({ name: reviewer.name, review: null, comment: null });
-            continue;
-        }
+		// Handle array form [rating, comment?]
+		let rating = null, comment = null;
+		if (Array.isArray(entry)) {
+			rating = entry[0];
+			comment = entry[1] ?? null;
+		} else {
+			rating = entry; // fallback in case old format used
+		}
 
-        let reviewScore = data[query];
-        let comment = null;
+		rating = Math.min(5, Math.max(0, rating));
+		allResults.push({ name: reviewer.name, review: rating, comment });
+	}
 
-        if (Array.isArray(reviewScore)) {
-            reviewScore = reviewScore[0];
-            comment = reviewScore[1] || null;
-        }
+	const validReviews = allResults.filter(r => r.review !== null);
+	let average = "N/A";
+	if (validReviews.length > 0) {
+		const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
+		average = formatAverage(rawAvg);
+	}
 
-        if (reviewScore === undefined) {
-            allResults.push({ name: reviewer.name, review: null, comment });
-            continue;
-        }
+	let html = `<h2 style="margin: 30px; text-align:center;">${query} — <span>${average}</span></h2>`;
+	html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
+		<tr><th>Source</th><th></th><th>Rating</th></tr>`;
 
-        reviewScore = Math.min(5, Math.max(0, reviewScore));
-        allResults.push({ name: reviewer.name, review: reviewScore, comment });
-    }
-
-    const validReviews = allResults.filter(r => r.review !== null);
-    let average = "N/A";
-    if (validReviews.length > 0) {
-        const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
-        average = formatAverage(rawAvg);
-    }
-
-    let html = `<h2 style="margin: 30px; text-align:center; ">${query} — <span>${average}</span></h2>`;
-    html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
-        <tr><th>Source</th><th>Rating</th></tr>`;
-
-    for (let r of allResults) {
-        let status = renderStars(r.review);
-        let commentHtml = r.comment ? `<br><small>${r.comment}</small>` : "";
-        html += `<tr><td>${r.name}</td><td>${status}${commentHtml}</td></tr>`;
-    }
-		html += `</table>`;
-
-		document.getElementById("results").innerHTML = html;
+for (let r of allResults) {
+	let infoCell;
+	if (r.comment) {
+		infoCell = `<span class="info-bubble" title="${r.comment}">💬</span>`;
+	}
+	let status = renderStars(r.review);
+	html += `<tr><td>${r.name}</td><td style="text-align:center;">${infoCell || ""}</td><td>${status}</td></tr>`;
 }
 
+	html += `</table>`;
+
+	document.getElementById("results").innerHTML = html;
+}
 
 preloadReviewers();
 
@@ -276,6 +271,24 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
 	if (e.key === "Enter") runSearch();
 });
 </script>
+
+<style>
+.star {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: gold;
+	margin-right: 2px;
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+		50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.star.empty { background: #ccc; }
+.info-bubble {
+	cursor: pointer;
+	font-size: 14px;
+}
+</style>
+
 
 
 </main>
