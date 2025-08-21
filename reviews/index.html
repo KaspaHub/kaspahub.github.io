@@ -101,6 +101,10 @@ table tr:hover {
 	filter: grayscale(100%) brightness(65%);
 }
 
+.info-bubble {
+	cursor: pointer;
+	font-size: 1em;
+}
 </style>
 
 </head>
@@ -272,25 +276,6 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
 	if (e.key === "Enter") runSearch();
 });
 </script>
-
-<style>
-.star {
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	background: gold;
-	margin-right: 2px;
-	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
-		50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-.star.empty { background: #ccc; }
-.info-bubble {
-	cursor: pointer;
-	font-size: 14px;
-}
-</style>
-
-
 
 </main>
 
