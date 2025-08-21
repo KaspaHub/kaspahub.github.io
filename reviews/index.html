@@ -235,11 +235,10 @@ async function runSearch() {
 		average = formatAverage(rawAvg);
 	}
 	
-	let html = `<center><h2>${query} — Average: ${average} / 5</h2>`;
-	if (validReviews.length > 0) {
-		html += `<div style="font-size: 1.2em;">${renderStars(Math.round(average))}</div>`;
-	}
-	html += `</center><table cellspacing="0" cellpadding="6" style="margin-top:10px;">
+	
+	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average} / 5</span></h2><div style="margin: 30px; font-size: 1.2em; display: flex; justify-content: center; ">${renderStars(Math.round(average))}</div></center>`;
+
+	html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
 		<tr><th>Source</th><th>Rating</th></tr>`;
 	
 	for (let r of allResults) {
