@@ -113,6 +113,23 @@ table tr:hover {
 
 <div id="results"></div>
 
+<style>
+.star {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: url(/assets/icons/star.svg) no-repeat center;
+  background-size: contain;
+  margin-right: 0.2em;
+  vertical-align: middle;
+}
+
+.star.empty {
+  filter: grayscale(100%) brightness(65%);
+}
+
+</style>
+
 <script type="module">
 const reviewers = [
     { name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.json" },
@@ -165,16 +182,13 @@ async function loadReviewerData(url, name) {
     }
 }
 
-
 function renderStars(rating) {
     if (!rating) return "N/A";
     const clamped = Math.min(5, Math.max(1, rating));
     let stars = "";
     for (let i = 1; i <= 5; i++) {
-        const filled = i <= clamped ? "#FFD700" : "#DDDDDD";
-        stars += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="margin-right:2px; vertical-align:middle;">
-            <path fill="${filled}" d="M12 .587l3.668 7.568L24 9.75l-6 5.85 1.416 8.4L12 19.771 4.584 24l1.416-8.4-6-5.85 8.332-1.595z"/>
-        </svg>`;
+        const cls = i <= clamped ? "" : "empty";
+        stars += `<span class="star ${cls}"></span>`;
     }
     return stars;
 }
@@ -227,9 +241,9 @@ async function runSearch() {
 
     let html = `<center><h2>${query} — Average: ${average} / 5</h2>`;
     if (validReviews.length > 0) {
-        html += `<div>${renderStars(Math.round(average))}</div>`;
+        html += `<div style="font-size: 1.2em;">${renderStars(Math.round(average))}</div>`;
     }
-    html += `</center><table border="1" cellspacing="0" cellpadding="6" style="margin-top:10px;">
+    html += `</center><table cellspacing="0" cellpadding="6" style="margin-top:10px;">
         <tr><th>Source</th><th>Rating</th></tr>`;
 
     for (let r of allResults) {
@@ -248,9 +262,6 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
     if (e.key === "Enter") runSearch();
 });
 </script>
-
-
-
 
 
 
