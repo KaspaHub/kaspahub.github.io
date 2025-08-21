@@ -15,9 +15,9 @@
 <meta name="twitter:title" content="Reviews - Kaspa Hub" />
 <meta property="og:title" content="Review Checker - Kaspa Hub" />
 
-<meta name="description" content="Check the trust score of any Kaspa project from multiple independent reviewers. Identify safe, unreviewed, or malicious projects instantly.">
-<meta name="twitter:description" content="Analyse any Kaspa project to see if it's reviewed, unreviewed, or malicious using multiple independent reviewers.">
-<meta property="og:description" content="Check if a Kaspa project is reviewed, unreviewed, or malicious using independent data sources.">
+<meta name="description" content="Check the trust rating of any Kaspa project with a 1–5 star score from multiple independent vendors. Quickly see which projects are safe, unreviewed, or risky.">
+<meta name="twitter:description" content="Get the trust rating of Kaspa projects with a 1–5 star score from independent reviewers. Identify safe, unreviewed, or risky projects instantly.">
+<meta property="og:description" content="Discover the trust rating of Kaspa projects on a 1–5 star scale, based on data from multiple independent sources. Spot safe, unreviewed, or risky projects quickly.">
 
 <link rel="canonical" href="https://kaspahub.org/reviews/" />
 <meta name="twitter:url" content="https://kaspahub.org/reviews/" />
@@ -97,7 +97,7 @@ table tr:hover {
 <main id="container-1">
 <div class="intro">
     <h1>Analyze Websites</h1>
-    <p>Check any project to see if it’s reviewed, unreviewed, or marked as malicious or suspicious, using data from multiple independent sources.</p>
+    <p>Check any project to see how it’s rated across multiple independent sources. Ratings are shown on a 1–5 star scale, with an overall average score so you can quickly understand trust and reputation. Unrated projects are clearly marked as N/A.</p>
 </div>
 
 
@@ -149,22 +149,40 @@ function validateDomain(input) {
 
 async function loadReviewerData(url, name) {
     try {
-        const module = await import(url);
-        if (typeof module.items !== "object" || module.items === null || Array.isArray(module.items)) {
-            console.error(`Reviewer ${name} has invalid format (should be an object map)`);
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (typeof data !== "object" || data === null || Array.isArray(data)) {
+            console.error(`Reviewer ${name} JSON is invalid (should be an object map)`);
             return null;
         }
-        for (let [key, review] of Object.entries(module.items)) {
-            if (typeof key !== "string" || typeof review !== "number") {
-                console.error(`Reviewer ${name} has invalid entry:`, key, review);
-                return null;
-            }
-        }
-        return module.items;
+
+        return data;
     } catch (err) {
         console.error(`Failed to load reviewer ${name}:`, err);
         return null;
     }
+}
+
+
+function renderStars(rating) {
+    if (!rating) return "N/A";
+    const clamped = Math.min(5, Math.max(1, rating));
+    let stars = "";
+    for (let i = 1; i <= 5; i++) {
+        const filled = i <= clamped ? "#FFD700" : "#DDDDDD";
+        stars += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="margin-right:2px; vertical-align:middle;">
+            <path fill="${filled}" d="M12 .587l3.668 7.568L24 9.75l-6 5.85 1.416 8.4L12 19.771 4.584 24l1.416-8.4-6-5.85 8.332-1.595z"/>
+        </svg>`;
+    }
+    return stars;
+}
+
+function formatAverage(avg) {
+    if (avg === "N/A") return avg;
+    const num = parseFloat(avg);
+    return (num % 1 === 0) ? num.toString() : num.toFixed(2);
 }
 
 async function runSearch() {
@@ -190,32 +208,32 @@ async function runSearch() {
             continue;
         }
 
-        const reviewScore = data[query] ?? 0;
-
-        if (reviewScore >= 1) {
-            allResults.push({ name: reviewer.name, review: 1 });
-        } else if (reviewScore === -1) {
-            allResults.push({ name: reviewer.name, review: -1 });
-        } else if (reviewScore === -2) {
-            allResults.push({ name: reviewer.name, review: -2 });
-        } else {
-            allResults.push({ name: reviewer.name, review: 0 });
+        let reviewScore = data[query];
+        if (reviewScore === undefined) {
+            allResults.push({ name: reviewer.name, review: null });
+            continue;
         }
+
+        reviewScore = Math.min(5, Math.max(1, reviewScore));
+        allResults.push({ name: reviewer.name, review: reviewScore });
     }
 
-const validReviews = allResults.filter(r => r.review !== null && r.review >= -2 && r.review <= 2);
-const combined = validReviews.length > 0 
-    ? validReviews.reduce((acc, r) => acc + r.review, 0) 
-    : "N/A";
+    const validReviews = allResults.filter(r => r.review !== null);
+    let average = "N/A";
+    if (validReviews.length > 0) {
+        const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
+        average = formatAverage(rawAvg);
+    }
 
-    let html = `<center><h2>${query} (Score: ${combined})</h2></center><table>
-        <tr><th>Source</th><th>Status</th></tr>`;
+    let html = `<center><h2>${query} — Average: ${average} / 5</h2>`;
+    if (validReviews.length > 0) {
+        html += `<div>${renderStars(Math.round(average))}</div>`;
+    }
+    html += `</center><table border="1" cellspacing="0" cellpadding="6" style="margin-top:10px;">
+        <tr><th>Source</th><th>Rating</th></tr>`;
+
     for (let r of allResults) {
-        let status;
-        if (r.review === 1) status = `<span class="positive">✅ Reviewed</span>`;
-        else if (r.review === -1) status = `<span class="warning">⚠️ Suspicious</span>`;
-        else if (r.review === -2) status = `<span class="negative">❌ Malicious</span>`;
-        else status = `<span class="neutral">N/A</span>`;
+        let status = r.review ? renderStars(r.review) : `<span class="neutral">N/A</span>`;
         html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
     }
     html += `</table>`;
@@ -230,6 +248,8 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
     if (e.key === "Enter") runSearch();
 });
 </script>
+
+
 
 
 
