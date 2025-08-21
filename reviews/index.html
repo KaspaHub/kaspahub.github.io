@@ -36,41 +36,41 @@
 <style type="text/css">
 
 input[type=text] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
 }
 
 button {
-    padding: 10px 15px;
+	padding: 10px 15px;
 }
 
 article {
-    margin: 50px;
+	margin: 50px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
 }
 th, td {
-    padding: 8px;
-    text-align: center;
+	padding: 8px;
+	text-align: center;
 }
 th {
-    background-color: #b3b3b3;
-    width: 50%;
+	background-color: #b3b3b3;
+	width: 50%;
 }
 table tr:nth-child(odd) {
-    background-color: #dddddd0f;
+	background-color: #dddddd0f;
 }
 table tr:nth-child(even) {
-    background-color: #dddddd2e;
+	background-color: #dddddd2e;
 }
 
 table tr:hover {
-    background-color: rgba(100, 100, 100, 0.1);
+	background-color: rgba(100, 100, 100, 0.1);
 }
 
 .positive { color: green; font-weight: bold; }
@@ -78,12 +78,12 @@ table tr:hover {
 /*.neutral  { color: gray; }*/
 
 #searchContainer {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 #searchContainer > * {
-    margin: 10px;
+	margin: 10px;
 }
 
 </style>
@@ -96,177 +96,173 @@ table tr:hover {
 
 <main id="container-1">
 <div class="intro">
-    <h1>Analyze Websites</h1>
-    <p>Check any project to see how it’s rated across multiple independent sources. Ratings are shown on a 1–5 star scale, with an overall average score so you can quickly understand trust and reputation. Unrated projects are clearly marked as N/A.</p>
+	<h1>Analyze Websites</h1>
+	<p>Check any project to see how it’s rated across multiple independent sources. Ratings are shown on a 1–5 star scale, with an overall average score so you can quickly understand trust and reputation. Unrated projects are clearly marked as N/A.</p>
 </div>
 
-
 <div id="searchContainer">
-  <input 
-    type="text" 
-    id="searchBox" 
-    placeholder="example.com" 
-    required
-  >
-  <button class="button" id="searchBtn">Search</button>
+	<input 
+		type="text" 
+		id="searchBox" 
+		placeholder="example.com" 
+		required
+	>
+	<button class="button" id="searchBtn">Search</button>
 </div>
 
 <div id="results"></div>
 
 <style>
 .star {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  background: url(/assets/icons/star.svg) no-repeat center;
-  background-size: contain;
-  margin-right: 0.2em;
-  vertical-align: middle;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background: url(/assets/icons/star.svg) no-repeat center;
+	background-size: contain;
+	margin-right: 0.2em;
+	vertical-align: middle;
 }
 
 .star.empty {
-  filter: grayscale(100%) brightness(65%);
+	filter: grayscale(100%) brightness(65%);
 }
 
 </style>
 
 <script type="module">
 const reviewers = [
-    { name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.json" },
-    { name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.json" }
+	{ name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.json" },
+	{ name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.json" }
 ];
 
 async function preloadReviewers() {
-    for (let reviewer of reviewers) {
-        reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
-    }
+	for (let reviewer of reviewers) {
+		reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
+	}
 }
 
 function sanitizeDomain(input) {
-    try {
-        const normalized = input.startsWith("http://") || input.startsWith("https://")
-            ? input
-            : `https://${input}`;
-        const url = new URL(normalized);
-
-        let hostname = url.hostname.replace(/^www\./i, "");
-        return hostname.toLowerCase();
-    } catch {
-        return "";
-    }
+	try {
+		const normalized = input.startsWith("http://") || input.startsWith("https://")
+			? input
+			: `https://${input}`;
+		const url = new URL(normalized);
+	
+		let hostname = url.hostname.replace(/^www\./i, "");
+		return hostname.toLowerCase();
+	} catch {
+		return "";
+	}
 }
 
 function validateDomain(input) {
-    const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-    if (!domainPattern.test(input)) {
-        return { valid: false, reason: "Invalid domain. Use example.com" };
-    }
-    return { valid: true };
+	const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+	if (!domainPattern.test(input)) {
+		return { valid: false, reason: "Invalid domain. Use example.com" };
+	}
+	return { valid: true };
 }
 
 async function loadReviewerData(url, name) {
-    try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-
-        if (typeof data !== "object" || data === null || Array.isArray(data)) {
-            console.error(`Reviewer ${name} JSON is invalid (should be an object map)`);
-            return null;
-        }
-
-        return data;
-    } catch (err) {
-        console.error(`Failed to load reviewer ${name}:`, err);
-        return null;
-    }
+	try {
+		const res = await fetch(url);
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+		const data = await res.json();
+	
+		if (typeof data !== "object" || data === null || Array.isArray(data)) {
+			console.error(`Reviewer ${name} JSON is invalid (should be an object map)`);
+			return null;
+		}
+	
+		return data;
+	} catch (err) {
+		console.error(`Failed to load reviewer ${name}:`, err);
+		return null;
+	}
 }
 
 function renderStars(rating) {
-    if (!rating) return "N/A";
-    const clamped = Math.min(5, Math.max(1, rating));
-    let stars = "";
-    for (let i = 1; i <= 5; i++) {
-        const cls = i <= clamped ? "" : "empty";
-        stars += `<span class="star ${cls}"></span>`;
-    }
-    return stars;
+	if (!rating) return "N/A";
+	const clamped = Math.min(5, Math.max(1, rating));
+	let stars = "";
+	for (let i = 1; i <= 5; i++) {
+		const cls = i <= clamped ? "" : "empty";
+		stars += `<span class="star ${cls}"></span>`;
+	}
+	return stars;
 }
 
 function formatAverage(avg) {
-    if (avg === "N/A") return avg;
-    const num = parseFloat(avg);
-    return (num % 1 === 0) ? num.toString() : num.toFixed(2);
+	if (avg === "N/A") return avg;
+	const num = parseFloat(avg);
+	return (num % 1 === 0) ? num.toString() : num.toFixed(2);
 }
 
 async function runSearch() {
-    let query = document.getElementById("searchBox").value.trim();
-    if (!query) return;
-
-    query = sanitizeDomain(query);
-
-    const validation = validateDomain(query);
-    if (!validation.valid) {
-        document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
-        return;
-    }
-
-    document.getElementById("results").innerHTML = "Loading...";
-
-    const allResults = [];
-
-    for (let reviewer of reviewers) {
-        const data = reviewer.cache;
-        if (!data) {
-            allResults.push({ name: reviewer.name, review: null });
-            continue;
-        }
-
-        let reviewScore = data[query];
-        if (reviewScore === undefined) {
-            allResults.push({ name: reviewer.name, review: null });
-            continue;
-        }
-
-        reviewScore = Math.min(5, Math.max(1, reviewScore));
-        allResults.push({ name: reviewer.name, review: reviewScore });
-    }
-
-    const validReviews = allResults.filter(r => r.review !== null);
-    let average = "N/A";
-    if (validReviews.length > 0) {
-        const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
-        average = formatAverage(rawAvg);
-    }
-
-    let html = `<center><h2>${query} — Average: ${average} / 5</h2>`;
-    if (validReviews.length > 0) {
-        html += `<div style="font-size: 1.2em;">${renderStars(Math.round(average))}</div>`;
-    }
-    html += `</center><table cellspacing="0" cellpadding="6" style="margin-top:10px;">
-        <tr><th>Source</th><th>Rating</th></tr>`;
-
-    for (let r of allResults) {
-        let status = r.review ? renderStars(r.review) : `<span class="neutral">N/A</span>`;
-        html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
-    }
-    html += `</table>`;
-
-    document.getElementById("results").innerHTML = html;
+	let query = document.getElementById("searchBox").value.trim();
+	if (!query) return;
+	
+	query = sanitizeDomain(query);
+	
+	const validation = validateDomain(query);
+	if (!validation.valid) {
+		document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
+		return;
+	}
+	
+	document.getElementById("results").innerHTML = "Loading...";
+	
+	const allResults = [];
+	
+	for (let reviewer of reviewers) {
+		const data = reviewer.cache;
+		if (!data) {
+			allResults.push({ name: reviewer.name, review: null });
+			continue;
+		}
+	
+		let reviewScore = data[query];
+		if (reviewScore === undefined) {
+			allResults.push({ name: reviewer.name, review: null });
+			continue;
+		}
+	
+		reviewScore = Math.min(5, Math.max(1, reviewScore));
+		allResults.push({ name: reviewer.name, review: reviewScore });
+	}
+	
+	const validReviews = allResults.filter(r => r.review !== null);
+	let average = "N/A";
+	if (validReviews.length > 0) {
+		const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
+		average = formatAverage(rawAvg);
+	}
+	
+	let html = `<center><h2>${query} — Average: ${average} / 5</h2>`;
+	if (validReviews.length > 0) {
+		html += `<div style="font-size: 1.2em;">${renderStars(Math.round(average))}</div>`;
+	}
+	html += `</center><table cellspacing="0" cellpadding="6" style="margin-top:10px;">
+		<tr><th>Source</th><th>Rating</th></tr>`;
+	
+	for (let r of allResults) {
+		let status = r.review ? renderStars(r.review) : `<span class="neutral">N/A</span>`;
+		html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
+	}
+	html += `</table>`;
+	
+	document.getElementById("results").innerHTML = html;
 }
 
 preloadReviewers();
 
 document.getElementById("searchBtn").addEventListener("click", runSearch);
 document.getElementById("searchBox").addEventListener("keydown", e => {
-    if (e.key === "Enter") runSearch();
+	if (e.key === "Enter") runSearch();
 });
 </script>
 
-
-
 </main>
-
 
 <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
 
