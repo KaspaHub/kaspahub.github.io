@@ -231,13 +231,12 @@ async function runSearch() {
 			continue;
 		}
 
-		// Handle array form [rating, comment?]
 		let rating = null, comment = null;
 		if (Array.isArray(entry)) {
 			rating = entry[0];
 			comment = entry[1] ?? null;
 		} else {
-			rating = entry; // fallback in case old format used
+			rating = entry;
 		}
 
 		rating = Math.min(5, Math.max(0, rating));
