@@ -111,7 +111,7 @@ table tr:hover {
 <main id="container-1">
 <div class="intro">
 	<h1>Analyze Websites</h1>
-	<p>Check any project to see how it’s rated across multiple independent sources. Ratings are shown on a 1–5 star scale, with an overall average score so you can quickly understand trust and reputation. Unrated projects are clearly marked as N/A.</p>
+	<p>Check any project to see how it’s rated across multiple independent sources. Ratings are shown on a 1–5 star scale, with an overall average score so you can quickly understand trust and reputation. Unrated projects are marked as N/A.</p>
 </div>
 
 <div id="searchContainer">
@@ -236,8 +236,8 @@ async function runSearch() {
 	}
 	
 	
-	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average} / 5</span></h2><div style="margin: 30px; font-size: 1.2em; display: flex; justify-content: center; ">${renderStars(Math.round(average))}</div></center>`;
-
+	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average} / 5</span></h2></center>`;
+//<div style="margin: 30px; font-size: 1.2em; display: flex; justify-content: center; ">${renderStars(Math.round(average))}</div>
 	html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
 		<tr><th>Source</th><th>Rating</th></tr>`;
 	
