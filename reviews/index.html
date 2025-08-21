@@ -153,11 +153,11 @@ function sanitizeDomain(input) {
 }
 
 function validateDomain(input) {
-    const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,}$/;
-    if (!domainPattern.test(input)) {
-        return { valid: false, reason: "Invalid domain. Use example.com" };
-    }
-    return { valid: true };
+	const domainPattern = /^([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,}$/;
+	if (!domainPattern.test(input)) {
+		return { valid: false, reason: "Invalid domain. Use example.com" };
+	}
+	return { valid: true };
 }
 
 async function loadReviewerData(url, name) {
@@ -192,7 +192,7 @@ function renderStars(rating) {
 function formatAverage(avg) {
 	if (avg === "N/A") return avg;
 	const num = parseFloat(avg);
-	return (num % 1 === 0) ? num.toString() : num.toFixed(2);
+	return num.toFixed(2);
 }
 
 async function runSearch() {

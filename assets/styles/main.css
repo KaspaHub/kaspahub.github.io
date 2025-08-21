@@ -547,6 +547,7 @@ code {
 .card-description {
 	margin-bottom: 20px;
 	flex-grow: 1;
+	font-size: 0.95em;
 }
 
 .card.coming-soon {
