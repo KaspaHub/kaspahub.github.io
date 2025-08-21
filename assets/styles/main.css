@@ -67,6 +67,7 @@ time {
 	background-color: #6598BD;
 	color: #0f0f0f;
 	background-image: url(/assets/bg-light.webp);
+	--color: #0f0f0f;
 }
 
 #dark {
@@ -74,6 +75,7 @@ time {
 	background-image: linear-gradient(to bottom, #000000, #003437);
 	/*background: linear-gradient(to bottom right, #1a1a2e, #0c3f3a);*/
 	color: #f1f1f1;
+	--color: #f1f1f1;
 }
 
 #light, #dark {
@@ -947,3 +949,24 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	margin-right: -20px;
 	min-width: calc(100% + 40px);
 }
+
+
+.spinner {
+	display: inline-block;
+	animation: spin 0.7s linear infinite;
+	border: 2px solid var(--color);
+	border-right-color: transparent;
+	border-radius: 50%;
+	width: 1em;
+	height: 1em;
+}
+
+#loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 1.5em;
+	margin: 50px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

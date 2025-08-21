@@ -124,7 +124,7 @@ table tr:hover {
 	<button class="button" id="searchBtn">Search</button>
 </div>
 
-<div id="results"></div>
+<div id="results"><div class="fade-in" id="loading"><span class="spinner"></span><span>Fetching data…</span></div></div>
 
 <script type="module">
 const reviewers = [
@@ -132,10 +132,21 @@ const reviewers = [
 	{ name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.json" }
 ];
 
+let dataReady = false;
+
+
+
 async function preloadReviewers() {
+	const resultsEl = document.getElementById("results");
+
+
 	for (let reviewer of reviewers) {
 		reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
 	}
+
+	dataReady = true;
+	document.getElementById("searchBtn").disabled = false;
+	resultsEl.innerHTML = ``;
 }
 
 function sanitizeDomain(input) {
@@ -195,58 +206,68 @@ function formatAverage(avg) {
 }
 
 async function runSearch() {
-	let query = document.getElementById("searchBox").value.trim();
-	if (!query) return;
-	
-	query = sanitizeDomain(query);
-	
-	const validation = validateDomain(query);
-	if (!validation.valid) {
-		document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
-		return;
-	}
-	
-	document.getElementById("results").innerHTML = "Loading...";
-	
-	const allResults = [];
-	
-	for (let reviewer of reviewers) {
-		const data = reviewer.cache;
-		if (!data) {
-			allResults.push({ name: reviewer.name, review: null });
-			continue;
-		}
-	
-		let reviewScore = data[query];
-		if (reviewScore === undefined) {
-			allResults.push({ name: reviewer.name, review: null });
-			continue;
-		}
-	
-		reviewScore = Math.min(5, Math.max(0, reviewScore));
-		allResults.push({ name: reviewer.name, review: reviewScore });
-	}
-	
-	const validReviews = allResults.filter(r => r.review !== null);
-	let average = "N/A";
-	if (validReviews.length > 0) {
-		const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
-		average = formatAverage(rawAvg);
-	}
-	
-	
-	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average}</span></h2>`;
-	html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
-		<tr><th>Source</th><th>Rating</th></tr>`;
-	
-	for (let r of allResults) {
-		let status = renderStars(r.review);
-		html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
-	}
-	html += `</table>`;
-	
-	document.getElementById("results").innerHTML = html;
+    if (!dataReady) return;
+
+    let query = document.getElementById("searchBox").value.trim();
+    if (!query) return;
+
+    query = sanitizeDomain(query);
+
+    const validation = validateDomain(query);
+    if (!validation.valid) {
+        document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
+        return;
+    }
+
+    document.getElementById("results").innerHTML = "Loading...";
+
+    const allResults = [];
+
+    for (let reviewer of reviewers) {
+        const data = reviewer.cache;
+        if (!data) {
+            allResults.push({ name: reviewer.name, review: null, comment: null });
+            continue;
+        }
+
+        let reviewScore = data[query];
+        let comment = null;
+
+        if (Array.isArray(reviewScore)) {
+            reviewScore = reviewScore[0];
+            comment = reviewScore[1] || null;
+        }
+
+        if (reviewScore === undefined) {
+            allResults.push({ name: reviewer.name, review: null, comment });
+            continue;
+        }
+
+        reviewScore = Math.min(5, Math.max(0, reviewScore));
+        allResults.push({ name: reviewer.name, review: reviewScore, comment });
+    }
+
+    const validReviews = allResults.filter(r => r.review !== null);
+    let average = "N/A";
+    if (validReviews.length > 0) {
+        const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
+        average = formatAverage(rawAvg);
+    }
+
+    let html = `<h2 style="margin: 30px; text-align:center; ">${query} — <span>${average}</span></h2>`;
+    html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
+        <tr><th>Source</th><th>Rating</th></tr>`;
+
+    for (let r of allResults) {
+        let status = renderStars(r.review);
+        let commentHtml = r.comment ? `<br><small>${r.comment}</small>` : "";
+        html += `<tr><td>${r.name}</td><td>${status}${commentHtml}</td></tr>`;
+    }
+		html += `</table>`;
+
+		document.getElementById("results").innerHTML = html;
 }
+
 
 preloadReviewers();
 
@@ -255,6 +276,7 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
 	if (e.key === "Enter") runSearch();
 });
 </script>
+
 
 </main>
 
