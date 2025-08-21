@@ -179,8 +179,8 @@ async function loadReviewerData(url, name) {
 }
 
 function renderStars(rating) {
-	if (!rating) return "N/A";
-	const clamped = Math.min(5, Math.max(1, rating));
+	if (rating === null || rating === undefined) return `<span class="neutral">N/A</span>`;
+	const clamped = Math.min(5, Math.max(0, rating));
 	let stars = "";
 	for (let i = 1; i <= 5; i++) {
 		const cls = i <= clamped ? "" : "empty";
@@ -191,8 +191,7 @@ function renderStars(rating) {
 
 function formatAverage(avg) {
 	if (avg === "N/A") return avg;
-	const num = parseFloat(avg);
-	return num.toFixed(2);
+	return parseFloat(avg).toFixed(1);
 }
 
 async function runSearch() {
@@ -224,7 +223,7 @@ async function runSearch() {
 			continue;
 		}
 	
-		reviewScore = Math.min(5, Math.max(1, reviewScore));
+		reviewScore = Math.min(5, Math.max(0, reviewScore));
 		allResults.push({ name: reviewer.name, review: reviewScore });
 	}
 	
@@ -236,13 +235,12 @@ async function runSearch() {
 	}
 	
 	
-	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average} / 5</span></h2></center>`;
-//<div style="margin: 30px; font-size: 1.2em; display: flex; justify-content: center; ">${renderStars(Math.round(average))}</div>
+	let html = `<h2 style="margin: 30px; text-align:center; ">${query} - <span>${average}</span></h2>`;
 	html += `<table cellspacing="0" cellpadding="6" style="margin-top:10px;">
 		<tr><th>Source</th><th>Rating</th></tr>`;
 	
 	for (let r of allResults) {
-		let status = r.review ? renderStars(r.review) : `<span class="neutral">N/A</span>`;
+		let status = renderStars(r.review);
 		html += `<tr><td>${r.name}</td><td>${status}</td></tr>`;
 	}
 	html += `</table>`;
