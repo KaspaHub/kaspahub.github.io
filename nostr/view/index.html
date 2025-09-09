@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Nostr Raw User Data by Relay</title>
+<meta name="twitter:title" content="View Nostr User Data by Relay" />
+<meta property="og:title" content="Nostr Profile & Raw Event Viewer with Kaspa Support" />
+
+<meta name="description" content="View raw Nostr user data directly from multiple relays. Enter your public key (npub or hex) to fetch events, kind 0 profiles, and explore decentralized identity with Kaspa integration.">
+<meta name="twitter:description" content="Fetch and display Nostr raw events by relay using your public key. Supports npub or hex formats for quick decentralized data viewing.">
+<meta property="og:description" content="Explore Nostr raw events across multiple relays. Enter your public key to view profile data and activity in real time.">
+
+<link rel="canonical" href="https://kaspahub.org/nostr/view/" />
+<meta name="twitter:url" content="https://kaspahub.org/nostr/view/" />
+<meta property="og:url" content="https://kaspahub.org/nostr/view/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="@KaspaHub is accepting donations!" />
+<meta name="kaspa:wallet" content="kaspa:qrqg5eteekhucatdwz3xn4k76d70ykl4e3jnt88pe6dmfzjwv20gzcwjrwye6" />
+
+<style>
+.section {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+.button {
+    max-width: 200px;
+    align-self: end;
+}
+
+#error {
+    color: red;
+    margin-top: 10px;
+}
+.hidden {
+    display: none;
+}
+.relay-data {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.relay-data h3 {
+    margin-top: 0;
+}
+pre {
+    font-size: 1rem;
+}
+</style>
+</head>
+
+<body>
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav>
+<script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+    <div id="login-section" class="section">
+        <h2>Nostr Public Key Input</h2>
+        <label for="public-key">Public Key (npub or hex):</label>
+        <input type="text" id="public-key" placeholder="Enter your public key">
+
+        <input type="checkbox" id="fetch-all-events">
+        <label for="fetch-all-events">Fetch all event kinds (uncheck for kind 0 only)</label>
+
+        <button class="button" onclick="fetchEvents()">Fetch Events</button>
+        <div id="error"></div>
+    </div>
+
+    <div id="profile-section" class="section hidden">
+        <h2 id="profile-title">All Raw User Events by Relay</h2>
+        <div id="profiles"></div>
+    </div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+    <script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+    <script>
+        let publicKey;
+        let pool;
+        const relays = [
+            'wss://relay.damus.io',
+            'wss://relay.primal.net',
+            'wss://nostr.bitcoiner.social',
+            'wss://relay.nos.social',
+            'wss://nos.lol',
+            'wss://nostr.mom',
+            'wss://nostr.oxtr.dev',
+            'wss://relay.0xchat.com',
+            'wss://relay.nostr.band',
+            'wss://relay.noswhere.com',
+        ];
+
+        async function fetchEvents() {
+            const input = document.getElementById('public-key').value.trim();
+            const fetchAllEvents = document.getElementById('fetch-all-events').checked;
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = '';
+
+            try {
+                if (input.startsWith('npub')) {
+                    publicKey = window.NostrTools.nip19.decode(input).data;
+                } else {
+                    publicKey = input;
+                }
+
+                if (!/^[0-9a-f]{64}$/.test(publicKey)) {
+                    throw new Error('Invalid public key: Must be 64-character hex or valid npub');
+                }
+                console.log('Public key:', publicKey);
+
+                document.getElementById('profile-title').textContent = fetchAllEvents
+                    ? 'All Raw User Events by Relay'
+                    : 'Raw Kind 0 Event Data by Relay';
+
+                pool = new window.NostrTools.SimplePool();
+
+                const connectedRelays = [];
+                await Promise.all(relays.map(async (url) => {
+                    try {
+                        const relay = await pool.ensureRelay(url);
+                        console.log(`Connected to ${url}`);
+                        connectedRelays.push(url);
+                    } catch (err) {
+                        console.error(`Failed to connect to ${url}:`, err);
+                    }
+                }));
+
+                if (connectedRelays.length === 0) {
+                    throw new Error('Failed to connect to any relays');
+                }
+
+                await loadRawEventsByRelay(connectedRelays, fetchAllEvents);
+
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('profile-section').classList.remove('hidden');
+            } catch (err) {
+                errorDiv.textContent = 'Error: ' + err.message;
+                console.error('Fetch events error:', err);
+            }
+        }
+
+        async function loadRawEventsByRelay(connectedRelays, fetchAllEvents) {
+            const profilesDiv = document.getElementById('profiles');
+            profilesDiv.innerHTML = ''; // Clear previous content
+
+            try {
+                for (const relayUrl of connectedRelays) {
+                    console.log(`Fetching events from ${relayUrl} for pubkey: ${publicKey}`);
+                    const filter = fetchAllEvents
+                        ? { authors: [publicKey] }
+                        : { kinds: [0], authors: [publicKey], limit: 1 };
+                    let events = [];
+                    try {
+                        events = await pool.querySync([relayUrl], filter);
+                        if (events && events.length > 0) {
+                            console.log(`Events found on ${relayUrl}:`, events);
+                        } else {
+                            console.log(`No events found on ${relayUrl} for pubkey: ${publicKey}`);
+                            events = [{ message: fetchAllEvents ? 'No events found' : 'No kind 0 event found' }];
+                        }
+                    } catch (err) {
+                        console.error(`Error fetching from ${relayUrl}:`, err);
+                        events = [{ error: `Failed to fetch data: ${err.message}` }];
+                    }
+
+                    const relayDiv = document.createElement('div');
+                    relayDiv.className = 'relay-data';
+                    relayDiv.innerHTML = `
+                        <h3>${relayUrl}</h3>
+                        <pre>${JSON.stringify(events, null, 2)}</pre>
+                    `;
+                    profilesDiv.appendChild(relayDiv);
+                }
+            } catch (err) {
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = 'Error loading events: ' + err.message;
+                console.error('Load events error:', err);
+            }
+        }
+
+        window.addEventListener('unload', () => {
+            if (pool) {
+                pool.close(relays);
+                console.log('Closed all relay connections');
+            }
+        });
+    </script>
+
+</body>
+</html>

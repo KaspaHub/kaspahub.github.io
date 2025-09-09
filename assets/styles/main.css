@@ -613,32 +613,34 @@ code {
 	user-select: none;
 	font-size: 1rem;
 	text-align: center;
-}
-.link-button {
-	background: rgb(0 126 114 / 55%);
-	border: 1px solid rgb(0 147 133);
-	color: #fff !important;
+
+	color: #FFFFFF !important;
 	transition: background-color 0.3s ease, transform 0.2s ease;
 	padding: 10px 25px;
 	margin: 5px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.link-button {
+	background: rgb(0 126 114 / 75%);
 	border-radius: 16px;
 }
 
-.link-button:hover {
-	background-color: #333;
-	transform: scale(1.1);
-	text-decoration: none;
-}
 .copy-button, .button {
 	background-color: #4caf50;
-	color: white;
+	border-radius: 7px;
+/*	color: white;
 	padding: 8px;
 	font-size: 1rem;
 	border: none;
-	border-radius: 6px;
+	border-radius: 6px;*/
 }
-.copy-button:hover, .button:hover {
-	background-color: #45a049;
+
+.link-button:hover, .copy-button:hover, .button:hover {
+	text-decoration: none;
+	transform: scale(1.03);
+	filter: brightness(1.03);
 }
 
 .qr-code {
@@ -800,7 +802,7 @@ option {
 	color: black;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
 	opacity: 0.5;
 	color: inherit;
 }
