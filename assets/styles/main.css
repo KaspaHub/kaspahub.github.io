@@ -977,6 +977,6 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	justify-content: center;
 	gap: 10px;
 	font-size: 1.5em;
-	margin: 50px;
+	margin: 50px 0;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
