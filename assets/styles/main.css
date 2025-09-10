@@ -817,7 +817,7 @@ input::placeholder, textarea::placeholder {
 	border-bottom: 3px solid #1C62B9;
 }
 
-textarea, input[type="text"], div[contenteditable="true"] {
+textarea, input[type="text"], input[type="password"], div[contenteditable="true"] {
 	border:2px solid #757575;
 	background-color: rgba(0,0,0, 0.1);
 	border-radius: 10px;
@@ -832,7 +832,7 @@ textarea, input[type="text"], div[contenteditable="true"] {
 	cursor: default;
 }
 
-textarea:focus, input[type="text"]:focus, div[contenteditable="true"]:focus {
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, div[contenteditable="true"]:focus {
 	border-color: #1C62B9;
 }
 

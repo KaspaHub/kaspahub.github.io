@@ -11,13 +11,13 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 
-<title>Nostr Account Registration</title>
-<meta name="twitter:title" content="Nostr Account Registration" />
+<title>Create Nostr Account</title>
+<meta name="twitter:title" content="Nostr Account Signup" />
 <meta property="og:title" content="Nostr Account Registration with Kaspa Support" />
 
-<meta name="description" content="Create your Nostr account with one click and save your private key securely. Start connecting across Web3 and Nostr with Kaspa integration.">
-<meta name="twitter:description" content="Register for Nostr in one click and securely save your private key. Supports Kaspa wallet integration.">
-<meta property="og:description" content="One-click Nostr account creation with Kaspa wallet support. Save your private key and join the decentralized network.">
+<meta name="description" content="Sign up for a Nostr account in just one click. Securely store your private key and start connecting across decentralized networks.">
+<meta name="twitter:description" content="Easily create your Nostr account and protect your private key. Join the decentralized community today.">
+<meta property="og:description" content="Create your Nostr account with one click and save your private key securely. Start connecting across Web3 and Nostr with Kaspa integration.">
 
 <link rel="canonical" href="https://kaspahub.org/nostr/register/" />
 <meta name="twitter:url" content="https://kaspahub.org/nostr/register/" />
@@ -55,6 +55,7 @@
     <h2>Create Account</h2>
     <p>Welcome! Create your account to get started.<br>Click below to generate your Nostr private key.</p>
     <button onclick="generateKeys()" class="button">Create Account</button>
+    <p>Already have a Nostr account? <a href="/nostr/edit/">Login now</a></p>
     <div id="error"></div>
   </div>
 
@@ -73,7 +74,7 @@
 
     <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <button onclick="copyKey()" class="button" id="copy">Copy Key</button>
-    <a href="/nostr/login/" id="login-link" class="button" style="opacity: 0.5; pointer-events: none;">Proceed to Login</a>
+    <a href="/nostr/edit/" id="login-link" class="button" style="opacity: 0.5; pointer-events: none;">Proceed to Login</a>
     </div>
   
   </div>
