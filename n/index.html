@@ -62,6 +62,13 @@ main {
     overflow: hidden;
     border-radius: 50%;
 }
+@media (max-width: 700px) {
+    #picture {
+        height: 100px;
+        width: 100px;
+    }
+}
+
 #posts {
     margin-top: 20px;
     width: 100%;
@@ -191,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorDiv = document.getElementById("error");
     const postsElement = document.getElementById("posts");
     const containerElement = document.getElementById("container-1");
-
+    const openButton = document.getElementById("open-button");
 
 
     const relays = [
