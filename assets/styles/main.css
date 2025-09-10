@@ -620,6 +620,7 @@ code {
 	margin: 5px;
 	height: 25px;
 	line-height: 25px;
+	overflow: hidden;
 }
 
 .link-button {
