@@ -117,7 +117,7 @@ function copyKey() {
   try {
     navigator.clipboard.writeText(nsecKey).then(() => {
       const originalText = copyButton.textContent;
-      copyButton.textContent = 'Copied to clipboard!';
+      copyButton.textContent = 'Copied!';
       setTimeout(() => {
         copyButton.textContent = originalText;
       }, 1500);
