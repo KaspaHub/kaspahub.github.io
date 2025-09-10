@@ -278,6 +278,9 @@
             const filter = { kinds: [0], authors: [publicKey], limit: 1 };
             const events = await pool.querySync(relays, filter);
 
+                const npub = window.NostrTools.nip19.npubEncode(publicKey);
+                document.getElementById('link').href = `https://kaspahub.org/n/?user=${npub}`;
+
             if (events && events.length > 0) {
                 const event = events[0];
                 console.log('Profile event found:', event);
@@ -299,8 +302,7 @@
                         validationState[field] = false;
                     }
                 });
-                const npub = window.NostrTools.nip19.npubEncode(publicKey);
-                document.getElementById('link').href = `https://kaspahub.org/n/?user=${npub}`;
+
                 updateSaveButton();
             } else {
                 console.log('No profile event found for pubkey:', publicKey);
