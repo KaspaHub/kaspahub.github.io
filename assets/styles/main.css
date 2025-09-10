@@ -621,6 +621,11 @@ code {
 	height: 25px;
 	line-height: 25px;
 	overflow: hidden;
+
+	white-space: nowrap;
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
 }
 
 .link-button {
