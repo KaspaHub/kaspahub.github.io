@@ -66,6 +66,9 @@ main {
         height: 100px;
         width: 100px;
     }
+    main {
+        font-size: 0.9em;
+    }
 }
 
 #posts {
@@ -91,6 +94,7 @@ main {
     display: flex;
     flex-direction: row;
     min-width: 100%;
+    margin-top: 30px;
 }
 #searchContainer > * {
     margin: 10px;
@@ -124,15 +128,17 @@ main {
     z-index: 10;
 }
 
-.popup-menu a {
+.popup-menu a, .popup-menu button {
     display: block;
     padding: 8px 12px;
     color: white;
     text-decoration: none;
     cursor: pointer;
+    width: 100%;
+    text-align: left;
 }
 
-.popup-menu a:hover {
+.popup-menu a:hover, .popup-menu button:hover {
     background-color: #555;
 }
 </style>
@@ -245,11 +251,12 @@ function processPostContent(content) {
         aboutElement.textContent = "";
         errorDiv.textContent = "";
         containerElement.innerHTML = `
+<div class="theme-1">
 <h3>Enter Your Nostr Public Key</h3>
 <div id="searchContainer">
     <input type="text" id="searchBox" placeholder="npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" required="">
     <button class="button" id="searchBtn">Search</button>
-</div>
+</div></div>
 `;
         return;
     }
@@ -303,13 +310,13 @@ function processPostContent(content) {
     }
 
 const menuItems = [];
-menuItems.push(`<a href="#" onclick="navigator.clipboard.writeText('${npub}')">Copy Public Key</a>`);
-// menuItems.push(`<a href="https://primal.net/p/${npub}" target="_blank">View on Primal</a>`);
+menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${npub}')">Copy Public Key</button>`);
+menuItems.push(`<a href="https://primal.net/p/${npub}" target="_blank">View on Primal</a>`);
 if (userProfile.website && userProfile.website.startsWith('http')) {
     menuItems.push(`<a href="${userProfile.website}" target="_blank">Visit Website</a>`);
 }
 if (userProfile.lud16 && userProfile.lud16.includes('@')) {
-    menuItems.push(`<a href="#" onclick="navigator.clipboard.writeText('${userProfile.lud16}')">Copy Lightning</a>`);
+    menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${userProfile.lud16}')">Copy Lightning</button>`);
 }
 popupMenu.innerHTML = menuItems.join('');
 
