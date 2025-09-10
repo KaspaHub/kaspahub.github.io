@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorDiv = document.getElementById("error");
     const postsElement = document.getElementById("posts");
     const containerElement = document.getElementById("container-1");
-    const openButton = document.getElementById("open-button");
+    // const openButton = document.getElementById("open-button");
 
 
     const relays = [
@@ -372,10 +372,10 @@ popupMenu.innerHTML = menuItems.join('');
         });
     });
 
-    if (window.innerHeight > window.innerWidth) {
-        openButton.style.display = "inline-block";
-        openButton.href = walletAddress;
-    }
+    // if (window.innerHeight > window.innerWidth) {
+    //     openButton.style.display = "inline-block";
+    //     openButton.href = walletAddress;
+    // }
 
     setMetaTag('kaspa:wallet', walletAddress);
 
