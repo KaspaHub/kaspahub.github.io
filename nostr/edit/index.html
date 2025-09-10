@@ -35,7 +35,7 @@
 <style type="text/css">
     .section { margin-bottom: 20px; }
     label { display: block; margin: 5px 0; }
-    .button, .link-button { margin: 20px 0; }
+    .button, .link-button { margin: 15px 0; padding: 7px 15px; }
     #status { color: green; margin-top: 10px; }
     #error { color: red; margin-top: 10px; }
     .hidden { display: none; }
@@ -49,7 +49,7 @@
 <script async src="/assets/scripts/main.js"></script>
 
 <main id="container-1">
-<div id="login-section" class="section">
+<div id="login-section" class="theme-1 section">
     <h2>Nostr Login</h2>
     <label for="private-key">Private Key (nsec or hex):</label>
     <input autocomplete="off" type="text" id="private-key" placeholder="Enter your private key">
@@ -57,7 +57,7 @@
     <div id="error"></div>
 </div>
 
-<div id="profile-section" class="section hidden">
+<div id="profile-section" class="theme-1 section hidden">
     <h2>Edit Profile</h2>
     <label for="display_name">Display Name:</label>
     <input type="text" id="display_name" placeholder="Your display name">
@@ -99,7 +99,7 @@
     <input type="text" id="lud16" placeholder="e.g., user@domain.com">
     <div id="lud16-error" class="error-message"></div>
 
-    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
         <a id="link" class="link-button">View Profile</a>
         <button id="save-button" onclick="saveProfile()" class="button" disabled>Save Profile</button>
     </div>
