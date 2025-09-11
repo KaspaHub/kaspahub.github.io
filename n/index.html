@@ -314,7 +314,7 @@ menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${
 if (userProfile.lud16 && userProfile.lud16.includes('@')) {
     menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${userProfile.lud16}')">Copy Lightning</button>`);
 }
-menuItems.push(`<a href="https://primal.net/p/${npub}" target="_blank">Visit Primal</a>`);
+// menuItems.push(`<a href="https://primal.net/p/${npub}" target="_blank">Visit Primal</a>`);
 if (userProfile.website && userProfile.website.startsWith('http')) {
     menuItems.push(`<a href="${userProfile.website}" target="_blank">Visit Website</a>`);
 }
