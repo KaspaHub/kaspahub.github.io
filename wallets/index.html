@@ -115,6 +115,10 @@
 			<input type="checkbox" id="multiChain" data-feature="multiChain">
 			<label for="multiChain">Multi-Chain</label>
 		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="layer2" data-feature="layer2">
+			<label for="layer2">Layer 2</label>
+		</div>
 	</div>
 	<h3>Devices</h3>
 	<div class="filter-category">
@@ -164,23 +168,6 @@
 
 const items = [
 {
-	name: "OneKey",
-	description: "Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices.",
-	link: "https://onekey.so",
-	logo: "/assets/logos/onekeywallet.webp",
-	features: {
-		reviewed: true,
-		openSource: true,
-		multiChain: true,
-		selfCustodial: true,
-		krc20: true,
-		hardware: true,
-		desktop: true,
-		mobile: true,
-		browserExtension: true
-	}
-},
-{
 	name: "Tangem",
 	description: "Popular hardware wallet with EAL6+ certified chip, audited by Kudelski Security and Riscure, offering multi-chain asset management with an open-source app.",
 	link: "https://tangem.com",
@@ -194,24 +181,12 @@ const items = [
 		krc20: true,
 		krc721: false,
 		knsDomains: false,
+		layer2: false,
 		hardware: true,
 		mobile: true,
 		desktop: false,
 		browserExtension: false,
 		web: false
-	}
-},
-{
-	name: "OKX Wallet",
-	description: "User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains.",
-	link: "https://web3.okx.com",
-	logo: "/assets/logos/okxwallet.webp",
-	features: {
-		reviewed: true,
-		selfCustodial: true,
-		multiChain: true,
-		mobile: true,
-		browserExtension: true
 	}
 },
 {
@@ -238,6 +213,7 @@ const items = [
 		krc20: true,
 		krc721: true,
 		knsDomains: true,
+		layer2: true,
 		mobile: true,
 		browserExtension: true
 	}
@@ -253,6 +229,7 @@ const items = [
 		krc20: true,
 		krc721: true,
 		knsDomains: true,
+		layer2: true,
 		mobile: true,
 		browserExtension: true
 	}
@@ -380,6 +357,36 @@ const items = [
 	}
 },
 {
+	name: "OneKey",
+	description: "Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices.",
+	link: "https://onekey.so",
+	logo: "/assets/logos/onekeywallet.webp",
+	features: {
+		reviewed: true,
+		openSource: true,
+		multiChain: true,
+		selfCustodial: true,
+		krc20: true,
+		hardware: true,
+		desktop: true,
+		mobile: true,
+		browserExtension: true
+	}
+},
+{
+	name: "OKX Wallet",
+	description: "User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains.",
+	link: "https://web3.okx.com",
+	logo: "/assets/logos/okxwallet.webp",
+	features: {
+		reviewed: true,
+		selfCustodial: true,
+		multiChain: true,
+		mobile: true,
+		browserExtension: true
+	}
+},
+{
 	name: "SafePal",
 	description: "Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping.",
 	link: "https://www.safepal.com",
@@ -460,20 +467,10 @@ const items = [
 	features: {
 		multiChain: true,
 		selfCustodial: true,
+		layer2: true,
 		desktop: true,
 		mobile: true,
 		browserExtension: true
-	}
-},
-{
-	name: "CoinRabbit",
-	description: "Custodial multi-currency wallet offering storage, swapping, lending, and borrowing crypto in one platform, focusing on user convenience.",
-	link: "https://coinrabbit.io/wallet/",
-	logo: "/assets/logos/coinrabbit.webp",
-	features: {
-		multiChain: true,
-		selfCustodial: false,
-		web: true
 	}
 },
 {
@@ -512,6 +509,17 @@ const items = [
 		hardware: true,
 		desktop: true,
 		mobile: true
+	}
+},
+{
+	name: "CoinRabbit",
+	description: "Custodial multi-currency wallet offering storage, swapping, lending, and borrowing crypto in one platform, focusing on user convenience.",
+	link: "https://coinrabbit.io/wallet/",
+	logo: "/assets/logos/coinrabbit.webp",
+	features: {
+		multiChain: true,
+		selfCustodial: false,
+		web: true
 	}
 }
 ];
