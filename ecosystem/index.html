@@ -130,36 +130,6 @@
 
 const items = [
 {
-	name: "Kaspa.org",
-	description: "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
-	link: "https://kaspa.org",
-	logo: "/assets/logos/kaspa.webp",
-	features: {
-		reviewed: true
-	}
-},
-{
-	name: "Kaspa.com",
-	description: "Leading Kaspa marketplace and DeFi platform for minting, trading KRC-20 tokens & KRC-721 NFTs on Kaspa’s blockDAG with portfolio tools to explore the ecosystem.",
-	link: "https://www.kaspa.com",
-	logo: "/assets/logos/kaspacom.webp",
-	features: {
-		reviewed: true,
-		defi: true,
-		marketplace: true
-	}
-},
-{
-	name: "KASmedia",
-	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
-	link: "https://www.kasmedia.com",
-	logo: "/assets/logos/kasmedia.webp",
-	features: {
-		reviewed: true,
-		social: true
-	}
-},
-{
 	name: "Kaspa Industrial Initiative",
 	description: "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
 	link: "https://kaspa-kii.org",
@@ -175,6 +145,16 @@ const items = [
 	logo: "/assets/logos/kef.webp",
 	features: {
 		reviewed: true
+	}
+},
+{
+	name: "KASmedia",
+	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
+	link: "https://www.kasmedia.com",
+	logo: "/assets/logos/kasmedia.webp",
+	features: {
+		reviewed: true,
+		social: true
 	}
 },
 {
@@ -198,42 +178,6 @@ const items = [
 	}
 },
 {
-	name: "Zealous Swap",
-	description: "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
-	link: "https://www.zealousswap.com",
-	logo: "/assets/logos/zealous.webp",
-	features: {
-		defi: true
-	}
-},
-{
-	name: "Fervent Finance",
-	description: "The first lending and borrowing platform in the Kaspa ecosystem, built by Zealous Swap, offering capital-efficient, non-custodial DeFi with insured deposits and audited contracts.",
-	link: "https://www.fervent.finance",
-	logo: "/assets/logos/fervent.finance.webp",
-	features: {
-		defi: true
-	}
-},
-{
-	name: "Kaspa Finance",
-	description: "A DEX and DeFi platform on Kaspa's Kasplex zkEVM, offering fast swaps, liquidity, farms, lending, AI-driven DeFai tools, and a Token Creator Tool for KRC20 and other tokens.",
-	link: "https://kaspafinance.io",
-	logo: "/assets/logos/kaspafinance.webp",
-	features: {
-		defi: true
-	}
-},
-{
-	name: "SeaSwap",
-	description: "A DEX aggregator for the Kaspa ecosystem, built on Igra Labs and Kasplex, enabling seamless trade routing and optimized DeFi trading experiences.",
-	link: "https://seaswap.xyz",
-	logo: "/assets/logos/seaswap.webp",
-	features: {
-		defi: true
-	}
-},
-{
 	name: "KNS",
 	description: "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	link: "https://app.knsdomains.org",
@@ -244,10 +188,101 @@ const items = [
 	}
 },
 {
+	name: "Kaspa.org",
+	description: "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
+	link: "https://kaspa.org",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		reviewed: true
+	}
+},
+{
+	name: "Kaspa.com",
+	description: "Leading Kaspa DeFi Platform with L2 DEX, lending & borrowing, and launchpad. Seamless L1 marketplace for trading KRC-721 NFTs, KRC-20 tokens, and KNS domains on Kaspa’s BlockDAG.",
+	link: "https://www.kaspa.com",
+	logo: "/assets/logos/kaspacom.webp",
+	features: {
+		reviewed: true,
+		defi: true,
+		marketplace: true
+	}
+},
+{
+	name: "Zealous Swap",
+	description: "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
+	link: "https://www.zealousswap.com",
+	logo: "/assets/logos/zealous.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "KSPR DEX",
+	description: "A decentralized exchange and launchpad on Kaspa's Kasplex L2, enabling zero-fee token deployment, V3 AMM liquidity with perpetual creator fees, and in-channel Telegram trading for seamless DeFi access.",
+	link: "https://app.kspr.exchange",
+	logo: "/assets/logos/kspr.webp",
+	features: {
+		reviewed: true,
+		defi: true,
+		launchpad: true
+	}
+},
+{
+	name: "Kaspa Finance",
+	description: "A DEX and DeFi platform on Kaspa's Kasplex zkEVM, offering fast swaps, liquidity, farms, lending, AI-driven DeFai tools, and a Token Creator Tool for KRC20 and other tokens.",
+	link: "https://kaspafinance.io",
+	logo: "/assets/logos/kaspafinance.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "SeaSwap",
+	description: "A DEX aggregator for the Kaspa ecosystem, built on Igra Labs and Kasplex, enabling seamless trade routing and optimized DeFi trading experiences.",
+	link: "https://seaswap.xyz",
+	logo: "/assets/logos/seaswap.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "Fervent Finance",
+	description: "The first lending and borrowing platform in the Kaspa ecosystem, built by Zealous Swap, offering capital-efficient, non-custodial DeFi with insured deposits and audited contracts.",
+	link: "https://www.fervent.finance",
+	logo: "/assets/logos/fervent.finance.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
 	name: "Kasway",
 	description: "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	link: "https://kasway.xyz",
 	logo: "/assets/logos/kasway.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "Kurve",
+	description: "A two-way KAS-EVM bridge for seamless $KAS transfers between Kaspa Layer 1 and Kasplex Layer 2, enabling DeFi and smart contract interactions with fast, low-fee transactions.",
+	link: "https://kasbridge-evm.kaspafoundation.org",
+	logo: "/assets/logos/kurve.webp",
+	features: {
+		reviewed: true,
+		defi: true
+	}
+},
+{
+	name: "KAT Bridge",
+	description: "A two-way bridge for Kaspa tokens, enabling seamless KRC-20 to ERC-20 transfers between Kaspa L1 and Kasplex L2, with FROST threshold signatures for security and support for project onboarding.",
+	link: "https://katbridge.com",
+	logo: "/assets/logos/katbridge.webp",
 	features: {
 		reviewed: true,
 		defi: true
@@ -287,6 +322,7 @@ const items = [
 	link: "https://vivoor.xyz",
 	logo: "/assets/logos/vivoor.webp",
 	features: {
+		reviewed: true,
 		social: true
 	}
 },
@@ -327,15 +363,15 @@ const items = [
 		reviewed: true
 	}
 },
-{
-	name: "KasClean",
-	description: "A token approval management tool for the Kaspa ecosystem, enabling users to scan, inspect, and revoke approvals for dApps to secure tokens and NFTs from exploits, hacks, and phishing scams.",
-	link: "https://kasclean.app",
-	logo: "/assets/logos/kasclean.webp",
-	features: {
-		defi: true
-	}
-},
+// {
+// 	name: "KasClean",
+// 	description: "A token approval management tool for the Kaspa ecosystem, enabling users to scan, inspect, and revoke approvals for dApps to secure tokens and NFTs from exploits, hacks, and phishing scams.",
+// 	link: "https://kasclean.app",
+// 	logo: "/assets/logos/kasclean.webp",
+// 	features: {
+// 		defi: true
+// 	}
+// },
 {
 	name: "Kaskad",
 	description: "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
@@ -384,22 +420,23 @@ const items = [
 		launchpad: true
 	}
 },
-{
-	name: "Knot Meme",
-	description: "A platform for launching KRC20 tokens on the Kaspa network, providing instant liquidity and live trading features for seamless token creation and DeFi integration.",
-	link: "https://knot.meme",
-	logo: "/assets/logos/knotmeme.webp",
-	features: {
-		defi: true,
-		launchpad: true
-	}
-},
+// {
+// 	name: "Knot Meme",
+// 	description: "A platform for launching KRC20 tokens on the Kaspa network, providing instant liquidity and live trading features for seamless token creation and DeFi integration.",
+// 	link: "https://knot.meme",
+// 	logo: "/assets/logos/knotmeme.webp",
+// 	features: {
+// 		defi: true,
+// 		launchpad: true
+// 	}
+// },
 {
 	name: "Proof of Works",
 	description: "The first fully on-chain job platform on Kaspa, offering smart contract escrow, KAS payouts, DAO-based disputes, and a censorship-resistant reputation system for trustless hiring.",
 	link: "https://www.proofofworks.com",
 	logo: "/assets/logos/proofofworks.webp",
 	features: {
+		reviewed: true,
 		jobs: true
 	}
 },
@@ -449,13 +486,13 @@ const items = [
 	}
 },
 {
-    name: "SLOWLIKEBTC",
-    description: "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
-    link: "https://slowlikebtc.printify.me",
-    logo: "/assets/logos/slowlikebtc.webp",
-    features: {
-        marketplace: true
-    }
+	name: "SLOWLIKEBTC",
+	description: "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
+	link: "https://slowlikebtc.printify.me",
+	logo: "/assets/logos/slowlikebtc.webp",
+	features: {
+		marketplace: true
+	}
 },
 {
 	name: "Kaspa Drip",
@@ -525,7 +562,7 @@ const items = [
 	name: "KasLens",
 	description: "AI-powered tool for real-time Kaspa market analysis, offering sentiment analysis, news summaries, predictive charting, and instant price movement notifications.",
 	link: "https://kaspa-ai.com",
-	logo: "/assets/logos/kaspaai.webp",
+	logo: "/assets/logos/kaslens.webp",
 	features: {
 		reviewed: true,
 		ai: true
@@ -622,7 +659,7 @@ const items = [
 	logo: "/assets/logos/blocks.webp",
 	features: {
 		mining: true
-		}
+	}
 },
 // {
 // 	name: "Kaspool",
@@ -648,6 +685,7 @@ const items = [
 	link: "https://katpool.xyz",
 	logo: "/assets/logos/katpool.webp",
 	features: {
+		reviewed: true,
 		mining: true
 	}
 },
@@ -840,6 +878,7 @@ const items = [
 	link: "https://www.lookintokaspa.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
+		reviewed: true,
 		analytics: true
 	}
 },
@@ -869,6 +908,7 @@ const items = [
 	link: "https://nachothekat.xyz",
 	logo: "/assets/logos/nacho.webp",
 	features: {
+		reviewed: true,
 		meme: true
 	}
 },
@@ -878,6 +918,7 @@ const items = [
 	link: "https://www.kaspercoin.net",
 	logo: "/assets/logos/kasper.webp",
 	features: {
+		reviewed: true,
 		meme: true
 	}
 },
@@ -887,6 +928,7 @@ const items = [
 	link: "https://slowlikebtc.com",
 	logo: "/assets/logos/slow.webp",
 	features: {
+		reviewed: true,
 		meme: true
 	}
 },
@@ -961,7 +1003,7 @@ const items = [
 	}
 },
 {
-	name: "Kaspacom  Wallet",
+	name: "Kaspacom Wallet",
 	description: "An open-source KaspaCom web wallet, formerly known as Kaspiano, fully integrated with both Layer 1 and Layer 2 of the Kaspa network.",
 	link: "https://wallet.kaspa.com",
 	logo: "/assets/logos/kaspacom.webp",
@@ -1012,7 +1054,7 @@ const items = [
 	name: "KSPR Bot",
 	description: "Telegram-based wallet for Kaspa, offering seamless KRC20 token management and self-custodial storage, ideal for users seeking convenience and integration with messaging platform.",
 	link: "https://kspr-bot.xyz",
-	logo: "/assets/logos/ksprbot.webp",
+	logo: "/assets/logos/kspr.webp",
 	features: {
 		wallet: true
 	}
