@@ -89,7 +89,7 @@ form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6p
   <button class="button" id="searchBtn">Search</button>
 </div>
 
-<div id="loading" class="hidden">
+<div id="loading" style="display: none;">
   <span class="spinner"></span> Fetching…
 </div>
 
@@ -216,7 +216,7 @@ async function handleSearch() {
 
   const prev = searchBtn.textContent;
   searchBtn.disabled = true;
-  loading.hidden = false; 
+  loading.style.display = "block";
 
   try {
     const [{ sompi }, kasPriceUsd] = await Promise.all([
@@ -233,7 +233,7 @@ async function handleSearch() {
     setStatus(`Couldn’t fetch data. ${err.message ? String(err.message) : ''}`);
   } finally {
     searchBtn.disabled = false;
-    loading.hidden = true;
+    loading.style.display = "none";
   }
 }
 
