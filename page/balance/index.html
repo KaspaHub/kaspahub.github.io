@@ -89,9 +89,9 @@ form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6p
   <button class="button" id="searchBtn">Search</button>
 </div>
 
-<!-- <div id="loading" hidden>
+<div id="loading" hidden>
   <span class="spinner"></span> Fetching…
-</div> -->
+</div>
 
 <div id="msg"></div>
 <div id="results" class="results" hidden></div>
@@ -104,6 +104,8 @@ const searchBox = document.getElementById('searchBox');
 const searchBtn = document.getElementById('searchBtn');
 const msg = document.getElementById('msg');
 const results = document.getElementById('results');
+
+const loading = document.getElementById('loading');
 
 function isKaspaAddress(s) {
   return typeof s === 'string'
