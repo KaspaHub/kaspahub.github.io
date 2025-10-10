@@ -60,9 +60,9 @@ The "Ratio (EH/s ÷ Marketcap)" is calculated by dividing the network hashrate (
 </thead>
 <tbody>
 <tr><td>Price (USD)</td><td id="kas-price">...</td><td id="btc-price">...</td></tr>
-<tr><td>Circulating Supply</td><td id="kas-circ">...</td><td>19,895,478</td></tr>
+<tr><td>Circulating Supply</td><td id="kas-circ">...</td><td>19,932,262</td></tr>
 <tr><td>Market Cap (USD)</td><td id="kas-cap">...</td><td id="btc-cap">...</td></tr>
-<tr><td>Hashrate (EH/s)</td><td>0.85</td><td>900.52</td></tr>
+<tr><td>Hashrate (EH/s)</td><td>0.68</td><td>953.89</td></tr>
 <tr><td>Ratio (EH/s ÷ Marketcap)</td><td id="kas-ratio">...</td><td id="btc-ratio">-</td></tr>
 <tr><td>Ratio (Normalized)</td><td id="kas-normalized">...</td><td id="btc-normalized">-</td></tr>
 </tbody>
@@ -84,15 +84,15 @@ let circSupply = 26556591412; // fallback circulating supply
 const data = {
 	kas: {
 		supply: circSupply,
-		hashrate: 0.85,
+		hashrate: 0.68,
 		price: fallbackKasPrice,
 		marketcap: null,
 		ratio: null,
 		normalized: null,
 	},
 	btc: {
-		supply: 19895478,
-		hashrate: 900.52,
+		supply: 19932262,
+		hashrate: 953.89,
 		price: fallbackBtcPrice,
 		marketcap: null,
 		ratio: null,

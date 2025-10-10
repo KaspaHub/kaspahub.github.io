@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+<head>
+  <script>
+    document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/assets/manifest.json" />
+
+  <title>Bitcoin Research - CoinHub</title>
+  <meta name="description" content="Research Bitcoin fundamentals including consensus protocol, block time, TPS, and tokenomics on CoinHub." />
+  <link rel="canonical" href="https://coinhub.fyi/?coin=btc" />
+  <meta property="og:title" content="Bitcoin Research - CoinHub" />
+  <meta property="og:description" content="Learn about Bitcoin’s consensus model, TPS, tokenomics, and network incidents on CoinHub." />
+  <meta property="og:image" content="https://coinhub.fyi/assets/images/btc-logo.png" />
+</head>
+
+<body>
+  <nav id="navBar">
+    <input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" />
+    <a id="title" href="/">CoinHub</a>
+    <input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" />
+  </nav>
+
+  <main id="container-1" class="coin-container">
+    <h1 id="coinName">Loading...</h1>
+    <div id="coinData" class="coin-info"></div>
+  </main>
+
+  <footer>
+    <a href="https://coinhub.fyi">CoinHub</a>
+  </footer>
+
+  <script async src="/assets/scripts/main.js"></script>
+<script>
+  async function loadCoinData() {
+    const query = new URLSearchParams(window.location.search);
+    const coinParam = query.get('coin')?.toLowerCase();
+    const nameEl = document.getElementById('coinName');
+    const dataEl = document.getElementById('coinData');
+
+    try {
+      const res = await fetch('/page/research/coins.json');
+      const coins = await res.json();
+      const coin = coins[coinParam];
+
+      if (!coin) {
+        nameEl.textContent = "Coin Not Found";
+        dataEl.innerHTML = `<p>Sorry, no data available for the requested coin.</p>`;
+        return;
+      }
+
+      nameEl.textContent = `${coin.name} (${coin.symbol.toUpperCase()})`;
+
+      // Helper function to safely display missing fields
+      const safe = (value) => value ? value : "N/A";
+
+      dataEl.innerHTML = `
+        <section class="coin-section">
+          <h2>Overview</h2>
+          <p>${safe(coin.description)}</p>
+          <ul>
+            <li><strong>Launch Year:</strong> ${safe(coin.launch_year)}</li>
+            <li><strong>Origin:</strong> ${safe(coin.origin)}</li>
+            <li><strong>Team:</strong> ${safe(coin.team)}</li>
+          </ul>
+        </section>
+
+        <section class="coin-section">
+          <h2>Technical Details</h2>
+          <ul>
+            <li><strong>Distributed Ledger Technology:</strong> ${safe(coin.dlt)}</li>
+            <li><strong>Consensus Protocol:</strong> ${safe(coin.consensus_protocol)}</li>
+            <li><strong>Consensus Mechanism:</strong> ${safe(coin.consensus_mechanism)}</li>
+            <li><strong>Hashing Algorithm:</strong> ${safe(coin.hashing_algorithm)}</li>
+            <li><strong>Block Time:</strong> ${safe(coin.block_time)}</li>
+            <li><strong>Transaction Finality:</strong> ${safe(coin.transaction_finality)}</li>
+            <li><strong>Max TPS Achieved:</strong> ${safe(coin.max_tps_achieved)}</li>
+            <li><strong>Theoretical TPS Capacity:</strong> ${safe(coin.max_tps_theoretical)}</li>
+            <li><strong>Average Transaction Fee:</strong> ${safe(coin.fees)}</li>
+          </ul>
+        </section>
+
+        <section class="coin-section">
+          <h2>Tokenomics</h2>
+          <ul>
+            <li><strong>Circulating Supply:</strong> ${safe(coin.tokenomics?.circulating_supply)}</li>
+            <li><strong>Max Supply:</strong> ${safe(coin.tokenomics?.max_supply)}</li>
+            <li><strong>Distribution Model:</strong> ${safe(coin.tokenomics?.distribution_model)}</li>
+            <li><strong>Issue Price:</strong> ${safe(coin.tokenomics?.issue_price)}</li>
+          </ul>
+        </section>
+
+        <section class="coin-section">
+          <h2>Decentralization</h2>
+          <p>${safe(coin.decentralization)}</p>
+        </section>
+
+        <section class="coin-section">
+          <h2>Security</h2>
+          <p>${safe(coin.security)}</p>
+        </section>
+
+        <section class="coin-section">
+          <h2>Energy Efficiency</h2>
+          <p>${safe(coin.energy_efficiency)}</p>
+        </section>
+
+        ${coin.network_issues ? `
+          <section class="coin-section">
+            <h2>Network Incidents</h2>
+            <p>${coin.network_issues}</p>
+          </section>` : ""
+        }
+
+        <section class="coin-section">
+          <h2>Links</h2>
+          <ul>
+            ${coin.links?.website ? `<li><a href="${coin.links.website}" target="_blank">Main Website</a></li>` : ""}
+            ${coin.links?.whitepaper ? `<li><a href="${coin.links.whitepaper}" target="_blank">Whitepaper</a></li>` : ""}
+          </ul>
+        </section>
+      `;
+    } catch (err) {
+      console.error("Error loading coin data:", err);
+      nameEl.textContent = "Error Loading Data";
+      dataEl.innerHTML = `<p>Unable to fetch coin data. Please try again later.</p>`;
+    }
+  }
+
+  loadCoinData();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "btc": {
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "launch_year": "2009",
+    "description": "Bitcoin is a Peer-to-Peer Electronic Cash System designed to enable trustless, censorship-resistant, and borderless value exchange without reliance on central authorities. It introduced decentralized digital money and established the foundation for the entire blockchain and cryptocurrency ecosystem.",
+    "origin": "Original",
+    "team": "Satoshi Nakamoto (unknown)",
+    "dlt": "Blockchain",
+    "consensus_protocol": "Proof of Work (PoW)",
+    "consensus_mechanism": "Nakamoto Consensus",
+    "hashing_algorithm": "SHA-256",
+    "block_time": "10 minutes",
+    "transaction_finality": "≈ 60 minutes (after 6 confirmations, standard for high-value transactions)",
+    "max_tps_achieved": "≈ 7 TPS",
+    "max_tps_theoretical": "≈ 10 TPS",
+    "fees": "≈ $5 (varies with network congestion)",
+    "tokenomics": {
+      "circulating_supply": "≈ 19,932,587 BTC",
+      "max_supply": "21,000,000 BTC",
+      "distribution_model": "Fair launch with no pre-mine, ICO, or VC allocation. Early mining rewarded participants from day one. Block rewards halve every 210,000 blocks (~4 years).",
+      "issue_price": "$0.003 (first market price in 2010)"
+    },
+    "decentralization": "High — Bitcoin is open-source and permissionless, allowing anyone to mine, run nodes, and contribute to development without central control.",
+    "security": "High — Secured by the largest Proof of Work network with immense hashpower and over a decade of operation. The only notable event was a temporary chain split in 2013 due to a version incompatibility, resolved within hours.",
+    "energy_efficiency": "Low — Bitcoin's Proof of Work mining consumes significant energy, estimated around 130–180 TWh per year (≈0.6% of global electricity). Each transaction can indirectly represent 400–800 kWh of energy usage due to global miner competition.",
+    "links": {
+      "website": "https://bitcoin.org",
+      "whitepaper": "https://bitcoin.org/bitcoin.pdf"
+    }
+  },
+
+  "ltc": {
+    "name": "Litecoin",
+    "symbol": "LTC",
+    "launch_year": "2011",
+    "description": "Litecoin is a peer-to-peer cryptocurrency designed for faster block generation and lower transaction costs. Often considered a testing ground for Bitcoin-related innovations, Litecoin has implemented several features ahead of Bitcoin, though not all are intended for Bitcoin itself.",
+    "origin": "Fork of Bitcoin",
+    "team": "Charlie Lee",
+    "dlt": "Blockchain",
+    "consensus_protocol": "Proof of Work (PoW)",
+    "consensus_mechanism": "Nakamoto Consensus",
+    "hashing_algorithm": "Scrypt",
+    "block_time": "2.5 minutes",
+    "transaction_finality": "≈ 15 minutes (after 6 confirmations, typical for exchange settlement)",
+    "max_tps_achieved": "≈ 56 TPS",
+    "max_tps_theoretical": "≈ 60 TPS",
+    "fees": "≈ $0.02 (varies with network congestion)",
+    "tokenomics": {
+      "circulating_supply": "≈ 76,391,776 LTC",
+      "max_supply": "84,000,000 LTC",
+      "distribution_model": "Fair launch — no pre-mine or ICO. Block rewards halve every 840,000 blocks (~4 years), mirroring Bitcoin's emission schedule with higher total supply and faster block generation.",
+      "issue_price": "$0.30 (first market price in 2011)"
+    },
+    "decentralization": "High — Litecoin is open-source, permissionless, and maintained by a distributed community of developers and miners with global participation.",
+    "security": "High — Built on a proven Proof of Work system using Scrypt, Litecoin has maintained strong network integrity since launch. A temporary slowdown in 2019 after halving did not compromise security.",
+    "energy_efficiency": "Low — As a Proof of Work blockchain using the Scrypt algorithm, Litecoin also relies on energy-intensive mining. Its total energy use is estimated around 3–5 TWh per year, considerably lower than Bitcoin but still inefficient compared to Proof of Stake systems.",
+    "links": {
+      "website": "https://litecoin.org",
+      "whitepaper": "https://litecoin.org/litecoin.pdf"
+    }
+  },
+
+"kas": {
+  "name": "Kaspa",
+  "symbol": "KAS",
+  "launch_year": "2021",
+  "description": "Kaspa is a proof-of-work cryptocurrency implementing the GHOSTDAG protocol, a generalization of Bitcoin’s Nakamoto Consensus that allows multiple blocks to coexist and be ordered without orphaning. This enables extremely high block rates while maintaining decentralization, security, and scalability — a trilemma solution within a PoW framework.",
+  "origin": "Original",
+  "team": "Yonatan Sompolinsky and Michael Sutton",
+  "dlt": "BlockDAG (Directed Acyclic Graph)",
+  "consensus_protocol": "Proof of Work (PoW)",
+  "consensus_mechanism": "PHANTOM GHOSTDAG (Generalization of Nakamoto Consensus)",
+  "hashing_algorithm": "kHeavyHash",
+  "block_time": "≈ 0.1 seconds",
+  "transaction_finality": "≈ 7 seconds (instant tx visibility)",
+  "max_tps_achieved": "≈ 5,584 TPS",
+  "max_tps_theoretical": "≈ 40,000+ TPS (with 100 BPS upgrade)",
+  "fees": "≈ $0.00001",
+  "tokenomics": {
+    "circulating_supply": "≈ 26,793,221,633 KAS",
+    "max_supply": "29,000,000,000 KAS (hardcoded)",
+    "distribution_model": "Fair launch — no pre-mine, ICO, or VC allocation. Emission follows a geometric decay model, with block rewards reducing smoothly over time instead of abrupt halvings.",
+    "issue_price": "N/A (fair-mined from genesis)"
+  },
+  "decentralization": "High — Kaspa is open-source and ASIC-friendly, encouraging broad participation in mining and node operation. Anyone with compatible hardware can join the network, making it one of the most decentralized PoW systems today.",
+  "security": "High — Backed by robust proof-of-work and the GHOSTDAG protocol, Kaspa achieves fast block confirmation without sacrificing the probabilistic security model of PoW. Its DAG structure resists 51% attacks more effectively than linear blockchains under high throughput.",
+  "energy_efficiency": "Moderate — While still PoW-based, Kaspa’s efficient block propagation and lower individual block energy cost make it significantly more energy-efficient per transaction than Bitcoin or Litecoin.",
+  "links": {
+    "website": "https://kaspa.org",
+    "whitepaper": "https://eprint.iacr.org/2018/104.pdf"
+    }
+  }
+}
