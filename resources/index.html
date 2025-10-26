@@ -99,6 +99,7 @@
 	<div class="filter-category">
 		<div class="filter-group"><input type="radio" name="feature" id="articles" data-feature="articles"><label for="articles">Articles</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="analytics" data-feature="analytics"><label for="analytics">Analytics</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="book" data-feature="book"><label for="book">Books</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="calculator" data-feature="calculator"><label for="calculator">Calculators</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="videos" data-feature="videos"><label for="videos">Videos</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="visualizer" data-feature="visualizer"><label for="visualizer">Visualizers</label></div>
@@ -149,12 +150,13 @@ const items = [
 	}
 },
 {
-    name: "The Book of Kaspa",
-    description: "A book by N.R. Crowningshield exploring Kaspa’s BlockDAG architecture, GHOSTDAG protocol, and its role in advancing digital finance, offering insights into its technology and community.",
-    link: "https://www.amazon.com/dp/B0CCVTFM2N",
-    logo: "/assets/logos/B0CCVTFM2N.webp",
-    features: {
-    }
+	name: "The Book of Kaspa",
+	description: "A book by N.R. Crowningshield exploring Kaspa’s BlockDAG architecture, GHOSTDAG protocol, and its role in advancing digital finance, offering insights into its technology and community.",
+	link: "https://www.amazon.com/dp/B0CCVTFM2N",
+	logo: "/assets/logos/B0CCVTFM2N.webp",
+	features: {
+		book: true
+	}
 },
 {
 	name: "From Ghost to Knight",
@@ -162,15 +164,17 @@ const items = [
 	link: "https://www.amazon.com/dp/B0D2VK4PVR",
 	logo: "/assets/logos/B0D2VK4PVR.webp",
 	features: {
+		book: true
 	}
 },
 {
-    name: "Dethroning Bitcoin",
-    description: "A book by Nadeem exploring Kaspa’s GHOSTDAG and DAGKNIGHT protocols, highlighting its high transaction throughput, scalability, and energy efficiency as a revolutionary blockchain surpassing leading chains.",
-    link: "https://www.amazon.com/dp/B0FT1V2NL4",
-    logo: "/assets/logos/B0FT1V2NL4.webp",
-    features: {
-    }
+	name: "Dethroning Bitcoin",
+	description: "A book by Nadeem exploring Kaspa’s GHOSTDAG and DAGKNIGHT protocols, highlighting its high transaction throughput, scalability, and energy efficiency as a revolutionary blockchain surpassing leading chains.",
+	link: "https://www.amazon.com/dp/B0FT1V2NL4",
+	logo: "/assets/logos/B0FT1V2NL4.webp",
+	features: {
+		book: true
+	}
 },
 {
 	name: "Kaspa Research",
@@ -189,12 +193,12 @@ const items = [
 	}
 },
 {
-    name: "Kaspa Q&A",
-    description: "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockchain, technology, and ecosystem.",
-    link: "https://qa.kas.pa",
-    logo: "/assets/logos/qa.kas.pa.webp",
-    features: {
-    }
+	name: "Kaspa Q&A",
+	description: "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockchain, technology, and ecosystem.",
+	link: "https://qa.kas.pa",
+	logo: "/assets/logos/qa.kas.pa.webp",
+	features: {
+	}
 },
 {
 	name: "KASmedia",
@@ -323,22 +327,22 @@ const items = [
 	}
 },
 {
-    name: "Your Crypto Crew",
-    description: "YouTube channel delivering comprehensive Kaspa content, including in-depth analyses, news, updates, and insights into its technology and KRC20 ecosystem.",
-    link: "https://www.youtube.com/@YourCryptoCrew",
-    logo: "/assets/logos/cryptocrew.webp",
-    features: {
-        videos: true
-    }
+	name: "Your Crypto Crew",
+	description: "YouTube channel delivering comprehensive Kaspa content, including in-depth analyses, news, updates, and insights into its technology and KRC20 ecosystem.",
+	link: "https://www.youtube.com/@YourCryptoCrew",
+	logo: "/assets/logos/cryptocrew.webp",
+	features: {
+		videos: true
+	}
 },
-{
-    name: "s c a p e . 𐤊",
-    description: "YouTube channel by a seasoned investor sharing Kaspa alpha, undervalued crypto gems, and market analysis to grow portfolios.",
-    link: "https://www.youtube.com/@scape.invest",
-    logo: "/assets/logos/scape.webp",
-    features: {
-        videos: true
-    }
+	{
+	name: "s c a p e . 𐤊",
+	description: "YouTube channel by a seasoned investor sharing Kaspa alpha, undervalued crypto gems, and market analysis to grow portfolios.",
+	link: "https://www.youtube.com/@scape.invest",
+	logo: "/assets/logos/scape.webp",
+	features: {
+		videos: true
+	}
 },
 {
 	name: "Kaspa Daily",
