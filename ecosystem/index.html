@@ -92,6 +92,7 @@
 	<h3>Category<span id="counter"></span></h3>
 	<div class="filter-category">
 		<!-- <div class="filter-group"><input type="radio" name="feature" id="ai" data-feature="ai"><label for="ai">AI</label></div> -->
+		<div class="filter-group"><input type="radio" name="feature" id="blogs" data-feature="blogs"><label for="blogs">Blogs</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="dex" data-feature="dex"><label for="dex">DEX</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="blockExplorer" data-feature="blockExplorer"><label for="blockExplorer">Explorers</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="gaming" data-feature="gaming"><label for="gaming">Gaming</label></div>
@@ -101,7 +102,6 @@
 		<div class="filter-group"><input type="radio" name="feature" id="mining" data-feature="mining"><label for="mining">Mining</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="privacy" data-feature="privacy"><label for="privacy">Privacy</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="rwa" data-feature="rwa"><label for="rwa">RWA</label></div>
-		<div class="filter-group"><input type="radio" name="feature" id="social" data-feature="social"><label for="social">Social</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="tool" data-feature="tool"><label for="tool">Tools</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="wallet" data-feature="wallet"><label for="wallet">Wallets</label></div>
 	</div>
@@ -154,7 +154,7 @@ const items = [
 	logo: "/assets/logos/kasmedia.webp",
 	features: {
 		reviewed: true,
-		social: true
+		blogs: true
 	}
 },
 {
@@ -193,7 +193,8 @@ const items = [
 	link: "https://kaspa.org",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		reviewed: true
+		reviewed: true,
+		blogs: true
 	}
 },
 {
@@ -206,7 +207,8 @@ const items = [
 		defi: true,
 		dex: true,
 		marketplace: true,
-		launchpad: true
+		launchpad: true,
+		blogs: true
 	}
 },
 {
@@ -301,7 +303,7 @@ const items = [
 	logo: "/assets/logos/kasia.webp",
 	features: {
 		reviewed: true,
-		social: true
+		app: true
 	}
 },
 {
@@ -310,7 +312,7 @@ const items = [
 	link: "https://ksocialnetwork.pages.dev",
 	logo: "/assets/logos/kaspa-black.webp",
 	features: {
-		social: true
+		app: true
 	}
 },
 {
@@ -319,7 +321,7 @@ const items = [
 	link: "https://verumonkas.com",
 	logo: "/assets/logos/verum.webp",
 	features: {
-		social: true
+		app: true
 	}
 },
 {
@@ -329,7 +331,29 @@ const items = [
 	logo: "/assets/logos/vivoor.webp",
 	features: {
 		reviewed: true,
-		social: true
+		app: true
+	}
+},
+{
+    name: "Spectre Market",
+    description: "Kaspa’s premier L2 NFT marketplace on Igra, enabling creators to deploy collections, mint NFTs, trade seamlessly, and stake for passive rewards from trading fees and royalties.",
+    link: "https://spectre.market",
+    logo: "/assets/logos/spectre.webp",
+    features: {
+        reviewed: true,
+        defi: true,
+        marketplace: true
+    }
+},
+{
+	name: "Proof of Works",
+	description: "The first fully on-chain job platform on Kaspa, offering smart contract escrow, KAS payouts, DAO-based disputes, and a censorship-resistant reputation system for trustless hiring.",
+	link: "https://www.proofofworks.com",
+	logo: "/assets/logos/proofofworks.webp",
+	features: {
+		reviewed: true,
+		marketplace: true,
+		jobs: true
 	}
 },
 // {
@@ -338,10 +362,38 @@ const items = [
 // 	link: "https://crumpet.media",
 // 	logo: "/assets/logos/crumpet.media.webp",
 // 	features: {
-// 		social: true,
+// 		app: true,
 // 		defi: true
 // 	}
 // },
+{
+	name: "TheCryptoSky",
+	description: "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
+	link: "https://thecryptosky.com",
+	logo: "/assets/logos/thecryptosky.webp",
+	features: {
+		jobs: true,
+		marketplace: true
+	}
+},
+{
+	name: "Kaskad",
+	description: "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
+	link: "https://www.kaskad.app",
+	logo: "/assets/logos/kaskad.webp",
+	features: {
+		defi: true
+	}
+},
+{
+	name: "KYO",
+	description: "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
+	link: "https://kyocard.app",
+	logo: "/assets/logos/kyocard.app.webp",
+	features: {
+		defi: true
+	}
+},
 {
 	name: "Kaspa File Storage",
 	description: "Arkiv - A decentralized P2P file storage system built on the Kaspa BlockDAG, enabling encrypted, permanent file uploads to transaction payloads with free downloads and low miner fees.",
@@ -367,8 +419,7 @@ const items = [
 	link: "https://kasmap.org",
 	logo: "/assets/logos/kasmap.webp",
 	features: {
-		reviewed: true,
-		social: true
+		reviewed: true
 	}
 },
 {
@@ -377,8 +428,7 @@ const items = [
 	link: "https://kaspamap.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
-		reviewed: true,
-		social: true
+		reviewed: true
 	}
 },
 {
@@ -387,7 +437,6 @@ const items = [
 	link: "https://tbd.directory",
 	logo: "/assets/logos/tbdai.webp",
 	features: {
-		social: true
 	}
 },
 {
@@ -408,15 +457,6 @@ const items = [
 		reviewed: true
 	}
 },
-{
-	name: "KaspaTips",
-	description: "A platform for creating private, expiring tip pages with QR codes to share Kaspa addresses for requesting tips, donations, invoices, and more via SMS, email, or social media.",
-	link: "https://www.kaspatips.com",
-	logo: "/assets/logos/kaspa-white.webp",
-	features: {
-		reviewed: true
-	}
-},
 // {
 // 	name: "KasClean",
 // 	description: "A token approval management tool for the Kaspa ecosystem, enabling users to scan, inspect, and revoke approvals for dApps to secure tokens and NFTs from exploits, hacks, and phishing scams.",
@@ -426,34 +466,6 @@ const items = [
 // 		defi: true
 // 	}
 // },
-{
-	name: "Kaskad",
-	description: "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
-	link: "https://www.kaskad.app",
-	logo: "/assets/logos/kaskad.webp",
-	features: {
-		defi: true
-	}
-},
-{
-	name: "KYO",
-	description: "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
-	link: "https://kyocard.app",
-	logo: "/assets/logos/kyocard.app.webp",
-	features: {
-		defi: true
-	}
-},
-{
-	name: "TheCryptoSky",
-	description: "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
-	link: "https://thecryptosky.com",
-	logo: "/assets/logos/thecryptosky.webp",
-	features: {
-		jobs: true,
-		marketplace: true
-	}
-},
 {
 	name: "Moonbound",
 	description: "A platform for launching, trading, and earning on the Kaspa network, providing tools for creators to build sustainable DeFi and tokenization projects.",
@@ -493,17 +505,6 @@ const items = [
 	features: {
 		reviewed: true,
 		gaming: true
-	}
-},
-{
-	name: "Proof of Works",
-	description: "The first fully on-chain job platform on Kaspa, offering smart contract escrow, KAS payouts, DAO-based disputes, and a censorship-resistant reputation system for trustless hiring.",
-	link: "https://www.proofofworks.com",
-	logo: "/assets/logos/proofofworks.webp",
-	features: {
-		reviewed: true,
-		marketplace: true,
-		jobs: true
 	}
 },
 {
@@ -639,7 +640,7 @@ const items = [
 	logo: "/assets/logos/kaspalife.webp",
 	features: {
 		reviewed: true,
-		social: true
+		tool: true
 	}
 },
 {
@@ -649,7 +650,7 @@ const items = [
 	logo: "/assets/logos/kaslens.webp",
 	features: {
 		reviewed: true,
-		ai: true
+		blogs: true
 	}
 },
 {
@@ -679,66 +680,6 @@ const items = [
 // 	logo: "/assets/logos/kasgpt.webp",
 // 	features: {
 // 		ai: true
-// 	}
-// },
-{
-	name: "Kaspa Daily",
-	description: "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
-	link: "https://kaspadaily.com",
-	logo: "/assets/logos/kaspadaily.webp",
-	features: {
-		reviewed: true,
-		social: true
-	}
-},
-{
-	name: "Kaspa Report",
-	description: "A platform providing visually engaging Kaspa-related data, including real-time metrics on price, hashrate, blocks, stock-to-flow, and blockDAG visualizer.",
-	link: "https://www.kaspa.report",
-	logo: "/assets/logos/kaspa-2.webp",
-	features: {
-		reviewed: true,
-		analytics: true,
-		visualizer: true
-	}
-},
-{
-	name: "KRCBOT",
-	description: "KRCBOT features a Kaspa TPS visualizer comparing it to leading blockchains, with links and status for resources, API docs, and Kaspa ecosystem collaboration.",
-	link: "https://krcbot.com",
-	logo: "/assets/logos/krcbot.webp",
-	features: {
-		reviewed: true,
-		visualizer: true
-	}
-},
-{
-	name: "Kasbun",
-	description: "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
-	link: "https://www.kasbun.com",
-	logo: "/assets/logos/kasbun.webp",
-	features: {
-		reviewed: true,
-		social: true
-	}
-},
-{
-	name: "Kaspa FAQ",
-	description: "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
-	link: "https://www.kaspafaq.com",
-	logo: "/assets/logos/kaspafaq.webp",
-	features: {
-		reviewed: true,
-		social: true
-	}
-},
-// {
-// 	name: "Burno",
-// 	description: "Community-driven platform for Kaspa’s ecosystem, covering KRC-20 tokens, projects, wallets, news, and insights with curated posts for traders and enthusiasts.",
-// 	link: "https://burno.xyz",
-// 	logo: "/assets/logos/burno.webp",
-// 	features: {
-// 		social: true
 // 	}
 // },
 {
@@ -814,6 +755,15 @@ const items = [
 	}
 },
 {
+	name: "KaspaTips",
+	description: "A platform for creating private, expiring tip pages with QR codes to share Kaspa addresses for requesting tips, donations, invoices, and more via SMS, email, or social media.",
+	link: "https://www.kaspatips.com",
+	logo: "/assets/logos/kaspa-white.webp",
+	features: {
+		reviewed: true
+	}
+},
+{
 	name: "Kas.fyi",
 	description: "Kas.fyi is a user-friendly Kaspa explorer with live metrics, richlist, market stats, and real-time transaction data - perfect for exploring blocks, addresses, and on-chain activity.",
 	link: "https://kas.fyi",
@@ -880,14 +830,62 @@ const items = [
 // 	}
 // },
 {
+	name: "Kaspa Daily",
+	description: "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
+	link: "https://kaspadaily.com",
+	logo: "/assets/logos/kaspadaily.webp",
+	features: {
+		reviewed: true,
+		blogs: true
+	}
+},
+{
+	name: "Kasbun",
+	description: "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
+	link: "https://www.kasbun.com",
+	logo: "/assets/logos/kasbun.webp",
+	features: {
+		reviewed: true,
+		blogs: true
+	}
+},
+{
+	name: "Kaspa FAQ",
+	description: "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
+	link: "https://www.kaspafaq.com",
+	logo: "/assets/logos/kaspafaq.webp",
+	features: {
+		reviewed: true,
+		blogs: true
+	}
+},
+// {
+// 	name: "Burno",
+// 	description: "Community-driven platform for Kaspa’s ecosystem, covering KRC-20 tokens, projects, wallets, news, and insights with curated posts for traders and enthusiasts.",
+// 	link: "https://burno.xyz",
+// 	logo: "/assets/logos/burno.webp",
+// 	features: {
+// 		blogs: true
+// 	}
+// },
+{
 	name: "KaspHub",
 	description: "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
 	link: "https://kasphub.com",
 	logo: "/assets/logos/kaspa.webp",
 	features: {
 		reviewed: true,
-		articles: true,
+		blogs: true,
 		analytics: true
+	}
+},
+{
+	name: "KaspArchive",
+	description: "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
+	link: "https://kasparchive.com",
+	logo: "/assets/logos/kaspa.webp",
+	features: {
+		blogs: true
 	}
 },
 {
