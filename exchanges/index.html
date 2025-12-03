@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Exchanges - Kaspa Hub</title>
+<meta name="twitter:title" content="Exchanges - Kaspa Hub" />
+<meta property="og:title" content="Exchanges - Kaspa Hub" />
+
+<meta name="description" content="Find top cryptocurrency exchanges where you can buy, sell, and trade Kaspa safely. Compare features, fees, and supported pairs to choose the best platform for Kaspa trading." />
+<meta name="twitter:description" content="Explore leading crypto exchanges offering Kaspa trading with competitive fees and reliable security. Start buying and selling Kaspa on your favorite platforms today!" />
+<meta property="og:description" content="Discover trusted crypto exchanges supporting Kaspa with diverse trading pairs and advanced features. Learn where to trade Kaspa efficiently and securely." />
+
+<link rel="canonical" href="https://kaspahub.org/exchanges/" />
+<meta name="twitter:url" content="https://kaspahub.org/exchanges/" />
+<meta property="og:url" content="https://kaspahub.org/exchanges/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Exchanges - Kaspa Hub",
+"url": "https://kaspahub.org/exchanges/",
+"description": "Discover where to buy, sell, and trade Kaspa cryptocurrency across trusted crypto exchanges. Explore a variety of platforms supporting Kaspa with multiple trading options.",
+"itemListElement": [
+	{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Kraken",
+		"url": "https://www.kraken.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Uphold",
+		"url": "https://uphold.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "Neverless",
+		"url": "https://neverless.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "Bybit",
+		"url": "https://www.bybit.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "MEXC",
+		"url": "https://promote.mexc.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 6,
+		"name": "BingX",
+		"url": "https://bingx.com"
+	}
+]
+}
+</script>
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+	<h1>Trade Kaspa</h1>
+	<p>To get Kaspa, you’ll need a platform such as an exchange, swap service, or custodian - services that let you buy, sell, and manage Kaspa. <br>Filter by features to find the option that best fits your needs.</p>
+</div>
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+	<h3>Features<span id="counter"></span></h3>
+	<div class="filter-category">
+		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
+		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
+		<div class="filter-group"><input type="checkbox" id="googleApplePay" data-feature="googleApplePay"><label for="googleApplePay">Google & Apple Pay</label></div>
+		<div class="filter-group"><input type="checkbox" id="noKyc" data-feature="noKyc"><label for="noKyc">No KYC</label></div>
+		<div class="filter-group"><input type="checkbox" id="swap" data-feature="swap"><label for="swap">Swap</label></div>
+		<div class="filter-group"><input type="checkbox" id="withdrawals" data-feature="withdrawals"><label for="withdrawals">Withdrawals</label></div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+	
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+	name: "Kraken",
+	description: "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
+	link: "https://www.kraken.com",
+	logo: "/assets/logos/kraken.webp",
+	features: {
+		reviewed: true,
+		dex: false,
+		noKyc: false,
+		cryptoCard: false,
+		googleApplePay: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Uphold",
+	description: "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
+	link: "https://uphold.com",
+	logo: "/assets/logos/uphold.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Topper",
+	description: "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
+	link: "https://www.topperpay.com",
+	logo: "/assets/logos/topper.webp",
+	features: {
+		reviewed: true,
+		swap: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Bybit",
+	description: "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
+	link: "https://www.bybit.com",
+	logo: "/assets/logos/bybit.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		googleApplePay: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Bitget",
+	description: "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
+	link: "https://www.bitget.com",
+	logo: "/assets/logos/bitget.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		googleApplePay: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Poloniex",
+	description: "Poloniex is a Seychelles-based trading platform established in 2014, offering crypto spot and futures trading.",
+	link: "https://www.poloniex.com",
+	logo: "/assets/logos/poloniex.webp",
+	features: {
+		reviewed: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "BingX",
+	description: "BingX is a Singapore-based trading platform founded in 2018, offering crypto and copy trading services.",
+	link: "https://bingx.com",
+	logo: "/assets/logos/bingx.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "CoinEx",
+	description: "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
+	link: "https://www.coinex.com",
+	logo: "/assets/logos/coinex.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "CoinW",
+	description: "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
+	link: "https://www.coinw.com",
+	logo: "/assets/logos/coinw.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Neverless",
+	description: "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
+	link: "https://neverless.com",
+	logo: "/assets/logos/neverless.webp",
+	features: {
+		reviewed: true,
+		googleApplePay: true
+	}
+},
+{
+	name: "WhiteBIT",
+	description: "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
+	link: "https://whitebit.com",
+	logo: "/assets/logos/whitebit.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		googleApplePay: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "MEXC",
+	description: "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
+	link: "https://www.mexc.com",
+	logo: "/assets/logos/mexc.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "KuCoin",
+	description: "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
+	link: "https://www.kucoin.com",
+	logo: "/assets/logos/kucoin.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "BTCC",
+	description: "BTCC is a UK-based trading platform established in 2011, offering crypto futures and spot trading services.",
+	link: "https://www.btcc.com",
+	logo: "/assets/logos/btcc.webp",
+	features: {
+		noKyc: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "XT",
+	description: "XT.com is a Seychelles-based trading platform founded in 2018, providing diverse crypto trading services.",
+	link: "https://www.xt.com",
+	logo: "/assets/logos/xt.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "AscendEX",
+	description: "AscendEX is a Singapore-based trading platform founded in 2018, offering crypto spot and futures trading.",
+	link: "https://ascendex.com",
+	logo: "/assets/logos/ascendex.webp",
+	features: {
+		reviewed: true,
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "CEX.IO",
+	description: "CEX.IO is a UK-based trading platform founded in 2013, providing crypto and fiat trading services.",
+	link: "https://www.cex.io",
+	logo: "/assets/logos/cexio.webp",
+	features: {
+		cryptoCard: true
+	}
+},
+{
+	name: "CoinSpot",
+	description: "CoinSpot is an Australian exchange platform established in 2013, offering crypto trading and NFT marketplace.",
+	link: "https://www.coinspot.com.au",
+	logo: "/assets/logos/coinspot.webp",
+	features: {
+		cryptoCard: true
+	}
+},
+{
+	name: "Ju.com",
+	description: "JuCom is a Singapore-based trading platform established in 2013, offering crypto trading and Web3 services.",
+	link: "https://www.ju.com",
+	logo: "/assets/logos/ju.webp",
+	features: {
+		futuresTrading: true,
+		cryptoCard: true
+	}
+},
+{
+	name: "Gate",
+	description: "Gate.io is a Seychelles-based trading platform founded in 2013, offering crypto and NFT services.",
+	link: "https://www.gate.io",
+	logo: "/assets/logos/gate.webp",
+	features: {
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Bitpanda",
+	description: "Bitpanda is an Austrian exchange platform founded in 2014, offering crypto, stocks, and ETFs.",
+	link: "https://www.bitpanda.com",
+	logo: "/assets/logos/bitpanda.webp",
+	features: {
+		cryptoCard: true,
+		googleApplePay: true
+	}
+},
+{
+	name: "Simplex",
+	description: "Simplex is an Israel-based crypto payment gateway established in 2014, allowing users to buy and sell crypto instantly with credit card, bank transfer, and more.",
+	link: "https://www.simplex.com",
+	logo: "/assets/logos/simplex.webp",
+	features: {
+		cryptoCard: true,
+		swap: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Coinone",
+	description: "Coinone is a South Korean trading platform established in 2014, offering crypto and KRW trading.",
+	link: "https://coinone.co.kr",
+	logo: "/assets/logos/coinone.webp",
+	features: {
+	}
+},
+{
+	name: "Bit2Me",
+	description: "Bit2Me is a Spain-based trading platform founded in 2014, offering crypto trading, wallet, fiat on-ramp, and loans.",
+	link: "https://pro.bit2me.com",
+	logo: "/assets/logos/bit2me.webp",
+	features: {
+		cryptoCard: true
+	}
+},
+{
+	name: "Changelly",
+	description: "Changelly is a Czech Republic-based crypto swap platform established in 2015, offering instant exchanges and fiat on-ramp services.",
+	link: "https://changelly.com",
+	logo: "/assets/logos/changelly.webp",
+	features: {
+		reviewed: true,
+		swap: true,
+		noKyc: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Paxful",
+	description: "Paxful is a US-based peer-to-peer crypto marketplace established in 2015, supporting multiple payment methods.",
+	link: "https://paxful.com",
+	logo: "/assets/logos/paxful.webp",
+	features: {
+	}
+},
+{
+	name: "AltcoinTrader",
+	description: "Altcoin Trader is a South Africa-based trading platform established in 2015, offering crypto trading with ZAR pairs.",
+	link: "https://www.altcointrader.co.za",
+	logo: "/assets/logos/altcointrader.webp",
+	features: {
+	}
+},
+{
+	name: "Caleb & Brown",
+	description: "Caleb & Brown, based in Australia, was founded in 2016 and provides personalized crypto brokerage with 24/7 support.",
+	link: "https://calebandbrown.com",
+	logo: "/assets/logos/calebandbrown.webp",
+	features: {
+	}
+},
+{
+	name: "ChangeNOW",
+	description: "ChangeNOW is a Seychelles-based crypto swap platform established in 2017, offering non-custodial exchanges without registration.",
+	link: "https://changenow.io",
+	logo: "/assets/logos/changenow.webp",
+	features: {
+		reviewed: true,
+		swap: true,
+		noKyc: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "ChangeHero",
+	description: "ChangeHero is an Estonia-based instant crypto swap platform founded in 2017, offering quick, account-free exchanges.",
+	link: "https://changehero.io",
+	logo: "/assets/logos/changehero.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "DigiFinex",
+	description: "DigiFinex is a Seychelles-based trading platform established in 2017, providing crypto spot and margin trading.",
+	link: "https://www.digifinex.com",
+	logo: "/assets/logos/digifinex.webp",
+	features: {
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "SwissBorg",
+	description: "SwissBorg is a Switzerland-based meta-exchange platform founded in 2017, offering crypto trading, earning yields, bundles, and access to pre-sales.",
+	link: "https://swissborg.com",
+	logo: "/assets/logos/swissborg.webp",
+	features: {
+		reviewed: true,
+	}
+},
+{
+	name: "Coinstash",
+	description: "Coinstash is an Australia-based crypto exchange established in 2017, offering a secure platform with competitive fees, and investor-focused services.",
+	link: "https://coinstash.com.au",
+	logo: "/assets/logos/coinstash.webp",
+	features: {
+	}
+},
+{
+	name: "Hotcoin",
+	description: "Hotcoin is an Australia-based trading platform founded in 2017, offering crypto, forex, spot, margin, futures, options.",
+	link: "https://www.hotcoin.com",
+	logo: "/assets/logos/hotcoin.webp",
+	features: {
+	}
+},
+{
+	name: "Dex-Trade",
+	description: "Dex-Trade is a Belize-based trading platform founded in 2017, with low fees, high liquidity, demo trading, and referral program.",
+	link: "https://dex-trade.com",
+	logo: "/assets/logos/dextrade.webp",
+	features: {
+	}
+},
+{
+	name: "Coinmerce",
+	description: "Coinmerce is a Netherlands-based trading platform founded in 2017, focused on simplicity with seamless fiat on-ramp services.",
+	link: "https://coinmerce.io",
+	logo: "/assets/logos/coinmerce.webp",
+	features: {
+		reviewed: true
+	}
+},
+{
+	name: "Guardarian",
+	description: "Guardarian is an Estonia-based exchange platform founded in 2017, offering fiat-to-crypto services with user-friendly interface.",
+	link: "https://guardarian.com",
+	logo: "/assets/logos/guardarian.webp",
+	features: {
+		googleApplePay: true
+	}
+},
+{
+	name: "SwapSpace",
+	description: "SwapSpace is a Marshall Islands-based crypto exchange aggregator initiated in 2017, known for non-custodial swaps without KYC.",
+	link: "https://swapspace.co",
+	logo: "/assets/logos/swapspace.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Digital Surge",
+	description: "Digital Surge is an Australia-based exchange platform founded in 2017, noted for its beginner-friendly trading experience with fiat support.",
+	link: "https://digitalsurge.com.au",
+	logo: "/assets/logos/digitalsurge.webp",
+	features: {
+	}
+},
+{
+	name: "SimpleSwap",
+	description: "SimpleSwap is a Cayman Islands-based crypto swap platform founded in 2018, providing instant exchanges without KYC requirements.",
+	link: "https://simpleswap.io",
+	logo: "/assets/logos/simpleswap.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "LCX",
+	description: "LCX is a Liechtenstein-based trading platform established in 2018, offering crypto trading and tokenization services.",
+	link: "https://www.lcx.com",
+	logo: "/assets/logos/lcx.webp",
+	features: {
+	}
+},
+{
+	name: "Bitvavo",
+	description: "Bitvavo is a Netherlands-based trading platform established in 2018, offering crypto trading and staking.",
+	link: "https://www.bitvavo.com",
+	logo: "/assets/logos/bitvavo.webp",
+	features: {
+	}
+},
+{
+	name: "BTSE",
+	description: "BTSE is a Seychelles-based trading platform established in 2018, providing crypto and fiat trading services.",
+	link: "https://www.btse.com",
+	logo: "/assets/logos/btse.webp",
+	features: {
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "StealthEX",
+	description: "StealthEX is a Cayman Islands-based swap platform launched in 2018, offering private, non-custodial swaps with fast transactions and no registration.",
+	link: "https://stealthex.io",
+	logo: "/assets/logos/stealthex.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Nexo",
+	description: "Nexo is a Switzerland-based exchange platform founded in 2018, offering crypto lending, borrowing, earning, swapping, and trading services.",
+	link: "https://nexo.com",
+	logo: "/assets/logos/nexo.webp",
+	features: {
+		cryptoCard: true,
+		googleApplePay: true
+	}
+},
+// {
+// 	name: "ProBit Global",
+// 	description: "ProBit Global is a Seychelles-based trading platform founded in 2018, focused on global altcoin trading with KYC for higher limits.",
+// 	link: "https://www.probit.com",
+// 	logo: "/assets/logos/probit.webp",
+// 	features: {
+// 	}
+// },
+{
+	name: "CoinDCX",
+	description: "CoinDCX is an India-based trading platform established in 2018, excelling in futures trading with robust fiat support.",
+	link: "https://coindcx.com",
+	logo: "/assets/logos/coindcx.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+	name: "Swyftx",
+	description: "Swyftx is an Australia-based exchange platform founded in 2018, recognized for its user-friendly interface and fiat integration.",
+	link: "https://swyftx.com",
+	logo: "/assets/logos/swyftx.webp",
+	features: {
+	}
+},
+{
+	name: "Kriptomat",
+	description: "Kriptomat is an Estonia-based exchange platform established in 2018, licensed under strict regulations with fiat-to-crypto services.",
+	link: "https://kriptomat.io",
+	logo: "/assets/logos/kriptomat.webp",
+	features: {
+	}
+},
+{
+	name: "Godex",
+	description: "Godex is a Seychelles-based crypto swap platform founded in 2018, offering anonymous exchanges without registration.",
+	link: "https://godex.io",
+	logo: "/assets/logos/godex.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Bitrue",
+	description: "Bitrue is a Singapore-based trading platform founded in 2018, offering crypto spot, margin, futures, staking.",
+	link: "https://www.bitrue.com",
+	logo: "/assets/logos/bitrue.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+	name: "NovaDAX",
+	description: "NovaDAX is a Brazil-based trading platform established in 2018, offering crypto trading with BRL pairs.",
+	link: "https://www.novadax.com.br",
+	logo: "/assets/logos/novadax.webp",
+	features: {
+	}
+},
+{
+	name: "Young Platform",
+	description: "Young Platform is an Italy-based exchange platform founded in 2018, known for its user-friendly interface and ease of use.",
+	link: "https://youngplatform.com",
+	logo: "/assets/logos/youngplatform.webp",
+	features: {
+	}
+},
+{
+	name: "Reku",
+	description: "Reku is an Indonesia-based trading platform founded in 2018, offering access to crypto and US stock assets with regulatory compliance.",
+	link: "https://reku.id",
+	logo: "/assets/logos/reku.webp",
+	features: {
+	}
+},
+{
+	name: "Exolix",
+	description: "Exolix is an Estonia-based crypto swap platform founded in 2018, offering instant exchanges with fixed rates.",
+	link: "https://exolix.com",
+	logo: "/assets/logos/exolix.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Quickex",
+	description: "Quickex is a Seychelles-based instant crypto swap platform founded in 2018, offering fast swaps without registration.",
+	link: "https://quickex.io",
+	logo: "/assets/logos/quickex.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Biconomy",
+	description: "Biconomy is a Canada-based trading platform founded in 2019, offering crypto trading and DeFi solutions.",
+	link: "https://www.biconomy.com",
+	logo: "/assets/logos/biconomy.webp",
+	features: {
+		reviewed: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Phemex",
+	description: "Phemex is a Singapore-based trading platform founded in 2019, offering crypto spot and derivatives trading.",
+	link: "https://phemex.com",
+	logo: "/assets/logos/phemex.webp",
+	features: {
+		reviewed: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Pionex",
+	description: "Pionex is a Singapore-based trading platform founded in 2019, offering crypto spot, futures & 16 free trading bots.",
+	link: "https://www.pionex.com",
+	logo: "/assets/logos/pionex.webp",
+	features: {
+		reviewed: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Swapzone",
+	description: "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
+	link: "https://swapzone.io",
+	logo: "/assets/logos/swapzone.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "CoinRabbit",
+	description: "CoinRabbit is a Estonia-based cryptocurrency swap platform founded in 2020, offering loans, a wallet, and exchange services with no credit checks.",
+	link: "https://coinrabbit.io",
+	logo: "/assets/logos/coinrabbit.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+	name: "RocketX",
+	description: "RocketX is a Netherlands-based crypto swap and bridge platform founded in 2020, aggregating top DEXs and CEXs for seamless cross-chain swaps.",
+	link: "https://www.rocketx.exchange",
+	logo: "/assets/logos/rocketx.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Coinstore",
+	description: "Coinstore is a Singapore-based trading platform founded in 2020, offering crypto trading and launchpad services.",
+	link: "https://www.coinstore.com",
+	logo: "/assets/logos/coinstore.webp",
+	features: {
+	}
+},
+{
+	name: "BYDFi",
+	description: "BYDFi is a Singapore-based trading platform launched in 2020, offering spot, futures, copy trading & fiat.",
+	link: "https://www.bydfi.com",
+	logo: "/assets/logos/bydfi.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+    name: "Swapuz",
+    description: "Swapuz is a Ukraine-based non-custodial crypto swap platform founded in 2020, offering anonymous exchanges with no KYC requirements.",
+    link: "https://swapuz.com",
+    logo: "/assets/logos/swapuz.webp",
+    features: {
+        swap: true,
+        noKyc: true,
+        withdrawals: true
+    }
+},
+{
+	name: "Swapswop",
+	description: "Swapswop is an Estonia-based crypto swap platform established in 2020, emphasizing privacy with instant crypto swaps and no KYC.",
+	link: "https://swapswop.io",
+	logo: "/assets/logos/swapswop.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Exbitron",
+	description: "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
+	link: "https://app.exbitron.com",
+	logo: "/assets/logos/exbitron.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+	name: "OrangeX",
+	description: "OrangeX is a Czech Republic-based crypto trading platform launched in 2021, offering spot, futures, and copy trading services.",
+	link: "https://www.orangex.com",
+	logo: "/assets/logos/orangex.webp",
+	features: {
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "LetsExchange",
+	description: "LetsExchange is a Seychelles-based swap platform launched in 2021, offering fast, easy swaps with flexible rates, and transparent fees.",
+	link: "https://letsexchange.io",
+	logo: "/assets/logos/letsexchange.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "KCEX",
+	description: "KCEX is a Seychelles-based trading platform founded in 2021, offering crypto spot and futures trading.",
+	link: "https://www.kcex.com",
+	logo: "/assets/logos/kcex.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+	name: "HiBT",
+	description: "HiBT is a Canada-based trading platform founded in 2021, offering crypto spot, futures, options & wealth products.",
+	link: "https://hibt.com",
+	logo: "/assets/logos/hibt.webp",
+	features: {
+	}
+},
+{
+	name: "Zedxion",
+	description: "Zedxion is a United Kingdom-based trading platform established in 2021, offering spot, futures, margin, P2P, and loan services.",
+	link: "https://www.zedxion.io",
+	logo: "/assets/logos/zedxion.webp",
+	features: {
+	}
+},
+{
+	name: "Bittime",
+	description: "Bittime is an Indonesia-based trading platform founded in 2021, offering secure crypto trading and staking.",
+	link: "https://www.bittime.com",
+	logo: "/assets/logos/bittime.webp",
+	features: {
+	}
+},
+{
+	name: "Houdini Swap",
+	description: "HoudiniSwap is a Saint Vincent-based privacy-focused crypto swap platform founded in 2022, offering anonymous cross-chain swaps without KYC.",
+	link: "https://houdiniswap.com",
+	logo: "/assets/logos/houdiniswap.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Onramp Money",
+	description: "OnrampMoney is an India-based fiat-to-crypto payment gateway launched in 2022, enabling seamless fiat-to-crypto conversions.",
+	link: "https://onramp.money",
+	logo: "/assets/logos/onrampmoney.webp",
+	features: {
+		googleApplePay: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "BITmarkets",
+	description: "BITmarkets is a Lithuania-based trading platform founded in 2022, offering low trading fees and a straightforward trading experience.",
+	link: "https://bitmarkets.com",
+	logo: "/assets/logos/bitmarkets.webp",
+	features: {
+	}
+},
+{
+	name: "Nanswap",
+	description: "Nanswap is a Netherlands-based swap platform launched in 2022, specializing in fast, private crypto swaps with no account required.",
+	link: "https://nanswap.com",
+	logo: "/assets/logos/nanswap.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "FinchPay",
+	description: "FinchPay is a Lithuania-based swap platform founded in 2022, offering OTC services, and is EU regulated.",
+	link: "https://finchpay.io",
+	logo: "/assets/logos/finchpay.webp",
+	features: {
+		swap: true,
+		googleApplePay: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Swapter",
+	description: "Swapter is a Ukraine-based crypto swap platform founded in 2022, offering exchanges for a variety of cryptocurrencies without KYC.",
+	link: "https://swapter.io",
+	logo: "/assets/logos/swapter.webp",
+	features: {
+		swap: true,
+		noKyc: true,
+		withdrawals: true
+	}
+},
+{
+	name: "SuperEx",
+	description: "SuperEx is a Canada-based Web 3.0 cryptocurrency exchange founded in 2022, offering spot, futures, and margin trading.",
+	link: "https://www.superex.com",
+	logo: "/assets/logos/superex.webp",
+	features: {
+	}
+},
+{
+	name: "Exchang.io",
+	description: "Exchang.io, formerly Swapika, is a UK-based swap platform launched in 2022, prioritizing fast and anonymous crypto exchanges without KYC.",
+	link: "https://exchang.io",
+	logo: "/assets/logos/exchang.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "CoinoSwap",
+	description: "CoinoSwap is a US-based swap platform founded in 2022, offering best rates across exchanges with simple, no-account swaps.",
+	link: "https://www.coinoswap.com",
+	logo: "/assets/logos/coinoswap.webp",
+	features: {
+		noKyc: true,
+		swap: true,
+		withdrawals: true
+	}
+},
+{
+	name: "Trocador",
+	description: "Trocador is a privacy-focused cryptocurrency swap aggregator launched in 2022, offering anonymous swaps, prepaid cards, and gift cards without KYC.",
+	link: "https://trocador.app",
+	logo: "/assets/logos/trocador.webp",
+	features: {
+		swap: true,
+		noKyc: true,
+		withdrawals: true
+	}
+},
+{
+	name: "GoExme",
+	description: "GoExme is a cryptocurrency swap platform launched in 2022, offering crypto exchanges without registration or KYC.",
+	link: "https://goexme.io",
+	logo: "/assets/logos/goexme.webp",
+	features: {
+		swap: true,
+		noKyc: true,
+		withdrawals: true
+	}
+},
+{
+    name: "Guardex",
+    description: "Guardex is a Seychelles-based crypto exchange aggregator launched in 2023, offering non-custodial swaps with no sign-up and a focus on privacy.",
+    link: "https://guardex.io",
+    logo: "/assets/logos/guardex.webp",
+    features: {
+        swap: true,
+        noKyc: true,
+        withdrawals: true
+    }
+},
+{
+	name: "GroveX",
+	description: "GroveX is an Australia-based cryptocurrency exchange founded in 2023, offering spot, margin, and futures trading with low fees.",
+	link: "https://www.grovex.io",
+	logo: "/assets/logos/grovex.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+	name: "NonKYC",
+	description: "NonKYC.io is a Seychelles-based trading platform founded in 2023, offering crypto trading without KYC requirements.",
+	link: "https://nonkyc.io",
+	logo: "/assets/logos/nonkyc.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+    name: "UEX.US",
+    description: "UEX.US is a United States-based exchange platform founded in 2024, offering fiat on-ramp, savings accounts, and crypto-backed loans.",
+    link: "https://uex.us",
+    logo: "/assets/logos/uex.us.webp",
+    features: {
+        withdrawals: true
+    }
+},
+{
+	name: "BigONE",
+	description: "BigONE is a Seychelles-based trading platform founded in 2017, providing crypto trading and investment services.",
+	link: "https://www.bigone.com",
+	logo: "/assets/logos/bigone.webp",
+	features: {
+		futuresTrading: true,
+		withdrawals: true
+	}
+},
+{
+	name: "WEEX",
+	description: "Weex is a Singapore-based trading platform founded in 2018, offering crypto spot and derivatives trading.",
+	link: "https://www.weex.com",
+	logo: "/assets/logos/weex.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+	name: "Exmo",
+	description: "Exmo is based in Poland and was founded in 2014. It offers a user-friendly platform for trading cryptocurrencies with fiat currencies.",
+	link: "https://exmo.com",
+	logo: "/assets/logos/exmo.webp",
+	features: {
+	}
+},
+{
+	name: "LBank",
+	description: "LBank is a Hong Kong-based trading platform established in 2015, offering crypto trading and token listing services.",
+	link: "https://www.lbank.com",
+	logo: "/assets/logos/lbank.webp",
+	features: {
+		futuresTrading: true
+	}
+},
+{
+	name: "BitMart",
+	description: "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
+	link: "https://www.bitmart.com",
+	logo: "/assets/logos/bitmart.webp",
+	features: {
+		noKyc: true,
+		cryptoCard: true,
+		futuresTrading: true
+	}
+},
+{
+	name: "Tapbit",
+	description: "Tapbit is a US-based trading platform founded in 2019, offering crypto spot and futures trading services.",
+	link: "https://www.tapbit.com",
+	logo: "/assets/logos/tapbit.webp",
+	features: {
+		noKyc: true
+	}
+},
+{
+	name: "Wirex",
+	description: "Wirex, based in the United Kingdom, launched 2016 and offers crypto trading, a multi-currency debit card, and wallet services.",
+	link: "https://wirexapp.com",
+	logo: "/assets/logos/wirex.webp",
+	features: {
+		cryptoCard: true
+	}
+}
+];
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterCheckboxes = document.querySelectorAll('aside input[type="checkbox"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 42;
+let currentIndex = 0;
+
+let filteredItems = [...items];
+
+const featureTags = {
+	reviewed: { label: 'Verified', class: 'checked' },
+	verified: { label: 'Verified', class: 'verified' }
+};
+
+function renderItems(reset = false) {
+	if (reset) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
+
+	const featuresHtml = Object.entries(item.features)
+		.filter(([key, value]) => value && featureTags[key])
+		.map(([key]) => {
+			const { label, class: extraClass = '' } = featureTags[key];
+			return `<span class="feature-tag ${extraClass}">${label}</span>`;
+		})
+		.join('');
+
+	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="filter-features-container">${featuresHtml}</div><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
+	itemGrid.appendChild(card);
+	});
+
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const activeFilters = [...filterCheckboxes]
+		.filter(cb => cb.checked)
+		.map(cb => cb.dataset.feature);
+
+	const searchTerm = searchInput.value.trim().toLowerCase();
+
+	filteredItems = items.filter(item =>
+	activeFilters.every(f => item.features[f]) &&
+	(!searchTerm ||
+		item.name.toLowerCase().includes(searchTerm) ||
+		item.description.toLowerCase().includes(searchTerm))
+	);
+
+	const sortMode = sortSelect.value;
+	filteredItems.sort((a, b) => sortMode === 'az'
+	? a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+	: sortMode === 'za'
+		? b.name.localeCompare(a.name, 'en', { sensitivity: 'base' })
+		: 0
+	);
+
+	if (!filteredItems.length) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${items.length})`;
+		return;
+	}
+
+	renderItems(true);
+}
+
+filterCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+
+renderItems(true);
+</script>
+</body>
+</html>

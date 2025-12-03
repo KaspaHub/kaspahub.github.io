@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Payment Solutions - Kaspa Hub</title>
+<meta name="twitter:title" content="Payment Solutions - Kaspa Hub" />
+<meta property="og:title" content="Merchant Solutions - Kaspa Hub" />
+
+<meta name="description" content="Kaspa Hub provides merchant solutions to accept Kaspa payments online, in-store, or as donations. Simple tools and integrations make payment acceptance easy and secure." />
+<meta name="twitter:description" content="Discover Kaspa payment solutions for your business. Accept Kaspa online, in-store, or through donations with easy integrations and simple tools." />
+<meta property="og:description" content="Grow your business with Kaspa payments. Accept Kaspa online, in-store, or via donations using Kaspa Hub’s secure and easy-to-use merchant solutions." />
+
+<link rel="canonical" href="https://kaspahub.org/solutions/" />
+<meta name="twitter:url" content="https://kaspahub.org/solutions/" />
+<meta property="og:url" content="https://kaspahub.org/solutions/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Payment Solutions - Kaspa Hub",
+"url": "https://kaspahub.org/solutions/",
+"description": "Explore Kaspa payment solutions for your business. Accept Kaspa online, in-store, or through donations with simple tools and integrations.",
+"itemListElement": [
+	{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Kasway",
+		"url": "https://kasway.xyz/"
+	},
+	{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Topper",
+		"url": "https://www.topperpay.com/"
+	},
+	{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "ChangeNOW",
+		"url": "https://changenow.io/"
+	},
+	{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "NOWPayments",
+		"url": "https://nowpayments.io/"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "Simplex",
+		"url": "https://www.simplex.com/"
+	}
+]
+}
+</script>
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+	<h1>Accept Kaspa</h1>
+	<p>To start accepting Kaspa, you’ll need a merchant solution - a platform to process KAS payments. <br>Filter by features to find your ideal solution.</p>
+</div>
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+	<h3>Features<span id="counter"></span></h3>
+	<div class="filter-category">
+		<div class="filter-group">
+			<input type="checkbox" id="api" data-feature="api">
+			<label for="api">API</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="openSource" data-feature="openSource">
+			<label for="openSource">Open Source</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="onlinePayments" data-feature="onlinePayments">
+			<label for="onlinePayments">Online Payments</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="pointOfSale" data-feature="pointOfSale">
+			<label for="pointOfSale">Point of Sale</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="donations" data-feature="donations">
+			<label for="donations">Donations</label>
+		</div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+	name: "Kasway",
+	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
+	link: "https://kasway.xyz",
+	logo: "/assets/logos/kasway.webp",
+	features: {
+		api: false,
+		openSource: false,
+		onlinePayments: false,
+		pointOfSale: true,
+		donations: false
+	}
+},
+{
+	name: "kas.coffee",
+	description: "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	link: "https://kas.coffee/",
+	logo: "/assets/logos/kascoffee.webp",
+	features: {
+		donations: true
+	}
+},
+{
+	name: "Topper",
+	description: "Topper Pay is a fiat-to-crypto on-ramp developed by Uphold that allows users to buy over 200 cryptocurrencies directly to their self-custodial wallets using various payment methods like debit cards, credit cards, Apple Pay, Google Pay, and more.",
+	link: "https://www.topperpay.com",
+	logo: "/assets/logos/topper.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "ChangeNOW",
+	description: "Change NOW is a leading non-custodial cryptocurrency exchange platform that facilitates instant swaps between over 900 cryptocurrencies without requiring user registration. It offers a seamless and secure way to exchange digital assets, with support for buying cryptocurrencies using fiat currencies via credit/debit cards.",
+	link: "https://changenow.io",
+	logo: "/assets/logos/changenow.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "NOWPayments",
+	description: "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits. Secure and user-friendly, it helps businesses accept KAS with low fees and instant fiat conversion.",
+	link: "https://nowpayments.io",
+	logo: "/assets/logos/nowpayments.webp",
+	features: {
+		api: true,
+		onlinePayments: true,
+		donations: true
+	}
+},
+{
+	name: "Simplex",
+	description: "Simplex is a fiat-to-crypto onramp for buying Kaspa via credit cards or bank transfers. Integrated with exchanges, it helps merchants acquire KAS. Not for payment acceptance, it offers a secure, globally compliant way to obtain Kaspa.",
+	link: "https://www.simplex.com",
+	logo: "/assets/logos/simplex.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "SimpleSwap",
+	description: "Simple Swap is a non-custodial cryptocurrency exchange supporting over 1500 cryptocurrencies, allowing instant swaps without registration. It offers a loyalty program, cashback up to 0.4% in USDT, and supports buying crypto with debit/credit cards, making it ideal for seamless crypto exchanges.",
+	link: "https://simpleswap.io",
+	logo: "/assets/logos/simpleswap.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Changelly",
+	description: "Changelly is a cryptocurrency exchange platform supporting over 1000 cryptocurrencies, offering instant swaps and competitive rates. It supports buying crypto with fiat via Visa, Mastercard, bank transfer, and Apple Pay, with 24/7 support and integrations with over 20 crypto platforms.",
+	link: "https://changelly.com",
+	logo: "/assets/logos/changelly.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "CoinPal",
+	description: "Coin Pal is a secure cryptocurrency payment platform supporting Kaspa, bridging traditional finance and the evolving Web3 world. It offers seamless integration for e-commerce platforms, enabling merchants to accept KAS with low-fee, secure payments and multi-currency conversion options.",
+	link: "https://www.coinpal.io",
+	logo: "/assets/logos/coinpal.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "CryptocurrencyCheckout",
+	description: "Cryptocurrency Checkout is a Free to Use, Non-Custodial & Decentralized Payment Gateway providing plugins that make accepting multiple cryptocurrencies for your products and services as easy as entering your wallet addresses.",
+	link: "https://cryptocurrencycheckout.com",
+	logo: "/assets/logos/cryptocurrencycheckout.webp",
+	features: {
+		onlinePayments: true,
+		donations: true
+	}
+},
+{
+	name: "Swyftx",
+	description: "Swyftx is Australia's leading cryptocurrency exchange, allowing users to buy, sell, and trade over 440 cryptocurrencies with a user-friendly interface and low fees. It offers features like recurring buys, stop-loss orders, and support for self-managed super funds, trusts, and companies.",
+	link: "https://swyftx.com",
+	logo: "/assets/logos/swyftx.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Kriptomat",
+	description: "Kriptomat is a European cryptocurrency exchange that allows users to buy, trade, and invest in over 350 cryptocurrencies with a focus on simplicity and security. It is licensed in Estonia and offers a user-friendly platform for both beginners and experienced traders.",
+	link: "https://kriptomat.io",
+	logo: "/assets/logos/kriptomat.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Nexo",
+	description: "Nexo is a digital asset platform allowing users to buy, earn interest, borrow, trade, and spend cryptocurrencies. It features a crypto card for global payments and offers API integration for developers.",
+	link: "https://nexo.com",
+	logo: "/assets/logos/nexo.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Onramp Money",
+	description: "OnrampMoney is a fiat-to-crypto onramp for buying Kaspa with fiat currencies. Integrated with Kaspa wallets, it helps merchants acquire KAS for business needs. Not for payment acceptance, it’s user-friendly and globally accessible.",
+	link: "https://onramp.money",
+	logo: "/assets/logos/onrampmoney.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "HoudiniSwap",
+	description: "Houdini Swap is a platform that enables anonymous and private cross-chain cryptocurrency swaps, utilizing Monero to ensure transaction privacy. It offers a secure way to trade cryptocurrencies without revealing user identities.",
+	link: "https://houdiniswap.com",
+	logo: "/assets/logos/houdiniswap.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "StealthEX",
+	description: "StealthEX is a privacy-focused, non-custodial cryptocurrency exchange supporting over 1400 cryptocurrencies with limitless swaps and no KYC required. It focuses on crypto-to-crypto exchanges, offering best rates and 24/7 support for seamless trading.",
+	link: "https://stealthex.io",
+	logo: "/assets/logos/stealthex.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "LetsExchange",
+	description: "Let's Exchange is a crypto exchange for trading Kaspa with other cryptocurrencies. It helps merchants manage KAS holdings but isn’t for payment acceptance. It offers a wide range of coins and a user-friendly interface for trading.",
+	link: "https://letsexchange.io",
+	logo: "/assets/logos/letsexchange.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "CoinoSwap",
+	description: "Coino Swap is a non-custodial cryptocurrency exchange aggregator that enables instant swaps and purchases of cryptocurrencies with best rates, without registration. It supports Kaspa and provides a user-friendly platform for efficient crypto trading.",
+	link: "https://www.coinoswap.com",
+	logo: "/assets/logos/coinoswap.webp",
+	features: {
+		onlinePayments: true
+	}
+},
+{
+	name: "Exolix",
+	description: "Exolix is a secure and anonymous cryptocurrency exchange platform that allows users to swap over 2000 cryptocurrencies instantly without registration. It offers both fixed and floating rates and provides an API for developers.",
+	link: "https://exolix.com",
+	logo: "/assets/logos/exolix.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Quickex",
+	description: "Quickex is a trusted and secure cryptocurrency exchange platform that has been operating since 2018. It allows users to exchange Bitcoin, Ethereum, Tether, BNB, and hundreds of different altcoins at the best rates simply and securely, without the need for registration.",
+	link: "https://quickex.io",
+	logo: "/assets/logos/quickex.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Swapzone",
+	description: "Swapzone is a non-custodial cryptocurrency exchange aggregator that facilitates instant swaps between over 1000 cryptocurrencies without requiring user registration. It aggregates offers from 18+ exchange services, allowing users to choose the best rates and conditions.",
+	link: "https://swapzone.io",
+	logo: "/assets/logos/swapzone.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Guardarian",
+	description: "Guardarian is a fiat on/off ramp cryptocurrency exchange that allows users to buy, sell, and swap over 1000 cryptocurrencies with best rates and low fees. It offers a seamless and secure way to convert between fiat and crypto, with support for various payment methods.",
+	link: "https://guardarian.com",
+	logo: "/assets/logos/guardarian.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "SwapSpace",
+	description: "Swyftx is Australia's leading cryptocurrency exchange, allowing users to buy, sell, and trade over 440 cryptocurrencies with a user-friendly interface and low fees. It offers features like recurring buys, stop-loss orders, and support for self-managed super funds, trusts, and companies.",
+	link: "https://swapspace.co",
+	logo: "/assets/logos/swapspace.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Digital Surge",
+	description: "Digital Surge is a trusted Australian cryptocurrency exchange that allows users to buy, sell, and trade over 400 cryptocurrencies with a focus on simplicity and security. It offers competitive pricing, low fees, and educational resources for beginners.",
+	link: "https://digitalsurge.com.au",
+	logo: "/assets/logos/digitalsurge.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "ChangeHero",
+	description: "ChangeHero is a non-custodial cryptocurrency exchange supporting over 200 cryptocurrencies, offering fast swaps with high security and no account registration. It provides competitive rates and 24/7 support for efficient crypto trading.",
+	link: "https://changehero.io",
+	logo: "/assets/logos/changehero.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Kaspa Donations",
+	description: "Kaspa Donations is a simple browser extension for Chromium-based browsers (Chrome, Brave, Edge, Opera) that enables easy Kaspa cryptocurrency donations to websites and authors. It uses meta tags for integration.",
+	link: "https://kaspahub.org/kaspa-donations/",
+	logo: "/assets/logos/kaspahub.webp",
+	features: {
+		openSource: true,
+		onlinePayments: true,
+		donations: true
+	}
+}
+];
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 42;
+let currentIndex = 0;
+
+let filteredItems = [...items];
+
+function renderItems(initial = false) {
+	if (initial) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+	
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
+
+	card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
+	itemGrid.appendChild(card);
+	});
+
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const activeFeatures = new Set();
+	filterCheckboxes.forEach(cb => cb.checked && activeFeatures.add(cb.dataset.feature));
+	
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...items];
+	
+	filteredItems = defaultOrder.filter(item => {
+	for (let feature of activeFeatures) {
+		if (!item.features[feature]) return false;
+	}
+	return searchTerm === "" || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+	});
+	
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') {
+	filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+	filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
+	
+	if (filteredItems.length === 0) {
+	itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+	loadMoreBtn.style.display = 'none';
+	counter.textContent = `(0 of ${items.length})`;
+	return;
+	}
+	
+	renderItems(true);
+}
+
+filterCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+
+renderItems(true);
+</script>
+</body>
+</html>

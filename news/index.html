@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>News Sources - Kaspa Hub</title>
+<meta name="twitter:title" content="News Sources - Kaspa Hub" />
+<meta property="og:title" content="News Sources - Kaspa Hub" />
+
+<meta name="description" content="Who to follow? News sources. Stay updated with the latest Kaspa news, announcements, and insights from trusted sources covering developments, partnerships, and ecosystem updates." />
+<meta name="twitter:description" content="Looking for legit information sources to follow? Discover trusted Kaspa news accounts on X, Bluesky, Nostr, Telegram, Facebook and Threads." />
+<meta property="og:description" content="Follow verified and trusted Kaspa news outlets for the latest updates, partnerships, and insights from the ecosystem." />
+
+<link rel="canonical" href="https://kaspahub.org/news/" />
+<meta name="twitter:url" content="https://kaspahub.org/news/" />
+<meta property="og:url" content="https://kaspahub.org/news/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Kaspa News Sources",
+"url": "https://kaspahub.org/news/",
+"description": "Trusted and verified Kaspa news sources to follow for real updates on developments, partnerships, and the ecosystem.",
+"itemListElement": [
+	{"@type": "ListItem","position": 1,"name": "Kaspa","url": "https://x.com/kaspaunchained"},
+	{"@type": "ListItem","position": 2,"name": "Kaspa Hub","url": "https://x.com/KaspaHub"},
+	{"@type": "ListItem","position": 3,"name": "KASmedia","url": "https://x.com/kasmediadotcom"},
+	{"@type": "ListItem","position": 4,"name": "Kaspa Commons","url": "https://x.com/Kaspa_Commons"},
+	{"@type": "ListItem","position": 5,"name": "Kaspa Industrial Initiative","url": "https://x.com/KaspaKii"},
+	{"@type": "ListItem","position": 6,"name": "Kaspa Eco Foundation","url": "https://x.com/Kaspa_KEF"}
+]
+}
+</script>
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+	<h1>Stay Updated</h1>
+	<p>To stay informed about the Kaspa ecosystem, follow news sources across social platforms and communication channels. Discover and filter sources by platform to find the ones that deliver reliable, timely updates for you.</p>
+</div>
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+	<h3>Platform<span id="counter"></span></h3>
+	<div class="filter-category">
+		<div class="filter-group"><input type="radio" name="feature" id="x" data-feature="x"><label for="x">X</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="bluesky" data-feature="bluesky"><label for="bluesky">Bluesky</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="nostr" data-feature="nostr"><label for="nostr">Nostr</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="telegram" data-feature="telegram"><label for="telegram">Telegram</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="linkedin" data-feature="linkedin"><label for="linkedin">Linkedin</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="facebook" data-feature="facebook"><label for="facebook">Facebook</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="instagram" data-feature="instagram"><label for="instagram">Instagram</label></div>
+		<div class="filter-group"><input type="radio" name="feature" id="threads" data-feature="threads"><label for="threads">Threads</label></div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+	name: "Kaspa",
+	description: "Community-driven account sharing updates, insights, and news about kaspa cryptocurrency, focusing on its adoption and real-world applications.",
+	link: "https://x.com/kaspaunchained",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KASmedia",
+	description: "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
+	link: "https://x.com/kasmediadotcom",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Commons",
+	description: "A community-centric channel amplifying the real-world impact, everyday benefits, & the people powering adoption with fresh updates.",
+	link: "https://x.com/Kaspa_Commons",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Currency",
+	description: "Community-driven account sharing insights, updates, and knowledge on Kaspa's ecosystem projects, empowering adoption.",
+	link: "https://www.linkedin.com/company/kaspa-currency",
+	logo: "/assets/logos/linkedin.webp",
+	features: { linkedin: true }
+},
+{
+	name: "Kaspa Currency",
+	description: "Community-driven account sharing insights, updates, and knowledge on Kaspa's ecosystem projects, empowering adoption.",
+	link: "https://www.facebook.com/KaspaCurrency",
+	logo: "/assets/logos/facebook.webp",
+	features: { facebook: true }
+},
+{
+	name: "Kaspa Currency",
+	description: "A community-centric instagram amplifying the real-world impact, everyday benefits, & the people powering adoption with fresh updates.",
+	link: "https://www.instagram.com/kaspa_currency/",
+	logo: "/assets/logos/instagram.webp",
+	features: { instagram: true }
+},
+{
+	name: "Kaspa Currency",
+	description: "A community-centric threads account amplifying the real-world impact, everyday benefits, & the people powering adoption with fresh updates.",
+	link: "https://www.threads.com/@kaspa_currency",
+	logo: "/assets/logos/threads.webp",
+	features: { threads: true }
+},
+{
+	name: "Kaspa Industrial Initiative",
+	description: "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
+	link: "https://x.com/KaspaKii",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Eco Foundation",
+	description: "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
+	link: "https://x.com/Kaspa_KEF",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Yonatan Sompolinsky",
+	description: "X account of Yonatan Sompolinsky, inventor of the GHOSTDAG protocol and founder of DAGLabs, providing insights into Kaspa and blockchain technology.",
+	link: "https://x.com/hashdag",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Michael Sutton",
+	description: "X profile of Michael Sutton, a core Kaspa developer and co-author of DAG KNIGHT, sharing insights on consensus protocols, scalability, and zero-knowledge tech advances.",
+	link: "https://x.com/michaelsuttonil",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Shai ❤️ Deshe 💜 Wyborski 💙",
+	description: "X account of Shai Wyborski. Key Kaspa contributor and GHOSTDAG paper co-author, known for deep dives into crypto tech and critical takes on consensus myths.",
+	link: "https://x.com/DesheShai",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Terah",
+	description: "AI-driven intern for Kaspa Core, curating signals, uncovering ecosystem gaps, and sharing insights on Kaspa’s high-throughput PoW blockdag, focusing on upgrades like vProgs.",
+	link: "https://x.com/terah4d5",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "coderofstuff",
+	description: "Coder deeply engaged in Kaspa’s ecosystem, sharing insights on innovative solutions and microtransaction potential with a focus on math and transparency.",
+	link: "https://x.com/coderofstuff_",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Crumpet Media",
+	description: "A decentralized platform sharing news, updates, and insights on Kaspa, engaging creators and communities with content focused on innovation and development.",
+	link: "https://x.com/Crumpet_Media",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Rock the Kaspa",
+	description: "Crypto enthusiasts running a merch store, hosting monthly updates on all things Kaspa, and fostering a vibrant community with epic events and engaging shows.",
+	link: "https://x.com/rock_the_kaspa",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Alliance for Transparency",
+	description: "Committed to fostering community-driven innovation, empowering transparency across the Kaspa ecosystem, uniting supporters for impactful events and initiatives. ",
+	link: "https://x.com/Kaspa_KAT",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KaspaFunding",
+	description: "Dedicated to funding and building innovative KRC20 projects, fostering community collaboration, and driving growth within the Kaspa ecosystem through events.",
+	link: "https://x.com/FundingKaspa",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "XXIM Podcast",
+	description: "Podcast host diving into Kaspa, hosting AMAs, and spotlighting innovative projects and developers in the decentralized tech space with engaging discussions.",
+	link: "https://x.com/xximpod",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Daily",
+	description: "Dedicated to daily Kaspa news and insights, delivering timely updates on market trends, ecosystem projects, and key developments for enthusiasts.",
+	link: "https://x.com/DailyKaspa",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Jennn",
+	description: "Researcher at kasmedia.com. Connects with Kaspa community, posts crypto updates, and sprinkles in humor for a lively, engaging feed. ",
+	link: "https://x.com/0xJennn",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Mr 𐤊iri",
+	description: "Crypto enthusiast sharing educational content, updates, and guides on Kaspa and digital currencies, emphasizing Proof of Work and decentralized finance solutions.",
+	link: "https://x.com/MrKiri_x",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspalife",
+	description: "Empowering Kaspa community members with tools and resources to create content, sharing insights and updates to grow awareness and support community growth.",
+	link: "https://x.com/kaspalife",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Report",
+	description: "Delivers in-depth analysis and bold predictions on Kaspa’s wealth distribution and market dynamics, with a knack for exposing exchange tactics. ",
+	link: "https://x.com/KaspaReport",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Report",
+	description: "Delivers in-depth analysis and bold predictions on Kaspa’s wealth distribution and market dynamics, with a knack for exposing exchange tactics. ",
+	link: "https://bsky.app/profile/kaspa.report",
+	logo: "/assets/logos/bluesky.webp",
+	features: { bluesky: true }
+},
+{
+	name: "Kaspa Daily Pulse",
+	description: "Your daily $KAS briefing, quick, AI-powered updates on market sentiment, news, and chart trends. Stay informed in under 2 minutes, every day. ",
+	link: "https://x.com/KaspaDailyPulse",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KASperience❄️🌍",
+	description: "Open-source dev crafting decentralized kdapp tools for Kaspa, championing L1 solutions and cypherpunk ideals for peer-to-peer economic freedom.",
+	link: "https://x.com/KASperiencexyz",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "CryptoK",
+	description: "A dedicated developer focused on advancing the Kaspa ecosystem with innovative tools and data-driven solutions, fostering community growth and engagement.",
+	link: "https://x.com/cryptok777",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "cryptopeople.kas",
+	description: "Dedicated to building decentralized identity solutions with .kas domains and KNS profiles, fostering community-driven innovation on Kaspa for a lasting on-chain future.",
+	link: "https://x.com/cryptopeoplekas",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KRCBot",
+	description: "A dedicated developer for the Kaspa ecosystem, building tools and data solutions to enhance KRC20, with a focus on community growth and innovation.",
+	link: "https://x.com/KrcBot",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "IzioDev",
+	description: "Dedicated open-source developer focused on decentralized tech and secure communication solutions, sharing updates on innovative projects.",
+	link: "https://x.com/IzioDev",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Starlight",
+	description: "A tech-savvy figure promoting Kaspa’s decentralized payment solutions, building innovative ecosystem tools, and engaging the community with enthusiasm. ",
+	link: "https://x.com/starlightkas",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspador",
+	description: "Developer driving Kaspa innovation, focusing on advancements and believing in fast, secure, decentralized PoW solutions for a robust ecosystem.",
+	link: "https://x.com/kaspador_",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "p4bpj",
+	description: "Tech-savvy Kaspa enthusiast focused on building tools, sharing news, and exploring innovative address adoption.",
+	link: "https://x.com/p4bpj",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Ashton",
+	description: "Committed to transparent crypto growth, hosts engaging community talks, owns up to coding errors, and fuels innovation in Kaspa ecosystem.",
+	link: "https://x.com/argonmining",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Shai𐤊ulud.kas",
+	description: "Committed to building Kaspa's decentralized ecosystem, focusing on domain integration and contributing to community-driven initiatives.",
+	link: "https://x.com/shai_hulud_kas",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "imalfect",
+	description: "Coder and developer at Kasmedia, building web solutions, sharing news, and championing the Kaspa ecosystem with innovative work.",
+	link: "https://x.com/imaldev",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Captain Sats 𐤊",
+	description: "A crypto enthusiast focused on Kaspa’s innovative PoW scaling, sharing insights and research while advocating for its adoption in the digital currency community.",
+	link: "https://x.com/plzsats",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Wolfie",
+	description: "Crypto enthusiast promoting Kaspa, fostering adoption for global exchange listings and innovative crypto projects with consistent, insightful posts on X. ",
+	link: "https://x.com/Kaspa_HypeMan",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Ray",
+	description: "Crypto enthusiast promoting Kaspa, sharing latest listing news, fostering adoption for global exchange listings and innovation on X.",
+	link: "https://x.com/kaspa_Ray",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Silver 𐤊",
+	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
+	link: "https://x.com/KaspaSilver",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Silver 𐤊",
+	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
+	link: "https://www.instagram.com/kaspasilver",
+	logo: "/assets/logos/instagram.webp",
+	features: { instagram: true }
+},
+{
+	name: "Kaspa Silver 𐤊",
+	description: "An enthusiast-driven resource providing educational videos, tutorials, and opinions on Kaspa cryptocurrency via social media platforms.",
+	link: "https://www.threads.com/@kaspasilver",
+	logo: "/assets/logos/threads.webp",
+	features: { threads: true }
+},
+{
+	name: "s c a p e . 𐤊",
+	description: "Seasoned investor focused on Kaspa and memecoins. Shares insights, critiques scams, and engages community with witty, informed crypto commentary.",
+	link: "https://x.com/ScapeSquad",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Mr. Kaspa",
+	description: "Crypto enthusiast devoted to Kaspa, sharing news and bold insights, engaging community with sharp takes and dedication to its potential. ",
+	link: "https://x.com/KaspaGuru",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Class",
+	description: "An educational community account covering updates and deep insights on how Kaspa builds the future of crypto with innovation speed and security.",
+	link: "https://x.com/KaspaClass",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "BaN𐤊ℚuOτE",
+	description: "Crypto educator and writer champions Kaspa’s innovative technology, sharing deep proof-of-work insights and advocating for scalable digital value solutions.",
+	link: "https://x.com/BankQuote_DAG",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "CatDog",
+	description: "A crypto sleuth diving into Kaspa's on-chain data, exposing scams with meticulous analysis, and championing transparency in decentralized systems.",
+	link: "https://x.com/kdoggo1181074",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "The 𐤊aspa Leidy",
+	description: "A dedicated Kaspa enthusiast rallying the community with striking visuals and fervent advocacy, sharing bold posts and engaging content on X daily.",
+	link: "https://x.com/kaspaleidy",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Unofficial Kaspa View",
+	description: "A devoted fan of Kaspa, sharing news and insightful commentary about its unique and innovative approach within the cryptocurrency world.",
+	link: "https://x.com/UnofficialKas",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Central",
+	description: "Community-driven account covering updates, sharing insights and news about Kaspa cryptocurrency, focusing on its adoption and real-world applications.",
+	link: "https://x.com/KaspaCentral",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa",
+	description: "Sharing news, updates & context on Kaspa's blockDAG tech, smart contracts, atomic swaps & censorship-resistant solutions, driving crypto innovation.",
+	link: "https://x.com/Kaspa_BlockDAG",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Seb",
+	description: "A crypto-savvy investor, shares educational content about all things money, championing Kaspa as digital silver and diving into finance with a focus on innovative tech.",
+	link: "https://x.com/TheLoadedLounge",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KASPA Enthusiast 𐤊",
+	description: "Dedicated Kaspa Ambassador sharing updates, insights, and enthusiasm for the $KAS community, celebrating achievements and exchange listings with fervor.",
+	link: "https://x.com/KASPAEnthusiast",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KAStastic News",
+	description: "Spreading the good news about Kaspa, advocating for its use as true people's money, promoting secure cold wallets, and celebrating community spirit.",
+	link: "https://x.com/KAStasticNews",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "NakaSompo",
+	description: "A crypto enthusiast championing Kaspa and Bitcoin, sparking debates with sharp insights and unwavering conviction in decentralized finance.",
+	link: "https://x.com/NakaSompo",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa King",
+	description: "Early adopter of Kaspa, a savvy investor who refinances rentals to stack crypto, champions fast, scalable solutions, slams middlemen, and spreads positivity.",
+	link: "https://x.com/KaspaKing1",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "coinco",
+	description: "Kaspa enthusiast, engineer, and advocate for fast, low-fee crypto transactions. Engages community with news and insights, supports innovation.",
+	link: "https://x.com/coinco041",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "auzghosty👻𐤊",
+	description: "Sharing Kaspa updates, leading P2P encrypted messaging platform, and sparking community innovation in a decentralized, censorship-resistant space.",
+	link: "https://x.com/auzghosty",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KaspaFacts 𐤊",
+	description: "Crypto enthusiast sharing facts about Kaspa with sharp wit. Known for insightful posts, debunking myths, and engaging the community with bold takes. ",
+	link: "https://x.com/KaspaFacts",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Gonzo.𐤊as",
+	description: "A Decentralized scribbler diving deep into Kaspa’s tech, sparking debates with keen insights, and sharing clever takes on trustless transactions and smart contracts. ",
+	link: "https://x.com/Dr_Gonzo_K",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "GoonBoyCrypto 𐤊 👽",
+	description: "Kaspa ambassador from the UK, hosting open mic spaces to discuss $KAS, DeFi, and AI innovations, engaging the community with insightful updates.",
+	link: "https://x.com/GoonBoyCrypto",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "goldenSparrow 𐤊",
+	description: "Kaspa enthusiast, advances decentralized innovation and human rights with sharp insight and steadfast commitment to progress.",
+	link: "https://x.com/KaspaIntern",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Luigi ✨𐤊",
+	description: "Kaspa enthusiast dedicated to sharing the latest news and updates on market movements, offering insights and engaging with the community.",
+	link: "https://x.com/luke_coval",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Vik Revolutionary 𐤊",
+	description: "Enthusiastic supporter of Kaspa, frequently shares updates and insights about its development, with a focus on its potential to transform finance.",
+	link: "https://x.com/Vivek4469",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "YᵉS",
+	description: "Crypto artist crafting memes and graphics to fuel Kaspa’s community narrative, decoding ideas through art with witty banter and cosmic vision.",
+	link: "https://x.com/Yestronaut",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Crypto Odie",
+	description: "Crypto enthusiast sharing engaging videos and insights on Kaspa, sparking discussions with a vibrant community about its potential and impact.",
+	link: "https://x.com/CryptoOdie",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KaspaUK",
+	description: "Advocates for Kaspa, promotes its ecosystem updates, and engages with the community. Shares insights on its development and growth.",
+	link: "https://x.com/KaspaUK",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "The ꓘaspa Maxi.kas",
+	description: "A fervent crypto enthusiast championing Kaspa as Bitcoin's superior successor, advocating for its speed and security in decentralized finance.",
+	link: "https://x.com/TheKaspaMaxi",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Usdorex",
+	description: "Enthusiastic Kaspa supporter, vocal about its potential as a top cryptocurrency. Designer and Holder, focused on promoting its speed and decentralized tech.",
+	link: "https://x.com/Usdorex",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Fluxkz",
+	description: "Crypto enthusiast sharing insights on Kaspa’s innovative tech, engaging the community with humor and vision for a decentralized financial future.",
+	link: "https://x.com/Fluxkz10",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Rover of Kaspa",
+	description: "A vocal advocate for Kaspa, debunking FUD and highlighting its potential as a superior P2P cash solution, challenging Bitcoin's dominance with sharp insights.",
+	link: "https://x.com/RoverofKaspa",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "CryptoGrodd",
+	description: "A writer sharing bullish insights on Kaspa, highlighting its potential for mass adoption with a focus on its promising future in the crypto space. ",
+	link: "https://x.com/groddofcrypto",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kasparus",
+	description: "A spirited advocate for Kaspa, sharing memes and insights with a humorous twist, all while championing decentralized tech and community-driven innovation.",
+	link: "https://x.com/Kasparus1",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "𐤊Kaspasaurus",
+	description: "A Kaspa enthusiast sharing insights and updates, rallying the community with engaging posts and a strong focus on decentralized innovation.",
+	link: "https://x.com/kaspasaurus",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "ᗪΛVIᗪ ∿ 𐤊",
+	description: "Sharing daily Kaspa content on X to help grow the community, engaging fans with lively posts that spark discussions and boost enthusiasm. ",
+	link: "https://x.com/davevw_",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "16bit.kas 𐤊",
+	description: "Crypto enthusiast sharing Kaspa memes, engaging the community with insightful posts, and pushing for broader recognition.",
+	link: "https://x.com/16bit_kaspa",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa𐤊Fox",
+	description: "Enthusiastic supporter of BlockDAG technology, promoting Kaspa’s scalable and secure solutions for innovative transaction processing.",
+	link: "https://x.com/KaspaFox",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Saint",
+	description: "A dedicated Kaspa enthusiast sharing thought-provoking takes that inspire and energize the community with unwavering support.",
+	link: "https://x.com/saint1v",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Dave 𐤊",
+	description: "Enthusiastically promoting Kaspa’s potential, encouraging engagement beyond price speculation in a concise, lively manner within crypto discussions.",
+	link: "https://x.com/Daveyboy230",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Fuzion",
+	description: "Crypto enthusiast diving deep into all things Kaspa, sharing vibrant art, and sparking excitement with NFTs. A true believer in decentralized finance.",
+	link: "https://x.com/TheFuzionHQ",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspion 𐤊",
+	description: "Passionate about #Kaspa, a voice for a scalable, secure future, emphasizing fairness and continuous evolution in a rapidly changing world.",
+	link: "https://x.com/Kaspionkas",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Bloc𐤊Zero",
+	description: "Crypto enthusiast dedicated to community-driven PoW projects like Kaspa, embracing a decentralized future with enthusiasm and excitement.",
+	link: "https://x.com/gotorosario",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KRC20 News",
+	description: "Go-to source for Kaspa's KRC20 token movements, market cap insights, and minting updates. Covers trends, surges, top performers, and volume shifts in clear detail.",
+	link: "https://x.com/krc20news",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "KRC Gems Alert",
+	description: "A vibrant Kaspa community supporter, spotlighting undervalued KRC-20 projects and rallying fans with enthusiasm for growth and discovery.",
+	link: "https://x.com/KRCGemsAlert",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Calls",
+	description: "Focused on Kaspa’s ecosystem, emphasizing KRC20 memecoins and community-driven updates, sharing insights to engage and inform followers.",
+	link: "https://x.com/KaspaCalls",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Calls",
+	description: "Call channel for the newest KRC20 tokens in the Kaspa ecosystem, featuring fresh updates, exclusive news, and engaging discussions for the community.",
+	link: "https://t.me/kaspacalls",
+	logo: "/assets/logos/telegram.webp",
+	features: { telegram: true }
+},
+{
+	name: "KRC20 HUB",
+	description: "Central hub for project leaders in the Kaspa ecosystem, sharing updates, exclusive news, and deep discussions for innovators and community members alike.",
+	link: "https://t.me/KRC20HUB",
+	logo: "/assets/logos/telegram.webp",
+	features: { telegram: true }
+},
+{
+	name: "Kaspa Hub",
+	description: "Independent voice sharing updates, supporting Kaspa projects, raising awareness, and helping newcomers join the Kaspa ecosystem.",
+	link: "https://x.com/KaspaHub",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+},
+{
+	name: "Kaspa Hub",
+	description: "Independent voice sharing updates, supporting Kaspa projects, raising awareness, and helping newcomers join the Kaspa ecosystem.",
+	link: "https://bsky.app/profile/kaspahub.org",
+	logo: "/assets/logos/bluesky.webp",
+	features: { bluesky: true }
+},
+{
+	name: "Kaspa Hub",
+	description: "Independent voice sharing updates, supporting Kaspa projects, raising awareness, and helping newcomers join the Kaspa ecosystem.",
+	link: "https://primal.net/p/nprofile1qqsfxknzwsa6d9ktw9punpualu0qp2vt44xqlsufx5mc9ge9kl9jtvg0sdcvk",
+	logo: "/assets/logos/nostr.webp",
+	features: { nostr: true }
+},
+{
+	name: "Kaspa Hub",
+	description: "Independent voice sharing updates, supporting Kaspa projects, raising awareness, and helping newcomers join the Kaspa ecosystem.",
+	link: "https://t.me/KaspaHubNews",
+	logo: "/assets/logos/telegram.webp",
+	features: { telegram: true }
+},
+{
+	name: "Kaspa News List",
+	description: "Real-time Kaspa News Feed in English featuring updates, insights, and highlights from the community.",
+	link: "https://x.com/i/lists/1939640357915951365",
+	logo: "/assets/logos/x.webp",
+	features: { x: true }
+}
+
+];
+
+const featureTags = {
+	reviewed: { label: 'Verified', class: 'checked' },
+	verified: { label: 'Verified', class: 'verified' },
+};
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 42;
+let currentIndex = 0;
+let lastCheckedRadio = null;
+let filteredItems = [...items];
+
+function renderItems(reset = false) {
+	if (reset) { itemGrid.innerHTML = ''; currentIndex = 0; }
+	
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
+	
+		const featuresHtml = Object.entries(item.features)
+			.filter(([k,v]) => v && featureTags[k])
+			.map(([k]) => `<span class="feature-tag ${featureTags[k].class}">${featureTags[k].label}</span>`)
+			.join('');
+	
+	
+		card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+	
+		itemGrid.appendChild(card);
+	});
+	
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const selectedFeature = Array.from(filterRadios).find(r => r.checked)?.dataset.feature;
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...items];
+	
+	filteredItems = defaultOrder.filter(item => {
+		if (selectedFeature && !item.features[selectedFeature]) return false;
+		return !searchTerm || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+	});
+	
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') filteredItems.sort((a,b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	else if (sortMode === 'za') filteredItems.sort((a,b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	
+	if (!filteredItems.length) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		counter.textContent = `(0 of ${items.length})`;
+		loadMoreBtn.style.display = 'none';
+		return;
+	}
+
+	renderItems(true);
+}
+
+filterRadios.forEach(radio => {
+	radio.addEventListener('click', function () {
+		if (lastCheckedRadio === this) { this.checked = false; lastCheckedRadio = null; }
+		else { lastCheckedRadio = this; }
+		filterItems();
+	});
+});
+
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+loadMoreBtn.addEventListener('click', () => renderItems());
+
+renderItems(true);
+</script>
+</body>
+</html>

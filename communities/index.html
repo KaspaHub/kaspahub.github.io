@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Communities - Kaspa Hub</title>
+<meta name="twitter:title" content="Communities - Kaspa Hub" />
+<meta property="og:title" content="Communities - Kaspa Hub" />
+
+<meta name="description" content="Discover Kaspa's active community hubs where enthusiasts worldwide collaborate, exchange ideas, and drive discussions about the ecosystem's growth." />
+<meta name="twitter:description" content="Join the vibrant Kaspa community to connect with global users, share innovative ideas, discuss ecosystem integration, and engage in dynamic conversations." />
+<meta property="og:description" content="Explore Kaspa community chats on Discord, X, and Telegram, where users connect, share insights, discuss integration, and fuel ecosystem conversations about blockchain, bitcoin and kaspa." />
+
+<link rel="canonical" href="https://kaspahub.org/communities/" />
+<meta name="twitter:url" content="https://kaspahub.org/communities/" />
+<meta property="og:url" content="https://kaspahub.org/communities/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpuj2l703xauvsk8z7n9repf79s590j3fh9u83m5yetfmt9k5km7zsp3mc3j5" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Communities - Kaspa Hub",
+"url": "https://kaspahub.org/communities/",
+"description": "Join the vibrant Kaspa cryptocurrency community to connect with global users, share innovative ideas, discuss ecosystem integration, and engage in dynamic conversations.",
+"itemListElement": [
+	{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Kaspa X Community",
+		"url": "https://x.com/i/communities/1670849604105928715"
+	},
+	{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Kaspa Discord",
+		"url": "https://discord.gg/kaspa"
+	},
+	{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "Kaspa Telegram",
+		"url": "https://t.me/kaspaenglish"
+	},
+	{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "Kaspa Hub Discord",
+		"url": "https://discord.gg/7umFvjcANE"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "KaspaSilver Discord",
+		"url": "https://discord.com/invite/39r8qg9b4R"
+	}
+]
+}
+</script>
+
+</head>
+
+<body>
+
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+	<h1>Join Community</h1>
+	<p>Explore Kaspa community chats across various platforms where users worldwide connect, share ideas, exchange insights, and engage in conversations about Kaspa and beyond.</p>
+</div>
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+	<h3>Platforms<span id="counter"></span></h3>
+	<div class="filter-category">
+		<div class="filter-group"><input type="radio" name="platform" id="discord" data-platform="discord"><label for="discord">Discord</label></div>
+		<div class="filter-group"><input type="radio" name="platform" id="x" data-platform="x"><label for="x">X</label></div>
+		<div class="filter-group"><input type="radio" name="platform" id="reddit" data-platform="reddit"><label for="reddit">Reddit</label></div>
+		<div class="filter-group"><input type="radio" name="platform" id="telegram" data-platform="telegram"><label for="telegram">Telegram</label></div>
+		<div class="filter-group"><input type="radio" name="platform" id="facebook" data-platform="facebook"><label for="facebook">Facebook</label></div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="theme-1 search-sort-controls">
+		<input type="text" id="searchInput" placeholder="Search..."/>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+	name: "Kaspa Community",
+	description: "A community on X (formerly Twitter) where users and developers share updates, discuss Kaspa, and connect with others in the ecosystem.",
+	link: "https://x.com/i/communities/1670849604105928715",
+	logo: "/assets/logos/x.webp",
+	platform: "x"
+},
+{
+	name: "Kaspa",
+	description: "The main Discord server where users and developers engage in real-time discussions, share educational content, and collaborate on Kaspa-related topics.",
+	link: "https://discord.gg/kaspa",
+	logo: "/assets/logos/discord.webp",
+	platform: "discord"
+},
+{
+	name: "Kaspa",
+	description: "A subreddit (r/kaspa) where users share news, updates, and engage in discussions about the Kaspa ecosystem.",
+	link: "https://www.reddit.com/r/kaspa/",
+	logo: "/assets/logos/reddit.webp",
+	platform: "reddit"
+},
+{
+	name: "Kaspa English",
+	description: "A Telegram group where English-speaking users discuss Kaspa, share ideas, and engage in conversations about the ecosystem.",
+	link: "https://t.me/kaspaenglish",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Core R&D (public)",
+	description: "A public topic-based group for Kaspa core research and development. Enthusiasts and developers can join to follow dev discussions.",
+	link: "https://t.me/kasparnd",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "KaspaSilver",
+	description: "A Discord server run by KaspaSilver, where users and developers discuss Kaspa, share educational content, and exchange ideas.",
+	link: "https://discord.com/invite/39r8qg9b4R",
+	logo: "/assets/logos/discord.webp",
+	platform: "discord"
+},
+{
+	name: "K-FORCE",
+	description: "A Telegram group focused on Kaspa, featuring a series of community challenges to promote engagement and education about the ecosystem.",
+	link: "https://t.me/+NLcoZkcQO9ZhZDI0",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+    name: "KAS Tweets X",
+    description: "A Telegram group to share X posts related to Kaspa and show support to the community.",
+    link: "https://t.me/kaspatweets",
+    logo: "/assets/logos/telegram.webp",
+    platform: "telegram"
+},
+{
+	name: "Kaspa (KAS)",
+	description: "One of the most active Kaspa communities on Facebook, where members learn, build, invest, discuss news, share content, and engage in the Kaspa movement.",
+	link: "https://www.facebook.com/groups/kaspacommunity/",
+	logo: "/assets/logos/facebook.webp",
+	platform: "facebook"
+},
+{
+	name: "Kaspa Public Group",
+	description: "A Facebook group where users discuss Kaspa, share updates, and engage in conversations about the ecosystem and its developments.",
+	link: "https://www.facebook.com/groups/296371053199745/",
+	logo: "/assets/logos/facebook.webp",
+	platform: "facebook"
+},
+// {
+// 	name: "KaspaBets",
+// 	description: "A subreddit (r/KaspaBets) where traders discuss Kaspa token trading, share strategies, and engage in conversations about market opportunities.",
+// 	link: "https://www.reddit.com/r/KaspaBets/",
+// 	logo: "/assets/logos/reddit.webp",
+// 	platform: "reddit"
+// },
+{
+	name: "Kaspa Academy",
+	description: "A community on X where users and developers share educational content, discuss Kaspa, and connect with others in the ecosystem.",
+	link: "https://x.com/i/communities/1948159602614317224",
+	logo: "/assets/logos/x.webp",
+	platform: "x"
+},
+{
+	name: "Kaspa Arabic",
+	description: "فضاء مجتمعي للناطقين بالعربية لمناقشة كاسبا والمواضيع الإقليمية.",
+	link: "https://t.me/kaspa_arabic",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Australia",
+	description: "Local hub for Kaspa-related discussions across Australia.",
+	link: "https://t.me/Kaspa_AUS",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Balkan",
+	description: "Grupa za razgovore o Kaspi u balkanskim jezicima.",
+	link: "https://t.me/kaspa_balkan",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Brazil",
+	description: "Chat da comunidade brasileira para compartilhar atualizações e discussões sobre Kaspa.",
+	link: "https://t.me/kaspabr",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Chinese",
+	description: "专注于中文的Kaspa内容讨论群。",
+	link: "https://t.me/kaspa_chinese",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Dutch",
+	description: "Discussies over Kaspa voor Nederlandssprekende deelnemers.",
+	link: "https://t.me/Kaspa_Dutch",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Finland",
+	description: "Suomenkielinen yhteisöryhmä Kaspa-keskusteluille.",
+	link: "https://t.me/kaspa_finland",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa French",
+	description: "Groupe francophone dédié aux discussions sur Kaspa.",
+	link: "https://t.me/kasfrench",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa German",
+	description: "Deutschsprachige Gemeinschaftsgruppe für Kaspa-Themen.",
+	link: "https://t.me/KaspaGerman",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Greek",
+	description: "Ομάδα συνομιλίας για Έλληνες φαν του Kaspa.",
+	link: "https://t.me/KaspaGR",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa India",
+	description: "भारत-केंद्रित समूह Kaspa समुदाय के लिए बातचीत के लिए।",
+	link: "https://t.me/kaspaindia",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Indonesian",
+	description: "Grup berbahasa Indonesia untuk percakapan seputar Kaspa.",
+	link: "https://t.me/Kaspa_Indonesian",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Israel",
+	description: "קבוצת צ'אט של Kaspa המשרתת את הקהילה המקומית בישראל.",
+	link: "https://t.me/kaspaisrael",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Italian",
+	description: "Discussioni della comunità in lingua italiana su Kaspa.",
+	link: "https://t.me/kaspaitalia",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Japan",
+	description: "日本語でKaspaに関するトピックに焦点を当てたグループチャット。",
+	link: "https://t.me/Kaspa_Japan",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Kenya",
+	description: "Kikundi cha jamii ya Kaspa kwa washiriki walioko Kenya.",
+	link: "https://t.me/kaspaKenya",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Korea",
+	description: "Kaspa에 대한 논의를 위한 한국어 공간.",
+	link: "https://t.me/kaspa_korea",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Latvian",
+	description: "Latviešu valodā runājoša grupa Kaspa diskusijām.",
+	link: "https://t.me/Kaspa_LV",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Persian",
+	description: "گفتگوهای کاسپا به زبان پارسی برای پارسی‌زبانان.",
+	link: "https://t.me/kaspapersianchannel",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Philippines",
+	description: "Chat ng komunidad para sa mga talakayan tungkol sa Kaspa sa Pilipinas.",
+	link: "https://t.me/kaspa_ph",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Poland",
+	description: "Przestrzeń polskojęzyczna do dzielenia się treściami związanymi z Kaspa.",
+	link: "https://t.me/Kaspa_Poland",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Portuguese",
+	description: "Grupo de chat em língua portuguesa para tópicos sobre Kaspa.",
+	link: "https://t.me/kaspa_portugues",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Romanian",
+	description: "Conversații ale comunității românești axate pe Kaspa.",
+	link: "https://t.me/kaspa_ro",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Russian",
+	description: "Русскоязычный центр сообщества для обсуждений Kaspa.",
+	link: "https://t.me/kaspa_rus",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Turkish",
+	description: "Türkçe konuşanlar için Kaspa sohbet grubu.",
+	link: "https://t.me/KaspaTr",
+	logo: "/assets/logos/telegram.webp",
+	platform: "telegram"
+},
+{
+	name: "Kaspa Hub",
+	description: "The ultimate community for cryptocurrency enthusiasts, traders, and developers, focused on Kaspa and broader crypto trends, sharing alpha, insights, and market opportunities.",
+	link: "https://discord.gg/7umFvjcANE",
+	logo: "/assets/logos/discord.webp",
+	platform: "discord"
+}
+];
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterRadios = document.querySelectorAll('input[type="radio"][data-platform]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 42;
+let currentIndex = 0;
+
+let lastCheckedRadio = null;
+let filteredItems = [...items];
+
+function renderItems(initial = false) {
+	if (initial) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+		const card = document.createElement('div');
+		card.classList.add('filter-card', 'theme-1');
+
+		card.innerHTML = `<div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p><div class="card-actions"><a href="${item.link}" target="_blank" rel="noopener" class="link-button">Visit</a><button class="link-button"data-name="${item.name}"data-link="${item.link}"onclick="toggleBookmark(this)">Save</button></div>`;
+
+	itemGrid.appendChild(card);
+	});
+	
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const selectedPlatform = Array.from(filterRadios).find(radio => radio.checked)?.dataset.platform;
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...items];
+
+	filteredItems = defaultOrder.filter(item => {
+		const matchesPlatform = !selectedPlatform || item.platform === selectedPlatform;
+		const matchesSearch = searchTerm === "" || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+		return matchesPlatform && matchesSearch;
+	});
+	
+	const sortMode = sortSelect.value;
+		if (sortMode === 'az') {
+	filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
+
+	if (filteredItems.length === 0) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${items.length})`;
+		return;
+	}
+
+	renderItems(true);
+}
+
+filterRadios.forEach(radio => {
+	radio.addEventListener('click', function () {
+	if (lastCheckedRadio === this) {
+		this.checked = false;
+		lastCheckedRadio = null;
+	} else {
+		lastCheckedRadio = this;
+	}
+	filterItems();
+	});
+});
+
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+
+renderItems(true);
+</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Nostr Account Settings</title>
+<meta name="twitter:title" content="Nostr Account Settings" />
+<meta property="og:title" content="Nostr Profile Editor with Kaspa Support" />
+
+<meta name="description" content="Easily edit your Nostr profile with Kaspa integration. Add your Kaspa wallet, KNS domain, Lightning address, and more to connect your identity across Web3 and Nostr.">
+<meta name="twitter:description" content="Update your Nostr profile settings with full Kaspa support. Add your wallet address, KNS domain, and showcase your decentralized identity.">
+<meta property="og:description" content="Kaspa users can now link wallets, KNS domains, and more directly in their Nostr profiles. Edit your decentralized identity today.">
+
+<link rel="canonical" href="https://kaspahub.org/nostr/edit/" />
+<meta name="twitter:url" content="https://kaspahub.org/nostr/edit/" />
+<meta property="og:url" content="https://kaspahub.org/nostr/edit/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="@KaspaHub is accepting donations!" />
+<meta name="kaspa:wallet" content="kaspa:qrqg5eteekhucatdwz3xn4k76d70ykl4e3jnt88pe6dmfzjwv20gzcwjrwye6" />
+
+<style type="text/css">
+    .section { margin-bottom: 20px; }
+    label { display: block; margin: 5px 0; }
+    .button, .link-button { margin: 15px 0; padding: 7px 15px; }
+    #status { color: green; margin-top: 10px; }
+    #error { color: red; margin-top: 10px; }
+    .hidden { display: none; }
+    .error-message { color: red; font-size: 0.9rem; margin-top: 5px; display: none; }
+    .button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+</head>
+
+<body>
+<nav id="navBar"><input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" /><a id="title" href="/">Kaspa Hub</a><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav>
+<script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+<div id="login-section" class="theme-1 section">
+    <h2>Nostr Login</h2>
+    <label for="private-key">Private Key (nsec or hex):</label>
+    <input autocomplete="off" type="text" id="private-key" placeholder="Enter your private key">
+    <div style="display: flex; justify-content: flex-end;"><button onclick="login()" class="button">Login</button></div>
+    <div id="error"></div>
+</div>
+
+<div id="profile-section" class="theme-1 section hidden">
+    <h2>Edit Profile</h2>
+    <label for="display_name">Display Name:</label>
+    <input type="text" id="display_name" placeholder="Your display name">
+    <div id="display_name-error" class="error-message"></div>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Your @username">
+    <div id="username-error" class="error-message"></div>
+
+    <label for="about">About:</label>
+    <textarea id="about" placeholder="About you"></textarea>
+    <div id="about-error" class="error-message"></div>
+
+    <label for="picture">
+      Profile Picture URL 
+      <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤1MB, recommended 256×256px)</small>:
+    </label>
+    <input type="text" id="picture" placeholder="Profile picture URL">
+    <div id="picture-error" class="error-message"></div>
+
+    <label for="banner">
+      Banner Image URL 
+      <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤2MB, recommended 1500×500px)</small>:
+    </label>
+    <input type="text" id="banner" placeholder="Banner image URL">
+    <div id="banner-error" class="error-message"></div>
+
+    <label for="website">Website URL:</label>
+    <input type="text" id="website" placeholder="e.g., https://domain.com">
+    <div id="website-error" class="error-message"></div>
+
+    <label for="kaspa">Kaspa Wallet Address:</label>
+    <input type="text" id="kaspa" placeholder="e.g., kaspa:qqejxej2q6eprdh0syyz4kuwf8064m5e0z446wlc57uuzxneq3n2yma57nyxm">
+    <div id="kaspa-error" class="error-message"></div>
+
+    <label for="kns">Kaspa KNS Domain:</label>
+    <input type="text" id="kns" placeholder="e.g., domain.kas">
+    <div id="kns-error" class="error-message"></div>
+
+    <label for="nip05">Verified Nostr Address (NIP-05 ID):</label>
+    <input type="text" id="nip05" placeholder="e.g., user@domain.com">
+    <div id="nip05-error" class="error-message"></div>
+
+    <label for="lud16">Bitcoin Lightning Address (or LNURL)</label>
+    <input type="text" id="lud16" placeholder="e.g., user@domain.com">
+    <div id="lud16-error" class="error-message"></div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <a id="link" class="link-button">View Profile</a>
+        <button id="save-button" onclick="saveProfile()" class="button" disabled>Save Profile</button>
+    </div>
+    <div id="status"></div>
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+<script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+<script type="text/javascript">
+    let privateKey;
+    let publicKey;
+    let pool;
+    const relays = [
+        'wss://relay.damus.io',
+        'wss://relay.primal.net',
+        'wss://nostr.bitcoiner.social',
+        'wss://relay.nos.social',
+        'wss://nos.lol',
+        'wss://nostr.mom',
+        'wss://nostr.oxtr.dev',
+        'wss://relay.0xchat.com',
+        'wss://relay.nostr.band',
+        'wss://relay.noswhere.com',
+        'wss://no.str.cr',
+        'wss://nostr-pub.wellorder.net',
+        'wss://relay.snort.social'
+    ];
+
+    const validators = {
+        display_name: (value) => {
+            if (!value) return true;
+            return value.length <= 50 ? true : 'Display name must be 50 characters or less';
+        },
+        username: (value) => {
+            if (!value) return true;
+            const regex = /^[a-zA-Z0-9_]{1,30}$/;
+            return regex.test(value) ? true : 'Username must be 1-30 characters, only letters, numbers, or underscores';
+        },
+        about: (value) => {
+            if (!value) return true;
+            return value.length <= 500 ? true : 'About section must be 500 characters or less';
+        },
+        picture: (value) => {
+            if (!value) return true;
+            try {
+                new URL(value);
+                return value.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? true : 'Picture URL must point to a valid image (jpg, jpeg, png, gif, webp)';
+            } catch {
+                return 'Invalid URL format';
+            }
+        },
+        banner: (value) => {
+            if (!value) return true;
+            try {
+                new URL(value);
+                return value.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? true : 'Banner URL must point to a valid image (jpg, jpeg, png, gif, webp)';
+            } catch {
+                return 'Invalid URL format';
+            }
+        },
+        website: (value) => {
+            if (!value) return true;
+            try {
+                new URL(value);
+                return value.startsWith('https://') || value.startsWith('http://') ? true : 'Website must be a valid URL starting with http:// or https://';
+            } catch {
+                return 'Invalid URL format';
+            }
+        },
+        kaspa: (value) => {
+            if (!value) return true;
+            return value.startsWith('kaspa:') && value.length > 10 ? true : 'Invalid Kaspa wallet address';
+        },
+        kns: (value) => {
+            if (!value) return true;
+            return value.endsWith('.kas') && /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.kas$/.test(value) ? true : 'Invalid KNS domain (e.g., domain.kas)';
+        },
+        nip05: (value) => {
+            if (!value) return true;
+            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? true : 'Invalid NIP-05 format (e.g., user@domain.com)';
+        },
+        lud16: (value) => {
+            if (!value) return true;
+            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || value.startsWith('LNURL') ? true : 'Invalid Lightning address or LNURL';
+        }
+    };
+
+    const validationState = {
+        display_name: true,
+        username: true,
+        about: true,
+        picture: true,
+        banner: true,
+        website: true,
+        kaspa: true,
+        kns: true,
+        nip05: true,
+        lud16: true
+    };
+
+    function setupValidation() {
+        const inputs = ['display_name', 'username', 'about', 'picture', 'banner', 'website', 'kaspa', 'kns', 'nip05', 'lud16'];
+        inputs.forEach(id => {
+            const input = document.getElementById(id);
+            const errorDiv = document.getElementById(`${id}-error`);
+
+            input.addEventListener('input', () => {
+                const value = input.value.trim();
+                const result = validators[id](value);
+                
+                if (result === true) {
+                    errorDiv.style.display = 'none';
+                    errorDiv.textContent = '';
+                    validationState[id] = true;
+                } else {
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = result;
+                    validationState[id] = false;
+                }
+                
+                updateSaveButton();
+            });
+        });
+    }
+
+    function updateSaveButton() {
+        const saveButton = document.getElementById('save-button');
+        const allValid = Object.values(validationState).every(state => state === true);
+        saveButton.disabled = !allValid;
+    }
+
+    async function login() {
+        const input = document.getElementById('private-key').value.trim();
+        const errorDiv = document.getElementById('error');
+        errorDiv.textContent = '';
+
+        try {
+            if (input.startsWith('nsec')) {
+                privateKey = window.NostrTools.nip19.decode(input).data;
+            } else {
+                privateKey = input;
+            }
+
+            publicKey = window.NostrTools.getPublicKey(privateKey);
+            if (!publicKey) {
+                throw new Error('Invalid private key');
+            }
+            console.log('Public key:', publicKey);
+
+            pool = new window.NostrTools.SimplePool();
+
+            console.log('Connecting to relays:', relays);
+            await Promise.all(relays.map(async (url) => {
+                try {
+                    const relay = await pool.ensureRelay(url);
+                    console.log(`Connected to ${url}`);
+                } catch (err) {
+                    console.error(`Failed to connect to ${url}:`, err);
+                }
+            }));
+
+            await loadProfile();
+
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('profile-section').classList.remove('hidden');
+            setupValidation();
+        } catch (err) {
+            errorDiv.textContent = 'Error: ' + err.message;
+            console.error('Login error:', err);
+        }
+    }
+
+    async function loadProfile() {
+        const errorDiv = document.getElementById('error');
+        try {
+            console.log('Fetching profile for pubkey:', publicKey);
+            const filter = { kinds: [0], authors: [publicKey], limit: 1 };
+            const events = await pool.querySync(relays, filter);
+
+                const npub = window.NostrTools.nip19.npubEncode(publicKey);
+                document.getElementById('link').href = `https://kaspahub.org/n/?user=${npub}`;
+
+            if (events && events.length > 0) {
+                const event = events[0];
+                console.log('Profile event found:', event);
+                const profile = JSON.parse(event.content);
+                const fields = ['display_name', 'username', 'about', 'picture', 'banner', 'website', 'kaspa', 'kns', 'nip05', 'lud16'];
+                fields.forEach(field => {
+                    const input = document.getElementById(field);
+                    input.value = profile[field] || '';
+
+                    const result = validators[field](input.value);
+                    const errorDiv = document.getElementById(`${field}-error`);
+                    if (result === true) {
+                        errorDiv.style.display = 'none';
+                        errorDiv.textContent = '';
+                        validationState[field] = true;
+                    } else {
+                        errorDiv.style.display = 'block';
+                        errorDiv.textContent = result;
+                        validationState[field] = false;
+                    }
+                });
+
+                updateSaveButton();
+            } else {
+                console.log('No profile event found for pubkey:', publicKey);
+                errorDiv.textContent = 'No profile found. You can create a new one.';
+                updateSaveButton();
+            }
+        } catch (err) {
+            errorDiv.textContent = 'Error loading profile: ' + err.message;
+            console.error('Load profile error:', err);
+        }
+    }
+
+    async function saveProfile() {
+        const statusDiv = document.getElementById('status');
+        const errorDiv = document.getElementById('error');
+        statusDiv.textContent = '';
+        errorDiv.textContent = '';
+
+        const allValid = Object.keys(validators).every(id => {
+            const value = document.getElementById(id).value.trim();
+            return validators[id](value) === true;
+        });
+
+        if (!allValid) {
+            errorDiv.textContent = 'Please fix all validation errors before saving.';
+            return;
+        }
+
+        try {
+            const profile = {
+                display_name: document.getElementById('display_name').value,
+                username: document.getElementById('username').value,
+                about: document.getElementById('about').value,
+                picture: document.getElementById('picture').value,
+                banner: document.getElementById('banner').value,
+                website: document.getElementById('website').value,
+                kaspa: document.getElementById('kaspa').value,
+                kns: document.getElementById('kns').value,
+                nip05: document.getElementById('nip05').value,
+                lud16: document.getElementById('lud16').value
+            };
+
+            const event = {
+                kind: 0,
+                pubkey: publicKey,
+                created_at: Math.floor(Date.now() / 1000),
+                tags: [],
+                content: JSON.stringify(profile)
+            };
+
+            const signedEvent = window.NostrTools.finalizeEvent(event, privateKey);
+            console.log('Signed event:', signedEvent);
+
+            console.log('Publishing to relays:', relays);
+            const pubs = pool.publish(relays, signedEvent);
+            let successCount = 0;
+            await Promise.all(pubs.map(async (pub, index) => {
+                try {
+                    await pub;
+                    console.log(`Published to ${relays[index]}`);
+                    successCount++;
+                } catch (err) {
+                    console.error(`Failed to publish to ${relays[index]}:`, err);
+                }
+            }));
+
+            if (successCount > 0) {
+                statusDiv.textContent = `Profile saved successfully to ${successCount} relay(s)!`;
+            } else {
+                throw new Error('Failed to publish to any relays');
+            }
+        } catch (err) {
+            errorDiv.textContent = 'Error saving profile: ' + err.message;
+            console.error('Save profile error:', err);
+        }
+    }
+
+    window.addEventListener('unload', () => {
+        if (pool) pool.close(relays);
+    });
+</script>
+</body>
+</html>

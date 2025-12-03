@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+<head>
+    <script>
+        document.documentElement.id = localStorage.getItem('dark') !== null ? 'dark' : 'light';
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/assets/manifest.json" />
+
+    <title>Nostr Login</title>
+    <meta name="description" content="Securely log in to your Nostr account using your private key and a PIN or password.">
+    <meta name="twitter:title" content="Nostr Login" />
+    <meta name="twitter:description" content="Access your Nostr profile securely with private key and PIN/password authentication.">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+    <meta name="twitter:site" content="@KaspaHub" />
+    <meta name="twitter:creator" content="@KaspaHub" />
+
+    <style type="text/css">
+        .section { margin-bottom: 20px; }
+        label { display: block; margin: 5px 0; }
+        .button { margin: 20px 0; }
+        #status { color: green; margin-top: 10px; }
+        #error { color: red; margin-top: 10px; }
+        .hidden { display: none; }
+        .error-message { color: red; font-size: 0.9rem; margin-top: 5px; display: none; }
+        .button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <nav id="navBar">
+        <input id="menu" type="button" aria-label="Menu Toggle" onclick="menu()" />
+        <a id="title" href="/">Kaspa Hub</a>
+        <input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" />
+    </nav>
+    <script async src="/assets/scripts/main.js"></script>
+
+    <main id="container-1">
+        <div id="login-section" class="section">
+            <h2>Nostr Login</h2>
+            <label for="private-key">Private Key (nsec or hex):</label>
+            <input autocomplete="off" type="text" id="private-key" placeholder="Enter your private key">
+            <div id="private-key-error" class="error-message"></div>
+
+            <label for="pin">PIN or Password:</label>
+            <input autocomplete="off" type="password" id="pin" placeholder="Enter PIN or password">
+            <div id="pin-error" class="error-message"></div>
+
+            <label for="pin-confirm">Confirm PIN or Password:</label>
+            <input autocomplete="off" type="password" id="pin-confirm" placeholder="Confirm PIN or password">
+            <div id="pin-confirm-error" class="error-message"></div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button id="login-button" onclick="login()" class="button" disabled>Login</button>
+            </div>
+            <div id="status"></div>
+            <div id="error"></div>
+        </div>
+    </main>
+
+    <footer><a href="https://kaspahub.org/">Kaspa Community Hub</a></footer>
+
+    <script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="text/javascript">
+        const relays = [
+            'wss://relay.damus.io',
+            'wss://relay.primal.net',
+            'wss://nostr.bitcoiner.social',
+            'wss://relay.nos.social',
+            'wss://nos.lol',
+            'wss://nostr.mom',
+            'wss://nostr.oxtr.dev',
+            'wss://relay.0xchat.com',
+            'wss://relay.nostr.band',
+            'wss://relay.noswhere.com'
+        ];
+
+        let privateKey;
+        let publicKey;
+        let pool;
+
+        const validators = {
+            privateKey: (value) => {
+                if (!value) return 'Private key is required';
+                try {
+                    if (value.startsWith('nsec')) {
+                        window.NostrTools.nip19.decode(value).data;
+                        return true;
+                    } else if (/^[0-9a-fA-F]{64}$/.test(value)) {
+                        return true;
+                    }
+                    return 'Invalid private key format (must be nsec or 64-character hex)';
+                } catch {
+                    return 'Invalid private key';
+                }
+            },
+            pin: (value) => {
+                if (!value) return 'PIN or password is required';
+                return value.length >= 4 ? true : 'PIN or password must be at least 4 characters';
+            },
+            pinConfirm: (value, pin) => {
+                if (!value) return 'Please confirm your PIN or password';
+                return value === pin ? true : 'PIN or password confirmation does not match';
+            }
+        };
+
+        const validationState = {
+            privateKey: false,
+            pin: false,
+            pinConfirm: false
+        };
+
+        function setupValidation() {
+            const inputs = [
+                { id: 'private-key', validator: 'privateKey' },
+                { id: 'pin', validator: 'pin' },
+                { id: 'pin-confirm', validator: 'pinConfirm' }
+            ];
+
+            inputs.forEach(({ id, validator }) => {
+                const input = document.getElementById(id);
+                const errorDiv = document.getElementById(`${id}-error`);
+
+                input.addEventListener('input', () => {
+                    const value = input.value.trim();
+                    const pinValue = validator === 'pinConfirm' ? document.getElementById('pin').value.trim() : null;
+                    const result = validator === 'pinConfirm' ? validators[validator](value, pinValue) : validators[validator](value);
+
+                    if (result === true) {
+                        errorDiv.style.display = 'none';
+                        errorDiv.textContent = '';
+                        validationState[validator] = true;
+                    } else {
+                        errorDiv.style.display = 'block';
+                        errorDiv.textContent = result;
+                        validationState[validator] = false;
+                    }
+
+                    updateLoginButton();
+                });
+            });
+        }
+
+        function updateLoginButton() {
+            const loginButton = document.getElementById('login-button');
+            const allValid = Object.values(validationState).every(state => state === true);
+            loginButton.disabled = !allValid;
+        }
+
+        async function login() {
+            const privateKeyInput = document.getElementById('private-key').value.trim();
+            const pin = document.getElementById('pin').value.trim();
+            const pinConfirm = document.getElementById('pin-confirm').value.trim();
+            const errorDiv = document.getElementById('error');
+            const statusDiv = document.getElementById('status');
+            errorDiv.textContent = '';
+            statusDiv.textContent = '';
+
+            try {
+                if (privateKeyInput.startsWith('nsec')) {
+                    privateKey = window.NostrTools.nip19.decode(privateKeyInput).data;
+                } else {
+                    privateKey = privateKeyInput;
+                }
+
+                publicKey = window.NostrTools.getPublicKey(privateKey);
+                if (!publicKey) {
+                    throw new Error('Invalid private key');
+                }
+
+                if (pin !== pinConfirm) {
+                    throw new Error('PIN or password confirmation does not match');
+                }
+
+                const hashedPin = CryptoJS.SHA256(pin).toString();
+                localStorage.setItem(`pin_${publicKey}`, hashedPin);
+
+                pool = new window.NostrTools.SimplePool();
+                console.log('Connecting to relays:', relays);
+                await Promise.all(relays.map(async (url) => {
+                    try {
+                        const relay = await pool.ensureRelay(url);
+                        console.log(`Connected to ${url}`);
+                    } catch (err) {
+                        console.error(`Failed to connect to ${url}:`, err);
+                    }
+                }));
+
+                const filter = { kinds: [0], authors: [publicKey], limit: 1 };
+                const events = await pool.querySync(relays, filter);
+                console.log('Profile check:', events.length > 0 ? 'Profile exists' : 'No profile found');
+
+                sessionStorage.setItem('nostr_private_key', privateKey);
+
+                statusDiv.textContent = 'Login successful! Redirecting to profile...';
+                
+                setTimeout(() => {
+                    window.location.href = '/nostr/edit/';
+                }, 1000);
+
+            } catch (err) {
+                errorDiv.textContent = 'Error: ' + err.message;
+                console.error('Login error:', err);
+            }
+        }
+
+        setupValidation();
+
+        window.addEventListener('unload', () => {
+            if (pool) pool.close(relays);
+        });
+    </script>
+</body>
+</html>
