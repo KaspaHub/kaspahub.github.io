@@ -4,7 +4,7 @@ Dive into the Kaspa universe with Kaspa Hub - an independent community-driven pl
 - [Communities](https://kaspahub.github.io/communities/)
 - [Developers](https://kaspahub.github.io/developers/)
 - [Exchanges](https://kaspahub.github.io/exchanges/)
-- [Projects](https://kaspahub.github.io/ecosystem/)
+- [Ecosystem](https://kaspahub.github.io/ecosystem/)
 - [Resources](https://kaspahub.github.io/resources/)
 - [Solutions](https://kaspahub.github.io/solutions/)
 - [Wallets](https://kaspahub.github.io/wallets/)
