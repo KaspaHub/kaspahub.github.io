@@ -118,14 +118,15 @@
 	"tradeogre.com": [0],
 	"phishdestroy.io": [0],
 
-	"hibit.app": [0],
 	"kaswareswallet.com": [0, "Phishing."],
 	"3x-kaspa.org": [0, "Scam."],
 	"kaspadex.net": [0, "Scam."],
-	"kaspa.insure": [0, "kaspadex redirect link"],
+	"kaspakas.org": [0, "Scam."],
+	"kaspa.insure": [0, "Scam redirect link."],
 	"klearswap.com": [0],
 	"prosperitydexkas.com": [0],
 	"kastra.org": [0],
+	"hibit.app": [0],
 	"probifi.market": [0],
 	"kaspavis.com": [0],
 	"schlangenreich.com": [0]
