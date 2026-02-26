@@ -147,6 +147,13 @@
   "features": ["reviewed", "social"]
 },
 {
+  "name": "Vivoor",
+  "description": "A video platform powered by $KAS micropayments that lets creators earn Kaspa through tipping, channel subscriptions, engagement, and paid videos.",
+  "link": "https://kasshi.io",
+  "logo": "/assets/logos/kasshi.webp",
+  "features": ["social"]
+},
+{
   "name": "Kaspeak",
   "description": "A decentralized messenger on the Kaspa network with end-to-end encrypted private messages, groups, channels, and a dedicated SDK for building decentralized applications.",
   "link": "https://kaspeak.net",
