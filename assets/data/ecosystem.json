@@ -585,14 +585,14 @@
   "description": "The first Learn-to-Earn platform on Kaspa L1. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
   "link": "https://kaspa.university",
   "logo": "/assets/logos/kaspa.university.webp",
-  "features": ["education"]
+  "features": ["reviewed", "education"]
 },
 {
   "name": "BMT University",
   "description": "A learn-to-earn educational platform offering in-depth courses on Kaspa technology and cryptocurrency topics, with interactive quizzes, progress tracking, certificates, and token rewards for completion.",
   "link": "https://bmtuniversity.com",
   "logo": "/assets/logos/bmtuniversity.webp",
-  "features": ["education"]
+  "features": ["reviewed", "education"]
 },
 {
   "name": "MyKai",
