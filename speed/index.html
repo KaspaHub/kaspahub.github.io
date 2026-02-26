@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Crypto Speed Visualization - Kaspa Hub</title>
+<meta name="twitter:title" content="Crypto Block Speed Visualization - Kaspa Hub" />
+<meta property="og:title" content="Blockchain Block Speed Visualization - Kaspa Hub" />
+
+<meta name="description" content="Visualize real blockchain block times and understand how different consensus systems compare in speed. Compare Proof of Work and Proof of Stake performance using accurate block timing." />
+<meta name="twitter:description" content="Blockchain block speed visualization showing real-time block production rates across major networks." />
+<meta property="og:description" content="An interactive visualization of blockchain block speeds using real-world timing data. Kaspa holds world records for Proof of Work throughput." />
+
+<link rel="canonical" href="https://kaspahub.org/speed/" />
+<meta name="twitter:url" content="https://kaspahub.org/speed/" />
+<meta property="og:url" content="https://kaspahub.org/speed/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+
+<style>
+.speed-wrap {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  gap: 12px;
+}
+
+.controls button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.info {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.theme-1 {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.row-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.block-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.bar-container {
+  height: 14px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+.filter-group {
+  margin: 6px 0;
+}
+
+#settings-menu {
+  display: none;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+#settings-menu h3 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+#chain-list {
+  padding-right: 8px;
+}
+</style>
+
+<div class="speed-wrap">
+  <h1 style="text-align:center;">⚡ Crypto Speed Race</h1>
+
+  <div class="info">
+    <p>
+      This interactive visualization displays real-world average block times across blockchain networks.
+    </p>
+    <p>
+Faster networks generate blocks more frequently, therefore enabling faster transaction confirmations and shorter time to finality, highlighting the practical differences between consensus designs and scalability approaches.
+    </p>
+  </div>
+
+  <div class="controls">
+    <button id="toggle">▶ Start</button>
+    <button id="settings">⚙️</button>
+  </div>
+
+  <div class="theme-1" id="settings-menu">
+    <h3>Select Chains</h3>
+    <div id="chain-list"></div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+const chains = [
+  { name: "Kaspa DAG KNIGHT (KAS)", time: 0.01, color: "#49EACB" },
+  { name: "Fogo (FOGO)", time: 0.04, color: "#FF3D00" },
+  { name: "Aptos (APT)", time: 0.06, color: "#D5FAD3" },
+  { name: "Hyperliquid (HYPE)", time: 0.07, color: "#97FCE4" },
+  { name: "Sui (SUI)", time: 0.09, color: "#4CA3FF" },
+  { name: "Kaspa (KAS)", time: 0.10, color: "#49EACB" },
+  { name: "Somnia (SOMI)", time: 0.10, color: "#49EACB" },
+  { name: "Nano (XNO)", time: 0.35, color: "#209CE9" },
+  { name: "Solana (SOL)", time: 0.40, color: "#9845FD" },
+  { name: "BNB Chain (BNB)", time: 0.45, color: "#F0B90B" },
+  { name: "Internet Computer (ICP)", time: 0.48, color: "#FF087D" },
+  { name: "Sei (SEI)", time: 0.52, color: "#9E1F19" },
+  { name: "MultiversX Supernova (EGLD)", time: 0.6, color: "#23F7DD" },
+  { name: "NEAR Protocol (NEAR)", time: 0.61, color: "#00EC97" },
+  { name: "Qubic (QUBIC)", time: 1.5, color: "#20FAFC" },
+  { name: "Avalanche (AVAX)", time: 1.19, color: "#E84142" },
+  { name: "Zilliqa (ZIL)", time: 1.3, color: "#329B9F" },
+  { name: "Sonic (S)", time: 1.34, color: "#F5F5F5" },
+  { name: "Polygon (POL)", time: 2.0, color: "#6C00F6" },
+  { name: "Hedera (HBAR)", time: 2.0, color: "#37383A" },
+  { name: "Harmony (ONE)", time: 2.0, color: "#2DCED6" },
+  { name: "Keeta (KTA)", time: 2.25, color: "#2C2A2B" },
+  { name: "Toncoin (TON)", time: 2.68, color: "#0088CC" },
+  { name: "Algorand (ALGO)", time: 2.77, color: "#17CAC6" },
+  { name: "XRP (XRP)", time: 4.0, color: "#23292F" },
+  { name: "XELIS (XEL)", time: 5.0, color: "#02FFCF" },
+  { name: "Quai Network (QUAI)", time: 5.0, color: "#C42507" },
+  { name: "MultiversX (EGLD)", time: 6.0, color: "#23F7DD" },
+  { name: "Alephium (ALPH)", time: 8.0, color: "#FF3637" },
+  { name: "Bittensor (TAO)", time: 12.0, color: "#FFFFFF" },
+  { name: "Ethereum (ETH)", time: 12.0, color: "#828385" },
+  { name: "Ethereum Classic (ETC)", time: 13.0, color: "#3CBA3C" },
+  { name: "DigiByte (DGB)", time: 15.0, color: "#006AD2" },
+  { name: "Cardano (ADA)", time: 20.0, color: "#0033AD" },
+  { name: "Ravencoin (RVN)", time: 60.0, color: "#384182" },
+  { name: "Dogecoin (DOGE)", time: 60.0, color: "#BA9F33" },
+  { name: "Zcash (ZEC)", time: 75.0, color: "#ECB244" },
+  { name: "Monero (XMR)", time: 120.0, color: "#FA6800" },
+  { name: "Litecoin (LTC)", time: 150.0, color: "#345D9D" },
+  { name: "Dash (DASH)", time: 150.0, color: "#008CE7" },
+  { name: "Bitcoin (BTC)", time: 600.0, color: "#F7931A" },
+  { name: "Bitcoin Cash (BCH)", time: 600.0, color: "#4CCA47" },
+  { name: "eCash (XEC)", time: 600.0, color: "#0768BA" },
+  { name: "Bitcoin SV (BSV)", time: 600.0, color: "#EAB300" }
+];
+
+chains.sort((a, b) => a.time - b.time);
+
+const list = document.getElementById("list");
+const btn = document.getElementById("toggle");
+const settingsBtn = document.getElementById("settings");
+
+let running = false;
+let state = [];
+let enabledChains = {};
+
+chains.forEach(c => enabledChains[c.name] = false);
+
+const defaults = ["Kaspa (KAS)", "Solana (SOL)", "Internet Computer (ICP)", "Nano (XNO)", "DigiByte (DGB)", "Sei (SEI)", "BNB Chain (BNB)", "Polygon (POL)", "XRP (XRP)", "Ethereum (ETH)", "Cardano (ADA)", "Bitcoin (BTC)"];
+defaults.forEach(name => enabledChains[name] = true);
+
+const chainList = document.getElementById("chain-list");
+chains.forEach(c => {
+  const div = document.createElement("div");
+  div.className = "filter-group";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  const id = c.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  input.id = id;
+  input.checked = enabledChains[c.name];
+  input.addEventListener("change", () => enabledChains[c.name] = input.checked);
+  const label = document.createElement("label");
+  label.htmlFor = id;
+  label.textContent = c.name;
+  div.appendChild(input);
+  div.appendChild(label);
+  chainList.appendChild(div);
+});
+
+function applySettings() {
+  document.getElementById("settings-menu").style.display = "none";
+  if (running) stop();
+  buildRows();
+  if (running) start();
+}
+
+settingsBtn.onclick = () => {
+  const menu = document.getElementById("settings-menu");
+  if (menu.style.display === "none" || menu.style.display === "") {
+    menu.style.display = "block";
+  } else {
+    applySettings();
+  }
+};
+
+function formatTime(t) {
+  if (t < 1) return (t * 1000) + " ms";
+  if (t >= 60) return (t / 60) + " min";
+  return t + " s";
+}
+
+function buildRows() {
+  const activeChains = chains.filter(c => enabledChains[c.name]);
+  list.innerHTML = "";
+  state = [];
+
+  activeChains.forEach(c => {
+    const row = document.createElement("div");
+    row.className = "theme-1";
+
+    row.innerHTML = `
+      <div class="row-header">
+        <span>${c.name}</span>
+        <span>${formatTime(c.time)}</span>
+        <span class="block-count">0 blocks</span>
+      </div>
+      <div class="bar-container">
+        <div class="bar" style="color:${c.color};"></div>
+      </div>
+    `;
+
+    const bar = row.querySelector(".bar");
+    const counter = row.querySelector(".block-count");
+
+    state.push({
+      bar,
+      counter,
+      duration: c.time * 1000,
+      start: 0,
+      blocks: 0
+    });
+
+    list.appendChild(row);
+  });
+}
+
+function start() {
+  running = true;
+  btn.textContent = "⏹ Stop";
+  const now = performance.now();
+  state.forEach(s => s.start = now);
+  requestAnimationFrame(tick);
+}
+
+function stop() {
+  running = false;
+  btn.textContent = "▶ Start";
+  state.forEach(s => {
+    s.bar.style.width = "0%";
+    s.blocks = 0;
+    s.counter.textContent = "0 blocks";
+  });
+}
+
+
+function tick(now) {
+  if (!running) return;
+
+  state.forEach(s => {
+    const elapsed = now - s.start;
+
+    if (s.duration > 0) {
+      const blocksPassed = Math.floor(elapsed / s.duration);
+      if (blocksPassed > 0) {
+        s.blocks += blocksPassed;
+        s.counter.textContent = s.blocks + " blocks";
+        s.start += blocksPassed * s.duration;
+      }
+    }
+
+    const progress = Math.min(elapsed / s.duration, 1);
+    s.bar.style.width = (progress * 100) + "%";
+  });
+
+  requestAnimationFrame(tick);
+}
+
+btn.onclick = () => {
+  running ? stop() : start();
+};
+
+buildRows();
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    running ? stop() : start();
+  }
+});
+</script>
+
+
+</body>
+</html>

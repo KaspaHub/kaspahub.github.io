@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa Wallet Balance - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Balance Checker - Kaspa Hub" />
+<meta property="og:title" content="Check Kaspa Wallet Balance Instantly - Kaspa Hub" />
+
+<meta name="description" content="Verify your Kaspa wallet balance instantly with this free lookup tool. Supports KAS and sompi formats with real-time API data." />
+<meta name="twitter:description" content="Easily check your Kaspa wallet balance by entering your address. Get accurate results in both KAS and sompi, powered by official Kaspa API." />
+<meta property="og:description" content="Paste a Kaspa address and see the current balance in seconds. Secure, fast, and connected directly to the official Kaspa REST API." />
+
+<link rel="canonical" href="https://kaspahub.org/page/balance/" />
+<meta name="twitter:url" content="https://kaspahub.org/page/balance/" />
+<meta property="og:url" content="https://kaspahub.org/page/balance/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<style>
+
+h1 { margin: 0 0 6px; font-weight: 700; letter-spacing: 0.2px; }
+p.hint { margin: 0 0 16px; font-size: 0.95rem; }
+form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6px; }
+
+
+.results { margin-top: 18px; display: grid; gap: 12px; }
+.row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; }
+.label { font-size: 0.95rem; margin: 7px; }
+.value { font-weight: 650; font-size: 1.05rem; word-break: break-all; }
+.error { margin-top: 12px; color: #ffb3b3; background: #2b0f15; border: 1px solid #5f1f2a; padding: 10px 12px; border-radius: 10px; }
+.ok    { margin-top: 12px; color: #bafad1; background: #0f2b1b; border: 1px solid #1f5f39; padding: 10px 12px; border-radius: 10px; }
+.footer { margin-top: 18px; font-size: 0.85rem; }
+.spinner { display: inline-block; width: 1em; height: 1em; border: 2px solid #9ecbff; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; margin-right: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tiny { font-size: 0.9rem; }
+
+
+#searchContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#searchContainer > * {
+  margin: 10px;
+}
+
+#loading {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 50px;
+}
+</style>
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+<div class="intro">
+    <h1>Check Kaspa Wallet Balance</h1>
+    <p class="hint">Paste a Kaspa address (e.g. <code>kaspa:qq...</code>) to see its current balance.</p>
+</div>
+
+<div id="searchContainer">
+  <input 
+    type="text" 
+    id="searchBox" 
+    placeholder="kaspa:qq..." 
+    required
+  >
+  <button class="button" id="searchBtn">Search</button>
+</div>
+
+<div id="loading" style="display: none;">
+  <span class="spinner"></span> Fetching…
+</div>
+
+<div id="msg"></div>
+<div id="results" class="results" hidden></div>
+
+<script>
+const API_BASE = "https://api.kaspa.org";
+const SOMPI_PER_KAS = 100_000_000;
+
+const searchBox = document.getElementById('searchBox');
+const searchBtn = document.getElementById('searchBtn');
+const msg = document.getElementById('msg');
+const results = document.getElementById('results');
+
+const loading = document.getElementById('loading');
+
+function isKaspaAddress(s) {
+  return typeof s === 'string'
+    && s.toLowerCase().startsWith('kaspa:')
+    && s.length >= 20 && s.length <= 120;
+}
+
+function formatKasFromSompi(sompi) {
+  const kas = Number(sompi) / SOMPI_PER_KAS;
+  return kas.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 8
+  });
+}
+
+function formatUsd(usd) {
+  return usd.toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 8
+  });
+}
+
+function setStatus(html, ok=false) {
+  msg.innerHTML = html ? `<div class="${ok ? 'ok' : 'error'}">${html}</div>` : '';
+}
+
+async function fetchBalance(address) {
+  const url = `${API_BASE}/addresses/${encodeURIComponent(address)}/balance`;
+  const res = await fetch(url, { headers: { 'accept': 'application/json' }});
+  if (!res.ok) {
+    throw new Error(`API error ${res.status}`);
+  }
+  const data = await res.json();
+
+  let sompi =
+    (typeof data.balance === 'number' && data.balance) ??
+    (typeof data.balanceSompi === 'number' && data.balanceSompi) ??
+    (typeof data.utxoBalance === 'number' && data.utxoBalance) ??
+    null;
+
+  if (sompi === null) {
+    const keys = Object.keys(data);
+    throw new Error(`Unexpected response format. Keys: ${keys.join(', ') || '(none)'}`);
+  }
+
+  return { sompi, url };
+}
+
+async function fetchKasPrice() {
+  const url = `${API_BASE}/info/price`;
+  const res = await fetch(url, { headers: { 'accept': 'application/json' }});
+  if (!res.ok) {
+    throw new Error(`Price API error ${res.status}`);
+  }
+  const data = await res.json();
+
+  if (typeof data.price !== 'number') {
+    throw new Error("Unexpected price response");
+  }
+
+  return data.price;
+}
+
+function renderResults(address, sompi, kasPriceUsd) {
+  const kas = Number(sompi) / SOMPI_PER_KAS;
+  const usdValue = kas * kasPriceUsd;
+
+  return `
+<div class="theme-1">
+  <div class="row">
+    <div class="label">Address</div>
+    <div class="value">${address}</div>
+  </div>
+  <div class="row">
+    <div class="label">Balance (KAS)</div>
+    <div class="value">${formatKasFromSompi(sompi)}</div>
+  </div>
+  <div class="row">
+    <div class="label">Balance (sompi)</div>
+    <div class="value">${Number(sompi).toLocaleString()}</div>
+  </div>
+  <div class="row">
+    <div class="label">Value (USD)</div>
+    <div class="value">${formatUsd(usdValue)}</div>
+  </div>
+<div class="footer tiny">
+  Notes:
+  <ul>
+    <li>1 KAS = 100,000,000 sompi.</li>
+  </ul>
+</div>
+</div>
+`;
+}
+
+async function handleSearch() {
+  const address = searchBox.value.trim();
+
+  results.hidden = true;
+  setStatus('');
+
+  if (!isKaspaAddress(address)) {
+    setStatus('Please enter a valid Kaspa address (should start with <code>kaspa:</code>).');
+    return;
+  }
+
+  const prev = searchBtn.textContent;
+  searchBtn.disabled = true;
+  loading.style.display = "block";
+
+  try {
+    const [{ sompi }, kasPriceUsd] = await Promise.all([
+      fetchBalance(address),
+      fetchKasPrice()
+    ]);
+
+    results.innerHTML = renderResults(address, sompi, kasPriceUsd);
+    results.hidden = false;
+
+    setStatus('✔ Balance and USD value fetched successfully.', true);
+  } catch (err) {
+    console.error(err);
+    setStatus(`Couldn’t fetch data. ${err.message ? String(err.message) : ''}`);
+  } finally {
+    searchBtn.disabled = false;
+    loading.style.display = "none";
+  }
+}
+
+searchBtn.addEventListener('click', handleSearch);
+searchBox.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleSearch();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => searchBox.focus());
+</script>
+
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+</body>
+</html>

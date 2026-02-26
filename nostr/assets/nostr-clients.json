@@ -1,0 +1,114 @@
+[
+{
+  "name": "Amethyst",
+  "description": "A privacy-focused Nostr client offering data sovereignty and advanced configurations.",
+  "link": "https://amethyst.social",
+  "logo": "/nostr/assets/logos/amethyst.webp",
+  "features": ["android", "communities", "lightning", "opensource", "note_deletions"]
+},
+{
+  "name": "Iris",
+  "description": "A simple client enabling better social networks free from distractions.",
+  "link": "https://iris.to",
+  "logo": "/nostr/assets/logos/iris.webp",
+  "features": ["ios", "android", "web", "opensource", "note_deletions"]
+},
+{
+  "name": "YakiHonne",
+  "description": "A programmable client tailored for decentralized media and long-form publishing.",
+  "link": "https://yakihonne.com",
+  "logo": "/nostr/assets/logos/yakihonne.webp",
+  "features": ["web", "ios", "android", "lightning", "longform", "opensource", "note_deletions"]
+},
+{
+  "name": "Damus",
+  "description": "A decentralized social app promoting free speech without ads or algorithms.",
+  "link": "https://damus.io",
+  "logo": "/nostr/assets/logos/damus.webp",
+  "features": ["ios", "android", "desktop", "lightning", "opensource"]
+},
+{
+  "name": "Primal",
+  "description": "A polished Nostr client emphasizing seamless user experience and content discovery.",
+  "link": "https://primal.net",
+  "logo": "/nostr/assets/logos/primal.webp",
+  "features": ["web", "ios", "android", "lightning", "opensource", "note_deletions"]
+},
+{
+  "name": "Snort",
+  "description": "A fast and lightweight web-based Nostr interface for efficient network interaction.",
+  "link": "https://snort.social",
+  "logo": "/nostr/assets/logos/snort.webp",
+  "features": ["web", "lightning", "opensource", "note_deletions"]
+},
+{
+  "name": "Coracle",
+  "description": "An experimental client pushing boundaries with relay selection and custom feeds.",
+  "link": "https://coracle.social",
+  "logo": "/nostr/assets/logos/coracle.webp",
+  "features": ["web", "communities", "lightning", "opensource"]
+},
+{
+  "name": "noStrudel",
+  "description": "A web app designed for in-depth exploration of the Nostr protocol.",
+  "link": "https://nostrudel.ninja",
+  "logo": "/nostr/assets/logos/nostrudel.webp",
+  "features": ["web", "opensource"]
+},
+{
+  "name": "Nostur",
+  "description": "A feature-rich client for Apple devices supporting articles and advanced tools.",
+  "link": "https://nostur.com",
+  "logo": "/nostr/assets/logos/nostur.webp",
+  "features": ["ios", "desktop", "longform", "opensource", "note_deletions"]
+},
+{
+  "name": "Openvibe",
+  "description": "An aggregator combining multiple decentralized social networks into one timeline.",
+  "link": "https://openvibe.social",
+  "logo": "/nostr/assets/logos/openvibe.webp",
+  "features": ["ios", "android"]
+},
+{
+  "name": "Satellite",
+  "description": "A community-oriented web client with strong moderation and group tools.",
+  "link": "https://satellite.earth",
+  "logo": "/nostr/assets/logos/satellite.webp",
+  "features": ["web", "communities", "lightning", "opensource"]
+},
+{
+  "name": "Spring",
+  "description": "A simplified Nostr browser with an email-like interface for easy adoption.",
+  "link": "https://spring.site",
+  "logo": "/nostr/assets/logos/spring.webp",
+  "features": ["web"]
+},
+{
+  "name": "Nostter",
+  "description": "A minimal and calm web-based Nostr client with a Twitter-style feed and mute options.",
+  "link": "https://nostter.app",
+  "logo": "/nostr/assets/logos/nostter.webp",
+  "features": ["web"]
+},
+{
+  "name": "Nosotros",
+  "description": "A fast and modern Nostr web client optimized for mobile and desktop with advanced browsing features.",
+  "link": "https://nosotros.app",
+  "logo": "/nostr/assets/logos/nosotros.webp",
+  "features": ["web", "longform", "opensource"]
+},
+{
+  "name": "Lumilumi",
+  "description": "A lightweight and flexible Nostr web client with low-data modes for improved accessibility.",
+  "link": "https://lumilumi.app",
+  "logo": "/nostr/assets/logos/lumilumi.webp",
+  "features": ["web", "opensource"]
+},
+{
+  "name": "Nostrmo",
+  "description": "A cross-platform Flutter-based Nostr client supporting extensive NIPs and features.",
+  "link": "https://github.com/haorendashu/nostrmo",
+  "logo": "/nostr/assets/logos/nostrmo.webp",
+  "features": ["android", "ios", "web", "desktop", "lightning", "communities", "longform", "opensource", "note_deletions"]
+}
+]

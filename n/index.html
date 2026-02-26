@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa Link</title>
+
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="canonical" href="https://kaspahub.org/n/" />
+<meta name="twitter:url" content="https://kaspahub.org/n/" />
+<meta property="og:url" content="https://kaspahub.org/n/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<style>
+/*main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}*/
+.pfp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    user-select: none;
+}
+#about {
+    margin: 10px;
+}
+
+.theme-1 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    width: 100%;
+}
+#picture {
+    flex-shrink: 0;
+    height: 150px;
+    width: 150px;
+}
+@media (max-width: 700px) {
+    .pfp, #picture {
+        height: 100px;
+        width: 100px;
+    }
+    main {
+        font-size: 0.9em;
+    }
+}
+
+.menu-button {
+    width: 30px;
+    height: 30px;
+    opacity: 0.9;
+    cursor: pointer;
+    position: relative;
+    display: none;
+}
+
+.popup-menu {
+    position: absolute;
+    top: 35px;
+    left: -140px;
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    display: none;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.popup-menu a, .popup-menu button {
+    display: block;
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.popup-menu a:hover, .popup-menu button:hover {
+    background-color: #555;
+}
+</style>
+</head>
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-0">
+
+    <section id="profile-section" class="theme-1 fade-in" style="display:none;">
+
+        <div style="display: flex; justify-content: space-between;">
+
+            <div style="display: flex; gap: 20px;">
+                <div id="picture"></div>
+                <div>
+                    <h1 id="display_name"></h1>
+                    <h3 id="name" style="opacity: 0.75;"></h3>
+                </div>
+            </div>
+
+            <div class="menu-button" id="menuButton">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="20" fill="#333"/>
+              <circle cx="10" cy="20" r="3" fill="#fff"/>
+              <circle cx="20" cy="20" r="3" fill="#fff"/>
+              <circle cx="30" cy="20" r="3" fill="#fff"/>
+            </svg>
+
+            <div class="popup-menu" id="popupMenu"></div>
+
+            </div>
+
+        </div>
+
+        <div id="about"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading data…</span></div></div>
+        <div id="qr-code" style="margin: 20px 0px; justify-content: space-around; display: flex; min-height: 100px;"></div>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <button class="copy-button" id="copy-button" style="display: none;">Copy Wallet Address</button>
+            <!-- <a class="button" id="open-button" style="display: none;" href="" target="_blank">Open Wallet</a> -->
+        </div>
+
+        <div id="error" style="color: red; margin-top: 10px;"></div>
+
+    </section>
+
+    <section id="search-section" class="theme-1" style="display:none;">
+        <div class="w-header">
+        <span>Donation Pages</span>
+        <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
+        </div>
+        <p>Please enter Nostr public key</p>
+        <input type="text" id="searchBox" placeholder="npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" required="">
+        <div class="w-footer">
+            <p><a href="/nostr/register/">Create a donation page</a></p>
+            <button class="button" id="searchBtn">Search</button>
+        </div>
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/nostr-tools@2.23.1/lib/nostr.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+<script src="/assets/scripts/jquery-qrcode.js"></script>
+<script type="module">
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const npub = urlParams.get('user');
+    const usernameElement = document.getElementById("name");
+    const displaynameElement = document.getElementById("display_name");
+    const pictureElement = document.getElementById("picture");
+    const aboutElement = document.getElementById("about");
+    const qrCodeElement = document.getElementById("qr-code");
+    const copyButton = document.getElementById("copy-button");
+    const errorDiv = document.getElementById("error");
+    // const openButton = document.getElementById("open-button");
+
+    const profileSection = document.getElementById("profile-section");
+    const searchSection = document.getElementById("search-section");
+
+    const relays = [
+        'wss://relay.damus.io',
+        'wss://nos.lol',
+        'wss://relay.primal.net'
+    ];
+
+    function setMetaTag(name, content) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        meta.setAttribute('content', content);
+        document.head.appendChild(meta);
+    }
+
+    if (!npub) {
+        searchSection.style.display = "block";
+    } else {
+        profileSection.style.display = "block";
+
+    let publicKey;
+    try {
+        if (npub.startsWith('npub')) {
+            publicKey = window.NostrTools.nip19.decode(npub).data;
+        } else {
+            publicKey = npub;
+        }
+    } catch (err) {
+        aboutElement.textContent = "Invalid npub provided.";
+        errorDiv.textContent = "Error: " + err.message;
+        return;
+    }
+
+    const pool = new window.NostrTools.SimplePool();
+    let userProfile = null;
+
+    function isValidKaspaAddress(address) {
+        return address && address.startsWith('kaspa:');
+    }
+
+    for (const relay of relays) {
+        try {
+            const relayConn = await pool.ensureRelay(relay);
+            console.log(`Connected to ${relay} for profile`);
+            const filter = { kinds: [0], authors: [publicKey], limit: 1 };
+            const events = await pool.querySync([relay], filter);
+
+            if (events && events.length > 0) {
+                const event = events[0];
+                const profile = JSON.parse(event.content);
+                if (isValidKaspaAddress(profile.kaspa)) {
+                    userProfile = profile;
+                    break;
+                }
+            }
+        } catch (err) {
+            console.error(`Failed to query ${relay} for profile:`, err);
+        }
+    }
+
+    if (!userProfile || !isValidKaspaAddress(userProfile.kaspa)) {
+        aboutElement.innerHTML = `<span class='error'>No user found with npub <strong>${npub}</strong> or no valid Kaspa wallet address.</span>`;
+        pool.close(relays);
+        return;
+    }
+
+const menuItems = [];
+menuItems.push(`<a href="https://kaspahub.org/nostr/register/">Sign up</a><button type="button" onclick="navigator.clipboard.writeText('${npub}')">Copy Public Key</button>`);
+if (userProfile.lud16 && userProfile.lud16.includes('@')) {
+    menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${userProfile.lud16}')">Copy Lightning</button>`);
+}
+
+if (userProfile.website && userProfile.website.startsWith('http')) {
+    menuItems.push(`<a href="${userProfile.website}" target="_blank">Visit Website</a>`);
+}
+
+popupMenu.innerHTML = menuItems.join('');
+
+    if (userProfile.picture && userProfile.picture.startsWith('https:')) {
+        pictureElement.innerHTML = `<img draggable="false" class="pfp" src="${userProfile.picture}" onerror="this.src='https://kaspahub.org/assets/icons/user.svg'">`;
+    } else {
+        pictureElement.innerHTML = `<img draggable="false" class="pfp" src="https://kaspahub.org/assets/icons/user.svg" alt="Profile Picture">`;
+    }
+
+    if (userProfile.display_name) {
+        displaynameElement.innerHTML = userProfile.display_name;
+    }
+
+    if (userProfile.about) {
+        aboutElement.innerHTML = userProfile.about;
+    } else {
+        aboutElement.innerHTML = "";
+    }
+
+    if (userProfile.kns) {
+        usernameElement.innerHTML = userProfile.kns;
+        document.title = userProfile.kns;
+        setMetaTag('kaspa:title', userProfile.kns);
+    } else if (userProfile.username) {
+        usernameElement.innerHTML = `@${userProfile.username}`;
+        document.title = `@${userProfile.username}`;
+        setMetaTag('kaspa:title', '@' + userProfile.username);
+    } else if (userProfile.display_name) {
+        document.title = userProfile.display_name;
+        setMetaTag('kaspa:title', userProfile.display_name);
+    } else {
+        const fallbackName = npub.slice(0, 8);
+        usernameElement.innerHTML = fallbackName;
+        document.title = fallbackName;
+        setMetaTag('kaspa:title', fallbackName);
+    }
+
+    button.style.display = 'inline-block';
+
+    const walletAddress = userProfile.kaspa;
+
+    $('#qr-code').qrcode({
+        render: 'image',
+        text: walletAddress,
+        size: 256,
+        quiet: 3
+    });
+
+    $('#qr-code img').addClass('qr-code');
+
+    copyButton.style.display = "inline-block";
+    copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(walletAddress).then(() => {
+            const originalText = copyButton.textContent;
+            copyButton.textContent = 'Copied!';
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+            }, 1500);
+        });
+    });
+
+    // if (window.innerHeight > window.innerWidth) {
+    //     openButton.style.display = "inline-block";
+    //     openButton.href = walletAddress;
+    // }
+
+    setMetaTag('kaspa:wallet', walletAddress);
+
+}
+});
+
+const button = document.getElementById('menuButton');
+const menu = document.getElementById('popupMenu');
+
+button.addEventListener('click', (e) => {
+e.stopPropagation();
+menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+});
+
+document.addEventListener('click', () => {
+menu.style.display = 'none';
+});
+
+function runSearch(npub) {
+    if (npub) {
+        window.location.href = `https://kaspahub.org/n/?user=${npub}`;
+    }
+}
+
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'searchBtn') {
+        runSearch(document.getElementById('searchBox')?.value);
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.target.id === 'searchBox' && e.key === 'Enter') {
+        runSearch(e.target.value);
+    }
+});
+</script>
+</body>
+</html>

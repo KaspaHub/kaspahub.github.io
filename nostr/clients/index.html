@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Nostr Clients - Kaspa Hub</title>
+<meta name="twitter:title" content="Nostr Clients - Kaspa Hub" />
+<meta property="og:title" content="Nostr Client Applications - Kaspa Hub" />
+
+<meta name="description" content="Explore our curated directory of Nostr clients. Compare options across mobile, web, desktop, Lightning payments, communities, long-form content, power-user tools, and open-source status. Find the perfect decentralized social client for your needs." />
+<meta name="twitter:description" content="Find and compare leading Nostr clients. Your complete guide to the growing ecosystem of decentralized social applications." />
+<meta property="og:description" content="Discover leading Nostr clients with filters for platforms, Lightning support, communities, longform publishing, advanced tools, and open-source availability. Your complete guide to decentralized social apps." />
+
+<link rel="canonical" href="https://kaspahub.org/nostr/clients/" />
+<meta name="twitter:url" content="https://kaspahub.org/nostr/clients/" />
+<meta property="og:url" content="https://kaspahub.org/nostr/clients/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+  <h1>Nostr Client Comparison</h1>
+  <p>Filter and compare popular Nostr clients by platform and features.</p>
+</div>
+
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+
+  <h3>Platform<span id="counter"></span></h3>
+  <div class="filter-category">
+
+    <div class="filter-group">
+      <input type="radio" name="family" id="plat-all" data-family="all" checked>
+      <label for="plat-all">All</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="radio" name="family" id="plat-web" data-family="web">
+      <label for="plat-web">Web</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="radio" name="family" id="plat-ios" data-family="ios">
+      <label for="plat-ios">iOS</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="radio" name="family" id="plat-android" data-family="android">
+      <label for="plat-android">Android</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="radio" name="family" id="plat-desktop" data-family="desktop">
+      <label for="plat-desktop">Desktop</label>
+    </div>
+
+  </div>
+
+  <h3>Features</h3>
+  <div class="filter-category">
+
+    <div class="filter-group">
+      <input type="checkbox" id="f-communities" data-feature="communities">
+      <label for="f-communities">Communities</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="checkbox" id="f-note_deletions" data-feature="note_deletions">
+      <label for="f-note_deletions">Delete Notes</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="checkbox" id="f-lightning" data-feature="lightning">
+      <label for="f-lightning">Lightning</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="checkbox" id="f-longform" data-feature="longform">
+      <label for="f-longform">Long-form</label>
+    </div>
+
+    <div class="filter-group">
+      <input type="checkbox" id="f-opensource" data-feature="opensource">
+      <label for="f-opensource">Open Source</label>
+    </div>
+
+  </div>
+
+</aside>
+
+<section class="filter-list-main">
+  <div class="theme-1 search-sort-controls">
+    <input type="text" id="searchInput" placeholder="Search..." />
+    <select id="sortSelect" aria-label="Sort">
+      <option value="default">Default</option>
+      <option value="az">A - Z</option>
+      <option value="za">Z - A</option>
+    </select>
+  </div>
+  <div class="filter-grid" id="itemGrid"></div>
+  <button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+let items = [];
+let filteredItems = [];
+let currentIndex = 0;
+const itemsPerPage = 42;
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const familyRadios = document.querySelectorAll('input[type="radio"][data-family]');
+const featureCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const featureTags = {
+    reviewed: { label: '', class: 'reviewed' },
+    verified: { label: '', class: 'verified' }
+};
+
+function renderItems(reset = false) {
+    if (reset) {
+        itemGrid.innerHTML = '';
+        currentIndex = 0;
+    }
+    const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < slice.length; i++) {
+        const item = slice[i];
+        const card = document.createElement('a');
+        card.className = 'filter-card theme-1';
+        card.href = item.link;
+        card.target = '_blank';
+
+        let featuresHtml = '';
+        for (let j = 0; j < item.features.length; j++) {
+            const f = item.features[j];
+            if (featureTags[f]) featuresHtml += `<span class="feature-tag ${featureTags[f].class}">${featureTags[f].label}</span>`;
+        }
+
+        card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
+        fragment.appendChild(card);
+    }
+    itemGrid.appendChild(fragment);
+    currentIndex += slice.length;
+    counter.textContent = `(${filteredItems.length} of ${items.length})`;
+    loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+  const selectedFamily = document.querySelector('input[type="radio"][data-family]:checked')?.dataset.family || 'all';
+  const activeFeatures = Array.from(featureCheckboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.dataset.feature);
+
+  const searchTerm = searchInput.value.trim().toLowerCase();
+
+  filteredItems = items.filter(item => {
+    const familyMatch = selectedFamily === 'all' || item.features.includes(selectedFamily);
+
+    const featureMatch = activeFeatures.length === 0 ||
+      activeFeatures.every(f => item.features.includes(f));
+
+    const searchMatch = !searchTerm ||
+      item.name.toLowerCase().includes(searchTerm) ||
+      item.description.toLowerCase().includes(searchTerm);
+
+    return familyMatch && featureMatch && searchMatch;
+  });
+
+  const sortMode = sortSelect.value;
+  if (sortMode === 'az') {
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortMode === 'za') {
+    filteredItems.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
+  if (filteredItems.length === 0) {
+    itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+    loadMoreBtn.style.display = 'none';
+    counter.textContent = ` (0 of ${items.length})`;
+    return;
+  }
+
+  renderItems(true);
+}
+
+familyRadios.forEach(r => r.addEventListener('change', filterItems));
+featureCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+loadMoreBtn.addEventListener('click', () => renderItems());
+
+fetch('/nostr/assets/nostr-clients.json?v=0')
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to load');
+    return res.json();
+  })
+  .then(data => {
+    items = data;
+    filteredItems = [...items];
+    renderItems(true);
+  })
+  .catch(err => {
+    console.error(err);
+    itemGrid.innerHTML = '<p class="no-items-message">Failed to load items.</p>';
+  });
+</script>
+</body>
+</html>

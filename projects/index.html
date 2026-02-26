@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa Projects - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Projects - Kaspa Hub" />
+<meta property="og:title" content="Kaspa Apps - Kaspa Hub" />
+
+<meta name="description" content="Discover a growing collection of innovative projects and initiatives powered by the high-performance Kaspa blockchain. Fast, scalable, and secure technology for real-world applications." />
+<meta name="twitter:description" content="A collection of applications and initiatives on the Kaspa network - fast, efficient, and forward-thinking digital solutions." />
+<meta property="og:description" content="Discover Kaspa's top decentralized ecosystem apps for development, trading, and community engagement." />
+
+<link rel="canonical" href="https://kaspahub.org/projects/" />
+<meta property="og:url" content="https://kaspahub.org/projects/" />
+<meta name="twitter:url" content="https://kaspahub.org/projects/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<style>
+.theme-1 {
+	border: 1px solid rgba(80, 255, 200, 0.2);
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+.project-card {
+	position: relative;
+	overflow: hidden;
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: left;
+	height: 120px;
+  border-radius: 15px;
+  color: inherit !important;
+  text-decoration: none !important;
+  font-weight: inherit !important;
+}
+.project-card::hover {
+}
+.project-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	filter: blur(10px);
+	z-index: -1;
+}
+.card-icon {
+	border-radius: 12px;
+	width: 50px;
+	height: 50px;
+	margin-right: 15px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	flex-shrink: 0;
+}
+.card-text {
+	display: flex;
+	flex-direction: column;
+}
+.card-title {
+	font-size: 1.2em;
+	margin: 0;
+}
+.card-description {
+	font-size: 0.9em;
+	margin: 5px 0 0;
+}
+@media (max-width: 768px) {
+	.grid-container {
+		grid-template-columns: 1fr;
+	}
+	.project-card {
+		height: auto;
+	}
+}
+@media (min-width: 1150px) {
+  .project-card {
+   min-width: 360px;
+  }
+}
+
+#loadMoreBtn:hover {
+  text-decoration: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2" style="padding-bottom: 0; display: flex; flex-direction: column;">
+
+    <div style="text-align: center; margin-bottom: 70px;">
+        <h1 style="font-size: 3em; filter: brightness(0.7);">Projects Building on Kaspa </h1>
+    </div>
+
+<div class="grid-container">
+
+  <a href="https://www.kaspa.com" class="project-card theme-1" style="--card-bg: url('/projects/kaspacom.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspacom.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kaspa.com</h2>
+      <p class="card-description">DeFi Platform</p>
+    </div>
+  </a>
+
+  <a href="https://kasia.fyi" class="project-card theme-1" style="--card-bg: url('/projects/kasia.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kasia.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kasia</h2>
+      <p class="card-description">Messenger</p>
+    </div>
+  </a>
+
+  <a href="https://k-social.network" class="project-card theme-1" style="--card-bg: url('/projects/k.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspa-black.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">K</h2>
+      <p class="card-description">Social Platform</p>
+    </div>
+  </a>
+
+  <a href="https://kaspeak.net" class="project-card theme-1" style="--card-bg: url('/projects/kaspeak.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspeak.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kaspeak</h2>
+      <p class="card-description">Messenger</p>
+    </div>
+  </a>
+
+  <a href="https://vivoor.xyz" class="project-card theme-1" style="--card-bg: url('/projects/vivoor.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/vivoor.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Vivoor</h2>
+      <p class="card-description">Streaming Platform</p>
+    </div>
+  </a>
+
+  <a href="https://kaspajobs.com" class="project-card theme-1" style="--card-bg: url('/projects/kaspajobs.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspero.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">KaspaJobs</h2>
+      <p class="card-description">Job Board</p>
+    </div>
+  </a>
+
+  <a href="https://kaspa.social" class="project-card theme-1" style="--card-bg: url('/projects/kaspa.social.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspa.social.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kaspa Social</h2>
+      <p class="card-description">Media Platform</p>
+    </div>
+  </a>
+
+  <a href="https://kaspium.io" class="project-card theme-1" style="--card-bg: url('/projects/kaspium.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspa.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kaspium</h2>
+      <p class="card-description">Wallet</p>
+    </div>
+  </a>
+
+  <a href="https://www.kasware.xyz" class="project-card theme-1" style="--card-bg: url('/projects/kaswarewallet.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaswarewallet.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kasware</h2>
+      <p class="card-description">Wallet</p>
+    </div>
+  </a>
+
+  <a href="https://kastle.cc" class="project-card theme-1" style="--card-bg: url('/projects/kastlewallet.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kastlewallet.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kastle</h2>
+      <p class="card-description">Wallet</p>
+    </div>
+  </a>
+
+  <a href="https://www.kurncy.com" class="project-card theme-1" style="--card-bg: url('/projects/kurncywallet.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kurncywallet.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kurncy</h2>
+      <p class="card-description">Wallet</p>
+    </div>
+  </a>
+
+  <a href="https://www.kaskad.app" class="project-card theme-1" style="--card-bg: url('/projects/kaskad.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaskad.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">Kaskad</h2>
+      <p class="card-description">Lending Platform</p>
+    </div>
+  </a>
+
+  <a href="https://kyocard.app" class="project-card theme-1" style="--card-bg: url('/projects/kyocard.app.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kyocard.app.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">KYO</h2>
+      <p class="card-description">Crypto Card</p>
+    </div>
+  </a>
+
+  <a href="https://thecryptosky.com" class="project-card theme-1" style="--card-bg: url('/projects/thecryptosky.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/thecryptosky.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">TheCryptoSky</h2>
+      <p class="card-description">Marketplace</p>
+    </div>
+  </a>
+
+  <a href="https://kasmart.org" class="project-card theme-1" style="--card-bg: url('/projects/kasmart.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kaspa-2.webp');"></div>
+    <div class="card-text">
+      <h2 class="card-title">KasMart</h2>
+      <p class="card-description">Marketplace</p>
+    </div>
+  </a>
+
+</div>
+
+<a href="https://kaspahub.org/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; margin-top: 100px;">Find out more</a>
+
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+<script>
+  document.querySelectorAll('.project-card').forEach(card => {
+    const bg = card.style.getPropertyValue('--card-bg');
+    if (bg) {
+      card.style.setProperty('--card-bg', bg);
+    }
+  });
+</script>
+
+<style>
+  .project-card::before {
+    background-image: var(--card-bg, url('https://via.placeholder.com/300x150?text=Default+BG'));
+  }
+</style>
+
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Developer Tools - Kaspa Hub</title>
+<meta name="twitter:title" content="Developer Tools - Kaspa Hub" />
+<meta property="og:title" content="Developer Tools - Kaspa Hub" />
+
+<meta name="description" content="Discover a comprehensive collection of open-source developer tools for Kaspa on GitHub or api endpoints. Easily browse tools designed for node management, wallet integration, and data visualization." />
+<meta name="twitter:description" content="Access a wide range of Kaspa developer tools available on GitHub. Find resources for node operation, wallet development, visual analytics, and community-driven projects all in one place." />
+<meta property="og:description" content="Browse Kaspa developer tools hosted on GitHub, offering solutions for node functionality, wallet applications, data visualization, and support through a vibrant developer community." />
+
+<link rel="canonical" href="https://kaspahub.org/developers/" />
+<meta name="twitter:url" content="https://kaspahub.org/developers/" />
+<meta property="og:url" content="https://kaspahub.org/developers/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ItemList",
+"name": "Developer Tools - Kaspa Hub",
+"url": "https://kaspahub.org/developers/",
+"description": "Explore open-source Kaspa cryptocurrency developer tools on GitHub. Filter by programming languages like Rust, JavaScript, Dart, Go, and PHP to find tools for nodes, wallets, visualization, and community support.",
+"itemListElement": [
+	{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Rusty Kaspa",
+		"url": "https://github.com/kaspanet/rusty-kaspa"
+	},
+	{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Kdapp",
+		"url": "https://github.com/michaelsutton/kdapp"
+	},
+	{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "WASM32 SDK",
+		"url": "https://kaspa.aspectron.org/docs/index.html"
+	},
+	{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "Simply Kaspa Indexer",
+		"url": "https://hub.docker.com/r/supertypo/simply-kaspa-indexer"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "Kaspa-ng",
+		"url": "https://github.com/aspectron/kaspa-ng"
+	}
+]
+}
+</script>
+
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-2">
+<div class="intro">
+	<h1>Developer Tools</h1>
+	<p>Build on Kaspa with open-source code and software that powers the future.</p>
+</div>
+
+<div class="search-sort-controls">
+	<select id="sortSelect" aria-label="Sort Menu">
+		<option value="default">Default</option>
+		<option value="az">A - Z</option>
+		<option value="za">Z - A</option>
+	</select>
+</div>
+
+<div class="main-content-area">
+
+<aside class="sidebar theme-1">
+	
+	<input type="text" id="searchInput" placeholder="Search..."/>
+
+	<h3>Languages<span id="counter"></span></h3>
+	<div class="filter-category">
+		<div class="filter-group">
+			<input type="radio" name="language" id="rust" data-feature="rust">
+			<label for="rust">Rust</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="javascript" data-feature="javascript">
+			<label for="javascript">JavaScript</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="typescript" data-feature="typescript">
+			<label for="typescript">TypeScript</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="dart" data-feature="dart">
+			<label for="dart">Dart</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="go" data-feature="go">
+			<label for="go">Golang</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="php" data-feature="php">
+			<label for="php">PHP</label>
+		</div>
+		<div class="filter-group">
+			<input type="radio" name="language" id="python" data-feature="python">
+			<label for="python">Python</label>
+		</div>
+	</div>
+</aside>
+
+<section class="filter-list-main">
+	<div class="filter-grid" id="itemGrid"></div>
+	<button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+<script type="text/javascript">
+'use strict';
+
+const items = [
+{
+	name: "REST-API",
+	description: "The REST-API server for the Kaspa network, providing an HTTP interface to interact with Kaspa nodes. It allows developers to build applications that communicate with the Kaspa blockchain using standard HTTP methods.",
+	link: "https://api.kaspa.org/docs",
+	features: {
+	}
+},
+{
+	name: "Kasplex API",
+	description: "Official public API for the Kasplex protocol on Kaspa, providing access to KRC-20 token data via an open-source indexer.",
+	link: "https://docs-kasplex.gitbook.io/krc20",
+	features: {
+	}
+},
+{
+	name: "Kaspa.com API",
+	description: "API for the KaspaCom platform, providing real-time data on KRC20 tokens, KRC721 NFTs, and KNS domains. Includes endpoints for trade statistics, floor prices, fulfilled orders, hot mints, open orders, recent mints, collection details, token filtering, and more.",
+	link: "https://api.kaspa.com/api-docs",
+	// link: "https://docs.google.com/document/d/1Cfk0AcmahhcxsunH1EIudNRs1LpNAqqHswnBXhzKnHE/edit?tab=t.0",
+	features: {
+	}
+},
+{
+	name: "KNS API",
+	description: "API documentation for Kaspa Name Service (KNS), providing endpoints for querying assets by owner, asset details, domain resolution to addresses (case-insensitive), domain availability checks, profile data (website, avatar, bio, socials), and primary name management by owner address or setting for users. Supports mainnet and testnet (TN10) with URL-encoded domains required for accurate queries.",
+	link: "https://apidoc.knsdomains.org/mainnet/",
+	features: {
+	}
+},
+// {
+// 	name: "Kas.fyi API",
+// 	description: "A comprehensive platform for building on Kaspa's BlockDAG, offering APIs for real-time node access, transaction tracking, and analytics. Includes BlockDAG API, Node as a Service (NaaS), Big Data & Analytics, and Layer2 API for scalable dApp development.",
+// 	link: "https://docs.kas.fyi",
+// 	features: {
+// 	}
+// },
+{
+	name: "Rusty Kaspa",
+	description: "The official Rust implementation of the Kaspa full-node and related libraries, designed for high-performance and scalability. It supports the BlockDAG protocol, enabling rapid transaction confirmations and high throughput.",
+	link: "https://github.com/kaspanet/rusty-kaspa",
+	features: {
+		rust: true
+	}
+},
+{
+	name: "WASM32 SDK",
+	description: "WASM bindings for Rusty Kaspa, enabling Rust code integration in JavaScript and TypeScript environments. Ideal for developers building Kaspa applications with web compatibility and high performance.",
+	link: "https://kaspa.aspectron.org/docs/index.html",
+	features: {
+		rust: true,
+		javascript: true,
+		typescript: true
+	}
+},
+{
+	name: "Simply Kaspa Indexer",
+	description: "A Rust-based PostgreSQL indexer for Kaspa, optimized for concurrency and compatibility with kaspa-rest-server. Ideal for developers needing efficient blockchain data indexing.",
+	link: "https://hub.docker.com/r/supertypo/simply-kaspa-indexer",
+	features: {
+		rust: true
+	}
+},
+{
+    name: "Kloak Node",
+    description: "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
+    link: "https://github.com/kloakprotocol/kloak_node",
+    features: {
+        python: true
+    }
+},
+{
+	name: "Kaspium",
+	description: "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
+	link: "https://kaspium.io",
+	features: {
+		dart: true
+	}
+},
+{
+	name: "Kaspa Simple Wallet",
+	description: "A secure, production-safe JavaScript SDK for generating watch-only Kaspa addresses from extended public keys (KPUB/XPUB/TPUB). Supports major wallet formats, and Legacy KDX.",
+	link: "https://www.npmjs.com/package/kaspa-simple-wallet",
+	features: {
+		javascript: true
+	}
+},
+{
+	name: "KasPaper",
+	description: "A lightweight Go-based tool for generating secure Kaspa paper wallets. It provides a simple way to create offline storage for Kaspa assets by generating seed phrases and printable wallet files. Users can customize the wallet's appearance by editing the template.html file before compilation.",
+	link: "https://github.com/svarogg/kaspaper",
+	features: {
+		go: true
+	}
+},
+{
+	name: "Kaspa-ng",
+	description: "A desktop application for running a Kaspa p2p node, wallet, and BlockDAG visualizer. Written in Rust, it offers a high-performance interface for managing transactions and exploring the Kaspa network. Suited for developers and enthusiasts seeking a comprehensive tool for decentralized operations, with support for solo mining via a stratum bridge.",
+	link: "https://github.com/aspectron/kaspa-ng",
+	features: {
+		rust: true
+	}
+},
+{
+	name: "Kdapp",
+	description: "A Rust-based framework for building high-frequency, interactive decentralized applications (k-dApps) on Kaspa's BlockDAG. It supports time-sensitive 'Episodes' like tic-tac-toe, leveraging Kaspa's 10 blocks-per-second capability. Designed for rapid development, it avoids state persistence for simplicity and includes rollback handling for reorgs.",
+	link: "https://github.com/michaelsutton/kdapp",
+	features: {
+		rust: true
+	}
+},
+{
+	name: "NOWNodes",
+	description: "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
+	link: "https://nownodes.io",
+	features: {
+	}
+},
+{
+	name: "Kaspa Payments",
+	description: "A WordPress plugin that integrates Kaspa (KAS) cryptocurrency payments into WooCommerce stores. Non-custodial using KPUB watch-only wallets, generates unique addresses per order, automatic real-time payment detection via Kaspa API, live exchange rates from CoinGecko, QR code support, and automatic order completion.",
+	link: "https://kaspawoo.com",
+	features: {
+		php: true
+	}
+},
+{
+	name: "KasPush",
+	description: "A simple HTML and JavaScript tool for tracking Kaspa wallet balances with real-time push notifications via Pushcut on iOS. Features multiple wallet support, USD value tooltips, and a clean, offline-capable design. Open-source and plug-and-play for easy setup.",
+	link: "https://github.com/kas-builder/KasPush_",
+	features: {
+		javascript: true
+	}
+},
+{
+	name: "Kaspa Register",
+	description: "An NFC Point of Sale web app built with Flask, enabling Kaspa payment request URIs to be written to NTAG21x NFC tags using PN532 (Raspberry Pi) or ACR1252 readers. Features a Bootstrap UI for entering AUD amounts, converting to KAS via Coingecko rates, and writing URIs to tags with optional verification.",
+	link: "https://github.com/laudena/kaspa_register",
+	features: {
+		python: true
+	}
+},
+{
+	name: "Kaspeak SDK",
+	description: "An SDK for developing decentralized applications on the Kaspa network. It simplifies low-level tasks like message handling, cryptography, and transaction management, allowing developers to focus on application logic.",
+	link: "https://github.com/kaspeak/kaspeak-sdk",
+	features: {
+		javascript: true,
+		typescript: true
+	}
+},
+{
+	name: "Kaspian",
+	description: "A self-custodial Kaspa wallet with integrated merchant tools, built using JavaScript (Bun) and Rust (via WebAssembly). It supports wallet creation, transaction management, and merchant payment integrations, making it ideal for developers building user-facing applications or e-commerce solutions on the Kaspa network.",
+	link: "https://github.com/KaffinPX/Kaspian",
+	features: {
+		typescript: true
+	}
+},
+{
+	name: "Graph Inspector",
+	description: "A real-time visualization tool for the Kaspa BlockDAG, built with Go and JavaScript (Node.js). It includes database and API components for analyzing the network's block structure, making it valuable for developers studying Kaspa's DAG-based architecture or building analytical tools for network insights.",
+	link: "https://github.com/kaspa-live/kaspa-graph-inspector",
+	features: {
+		typescript: true,
+		go: true
+	}
+},
+{
+	name: "BLanim",
+	description: "BLanim is a Python library that extends the Manim package to provide tools for creating animations of blockchain and blockDAG concepts. It is being utilized in creating educational content related to Kaspa, helping to visualize its BlockDAG architecture.",
+	link: "https://github.com/ShaiW/blanim",
+	features: {
+		python: true
+	}
+},
+{
+	name: "KaspaCom Wallet",
+	description: "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps).",
+	link: "https://github.com/KASPACOM/kaspacom-web-wallet",
+	features: {
+		javascript: true
+	}
+},
+{
+	name: "KasOS",
+	description: "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
+	link: "https://github.com/deokman420/KasOS",
+	features: {
+		javascript: true
+	}
+},
+{
+	name: "Kasmage",
+	description: "A whimsical, lightweight frog-wizard themed CLI for monitoring Kaspa ($KAS) transactions with live alerts, history, and receipts. Supports real-time transaction streaming, threshold alerts, direction filtering, and TXT/JSON receipt generation.",
+	link: "https://github.com/ethanvillalobos8/kasmage",
+	features: {
+		python: true
+	}
+},
+{
+	name: "Kaspa REST Proxy",
+	description: "A REST to Kaspad wRPC Proxy that mirrors most Rusty Kaspa wRPC operations via HTTP REST endpoints. Simplifies developer integration with Kaspad nodes by allowing standard REST calls instead of WebSocket RPC.",
+	link: "https://github.com/supertypo/kaspa-rest-proxy",
+	features: {
+		python: true
+	}
+},
+{
+	name: "Simply Kaspa UTXO Exporter",
+	description: "Tool that exports Kaspa UTXO set data (top scripts/rich list and address distribution) by reading Rusty-Kaspad directory in read-only mode.",
+	link: "https://github.com/supertypo/simply-kaspa-utxo-exporter",
+	features: {
+		rust: true
+	}
+},
+{
+	name: "Kaspa Kinesis",
+	description: "A serverless multiplayer engine using the Kaspa for verifiable randomness and as a global relay, enabling real-time CGNAT-to-CGNAT connectivity, fair gameplay, full auditability, and zero infrastructure or centralized servers.",
+	link: "https://github.com/peavey2787/KaspaKinesis",
+	features: {
+		javascript: true,
+		typescript: true
+	}
+},
+{
+	name: "Kaspa WASM JS Wrapper",
+	description: "Browser based JavaScript Wrapper with interactive demos showcasing the Kaspa WASM SDK",
+	link: "https://github.com/peavey2787/minKasWasm",
+	features: {
+		rust: true
+	}
+},
+{
+	name: "ChainVsDag",
+	description: "An embeddable 3D visualization comparing Kaspa’s BlockDAG with traditional blockchains, featuring real-time animations, glass-morphism design, and customizable themes to illustrate Kaspa’s performance and scalability.",	
+	link: "https://chainvsdag.com",
+	features: {
+	}
+}
+];
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const itemsPerPage = 42;
+let currentIndex = 0;
+
+let lastCheckedRadio = null;
+let filteredItems = [...items];
+
+function getRandomColor() {
+	const letters = '0123456789ABCDEF';
+	let color = '#';
+	for (let i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+
+function renderItems(initial = false) {
+	if (initial) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	slice.forEach(item => {
+	const card = document.createElement('a');
+	card.classList.add('filter-card', 'theme-1');
+	card.href = item.link;
+	card.target = '_blank';
+	const randomColor = getRandomColor();
+	card.innerHTML = `<div class="item-header"><div class="filter-logo random-logo" style="background-color: ${randomColor};"><h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${item.name.charAt(0)}</h2></div><div class="item-top-actions"></div></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p>`;
+
+		itemGrid.appendChild(card);
+	});
+
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const selectedFeature = Array.from(filterRadios).find(radio => radio.checked)?.dataset.feature;
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const defaultOrder = [...items];
+
+	filteredItems = defaultOrder.filter(item => {
+		if (selectedFeature && !item.features[selectedFeature]) return false;
+		return searchTerm === "" || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+	});
+	
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') {
+	filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
+	
+	if (filteredItems.length === 0) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		loadMoreBtn.style.display = 'none';
+		counter.textContent = `(0 of ${items.length})`;
+		return;
+	}
+	
+	renderItems(true);
+}
+
+filterRadios.forEach(radio => {
+	radio.addEventListener('click', function () {
+	if (lastCheckedRadio === this) {
+		this.checked = false;
+		lastCheckedRadio = null;
+	} else {
+		lastCheckedRadio = this;
+	}
+	filterItems();
+	});
+});
+
+loadMoreBtn.addEventListener('click', () => renderItems());
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+
+renderItems(true);
+</script>
+</body>
+</html>

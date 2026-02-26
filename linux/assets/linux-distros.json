@@ -1,0 +1,135 @@
+[
+{
+  "name": "Debian",
+  "description": "Established by Ian Murdock in August 1993. Debian is developed openly by a team of volunteers.",
+  "link": "https://www.debian.org",
+  "logo": "/linux/assets/logos/debian.webp",
+  "features": ["debian", "debian", "offline", "liveusb", "secureboot", "ventoy", "gnome", "kde", "xfce", "cinnamon", "mate", "lxde", "lqqt"]
+},
+{
+  "name": "Fedora",
+  "description": "Cutting-edge, Red Hat sponsored, latest GNOME.",
+  "link": "https://fedoraproject.org",
+  "logo": "/linux/assets/logos/fedora.webp",
+  "features": ["fedora", "offline", "immutable", "flatpak", "secureboot", "ventoy", "gnome", "kde"]
+},
+{
+  "name": "Arch Linux",
+  "description": "Rolling release, minimalist, pacman + AUR, excellent wiki.",
+  "link": "https://archlinux.org",
+  "logo": "/linux/assets/logos/arch.webp",
+  "features": ["arch", "rolling", "ventoy"]
+},
+{
+  "name": "Linux Mint",
+  "description": "Beginner-friendly, non corp, funded via donations.",
+  "link": "https://linuxmint.com",
+  "logo": "/linux/assets/logos/mint.webp",
+  "features": ["debian", "secureboot", "ventoy", "nvidia", "flatpak", "cinnamon", "xfce"]
+},
+{
+  "name": "Zorin OS",
+  "description": "Beginner-friendly distribution developed by Zorin Group designed to make your computer faster.",
+  "link": "https://zorin.com",
+  "logo": "/linux/assets/logos/zorin.webp",
+  "features": ["debian", "secureboot", "ventoy", "flatpak", "snaps", "liveusb", "offline", "gnome"]
+},
+{
+  "name": "openSUSE",
+  "description": "A Linux distribution developed by the openSUSE Project. It is offered in two main variations.",
+  "link": "https://www.opensuse.org",
+  "logo": "/linux/assets/logos/suse.webp",
+  "features": ["offline", "secureboot", "gnome", "kde", "xfce"]
+},
+{
+  "name": "Ubuntu",
+  "description": "Popular and reliable Linux distribution developed by the British company Canonical and a community of contributors.",
+  "link": "https://ubuntu.com",
+  "logo": "/linux/assets/logos/ubuntu.webp",
+  "features": ["debian", "secureboot", "nvidia", "ventoy", "gnome"]
+},
+{
+  "name": "Kubuntu",
+  "description": "User friendly Ubuntu-based distro launched in 2004, developed by its community team, previously sponsored by Blue Systems and Canonical.",
+  "link": "https://kubuntu.org",
+  "logo": "/linux/assets/logos/kubuntu.webp",
+  "features": ["debian", "secureboot", "snaps", "ventoy", "kde"]
+},
+{
+  "name": "NixOS",
+  "description": "A Linux distribution built around the Nix package manager.",
+  "link": "https://nixos.org/",
+  "logo": "/linux/assets/logos/nix.webp",
+  "features": ["liveusb"]
+},
+{
+  "name": "CachyOS",
+  "description": "A modern, user-friendly and independent desktop-focused Linux distribution built from scratch.",
+  "link": "https://cachyos.org",
+  "logo": "/linux/assets/logos/cachyos.webp",
+  "features": ["arch", "kde", "liveusb"]
+},
+{
+  "name": "Solus",
+  "description": "A modern, user-friendly and independent desktop-focused Linux distribution built from scratch.",
+  "link": "https://getsol.us",
+  "logo": "/linux/assets/logos/solus.webp",
+  "features": ["budgie", "gnome", "kde", "xfce", "liveusb"]
+},
+{
+  "name": "AnduinOS",
+  "description": "Lightweight, beginner friendly Ubuntu-based Linux distribution that offers a familiar and easy-to-use experience for anyone moving to Linux.",
+  "link": "https://www.anduinos.com",
+  "logo": "/linux/assets/logos/anduinos.webp",
+  "features": ["debian", "ventoy", "gnome", "secureboot", "lightweight", "liveusb"]
+},
+{
+  "name": "TUXEDO OS",
+  "description": "Ubuntu-based, great for gaming & creators, hybrid rolling release updating kernel and de.",
+  "link": "https://www.tuxedocomputers.com",
+  "logo": "/linux/assets/logos/tuxedo.webp",
+  "features": ["debian", "ventoy", "offline", "kde", "nvidia"]
+},
+{
+  "name": "EndeavourOS",
+  "description": "Arch with easy graphical installer, close to vanilla.",
+  "link": "https://endeavouros.com",
+  "logo": "/linux/assets/logos/endeavour.webp",
+  "features": ["arch", "rolling", "ventoy", "xfce", "kde", "gnome", "mate", "cinnamon", "budgie", "lxqt", "lxde", "i3"]
+},
+{
+  "name": "PikaOS",
+  "description": "Ubuntu-based, great for gaming & creators.",
+  "link": "https://pika-os.com",
+  "logo": "/linux/assets/logos/pika.webp",
+  "features": ["debian", "gnome", "kde", "hyperland", "niri", "cosmic"]
+},
+{
+  "name": "Pop! OS",
+  "description": "Ubuntu-based, great for gaming & creators.",
+  "link": "https://system76.com/pop/",
+  "logo": "/linux/assets/logos/pop.webp",
+  "features": ["debian", "flatpak", "ventoy", "gnome", "cosmic"]
+},
+{
+  "name": "Manjaro",
+  "description": "User-friendly Arch with Calamares, multiple DE editions.",
+  "link": "https://manjaro.org",
+  "logo": "/linux/assets/logos/manjaro.webp",
+  "features": ["arch", "rolling", "flatpak", "kde", "gnome", "xfce"]
+},
+{
+  "name": "Nobara",
+  "description": "Fedora-based gaming distro with preconfigured drivers.",
+  "link": "https://nobaraproject.org",
+  "logo": "/linux/assets/logos/nobara.webp",
+  "features": ["fedora", "ventoy", "kde", "gnome"]
+},
+{
+  "name": "Endless OS",
+  "description": "A Safe, User-Friendly Operating System Packed with Educational Tools, Games, and Pathways To Turn Your Youth Into Creators.",
+  "link": "https://endlessglobal.com",
+  "logo": "/linux/assets/logos/endlessos.webp",
+  "features": ["debian", "flatpak"]
+}
+]

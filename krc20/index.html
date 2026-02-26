@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>KRC20 Token Explorer - Kaspa Hub</title>
+<meta property="og:title" content="KRC20 Token Explorer - Kaspa Hub" />
+<meta name="twitter:title" content="KRC20 Token Explorer - Kaspa Hub" />
+
+<meta name="description" content="Explore KRC20 tokens on Kaspa with real-time stats, transfers, holders, and tokenomics. Look up any Kaspa KRC20 token by ticker to track supply, activity, and holders." />
+<meta property="og:description" content="Discover Kaspa KRC20 tokens with detailed token data including transfers, holders, supply, and tokenomics. Search any KRC20 token on Kaspa instantly." />
+<meta name="twitter:description" content="Search and explore Kaspa KRC20 tokens. View live transfers, holders, supply, and tokenomics for any token on the Kaspa network." />
+
+<link rel="canonical" href="https://kaspahub.org/krc20/" />
+<meta property="og:url" content="https://kaspahub.org/krc20/" />
+<meta name="twitter:url" content="https://kaspahub.org/krc20/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+    <div class="pageHead">
+      <div class="tokenTitle">
+        <img id="tokenLogo" class="avatar" alt="" />
+        <div>
+          <h1 id="hdrLine">Token</h1>
+          <div class="sub" id="hdrSub">-</div>
+        </div>
+      </div>
+
+      <div class="searchRow">
+        <div class="input" title="Ticker">
+          <input id="q" placeholder="e.g. TICKER" />
+        </div>
+        <button class="btn" id="go">Search</button>
+      </div>
+    </div>
+
+    <section class="grid-2" aria-label="Summary">
+      <div class="theme-1 third">
+        <h3>Market</h3>
+        <div class="big" id="priceUsd">-</div>
+        <div class="rows">
+          <div class="row"><div class="k">24h change</div><div class="v" id="priceChg">-</div></div>
+          <div class="row"><div class="k">24h volume</div><div class="v" id="priceVol">-</div></div>
+          <div class="row"><div class="k">Market cap</div><div class="v" id="mcap">-</div></div>
+        </div>
+      </div>
+
+      <div class="theme-1 third">
+        <h3>Overview</h3>
+        <div class="rows">
+          <div class="row"><div class="k">Name</div><div class="v" id="name">-</div></div>
+          <div class="row"><div class="k">Ticker</div><div class="v mono" id="tick">-</div></div>
+          <div class="row"><div class="k">Decimals</div><div class="v mono" id="dec">-</div></div>
+          <div class="row"><div class="k">Deployed</div><div class="v" id="deployDate">-</div></div>
+        </div>
+      </div>
+
+      <div class="theme-1 third">
+        <h3>Tokenomics</h3>
+        <div class="rows">
+          <div class="row"><div class="k">Preminted</div><div class="v mono" id="preminted">-</div></div>
+          <div class="row"><div class="k">Burned</div><div class="v mono" id="burned">-</div></div>
+          <div class="row"><div class="k">Circulating</div><div class="v mono" id="circ">-</div></div>
+          <div class="row"><div class="k">Max</div><div class="v mono" id="max">-</div></div>
+        </div>
+      </div>
+
+      <div class="theme-1 half">
+        <h3>Stats</h3>
+        <div class="rows">
+          <div class="row"><div class="k">Holders</div><div class="v mono" id="holders">-</div></div>
+          <div class="row"><div class="k">Transfers</div><div class="v mono" id="transfers">-</div></div>
+          <div class="row"><div class="k">Mint ops</div><div class="v mono" id="mintOps">-</div></div>
+          <div class="row"><div class="k">Minted</div><div class="v mono" id="minted">-</div></div>
+        </div>
+      </div>
+    </section>
+
+<div class="tabs" role="tablist" aria-label="Token tabs">
+  <button class="tab active" data-tab="tabHolders">Holders</button>
+  <button class="tab" data-tab="tabTransfers">Transfers</button>
+  <button class="tab" data-tab="tabInfo">Info</button>
+</div>
+
+    <section id="tabHolders" class="tabPanel active" aria-label="Holders panel">
+      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+        <h3>Top Holders</h3>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Address</th>
+                <th class="right">Quantity</th>
+                <th class="right">Percentage</th>
+              </tr>
+            </thead>
+            <tbody id="holderRows">
+              <tr><td colspan="4" class="muted">-</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="miniBtns">
+          <button class="btn" id="prevHolder" disabled>Prev</button>
+          <button class="btn" id="nextHolder" disabled>Next</button>
+          <span class="muted" style="margin: auto 0;" id="holderCursor"></span>
+        </div>
+        <div class="muted" style="margin-top:10px" id="holderNote"></div>
+      </div>
+    </section>
+
+    <section id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
+      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+        <h3>Transfers</h3>
+        <div id="txLoading" class="muted" style="margin-bottom:10px; display:none;"><span class="spinner"></span>Loading…</div>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tx</th>
+                <th>Age</th>
+                <th>From</th>
+                <th>To</th>
+                <th class="right">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="txRows">
+              <tr><td colspan="5" class="muted">-</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="miniBtns">
+          <button class="btn" id="prevTx" disabled>Prev</button>
+          <button class="btn" id="nextTx" disabled>Next</button>
+          <span class="muted" style="margin: auto 0;" id="txCursor"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="tabInfo" class="tabPanel" aria-label="Info panel">
+      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+        <h3>Token Info</h3>
+        <div class="rows">
+          <div class="row"><div class="k">Website</div><div class="v" id="iWebsite">-</div></div>
+          <div class="row"><div class="k">Feed</div><div class="v" id="iFeed">-</div></div>
+          <div class="row"><div class="k">Chat</div><div class="v" id="iChat">-</div></div>
+          <div class="row"><div class="k">Mode</div><div class="v mono" id="iMode">-</div></div>
+          <div class="row"><div class="k">Deploy to</div><div class="v mono" id="iTo">-</div></div>
+          <div class="row"><div class="k">Updated</div><div class="v" id="iUpdated">-</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+  <div class="toast" id="toast">
+    <div class="m" id="toastMsg"></div>
+  </div>
+
+<script type="text/javascript">
+'use strict';
+(() => {
+  const KASPLEX_BASE = "https://api.kasplex.org/v1";
+  const LCW_BASE = "https://api.livecoinwatch.com";
+  const LCW_KEY = "ce13b00b-db7e-4cf9-9781-ea0a65d69b7d";
+  const EXPLORER_BASE = "https://kaspa.stream";
+
+  const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
+
+  const el = (id) => document.getElementById(id);
+
+  const q = el("q");
+  const go = el("go");
+
+  const tokenLogo = el("tokenLogo");
+  const hdrLine = el("hdrLine");
+  const hdrSub = el("hdrSub");
+
+  const priceUsd = el("priceUsd");
+  const priceChg = el("priceChg");
+  const priceVol = el("priceVol");
+  const mcap = el("mcap");
+
+  const name = el("name");
+  const tick = el("tick");
+  const dec = el("dec");
+  const deployDate = el("deployDate");
+
+  const circ = el("circ");
+  const minted = el("minted");
+  const preminted = el("preminted");
+  const burned = el("burned");
+  const max = el("max");
+
+  const holders = el("holders");
+  const transfers = el("transfers");
+  const mintOps = el("mintOps");
+
+  const holderRows = el("holderRows");
+  const holderNote = el("holderNote");
+
+  const iWebsite = el("iWebsite");
+  const iFeed = el("iFeed");
+  const iChat = el("iChat");
+  const iMode = el("iMode");
+  const iTo = el("iTo");
+  const iUpdated = el("iUpdated");
+
+  const txLoading = el("txLoading");
+  const txRows = el("txRows");
+  const prevTx = el("prevTx");
+  const nextTx = el("nextTx");
+  const txCursor = el("txCursor");
+
+  const prevHolder = el("prevHolder");
+  const nextHolder = el("nextHolder");
+  const holderCursor = el("holderCursor");
+
+  const toast = el("toast");
+  const toastMsg = el("toastMsg");
+
+  let busy = false;
+  let currentTick = "";
+  let tokenInfo = null;
+  let tokenMeta = null;
+  let tokenCircRaw = "0";
+  let tokenDec = 0;
+
+  let txPrev = null;
+  let txNext = null;
+  let txOffset = 0;
+
+  let tokenBurnedRaw = "0";
+
+  let holderList = [];
+  let holderOffset = 0;
+  const HOLDER_LIMIT = 20;
+
+  function showToast(title, msg){
+    toastMsg.textContent = msg || "";
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 5200);
+  }
+
+  function nowFmt(){
+    return new Date().toLocaleString(undefined, { hour12:false });
+  }
+
+  function safeUpper(s){ return (s || "").trim().toUpperCase(); }
+
+  function withSeparators(numStr){
+    const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function formatUsd(x){
+    if(x == null || !isFinite(x)) return "-";
+    return new Intl.NumberFormat(undefined, {
+      style:"currency", currency:"USD", maximumFractionDigits: 10
+    }).format(x);
+  }
+
+  function formatUsd0(x){
+    if(x == null || !isFinite(x)) return "-";
+    return new Intl.NumberFormat(undefined, {
+      style:"currency", currency:"USD", maximumFractionDigits: 0
+    }).format(x);
+  }
+
+  function formatCompact(x){
+    if(x == null || !isFinite(x)) return "-";
+    return new Intl.NumberFormat(undefined, { notation:"compact", maximumFractionDigits: 3 }).format(x);
+  }
+
+  function parseFloatSafe(v){
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function setUrlTick(t){
+    const u = new URL(window.location.href);
+    u.searchParams.set("q", t);
+    history.replaceState({}, "", u.toString());
+  }
+
+  function getUrlTick(){
+    const u = new URL(window.location.href);
+    return u.searchParams.get("q");
+  }
+
+  async function copyToClipboard(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      return true;
+    }catch{
+      try{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        return true;
+      }catch{
+        return false;
+      }
+    }
+  }
+
+  function tokenToNumber(rawStr, dec){
+    if(rawStr == null) return null;
+    const d = Number(dec || 0);
+    if(!/^\d+$/.test(String(rawStr))) return null;
+    return Number(rawStr) / Math.pow(10, d);
+  }
+
+  function formatTokenAmount(rawStr, dec){
+    if(rawStr == null) return "-";
+    const s = String(rawStr);
+    const d = Number(dec || 0);
+
+    if(!/^\d+$/.test(s)) return s;
+    if(d === 0) return withSeparators(s);
+
+    const pad = d - s.length + 1;
+    const full = (pad > 0 ? ("0".repeat(pad) + s) : s);
+    const i = full.length - d;
+
+    const intPart = full.slice(0, i);
+    const fracPart = full.slice(i).replace(/0+$/, "");
+
+    const intFmt = withSeparators(intPart === "" ? "0" : intPart);
+    return fracPart ? `${intFmt}.${fracPart}` : intFmt;
+  }
+
+  function pow10Big(n){
+    if(n <= 0) return 1n;
+    return BigInt("1" + "0".repeat(n));
+  }
+
+  function formatTokenAmount2(rawStr, dec){
+    if(rawStr == null) return "-";
+    const s = String(rawStr);
+    const d = Number(dec || 0);
+    if(!/^\d+$/.test(s)) return s;
+
+    let cents = 0n;
+    try{
+      const raw = BigInt(s);
+      if(d >= 2){
+        const scale = pow10Big(d - 2);
+        const half = scale / 2n;
+        cents = (raw + half) / scale;
+      }else if(d === 1){
+        cents = raw * 10n;
+      }else{
+        cents = raw * 100n;
+      }
+    }catch{
+      return "-";
+    }
+
+    const intPart = cents / 100n;
+    const fracPart = cents % 100n;
+
+    const intFmt = withSeparators(intPart.toString());
+    const fracStr = fracPart.toString().padStart(2, "0");
+    return `${intFmt}.${fracStr}`;
+  }
+
+  function ageFromMs(ms){
+    const t = Number(ms);
+    if(!isFinite(t)) return "-";
+    const diff = Date.now() - t;
+    if(diff < 0) return "-";
+    const s = Math.floor(diff/1000);
+    if(s < 60) return `${s}s`;
+    const m = Math.floor(s/60);
+    if(m < 60) return `${m}m`;
+    const h = Math.floor(m/60);
+    if(h < 24) return `${h}h`;
+    const d = Math.floor(h/24);
+    return `${d}d`;
+  }
+
+  function shortenMiddle(str, head=12, tail=10){
+    const s = String(str ?? "");
+    if(s.length <= head + tail + 3) return s;
+    return s.slice(0, head) + "…" + s.slice(-tail);
+  }
+
+  function escHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+  }
+
+  function explorerAddressUrl(addr){
+    const a = String(addr ?? "").trim();
+    return a ? `/address/?q=${encodeURIComponent(a)}` : "#";
+  }
+
+  function explorerTxUrl(hash){
+    const h = String(hash ?? "").trim();
+    return h ? `${EXPLORER_BASE}/transactions/${encodeURIComponent(h)}` : "#";
+  }
+
+  function linkAddress(addr, label){
+    const a = String(addr ?? "").trim();
+    const text = escHtml(label != null ? label : a);
+    if(!a) return "-";
+    return `<a class="explorerLink mono" href="${explorerAddressUrl(a)}">${text}</a>`;
+  }
+
+  function linkTx(hash, label){
+    const h = String(hash ?? "").trim();
+    const text = escHtml(label != null ? label : h);
+    if(!h) return "-";
+    return `<a class="explorerLink mono" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+  }
+
+  async function fetchKasplexToken(t){
+    const url = `${KASPLEX_BASE}/krc20/token/${encodeURIComponent(t)}`;
+    const res = await fetch(url, { method:"GET" });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const row = json?.result?.[0];
+    if(!row) throw new Error("Not found");
+    return row;
+  }
+
+  async function fetchBurnedAmountByAddress(t){
+    const url = `${KASPLEX_BASE}/krc20/address/${encodeURIComponent(BURN_ADDR)}/token/${encodeURIComponent(String(t || "").trim().toLowerCase())}`;
+    const res = await fetch(url, { method:"GET" });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const row = json?.result?.[0];
+    const bal = row?.balance ?? "0";
+    return /^\d+$/.test(String(bal)) ? String(bal) : "0";
+  }
+
+  async function fetchDirectoryMeta(t){
+    const up = safeUpper(t);
+    const jsonUrl = `/assets/data/krc20/${encodeURIComponent(up)}.json`;
+    const logoURL  = `/assets/logos/krc20/${encodeURIComponent(up)}.webp`;
+
+    let meta = null;
+    try{
+      const r = await fetch(jsonUrl, { method:"GET", cache:"no-store" });
+      if(r.ok) meta = await r.json();
+    }catch{}
+
+    try{
+      const r2 = await fetch(logoURL, { method:"HEAD" });
+      if(r2.ok) tokenLogo.src = logoURL;
+    }catch{}
+
+    return meta;
+  }
+
+  async function fetchLiveCoinWatchCoinSingle(code){
+    const res = await fetch(`${LCW_BASE}/coins/single`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": LCW_KEY
+      },
+      body: JSON.stringify({ currency: "USD", code: String(code || "").trim(), meta: false })
+    });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if(!json || typeof json !== "object") throw new Error("Missing market data");
+    return json;
+  }
+
+  async function fetchOpList({ tick, next=null, prev=null }){
+    const u = new URL(`${KASPLEX_BASE}/krc20/oplist`);
+    u.searchParams.set("tick", tick);
+    if(next) u.searchParams.set("next", next);
+    if(prev) u.searchParams.set("prev", prev);
+
+    const res = await fetch(u.toString(), { method:"GET" });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return {
+      prev: json?.prev ?? null,
+      next: json?.next ?? null,
+      result: Array.isArray(json?.result) ? json.result : []
+    };
+  }
+
+  function applyTokenDescription(){
+    const d = String(tokenMeta?.description || "").trim();
+    if(!d) return;
+    const m1 = document.querySelector('meta[name="description"]');
+    if(m1) m1.setAttribute("content", d);
+    const m2 = document.querySelector('meta[property="og:description"]');
+    if(m2) m2.setAttribute("content", d);
+    const m3 = document.querySelector('meta[name="twitter:description"]');
+    if(m3) m3.setAttribute("content", d);
+  }
+
+  function renderHeader(){
+    const t = safeUpper(currentTick);
+    const displayName = tokenMeta?.name || tokenInfo?.name || t;
+
+    hdrLine.textContent = `Token`;
+    hdrSub.textContent = `${displayName} (${t})`;
+    document.title = `${t} Token - Kaspa Hub`;
+
+    applyTokenDescription();
+
+    if(!tokenLogo.src){
+      tokenLogo.alt = t;
+      tokenLogo.style.background = "rgba(255,255,255,.08)";
+    }
+  }
+
+  function renderSummary(){
+    const t = safeUpper(currentTick);
+    const displayName = tokenMeta?.name || tokenInfo?.name || "-";
+
+    name.textContent = displayName;
+    tick.textContent = t;
+
+    tokenDec = Number(tokenInfo?.dec ?? "0");
+    dec.textContent = String(tokenDec);
+
+    if(tokenInfo?.mtsAdd != null){
+      const dt = new Date(Number(tokenInfo.mtsAdd));
+      deployDate.textContent = isFinite(dt.getTime()) ? dt.toLocaleString(undefined, { hour12:false }) : "-";
+    }else{
+      deployDate.textContent = "-";
+    }
+
+    const mintedRaw = tokenInfo?.minted ?? "0";
+    const burnedRaw = tokenBurnedRaw ?? "0";
+    const maxRaw = tokenInfo?.max ?? "0";
+    const premintedRaw = tokenInfo?.pre ?? "0";
+
+    let circRaw = "0";
+    try{
+      const m = BigInt(String(mintedRaw));
+      const b = BigInt(String(burnedRaw));
+      circRaw = String(m - b);
+    }catch{
+      circRaw = "0";
+    }
+    tokenCircRaw = circRaw;
+
+    let mintedPct = "-";
+    try{
+      const mintedN = tokenToNumber(mintedRaw, tokenDec);
+      const maxN = tokenToNumber(maxRaw, tokenDec);
+      if(mintedN != null && maxN != null && maxN > 0){
+        mintedPct = `${(mintedN / maxN * 100).toFixed(2)}%`;
+      }
+    }catch{}
+    minted.textContent = mintedPct;
+
+    let maxN = null;
+    try {
+      maxN = tokenToNumber(maxRaw, tokenDec);
+    } catch {}
+    const pctOfMax = (rawStr) => {
+      if (maxN == null || !(maxN > 0)) return "-";
+      const n = tokenToNumber(rawStr, tokenDec);
+      if (n == null || !(n >= 0)) return "-";
+      return (n / maxN * 100).toFixed(2) + "%";
+    };
+
+    const premPct = pctOfMax(premintedRaw);
+    const burnPct = pctOfMax(burnedRaw);
+    const circPct = pctOfMax(circRaw);
+    const maxPct = (maxN != null && maxN > 0) ? "100.00%" : "-";
+
+    preminted.innerHTML = `${formatTokenAmount(premintedRaw, tokenDec)}${premPct === "-" ? "" : ` (${premPct})`}`;
+    burned.innerHTML = `${formatTokenAmount(burnedRaw, tokenDec)}${burnPct === "-" ? "" : ` (${burnPct})`}`;
+    circ.innerHTML = `${formatTokenAmount2(circRaw, tokenDec)}${circPct === "-" ? "" : ` (${circPct})`}`;
+    max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxPct === "-" ? "" : ` (${maxPct})`}`;
+
+    holders.textContent = tokenInfo?.holderTotal != null ? withSeparators(tokenInfo.holderTotal) : "-";
+    transfers.textContent = tokenInfo?.transferTotal != null ? withSeparators(tokenInfo.transferTotal) : "-";
+    mintOps.textContent = tokenInfo?.mintTotal != null ? withSeparators(tokenInfo.mintTotal) : "-";
+
+    const website = tokenMeta?.website || "";
+    const feed = tokenMeta?.feed || "";
+    const chat = tokenMeta?.chat || "";
+
+    iWebsite.innerHTML = website ? `<a href="${website}" target="_blank" rel="noreferrer">${website}</a>` : "-";
+    iFeed.innerHTML = feed ? `<a href="${feed}" target="_blank" rel="noreferrer">${feed}</a>` : "-";
+    iChat.innerHTML = chat ? `<a href="${chat}" target="_blank" rel="noreferrer">${chat}</a>` : "-";
+    iMode.textContent = tokenInfo?.mod ?? "-";
+    iTo.textContent = tokenInfo?.to ?? "-";
+    if(tokenInfo?.mtsAdd != null){
+      const dt = new Date(Number(tokenInfo.mtsAdd));
+      iUpdated.textContent = isFinite(dt.getTime()) ? dt.toLocaleString(undefined, { hour12:false }) : nowFmt();
+    }else{
+      iUpdated.textContent = nowFmt();
+    }
+  }
+
+  function renderPriceRow(row){
+    const usd = parseFloatSafe(row?.rate);
+    const vol = parseFloatSafe(row?.volume);
+    const chFactor = parseFloatSafe(row?.delta?.day);
+    const ch = chFactor == null ? null : (chFactor - 1) * 100;
+
+    priceUsd.textContent = formatUsd(usd);
+
+    priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
+    priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
+
+    priceVol.textContent = vol == null ? "-" : formatCompact(vol);
+
+    const circN = tokenToNumber(tokenCircRaw, tokenDec);
+    if(circN != null && usd != null){
+      mcap.textContent = formatUsd0(circN * usd);
+    }else{
+      mcap.textContent = "-";
+    }
+  }
+
+  function renderPriceMissing(){
+    priceUsd.textContent = "-";
+    priceChg.textContent = "-";
+    priceChg.style.color = "rgba(255,255,255,.70)";
+    priceVol.textContent = "-";
+    mcap.textContent = "-";
+  }
+
+  function getLiveCoinWatchCode(){
+    const v =
+      tokenMeta?.livecoinwatch ??
+      tokenMeta?.lcw ??
+      tokenMeta?.market?.livecoinwatch?.code ??
+      tokenMeta?.market?.lcw?.code ??
+      tokenMeta?.market?.livecoinwatch ??
+      tokenMeta?.market?.lcw ??
+      null;
+    const s = String(v || "").trim();
+    return s ? s : null;
+  }
+
+  function renderHoldersPage(){
+    if(!holderList.length){
+      holderRows.innerHTML = `<tr><td colspan="4" class="muted">No holder data.</td></tr>`;
+      return;
+    }
+
+    const start = holderOffset;
+    const end = Math.min(start + HOLDER_LIMIT, holderList.length);
+    const pageList = holderList.slice(start, end);
+    const circN = tokenToNumber(tokenCircRaw, tokenDec);
+
+    holderRows.innerHTML = pageList.map((h, i) => {
+      const globalI = start + i;
+      const addr = String(h.address || "-");
+      const amtRaw = String(h.amount ?? "0");
+      const amtFmt = formatTokenAmount(amtRaw, tokenDec);
+
+      let share = "-";
+      if(circN != null){
+        const n = tokenToNumber(amtRaw, tokenDec);
+        if(n != null && circN > 0){
+          share = (n / circN * 100).toFixed(2) + "%";
+        }
+      }
+
+      return `
+        <tr>
+          <td class="mono">${globalI+1}</td>
+          <td>${linkAddress(addr, addr)}</td>
+          <td class="mono right">${amtFmt}</td>
+          <td class="right">${share}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function setHolderPaging(){
+    const hasPrev = holderOffset > 0;
+    const hasNext = holderOffset + HOLDER_LIMIT < holderList.length;
+    prevHolder.disabled = !hasPrev;
+    nextHolder.disabled = !hasNext;
+    holderCursor.textContent = (hasPrev || hasNext) ? `Page offset: ${holderOffset}` : "";
+  }
+
+  function renderHolders(){
+    holderList = Array.isArray(tokenInfo?.holder) ? tokenInfo.holder : [];
+    holderOffset = 0;
+    renderHoldersPage();
+    setHolderPaging();
+  }
+
+  function renderTransfers(result){
+    const rows = (result || []).filter(r => (r?.op || "").toLowerCase() === "transfer").slice(0, 60);
+
+    if(!rows.length){
+      txRows.innerHTML = `<tr><td colspan="5" class="muted">No transfers found.</td></tr>`;
+      return;
+    }
+
+    txRows.innerHTML = rows.map((r) => {
+      const hash = String(r.hashRev || "-");
+      const age = r.mtsAdd ? ageFromMs(r.mtsAdd) : "-";
+      const from = String(r.from || "-");
+      const to = String(r.to || "-");
+      const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
+
+      const shortHash = shortenMiddle(hash, 10, 6);
+      const shortFrom = shortenMiddle(from, 14, 10);
+      const shortTo = shortenMiddle(to, 14, 10);
+
+      return `
+        <tr>
+          <td>${linkTx(hash, shortHash)}</td>
+          <td>${age}</td>
+          <td>${linkAddress(from, shortFrom)}</td>
+          <td>${linkAddress(to, shortTo)}</td>
+          <td class="mono right">${amt}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function setTxPaging(prev, next){
+    txPrev = prev;
+    txNext = next;
+    prevTx.disabled = txOffset === 0;
+    nextTx.disabled = !txNext;
+    txCursor.textContent = (txPrev || txNext) ? `Page offset: ${txOffset}` : "";
+  }
+
+  function setActiveTab(tabId){
+    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
+    document.querySelectorAll(".tabPanel").forEach(p => p.classList.toggle("active", p.id === tabId));
+  }
+
+  async function loadTransfers({ next=null, prev=null } = {}){
+    txLoading.style.display = "block";
+    try{
+      const page = await fetchOpList({ tick: currentTick, next, prev });
+      setTxPaging(page.prev, page.next);
+      renderTransfers(page.result);
+    }catch{
+      txRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transfers.</td></tr>`;
+      setTxPaging(null, null);
+    }finally{
+      txLoading.style.display = "none";
+    }
+  }
+
+  async function runSearch(t){
+    if(busy) return;
+    busy = true;
+
+    const T = safeUpper(t);
+    if(!T){
+      showToast("Missing token", "Enter a ticker.");
+      busy = false;
+      return;
+    }
+
+    currentTick = T;
+    setUrlTick(T);
+
+    go.disabled = true;
+
+    tokenLogo.removeAttribute("src");
+
+    try{
+      tokenInfo = await fetchKasplexToken(T);
+      tokenMeta = await fetchDirectoryMeta(T);
+
+      try{
+        tokenBurnedRaw = await fetchBurnedAmountByAddress(T);
+      }catch{
+        tokenBurnedRaw = "0";
+      }
+
+      renderHeader();
+      renderSummary();
+      renderHolders();
+
+      txOffset = 0;
+      await loadTransfers({ next:null, prev:null });
+
+      const lcwCode = getLiveCoinWatchCode();
+      if(!lcwCode){
+        renderPriceMissing();
+      }else{
+        try{
+          const row = await fetchLiveCoinWatchCoinSingle(lcwCode);
+          renderPriceRow(row);
+        }catch{
+          renderPriceMissing();
+        }
+      }
+
+      q.value = "";
+    }catch(err){
+      showToast("Not available", String(err?.message || err));
+
+      hdrSub.textContent = "-";
+      renderPriceMissing();
+      holderRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+      holderNote.textContent = "";
+      txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+    }finally{
+      go.disabled = false;
+      busy = false;
+    }
+  }
+
+  document.addEventListener("click", async (e) => {
+    const t = e.target;
+    if(t && t.classList && t.classList.contains("tab")){
+      setActiveTab(t.dataset.tab);
+      return;
+    }
+    if(t && t.dataset && t.dataset.copy){
+      const ok = await copyToClipboard(t.dataset.copy);
+      showToast(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
+    }
+  });
+
+  go.addEventListener("click", () => runSearch(q.value));
+
+  q.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+      e.preventDefault();
+      runSearch(q.value);
+    }
+  });
+  q.addEventListener("blur", () => { q.value = safeUpper(q.value); });
+
+  prevTx.addEventListener("click", () => {
+    if (txOffset > 0 && txPrev) {
+      txOffset -= 50;
+      loadTransfers({ prev: txPrev, next: null });
+    }
+  });
+  nextTx.addEventListener("click", () => {
+    if (txNext) {
+      txOffset += 50;
+      loadTransfers({ next: txNext, prev: null });
+    }
+  });
+
+  prevHolder.addEventListener("click", () => {
+    if (holderOffset > 0) {
+      holderOffset -= HOLDER_LIMIT;
+      renderHoldersPage();
+      setHolderPaging();
+    }
+  });
+  nextHolder.addEventListener("click", () => {
+    holderOffset += HOLDER_LIMIT;
+    renderHoldersPage();
+    setHolderPaging();
+  });
+
+  (function init(){
+    const urlTick = getUrlTick();
+    if(urlTick){
+      runSearch(urlTick);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
