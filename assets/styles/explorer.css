@@ -75,7 +75,7 @@ html#dark{
   border:0; outline:0;
   background:transparent;
   color:inherit;
-  font-size:13px;
+  font-size:14px;
 }
 
 .btn{
@@ -86,7 +86,7 @@ html#dark{
   border-radius:12px;
   cursor:pointer;
   font-weight:650;
-  font-size:13px;
+  font-size:14px;
 }
 
 .btn:hover{ background:rgba(255,255,255,.1); }
@@ -105,7 +105,7 @@ html#dark{
 /* Typography + Data */
 .theme-1 h3{
   margin:0 0 10px;
-  font-size:13px;
+  font-size:14px;
   letter-spacing:.2px;
   text-transform:uppercase;
 }
@@ -119,8 +119,8 @@ html#dark{
   align-items:baseline;
 }
 
-.k{ font-size:13px; }
-.v{ font-size:13px; font-weight:650; word-break:break-all; }
+.k{ font-size:14px; }
+.v{ font-size:14px; font-weight:650; word-break:break-all; }
 
 tbody {
   font-family: Consolas;
@@ -150,7 +150,7 @@ tbody {
   background:var(--background-color);
   cursor:pointer;
   font-weight:700;
-  font-size:13px;
+  font-size:14px;
   opacity:.5;
 }
 
@@ -173,7 +173,7 @@ table{
   width:100%;
   border-collapse:collapse;
   min-width:720px;
-  font-size:13px;
+  font-size:14px;
 }
 
 th, td{

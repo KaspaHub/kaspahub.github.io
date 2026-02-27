@@ -735,8 +735,8 @@
       const shortHash = hash.length > 16
         ? hash.slice(0, 16) + "..."
         : hash;
-      const shortFrom = shortenMiddle(from, 14, 10);
-      const shortTo = shortenMiddle(to, 14, 10);
+      const shortFrom = shortenMiddle(from, 12, 7);
+      const shortTo = shortenMiddle(to, 12, 7);
 
       return `
         <tr>

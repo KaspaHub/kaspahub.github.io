@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Transaction Explorer - Kaspa Hub</title>
+<meta property="og:title" content="Transaction Explorer - Kaspa Hub" />
+<meta name="twitter:title" content="Transaction Explorer - Kaspa Hub" />
+
+<meta name="description" content="Explore Kaspa transactions with real-time details, inputs, outputs, and more. Look up any Kaspa transaction ID to track activity." />
+<meta property="og:description" content="Discover Kaspa transactions with detailed data including inputs, outputs, and details. Search any Kaspa transaction ID instantly." />
+<meta name="twitter:description" content="Search and explore Kaspa transactions. View inputs, outputs, and details for any transaction on the Kaspa network." />
+
+<link rel="canonical" href="https://kaspahub.org/transaction/" />
+<meta property="og:url" content="https://kaspahub.org/transaction/" />
+<meta name="twitter:url" content="https://kaspahub.org/transaction/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+  <div class="pageHead">
+    <div id="walletHeader">
+      <div style="max-width: 100%; overflow: hidden;">
+        <h1 id="hdrLine">Kaspa Transaction</h1>
+        <div class="sub" id="hdrSub">-</div>
+      </div>
+    </div>
+
+    <div class="searchRow">
+      <div class="input" title="Transaction ID">
+        <input id="q" placeholder="e.g. adf842addf9d..." />
+      </div>
+      <button class="btn" id="go">Search</button>
+    </div>
+  </div>
+
+  <section class="grid-1" aria-label="Summary">
+    <div class="theme-1">
+      <h3>Summary</h3>
+      <div class="rows">
+        <div class="row"><div class="k">Total Sent</div><div class="v" id="totalSent">-</div></div>
+        <div class="row"><div class="k">Fee</div><div class="v" id="fee">-</div></div>
+        <div class="row"><div class="k">Inputs / Outputs</div><div class="v" id="ioCount">-</div></div>
+        <div class="row"><div class="k">Status</div><div class="v" id="status">-</div></div>
+      </div>
+    </div>
+
+    <div class="theme-1">
+      <h3>Overview</h3>
+      <div class="rows">
+        <div class="row"><div class="k">Mass</div><div class="v" id="mass">-</div></div>
+        <div class="row"><div class="k">Blue Score</div><div class="v" id="blueScore">-</div></div>
+        <div class="row"><div class="k">Block Time</div><div class="v" id="blockTime">-</div></div>
+        <div class="row"><div class="k">Accepting Block Time</div><div class="v" id="acceptingBlockTime">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Transaction tabs">
+    <button class="tab active" data-tab="tabIO">Inputs & Outputs</button>
+    <button class="tab" data-tab="tabDetails">Details</button>
+    <button class="tab" data-tab="tabPayload">Payload</button>
+  </div>
+
+  <section id="tabIO" class="tabPanel active" aria-label="Inputs & Outputs panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>Inputs & Outputs</h3>
+      <div id="ioLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Outpoint</th>
+              <th>Address</th>
+              <th>Type</th>
+              <th class="right">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="ioRows">
+            <tr><td colspan="5" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="tabDetails" class="tabPanel" aria-label="Details panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>Details</h3>
+      <div class="rows" id="detailsRows">
+        <div class="row"><div class="k">-</div><div class="v">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tabPayload" class="tabPanel" aria-label="Payload panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>Payload</h3>
+      <div class="muted" id="payloadContent">-</div>
+    </div>
+  </section>
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+<div class="toast" id="toast">
+  <div class="m" id="toastMsg"></div>
+</div>
+
+<script type="text/javascript">
+'use strict';
+(() => {
+  const API_BASE = "https://api.kaspa.org";
+  const EXPLORER_BLOCK_BASE = "https://kaspa.stream/blocks/";
+  const TRANSACTION_BASE = "/transaction/?q=";
+  const WALLET_BASE = "/address/?q=";
+
+  const el = id => document.getElementById(id);
+
+  const q = el("q");
+  const go = el("go");
+
+  const hdrSub = el("hdrSub");
+
+  const totalSent = el("totalSent");
+  const fee = el("fee");
+  const ioCount = el("ioCount");
+  const status = el("status");
+
+  const massEl = el("mass");
+  const blueScore = el("blueScore");
+  const blockTime = el("blockTime");
+  const acceptingBlockTime = el("acceptingBlockTime");
+
+  const ioLoading = el("ioLoading");
+  const ioRows = el("ioRows");
+
+  const detailsRows = el("detailsRows");
+
+  const payloadContent = el("payloadContent");
+
+  const toast = el("toast");
+  const toastMsg = el("toastMsg");
+
+  let busy = false;
+  let currentTxId = "";
+
+  const tabs = document.querySelectorAll('.tabs .tab');
+  const tabPanels = document.querySelectorAll('.tabPanel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      tabPanels.forEach(p => p.classList.remove('active'));
+      el(tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  function showToast(title, msg) {
+    toastMsg.textContent = msg || "";
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 5200);
+  }
+
+  function withSeparators(numStr) {
+    const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function formatKas(amountSomes, fixed = false) {
+    if (amountSomes == null) return "-";
+    const n = Number(amountSomes) / 1e8;
+    if (fixed) {
+      return n.toFixed(8) + " KAS";
+    }
+    const fixedStr = n.toFixed(8);
+    const [int, dec] = fixedStr.split('.');
+    return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
+  }
+
+  function shortenMiddle(str, head = 12, tail = 10) {
+    const s = String(str ?? "");
+    if (s.length <= head + tail + 3) return s;
+    return s.slice(0, head) + "..." + s.slice(-tail);
+  }
+
+  function shortenEnd(str, maxLength = 20) {
+    const s = String(str ?? "");
+    if (s.length <= maxLength) return s;
+    return s.slice(0, maxLength) + "...";
+  }
+
+  function escHtml(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  function walletUrl(addr) {
+    const a = String(addr ?? "").trim();
+    return a ? WALLET_BASE + encodeURIComponent(a) : "#";
+  }
+
+  function transactionUrl(hash) {
+    const h = String(hash ?? "").trim();
+    return h ? TRANSACTION_BASE + encodeURIComponent(h) : "#";
+  }
+
+  function explorerBlockUrl(hash) {
+    const h = String(hash ?? "").trim();
+    return h ? EXPLORER_BLOCK_BASE + encodeURIComponent(h) : "#";
+  }
+
+  function linkAddress(addr, label) {
+    const a = String(addr ?? "").trim();
+    const text = escHtml(label != null ? label : shortenMiddle(a, 12, 10));
+    if (!a) return "-";
+    return `<a class="explorerLink" href="${walletUrl(a)}">${text}</a>`;
+  }
+
+  function linkTx(hash, label) {
+    const h = String(hash ?? "").trim();
+    const text = escHtml(label != null ? label : h);
+    if (!h) return "-";
+    return `<a class="explorerLink" href="${transactionUrl(h)}">${text}</a>`;
+  }
+
+  function linkBlock(hash, label) {
+    const h = String(hash ?? "").trim();
+    const text = escHtml(label != null ? label : h);
+    if (!h) return "-";
+    return `<a class="explorerLink" href="${explorerBlockUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+  }
+
+  async function fetchTransaction(txid) {
+    const url = `${API_BASE}/transactions/${encodeURIComponent(txid)}?resolve_previous_outpoints=full`;
+    const res = await fetch(url);
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+
+    // Resolve input amounts and addresses if null
+    const resolvePromises = json.inputs.map(async (inp) => {
+      if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
+        const prevUrl = `${API_BASE}/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
+        const prevRes = await fetch(prevUrl);
+        if (!prevRes.ok) return;
+        const prevJson = await prevRes.json();
+        const outIndex = Number(inp.previous_outpoint_index);
+        const prevOut = prevJson.outputs[outIndex];
+        if (prevOut) {
+          inp.previous_outpoint_amount = prevOut.amount;
+          inp.previous_outpoint_address = prevOut.script_public_key_address;
+        }
+      }
+    });
+    await Promise.all(resolvePromises);
+
+    return json;
+  }
+
+  function setUrlTxId(txid) {
+    const u = new URL(window.location.href);
+    u.searchParams.set("q", txid);
+    history.replaceState({}, "", u.toString());
+  }
+
+  function renderHeader(txid) {
+    hdrSub.textContent = txid;
+    document.title = `${shortenMiddle(txid, 6, 6)} Transaction - Kaspa Hub`;
+  }
+
+  function computeTotals(inputs, outputs) {
+    let totalIn = 0n;
+    let totalOut = 0n;
+    if (Array.isArray(inputs)) {
+      inputs.forEach(inp => {
+        totalIn += BigInt(inp.previous_outpoint_amount || 0);
+      });
+    }
+    if (Array.isArray(outputs)) {
+      outputs.forEach(out => {
+        totalOut += BigInt(out.amount || 0);
+      });
+    }
+    return { totalIn, totalOut, fee: totalIn - totalOut };
+  }
+
+  function renderSummary(json, totals, inputs, outputs) {
+    totalSent.textContent = formatKas(totals.totalOut, true);
+    fee.textContent = formatKas(totals.fee, true);
+    ioCount.textContent = `${inputs.length} / ${outputs.length}`;
+    status.textContent = json.is_accepted ? "Confirmed" : "Pending";
+
+    massEl.textContent = withSeparators(json.mass) || "-";
+    blueScore.textContent = withSeparators(json.accepting_block_blue_score) || "-";
+    blockTime.textContent = json.block_time ? new Date(Number(json.block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
+    acceptingBlockTime.textContent = json.accepting_block_time ? new Date(Number(json.accepting_block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
+  }
+
+  function renderIORows(inputs, outputs, txid) {
+    let html = '';
+    if (Array.isArray(inputs)) {
+      inputs.forEach((inp, i) => {
+        const index = inp.index ?? i;
+        const outpointHash = inp.previous_outpoint_hash ?? "-";
+        const outpointIndex = inp.previous_outpoint_index ?? "-";
+        const outpoint = `${outpointIndex}:${shortenEnd(outpointHash, 12)}`;
+        const address = inp.previous_outpoint_address ?? "-";
+        const amount = inp.previous_outpoint_amount ?? 0;
+        let kasStr = formatKas(amount, true);
+        let absStr = kasStr.startsWith("0.") ? "0" + kasStr.slice(1) : kasStr.slice(0, -4);
+        const amtHtml = `<span style="color:#ff6b6b">-${absStr}</span>`;
+        const outpointHtml = (outpointHash === txid) ? escHtml(outpoint) : linkTx(outpointHash, outpoint);
+        html += `
+          <tr>
+            <td>${index}</td>
+            <td>${outpointHtml}</td>
+            <td>${linkAddress(address)}</td>
+            <td>Input</td>
+            <td class="right">${amtHtml}</td>
+          </tr>
+        `;
+      });
+    }
+    if (Array.isArray(outputs)) {
+      outputs.forEach((out, i) => {
+        const index = out.index ?? i;
+        const outpoint = `${index}:${shortenEnd(txid, 12)}`;
+        const address = out.script_public_key_address ?? "-";
+        const amount = out.amount ?? 0;
+        const amtHtml = `<span style="color:#2ee59d">+${formatKas(amount, true)}</span>`;
+        const outpointHtml = escHtml(outpoint); // No hyperlink for outputs
+        html += `
+          <tr>
+            <td>${index}</td>
+            <td>${outpointHtml}</td>
+            <td>${linkAddress(address)}</td>
+            <td>Output</td>
+            <td class="right">${amtHtml}</td>
+          </tr>
+        `;
+      });
+    }
+    if (!html) {
+      html = `<tr><td colspan="5" class="muted">No inputs or outputs found.</td></tr>`;
+    }
+    ioRows.innerHTML = html;
+  }
+
+  function renderDetails(json, inputs, outputs) {
+    let html = `
+      <div class="row"><div class="k">Subnetwork ID</div><div class="v">${escHtml(json.subnetwork_id) || "-"}</div></div>
+      <div class="row"><div class="k">Transaction ID</div><div class="v">${escHtml(json.transaction_id) || "-"}</div></div>
+      <div class="row"><div class="k">Hash</div><div class="v">${escHtml(json.hash) || "-"}</div></div>
+      <div class="row"><div class="k">Block Hash</div><div class="v">${Array.isArray(json.block_hash) ? json.block_hash.map(h => escHtml(h)).join(", ") : "-"}</div></div>
+      <div class="row"><div class="k">Accepting Block Hash</div><div class="v">${escHtml(json.accepting_block_hash) || "-"}</div></div>
+    `;
+
+    if (Array.isArray(outputs) && outputs.length > 0) {
+      html += `<div class="row"><div class="k">Output Details</div><div class="v"></div></div>`;
+      outputs.forEach((out, i) => {
+        html += `
+          <div class="row"><div class="k">Output ${i} Script Public Key</div><div class="v">${escHtml(out.script_public_key) || "-"}</div></div>
+          <div class="row"><div class="k">Output ${i} Script Public Key Type</div><div class="v">${escHtml(out.script_public_key_type) || "-"}</div></div>
+        `;
+      });
+    }
+
+    if (Array.isArray(inputs) && inputs.length > 0) {
+      html += `<div class="row"><div class="k">Input Details</div><div class="v"></div></div>`;
+      inputs.forEach((inp, i) => {
+        html += `
+          <div class="row"><div class="k">Input ${i} Sig Op Count</div><div class="v">${inp.sig_op_count || "-"}</div></div>
+          <div class="row"><div class="k">Input ${i} Signature Script</div><div class="v">${escHtml(inp.signature_script) || "-"}</div></div>
+        `;
+      });
+    }
+
+    detailsRows.innerHTML = html;
+  }
+
+  function renderPayload(payload) {
+    if (!payload) {
+      payloadContent.textContent = "No payload data.";
+      return;
+    }
+    payloadContent.innerHTML = `<pre>${escHtml(payload)}</pre>`;
+    // Attempt human readable
+    try {
+      const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
+      const text = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
+      if (text.trim()) {
+        payloadContent.innerHTML += `<div class="muted">Human readable (UTF-8): ${escHtml(text)}</div>`;
+      }
+    } catch {}
+  }
+
+  async function runSearch(inputTxId) {
+    if (busy) return;
+    busy = true;
+
+    const txid = String(inputTxId || "").trim();
+    if (txid.length !== 64 || !/^[0-9a-f]+$/.test(txid)) {
+      showToast("Invalid transaction ID", "Please enter a valid 64-character hexadecimal Kaspa transaction ID.");
+      busy = false;
+      return;
+    }
+
+    currentTxId = txid;
+    setUrlTxId(txid);
+
+    go.disabled = true;
+
+    let json = null;
+
+    try {
+      json = await fetchTransaction(txid);
+      if (!json) {
+        throw new Error("Transaction not found.");
+      }
+    } catch (err) {
+      showToast("Error", "Could not load transaction data.");
+      resetUI();
+      go.disabled = false;
+      busy = false;
+      q.value = "";
+      return;
+    }
+
+    const totals = computeTotals(json.inputs, json.outputs);
+
+    renderHeader(txid);
+    renderSummary(json, totals, json.inputs, json.outputs);
+    renderIORows(json.inputs, json.outputs, txid);
+    renderDetails(json, json.inputs, json.outputs);
+    renderPayload(json.payload);
+
+    go.disabled = false;
+    busy = false;
+    q.value = "";
+  }
+
+  function resetUI() {
+    totalSent.textContent = "-";
+    fee.textContent = "-";
+    ioCount.textContent = "-";
+    status.textContent = "-";
+    massEl.textContent = "-";
+    blueScore.textContent = "-";
+    blockTime.textContent = "-";
+    acceptingBlockTime.textContent = "-";
+    ioRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+    detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+    payloadContent.textContent = "-";
+  }
+
+  go.addEventListener("click", () => runSearch(q.value));
+
+  q.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runSearch(q.value);
+    }
+  });
+
+  (function init() {
+    const urlTxId = new URL(window.location.href).searchParams.get("q");
+    if (urlTxId) {
+      runSearch(urlTxId);
+    }
+  })();
+})();
+</script>
+</body>
+</html>

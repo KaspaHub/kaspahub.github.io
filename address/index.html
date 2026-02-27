@@ -166,7 +166,7 @@
   const NAMES_API = "https://api.kaspa.org/addresses/names";
   const KRC_API_BASE = "https://api.kasplex.org";
   const KNS_API_BASE = "https://api.knsdomains.org/mainnet/api/v1";
-  const EXPLORER_TX_BASE = "https://kaspa.stream/transactions/";
+  const TRANSACTION_BASE = "/transaction/?q=";
   const WALLET_BASE = "/address/?q=";
   const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
 
@@ -278,7 +278,7 @@
 
   function shortenHash(hash) {
     const h = String(hash ?? "");
-    return h.length > 16 ? h.slice(0, 16) + "..." : h;
+    return h.length > 16 ? h.slice(0, 14) + "..." : h;
   }
 
   function escHtml(s) {
@@ -290,9 +290,9 @@
     return a ? WALLET_BASE + a : "#";
   }
 
-  function explorerTxUrl(hash) {
+  function transactionUrl(hash) {
     const h = String(hash ?? "").trim();
-    return h ? EXPLORER_TX_BASE + h : "#";
+    return h ? TRANSACTION_BASE + h : "#";
   }
 
   function linkAddress(addr, label) {
@@ -306,7 +306,7 @@
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if (!h) return "-";
-    return `<a class="explorerLink" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+    return `<a class="explorerLink" href="${transactionUrl(h)}">${text}</a>`;
   }
 
   async function fetchKasPrice() {
@@ -530,7 +530,7 @@
   function formatDateTime(dt) {
     return dt.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) +
            ", " +
-           dt.toLocaleTimeString(undefined, { hour12: false });
+           dt.toLocaleTimeString(undefined, { hour12: true });
   }
 
   function renderTransactions(txs, addr) {
@@ -549,8 +549,8 @@
       const amt = formatAmount(net);
 
       const shortHash = shortenHash(hash);
-      const shortFrom = shortenMiddle(from, 14, 10);
-      const shortTo = shortenMiddle(to, 14, 10);
+      const shortFrom = shortenMiddle(from, 12, 7);
+      const shortTo = shortenMiddle(to, 12, 7);
 
       const fromHtml = (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) 
           ? linkAddress(from, shortFrom) 
