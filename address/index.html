@@ -69,8 +69,8 @@
       <div class="rows">
         <div class="row"><div class="k">Label</div><div class="v" id="label">-</div></div>
         <div class="row"><div class="k">Transactions</div><div class="v" id="txCount">-</div></div>
-        <div class="row"><div class="k">First seen</div><div class="v" id="firstSeen">-</div></div>
-        <div class="row"><div class="k">Last seen</div><div class="v" id="lastSeen">-</div></div>
+        <div class="row"><div class="k">First transaction</div><div class="v" id="firstSeen">-</div></div>
+        <div class="row"><div class="k">Last transaction</div><div class="v" id="lastSeen">-</div></div>
       </div>
     </div>
   </section>
@@ -78,6 +78,7 @@
   <div class="tabs" role="tablist" aria-label="Wallet tabs">
     <button class="tab active" data-tab="tabTransactions">Transactions</button>
     <button class="tab" data-tab="tabKRC20">KRC20 Tokens</button>
+    <button class="tab" data-tab="tabKNS">KNS Domains</button>
   </div>
 
   <section id="tabTransactions" class="tabPanel active" aria-label="Transactions panel">
@@ -129,6 +130,28 @@
       </div>
     </div>
   </section>
+
+  <section id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>KNS Domains</h3>
+      <div id="domainLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Created</th>
+              <th>Status</th>
+              <th>TxID</th>
+            </tr>
+          </thead>
+          <tbody id="domainRows">
+            <tr><td colspan="4" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
@@ -143,6 +166,7 @@
   const API_BASE = "https://api.kaspa.org";
   const NAMES_API = "https://api.kaspa.org/addresses/names";
   const KRC_API_BASE = "https://api.kasplex.org";
+  const KNS_API_BASE = "https://api.knsdomains.org/mainnet/api/v1";
   const EXPLORER_TX_BASE = "https://kaspa.stream/transactions/";
   const WALLET_BASE = "/address/?q=";
   const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
@@ -171,6 +195,9 @@
   const tokenLoading = el("tokenLoading");
   const tokenRows = el("tokenRows");
 
+  const domainLoading = el("domainLoading");
+  const domainRows = el("domainRows");
+
   const toast = el("toast");
   const toastMsg = el("toastMsg");
 
@@ -178,6 +205,7 @@
   let currentAddr = "";
   let kasPrice = null;
   let tokens = null;
+  let domains = null;
 
   let txOffset = 0;
   const txLimit = 20;
@@ -195,6 +223,10 @@
       if (tab.dataset.tab === 'tabKRC20') {
         if (currentAddr && tokens === null) {
           loadTokens();
+        }
+      } else if (tab.dataset.tab === 'tabKNS') {
+        if (currentAddr && domains === null) {
+          loadDomains();
         }
       }
     });
@@ -243,6 +275,11 @@
     const s = String(str ?? "");
     if (s.length <= head + tail + 3) return s;
     return s.slice(0, head) + "..." + s.slice(-tail);
+  }
+
+  function shortenHash(hash) {
+    const h = String(hash ?? "");
+    return h.length > 16 ? h.slice(0, 16) + "..." : h;
   }
 
   function escHtml(s) {
@@ -341,6 +378,25 @@
       start = json.next || '';
       if (!isNew && newResult.length > 0) break;
     } while (start);
+    return all;
+  }
+
+  async function fetchAllDomains(addr) {
+    let all = [];
+    let page = 1;
+    const pageSize = 100;
+    while (true) {
+      const url = `${KNS_API_BASE}/assets?owner=${encodeURIComponent(addr)}&page=${page}&pageSize=${pageSize}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (!json.success) throw new Error(json.message || 'Failed');
+      const assets = json.data.assets || [];
+      all.push(...assets.filter(a => a.isDomain));
+      const pagination = json.data.pagination || {};
+      if (page >= pagination.totalPages) break;
+      page++;
+    }
     return all;
   }
 
@@ -472,6 +528,12 @@
     return withSeparators(int.toString()) + frac;
   }
 
+  function formatDateTime(dt) {
+    return dt.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) +
+           ", " +
+           dt.toLocaleTimeString(undefined, { hour12: false });
+  }
+
   function renderTransactions(txs, addr) {
     if (!txs.length) {
       txRows.innerHTML = `<tr><td colspan="5" class="muted">No transactions found.</td></tr>`;
@@ -481,20 +543,13 @@
     txRows.innerHTML = txs.map(tx => {
       const hash = String(tx.transaction_id || "-");
       const age = tx.block_time
-        ? (() => {
-            const d = new Date(Number(tx.block_time));
-            return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) +
-                   ", " +
-                   d.toLocaleTimeString(undefined, { hour12: false });
-          })()
+        ? formatDateTime(new Date(Number(tx.block_time)))
         : "-";
       const net = getNetChange(tx, addr);
       const { from, to } = getFromTo(tx, addr, net);
       const amt = formatAmount(net);
 
-      const shortHash = hash.length > 16
-        ? hash.slice(0, 16) + "..."
-        : hash;
+      const shortHash = shortenHash(hash);
       const shortFrom = shortenMiddle(from, 14, 10);
       const shortTo = shortenMiddle(to, 14, 10);
 
@@ -535,6 +590,28 @@
           <td>${bal}</td>
           <td>${lock}</td>
           <td>${escHtml(t.dec)}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderDomains(doms) {
+    if (!doms.length) {
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">No domains found.</td></tr>`;
+      return;
+    }
+
+    domainRows.innerHTML = doms.map(d => {
+      const name = escHtml(d.asset);
+      const created = d.creationBlockTime ? formatDateTime(new Date(d.creationBlockTime)) : "-";
+      const status = escHtml(d.status);
+      const shortTx = shortenHash(d.transactionId);
+      return `
+        <tr>
+          <td>${name}</td>
+          <td>${created}</td>
+          <td>${status}</td>
+          <td>${linkTx(d.transactionId, shortTx)}</td>
         </tr>
       `;
     }).join("");
@@ -582,6 +659,19 @@
     }
   }
 
+  async function loadDomains() {
+    if (!currentAddr) return;
+    domainLoading.classList.remove("hidden");
+    try {
+      domains = await fetchAllDomains(currentAddr);
+      renderDomains(domains);
+    } catch {
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">Failed to load domains.</td></tr>`;
+    } finally {
+      domainLoading.classList.add("hidden");
+    }
+  }
+
   async function runSearch(inputAddr) {
     if (busy) return;
     busy = true;
@@ -610,6 +700,7 @@
       ]);
       txOffset = 0;
       tokens = null;
+      domains = null;
     } catch (err) {
       showToast("Error", "Could not load wallet data.");
       balanceKas.textContent = "-";
@@ -620,6 +711,7 @@
       lastSeen.textContent = "-";
       txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
       tokenRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
       go.disabled = false;
       busy = false;
       q.value = "";
@@ -639,6 +731,8 @@
 
     if (el("tabKRC20").classList.contains("active")) {
       loadTokens();
+    } else if (el("tabKNS").classList.contains("active")) {
+      loadDomains();
     }
 
     go.disabled = false;
