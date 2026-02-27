@@ -64,19 +64,9 @@
 
 <main id="container-h">
 
-<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
-     crossorigin="anonymous"></script>
-<!-- Horizontal bar ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1682291217022161"
-     data-ad-slot="3951210451"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<div style="text-align: center; margin-bottom: 70px;">
+	<h1 style="font-size: 3em; filter: brightness(0.7);">Kaspa Hub</h1>
+	<p id="intro" style="font-weight: bold;"></p>
 </div>
 
 <div id="bookmarks-wrapper"></div>
@@ -134,6 +124,27 @@
 	</a>
 
 </div>
+
+<script type="text/javascript">
+'use strict';
+(() => {
+	const introEl = document.getElementById("intro");
+	if (!introEl) return;
+
+	const intros = [
+		"Where your Kaspa journey begins.",
+		"Your starting point for everything Kaspa.",
+		"Your gateway to the Kaspa ecosystem.",
+		"Your central resource for the Kaspa ecosystem.",
+		"All-in-one directory of resources for the Kaspa ecosystem.",
+		"Community-driven resource for the Kaspa ecosystem.",
+		"Dive into the Kaspa universe with Kaspa Hub.",
+		"Explore the Kaspa Ecosystem"
+	];
+
+	introEl.textContent = intros[Math.floor(Math.random() * intros.length)];
+})();
+</script>
 
 <section id="footer" style="margin-top: 70px; text-align: left;">
 	<p><strong>Built with ❤️ by Kaspa community, for the Kaspa community. We're <a href="https://github.com/KaspaHub/kaspahub.github.io">open-source</a>, and contributions are always welcome!</strong></p>

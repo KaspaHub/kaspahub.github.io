@@ -72,8 +72,8 @@
         <h3>Overview</h3>
         <div class="rows">
           <div class="row"><div class="k">Name</div><div class="v" id="name">-</div></div>
-          <div class="row"><div class="k">Ticker</div><div class="v mono" id="tick">-</div></div>
-          <div class="row"><div class="k">Decimals</div><div class="v mono" id="dec">-</div></div>
+          <div class="row"><div class="k">Ticker</div><div class="v" id="tick">-</div></div>
+          <div class="row"><div class="k">Decimals</div><div class="v" id="dec">-</div></div>
           <div class="row"><div class="k">Deployed</div><div class="v" id="deployDate">-</div></div>
         </div>
       </div>
@@ -81,20 +81,20 @@
       <div class="theme-1 third">
         <h3>Tokenomics</h3>
         <div class="rows">
-          <div class="row"><div class="k">Preminted</div><div class="v mono" id="preminted">-</div></div>
-          <div class="row"><div class="k">Burned</div><div class="v mono" id="burned">-</div></div>
-          <div class="row"><div class="k">Circulating</div><div class="v mono" id="circ">-</div></div>
-          <div class="row"><div class="k">Max</div><div class="v mono" id="max">-</div></div>
+          <div class="row"><div class="k">Preminted</div><div class="v" id="preminted">-</div></div>
+          <div class="row"><div class="k">Burned</div><div class="v" id="burned">-</div></div>
+          <div class="row"><div class="k">Circulating</div><div class="v" id="circ">-</div></div>
+          <div class="row"><div class="k">Max</div><div class="v" id="max">-</div></div>
         </div>
       </div>
 
       <div class="theme-1 half">
         <h3>Stats</h3>
         <div class="rows">
-          <div class="row"><div class="k">Holders</div><div class="v mono" id="holders">-</div></div>
-          <div class="row"><div class="k">Transfers</div><div class="v mono" id="transfers">-</div></div>
-          <div class="row"><div class="k">Mint ops</div><div class="v mono" id="mintOps">-</div></div>
-          <div class="row"><div class="k">Minted</div><div class="v mono" id="minted">-</div></div>
+          <div class="row"><div class="k">Holders</div><div class="v" id="holders">-</div></div>
+          <div class="row"><div class="k">Transfers</div><div class="v" id="transfers">-</div></div>
+          <div class="row"><div class="k">Mint ops</div><div class="v" id="mintOps">-</div></div>
+          <div class="row"><div class="k">Minted</div><div class="v" id="minted">-</div></div>
         </div>
       </div>
     </section>
@@ -135,12 +135,12 @@
     <section id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
       <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
         <h3>Transfers</h3>
-        <div id="txLoading" class="muted" style="margin-bottom:10px; display:none;"><span class="spinner"></span>Loading…</div>
+        <div id="txLoading" class="muted loading"><span class="spinner"></span><span>Loading…</span></div>
         <div class="tableWrap">
           <table>
             <thead>
               <tr>
-                <th>Tx</th>
+                <th>TxId</th>
                 <th>Age</th>
                 <th>From</th>
                 <th>To</th>
@@ -167,8 +167,8 @@
           <div class="row"><div class="k">Website</div><div class="v" id="iWebsite">-</div></div>
           <div class="row"><div class="k">Feed</div><div class="v" id="iFeed">-</div></div>
           <div class="row"><div class="k">Chat</div><div class="v" id="iChat">-</div></div>
-          <div class="row"><div class="k">Mode</div><div class="v mono" id="iMode">-</div></div>
-          <div class="row"><div class="k">Deploy to</div><div class="v mono" id="iTo">-</div></div>
+          <div class="row"><div class="k">Mode</div><div class="v" id="iMode">-</div></div>
+          <div class="row"><div class="k">Deploy to</div><div class="v" id="iTo">-</div></div>
           <div class="row"><div class="k">Updated</div><div class="v" id="iUpdated">-</div></div>
         </div>
       </div>
@@ -412,7 +412,7 @@
   function shortenMiddle(str, head=12, tail=10){
     const s = String(str ?? "");
     if(s.length <= head + tail + 3) return s;
-    return s.slice(0, head) + "…" + s.slice(-tail);
+    return s.slice(0, head) + "..." + s.slice(-tail);
   }
 
   function escHtml(s){
@@ -433,14 +433,14 @@
     const a = String(addr ?? "").trim();
     const text = escHtml(label != null ? label : a);
     if(!a) return "-";
-    return `<a class="explorerLink mono" href="${explorerAddressUrl(a)}">${text}</a>`;
+    return `<a class="explorerLink" href="${explorerAddressUrl(a)}">${text}</a>`;
   }
 
   function linkTx(hash, label){
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if(!h) return "-";
-    return `<a class="explorerLink mono" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+    return `<a class="explorerLink" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
   }
 
   async function fetchKasplexToken(t){
@@ -693,9 +693,9 @@
 
       return `
         <tr>
-          <td class="mono">${globalI+1}</td>
+          <td>${globalI+1}</td>
           <td>${linkAddress(addr, addr)}</td>
-          <td class="mono right">${amtFmt}</td>
+          <td class="right">${amtFmt}</td>
           <td class="right">${share}</td>
         </tr>
       `;
@@ -732,7 +732,9 @@
       const to = String(r.to || "-");
       const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
 
-      const shortHash = shortenMiddle(hash, 10, 6);
+      const shortHash = hash.length > 16
+        ? hash.slice(0, 16) + "..."
+        : hash;
       const shortFrom = shortenMiddle(from, 14, 10);
       const shortTo = shortenMiddle(to, 14, 10);
 
@@ -742,7 +744,7 @@
           <td>${age}</td>
           <td>${linkAddress(from, shortFrom)}</td>
           <td>${linkAddress(to, shortTo)}</td>
-          <td class="mono right">${amt}</td>
+          <td class="right">${amt}</td>
         </tr>
       `;
     }).join("");
@@ -762,7 +764,7 @@
   }
 
   async function loadTransfers({ next=null, prev=null } = {}){
-    txLoading.style.display = "block";
+    txLoading.classList.remove("hidden");
     try{
       const page = await fetchOpList({ tick: currentTick, next, prev });
       setTxPaging(page.prev, page.next);
@@ -771,7 +773,7 @@
       txRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transfers.</td></tr>`;
       setTxPaging(null, null);
     }finally{
-      txLoading.style.display = "none";
+      txLoading.classList.add("hidden");
     }
   }
 

@@ -1,5 +1,4 @@
-/* Layout */
-main#container-1 { padding: 18px 0 44px; }
+main { padding-top: 44px; }
 
 .pageHead{
   border-bottom:1px solid rgba(255,255,255,.1);
@@ -24,14 +23,26 @@ main#container-1 { padding: 18px 0 44px; }
   margin:2px 0 0; font-size:12px;
 }
 
-#qrCode, #tokenLogo{
+#tokenLogo{
   width:34px; height:34px;
   border-radius:999px;
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.12);
   object-fit:cover;
 }
-
+#qrCode {
+  width:34px; 
+  height:34px;
+  border-radius: 8px;
+  background-image: url('/assets/icons/qr.svg');
+  background-size: 34px;
+  background-repeat: no-repeat;
+  background-position: center;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+}
 /* Search + Buttons */
 .searchRow{
   display:flex; gap:10px;
@@ -81,7 +92,6 @@ html#dark{
 .btn:hover{ background:rgba(255,255,255,.1); }
 .btn:disabled{ opacity:.6; cursor:not-allowed; }
 
-/* Grids */
 .grid-1,
 .grid-2{
   display:grid;
@@ -112,9 +122,8 @@ html#dark{
 .k{ font-size:13px; }
 .v{ font-size:13px; font-weight:650; word-break:break-all; }
 
-.mono{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,
-  "Liberation Mono","Courier New",monospace;
+tbody {
+  font-family: Consolas;
 }
 
 .big{
@@ -123,12 +132,10 @@ html#dark{
   letter-spacing:-.2px;
   margin:0 0 6px;
 }
-
-.muted{
-  color:rgba(255,255,255,.65);
-  font-size:12px;
+.loading {
+  margin-bottom:15px;
+  font-size:12px; 
 }
-
 /* Tabs */
 .tabs{
   margin-top:12px;
@@ -194,28 +201,6 @@ tr:hover td{ background:rgba(255,255,255,.03); }
   margin-top:10px;
 }
 
-/* Toast */
-.toast{
-  position:fixed;
-  right:16px; bottom:16px;
-  padding:10px 12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.1);
-  background:rgba(10,14,25,.92);
-  color:inherit;
-  max-width:420px;
-  display:none;
-  z-index:9999;
-}
-
-.toast.show{ display:block; }
-
-.toast .m{
-  color:rgba(255,255,255,.7);
-  font-size:12px;
-  line-height:1.35;
-}
-
 /* Links */
 a.explorerLink,
 a.explorerLink:visited,
@@ -227,7 +212,6 @@ a.explorerLink:active{
 
 a.explorerLink:hover{ text-decoration:underline; }
 
-/* Responsive */
 @media (max-width:800px){
   .grid-1,
   .grid-2{
@@ -235,3 +219,4 @@ a.explorerLink:hover{ text-decoration:underline; }
   }
   .grid-2{ grid-template-rows:none; }
 }
+

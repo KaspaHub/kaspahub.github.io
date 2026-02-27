@@ -119,6 +119,33 @@ html#dark {
 	filter: invert(85%);
 }
 
+.muted {
+	color: inherit;
+	opacity: 0.8;
+}
+
+/* Popup */
+.toast{
+  position:fixed;
+  right:16px; bottom:16px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(10,14,25,.92);
+  color:inherit;
+  max-width:420px;
+  display:none;
+  z-index:9999;
+}
+
+.toast.show{ display:block; }
+
+.toast .m{
+  color:rgba(255,255,255,.7);
+  font-size:12px;
+  line-height:1.35;
+}
+
 h1 {font-size: 2em;}
 h2 {font-size: 1.295em;}
 h3 {font-size: 1.215em;}
@@ -1018,6 +1045,12 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	gap: 10px;
 	font-size: 1.5em;
 	margin: 50px 0;
+}
+.loading {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 1.5em;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 

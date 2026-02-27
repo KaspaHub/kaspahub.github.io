@@ -42,8 +42,8 @@
 <main id="container-1">
   <div class="pageHead">
     <div id="walletHeader">
-      <img id="walletLogo" class="avatar" alt="" />
-      <div>
+      <img id="qrCode" class="avatar" alt="" />
+      <div style="max-width: 100%; overflow: hidden;">
         <h1 id="hdrLine">Kaspa Wallet Address</h1>
         <div class="sub" id="hdrSub">-</div>
       </div>
@@ -83,12 +83,12 @@
   <section id="tabTransactions" class="tabPanel active" aria-label="Transactions panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Transactions</h3>
-      <div id="txLoading" class="muted" style="margin-bottom:10px; display:none;"><span class="spinner"></span>Loading…</div>
+      <div id="txLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
       <div class="tableWrap">
         <table>
           <thead>
             <tr>
-              <th>Tx</th>
+              <th>TxID</th>
               <th>Date</th>
               <th>From</th>
               <th>To</th>
@@ -111,7 +111,7 @@
   <section id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>KRC20 Tokens</h3>
-      <div id="tokenLoading" class="muted" style="margin-bottom:10px; display:none;"><span class="spinner"></span>Loading…</div>
+      <div id="tokenLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
       <div class="tableWrap">
         <table>
           <thead>
@@ -242,7 +242,7 @@
   function shortenMiddle(str, head = 12, tail = 10) {
     const s = String(str ?? "");
     if (s.length <= head + tail + 3) return s;
-    return s.slice(0, head) + "…" + s.slice(-tail);
+    return s.slice(0, head) + "..." + s.slice(-tail);
   }
 
   function escHtml(s) {
@@ -263,14 +263,14 @@
     const a = String(addr ?? "").trim();
     const text = escHtml(label != null ? label : a);
     if (!a) return "-";
-    return `<a class="explorerLink mono" href="${walletUrl(a)}">${text}</a>`;
+    return `<a class="explorerLink" href="${walletUrl(a)}">${text}</a>`;
   }
 
   function linkTx(hash, label) {
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if (!h) return "-";
-    return `<a class="explorerLink mono" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+    return `<a class="explorerLink" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
   }
 
   async function fetchKasPrice() {
@@ -480,17 +480,31 @@
 
     txRows.innerHTML = txs.map(tx => {
       const hash = String(tx.transaction_id || "-");
-      const age = tx.block_time ? new Date(Number(tx.block_time)).toLocaleString(undefined, { hour12: false }) : "-";
+      const age = tx.block_time
+        ? (() => {
+            const d = new Date(Number(tx.block_time));
+            return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) +
+                   ", " +
+                   d.toLocaleTimeString(undefined, { hour12: false });
+          })()
+        : "-";
       const net = getNetChange(tx, addr);
       const { from, to } = getFromTo(tx, addr, net);
       const amt = formatAmount(net);
 
-      const shortHash = shortenMiddle(hash, 10, 6);
+      const shortHash = hash.length > 16
+        ? hash.slice(0, 16) + "..."
+        : hash;
       const shortFrom = shortenMiddle(from, 14, 10);
       const shortTo = shortenMiddle(to, 14, 10);
 
-      const fromHtml = (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) ? linkAddress(from, shortFrom) : escHtml(shortFrom);
-      const toHtml = (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) ? linkAddress(to, shortTo) : escHtml(shortTo);
+      const fromHtml = (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) 
+          ? linkAddress(from, shortFrom) 
+          : `<span class="muted">${escHtml(shortFrom)}</span>`;
+
+      const toHtml = (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) 
+          ? linkAddress(to, shortTo) 
+          : `<span class="muted">${escHtml(shortTo)}</span>`;
 
       return `
         <tr>
@@ -498,7 +512,7 @@
           <td>${age}</td>
           <td>${fromHtml}</td>
           <td>${toHtml}</td>
-          <td class="mono right">${amt}</td>
+          <td class="right">${amt}</td>
         </tr>
       `;
     }).join("");
@@ -518,8 +532,8 @@
       return `
         <tr>
           <td><a class="explorerLink" href="${tokenUrl}">${tick}</a></td>
-          <td class="mono">${bal}</td>
-          <td class="mono">${lock}</td>
+          <td>${bal}</td>
+          <td>${lock}</td>
           <td>${escHtml(t.dec)}</td>
         </tr>
       `;
@@ -533,7 +547,7 @@
   }
 
   async function loadTransactions(offset = 0) {
-    txLoading.style.display = "block";
+    txLoading.classList.remove("hidden");
     try {
       const txs = await fetchTransactions(currentAddr, offset, txLimit + 1);
       const hasMore = txs.length > txLimit;
@@ -544,13 +558,13 @@
       txRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transactions.</td></tr>`;
       setTxPaging(false, false);
     } finally {
-      txLoading.style.display = "none";
+      txLoading.classList.add("hidden");
     }
   }
 
   async function loadTokens() {
     if (!currentAddr) return;
-    tokenLoading.style.display = "block";
+    tokenLoading.classList.remove("hidden");
     try {
       tokens = await fetchAllTokens(currentAddr);
       tokens.sort((a, b) => {
@@ -561,9 +575,10 @@
       });
       renderTokens(tokens);
     } catch {
-      tokenRows.innerHTML = `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
+      tokenRows.innerHTML =
+        `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
     } finally {
-      tokenLoading.style.display = "none";
+      tokenLoading.classList.add("hidden");
     }
   }
 
