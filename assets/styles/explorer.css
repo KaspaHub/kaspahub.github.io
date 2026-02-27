@@ -202,15 +202,6 @@ tr:hover td{ background:rgba(255,255,255,.03); }
 }
 
 /* Links */
-a.explorerLink,
-a.explorerLink:visited,
-a.explorerLink:hover,
-a.explorerLink:active{
-  color:inherit;
-  text-decoration:none;
-}
-
-a.explorerLink:hover{ text-decoration:underline; }
 
 @media (max-width:800px){
   .grid-1,

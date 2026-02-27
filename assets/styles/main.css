@@ -73,6 +73,9 @@ html#light {
 	--box-shadow: unset;
 	--input-bg-color: #EEF0F3;
 	--card-hover-bg: #E8EAED;
+	--link: #1C62B9;
+	--link-hover: #3952C6;
+	--link-active: #D8B234;
 }
 
 html#dark {
@@ -81,6 +84,9 @@ html#dark {
 	--box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 	--input-bg-color: rgba(0,0,0, 0.1);
 	--card-hover-bg: rgba(255, 255, 255, 0.15);
+	--link: #6AB5DB;
+	--link-hover: #9CCEE7;
+	--link-active: #70C7BA;
 }
 
 #light {
@@ -173,10 +179,10 @@ li {
 }
 
 a {cursor: pointer; font-weight: bold; text-decoration: none; transition: color 0.2s linear; }
-a:link {color:#1C62B9; }
-a:visited {color:#1C62B9; }
-a:hover {color:#3952C6; text-decoration: underline; }
-a:active {color:#D8B234; text-decoration: underline; }
+a:link {color: var(--link); }
+a:visited {color: var(--link); }
+a:hover {color: var(--link-hover);; text-decoration: underline; }
+a:active {color: var(--link-active);; text-decoration: underline; }
 
 #navBar {
 	height: 90px;

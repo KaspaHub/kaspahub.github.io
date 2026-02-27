@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" id="">
-
 <head>
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta charset="UTF-8" />
@@ -140,7 +139,7 @@
           <thead>
             <tr>
               <th>Domain</th>
-              <th>Created</th>
+              <th>Minted</th>
               <th>Status</th>
               <th>TxID</th>
             </tr>
@@ -288,12 +287,12 @@
 
   function walletUrl(addr) {
     const a = String(addr ?? "").trim();
-    return a ? WALLET_BASE + encodeURIComponent(a) : "#";
+    return a ? WALLET_BASE + a : "#";
   }
 
   function explorerTxUrl(hash) {
     const h = String(hash ?? "").trim();
-    return h ? EXPLORER_TX_BASE + encodeURIComponent(h) : "#";
+    return h ? EXPLORER_TX_BASE + h : "#";
   }
 
   function linkAddress(addr, label) {
@@ -318,7 +317,7 @@
   }
 
   async function fetchBalance(addr) {
-    const res = await fetch(`${API_BASE}/addresses/${encodeURIComponent(addr)}/balance`);
+    const res = await fetch(`${API_BASE}/addresses/${addr}/balance`);
     if (res.status === 404) return 0;
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -326,7 +325,7 @@
   }
 
   async function fetchTxCount(addr) {
-    const res = await fetch(`${API_BASE}/addresses/${encodeURIComponent(addr)}/transactions-count`);
+    const res = await fetch(`${API_BASE}/addresses/${addr}/transactions-count`);
     if (res.status === 404) return 0;
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -347,7 +346,7 @@
   }
 
   async function fetchTransactions(addr, offset, limit) {
-    const url = `${API_BASE}/addresses/${encodeURIComponent(addr)}/full-transactions?offset=${offset}&limit=${limit}&resolve_previous_outpoints=light`;
+    const url = `${API_BASE}/addresses/${addr}/full-transactions?offset=${offset}&limit=${limit}&resolve_previous_outpoints=light`;
     const res = await fetch(url);
     if (res.status === 404) return [];
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -360,8 +359,8 @@
     let start = '';
     const seen = new Set();
     do {
-      const param = start ? `?start=${encodeURIComponent(start)}` : '';
-      const url = `${KRC_API_BASE}/v1/krc20/address/${encodeURIComponent(addr)}/tokenlist${param}`;
+      const param = start ? `?start=${start}` : '';
+      const url = `${KRC_API_BASE}/v1/krc20/address/${addr}/tokenlist${param}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
@@ -386,7 +385,7 @@
     let page = 1;
     const pageSize = 100;
     while (true) {
-      const url = `${KNS_API_BASE}/assets?owner=${encodeURIComponent(addr)}&page=${page}&pageSize=${pageSize}`;
+      const url = `${KNS_API_BASE}/assets?owner=${addr}&page=${page}&pageSize=${pageSize}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
@@ -402,7 +401,7 @@
 
   function setUrlAddr(addr) {
     const u = new URL(window.location.href);
-    u.searchParams.set("q", addr);
+    u.search = "?q=" + addr;
     history.replaceState({}, "", u.toString());
   }
 
@@ -583,7 +582,7 @@
       const bal = formatTokenAmount(t.balance, t.dec);
       const lock = formatTokenAmount(t.locked, t.dec);
       const tick = escHtml(t.tick);
-      const tokenUrl = `/krc20/?q=${encodeURIComponent(t.tick)}`;
+      const tokenUrl = `/krc20/?q=${t.tick}`;
       return `
         <tr>
           <td><a class="explorerLink" href="${tokenUrl}">${tick}</a></td>
