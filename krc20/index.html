@@ -37,67 +37,67 @@
 
 <body>
 
-<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script>
 
 <main id="container-1">
-    <div class="pageHead">
-      <div class="tokenTitle">
-        <img id="tokenLogo" class="avatar" alt="" />
-        <div>
-          <h1 id="hdrLine">Token</h1>
-          <div class="sub" id="hdrSub">-</div>
-        </div>
-      </div>
-
-      <div class="searchRow">
-        <div class="input" title="Ticker">
-          <input id="q" placeholder="e.g. TICKER" />
-        </div>
-        <button class="btn" id="go">Search</button>
+  <div class="pageHead">
+    <div class="tokenTitle">
+      <img id="tokenLogo" class="avatar" alt="" />
+      <div>
+        <h1 id="hdrLine">Token</h1>
+        <div class="sub" id="hdrSub">-</div>
       </div>
     </div>
 
-    <section class="grid-2" aria-label="Summary">
-      <div class="theme-1 third">
-        <h3>Market</h3>
-        <div class="big" id="priceUsd">-</div>
-        <div class="rows">
-          <div class="row"><div class="k">24h change</div><div class="v" id="priceChg">-</div></div>
-          <div class="row"><div class="k">24h volume</div><div class="v" id="priceVol">-</div></div>
-          <div class="row"><div class="k">Market cap</div><div class="v" id="mcap">-</div></div>
-        </div>
+    <div class="searchRow">
+      <div class="input" title="Ticker">
+        <input id="q" placeholder="e.g. TICKER" />
       </div>
+      <button class="btn" id="go">Search</button>
+    </div>
+  </div>
 
-      <div class="theme-1 third">
-        <h3>Overview</h3>
-        <div class="rows">
-          <div class="row"><div class="k">Name</div><div class="v" id="name">-</div></div>
-          <div class="row"><div class="k">Ticker</div><div class="v" id="tick">-</div></div>
-          <div class="row"><div class="k">Decimals</div><div class="v" id="dec">-</div></div>
-          <div class="row"><div class="k">Deployed</div><div class="v" id="deployDate">-</div></div>
-        </div>
+  <section class="grid-2" aria-label="Summary">
+    <div class="theme-1 third">
+      <h3>Market</h3>
+      <div class="big" id="priceUsd">-</div>
+      <div class="rows">
+        <div class="row"><div class="k">24h change</div><div class="v" id="priceChg">-</div></div>
+        <div class="row"><div class="k">24h volume</div><div class="v" id="priceVol">-</div></div>
+        <div class="row"><div class="k">Market cap</div><div class="v" id="mcap">-</div></div>
       </div>
+    </div>
 
-      <div class="theme-1 third">
-        <h3>Tokenomics</h3>
-        <div class="rows">
-          <div class="row"><div class="k">Preminted</div><div class="v" id="preminted">-</div></div>
-          <div class="row"><div class="k">Burned</div><div class="v" id="burned">-</div></div>
-          <div class="row"><div class="k">Circulating</div><div class="v" id="circ">-</div></div>
-          <div class="row"><div class="k">Max</div><div class="v" id="max">-</div></div>
-        </div>
+    <div class="theme-1 third">
+      <h3>Overview</h3>
+      <div class="rows">
+        <div class="row"><div class="k">Name</div><div class="v" id="name">-</div></div>
+        <div class="row"><div class="k">Ticker</div><div class="v" id="tick">-</div></div>
+        <div class="row"><div class="k">Decimals</div><div class="v" id="dec">-</div></div>
+        <div class="row"><div class="k">Deployed</div><div class="v" id="deployDate">-</div></div>
       </div>
+    </div>
 
-      <div class="theme-1 half">
-        <h3>Stats</h3>
-        <div class="rows">
-          <div class="row"><div class="k">Holders</div><div class="v" id="holders">-</div></div>
-          <div class="row"><div class="k">Transfers</div><div class="v" id="transfers">-</div></div>
-          <div class="row"><div class="k">Mint ops</div><div class="v" id="mintOps">-</div></div>
-          <div class="row"><div class="k">Minted</div><div class="v" id="minted">-</div></div>
-        </div>
+    <div class="theme-1 third">
+      <h3>Tokenomics</h3>
+      <div class="rows">
+        <div class="row"><div class="k">Preminted</div><div class="v" id="preminted">-</div></div>
+        <div class="row"><div class="k">Burned</div><div class="v" id="burned">-</div></div>
+        <div class="row"><div class="k">Circulating</div><div class="v" id="circ">-</div></div>
+        <div class="row"><div class="k">Max</div><div class="v" id="max">-</div></div>
       </div>
-    </section>
+    </div>
+
+    <div class="theme-1 half">
+      <h3>Stats</h3>
+      <div class="rows">
+        <div class="row"><div class="k">Holders</div><div class="v" id="holders">-</div></div>
+        <div class="row"><div class="k">Transfers</div><div class="v" id="transfers">-</div></div>
+        <div class="row"><div class="k">Mint ops</div><div class="v" id="mintOps">-</div></div>
+        <div class="row"><div class="k">Minted</div><div class="v" id="minted">-</div></div>
+      </div>
+    </div>
+  </section>
 
 <div class="tabs" role="tablist" aria-label="Token tabs">
   <button class="tab active" data-tab="tabHolders">Holders</button>
@@ -105,80 +105,125 @@
   <button class="tab" data-tab="tabInfo">Info</button>
 </div>
 
-    <section id="tabHolders" class="tabPanel active" aria-label="Holders panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>Top Holders</h3>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Address</th>
-                <th class="right">Quantity</th>
-                <th class="right">Percentage</th>
-              </tr>
-            </thead>
-            <tbody id="holderRows">
-              <tr><td colspan="4" class="muted">-</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="miniBtns">
-          <button class="btn" id="prevHolder" disabled>Prev</button>
-          <button class="btn" id="nextHolder" disabled>Next</button>
-          <span class="muted" style="margin: auto 0;" id="holderCursor"></span>
-        </div>
-        <div class="muted" style="margin-top:10px" id="holderNote"></div>
-      </div>
-    </section>
+<section id="tabHolders" class="tabPanel active" aria-label="Holders panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>Top Holders</h3>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Address</th>
+            <th class="right">Quantity</th>
+            <th class="right">Percentage</th>
+          </tr>
+        </thead>
+        <tbody id="holderRows">
+          <tr><td colspan="4" class="muted">-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="miniBtns">
+      <button class="btn" id="prevHolder" disabled>Prev</button>
+      <button class="btn" id="nextHolder" disabled>Next</button>
+      <span class="muted" style="margin: auto 0;" id="holderCursor"></span>
+    </div>
+    <div class="muted" style="margin-top:10px" id="holderNote"></div>
+  </div>
+</section>
 
-    <section id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>Transfers</h3>
-        <div id="txLoading" class="muted loading"><span class="spinner"></span><span>Loading…</span></div>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>TxId</th>
-                <th>Age</th>
-                <th>From</th>
-                <th>To</th>
-                <th class="right">Amount</th>
-              </tr>
-            </thead>
-            <tbody id="txRows">
-              <tr><td colspan="5" class="muted">-</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="miniBtns">
-          <button class="btn" id="prevTx" disabled>Prev</button>
-          <button class="btn" id="nextTx" disabled>Next</button>
-          <span class="muted" style="margin: auto 0;" id="txCursor"></span>
-        </div>
-      </div>
-    </section>
+<section id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>Transfers</h3>
+    <div id="txLoading" class="muted loading"><span class="spinner"></span><span>Loading…</span></div>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>TxId</th>
+            <th>Age</th>
+            <th>From</th>
+            <th>To</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="txRows">
+          <tr><td colspan="5" class="muted">-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="miniBtns">
+      <button class="btn" id="prevTx" disabled>Prev</button>
+      <button class="btn" id="nextTx" disabled>Next</button>
+      <span class="muted" style="margin: auto 0;" id="txCursor"></span>
+    </div>
+  </div>
+</section>
 
-    <section id="tabInfo" class="tabPanel" aria-label="Info panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>Token Info</h3>
-        <div class="rows">
-          <div class="row"><div class="k">Website</div><div class="v" id="iWebsite">-</div></div>
-          <div class="row"><div class="k">Feed</div><div class="v" id="iFeed">-</div></div>
-          <div class="row"><div class="k">Chat</div><div class="v" id="iChat">-</div></div>
-          <div class="row"><div class="k">Mode</div><div class="v" id="iMode">-</div></div>
-          <div class="row"><div class="k">Deploy to</div><div class="v" id="iTo">-</div></div>
-          <div class="row"><div class="k">Updated</div><div class="v" id="iUpdated">-</div></div>
-        </div>
-      </div>
-    </section>
-  </main>
+<section id="tabInfo" class="tabPanel" aria-label="Info panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>Token Info</h3>
+    <div class="rows">
+      <div class="row"><div class="k">Website</div><div class="v" id="iWebsite">-</div></div>
+      <div class="row"><div class="k">Feed</div><div class="v" id="iFeed">-</div></div>
+      <div class="row"><div class="k">Chat</div><div class="v" id="iChat">-</div></div>
+      <div class="row"><div class="k">Mode</div><div class="v" id="iMode">-</div></div>
+      <div class="row"><div class="k">Deploy to</div><div class="v" id="iTo">-</div></div>
+      <div class="row"><div class="k">Updated</div><div class="v" id="iUpdated">-</div></div>
+    </div>
+  </div>
+</section>
+</main>
 
-  <footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+<footer>
 
-  <div class="toast" id="toast">
-    <div class="m" id="toastMsg"></div>
+<div class="social">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open source platform that brings together resources, initiatives, and connections for everyone interested in Kaspa, Linux, and Nostr.</p>
+</div>
+
+<div class="ad">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="resources">
+<h4>Resources</h4>
+<ul class="section-list">
+<li><a href="https://kaspahub.org/post/about/">About</a></li>
+<li><a href="https://kaspahub.org/post/sitemap/">Sitemap</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+<div class="resources">
+<h4>Help improve</h4>
+<ul class="section-list">
+<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+</ul>
+</div>
+
+</footer>
+
+  <div class="notification" id="notification">
+    <div class="m" id="notificationMsg"></div>
   </div>
 
 <script type="text/javascript">
@@ -240,8 +285,8 @@
   const nextHolder = el("nextHolder");
   const holderCursor = el("holderCursor");
 
-  const toast = el("toast");
-  const toastMsg = el("toastMsg");
+  const notification = el("notification");
+  const notificationMsg = el("notificationMsg");
 
   let busy = false;
   let currentTick = "";
@@ -260,10 +305,10 @@
   let holderOffset = 0;
   const HOLDER_LIMIT = 20;
 
-  function showToast(title, msg){
-    toastMsg.textContent = msg || "";
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 5200);
+  function showNotification(title, msg){
+    notificationMsg.textContent = msg || "";
+    notification.classList.add("show");
+    setTimeout(() => notification.classList.remove("show"), 5200);
   }
 
   function nowFmt(){
@@ -783,7 +828,7 @@
 
     const T = safeUpper(t);
     if(!T){
-      showToast("Missing token", "Enter a ticker.");
+      showNotification("Missing token", "Enter a ticker.");
       busy = false;
       return;
     }
@@ -826,7 +871,7 @@
 
       q.value = "";
     }catch(err){
-      showToast("Not available", String(err?.message || err));
+      showNotification("Not available", String(err?.message || err));
 
       hdrSub.textContent = "-";
       renderPriceMissing();
@@ -847,7 +892,7 @@
     }
     if(t && t.dataset && t.dataset.copy){
       const ok = await copyToClipboard(t.dataset.copy);
-      showToast(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
+      showNotification(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
     }
   });
 

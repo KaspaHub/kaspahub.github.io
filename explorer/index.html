@@ -37,22 +37,22 @@
 
 <body>
 
-<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script>
 
 <main id="container-1">
 <div class="intro">
-    <h1>Kaspa Block Explorer</h1>
-    <p class="hint">Search for a Kaspa address (e.g. <code>kaspa:qwerty...</code>), transaction ID, block hash, KRC20 token, or .kas domain.</p>
+    <h1>Coming Soon!</h1>
+    <p class="hint">Explore Kaspa transactions, wallets, tokens, domains, and more.</p>
 </div>
 
-<div class="searchBar"><input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+<div class="searchBar"><input disabled id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
 <button id="searchQuerySubmit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
 </div>
 
 <div id="checking" class="loading-2 hidden">
-  <div class="loading-dots dot-0"></div>
   <div class="loading-dots dot-1"></div>
   <div class="loading-dots dot-2"></div>
+  <div class="loading-dots dot-3"></div>
 </div>
 
 <div id="msg"></div>
@@ -64,6 +64,10 @@ const searchQuerySubmit = document.getElementById('searchQuerySubmit');
 const msg = document.getElementById('msg');
 const results = document.getElementById('results');
 const checking = document.getElementById('checking');
+
+function setStatus(html, ok = false) {
+  msg.innerHTML = html ? `<div class="${ok ? 'ok' : 'error'}">${html}</div>` : '';
+}
 
 const validators = {
   invalidLengthOrChars: (trimmed) => {
@@ -84,10 +88,6 @@ const validators = {
   isTxOrBlock: (s) => s.length >= 50 && s.length <= 80,
 };
 
-function setStatus(html, ok = false) {
-  msg.innerHTML = html ? `<div class="${ok ? 'ok' : 'error'}">${html}</div>` : '';
-}
-
 function sanitize(query) {
   const trimmed = query.trim();
   if (validators.invalidLengthOrChars(trimmed)) {
@@ -96,12 +96,19 @@ function sanitize(query) {
   return trimmed.toLowerCase();
 }
 
-function handleSearch() {
+async function handleSearch() {
   const query = searchQueryInput.value;
   results.hidden = true;
   setStatus('');
 
+  checking.classList.remove('hidden');
+
+  // 1 second delay + show loading
+  await new Promise(resolve => setTimeout(resolve, 100000));
+
   const sanitized = sanitize(query);
+
+  checking.classList.add('hidden');
 
   if (sanitized === null) {
     setStatus('Invalid query: empty, too long, or contains invalid characters.');
@@ -148,7 +155,52 @@ window.addEventListener('DOMContentLoaded', () => searchQueryInput.focus());
 
 </main>
 
-<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+<footer>
+
+<div class="social">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open source platform that brings together resources, initiatives, and connections for everyone interested in Kaspa, Linux, and Nostr.</p>
+</div>
+
+<div class="ad">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="resources">
+<h4>Resources</h4>
+<ul class="section-list">
+<li><a href="https://kaspahub.org/post/about/">About</a></li>
+<li><a href="https://kaspahub.org/post/sitemap/">Sitemap</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+<div class="resources">
+<h4>Help improve</h4>
+<ul class="section-list">
+<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+</ul>
+</div>
+
+</footer>
 
 </body>
 </html>
