@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" id="">
+
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+
+<title>Kaspa Block Explorer - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Block Explorer - Kaspa Hub" />
+<meta property="og:title" content="Kaspa Block Explorer - Kaspa Hub" />
+
+<meta name="description" content="Explore the Kaspa blockchain in real-time. Search for wallet addresses, transactions, blocks, KRC20 tokens, and .kas domains using official Kaspa API data." />
+<meta name="twitter:description" content="Search Kaspa blockchain for addresses, tx IDs, block hashes, tokens, and domains. Get accurate, up-to-date results powered by the official Kaspa API." />
+<meta property="og:description" content="Instantly query Kaspa network data: wallet balances, transaction details, block information, KRC20 tokens, and .kas domains. Secure and fast." />
+
+<link rel="canonical" href="https://kaspahub.org/explorer/" />
+<meta name="twitter:url" content="https://kaspahub.org/explorer/" />
+<meta property="og:url" content="https://kaspahub.org/explorer/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+</head>
+
+<body>
+
+<nav id="navBar"><a id="title" draggable="false" href="/">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/" draggable="false">Articles</a><a class="navTag" href="/news/" draggable="false">News</a><a class="navTag" href="/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" draggable="false">Donate</a><a class="navTag" href="https://github.com/KaspaHub/kaspahub.github.io/issues" draggable="false">Contribute</a></div><input id="theme" type="checkbox" aria-label="Theme Toggle" onclick="theme()" /></nav><script async src="/assets/scripts/main.js"></script>
+
+<main id="container-1">
+<div class="intro">
+    <h1>Kaspa Block Explorer</h1>
+    <p class="hint">Search for a Kaspa address (e.g. <code>kaspa:qwerty...</code>), transaction ID, block hash, KRC20 token, or .kas domain.</p>
+</div>
+
+<div class="searchBar"><input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+<button id="searchQuerySubmit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
+</div>
+
+<div id="checking" class="loading-2 hidden">
+  <div class="loading-dots dot-0"></div>
+  <div class="loading-dots dot-1"></div>
+  <div class="loading-dots dot-2"></div>
+</div>
+
+<div id="msg"></div>
+<div id="results" class="results" hidden></div>
+
+<script>
+const searchQueryInput = document.getElementById('searchQueryInput');
+const searchQuerySubmit = document.getElementById('searchQuerySubmit');
+const msg = document.getElementById('msg');
+const results = document.getElementById('results');
+const checking = document.getElementById('checking');
+
+const validators = {
+  invalidLengthOrChars: (trimmed) => {
+    if (trimmed.length === 0) return true;
+    if (trimmed.length > 104) return true;
+    if (/[^a-zA-Z0-9 .:]/.test(trimmed)) return true;
+    return false;
+  },
+
+  hasWhitespace: (s) => /\s/.test(s),
+
+  isWalletAddress: (s) => s.startsWith('kaspa:') && s.length > 30 && s.length < 80,
+
+  isDomainName: (s) => s.endsWith('.kas'),
+
+  isKrc20Token: (s) => s.length >= 1 && s.length <= 6,
+
+  isTxOrBlock: (s) => s.length >= 50 && s.length <= 80,
+};
+
+function setStatus(html, ok = false) {
+  msg.innerHTML = html ? `<div class="${ok ? 'ok' : 'error'}">${html}</div>` : '';
+}
+
+function sanitize(query) {
+  const trimmed = query.trim();
+  if (validators.invalidLengthOrChars(trimmed)) {
+    return null;
+  }
+  return trimmed.toLowerCase();
+}
+
+function handleSearch() {
+  const query = searchQueryInput.value;
+  results.hidden = true;
+  setStatus('');
+
+  const sanitized = sanitize(query);
+
+  if (sanitized === null) {
+    setStatus('Invalid query: empty, too long, or contains invalid characters.');
+    return;
+  }
+
+  let typeText = 'Other search query';
+  let isValid = true;
+
+  if (validators.hasWhitespace(sanitized)) {
+    typeText = 'Other search query (contains spaces)';
+  }
+  else if (validators.isWalletAddress(sanitized)) {
+    typeText = 'Wallet address';
+  }
+  else if (validators.isDomainName(sanitized)) {
+    typeText = 'Domain name (.kas)';
+  }
+  else if (validators.isKrc20Token(sanitized)) {
+    typeText = 'KRC20 token ticker';
+  }
+  else if (validators.isTxOrBlock(sanitized)) {
+    typeText = 'Transaction ID or block hash';
+  }
+  else {
+    typeText = 'Invalid or unrecognized format';
+    isValid = false;
+  }
+
+  const displayValue = isValid ? `: ${sanitized}` : '';
+  setStatus(`${typeText}${displayValue}`, isValid);
+}
+
+searchQuerySubmit.addEventListener('click', handleSearch);
+searchQueryInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleSearch();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => searchQueryInput.focus());
+</script>
+
+</main>
+
+<footer><a href="https://kaspahub.org">Kaspa Community Hub</a></footer>
+
+</body>
+</html>

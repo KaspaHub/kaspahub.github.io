@@ -2,11 +2,11 @@
 <html lang="en" id="">
 
 <head>
-<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta charset="UTF-8" />
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
@@ -50,7 +50,7 @@
 
     <div class="searchRow">
       <div class="input" title="Transaction ID">
-        <input id="q" placeholder="e.g. adf842addf9d..." />
+        <input id="q" placeholder="e.g. qwerty..." />
       </div>
       <button class="btn" id="go">Search</button>
     </div>
@@ -261,7 +261,6 @@
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
 
-    // Resolve input amounts and addresses if null
     const resolvePromises = json.inputs.map(async (inp) => {
       if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
         const prevUrl = `${API_BASE}/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
@@ -289,7 +288,7 @@
 
   function renderHeader(txid) {
     hdrSub.textContent = txid;
-    document.title = `${shortenMiddle(txid, 6, 6)} Transaction - Kaspa Hub`;
+    document.title = txid;
   }
 
   function computeTotals(inputs, outputs) {
@@ -352,7 +351,7 @@
         const address = out.script_public_key_address ?? "-";
         const amount = out.amount ?? 0;
         const amtHtml = `<span style="color:#2ee59d">+${formatKas(amount, true)}</span>`;
-        const outpointHtml = escHtml(outpoint); // No hyperlink for outputs
+        const outpointHtml = escHtml(outpoint);
         html += `
           <tr>
             <td>${index}</td>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" id="">
+
 <head>
-<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta charset="UTF-8" />
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 
-<title>Wallet Explorer - Kaspa Hub</title>
-<meta property="og:title" content="Wallet Explorer - Kaspa Hub" />
-<meta name="twitter:title" content="Wallet Explorer - Kaspa Hub" />
+<title>Address Explorer - Kaspa Hub</title>
+<meta property="og:title" content="Address Explorer - Kaspa Hub" />
+<meta name="twitter:title" content="Address Explorer - Kaspa Hub" />
 
 <meta name="description" content="Explore Kaspa wallets with real-time transaction history, balance, and more. Look up any Kaspa wallet address to track activity." />
 <meta property="og:description" content="Discover Kaspa wallets with detailed data including transactions, balance, and activity. Search any Kaspa address instantly." />
@@ -76,8 +77,8 @@
 
   <div class="tabs" role="tablist" aria-label="Wallet tabs">
     <button class="tab active" data-tab="tabTransactions">Transactions</button>
-    <button class="tab" data-tab="tabKRC20">KRC20 Tokens</button>
-    <button class="tab" data-tab="tabKNS">KNS Domains</button>
+    <button class="tab" data-tab="tabKRC20">Tokens</button>
+    <button class="tab" data-tab="tabKNS">Domains</button>
   </div>
 
   <section id="tabTransactions" class="tabPanel active" aria-label="Transactions panel">
@@ -139,7 +140,7 @@
           <thead>
             <tr>
               <th>Domain</th>
-              <th>Minted</th>
+              <th>Mint date</th>
               <th>Status</th>
               <th>TxID</th>
             </tr>
@@ -407,7 +408,7 @@
 
   function renderHeader(addr) {
     hdrSub.textContent = addr;
-    document.title = `${shortenMiddle(addr, 6, 6)} Wallet - Kaspa Hub`;
+    document.title = addr;
   }
 
   async function renderSummary(addr, balanceSomes, txCountVal, txs) {

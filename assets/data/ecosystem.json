@@ -116,7 +116,7 @@
   "description": "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
   "link": "https://app.knsdomains.org",
   "logo": "/assets/logos/kns.webp",
-  "features": ["marketplace"]
+  "features": ["reviewed", "marketplace"]
 },
 {
   "name": "Kasia",

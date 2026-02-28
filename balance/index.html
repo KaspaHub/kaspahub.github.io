@@ -2,71 +2,37 @@
 <html lang="en" id="">
 
 <head>
-<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta charset="UTF-8" />
+<script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.2" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 
-<title>Kaspa Wallet Balance - Kaspa Hub</title>
-<meta name="twitter:title" content="Kaspa Balance Checker - Kaspa Hub" />
-<meta property="og:title" content="Check Kaspa Wallet Balance Instantly - Kaspa Hub" />
+<title>Wallet Balance Checker - Kaspa Hub</title>
+<meta name="twitter:title" content="Wallet Balance Checker - Kaspa Hub" />
+<meta property="og:title" content="Wallet Balance Checker - Kaspa Hub" />
 
 <meta name="description" content="Verify your Kaspa wallet balance instantly with this free lookup tool. Supports KAS and sompi formats with real-time API data." />
 <meta name="twitter:description" content="Easily check your Kaspa wallet balance by entering your address. Get accurate results in both KAS and sompi, powered by official Kaspa API." />
 <meta property="og:description" content="Paste a Kaspa address and see the current balance in seconds. Secure, fast, and connected directly to the official Kaspa REST API." />
 
-<link rel="canonical" href="https://kaspahub.org/page/balance/" />
-<meta name="twitter:url" content="https://kaspahub.org/page/balance/" />
-<meta property="og:url" content="https://kaspahub.org/page/balance/" />
+<link rel="canonical" href="https://kaspahub.org/balance/" />
+<meta name="twitter:url" content="https://kaspahub.org/balance/" />
+<meta property="og:url" content="https://kaspahub.org/balance/" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
 <meta name="twitter:site" content="@KaspaHub" />
-
 <meta name="twitter:creator" content="@KaspaHub" />
 <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
-<style>
-
-h1 { margin: 0 0 6px; font-weight: 700; letter-spacing: 0.2px; }
-p.hint { margin: 0 0 16px; font-size: 0.95rem; }
-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6px; }
-
-
-.results { margin-top: 18px; display: grid; gap: 12px; }
-.row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; }
-.label { font-size: 0.95rem; margin: 7px; }
-.value { font-weight: 650; font-size: 1.05rem; word-break: break-all; }
-.error { margin-top: 12px; color: #ffb3b3; background: #2b0f15; border: 1px solid #5f1f2a; padding: 10px 12px; border-radius: 10px; }
-.ok    { margin-top: 12px; color: #bafad1; background: #0f2b1b; border: 1px solid #1f5f39; padding: 10px 12px; border-radius: 10px; }
-.footer { margin-top: 18px; font-size: 0.85rem; }
-.spinner { display: inline-block; width: 1em; height: 1em; border: 2px solid #9ecbff; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; margin-right: 6px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.tiny { font-size: 0.9rem; }
-
-
-#searchContainer {
-  display: flex;
-  flex-direction: row;
-}
-
-#searchContainer > * {
-  margin: 10px;
-}
-
-#loading {
-  text-align: center;
-  font-size: 1.5em;
-  margin: 50px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 </head>
 
 <body>
@@ -76,17 +42,11 @@ form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6p
 <main id="container-1">
 <div class="intro">
     <h1>Check Kaspa Wallet Balance</h1>
-    <p class="hint">Paste a Kaspa address (e.g. <code>kaspa:qq...</code>) to see its current balance.</p>
+    <p class="hint">Paste a Kaspa address (e.g. <code>kaspa:qwerty...</code>) to see its current balance.</p>
 </div>
 
-<div id="searchContainer">
-  <input 
-    type="text" 
-    id="searchBox" 
-    placeholder="kaspa:qq..." 
-    required
-  >
-  <button class="button" id="searchBtn">Search</button>
+<div class="searchBar"><input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+<button id="searchQuerySubmit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
 </div>
 
 <div id="loading" style="display: none;">
@@ -100,8 +60,8 @@ form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6p
 const API_BASE = "https://api.kaspa.org";
 const SOMPI_PER_KAS = 100_000_000;
 
-const searchBox = document.getElementById('searchBox');
-const searchBtn = document.getElementById('searchBtn');
+const searchQueryInput = document.getElementById('searchQueryInput');
+const searchQuerySubmit = document.getElementById('searchQuerySubmit');
 const msg = document.getElementById('msg');
 const results = document.getElementById('results');
 
@@ -204,7 +164,7 @@ function renderResults(address, sompi, kasPriceUsd) {
 }
 
 async function handleSearch() {
-  const address = searchBox.value.trim();
+  const address = searchQueryInput.value.trim();
 
   results.hidden = true;
   setStatus('');
@@ -214,8 +174,8 @@ async function handleSearch() {
     return;
   }
 
-  const prev = searchBtn.textContent;
-  searchBtn.disabled = true;
+  const prev = searchQuerySubmit.textContent;
+  searchQuerySubmit.disabled = true;
   loading.style.display = "block";
 
   try {
@@ -232,20 +192,20 @@ async function handleSearch() {
     console.error(err);
     setStatus(`Couldn’t fetch data. ${err.message ? String(err.message) : ''}`);
   } finally {
-    searchBtn.disabled = false;
+    searchQuerySubmit.disabled = false;
     loading.style.display = "none";
   }
 }
 
-searchBtn.addEventListener('click', handleSearch);
-searchBox.addEventListener('keydown', (e) => {
+searchQuerySubmit.addEventListener('click', handleSearch);
+searchQueryInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
     handleSearch();
   }
 });
 
-window.addEventListener('DOMContentLoaded', () => searchBox.focus());
+window.addEventListener('DOMContentLoaded', () => searchQueryInput.focus());
 </script>
 
 </main>

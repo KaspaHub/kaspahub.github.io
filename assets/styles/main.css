@@ -519,7 +519,7 @@ footer, #footer {
 }
 
 footer::after {
-	content: "© 2026";
+	content: " © 2026 • v2.3 • FOSS";
 }
 
 
@@ -878,7 +878,8 @@ textarea, input[type="text"], input[type="password"], div[contenteditable="true"
 }
 
 textarea:focus, input[type="text"]:focus, input[type="password"]:focus, div[contenteditable="true"]:focus {
-	border-color: #1C62B9;
+	/*border-color: #1C62B9;*/
+	border-color: #70C7BA;
 }
 
 .search-sort-controls {

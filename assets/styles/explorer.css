@@ -211,3 +211,103 @@ tr:hover td{ background:rgba(255,255,255,.03); }
   .grid-2{ grid-template-rows:none; }
 }
 
+/*balv*/
+
+h1 { margin: 0 0 6px; font-weight: 700; letter-spacing: 0.2px; }
+p.hint { margin: 0 0 16px; font-size: 0.95rem; }
+form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6px; }
+
+
+.results { margin-top: 18px; display: grid; gap: 12px; }
+.row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; }
+.label { font-size: 0.95rem; margin: 7px; }
+.value { font-weight: 650; font-size: 1.05rem; word-break: break-all; }
+.error { margin-top: 12px; color: #ffb3b3; background: #2b0f15; border: 1px solid #5f1f2a; padding: 10px 12px; border-radius: 10px; }
+.ok    { margin-top: 12px; color: #bafad1; background: #0f2b1b; border: 1px solid #1f5f39; padding: 10px 12px; border-radius: 10px; }
+.footer { margin-top: 18px; font-size: 0.85rem; }
+.spinner { display: inline-block; width: 1em; height: 1em; border: 2px solid #9ecbff; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: -3px; margin-right: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tiny { font-size: 0.9rem; }
+
+
+#searchContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#searchContainer > * {
+  margin: 10px;
+}
+
+#loading {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 50px;
+}
+/*searchMain*/
+.searchBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#searchQueryInput {
+  width: 100%;
+  height: 2.8rem;
+  border-radius: 1.625rem;
+  padding: 0 3.5rem 0 1.5rem;
+  font-size: 1rem;
+}
+
+#searchQuerySubmit {
+  width: 3.5rem;
+  height: 2.8rem;
+  margin-left: -3.5rem;
+
+}
+
+#searchQuerySubmit:hover {
+  cursor: pointer;
+}
+/*test*/
+.loading-2{
+  background:#FFF;
+  width:50px;
+  margin: auto;
+  padding-top:40px;
+
+}
+.loading-dots {
+  width:10px;
+  height:10px;
+  background:#FFF;
+  border-radius:100%;
+  float:left;
+  margin-right:5px;
+}
+.dot-1 {
+    -webkit-animation:bounce 1s infinite;
+    -webkit-animation-delay:.1s;
+    background:#009DC6
+  
+}
+.dot-1{
+    -webkit-animation:bounce 1s infinite;
+    -webkit-animation-delay:.3s;
+    background:#e8b440;
+}
+.dot-2{
+    -webkit-animation:bounce 1s infinite ease;
+    -webkit-animation-delay:.5s;
+    background:#b62327;
+}
+@-webkit-keyframes bounce {
+  0%, 100% {
+    opacity:1;
+  }
+  60% {
+    opacity:.0;
+   
+  }
+}
