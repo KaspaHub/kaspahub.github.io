@@ -1016,6 +1016,8 @@ article table tr:hover {
 footer::after {
 	font-size: 14px;
 	content: "© 2026 Kaspa Hub – v2.3";
+	color: #6C757D;
+	opacity: 0.9;
 }
 
 footer {
@@ -1032,7 +1034,7 @@ footer {
 }
 
 .social, .resources {
-	color: #6c757d;
+	color: #6C757D;
 	opacity: 0.9;
 	font-size: 0.9rem;
 }
