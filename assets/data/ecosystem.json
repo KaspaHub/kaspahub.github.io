@@ -2093,7 +2093,7 @@
   "features": ["solutions"]
 },
 {
-  "name": "REST-API",
+  "name": "Kaspa REST API",
   "description": "The REST-API server for the Kaspa network, providing an HTTP interface to interact with Kaspa nodes. It allows developers to build applications that communicate with the Kaspa blockchain using standard HTTP methods.",
   "link": "http://api.kaspa.org/docs",
   "logo": "/assets/logos/rest-api.webp",
