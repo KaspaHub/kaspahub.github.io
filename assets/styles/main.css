@@ -1023,8 +1023,7 @@ footer::after {
 footer {
 	background-color: var(--input-bg-color);
 	min-height: 300px;
-	max-width: 100vw;
-	min-width: 100vw;
+	width: 100%;
 	margin: 0;
 	padding: 20px;
 	gap: 20px;
@@ -1033,7 +1032,7 @@ footer {
 	grid-template-columns: repeat(4, 1fr);
 }
 
-.social, .resources {
+.resources {
 	color: #6C757D;
 	opacity: 0.9;
 	font-size: 0.9rem;
@@ -1093,9 +1092,15 @@ footer {
 .mobile-only {
 	display: none !important;
 }
-@media (max-width: 800px) {
+@media (max-aspect-ratio: 1/1) {
 	footer {
 		grid-template-columns: 1fr;
+		padding: 20px 0;
+	}
+	.resources {
+		min-width: 0;
+		max-width: 100%;
+		padding: 0 7px;
 	}
 	.mobile-only {
 		display: initial !important;
