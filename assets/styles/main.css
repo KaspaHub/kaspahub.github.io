@@ -273,6 +273,7 @@ nav {
 
 #container-1 {
 	max-width: 1000px;
+	padding-bottom: 100px;
 }
 
 #container-2 {
@@ -1019,7 +1020,6 @@ footer::after {
 
 footer {
 	min-height: 300px;
-	max-height: 400px;
 	overflow: hidden;
 	color: #6c757d;
 	opacity: 0.9;

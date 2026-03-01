@@ -216,7 +216,7 @@ display_name: (value) => {
 username: (value) => {
     if (!value) return true;
     const regex = /^[a-zA-Z0-9_]{1,30}$/;
-    return regex.test(value) ? true : 'Username must be 1–30 characters (letters, numbers, underscores only)';
+    return regex.test(value) ? true : 'Username must be 1-30 characters (letters, numbers, underscores only)';
 },
 about: (value) => {
     if (!value) return true;
@@ -257,24 +257,24 @@ website: (value) => {
 kaspa: (value) => {
     if (!value) return true;
     if (!value.startsWith('kaspa:')) return 'Kaspa address must start with kaspa:';
-    if (value.length < 30 || value.length > 90) return 'Kaspa address must be 30–90 characters';
+    if (value.length < 30 || value.length > 90) return 'Kaspa address must be 30-90 characters';
     return true;
 },
 kns: (value) => {
     if (!value) return true;
     if (!value.endsWith('.kas')) return 'KNS domain must end with .kas';
-    if (value.length < 1 || value.length > 68) return 'KNS domain must be 1–68 characters total';
+    if (value.length < 1 || value.length > 68) return 'KNS domain must be 1-68 characters total';
     const regex = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.kas$/;
     return regex.test(value) ? true : 'Invalid KNS domain format (e.g., example.kas)';
 },
 nip05: (value) => {
     if (!value) return true;
-    if (value.length < 5 || value.length > 100) return 'NIP-05 must be 5–100 characters';
+    if (value.length < 5 || value.length > 100) return 'NIP-05 must be 5-100 characters';
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ? true : 'Invalid NIP-05 format (e.g., user@domain.com)';
 },
 lud16: (value) => {
     if (!value) return true;
-    if (value.length < 5 || value.length > 128) return 'Lightning address/LNURL must be 5–128 characters';
+    if (value.length < 5 || value.length > 128) return 'Lightning address/LNURL must be 5-128 characters';
     const isEmailLike = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
     const isLnurl = value.toUpperCase().startsWith('LNURL');
     return isEmailLike || isLnurl ? true : 'Invalid Lightning address or LNURL format';
