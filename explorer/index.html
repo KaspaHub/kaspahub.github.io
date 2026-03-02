@@ -11,13 +11,13 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 
-<title>Kaspa Block Explorer - Kaspa Hub</title>
-<meta name="twitter:title" content="Kaspa Block Explorer - Kaspa Hub" />
-<meta property="og:title" content="Kaspa Block Explorer - Kaspa Hub" />
+<title>Could K Social Replace Nostr, Bluesky, and Mastodon? | Kaspa On-Chain Social</title>
+<meta name="twitter:title" content="Could K Social Replace Nostr, Bluesky, and Mastodon?" />
+<meta property="og:title" content="Could K Social on Kaspa Replace Nostr, Bluesky, and Mastodon?" />
 
-<meta name="description" content="Explore the Kaspa blockchain in real-time. Search for wallet addresses, transactions, blocks, KRC20 tokens, and .kas domains using official Kaspa API data." />
-<meta name="twitter:description" content="Search Kaspa blockchain for addresses, tx IDs, block hashes, tokens, and domains. Get accurate, up-to-date results powered by the official Kaspa API." />
-<meta property="og:description" content="Instantly query Kaspa network data: wallet balances, transaction details, block information, KRC20 tokens, and .kas domains. Secure and fast." />
+<meta name="description" content="Discover if K Social, the decentralized microblogging app built on Kaspa's blockDAG, could replace Nostr, Bluesky, and Mastodon with true immutability, single-ledger data, spam-resistant fees, and censorship resistance." />
+<meta name="twitter:description" content="K Social brings on-chain social networking to Kaspa. Explore its advantages over Nostr, Bluesky, Mastodon and potential to redefine decentralized social media." />
+<meta property="og:description" content="Is K Social the future of uncensored social media? Learn how Kaspa-powered K Social solves fragmentation, spam, and censorship issues plaguing Nostr, Bluesky, and Mastodon." />
 
 <link rel="canonical" href="https://kaspahub.org/explorer/" />
 <meta name="twitter:url" content="https://kaspahub.org/explorer/" />
@@ -33,15 +33,16 @@
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+
 </head>
 
 <body>
 
-<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script>
+<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script><script src="/assets/scripts/explorer.js" defer></script>
 
 <main id="container-1">
 <div class="intro">
-    <h1>Coming Soon!</h1>
+    <h1>Kaspa Explorer</h1>
     <p class="hint">Explore Kaspa transactions, wallets, tokens, domains, and more.</p>
 </div>
 
@@ -117,10 +118,7 @@ function sanitize(query) {
   return query;
 }
 
-async function handleSearch() {
-
-  let query = searchQueryInput.value;
-  query = sanitize(query);
+async function handleSearch(query) {
 
   if (validators.invalidFormet(query)) {
     return false;
@@ -135,7 +133,8 @@ async function handleSearch() {
       return 'Kaspa Name Service (.kas): ' + query;
     }
     if (validators.isDomainName(query)) {
-     return 'Web domain: ' + query;
+     showReviews(query);
+     return true;
     }
   }
 
@@ -160,8 +159,10 @@ async function handleSearch() {
 async function runSearch() {
   checking.classList.remove('hidden');
   setStatus(false);
+  results.innerHTML = '';
+  results.hidden = true;
 
-  let query = searchQueryInput.value;
+  let query = sanitize(searchQueryInput.value);
 
   const newUrl = new URL(window.location);
   if (query) {
@@ -172,18 +173,23 @@ async function runSearch() {
   history.pushState({}, '', newUrl);
 
   try {
-    const result = await handleSearch();
+    const response = await handleSearch(query);
     
-    if (result === false) {
+    if (response === true) {
+      console.log('[runSearch] Response is true.');
+    } else if (response === false) {
       setStatus('Invalid search query.');
-      console.log('[runSearch] Invalid query: empty, too long, or contains invalid characters: ', result);
-    } else if (typeof result === "string") {
-      console.log('[runSearch] Success:', result);
+      console.log('[runSearch] Invalid query: empty, too long, or contains invalid characters:', response);
+    } else if (typeof response === "string") {
+      results.innerHTML = response;
+      results.hidden = false;
+      console.log('[runSearch] Success:', response);
+      setStatus('This feature is not yet supported.');
     } else {
       setStatus('Unknown error, please send console log to developer. :)');
-      console.log('[runSearch] Unknown error: ', result);
+      console.log('[runSearch] Unknown error:', response);
     }
-    
+      
   } catch (error) {
     setStatus('Error executing search, please try again.');
     console.log('[runSearch] Exception thrown: ', error);

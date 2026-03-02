@@ -300,3 +300,34 @@ form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6p
    
   }
 }
+
+/* reviews v */
+/*th {
+    background-color: #b3b3b3;
+    width: 33%;
+    color: black;
+}
+table tr:nth-child(odd) {
+    background-color: #dddddd0f;
+}
+table tr:nth-child(even) {
+    background-color: #dddddd2e;
+}*/
+.star {
+    display: inline-block;
+    background: url(/assets/icons/star.svg) no-repeat center;
+    
+    width: 1em;
+    height: 1em;
+    margin-right: 0.2em;
+    margin-top: 3px;
+}
+
+.star.empty {
+    filter: grayscale(100%) brightness(65%);
+}
+
+.info-bubble {
+    cursor: pointer;
+    font-size: 1em;
+}
