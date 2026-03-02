@@ -157,10 +157,19 @@ async function handleSearch() {
   return false;
 }
 
-
 async function runSearch() {
   checking.classList.remove('hidden');
   setStatus(false);
+
+  let query = searchQueryInput.value;
+
+  const newUrl = new URL(window.location);
+  if (query) {
+    newUrl.searchParams.set('query', query);
+  } else {
+    newUrl.searchParams.delete('query');
+  }
+  history.pushState({}, '', newUrl);
 
   try {
     const result = await handleSearch();
@@ -185,7 +194,17 @@ async function runSearch() {
 }
 
 let throttle = false;
-window.addEventListener('DOMContentLoaded', () => searchQueryInput.focus());
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('query') && urlParams.get('query')) {
+      searchQueryInput.value = urlParams.get('query');
+      console.log('filled');
+  }
+  searchQueryInput.focus();
+  if (searchQueryInput.value) {
+    runSearch();
+  }
+});
 
 searchQueryInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && !throttle) {
