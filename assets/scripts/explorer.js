@@ -171,9 +171,6 @@ async function loadAddress(searchQuery) {
     const h = String(hash ?? "");
     return h.length > 16 ? h.slice(0, 14) + "..." : h;
   }
-  function escHtml(s) {
-    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
   function walletUrl(addr) {
     const a = String(addr ?? "").trim();
     return a ? WALLET_BASE + a : "#";

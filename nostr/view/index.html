@@ -68,14 +68,15 @@ pre {
 
 <main id="container-0">
 
-    <section id="login-section" class="theme-1 section">
-        <div class="w-header">
-          <span>Nostr Raw Data Viewer</span>
-          <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
+<section id="login-section" class="theme-1 section">
 
-        <p for="public-key">Public Key (npub or hex):</p>
-        <input type="text" id="public-key" placeholder="Enter your public key">
+    <div class="w-header">
+      <span>Nostr Raw Data Viewer</span>
+      <a class="w-close" draggable="false" href="/nostr/"></a>
+    </div>
+
+    <p for="public-key">Public Key (npub or hex):</p>
+    <input type="text" id="public-key" placeholder="Enter your public key">
 
     <div class="w-footer">
         <p>
@@ -85,18 +86,19 @@ pre {
         <button class="button" id="fetch-btn" onclick="fetchEvents()" ><span id="spinner-button" class="spinner fade-in hidden"></span> Fetch Events</button>
     </div>
 
-        <div id="error"></div>
-    </section>
+    <div id="error"></div>
+</section>
 
-    <section id="profile-section" class="section theme-1 hidden">
-        <div class="w-header">
-          <span>Nostr Raw Data Viewer</span>
-          <a draggable="false" href="/nostr/view/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
+<section id="profile-section" class="section theme-1 hidden">
 
-        <p id="profile-title">All Raw User Events by Relay</p>
-        <div id="profiles"></div>
-    </section>
+    <div class="w-header">
+      <span>Nostr Raw Data</span>
+      <a class="w-close" draggable="false" href="/nostr/view/"></a>
+    </div>
+
+    <p id="profile-title">All Raw User Events by Relay</p>
+    <div id="profiles"></div>
+</section>
 
 </main>
 

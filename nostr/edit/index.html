@@ -48,83 +48,83 @@ label { display: block; margin-block-start: 0.7em; margin-block-end: 0.7em; }
 
 <main id="container-0">
 
-    <section id="login-section" class="theme-1 section">
-        <div class="w-header">
-            <span>Nostr Login</span>
-            <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
+<section id="login-section" class="theme-1 section">
+    <div class="w-header">
+      <span>Nostr Login</span>
+      <a class="w-close" draggable="false" href="/nostr/"></a>
+    </div>
 
-        <p for="private-key">Private Key (nsec or hex):</p>
-        <input autocomplete="off" type="text" id="private-key" placeholder="Enter your private key">
+    <p for="private-key">Private Key (nsec or hex):</p>
+    <input autocomplete="off" type="text" id="private-key" placeholder="Enter your private key">
 
-        <div class="w-footer">
-            <p>No account? <a href="/nostr/register/">Sign up</a></p>
-            <button id="login-button" onclick="login()" class="button"><span id="spinner-button" class="spinner fade-in hidden"></span> Login</button>
-        </div>
+    <div class="w-footer">
+        <p>No account? <a href="/nostr/register/">Sign up</a></p>
+        <button id="login-button" onclick="login()" class="button"><span id="spinner-button" class="spinner fade-in hidden"></span> Login</button>
+    </div>
 
-        <div id="error"></div>
-    </section>
+    <div id="error"></div>
+</section>
 
-    <section id="profile-section" class="theme-1 section hidden">
+<section id="profile-section" class="theme-1 section hidden">
 
-        <div class="w-header">
-            <span>Nostr Account</span>
-            <a draggable="false" href="/nostr/edit/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
+    <div class="w-header">
+        <span>Nostr Account</span>
+        <a draggable="false" href="/nostr/edit/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
+    </div>
 
-        <label for="display_name">Display Name:</label>
-        <input type="text" id="display_name" placeholder="Your display name">
-        <div id="display_name-error" class="error-message"></div>
+    <label for="display_name">Display Name:</label>
+    <input type="text" id="display_name" placeholder="Your display name">
+    <div id="display_name-error" class="error-message"></div>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Your @username">
-        <div id="username-error" class="error-message"></div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Your @username">
+    <div id="username-error" class="error-message"></div>
 
-        <label for="about">About:</label>
-        <textarea id="about" placeholder="About you"></textarea>
-        <div id="about-error" class="error-message"></div>
+    <label for="about">About:</label>
+    <textarea id="about" placeholder="About you"></textarea>
+    <div id="about-error" class="error-message"></div>
 
-        <label for="picture">
-          Profile Picture URL 
-          <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤1MB, recommended 256×256px)</small>:
-        </label>
-        <input type="text" id="picture" placeholder="Profile picture URL">
-        <div id="picture-error" class="error-message"></div>
+    <label for="picture">
+      Profile Picture URL 
+      <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤1MB, recommended 256×256px)</small>:
+    </label>
+    <input type="text" id="picture" placeholder="Profile picture URL">
+    <div id="picture-error" class="error-message"></div>
 
-        <label for="banner">
-          Banner Image URL 
-          <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤2MB, recommended 1500×500px)</small>:
-        </label>
-        <input type="text" id="banner" placeholder="Banner image URL">
-        <div id="banner-error" class="error-message"></div>
+    <label for="banner">
+      Banner Image URL 
+      <small style="opacity: 0.8;">(PNG/JPG/WebP, ≤2MB, recommended 1500×500px)</small>:
+    </label>
+    <input type="text" id="banner" placeholder="Banner image URL">
+    <div id="banner-error" class="error-message"></div>
 
-        <label for="website">Website URL:</label>
-        <input type="text" id="website" placeholder="e.g., https://domain.com">
-        <div id="website-error" class="error-message"></div>
+    <label for="website">Website URL:</label>
+    <input type="text" id="website" placeholder="e.g., https://domain.com">
+    <div id="website-error" class="error-message"></div>
 
-        <label for="kaspa">Kaspa Wallet Address:</label>
-        <input type="text" id="kaspa" placeholder="e.g., kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m">
-        <div id="kaspa-error" class="error-message"></div>
+    <label for="kaspa">Kaspa Wallet Address:</label>
+    <input type="text" id="kaspa" placeholder="e.g., kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m">
+    <div id="kaspa-error" class="error-message"></div>
 
-        <label for="kns">Kaspa KNS Domain:</label>
-        <input type="text" id="kns" placeholder="e.g., domain.kas">
-        <div id="kns-error" class="error-message"></div>
+    <label for="kns">Kaspa KNS Domain:</label>
+    <input type="text" id="kns" placeholder="e.g., domain.kas">
+    <div id="kns-error" class="error-message"></div>
 
-        <label for="nip05">Verified Nostr Address (NIP-05 ID):</label>
-        <input type="text" id="nip05" placeholder="e.g., user@domain.com">
-        <div id="nip05-error" class="error-message"></div>
+    <label for="nip05">Verified Nostr Address (NIP-05 ID):</label>
+    <input type="text" id="nip05" placeholder="e.g., user@domain.com">
+    <div id="nip05-error" class="error-message"></div>
 
-        <label for="lud16">Bitcoin Lightning Address (or LNURL)</label>
-        <input type="text" id="lud16" placeholder="e.g., user@domain.com">
-        <div id="lud16-error" class="error-message"></div>
+    <label for="lud16">Bitcoin Lightning Address (or LNURL)</label>
+    <input type="text" id="lud16" placeholder="e.g., user@domain.com">
+    <div id="lud16-error" class="error-message"></div>
 
-        <div class="w-footer">
-            <p><a id="link">View Profile</a></p>
-            <button id="save-button" onclick="saveProfile()" class="button" disabled><span id="save-spinner" class="spinner fade-in hidden"></span>Save Profile</button>
-        </div>
+    <div class="w-footer">
+        <p><a id="link">View Profile</a></p>
+        <button id="save-button" onclick="saveProfile()" class="button" disabled><span id="save-spinner" class="spinner fade-in hidden"></span>Save Profile</button>
+    </div>
 
-        <div id="status"></div>
-    </section>
+    <div id="status"></div>
+</section>
 
 </main>
 

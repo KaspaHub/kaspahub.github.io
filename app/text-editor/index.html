@@ -67,11 +67,10 @@
 
 <div class="theme-1">
 
-<div class="w-header">
-    <a draggable="false" href="/apps/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10" /></svg></a>
-    <label>Text Editor</label>
-    <button id="save"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="gray"><circle cx="10" cy="10" r="10" /></svg></button>
-</div>
+    <div class="w-header">
+        <span>Text Editor</span>
+        <a class="w-close" draggable="false" href="/apps/"></a>
+    </div>
 
     <div id="toolbar">
         <button class="ebtn" id="clear"></button>
@@ -136,16 +135,18 @@
     <div id="editor" contenteditable="true"><p><br><p></div>
     <textarea id="code-view"></textarea>
 
-<div style="display: flex; justify-content: space-between;">
-    <input type="checkbox" id="formatting" data-feature="formatting">
-    <label for="formatting" style="scale: 0.9">Formatting</label>
-    <p id="htmlCounter" style="font-size: 0.8em; color: #757575;">
-        <span id="charCount">0</span> characters,
-        <span id="wordCount">0</span> words
-    </p>
-</div>
+    <div style="display: flex; justify-content: space-between;">
+        <input type="checkbox" id="formatting" data-feature="formatting">
+        <label for="formatting" style="scale: 0.9">Formatting</label>
+        <p id="htmlCounter" style="font-size: 0.8em; color: #757575;">
+            <span id="charCount">0</span> characters,
+            <span id="wordCount">0</span> words
+        </p>    <button id="save" class="button">Save</button>
 
-</div>
+    </div>
+
+    </div>
+
 
 
 </div>
@@ -237,9 +238,7 @@
     border-bottom-left-radius: 0 !important;
 }
 
-#toolbar button:hover, #toolbar select:hover, #toolbar input:hover {
-    filter: opacity(0.7);
-}
+
 #toolbar .tool-group {
     display: flex;
     align-items: center;
@@ -285,6 +284,22 @@ select:disabled, button:disabled, input:disabled {
 /*#undo {background-image: url(assets/img/undo.png);}
 #redo {background-image: url(assets/img/redo.png);}*/
 
+
+
+html#light {
+    --filter: none;
+}
+
+html#dark {
+    --filter: invert(1);
+}
+
+#toggleCode, .ebtn:not(input[type="color"]) {
+    filter: var(--filter);
+}
+#toolbar button:hover, #toolbar select:hover, #toolbar input:hover {
+    border: 1px solid black;
+}
 </style>
 
 <script src="https://kaspahub.org/assets/scripts/jquery.js"></script>

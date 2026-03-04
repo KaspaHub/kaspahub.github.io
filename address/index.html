@@ -33,6 +33,7 @@
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@latest/qrcode.min.js" defer></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@
 <main id="container-1">
   <section class="pageHead">
     <div id="walletHeader">
-      <img id="qrCode" class="avatar" alt="" />
+      <div class="qrCode avatar" onclick="showWalletPopup('asdasdasd')"></div>
       <div style="max-width: 100%; overflow: hidden;">
         <h1 id="hdrLine">Kaspa Wallet Address</h1>
         <div class="sub" id="hdrSub">-</div>

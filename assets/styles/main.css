@@ -131,6 +131,7 @@ html#dark {
 .muted {
 	color: inherit;
 	opacity: 0.8;
+	user-select: none;
 }
 
 h1 {font-size: 2em;}
@@ -480,6 +481,7 @@ img {
 }
 
 pre {
+	font-family: Consolas;
 	background-color: rgba(45,55,60, 0.9);
 	color: #CED7E5;
 	font-size: 1.1rem;
@@ -897,26 +899,50 @@ article table tr:hover {
 }
 
 /* w */
-.close {
-	color: inherit !important;
-	opacity: 0.9;
-	float: right;
-	transform: rotate(45deg);
-	width: 1.2rem;
-	height: 1.2rem;
+dialog {
+	max-width: 100%;
+	min-width: 100px;
+	width: 300px;
 }
+
+.w-container {
+   justify-items: stretch;
+/*align-items: flex-start;*/
+}
+
 .w-header {
 	display: flex;
 	justify-content: space-between;
 	vertical-align: baseline;
 	border-bottom: 2px solid #757575;
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: 600;
-	opacity: 0.75;
+	opacity: 0.8;
 	margin-bottom: 20px;
-	max-height: 47px;
-	min-height: 47px;
+	max-height: 37px;
+	min-height: 37px;
+	user-select: none;
 }
+
+.w-close {
+	background-image: url("data:image/svg+xml;utf8,<svg fill='%23EC6A5E' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' width='20' height='20' ><circle cx='10' cy='10' r='10'/></svg>");	
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 20px;
+	height: 20px;
+	float: right;
+	cursor: pointer;
+}
+
+.w-message {
+	user-select: none;
+}
+
+.w-data {
+	font-size: 14px;
+}
+
 .w-footer {
 	display: flex;
 	justify-content: space-around;
@@ -977,8 +1003,6 @@ article table tr:hover {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-
-/*18.01*/
 .item-header {
 	display: flex;
 	justify-content: space-between;
