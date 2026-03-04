@@ -56,7 +56,9 @@
     </div>
   </div>
 
-  <section class="grid-1" aria-label="Summary">
+  <section id="pageData">
+
+  <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
       <h3>Summary</h3>
       <div class="rows">
@@ -76,7 +78,12 @@
         <div class="row"><div class="k">Accepting Block Time</div><div class="v" id="acceptingBlockTime">-</div></div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="theme-1" id="transfersBox" aria-label="Transaction Summary">
+    <h3>Transfers</h3>
+    <div id="txSummaries"></div>
+  </div>
 
   <div class="tabs" role="tablist" aria-label="Transaction tabs">
     <button class="tab active" data-tab="tabIO">Inputs & Outputs</button>
@@ -84,7 +91,7 @@
     <button class="tab" data-tab="tabPayload">Payload</button>
   </div>
 
-  <section id="tabIO" class="tabPanel active" aria-label="Inputs & Outputs panel">
+  <div id="tabIO" class="tabPanel active" aria-label="Inputs & Outputs panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Inputs & Outputs</h3>
       <div id="ioLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
@@ -105,23 +112,25 @@
         </table>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="tabDetails" class="tabPanel" aria-label="Details panel">
+  <div id="tabDetails" class="tabPanel" aria-label="Details panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Details</h3>
       <div class="rows" id="detailsRows">
         <div class="row"><div class="k">-</div><div class="v">-</div></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="tabPayload" class="tabPanel" aria-label="Payload panel">
+  <div id="tabPayload" class="tabPanel" aria-label="Payload panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Payload</h3>
       <div class="muted" id="payloadContent">-</div>
     </div>
+  </div>
   </section>
+
 </main>
 
 <footer>
@@ -206,6 +215,7 @@
   const detailsRows = el("detailsRows");
 
   const payloadContent = el("payloadContent");
+  const txSummaries = el("txSummaries");
 
   const notification = el("notification");
   const notificationMsg = el("notificationMsg");
@@ -306,7 +316,7 @@
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
 
-    const resolvePromises = json.inputs.map(async (inp) => {
+    const resolvePromises = (json.inputs || []).map(async (inp) => {
       if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
         const prevUrl = `${API_BASE}/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
         const prevRes = await fetch(prevUrl);
@@ -349,19 +359,95 @@
         totalOut += BigInt(out.amount || 0);
       });
     }
-    return { totalIn, totalOut, fee: totalIn - totalOut };
+    return { totalIn, totalOut, fee: totalIn ? totalIn - totalOut : 0n };
   }
 
   function renderSummary(json, totals, inputs, outputs) {
     totalSent.textContent = formatKas(totals.totalOut, true);
     fee.textContent = formatKas(totals.fee, true);
-    ioCount.textContent = `${inputs.length} / ${outputs.length}`;
+    ioCount.textContent = `${(inputs || []).length} / ${outputs.length}`;
     status.textContent = json.is_accepted ? "Confirmed" : "Pending";
 
     massEl.textContent = withSeparators(json.mass) || "-";
     blueScore.textContent = withSeparators(json.accepting_block_blue_score) || "-";
     blockTime.textContent = json.block_time ? new Date(Number(json.block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
     acceptingBlockTime.textContent = json.accepting_block_time ? new Date(Number(json.accepting_block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
+  }
+
+  function renderTransfers(json, totals) {
+    let html = '';
+    const isCoinbase = !json.inputs || json.inputs.length === 0;
+
+    if (isCoinbase) {
+      if (Array.isArray(json.outputs) && json.outputs.length > 0) {
+        json.outputs.forEach((out) => {
+          const addr = out.script_public_key_address ?? "-";
+          const amt = out.amount ?? 0;
+          html += `<p class="k">Block reward to ${linkAddress(addr)} for ${formatKas(amt, true)}</p>`;
+        });
+      } else {
+        html += `<p class="k">Block reward</p>`;
+      }
+    } else {
+      const inputMap = new Map();
+      (json.inputs || []).forEach((inp) => {
+        const addr = inp.previous_outpoint_address;
+        if (addr) {
+          const amt = BigInt(inp.previous_outpoint_amount || 0);
+          inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
+        }
+      });
+
+      const outputMap = new Map();
+      (json.outputs || []).forEach((out) => {
+        const addr = out.script_public_key_address;
+        if (addr) {
+          const amt = BigInt(out.amount || 0);
+          outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
+        }
+      });
+
+      const inputKeys = Array.from(inputMap.keys());
+      const outputKeys = Array.from(outputMap.keys());
+
+      const isSelfTx = inputMap.size === 1 && outputMap.size === 1 && inputKeys[0] === outputKeys[0];
+
+      if (isSelfTx) {
+        let label = "Self";
+        if (json.payload && String(json.payload).length > 50) {
+          label += " (dApp interaction)";
+        }
+        html += `<p class="k">${label} for ${formatKas(totals.fee, true)}</p>`;
+      } else {
+        const isSingleSender = inputMap.size === 1;
+        inputMap.forEach((inAmt, fromAddr) => {
+          const changeAmt = outputMap.get(fromAddr) || 0n;
+          let transferredAmt = isSingleSender
+            ? totals.totalOut - changeAmt
+            : inAmt - changeAmt;
+
+          if (transferredAmt <= 0n) return;
+
+          const externalReceivers = outputKeys.filter(a => a !== fromAddr);
+          let toHtml = "";
+          if (externalReceivers.length === 1) {
+            toHtml = ` to ${linkAddress(externalReceivers[0])}`;
+          } else if (externalReceivers.length > 1) {
+            toHtml = ` to multiple addresses`;
+          } else {
+            return;
+          }
+
+          html += `<p class="k">From ${linkAddress(fromAddr)}${toHtml} for ${formatKas(transferredAmt, true)}</p>`;
+        });
+      }
+    }
+
+    if (html === "") {
+      html = `<p class="k muted">No transfers to summarize</p>`;
+    }
+
+    txSummaries.innerHTML = html;
   }
 
   function renderIORows(inputs, outputs, txid) {
@@ -452,12 +538,11 @@
       return;
     }
     payloadContent.innerHTML = `<pre>${escHtml(payload)}</pre>`;
-    // Attempt human readable
     try {
       const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
       const text = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
       if (text.trim()) {
-        payloadContent.innerHTML += `<div class="muted">Human readable (UTF-8): ${escHtml(text)}</div>`;
+        payloadContent.innerHTML += `<h3>UTF-8</h3><pre>${escHtml(text)}</pre>`;
       }
     } catch {}
   }
@@ -498,6 +583,7 @@
 
     renderHeader(txid);
     renderSummary(json, totals, json.inputs, json.outputs);
+    renderTransfers(json, totals);
     renderIORows(json.inputs, json.outputs, txid);
     renderDetails(json, json.inputs, json.outputs);
     renderPayload(json.payload);
@@ -516,6 +602,7 @@
     blueScore.textContent = "-";
     blockTime.textContent = "-";
     acceptingBlockTime.textContent = "-";
+    txSummaries.innerHTML = "";
     ioRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
     detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
     payloadContent.textContent = "-";

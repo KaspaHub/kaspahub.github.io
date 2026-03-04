@@ -40,6 +40,7 @@
   -webkit-appearance: none;
   border: none;
   outline: none;
+  display: none;
 }
 /* Search + Buttons */
 .searchRow{
@@ -199,6 +200,10 @@ tr:hover td{ background:rgba(255,255,255,.03); }
   margin-top:10px;
 }
 
+#transfersBox {
+  margin-top: 12px;
+}
+
 /* Links */
 
 @media (max-width:800px){
@@ -215,7 +220,7 @@ h1 { margin: 0 0 6px; font-weight: 700; letter-spacing: 0.2px; }
 p.hint { margin: 0 0 16px; font-size: 0.95rem; }
 form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 6px; }
 
-.results { margin-top: 18px; display: grid; gap: 12px; }
+.results { margin-top: 18px; }
 .row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; }
 .label { font-size: 0.95rem; margin: 7px; }
 .value { font-weight: 650; font-size: 1.05rem; word-break: break-all; }

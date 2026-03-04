@@ -33,79 +33,7 @@
 <meta name="kaspa:title" content="@KaspaHub is accepting donations!" />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
-<style type="text/css">
-
-input[type=text] {
-	width: 100%;
-	padding: 10px;
-	font-size: 16px;
-}
-
-button {
-	padding: 10px 15px;
-}
-
-article {
-	margin: 50px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-th, td {
-	padding: 8px;
-	text-align: center;
-}
-th {
-	background-color: #b3b3b3;
-	width: 33%;
-	color: black;
-}
-table tr:nth-child(odd) {
-	background-color: #dddddd0f;
-}
-table tr:nth-child(even) {
-	background-color: #dddddd2e;
-}
-
-table tr:hover {
-	background-color: rgba(100, 100, 100, 0.1);
-}
-
-.positive { color: green; font-weight: bold; }
-.negative { color: red; font-weight: bold; }
-/*.neutral	{ color: gray; }*/
-
-#searchContainer {
-	display: flex;
-	flex-direction: row;
-}
-
-#searchContainer > * {
-	margin: 10px;
-}
-
-.star {
-	display: inline-block;
-	background: url(/assets/icons/star.svg) no-repeat center;
-	
-	width: 1em;
-	height: 1em;
-	margin-right: 0.2em;
-	margin-top: 3px;
-}
-
-.star.empty {
-	filter: grayscale(100%) brightness(65%);
-}
-
-.info-bubble {
-	cursor: pointer;
-	font-size: 1em;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 
 </head>
 
@@ -129,7 +57,7 @@ table tr:hover {
 	<button class="button" id="searchBtn">Search</button>
 </div>
 
-<div id="results"><div class="fade-in" id="loading"><span class="spinner"></span><span>Fetching data…</span></div></div>
+<div id="pageData"><div class="fade-in" id="loading"><span class="spinner"></span><span>Fetching data…</span></div></div>
 
 <script type="module">
 const reviewers = [
@@ -140,7 +68,7 @@ const reviewers = [
 let dataReady = false;
 
 async function preloadReviewers() {
-	const resultsEl = document.getElementById("results");
+	const resultsEl = document.getElementById("pageData");
 	for (let reviewer of reviewers) {
 		reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
 	}
@@ -211,11 +139,11 @@ async function runSearch() {
 
 	const validation = validateDomain(query);
 	if (!validation.valid) {
-		document.getElementById("results").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
+		document.getElementById("pageData").innerHTML = `<span style="margin: 10px;">${validation.reason}</span>`;
 		return;
 	}
 
-	document.getElementById("results").innerHTML = "Loading...";
+	document.getElementById("pageData").innerHTML = "Loading...";
 	const allResults = [];
 
 	for (let reviewer of reviewers) {
@@ -265,7 +193,7 @@ for (let r of allResults) {
 
 	html += `</table>`;
 
-	document.getElementById("results").innerHTML = html;
+	document.getElementById("pageData").innerHTML = html;
 }
 
 preloadReviewers();
