@@ -30,6 +30,16 @@ const validators = {
   isEvmAddress: (query) => query.startsWith('0x') && query.length === 42
 };
 
+function setLoading(value) {
+
+    if (value) {
+        results.innerHTML = '<div id="fetching" class="loading-2"><div class="loading-dots dot-1"></div><div class="loading-dots dot-2"></div><div class="loading-dots dot-3"></div></div>';
+    } else {
+        results.innerHTML = '';
+        console.log("It's false!");
+    }
+
+}
 
 function setStatus(value) {
   if (value === false) {
