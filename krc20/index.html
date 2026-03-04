@@ -103,6 +103,7 @@
   <button class="tab active" data-tab="tabHolders">Holders</button>
   <button class="tab" data-tab="tabTransfers">Transfers</button>
   <button class="tab" data-tab="tabInfo">Info</button>
+  <button class="tab" data-tab="tabMarkets">Markets</button>
 </div>
 
 <section id="tabHolders" class="tabPanel active" aria-label="Holders panel">
@@ -173,6 +174,27 @@
     </div>
   </div>
 </section>
+
+<section id="tabMarkets" class="tabPanel" aria-label="Markets panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>Markets</h3>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Price</th>
+            <th>Volume 24h</th>
+            <th>Market Cap</th>
+          </tr>
+        </thead>
+        <tbody id="marketRows">
+          <tr><td colspan="4" class="muted">-</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -230,9 +252,6 @@
 'use strict';
 (() => {
   const KASPLEX_BASE = "https://api.kasplex.org/v1";
-  const LCW_BASE = "https://api.livecoinwatch.com";
-  const LCW_KEY = "ce13b00b-db7e-4cf9-9781-ea0a65d69b7d";
-  const EXPLORER_BASE = "https://kaspa.stream";
 
   const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
 
@@ -275,6 +294,8 @@
   const iTo = el("iTo");
   const iUpdated = el("iUpdated");
 
+  const marketRows = el("marketRows");
+
   const txLoading = el("txLoading");
   const txRows = el("txRows");
   const prevTx = el("prevTx");
@@ -300,6 +321,8 @@
   let txOffset = 0;
 
   let tokenBurnedRaw = "0";
+
+  let tokenMarket = null;
 
   let holderList = [];
   let holderOffset = 0;
@@ -471,7 +494,7 @@
 
   function explorerTxUrl(hash){
     const h = String(hash ?? "").trim();
-    return h ? `${EXPLORER_BASE}/transactions/${encodeURIComponent(h)}` : "#";
+    return h ? `/transaction/?q=${encodeURIComponent(h)}` : "#";
   }
 
   function linkAddress(addr, label){
@@ -485,7 +508,7 @@
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if(!h) return "-";
-    return `<a class="explorerLink" href="${explorerTxUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+    return `<a class="explorerLink" href="${explorerTxUrl(h)}">${text}</a>`;
   }
 
   async function fetchKasplexToken(t){
@@ -525,21 +548,6 @@
     }catch{}
 
     return meta;
-  }
-
-  async function fetchLiveCoinWatchCoinSingle(code){
-    const res = await fetch(`${LCW_BASE}/coins/single`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": LCW_KEY
-      },
-      body: JSON.stringify({ currency: "USD", code: String(code || "").trim(), meta: false })
-    });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    if(!json || typeof json !== "object") throw new Error("Missing market data");
-    return json;
   }
 
   async function fetchOpList({ tick, next=null, prev=null }){
@@ -669,46 +677,12 @@
     }
   }
 
-  function renderPriceRow(row){
-    const usd = parseFloatSafe(row?.rate);
-    const vol = parseFloatSafe(row?.volume);
-    const chFactor = parseFloatSafe(row?.delta?.day);
-    const ch = chFactor == null ? null : (chFactor - 1) * 100;
-
-    priceUsd.textContent = formatUsd(usd);
-
-    priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
-    priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
-
-    priceVol.textContent = vol == null ? "-" : formatCompact(vol);
-
-    const circN = tokenToNumber(tokenCircRaw, tokenDec);
-    if(circN != null && usd != null){
-      mcap.textContent = formatUsd0(circN * usd);
-    }else{
-      mcap.textContent = "-";
-    }
-  }
-
   function renderPriceMissing(){
     priceUsd.textContent = "-";
     priceChg.textContent = "-";
     priceChg.style.color = "rgba(255,255,255,.70)";
     priceVol.textContent = "-";
     mcap.textContent = "-";
-  }
-
-  function getLiveCoinWatchCode(){
-    const v =
-      tokenMeta?.livecoinwatch ??
-      tokenMeta?.lcw ??
-      tokenMeta?.market?.livecoinwatch?.code ??
-      tokenMeta?.market?.lcw?.code ??
-      tokenMeta?.market?.livecoinwatch ??
-      tokenMeta?.market?.lcw ??
-      null;
-    const s = String(v || "").trim();
-    return s ? s : null;
   }
 
   function renderHoldersPage(){
@@ -822,6 +796,33 @@
     }
   }
 
+  function renderMarkets(){
+    if(!tokenMarket){
+      marketRows.innerHTML = `<tr><td colspan="4" class="muted">No markets listed.</td></tr>`;
+      return;
+    }
+    const mcapVal = parseFloatSafe(tokenMarket.marketCap);
+    const vol = parseFloatSafe(tokenMarket.volumeUsd);
+    const volFmt = vol == null ? "-" : formatCompact(vol);
+    const mcapFmt = mcapVal == null ? "-" : formatUsd0(mcapVal);
+    let priceFmt = "-";
+    const circN = tokenToNumber(tokenCircRaw, tokenDec);
+    if(mcapVal != null && circN != null && circN > 0){
+      const compUsd = mcapVal / circN;
+      priceFmt = formatUsd(compUsd);
+    }else if(tokenMarket.price != null){
+      priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
+    }
+    marketRows.innerHTML = `
+    <tr>
+      <td>kaspa.com</td>
+      <td class="right">${priceFmt}</td>
+      <td class="right">${volFmt}</td>
+      <td class="right">${mcapFmt}</td>
+    </tr>
+    `;
+  }
+
   async function runSearch(t){
     if(busy) return;
     busy = true;
@@ -842,7 +843,26 @@
 
     try{
       tokenInfo = await fetchKasplexToken(T);
-      tokenMeta = await fetchDirectoryMeta(T);
+
+      tokenMarket = null;
+      try{
+        const mres = await fetch("https://api.kaspa.com/api/market-data");
+        if(mres.ok){
+          const mjson = await mres.json();
+          if(Array.isArray(mjson)){
+            tokenMarket = mjson.find(r => safeUpper(r.ticker) === T);
+          }
+        }
+      }catch{}
+
+      tokenMeta = null;
+      if(!tokenMarket){
+        tokenMeta = await fetchDirectoryMeta(T);
+      }
+
+      if(tokenMarket && tokenMarket.logoUrl){
+        tokenLogo.src = tokenMarket.logoUrl;
+      }
 
       try{
         tokenBurnedRaw = await fetchBurnedAmountByAddress(T);
@@ -857,17 +877,35 @@
       txOffset = 0;
       await loadTransfers({ next:null, prev:null });
 
-      const lcwCode = getLiveCoinWatchCode();
-      if(!lcwCode){
-        renderPriceMissing();
-      }else{
-        try{
-          const row = await fetchLiveCoinWatchCoinSingle(lcwCode);
-          renderPriceRow(row);
-        }catch{
-          renderPriceMissing();
+      if(tokenMarket){
+        const mcapVal = parseFloatSafe(tokenMarket.marketCap);
+        const vol = parseFloatSafe(tokenMarket.volumeUsd);
+        const ch = parseFloatSafe(tokenMarket.changeMarketCap);
+        const circN = tokenToNumber(tokenCircRaw, tokenDec);
+        let usd = null;
+        if(mcapVal != null && circN != null && circN > 0){
+          usd = mcapVal / circN;
+        }else{
+          usd = parseFloatSafe(tokenMarket.price);
         }
+        priceUsd.textContent = formatUsd(usd);
+        priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
+        priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
+        priceVol.textContent = vol == null ? "-" : formatCompact(vol);
+        if(mcapVal != null){
+          mcap.textContent = formatUsd0(mcapVal);
+        }else{
+          if(circN != null && usd != null){
+            mcap.textContent = formatUsd0(circN * usd);
+          }else{
+            mcap.textContent = "-";
+          }
+        }
+      }else{
+        renderPriceMissing();
       }
+
+      renderMarkets();
 
       q.value = "";
     }catch(err){
