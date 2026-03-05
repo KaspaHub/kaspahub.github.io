@@ -910,8 +910,7 @@ dialog {
 }
 
 .w-container {
-	justify-items: center;
-	/*justify-items: stretch;*/
+	justify-items: stretch;
 /*align-items: flex-start;*/
 }
 
