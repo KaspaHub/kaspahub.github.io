@@ -215,8 +215,14 @@ display_name: (value) => {
 },
 username: (value) => {
     if (!value) return true;
-    const regex = /^[a-zA-Z0-9_]{1,30}$/;
-    return regex.test(value) ? true : 'Username must be 1-30 characters (letters, numbers, underscores only)';
+    const regex = /^(?!\.)(?!.*\.\.)[a-zA-Z0-9_.]{1,30}(?<!\.)$/;
+    const dotCount = (value.match(/\./g) || []).length;
+    
+    if (!regex.test(value) || dotCount > 1) {
+        return 'Username must be 1–30 characters, may include letters, numbers, underscores, and at most one dot (not at the start or end)';
+    }
+    
+    return true;
 },
 about: (value) => {
     if (!value) return true;
