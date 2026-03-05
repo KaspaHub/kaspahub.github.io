@@ -36,7 +36,7 @@ function setLoading(value) {
         results.innerHTML = '<div id="fetching" class="loading-2"><div class="loading-dots dot-1"></div><div class="loading-dots dot-2"></div><div class="loading-dots dot-3"></div></div>';
     } else {
         results.innerHTML = '';
-        console.log("It's false!");
+        console.log("[setLoading] It's " + value + "!");
     }
 
 }

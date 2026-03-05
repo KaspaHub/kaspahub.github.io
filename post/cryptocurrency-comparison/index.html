@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" id="">
+<html lang="en-US">
 
 <head>
 <meta charset="UTF-8" />
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
-<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
 <link rel="manifest" href="/assets/manifest.json" />
 
 <title>Comparison</title>
@@ -65,7 +66,9 @@
 
 <body>
 
-<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script>
+<nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+<script defer src="/assets/scripts/main.js"></script>
 
 <main id="container-2">
 
@@ -380,21 +383,12 @@
 </div>
 
 <div class="resources">
-<h4>Resources</h4>
-<ul class="section-list">
-<li><a href="https://kaspahub.org/post/about/">About</a></li>
-<li><a href="https://kaspahub.org/post/sitemap/">Sitemap</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
-<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
-</ul>
-</div>
-
-<div class="resources">
-<h4>Help improve</h4>
 <ul class="section-list">
 <li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
 <li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
 <li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
 </ul>
 </div>
 

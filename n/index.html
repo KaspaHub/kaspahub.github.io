@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" id="">
+<html lang="en-US">
 
 <head>
 <meta charset="UTF-8" />
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.3" />
-<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/assets/fonts/mulish.woff2" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
 <link rel="manifest" href="/assets/manifest.json" />
 
 <title>Kaspa Link</title>
@@ -19,11 +20,88 @@
 <meta name="twitter:url" content="https://kaspahub.org/n/" />
 <meta property="og:url" content="https://kaspahub.org/n/" />
 
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
-<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
-
 <meta name="twitter:site" content="@KaspaHub" />
+<meta name="twitter:creator" content="@KaspaHub" />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
+<meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+<script defer src="/assets/scripts/main.js?v=2.4"></script>
+
+<style>
+
+</style>
+
+<script>
+
+</script>
+<main id="container-0">
+
+    <section id="profile-section" class="theme-1 fade-in" style="display:none;">
+
+        <div style="display: flex; justify-content: space-between;">
+
+            <div style="display: flex; gap: 20px;">
+                <div id="picture"></div>
+                <div>
+                    <h1 id="display_name"></h1>
+                    <h3 id="name" style="opacity: 0.75;"></h3>
+                </div>
+            </div>
+
+            <div class="menu-button" id="menuButton">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="20" fill="#333"/>
+              <circle cx="10" cy="20" r="3" fill="#fff"/>
+              <circle cx="20" cy="20" r="3" fill="#fff"/>
+              <circle cx="30" cy="20" r="3" fill="#fff"/>
+            </svg>
+
+            <div class="popup-menu" id="popupMenu"></div>
+
+            </div>
+
+        </div>
+
+        <div id="about"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading data…</span></div></div>
+        <div id="qr-code" style="margin: 20px 0px; justify-content: space-around; display: flex; min-height: 100px;"></div>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <!-- <a class="button" id="open-button" style="display: none;" href="" target="_blank">Open Wallet</a> -->
+        </div>
+
+        <div id="error" style="color: red; margin-top: 10px;"></div>
+
+    </section>
+
+    <section id="search-section" class="theme-1" style="display:none;">
+        <div class="w-header">
+        <span>Donation Pages</span>
+        <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
+        </div>
+        <p>Please enter Nostr public key</p>
+        <input type="text" id="searchBox" placeholder="npub..." required="">
+        <div class="w-footer">
+            <p><a href="/nostr/register/">Create a donation page</a></p>
+            <button class="button" id="searchBtn">Search</button>
+        </div>
+    </section>
+
+</main>
+
+<div id="footer" style="text-align:center; padding:16px;">
+  <a href="/nostr/register/">
+    Create a donation page!
+  </a>
+</div>
 
 <style>
 /*main {
@@ -41,13 +119,13 @@
     margin: 10px;
 }
 
-.theme-1 {
+/*.theme-1 {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     max-width: 800px;
     width: 100%;
-}
+}*/
 #picture {
     flex-shrink: 0;
     height: 150px;
@@ -100,77 +178,6 @@
     background-color: #555;
 }
 </style>
-</head>
-
-<body>
-
-<nav aria-label="Main Navigation"><a id="title" href="/" rel="home">Kaspa Hub</a><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><input id="theme" type="checkbox" role="switch" aria-label="Toggle dark mode" onclick="theme()"/></nav><script src="/assets/scripts/main.js" defer></script>
-
-<main id="container-0">
-
-    <section id="profile-section" class="theme-1 fade-in" style="display:none;">
-
-        <div style="display: flex; justify-content: space-between;">
-
-            <div style="display: flex; gap: 20px;">
-                <div id="picture"></div>
-                <div>
-                    <h1 id="display_name"></h1>
-                    <h3 id="name" style="opacity: 0.75;"></h3>
-                </div>
-            </div>
-
-            <div class="menu-button" id="menuButton">
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
-              <circle cx="20" cy="20" r="20" fill="#333"/>
-              <circle cx="10" cy="20" r="3" fill="#fff"/>
-              <circle cx="20" cy="20" r="3" fill="#fff"/>
-              <circle cx="30" cy="20" r="3" fill="#fff"/>
-            </svg>
-
-            <div class="popup-menu" id="popupMenu"></div>
-
-            </div>
-
-        </div>
-
-        <div id="about"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading data…</span></div></div>
-        <div id="qr-code" style="margin: 20px 0px; justify-content: space-around; display: flex; min-height: 100px;"></div>
-
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <button class="copy-button" id="copy-button" style="display: none;">Copy Wallet Address</button>
-            <!-- <a class="button" id="open-button" style="display: none;" href="" target="_blank">Open Wallet</a> -->
-        </div>
-
-        <div id="error" style="color: red; margin-top: 10px;"></div>
-
-    </section>
-
-    <section id="search-section" class="theme-1" style="display:none;">
-        <div class="w-header">
-        <span>Donation Pages</span>
-        <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
-        <p>Please enter Nostr public key</p>
-        <input type="text" id="searchBox" placeholder="npub..." required="">
-        <div class="w-footer">
-            <p><a href="/nostr/register/">Create a donation page</a></p>
-            <button class="button" id="searchBtn">Search</button>
-        </div>
-    </section>
-
-</main>
-
-<div id="footer" style="text-align:center; padding:16px;">
-  <a href="/nostr/register/">
-    Create a donation page!
-  </a>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/nostr-tools@2.23.1/lib/nostr.bundle.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-<script src="/assets/scripts/jquery-qrcode.js"></script>
 <script type="module">
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -180,7 +187,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pictureElement = document.getElementById("picture");
     const aboutElement = document.getElementById("about");
     const qrCodeElement = document.getElementById("qr-code");
-    const copyButton = document.getElementById("copy-button");
     const errorDiv = document.getElementById("error");
     // const openButton = document.getElementById("open-button");
 
@@ -279,11 +285,7 @@ popupMenu.innerHTML = menuItems.join('');
         aboutElement.innerHTML = "";
     }
 
-    if (userProfile.kns) {
-        usernameElement.innerHTML = userProfile.kns;
-        document.title = userProfile.kns;
-        setMetaTag('kaspa:title', userProfile.kns);
-    } else if (userProfile.username) {
+     if (userProfile.username) {
         usernameElement.innerHTML = `@${userProfile.username}`;
         document.title = `@${userProfile.username}`;
         setMetaTag('kaspa:title', '@' + userProfile.username);
@@ -301,24 +303,31 @@ popupMenu.innerHTML = menuItems.join('');
 
     const walletAddress = userProfile.kaspa;
 
-    $('#qr-code').qrcode({
-        render: 'image',
-        text: walletAddress,
-        size: 256,
-        quiet: 3
-    });
+    
 
-    $('#qr-code img').addClass('qr-code');
+  qrCodeElement.innerHTML = `
+<div class="w-container">
+<div data-qr></div>
+<p class="w-message">Scan or copy the Kaspa address</p>
+<pre class="w-data">${escHtml(walletAddress)}</pre>
+<button class="button" data-copy>Copy</button>
+</div>
+  `;
+    generateQRCode(document.querySelector('[data-qr]'), walletAddress, 200);
+
+    const copyButton = document.querySelector('[data-copy]');
 
     copyButton.style.display = "inline-block";
+
     copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText(walletAddress).then(() => {
-            const originalText = copyButton.textContent;
-            copyButton.textContent = 'Copied!';
-            setTimeout(() => {
-                copyButton.textContent = originalText;
-            }, 1500);
-        });
+      copyToClipboard(walletAddress);
+      const originalText = copyButton.textContent;
+      copyButton.textContent = 'Copied to clipboard';
+      copyButton.disabled = true;
+      setTimeout(() => {
+        copyButton.textContent = originalText;
+        copyButton.disabled = false;
+      }, 1500);
     });
 
     // if (window.innerHeight > window.innerWidth) {

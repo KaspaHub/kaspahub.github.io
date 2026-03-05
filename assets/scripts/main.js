@@ -1,13 +1,46 @@
 'use strict';
 
+
 const isLightTheme = localStorage.getItem('light') !== null;
 // document.documentElement.id = isLightTheme ? 'dark' : 'light';
 
-const checkbox = document.getElementById('theme');
+const checkbox = document.getElementById('theme-check');
 checkbox.checked = isLightTheme;
 
-function escHtml(s) {
-  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+let testing = true;
+
+
+function escHtml(input) {
+  return String(input).replace(/[&<>"'`]/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '`': '&#96;',
+  })[char]);
+}
+
+function addToast(title = "", msg = "") {
+
+  let container = document.querySelector('.toast-container')
+  if (!container) {
+      container = document.createElement('div')
+      container.className = 'toast-container'
+      document.body.appendChild(container)
+  }
+
+  new Audio('/assets/sounds/notification.mp3').play();
+  const notification = document.createElement('div')
+  notification.className = 'toast'
+  const messageContainer = document.createElement('div')
+  messageContainer.className = 'm'
+  messageContainer.textContent = escHtml(msg || '')
+  notification.appendChild(messageContainer)
+  
+  container.appendChild(notification)
+  
+  setTimeout(() => notification.remove(), 5200)
 }
 
 function theme() {
@@ -39,6 +72,59 @@ function copyToClipboard(textToCopy) {
 }
 
 
+function generateQRCode(container, text, size) {
+  new QRCode(container, {
+    text: text,
+    width: size,
+    height: size
+  });
+}
+
+function showDialog(message) {
+  if (!message) return;
+
+  const html = `
+<dialog id="dialog" class="theme-1" data-popup>
+  <div class="w-container">
+    <div class="w-header">
+      <span>Message</span>
+      <span class="w-close" data-close></span>
+    </div>
+    <p class="w-message">${escHtml(message)}</p>
+  </div>
+</dialog>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  const dialog = document.getElementById('dialog');
+  const closeBtn = dialog.querySelector('[data-close]');
+
+  dialog.showModal();
+
+  const closeDialog = () => {
+    dialog.close();
+    dialog.remove();
+  };
+
+  closeBtn.addEventListener('click', closeDialog);
+
+  dialog.addEventListener('click', (e) => {
+    if (!e.target.closest('.w-container')) {
+      closeDialog();
+    }
+  });
+
+  dialog.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    closeDialog();
+  });
+
+  if (testing === true) {
+    enableDialogDrag();
+  }
+}
+
 function showWalletPopup(wallet) {
   if (!wallet) return;
 
@@ -60,7 +146,7 @@ function showWalletPopup(wallet) {
 
   const dialog = document.getElementById('dialog');
   const closeBtn = dialog.querySelector('[data-close]');
-  const copyBtn = dialog.querySelector('[data-copy]');
+  const copyButton = dialog.querySelector('[data-copy]');
   const qrContainer = dialog.querySelector('[data-qr]');
 
   dialog.showModal();
@@ -73,10 +159,10 @@ function showWalletPopup(wallet) {
   closeBtn.addEventListener('click', closeDialog);
 
   dialog.addEventListener('click', (e) => {
+// if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {closeDialog();}
     if (!e.target.closest('.w-container')) {
       closeDialog();
     }
-    // if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {closeDialog();}
   });
 
   dialog.addEventListener('cancel', (e) => {
@@ -84,55 +170,54 @@ function showWalletPopup(wallet) {
     closeDialog();
   });
 
-  copyBtn.addEventListener('click', () => {
+  copyButton.addEventListener('click', () => {
     copyToClipboard(wallet);
-    const originalText = copyBtn.textContent;
-    copyBtn.textContent = 'Copied to clipboard';
+    const originalText = copyButton.textContent;
+    copyButton.textContent = 'Copied to clipboard';
+    copyButton.disabled = true;
     setTimeout(() => {
-        copyBtn.textContent = originalText;
+      copyButton.textContent = originalText;
+      copyButton.disabled = false;
     }, 1500);
   });
 
+  generateQRCode(qrContainer, wallet, 200);
 
-
-  new QRCode(qrContainer, {
-    text: wallet,
-    width: 200,
-    height: 200
-  });
-
-
-
-//for fun
-  const d = document.getElementById('dialog');
-  const h = d.querySelector('.w-header');
-
-  h.onmousedown = e => {
-    const rect = d.getBoundingClientRect();
-    const ox = e.clientX - rect.left;
-    const oy = e.clientY - rect.top;
-
-    d.style.position = 'absolute';
-    d.style.left = rect.left + 'px';
-    d.style.top = rect.top + 'px';
-    d.style.margin = 0;
-
-    const move = e => {
-      d.style.left = e.clientX - ox + 'px';
-      d.style.top = e.clientY - oy + 'px';
-    };
-
-    const up = () => {
-      document.removeEventListener('mousemove', move);
-      document.removeEventListener('mouseup', up);
-    };
-
-    document.addEventListener('mousemove', move);
-    document.addEventListener('mouseup', up);
-  };
+  if (testing === true) {
+    enableDialogDrag();
+  }
 }
 
+function enableDialogDrag() {
+  if (window.innerWidth > window.innerHeight) {
+    const d = document.getElementById('dialog');
+    const h = d.querySelector('.w-header');
 
+    h.onmousedown = e => {
+      const rect = d.getBoundingClientRect();
+      const ox = e.clientX - rect.left;
+      const oy = e.clientY - rect.top;
+
+      d.style.position = 'absolute';
+      d.style.left = rect.left + 'px';
+      d.style.top = rect.top + 'px';
+      d.style.margin = 0;
+
+      const move = e => {
+        d.style.left = e.clientX - ox + 'px';
+        d.style.top = e.clientY - oy + 'px';
+      };
+
+      const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      };
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+    };
+  }
+}
 
 function toggleBookmark(button) {
   const name = button.dataset.name;
@@ -163,3 +248,62 @@ function toggleBookmark(button) {
     button.disabled = false;
   }, 2000);
 }
+
+
+// toggle menu
+
+function menu(forceClose = false) {
+  const drawer = document.getElementById("drawer");
+  const overlay = document.getElementById("drawer-overlay");
+  const check = document.getElementById("menu-check");
+  if (!drawer || !overlay || !check) return;
+  if (forceClose) check.checked = false;
+  const isOpen = check.checked;
+  drawer.classList.toggle("open", isOpen);
+  overlay.classList.toggle("open", isOpen);
+}
+
+function populateMenu() {
+  const items = [
+    { name: "Home", icon: "🏠", href: "/" },
+    { name: "Apps", icon: "✨", href: "/apps/" },
+    { name: "Kaspa", icon: "⛓️", href: "/ecosystem/" },
+    { name: "Linux", icon: "🐧", href: "/linux/distributions/" },
+    { name: "Nostr", icon: "📡", href: "/nostr/clients/" }
+  ];
+
+  let html = items.map(item => {
+    if (item.href) {
+      return `<a class="drawer-item" href="${item.href}" style="text-decoration:none;color:inherit;">${item.icon} ${item.name}</a>`;
+    } else {
+      return `<div class="drawer-item">${item.icon} ${item.name}</div>`;
+    }
+  }).join("");
+
+  html += `
+    <div class="drawer-divider"></div>
+    <div class="drawer-section">Settings</div>
+    <div class="drawer-item" id="toggle-experiments">⚙️ Beta Features</div>
+    <div class="drawer-item" id="toggle-theme">☀️ Toggle Theme</div>
+  `;
+
+  const drawerList = document.getElementById("drawer-list");
+  drawerList.innerHTML = html;
+
+  document.getElementById("toggle-experiments").onclick = () => {
+    testing = !testing;
+    if (testing) {
+      showDialog("Experimental features enabled.");
+    } else {
+      showDialog("Experimental features disabled.");
+    }
+
+    
+  };
+
+  document.getElementById("toggle-theme").onclick = () => {
+    checkbox.click();
+  };
+}
+
+populateMenu();
