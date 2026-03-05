@@ -10,26 +10,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-<link rel="manifest" href="/assets/manifest.json" />
-
-<title>Bookmarks - Kaspa Hub</title>
-<meta name="twitter:title" content="Bookmarks - Kaspa Hub" />
-<meta property="og:title" content="Bookmarks - Kaspa Hub" />
+<title>Offline - Kaspa Hub</title>
 
 <meta name="robots" content="noindex, nofollow" />
 
-<link rel="canonical" href="https://kaspahub.org/bookmarks/" />
-<meta name="twitter:url" content="https://kaspahub.org/bookmarks/" />
-<meta property="og:url" content="https://kaspahub.org/bookmarks/" />
+<link rel="canonical" href="https://kaspahub.org/offline/" />
+<meta name="twitter:url" content="https://kaspahub.org/offline/" />
+<meta property="og:url" content="https://kaspahub.org/offline/" />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
 <meta name="twitter:site" content="@KaspaHub" />
-
 <meta name="twitter:creator" content="@KaspaHub" />
-<meta name="kaspa:title" content="Thanks for being here - your support is appreciated more than you know." />
+<meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
 </head>
@@ -40,11 +35,11 @@
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 <script async src="/assets/scripts/main.js"></script>
 
-<main id="container-h">
-
-<div id="bookmarks-wrapper"></div>
-<div></div>
-
+<main id="container-1">
+<div style="text-align: center; margin: 40px;">
+	<h1 style="font-size: 3em; filter: brightness(0.7);">🔎 404 </h1>
+	<p style="font-weight: bold;">The requested page could not be located on our server.</p>
+</div>
 </main>
 
 <footer>
@@ -84,79 +79,6 @@
 </div>
 
 </footer>
-
-<style type="text/css">
-
-.bookmarks-title {
-	filter: brightness(0.9);
-	font-size: 1.5rem;
-}
-
-.bookmarks-grid {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-	margin: 50px 0;
-	justify-content: center;
-}
-
-.remove-btn {
-	position: absolute;
-	top: 8px;
-	right: 8px;
-	background: rgba(255,255,255,0.3);
-	border: none;
-	border-radius: 50%;
-	width: 28px;
-	height: 28px;
-	font-size: 16px;
-	line-height: 1;
-	cursor: pointer;
-	color: #c00;
-	box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-	transition: background 0.2s;
-}
-.remove-btn:hover {
-	background: #ffe5e5;
-}
-</style>
-<script type="text/javascript">
-'use strict';
-
-function removeBookmark(index) {
-	const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
-	data.splice(index, 1);
-	localStorage.setItem("bookmarks", JSON.stringify(data));
-	renderBookmarks();
-}
-
-function renderBookmarks() {
-	const wrapper = document.getElementById("bookmarks-wrapper");
-	const data = JSON.parse(localStorage.getItem("bookmarks")) || [];
-
-	if (!wrapper) return;
-
-	if (!data.length) {
-		wrapper.innerHTML = `<h3 style="margin:60px 20px 20px;">No saved bookmarks</h3><div class="bookmarks-grid">`;
-		return;
-	}
-
-	let html = `<h3 style="margin:60px 20px 20px;">Bookmarks</h3><div class="bookmarks-grid">`;
-
-	data.forEach(({ name, link }, index) => {
-	html += `
-<a href="${link}" class="card theme-1">
-<button class="remove-btn" onclick="removeBookmark(${index}); return false;">✕</button>
-<h2 class="bookmark-title">${name}</h2>
-</a>`;
-	});
-
-	html += `</div>`;
-	wrapper.innerHTML = html;
-}
-
-renderBookmarks();
-</script>
 
 </body>
 </html>

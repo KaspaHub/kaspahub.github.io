@@ -6,7 +6,7 @@
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -34,94 +34,13 @@
 <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
-<style>
-.theme-1 {
-	border: 1px solid rgba(80, 255, 200, 0.2);
-}
-
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-	max-width: 1200px;
-	margin: 0 auto;
-}
-.project-card {
-	position: relative;
-	overflow: hidden;
-	padding: 20px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	text-align: left;
-	height: 120px;
-  border-radius: 15px;
-  color: inherit !important;
-  text-decoration: none !important;
-  font-weight: inherit !important;
-}
-.project-card::hover {
-}
-.project-card::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-position: center;
-	filter: blur(10px);
-	z-index: -1;
-}
-.card-icon {
-	border-radius: 12px;
-	width: 50px;
-	height: 50px;
-	margin-right: 15px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	flex-shrink: 0;
-}
-.card-text {
-	display: flex;
-	flex-direction: column;
-}
-.card-title {
-	font-size: 1.2em;
-	margin: 0;
-}
-.card-description {
-	font-size: 0.9em;
-	margin: 5px 0 0;
-}
-@media (max-width: 768px) {
-	.grid-container {
-		grid-template-columns: 1fr;
-	}
-	.project-card {
-		height: auto;
-	}
-}
-@media (min-width: 1150px) {
-  .project-card {
-   min-width: 360px;
-  }
-}
-
-#loadMoreBtn:hover {
-  text-decoration: none;
-}
-</style>
-
 </head>
 
 <body>
 
 <nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-<script defer src="/assets/scripts/main.js"></script>
+<script async src="/assets/scripts/main.js"></script>
 
 <main id="container-2" style="padding-bottom: 0; display: flex; flex-direction: column;">
 
@@ -295,7 +214,94 @@
 
 </footer>
 
-<script>
+<style>
+.theme-1 {
+  border: 1px solid rgba(80, 255, 200, 0.2);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.project-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  height: 120px;
+  border-radius: 15px;
+  color: inherit !important;
+  text-decoration: none !important;
+  font-weight: inherit !important;
+}
+.project-card::hover {
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+.card-icon {
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+.card-text {
+  display: flex;
+  flex-direction: column;
+}
+.card-title {
+  font-size: 1.2em;
+  margin: 0;
+}
+.card-description {
+  font-size: 0.9em;
+  margin: 5px 0 0;
+}
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    height: auto;
+  }
+}
+@media (min-width: 1150px) {
+  .project-card {
+   min-width: 360px;
+  }
+}
+
+#loadMoreBtn:hover {
+  text-decoration: none;
+}
+</style>
+<style>
+  .project-card::before {
+    background-image: var(--card-bg, url('https://via.placeholder.com/300x150?text=Default+BG'));
+  }
+</style>
+<script type="text/javascript">
+'use strict';
+
   document.querySelectorAll('.project-card').forEach(card => {
     const bg = card.style.getPropertyValue('--card-bg');
     if (bg) {
@@ -303,12 +309,6 @@
     }
   });
 </script>
-
-<style>
-  .project-card::before {
-    background-image: var(--card-bg, url('https://via.placeholder.com/300x150?text=Default+BG'));
-  }
-</style>
 
 </body>
 </html>

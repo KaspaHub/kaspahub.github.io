@@ -6,12 +6,12 @@
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
 <!-- <link rel="manifest" href="wm.json" />
-<script defer type='text/javascript' src="app.js"></script> -->
+<script defer src="app.js"></script> -->
 
 <title>Text Editor - Kaspa Hub</title>
 <meta name="twitter:title" content="Text Editor - Kaspa Hub" />
@@ -34,8 +34,6 @@
 <meta name="twitter:creator" content="@KaspaHub" />
 <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
-
-<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/jquery.js"></script>
 
 <script id="schema" type="application/ld+json">
 {
@@ -65,7 +63,7 @@
 
 <nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-<script defer src="/assets/scripts/main.js"></script>
+<script async src="/assets/scripts/main.js"></script>
 
 <main id="container-1">
 
@@ -279,8 +277,6 @@ select:disabled, button:disabled, input:disabled {
 /*#undo {background-image: url(assets/img/undo.png);}
 #redo {background-image: url(assets/img/redo.png);}*/
 
-
-
 html#light {
     --filter: none;
 }
@@ -296,11 +292,9 @@ html#dark {
     border: 1px solid black;
 }
 </style>
-
-<script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/jquery.js"></script>
+<script type="module">
 'use strict';
-
-document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function() {
     const editor = $('#editor')[0];
@@ -541,7 +535,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-});
 </script>
 </body>
 </html>

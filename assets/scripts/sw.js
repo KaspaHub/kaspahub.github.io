@@ -1,16 +1,14 @@
 'use strict';
 
-
-const CACHE_VERSION = 'v0.8';
-const START_URL = '/app/calculator/';
-const OFFLINE_URL = '/app/calculator/offline/';
+const CACHE_VERSION = 'v2.2';
+const START_URL = '/';
+const OFFLINE_URL = '/offline/';
 const ASSETS = [
   START_URL,
   OFFLINE_URL,
-  '/favicon.ico',
-  '/app/calculator/wm.json',
-  '/assets/styles/main.css',
-  '/assets/fonts/mulish.woff2'
+    'https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2',
+    '/assets/scripts/main.js',
+    '/assets/styles/main.css'
 ];
 
 self.addEventListener('install', function (event) {

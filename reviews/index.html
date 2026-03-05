@@ -6,7 +6,7 @@
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -33,8 +33,7 @@
 <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
-<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css?v=2.4" />
-<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 
 </head>
 
@@ -42,7 +41,7 @@
 
 <nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-<script defer src="/assets/scripts/main.js?v=2.4"></script>
+<script async src="/assets/scripts/main.js"></script>
 
 <main id="container-1">
 <div class="intro">
@@ -62,7 +61,51 @@
 
 <div id="pageData"><div class="fade-in" id="loading"><span class="spinner"></span><span>Fetching data…</span></div></div>
 
+</main>
+
+<footer>
+
+<div class="resources">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div class="ad">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="resources">
+<ul class="section-list">
+<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/explorer.js"></script>
 <script type="module">
+'use strict';
+
 const reviewers = [
 	{ name: "Kaspa Hub", url: "https://kaspahub.github.io/directory/reviews.json" },
 	{ name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.json" }
@@ -206,46 +249,6 @@ document.getElementById("searchBox").addEventListener("keydown", e => {
 	if (e.key === "Enter") runSearch();
 });
 </script>
-
-</main>
-
-<footer>
-
-<div class="resources">
-<div class="social-icons">
-<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
-<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
-</div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
-</div>
-
-<div class="ad">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
-     crossorigin="anonymous"></script>
-<!-- footer -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1682291217022161"
-     data-ad-slot="6582596191"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-<div class="resources">
-<ul class="section-list">
-<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
-<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
-</ul>
-</div>
-
-</footer>
 
 </body>
 </html>

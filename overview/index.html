@@ -6,7 +6,7 @@
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -33,6 +33,310 @@
 <meta name="twitter:creator" content="@KaspaHub" />
 <meta name="kaspa:title" content="We gratefully accept donations in Kaspa." />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
+
+</head>
+
+<body>
+
+<nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+<script async src="/assets/scripts/main.js"></script>
+
+<main id="container-o">
+
+<div style="text-align:center; margin:60px 0;">
+  <h1 style="font-size:3em;">Kaspa at a Glance</h1>
+</div>
+
+<div class="glance" style="text-align:center;">
+
+<div class="records-container">
+    <div class="left-side">
+
+        <div class="crypto-card theme-1">
+            <div class="crypto-column">
+                <div class="crypto-value">Kaspa</div>
+                <div class="info-extra">NAME</div>
+            </div>
+            <div class="crypto-column">
+                <div class="crypto-value">𐤊</div>
+                <div class="info-extra">SYMBOL</div>
+            </div>
+            <div class="crypto-column">
+                <div class="crypto-value">KAS</div>
+                <div class="info-extra">TICKER</div>
+            </div>
+        </div>
+
+    <div class="info-card theme-1">
+        <div class="info-title">Launch Date</div>
+        <div class="info-value">Nov 7, 2021</div>
+    </div>
+    <div class="info-card theme-1">
+        <div class="info-title">Distribution Model</div>
+        <div class="info-value">Fair Launch Mining</div>
+    </div>
+
+    </div>
+
+    <div class="info-card transactions theme-1">
+        <div class="data-overlay">
+            <div class="info-title">World-Record</div>
+            <!-- <div class="info-title">Highest Number of Daily Transactions</div> -->
+            <div class="info-value">158,441,966</div>
+            <div class="info-subtitle">Transactions in 24 Hours on Proof of Work</div>
+            <div class="info-extra">On October 5, 2025</div>
+        </div>
+
+        <svg class="chart" viewBox="0 0 420 220" preserveAspectRatio="xMidYMid meet">
+            <rect x="30" y="200" width="22" height="20" fill="#4a6fa5"/>
+            <rect x="65" y="190" width="22" height="30" fill="#4a6fa5"/>
+            <rect x="100" y="180" width="22" height="40" fill="#4a6fa5"/>
+            <rect x="135" y="165" width="22" height="55" fill="#4a6fa5"/>
+            <rect x="170" y="140" width="22" height="80" fill="#4a6fa5"/>
+            <rect x="205" y="110" width="22" height="110" fill="#4dd4b8"/>
+            <rect x="240" y="80" width="22" height="140" fill="#4dd4b8"/>
+            <rect x="275" y="50" width="22" height="170" fill="#a0ffaa"/>
+            <rect x="310" y="30" width="22" height="190" fill="#a0ffaa"/>
+            <rect x="345" y="70" width="22" height="150" fill="#a0ffaa"/>
+            <rect x="380" y="110" width="22" height="110" fill="#4dd4b8"/>
+        </svg>
+    </div>
+</div>
+
+<div class="info-grid">
+
+  <div class="info-card theme-1">
+      <div class="info-title">Distributed Ledger Technology</div>
+      <div class="info-value">BlockDAG</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Consensus Mechanism</div>
+      <div class="info-value">Proof of Work</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Consensus Protocol</div>
+      <div class="info-value" style="margin: 0;">PHANTOM GHOSTDAG</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Hashing Algorithm</div>
+      <div class="info-value">kHeavyHash</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Codebase</div>
+      <div class="info-value">Open Source</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Programming Language</div>
+      <div class="info-value">Rust</div>
+      <div class="info-extra">Rewritten from Golang</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Block Time</div>
+      <div class="info-value">100 milliseconds</div>
+      <div class="info-extra">10 Blocks per Second</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Time to Finality</div>
+      <div class="info-value">&lt; 7 seconds</div>
+      <div class="info-extra">Probabilistic Finality</div>
+  </div>
+
+  <div class="info-card tps theme-1">
+      <div class="info-title">Transaction Capacity</div>
+      <div class="info-value">5,000+ TPS</div>
+      <div class="info-extra">Record of 5,584 TPS</div>
+  </div>
+  <div class="info-card nodes theme-1">
+      <div class="info-title">Public Nodes</div>
+      <div class="info-value">700+</div>
+      <div class="info-extra">Record of 1,008</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Average Transaction Fee</div>
+      <div class="info-value">$0.00001</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Decimal Places</div>
+      <div class="info-value">8</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Max Supply</div>
+      <div class="info-value">28.7B KAS</div>
+      <div class="info-extra">Hardcoded at 29B</div>
+  </div>
+    <div class="info-card theme-1">
+      <div class="info-title">Circulating Supply</div>
+      <div class="info-value">27.11B KAS</div>
+      <div class="info-extra">94% Mined</div>
+    </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Ledger Size</div>
+      <div class="info-value">~100 GB</div>
+      <div class="info-extra">Pruned Every 3 Days</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Network Uptime</div>
+      <div class="info-value">100%</div>
+      <div class="info-extra">Since Rust Rewrite</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Attack Resistance</div>
+      <div class="info-value">51%</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Transaction Visibility</div>
+      <div class="info-value">Instant</div>
+  </div>
+  <div class="info-card theme-1">
+      <div class="info-title">Wallet Syncing</div>
+      <div class="info-value">Instant</div>
+  </div>
+
+
+</div>
+
+</div>
+
+<div style="text-align:center; margin:60px 0;">
+  <h1 style="font-size:3em;">Kaspa Ecosystem Overview</h1>
+</div>
+
+<div class="ecosystem">
+
+<div class="right section wallets">
+  <div class="section-title">Wallets</div>
+  <div class="icard theme-1">
+    <div class="items one-row">
+      <div class="item"><img class="icon" src="/assets/logos/ledgerwallet.webp"><span>Ledger</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/tangemwallet.webp"><span>Tangem</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/onekeywallet.webp"><span>OneKey</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kaspium</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaswarewallet.webp"><span>Kasware</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="left section exchanges">
+  <div class="section-title">Exchanges</div>
+  <div class="icard theme-1">
+    <div class="items one-row">
+      <div class="item"><img class="icon" src="/assets/logos/kraken.webp"><span>Kraken</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/uphold.webp"><span>Uphold</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/bybit.webp"><span>Bybit</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/htx.webp"><span>HTX</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/gate.webp"><span>Gate</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="left section analytics">
+  <div class="section-title">Analytics</div>
+  <div class="icard theme-1">
+    <div class="items one-row">
+      <div class="item"><img class="icon" src="/assets/logos/kaspa.stream.webp"><span>Kaspa.Stream</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspaexplorer.webp"><span>Kaspa Explorer</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kaspalytics</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kasplore</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaslens.webp"><span>KasLens</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="core">
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" viewBox="0 0 197.05 196.86">
+  <defs>
+    <style>.cls-1{fill:none;}.cls-2{fill:#fff;}.cls-3{fill:#6fc7ba;}</style>
+  </defs>
+  <g id="Layer_1-2">
+    <g transform="translate(98.52 98.43) scale(1.7) translate(-98.52 -98.43)">
+      <circle class="cls-2" cx="98.52" cy="98.43" r="41.03"></circle>
+      <path class="cls-3" d="m149.42,76.34c-2.8-6.76-7.22-13.03-12.32-18.12-5.08-5.1-11.61-8.91-18.38-11.71-6.51-2.71-13.78-4.07-21.28-4.07s-15.21.27-21.72,2.98c-6.76,2.8-12.42,8.12-17.51,13.22-5.1,5.1-11.02,10.51-13.82,17.26-2.71,6.53-1.83,14.48-1.83,21.99s.55,14.85,3.26,21.38c2.8,6.76,8.52,11.54,13.6,16.64,5.1,5.1,9.71,11.18,16.47,13.98,6.53,2.71,14.04,4.55,21.54,4.55s14.87-2.22,21.4-4.94c6.75-2.8,12.86-7.18,17.96-12.27,5.1-5.1,9.19-11.32,12.01-18.08,2.7-6.51,5.79-13.76,5.79-21.26s-2.48-15-5.19-21.53Zm-36.26,53.49l-11.88-1.75,3.39-23-24.87,19.16-7.32-9.56,21.82-16.8-21.82-16.81,7.32-9.56,24.87,19.16-3.39-22.99,11.88-1.77,4.73,31.98-4.73,31.96Z"></path>
+    </g>
+    <rect class="cls-1" x=".09" y="-.09" width="196.86" height="197.05" transform="translate(196.96 -.09) rotate(90)"></rect>
+  </g>
+</svg>
+
+</div>
+
+<div class="section o-social">
+  <div class="section-title">Apps</div>
+  <div class="icard theme-1">
+    <div class="items two-row">
+      <div class="item"><img class="icon" src="/assets/logos/kasia.webp"><span>Kasia</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspa-black.webp"><span>K</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspeak.webp"><span>Kaspeak</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/vivoor.webp"><span>Vivoor</span></div>
+<!--       <div class="item"><img class="icon" src="/assets/logos/crumpet.media.webp"><span>Crumpet Media</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Arkiv File Storage</span></div> -->
+    </div>
+  </div>
+</div>
+
+<div class="right section payments">
+  <div class="section-title">Payments</div>
+  <div class="icard theme-1">
+    <div class="items one-row">
+      <div class="item"><img class="icon" src="/assets/logos/onchainpos.webp"><span>OnChain POS</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kaspay.webp"><span>Kaspay POS</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/nowpayments.webp"><span>NOW Payments</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/cryptocurrencycheckout.webp"><span>Cryptocurrency Checkout</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/coinpal.webp"><span>CoinPal</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section layer2">
+  <div class="section-title">Layer 2</div>
+  <div class="icard theme-1">
+    <div class="items two-row">
+      <div class="item"><img class="icon" src="/assets/logos/igralabs.webp"><span>Igra</span></div>
+      <div class="item"><img class="icon" src="/assets/logos/kasplex.webp"><span>Kasplex</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</main>
+
+<footer>
+
+<div class="resources">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div class="ad">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="resources">
+<ul class="section-list">
+<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
 
 <style>
 :root {
@@ -341,310 +645,6 @@
 }
 
 </style>
-
-</head>
-
-<body>
-
-<nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
-<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-<script defer src="/assets/scripts/main.js"></script>
-
-<main id="container-o">
-
-<div style="text-align:center; margin:60px 0;">
-  <h1 style="font-size:3em;">Kaspa at a Glance</h1>
-</div>
-
-<div class="glance" style="text-align:center;">
-
-<div class="records-container">
-    <div class="left-side">
-
-        <div class="crypto-card theme-1">
-            <div class="crypto-column">
-                <div class="crypto-value">Kaspa</div>
-                <div class="info-extra">NAME</div>
-            </div>
-            <div class="crypto-column">
-                <div class="crypto-value">𐤊</div>
-                <div class="info-extra">SYMBOL</div>
-            </div>
-            <div class="crypto-column">
-                <div class="crypto-value">KAS</div>
-                <div class="info-extra">TICKER</div>
-            </div>
-        </div>
-
-    <div class="info-card theme-1">
-        <div class="info-title">Launch Date</div>
-        <div class="info-value">Nov 7, 2021</div>
-    </div>
-    <div class="info-card theme-1">
-        <div class="info-title">Distribution Model</div>
-        <div class="info-value">Fair Launch Mining</div>
-    </div>
-
-    </div>
-
-    <div class="info-card transactions theme-1">
-        <div class="data-overlay">
-            <div class="info-title">World-Record</div>
-            <!-- <div class="info-title">Highest Number of Daily Transactions</div> -->
-            <div class="info-value">158,441,966</div>
-            <div class="info-subtitle">Transactions in 24 Hours on Proof of Work</div>
-            <div class="info-extra">On October 5, 2025</div>
-        </div>
-
-        <svg class="chart" viewBox="0 0 420 220" preserveAspectRatio="xMidYMid meet">
-            <rect x="30" y="200" width="22" height="20" fill="#4a6fa5"/>
-            <rect x="65" y="190" width="22" height="30" fill="#4a6fa5"/>
-            <rect x="100" y="180" width="22" height="40" fill="#4a6fa5"/>
-            <rect x="135" y="165" width="22" height="55" fill="#4a6fa5"/>
-            <rect x="170" y="140" width="22" height="80" fill="#4a6fa5"/>
-            <rect x="205" y="110" width="22" height="110" fill="#4dd4b8"/>
-            <rect x="240" y="80" width="22" height="140" fill="#4dd4b8"/>
-            <rect x="275" y="50" width="22" height="170" fill="#a0ffaa"/>
-            <rect x="310" y="30" width="22" height="190" fill="#a0ffaa"/>
-            <rect x="345" y="70" width="22" height="150" fill="#a0ffaa"/>
-            <rect x="380" y="110" width="22" height="110" fill="#4dd4b8"/>
-        </svg>
-    </div>
-</div>
-
-<div class="info-grid">
-
-  <div class="info-card theme-1">
-      <div class="info-title">Distributed Ledger Technology</div>
-      <div class="info-value">BlockDAG</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Consensus Mechanism</div>
-      <div class="info-value">Proof of Work</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Consensus Protocol</div>
-      <div class="info-value" style="margin: 0;">PHANTOM GHOSTDAG</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Hashing Algorithm</div>
-      <div class="info-value">kHeavyHash</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Codebase</div>
-      <div class="info-value">Open Source</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Programming Language</div>
-      <div class="info-value">Rust</div>
-      <div class="info-extra">Rewritten from Golang</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Block Time</div>
-      <div class="info-value">100 milliseconds</div>
-      <div class="info-extra">10 Blocks per Second</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Time to Finality</div>
-      <div class="info-value">&lt; 7 seconds</div>
-      <div class="info-extra">Probabilistic Finality</div>
-  </div>
-
-  <div class="info-card tps theme-1">
-      <div class="info-title">Transaction Capacity</div>
-      <div class="info-value">5,000+ TPS</div>
-      <div class="info-extra">Record of 5,584 TPS</div>
-  </div>
-  <div class="info-card nodes theme-1">
-      <div class="info-title">Public Nodes</div>
-      <div class="info-value">700+</div>
-      <div class="info-extra">Record of 1,008</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Average Transaction Fee</div>
-      <div class="info-value">$0.00001</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Decimal Places</div>
-      <div class="info-value">8</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Max Supply</div>
-      <div class="info-value">28.7B KAS</div>
-      <div class="info-extra">Hardcoded at 29B</div>
-  </div>
-    <div class="info-card theme-1">
-      <div class="info-title">Circulating Supply</div>
-      <div class="info-value">27.11B KAS</div>
-      <div class="info-extra">94% Mined</div>
-    </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Ledger Size</div>
-      <div class="info-value">~100 GB</div>
-      <div class="info-extra">Pruned Every 3 Days</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Network Uptime</div>
-      <div class="info-value">100%</div>
-      <div class="info-extra">Since Rust Rewrite</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Attack Resistance</div>
-      <div class="info-value">51%</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Transaction Visibility</div>
-      <div class="info-value">Instant</div>
-  </div>
-  <div class="info-card theme-1">
-      <div class="info-title">Wallet Syncing</div>
-      <div class="info-value">Instant</div>
-  </div>
-
-
-</div>
-
-</div>
-
-<div style="text-align:center; margin:60px 0;">
-  <h1 style="font-size:3em;">Kaspa Ecosystem Overview</h1>
-</div>
-
-<div class="ecosystem">
-
-<div class="right section wallets">
-  <div class="section-title">Wallets</div>
-  <div class="icard theme-1">
-    <div class="items one-row">
-      <div class="item"><img class="icon" src="/assets/logos/ledgerwallet.webp"><span>Ledger</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/tangemwallet.webp"><span>Tangem</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/onekeywallet.webp"><span>OneKey</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kaspium</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaswarewallet.webp"><span>Kasware</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="left section exchanges">
-  <div class="section-title">Exchanges</div>
-  <div class="icard theme-1">
-    <div class="items one-row">
-      <div class="item"><img class="icon" src="/assets/logos/kraken.webp"><span>Kraken</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/uphold.webp"><span>Uphold</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/bybit.webp"><span>Bybit</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/htx.webp"><span>HTX</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/gate.webp"><span>Gate</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="left section analytics">
-  <div class="section-title">Analytics</div>
-  <div class="icard theme-1">
-    <div class="items one-row">
-      <div class="item"><img class="icon" src="/assets/logos/kaspa.stream.webp"><span>Kaspa.Stream</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspaexplorer.webp"><span>Kaspa Explorer</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kaspalytics</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Kasplore</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaslens.webp"><span>KasLens</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="core">
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" viewBox="0 0 197.05 196.86">
-  <defs>
-    <style>.cls-1{fill:none;}.cls-2{fill:#fff;}.cls-3{fill:#6fc7ba;}</style>
-  </defs>
-  <g id="Layer_1-2">
-    <g transform="translate(98.52 98.43) scale(1.7) translate(-98.52 -98.43)">
-      <circle class="cls-2" cx="98.52" cy="98.43" r="41.03"></circle>
-      <path class="cls-3" d="m149.42,76.34c-2.8-6.76-7.22-13.03-12.32-18.12-5.08-5.1-11.61-8.91-18.38-11.71-6.51-2.71-13.78-4.07-21.28-4.07s-15.21.27-21.72,2.98c-6.76,2.8-12.42,8.12-17.51,13.22-5.1,5.1-11.02,10.51-13.82,17.26-2.71,6.53-1.83,14.48-1.83,21.99s.55,14.85,3.26,21.38c2.8,6.76,8.52,11.54,13.6,16.64,5.1,5.1,9.71,11.18,16.47,13.98,6.53,2.71,14.04,4.55,21.54,4.55s14.87-2.22,21.4-4.94c6.75-2.8,12.86-7.18,17.96-12.27,5.1-5.1,9.19-11.32,12.01-18.08,2.7-6.51,5.79-13.76,5.79-21.26s-2.48-15-5.19-21.53Zm-36.26,53.49l-11.88-1.75,3.39-23-24.87,19.16-7.32-9.56,21.82-16.8-21.82-16.81,7.32-9.56,24.87,19.16-3.39-22.99,11.88-1.77,4.73,31.98-4.73,31.96Z"></path>
-    </g>
-    <rect class="cls-1" x=".09" y="-.09" width="196.86" height="197.05" transform="translate(196.96 -.09) rotate(90)"></rect>
-  </g>
-</svg>
-
-</div>
-
-<div class="section o-social">
-  <div class="section-title">Apps</div>
-  <div class="icard theme-1">
-    <div class="items two-row">
-      <div class="item"><img class="icon" src="/assets/logos/kasia.webp"><span>Kasia</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspa-black.webp"><span>K</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspeak.webp"><span>Kaspeak</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/vivoor.webp"><span>Vivoor</span></div>
-<!--       <div class="item"><img class="icon" src="/assets/logos/crumpet.media.webp"><span>Crumpet Media</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspa.webp"><span>Arkiv File Storage</span></div> -->
-    </div>
-  </div>
-</div>
-
-<div class="right section payments">
-  <div class="section-title">Payments</div>
-  <div class="icard theme-1">
-    <div class="items one-row">
-      <div class="item"><img class="icon" src="/assets/logos/onchainpos.webp"><span>OnChain POS</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kaspay.webp"><span>Kaspay POS</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/nowpayments.webp"><span>NOW Payments</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/cryptocurrencycheckout.webp"><span>Cryptocurrency Checkout</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/coinpal.webp"><span>CoinPal</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="section layer2">
-  <div class="section-title">Layer 2</div>
-  <div class="icard theme-1">
-    <div class="items two-row">
-      <div class="item"><img class="icon" src="/assets/logos/igralabs.webp"><span>Igra</span></div>
-      <div class="item"><img class="icon" src="/assets/logos/kasplex.webp"><span>Kasplex</span></div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-</main>
-
-<footer>
-
-<div class="resources">
-<div class="social-icons">
-<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://nosta.me/npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
-<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
-</div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
-</div>
-
-<div class="ad">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
-     crossorigin="anonymous"></script>
-<!-- footer -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1682291217022161"
-     data-ad-slot="6582596191"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-<div class="resources">
-<ul class="section-list">
-<li><a href="http://tiptr.ee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
-<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
-</ul>
-</div>
-
-</footer>
 
 </body>
 </html>

@@ -6,7 +6,7 @@
 <script>document.documentElement.id = localStorage.getItem('light') !== null ? 'light' : 'dark';</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css?v=2.4" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/fonts/mulish.woff2" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -34,20 +34,13 @@
 <meta name="kaspa:title" content="@KaspaHub is accepting donations!" />
 <meta name="kaspa:wallet" content="kaspa:qpyfkp6nucky576r7q346k39r7schq8qnk2peegel8cu6uyg767g27jjec83m" />
 
-<style type="text/css">
-label { display: block; margin-block-start: 0.7em; margin-block-end: 0.7em; }
-#status { color: green; margin-top: 10px; }
-#error { color: red; margin-top: 10px; }
-.error-message { color: red; font-size: 0.9rem; margin-top: 5px; display: none; }
-</style>
-
 </head>
 
 <body>
 
 <nav aria-label="Main Navigation"><div><input type="checkbox" id="menu-check" onclick="menu()" aria-label="Toggle Drawer" /><a id="title" href="/" aria-label="Home Hyperlink">Kaspa Hub</a></div><div class="widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div><a class="widescreen-only navTag" id="login" aria-label="Login Hyperlink">Login</a><input type="checkbox" id="theme-check" onclick="theme()" aria-label="Toggle Dark Mode" /></div></nav>
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-<script defer src="/assets/scripts/main.js"></script>
+<script async src="/assets/scripts/main.js"></script>
 
 <main id="container-0">
 
@@ -169,8 +162,16 @@ label { display: block; margin-block-start: 0.7em; margin-block-end: 0.7em; }
 
 </footer>
 
-<script src="https://unpkg.com/nostr-tools@2.7.2/lib/nostr.bundle.js"></script>
+<style type="text/css">
+label { display: block; margin-block-start: 0.7em; margin-block-end: 0.7em; }
+#status { color: green; margin-top: 10px; }
+#error { color: red; margin-top: 10px; }
+.error-message { color: red; font-size: 0.9rem; margin-top: 5px; display: none; }
+</style>
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/nostr.bundle.js"></script>
 <script type="text/javascript">
+'use strict';
+
     let privateKey;
     let publicKey;
     let pool;
@@ -508,5 +509,6 @@ window.addEventListener('unload', () => {
     if (pool) pool.close([...fastRelays, ...fullRelays]);
 });
 </script>
+
 </body>
 </html>
