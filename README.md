@@ -1,3 +1,6 @@
+# DEPRECATED
+## This repository is no longer in use. Everything has been consolidated into the [Kaspa Hub](https://github.com/KaspaHub/kaspahub.github.io) main repository.
+
 ## Purpose
 A public, open-source list of structured Kaspa data designed for integration across apps and projects.
 - Provide a shared, maintainable data source  
