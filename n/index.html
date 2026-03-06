@@ -337,15 +337,15 @@ popupMenu.innerHTML = menuItems.join('');
 });
 
 const button = document.getElementById('menuButton');
-const menu = document.getElementById('popupMenu');
+const popupMenu = document.getElementById('popupMenu');
 
 button.addEventListener('click', (e) => {
 e.stopPropagation();
-menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
 });
 
 document.addEventListener('click', () => {
-menu.style.display = 'none';
+popupMenu.style.display = 'none';
 });
 
 function runSearch(npub) {

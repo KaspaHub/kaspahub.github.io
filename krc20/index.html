@@ -48,13 +48,13 @@
 
 <section class="pageHead">
 
-    <div class="explorerHdr">
-      <img id="explorerPic" />
-      <div>
-        <h1 id="hdrLine">Token</h1>
-        <div class="sub" id="hdrSub">-</div>
-      </div>
+  <div id="explorerHdr">
+    <img id="explorerPic" />
+      <div class="explorerCtn">
+      <h1 id="hdrLine">Token</h1>
+      <div class="sub" id="hdrSub">-</div>
     </div>
+  </div>
 
   <div class="searchRow"><div class="input" title="Ticker"><input id="q" placeholder="e.g. TICKER" /></div><button class="btn" id="go">Search</button></div>
 
@@ -253,7 +253,7 @@
   const q = el("q");
   const go = el("go");
 
-  const tokenLogo = el("tokenLogo");
+  const explorerPic = el("explorerPic");
   const hdrLine = el("hdrLine");
   const hdrSub = el("hdrSub");
 
@@ -520,7 +520,7 @@
 
     try{
       const r2 = await fetch(logoURL, { method:"HEAD" });
-      if(r2.ok) tokenLogo.src = logoURL;
+      if(r2.ok) explorerPic.src = logoURL;
     }catch{}
 
     return meta;
@@ -563,9 +563,9 @@
 
     applyTokenDescription();
 
-    if(!tokenLogo.src){
-      tokenLogo.alt = t;
-      tokenLogo.style.background = "rgba(255,255,255,.08)";
+    if(!explorerPic.src){
+      explorerPic.alt = t;
+      explorerPic.style.background = "rgba(255,255,255,.08)";
     }
   }
 
@@ -805,7 +805,7 @@
 
     go.disabled = true;
 
-    tokenLogo.removeAttribute("src");
+    explorerPic.removeAttribute("src");
 
     try{
       tokenInfo = await fetchKasplexToken(T);
@@ -827,7 +827,7 @@
       }
 
       if(tokenMarket && tokenMarket.logoUrl){
-        tokenLogo.src = tokenMarket.logoUrl;
+        explorerPic.src = tokenMarket.logoUrl;
       }
 
       try{

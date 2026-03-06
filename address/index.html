@@ -327,14 +327,14 @@
     const a = String(addr ?? "").trim();
     const text = escHtml(label != null ? label : a);
     if (!a) return "-";
-    return `<a class="explorerLink" href="${walletUrl(a)}">${text}</a>`;
+    return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
   }
 
   function linkTx(hash, label) {
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if (!h) return "-";
-    return `<a class="explorerLink" href="${transactionUrl(h)}">${text}</a>`;
+    return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
   }
 
   async function fetchKasPrice() {
@@ -490,51 +490,59 @@
   }
 
   function getFromTo(tx, addr, net) {
-    let from = [];
-    let to = [];
-
+    let fromMap = new Map();
     if (Array.isArray(tx.inputs)) {
       tx.inputs.forEach(inp => {
         const inpAddr = inp.previous_outpoint_address;
-        if (inpAddr && !from.includes(inpAddr)) {
-          from.push(inpAddr);
+        const amt = BigInt(inp.previous_outpoint_amount || 0);
+        if (inpAddr) {
+          fromMap.set(inpAddr, (fromMap.get(inpAddr) || 0n) + amt);
         }
       });
     }
-
+    let toMap = new Map();
     if (Array.isArray(tx.outputs)) {
       tx.outputs.forEach(out => {
         const outAddr = out.script_public_key_address;
-        if (outAddr && !to.includes(outAddr)) {
-          to.push(outAddr);
+        const amt = BigInt(out.amount || 0);
+        if (outAddr) {
+          toMap.set(outAddr, (toMap.get(outAddr) || 0n) + amt);
         }
       });
     }
-
     const type = getTransactionType(tx);
-
+    let fromItems = [];
+    let toItems = [];
     let fromStr, toStr;
-
     if (net > 0n) {
-      from = from.filter(a => a !== addr);
-      fromStr = from.length > 1 ? "Multiple" :
-                (from.length === 1 ? from[0] :
-                 (from.length === 0 && tx.inputs?.length > 0 ? "Unresolved inputs" :
-                  (type === "coinbase" ? "Block reward" : addr)));
+      fromMap.forEach((amt, a) => {
+        if (a !== addr) fromItems.push({addr: a, amt});
+      });
+      if (fromItems.length > 1) {
+        fromStr = "Multiple";
+      } else if (fromItems.length === 1) {
+        fromStr = fromItems[0].addr;
+      } else {
+        fromStr = (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : (type === "coinbase" ? "Block reward" : addr);
+      }
       toStr = addr;
     } else if (net < 0n) {
       fromStr = addr;
-
-      to = to.filter(a => a !== addr);
-      toStr = to.length > 1 ? "Multiple" :
-              (to.length === 1 ? to[0] :
-               (to.length === 0 ? addr : "-"));
+      toMap.forEach((amt, a) => {
+        if (a !== addr) toItems.push({addr: a, amt});
+      });
+      if (toItems.length > 1) {
+        toStr = "Multiple";
+      } else if (toItems.length === 1) {
+        toStr = toItems[0].addr;
+      } else {
+        toStr = addr;
+      }
     } else {
       fromStr = addr;
       toStr = addr;
     }
-
-    return { from: fromStr, to: toStr };
+    return { from: fromStr, to: toStr, fromItems, toItems };
   }
 
   function formatAmount(net) {
@@ -567,20 +575,50 @@
         ? formatDate(new Date(Number(tx.block_time)))
         : "-";
       const net = getNetChange(tx, addr);
-      const { from, to } = getFromTo(tx, addr, net);
+      const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
       const amt = formatAmount(net);
 
       const shortHash = shortenHash(hash);
-      const shortFrom = shortenMiddle(from, 12, 7);
-      const shortTo = shortenMiddle(to, 12, 7);
 
-      const fromHtml = (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) 
-          ? linkAddress(from, shortFrom) 
-          : `<span class="muted">${escHtml(shortFrom)}</span>`;
+      let fromHtml;
+      if (from === "Multiple") {
+        const receiverItems = fromItems.map(item => {
+          const short = shortenMiddle(item.addr, 12, 7);
+          return `${linkAddress(item.addr, short)}<span> → <span style="color:#2ee59d">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span>/span><br>`;
+        }).join('');
+        fromHtml = `
+          <details>
+            <summary class="expandable-row muted">Multiple addresses (${fromItems.length})</summary>
+            <div class="receiver-list">${receiverItems}</div>
+          </details>
+        `;
+      } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
+        const shortFrom = shortenMiddle(from, 12, 7);
+        fromHtml = linkAddress(from, shortFrom);
+      } else {
+        const shortFrom = shortenMiddle(from, 12, 7);
+        fromHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
+      }
 
-      const toHtml = (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) 
-          ? linkAddress(to, shortTo) 
-          : `<span class="muted">${escHtml(shortTo)}</span>`;
+      let toHtml;
+      if (to === "Multiple") {
+        const receiverItems = toItems.map(item => {
+          const short = shortenMiddle(item.addr, 12, 7);
+          return `${linkAddress(item.addr, short)}<span> → <span style="color:#2ee59d">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span>/span><br>`;
+        }).join('');
+        toHtml = `
+          <details>
+            <summary class="expandable-row muted">Multiple addresses (${toItems.length})</summary>
+            <div class="receiver-list">${receiverItems}</div>
+          </details>
+        `;
+      } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
+        const shortTo = shortenMiddle(to, 12, 7);
+        toHtml = linkAddress(to, shortTo);
+      } else {
+        const shortTo = shortenMiddle(to, 12, 7);
+        toHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
+      }
 
       return `
         <tr>
@@ -607,7 +645,7 @@
       const tokenUrl = `/krc20/?q=${t.tick}`;
       return `
         <tr>
-          <td><a class="explorerLink" href="${tokenUrl}">${tick}</a></td>
+          <td><a class="explorerTx" href="${tokenUrl}">${tick}</a></td>
           <td>${bal}</td>
           <td>${lock}</td>
           <td>${escHtml(t.dec)}</td>

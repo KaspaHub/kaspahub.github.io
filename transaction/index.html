@@ -49,7 +49,7 @@
 
   <div id="explorerHdr">
     <div id="explorerPic"></div>
-    <div style="max-width: 100%; overflow: hidden;">
+    <div class="explorerCtn">
       <h1 id="hdrLine">Kaspa Transaction</h1>
       <div class="sub" id="hdrSub">-</div>
     </div>
@@ -199,7 +199,7 @@
 
 (() => {
   const API_BASE = "https://api.kaspa.org";
-  const EXPLORER_BLOCK_BASE = "https://kaspa.stream/blocks/";
+  const BLOCK_BASE = "/block/?q=";
   const TRANSACTION_BASE = "/transaction/?q=";
   const WALLET_BASE = "/address/?q=";
 
@@ -207,26 +207,21 @@
 
   const q = el("q");
   const go = el("go");
-
   const hdrSub = el("hdrSub");
-
   const totalSent = el("totalSent");
   const fee = el("fee");
   const ioCount = el("ioCount");
   const status = el("status");
-
   const massEl = el("mass");
   const blueScore = el("blueScore");
   const blockTime = el("blockTime");
   const acceptingBlockTime = el("acceptingBlockTime");
-
   const ioLoading = el("ioLoading");
   const ioRows = el("ioRows");
-
   const detailsRows = el("detailsRows");
-
   const payloadContent = el("payloadContent");
   const transferRows = el("transferRows");
+  const explorerPic = el("explorerPic");
 
   let busy = false;
   let currentTxId = "";
@@ -283,28 +278,28 @@
 
   function explorerBlockUrl(hash) {
     const h = String(hash ?? "").trim();
-    return h ? EXPLORER_BLOCK_BASE + encodeURIComponent(h) : "#";
+    return h ? BLOCK_BASE + encodeURIComponent(h) : "#";
   }
 
   function linkAddress(addr, label) {
     const a = String(addr ?? "").trim();
     const text = escHtml(label != null ? label : shortenMiddle(a, 13, 10));
     if (!a) return "-";
-    return `<a class="explorerLink" href="${walletUrl(a)}">${text}</a>`;
+    return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
   }
 
   function linkTx(hash, label) {
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if (!h) return "-";
-    return `<a class="explorerLink" href="${transactionUrl(h)}">${text}</a>`;
+    return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
   }
 
   function linkBlock(hash, label) {
     const h = String(hash ?? "").trim();
     const text = escHtml(label != null ? label : h);
     if (!h) return "-";
-    return `<a class="explorerLink" href="${explorerBlockUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
+    return `<a class="explorerTx" href="${explorerBlockUrl(h)}" target="_blank" rel="noreferrer">${text}</a>`;
   }
 
   async function fetchTransaction(txid) {
@@ -463,7 +458,7 @@
             let toCellContent = '';
             const receiverItems = receivers.map(addr => {
               const amt = outputMap.get(addr) || 0n;
-              return `${linkAddress(addr)} → <span style="color:#2ee59d">${formatKas(amt, true)}</span><br>`;
+              return `${linkAddress(addr)}<span> → <span style="color:#2ee59d">${formatKas(amt, true)}</span></span><br>`;
             }).join('');
             if (receivers.length === 1) {
               toCellContent = linkAddress(receivers[0]);
@@ -542,7 +537,7 @@
           <tr>
             <td>${index}</td>
             <td>-</td>
-            <td><span class="muted">${outpointHtml}</span></td>
+            <td><span class="explorerTx muted">${outpointHtml}</span></td>
             <td>${renderScript(out.script_public_key, "Public Key Script")}</td>
             <td>${escHtml(out.script_public_key_type || "Output")}</td>
             <td class="right">${amtHtml}</td>
@@ -582,22 +577,37 @@
     } catch {}
   }
 
-  function determineTx(payload, outputs) {
-    let isK = false;
-    if (payload) {
-      try {
-        const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
-        const utf8 = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
-        if (utf8.startsWith("k:1:")) {
-          console.log("K");
-          isK = true;
-        }
-      } catch {}
-    }
-    if (!isK && Array.isArray(outputs) && outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")) {
-      console.log("KNS");
+function determineTx(payload, outputs) {
+  let plOk = false;
+  let utf8 = "";
+
+  if (payload) {
+    try {
+      const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
+      utf8 = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
+
+      if (utf8.startsWith("k:1:")) {
+        explorerPic.innerHTML = `<img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-black.webp">`;
+        plOk = true;
+      }
+    } catch {}
+  }
+
+  if (!plOk) {
+    if (utf8.startsWith("ciph_msg:1:")) {
+      explorerPic.innerHTML = `<img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp">`;
+    } 
+    else if (
+      Array.isArray(outputs) &&
+      outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")
+    ) {
+      explorerPic.innerHTML = `<img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp">`;
+    } 
+    else {
+      explorerPic.innerHTML = `<img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp">`;
     }
   }
+}
 
   async function runSearch(inputTxId) {
     if (busy) return;

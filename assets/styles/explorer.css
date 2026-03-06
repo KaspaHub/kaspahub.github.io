@@ -33,6 +33,10 @@
   overflow: hidden;
 }
 
+.explorerTx {
+  word-break: break-all;
+}
+
 .qrCode {
   background-image: url('/assets/icons/qr.svg');
   min-width:34px;
