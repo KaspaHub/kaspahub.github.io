@@ -1,5 +1,13 @@
 'use strict';
 
+const isLightTheme = localStorage.getItem('light') !== null;
+// document.documentElement.id = isLightTheme ? 'dark' : 'light';
+
+const checkbox = document.getElementById('theme-check');
+checkbox.checked = isLightTheme;
+
+let testing = true;
+
 
 function initServiceWorker() {
     if (!('serviceWorker' in navigator)) {
@@ -11,7 +19,7 @@ function initServiceWorker() {
         console.log('%c[Main] A service worker is already controlling this page.', 'color: #61C554;');
     }
 
-    navigator.serviceWorker.register('/assets/scripts/sw.js')
+    navigator.serviceWorker.register('/sw.js')
         .then(function (registration) {
             console.log('%c[Main] Service worker registered successfully.', 'color: #61C554;');
         })
@@ -35,13 +43,24 @@ initServiceWorker();
 //sw ^
 
 
-const isLightTheme = localStorage.getItem('light') !== null;
-// document.documentElement.id = isLightTheme ? 'dark' : 'light';
 
-const checkbox = document.getElementById('theme-check');
-checkbox.checked = isLightTheme;
+function formatDate(ts, locale = 'en-US') {
+  if (!ts) return "-";
+  const d = new Date(Number(ts));
+  if (!isFinite(d.getTime())) return "-";
 
-let testing = true;
+  const options = {
+    month: 'short',
+    day:   'numeric',
+    year:  'numeric',
+    hour:  'numeric',
+    minute:'2-digit',
+    second:'2-digit',
+    hour12: locale === 'en-US'
+  };
+
+  return d.toLocaleString(locale, options);
+}
 
 
 function escHtml(input) {

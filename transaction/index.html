@@ -130,7 +130,7 @@
   <div id="tabPayload" class="tabPanel" aria-label="Payload panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Payload</h3>
-      <div class="muted" id="payloadContent">-</div>
+      <div id="payloadContent">-</div>
     </div>
   </div>
   </section>
@@ -355,8 +355,8 @@
 
     massEl.textContent = withSeparators(json.mass) || "-";
     blueScore.textContent = withSeparators(json.accepting_block_blue_score) || "-";
-    blockTime.textContent = json.block_time ? new Date(Number(json.block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
-    acceptingBlockTime.textContent = json.accepting_block_time ? new Date(Number(json.accepting_block_time)).toLocaleString(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit", hour12: true }) : "-";
+    blockTime.textContent = formatDate(json.block_time);
+    acceptingBlockTime.textContent = formatDate(json.accepting_block_time);
   }
 
   function renderTransfers(json, totals) {

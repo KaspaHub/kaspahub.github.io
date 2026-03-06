@@ -120,8 +120,8 @@
           <tr>
             <th>#</th>
             <th>Address</th>
-            <th class="right">Quantity</th>
-            <th class="right">Percentage</th>
+            <th>Quantity</th>
+            <th>Percentage</th>
           </tr>
         </thead>
         <tbody id="holderRows">
@@ -150,7 +150,7 @@
             <th>Age</th>
             <th>From</th>
             <th>To</th>
-            <th class="right">Amount</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody id="txRows">
@@ -319,10 +319,6 @@
   let holderList = [];
   let holderOffset = 0;
   const HOLDER_LIMIT = 20;
-
-  function nowFmt(){
-    return new Date().toLocaleString(undefined, { hour12:false });
-  }
 
   function safeUpper(s){ return (s || "").trim().toUpperCase(); }
 
@@ -589,12 +585,7 @@
     tokenDec = Number(tokenInfo?.dec ?? "0");
     dec.textContent = String(tokenDec);
 
-    if(tokenInfo?.mtsAdd != null){
-      const dt = new Date(Number(tokenInfo.mtsAdd));
-      deployDate.textContent = isFinite(dt.getTime()) ? dt.toLocaleString(undefined, { hour12:false }) : "-";
-    }else{
-      deployDate.textContent = "-";
-    }
+    deployDate.textContent = formatDate(tokenInfo?.mtsAdd);
 
     const mintedRaw = tokenInfo?.minted ?? "0";
     const burnedRaw = tokenBurnedRaw ?? "0";
@@ -655,12 +646,7 @@
     iChat.innerHTML = chat ? `<a href="${chat}" target="_blank" rel="noreferrer">${chat}</a>` : "-";
     iMode.textContent = tokenInfo?.mod ?? "-";
     iTo.textContent = tokenInfo?.to ?? "-";
-    if(tokenInfo?.mtsAdd != null){
-      const dt = new Date(Number(tokenInfo.mtsAdd));
-      iUpdated.textContent = isFinite(dt.getTime()) ? dt.toLocaleString(undefined, { hour12:false }) : nowFmt();
-    }else{
-      iUpdated.textContent = nowFmt();
-    }
+    iUpdated.textContent = formatDate(tokenInfo?.mtsAdd);
   }
 
   function renderPriceMissing(){
@@ -700,8 +686,8 @@
         <tr>
           <td>${globalI+1}</td>
           <td>${linkAddress(addr, addr)}</td>
-          <td class="right">${amtFmt}</td>
-          <td class="right">${share}</td>
+          <td>${amtFmt}</td>
+          <td>${share}</td>
         </tr>
       `;
     }).join("");
@@ -749,7 +735,7 @@
           <td>${age}</td>
           <td>${linkAddress(from, shortFrom)}</td>
           <td>${linkAddress(to, shortTo)}</td>
-          <td class="right">${amt}</td>
+          <td>${amt}</td>
         </tr>
       `;
     }).join("");
@@ -802,9 +788,9 @@
     marketRows.innerHTML = `
     <tr>
       <td>kaspa.com</td>
-      <td class="right">${priceFmt}</td>
-      <td class="right">${volFmt}</td>
-      <td class="right">${mcapFmt}</td>
+      <td>${priceFmt}</td>
+      <td>${volFmt}</td>
+      <td>${mcapFmt}</td>
     </tr>
     `;
   }
