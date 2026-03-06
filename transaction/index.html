@@ -84,18 +84,35 @@
     </div>
   </div>
 
-  <div class="theme-1" id="transfersBox" aria-label="Transaction Summary">
-    <h3>Transfers</h3>
-    <div id="txSummaries"></div>
-  </div>
-
   <div class="tabs" role="tablist" aria-label="Transaction tabs">
-    <button class="tab active" data-tab="tabIO">Inputs & Outputs</button>
+    <button class="tab active" data-tab="tabTransfers">Transfers</button>
+    <button class="tab" data-tab="tabIO">Inputs & Outputs</button>
     <button class="tab" data-tab="tabDetails">Details</button>
     <button class="tab" data-tab="tabPayload">Payload</button>
   </div>
 
-  <div id="tabIO" class="tabPanel active" aria-label="Inputs & Outputs panel">
+  <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>Transfers</h3>
+      <div id="txSummariesLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>To</th>
+              <th class="right">For</th>
+            </tr>
+          </thead>
+          <tbody id="transferRows">
+            <tr><td colspan="3" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabIO" class="tabPanel" aria-label="Inputs & Outputs panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Inputs & Outputs</h3>
       <div id="ioLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
@@ -104,14 +121,15 @@
           <thead>
             <tr>
               <th>Index</th>
+              <th>Sig Op Count</th>
               <th>Outpoint</th>
-              <th>Address</th>
+              <th>Script</th>
               <th>Type</th>
               <th class="right">Amount</th>
             </tr>
           </thead>
           <tbody id="ioRows">
-            <tr><td colspan="5" class="muted">-</td></tr>
+            <tr><td colspan="6" class="muted">-</td></tr>
           </tbody>
         </table>
       </div>
@@ -177,6 +195,21 @@
 
 <script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/explorer.js"></script>
+<style>
+.expandable-receivers {
+  cursor: pointer;
+  font-style: italic;
+}
+.receiver-list {
+  margin-top: 6px;
+  padding-left: 12px;
+  line-height: 1.4;
+}
+.receiver-list a {
+  display: inline;
+  white-space: nowrap;
+}
+</style>
 <script type="text/javascript">
 'use strict';
 
@@ -209,7 +242,7 @@
   const detailsRows = el("detailsRows");
 
   const payloadContent = el("payloadContent");
-  const txSummaries = el("txSummaries");
+  const transferRows = el("transferRows");
 
   let busy = false;
   let currentTxId = "";
@@ -359,81 +392,118 @@
     acceptingBlockTime.textContent = formatDate(json.accepting_block_time);
   }
 
-  function renderTransfers(json, totals) {
-    let html = '';
-    const isCoinbase = !json.inputs || json.inputs.length === 0;
+function renderTransfers(json, totals) {
+  let html = '';
+  const isCoinbase = !json.inputs || json.inputs.length === 0;
 
-    if (isCoinbase) {
-      if (Array.isArray(json.outputs) && json.outputs.length > 0) {
-        json.outputs.forEach((out) => {
-          const addr = out.script_public_key_address ?? "-";
-          const amt = out.amount ?? 0;
-          html += `<p class="k">Block reward to ${linkAddress(addr)} for ${formatKas(amt, true)}</p>`;
-        });
-      } else {
-        html += `<p class="k">Block reward</p>`;
-      }
+  if (isCoinbase) {
+    if (Array.isArray(json.outputs) && json.outputs.length > 0) {
+      json.outputs.forEach((out) => {
+        const addr = out.script_public_key_address ?? "-";
+        const amt = out.amount ?? 0;
+        html += `
+          <tr>
+            <td class="muted">Miner Reward</td>
+            <td>${linkAddress(addr)}</td>
+            <td class="right">${formatKas(amt, true)}</td>
+          </tr>
+        `;
+      });
     } else {
-      const inputMap = new Map();
-      (json.inputs || []).forEach((inp) => {
-        const addr = inp.previous_outpoint_address;
-        if (addr) {
-          const amt = BigInt(inp.previous_outpoint_amount || 0);
-          inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
-        }
-      });
-
-      const outputMap = new Map();
-      (json.outputs || []).forEach((out) => {
-        const addr = out.script_public_key_address;
-        if (addr) {
-          const amt = BigInt(out.amount || 0);
-          outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
-        }
-      });
-
-      const inputKeys = Array.from(inputMap.keys());
-      const outputKeys = Array.from(outputMap.keys());
-
-      const isSelfTx = inputMap.size === 1 && outputMap.size === 1 && inputKeys[0] === outputKeys[0];
-
-      if (isSelfTx) {
-        let label = "Self";
-        if (json.payload && String(json.payload).length > 50) {
-          label += " (dApp interaction)";
-        }
-        html += `<p class="k">${label} for ${formatKas(totals.fee, true)}</p>`;
-      } else {
-        const isSingleSender = inputMap.size === 1;
-        inputMap.forEach((inAmt, fromAddr) => {
-          const changeAmt = outputMap.get(fromAddr) || 0n;
-          let transferredAmt = isSingleSender
-            ? totals.totalOut - changeAmt
-            : inAmt - changeAmt;
-
-          if (transferredAmt <= 0n) return;
-
-          const externalReceivers = outputKeys.filter(a => a !== fromAddr);
-          let toHtml = "";
-          if (externalReceivers.length === 1) {
-            toHtml = ` to ${linkAddress(externalReceivers[0])}`;
-          } else if (externalReceivers.length > 1) {
-            toHtml = ` to multiple addresses`;
-          } else {
-            return;
-          }
-
-          html += `<p class="k">From ${linkAddress(fromAddr)}${toHtml} for ${formatKas(transferredAmt, true)}</p>`;
-        });
+      html += `
+        <tr>
+          <td colspan="3" class="muted">Block reward – no outputs</td>
+        </tr>
+      `;
+    }
+  } else {
+    const inputMap = new Map();
+    (json.inputs || []).forEach((inp) => {
+      const addr = inp.previous_outpoint_address;
+      if (addr) {
+        const amt = BigInt(inp.previous_outpoint_amount || 0);
+        inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
       }
-    }
+    });
 
-    if (html === "") {
-      html = `<p class="k muted">No transfers to summarize</p>`;
-    }
+    const outputMap = new Map();
+    (json.outputs || []).forEach((out) => {
+      const addr = out.script_public_key_address;
+      if (addr) {
+        const amt = BigInt(out.amount || 0);
+        outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
+      }
+    });
 
-    txSummaries.innerHTML = html;
+    const inputKeys = Array.from(inputMap.keys());
+    const outputKeys = Array.from(outputMap.keys());
+
+    const isSelfTx = inputMap.size === 1 && outputMap.size === 1 && inputKeys[0] === outputKeys[0];
+
+    if (isSelfTx) {
+      html += `
+        <tr>
+          <td>${linkAddress(inputKeys[0])}</td>
+          <td>${linkAddress(outputKeys[0])} <span class="muted">(self)</span></td>
+          <td class="right">${formatKas(totals.fee, true)} <span class="muted">(fee)</span></td>
+        </tr>
+      `;
+    } else {
+      const allSenders = inputKeys;
+      const changeReceivers = outputKeys.filter(a => allSenders.includes(a));
+      const trueExternals = outputKeys.filter(a => !allSenders.includes(a));
+
+      inputMap.forEach((inAmt, fromAddr) => {
+        const changeAmt = outputMap.get(fromAddr) || 0n;
+        const isSingleSender = inputMap.size === 1;
+        const transferredAmt = isSingleSender ? totals.totalOut - changeAmt : inAmt - changeAmt;
+        if (transferredAmt <= 0n) return;
+
+        let receivers = changeAmt > 0n ? trueExternals : changeReceivers;
+        if (receivers.length === 0) {
+          receivers = trueExternals;
+        }
+        if (receivers.length === 0) return;
+
+        let toCellContent = '';
+        if (receivers.length === 1) {
+          toCellContent = linkAddress(receivers[0]);
+        } else {
+          const receiverItems = receivers.map(addr => {
+            const amt = outputMap.get(addr) || 0n;
+            return `${linkAddress(addr)} → ${formatKas(amt, true)}`;
+          }).join('<br>');
+
+          toCellContent = `
+            <details>
+              <summary class="expandable-receivers">multiple addresses (${receivers.length})</summary>
+              <div class="receiver-list">${receiverItems}</div>
+            </details>
+          `;
+        }
+
+        html += `
+          <tr>
+            <td>${linkAddress(fromAddr)}</td>
+            <td>${toCellContent}</td>
+            <td class="right">${formatKas(transferredAmt, true)}</td>
+          </tr>
+        `;
+      });
+    }
   }
+
+  if (html === '') {
+    html = `<tr><td colspan="3" class="muted">No transfers to display</td></tr>`;
+  }
+
+  transferRows.innerHTML = html;
+}
+
+function renderScript(script, type) {
+  if (!script) return "-";
+  return `<details><summary>${type}</summary><pre>${escHtml(script)}</pre></details>`;
+}
 
   function renderIORows(inputs, outputs, txid) {
     let html = '';
@@ -442,8 +512,7 @@
         const index = inp.index ?? i;
         const outpointHash = inp.previous_outpoint_hash ?? "-";
         const outpointIndex = inp.previous_outpoint_index ?? "-";
-        const outpoint = `${outpointIndex}:${shortenEnd(outpointHash, 12)}`;
-        const address = inp.previous_outpoint_address ?? "-";
+        const outpoint = shortenMiddle(outpointHash);
         const amount = inp.previous_outpoint_amount ?? 0;
         let kasStr = formatKas(amount, true);
         let absStr = kasStr.startsWith("0.") ? "0" + kasStr.slice(1) : kasStr.slice(0, -4);
@@ -452,8 +521,9 @@
         html += `
           <tr>
             <td>${index}</td>
+            <td>${inp.sig_op_count || "-"}</td>
             <td>${outpointHtml}</td>
-            <td>${linkAddress(address)}</td>
+            <td>${renderScript(inp.signature_script, "Signature Script")}</td>
             <td>Input</td>
             <td class="right">${amtHtml}</td>
           </tr>
@@ -463,16 +533,16 @@
     if (Array.isArray(outputs)) {
       outputs.forEach((out, i) => {
         const index = out.index ?? i;
-        const outpoint = `${index}:${shortenEnd(txid, 12)}`;
-        const address = out.script_public_key_address ?? "-";
+        const outpoint = shortenMiddle(txid);
         const amount = out.amount ?? 0;
         const amtHtml = `<span style="color:#2ee59d">+${formatKas(amount, true)}</span>`;
         const outpointHtml = escHtml(outpoint);
         html += `
           <tr>
             <td>${index}</td>
+            <td>-</td>
             <td>${outpointHtml}</td>
-            <td>${linkAddress(address)}</td>
+            <td>${renderScript(out.script_public_key, "Public Key Script")}</td>
             <td>Output</td>
             <td class="right">${amtHtml}</td>
           </tr>
@@ -480,12 +550,12 @@
       });
     }
     if (!html) {
-      html = `<tr><td colspan="5" class="muted">No inputs or outputs found.</td></tr>`;
+      html = `<tr><td colspan="6" class="muted">No inputs or outputs found.</td></tr>`;
     }
     ioRows.innerHTML = html;
   }
 
-  function renderDetails(json, inputs, outputs) {
+  function renderDetails(json) {
     let html = `
       <div class="row"><div class="k">Subnetwork ID</div><div class="v">${escHtml(json.subnetwork_id) || "-"}</div></div>
       <div class="row"><div class="k">Transaction ID</div><div class="v">${escHtml(json.transaction_id) || "-"}</div></div>
@@ -493,27 +563,6 @@
       <div class="row"><div class="k">Block Hash</div><div class="v">${Array.isArray(json.block_hash) ? json.block_hash.map(h => escHtml(h)).join(", ") : "-"}</div></div>
       <div class="row"><div class="k">Accepting Block Hash</div><div class="v">${escHtml(json.accepting_block_hash) || "-"}</div></div>
     `;
-
-    if (Array.isArray(outputs) && outputs.length > 0) {
-      html += `<div class="row"><div class="k">Output Details</div><div class="v"></div></div>`;
-      outputs.forEach((out, i) => {
-        html += `
-          <div class="row"><div class="k">Output ${i} Script Public Key</div><div class="v">${escHtml(out.script_public_key) || "-"}</div></div>
-          <div class="row"><div class="k">Output ${i} Script Public Key Type</div><div class="v">${escHtml(out.script_public_key_type) || "-"}</div></div>
-        `;
-      });
-    }
-
-    if (Array.isArray(inputs) && inputs.length > 0) {
-      html += `<div class="row"><div class="k">Input Details</div><div class="v"></div></div>`;
-      inputs.forEach((inp, i) => {
-        html += `
-          <div class="row"><div class="k">Input ${i} Sig Op Count</div><div class="v">${inp.sig_op_count || "-"}</div></div>
-          <div class="row"><div class="k">Input ${i} Signature Script</div><div class="v">${escHtml(inp.signature_script) || "-"}</div></div>
-        `;
-      });
-    }
-
     detailsRows.innerHTML = html;
   }
 
@@ -570,7 +619,7 @@
     renderSummary(json, totals, json.inputs, json.outputs);
     renderTransfers(json, totals);
     renderIORows(json.inputs, json.outputs, txid);
-    renderDetails(json, json.inputs, json.outputs);
+    renderDetails(json);
     renderPayload(json.payload);
 
     go.disabled = false;
@@ -587,8 +636,8 @@
     blueScore.textContent = "-";
     blockTime.textContent = "-";
     acceptingBlockTime.textContent = "-";
-    txSummaries.innerHTML = "";
-    ioRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+    transferRows.innerHTML = `<tr><td colspan="3" class="muted">-</td></tr>`;
+    ioRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
     detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
     payloadContent.textContent = "-";
   }

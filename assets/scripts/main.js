@@ -6,7 +6,7 @@ const isLightTheme = localStorage.getItem('light') !== null;
 const checkbox = document.getElementById('theme-check');
 checkbox.checked = isLightTheme;
 
-let testing = true;
+let testing = false;
 
 
 function initServiceWorker() {

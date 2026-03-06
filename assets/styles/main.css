@@ -418,22 +418,12 @@ hr {
 	color: #004c41;*/
 }
 
-.checked::before {
-	content: url('/assets/icons/checked.svg');
-}
-.reviewed::before {
-	content: url('/assets/icons/reviewed.svg');
-}
-.verified::before {
-	content: url('/assets/icons/verified.svg');
-}
-
-.checked, .reviewed, .verified {
+.reviewed, .verified {
 	position: relative;
 	cursor: pointer;
 }
 
-.checked::before, .reviewed::before, .verified::before {
+.reviewed::before, .verified::before {
 	margin-right: 5px;
 	height: 1em;
 	width: 1em;
@@ -456,7 +446,23 @@ hr {
 	transition: opacity 0.3s ease;
 }
 
-.checked:hover::after, .reviewed:hover::after, .verified:hover::after {
+.reviewed::before {
+	content: url('/assets/icons/reviewed.svg');
+}
+
+.verified::before {
+	content: url('/assets/icons/verified.svg');
+}
+
+.reviewed::after {
+	content: "Reviewed by Kaspa Hub Team";
+}
+
+.verified::after {
+	content: "Sponsored";
+}
+
+.reviewed:hover::after, .verified:hover::after {
 	opacity: 1;
 }
 
