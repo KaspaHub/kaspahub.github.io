@@ -97,7 +97,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/explorer.js"></script>
+<script src="/assets/scripts/explorer.js"></script>
 <script type="text/javascript">
 'use strict';
 
@@ -130,7 +130,10 @@ async function execute(query, source = '[unknown] ') {
     }, 100);
 
     setStatus(false);
-    results.innerHTML = '';
+
+    // results.innerHTML = '';
+
+    results.style.opacity= "0";
 
 
     const newUrl = new URL(window.location);

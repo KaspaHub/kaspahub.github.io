@@ -628,4 +628,6 @@ async function loadAddress(searchQuery) {
       domainLoading.classList.add("hidden");
     }
   }
+
+results.style.opacity= "1";
 }

@@ -44,7 +44,7 @@
                 <div id="picture"></div>
                 <div>
                     <h1 id="display_name"></h1>
-                    <h3 id="name" style="opacity: 0.75;"></h3>
+                    <p id="name" style="opacity: 0.8;"></p>
                 </div>
             </div>
 
@@ -96,41 +96,26 @@
 </div>
 
 <style>
-/*main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}*/
+
+#display_name {
+    font-size: 20px;
+}
+
 .pfp {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     user-select: none;
 }
-#about {
-    margin: 10px;
-}
 
-/*.theme-1 {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    width: 100%;
-}*/
 #picture {
     flex-shrink: 0;
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
 }
-@media (max-width: 700px) {
-    .pfp, #picture {
-        height: 100px;
-        width: 100px;
-    }
-    main {
-        font-size: 0.9em;
-    }
+
+#about {
+    margin: 10px;
 }
 
 .menu-button {
@@ -184,10 +169,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const aboutElement = document.getElementById("about");
     const qrCodeElement = document.getElementById("qr-code");
     const errorDiv = document.getElementById("error");
-    // const openButton = document.getElementById("open-button");
-
     const profileSection = document.getElementById("profile-section");
     const searchSection = document.getElementById("search-section");
+    const button = document.getElementById('menuButton');
+    const popupMenu = document.getElementById('popupMenu');
 
     const relays = [
         'wss://relay.damus.io',
@@ -248,41 +233,64 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (!userProfile || !isValidKaspaAddress(userProfile.kaspa)) {
-        aboutElement.innerHTML = `<span class='error'>No user found with npub <strong>${npub}</strong> or no valid Kaspa wallet address.</span>`;
+        aboutElement.innerHTML = `<span class='error'>No user found with npub <strong>${escHtml(npub)}</strong> or no valid Kaspa wallet address.</span>`;
         pool.close(relays);
         return;
     }
 
-const menuItems = [];
-menuItems.push(`<a href="https://kaspahub.org/nostr/register/">Sign up</a><button type="button" onclick="navigator.clipboard.writeText('${npub}')">Copy Public Key</button>`);
-if (userProfile.lud16 && userProfile.lud16.includes('@')) {
-    menuItems.push(`<button type="button" onclick="navigator.clipboard.writeText('${userProfile.lud16}')">Copy Lightning</button>`);
-}
+    const escapedNpub = escHtml(npub);
+    const escapedDisplayName = userProfile.display_name ? escHtml(userProfile.display_name) : '';
+    const escapedUsername = userProfile.username ? escHtml(userProfile.username) : '';
+    const escapedAbout = userProfile.about ? escHtml(userProfile.about) : '';
+    const pictureUrl = userProfile.picture && userProfile.picture.startsWith('https:') ? userProfile.picture : '';
+    const escapedPictureUrl = pictureUrl ? escHtml(pictureUrl) : '';
+    const websiteUrl = userProfile.website && userProfile.website.startsWith('http') ? userProfile.website : '';
+    const escapedWebsiteUrl = websiteUrl ? escHtml(websiteUrl) : '';
+    const lud16 = userProfile.lud16 && userProfile.lud16.includes('@') ? userProfile.lud16 : '';
+    const walletAddress = userProfile.kaspa;
+    const escapedWalletAddress = escHtml(walletAddress);
 
-if (userProfile.website && userProfile.website.startsWith('http')) {
-    menuItems.push(`<a href="${userProfile.website}" target="_blank">Visit Website</a>`);
-}
+    const menuItems = [];
+    menuItems.push(`<a href="https://kaspahub.org/nostr/register/">Sign up</a><button type="button" data-copy-npub>Copy Public Key</button>`);
+    if (lud16) {
+        menuItems.push(`<button type="button" data-copy-lud16>Copy Lightning</button>`);
+    }
+    if (websiteUrl) {
+        menuItems.push(`<a href="${escapedWebsiteUrl}" target="_blank">Visit Website</a>`);
+    }
+    popupMenu.innerHTML = menuItems.join('');
 
-popupMenu.innerHTML = menuItems.join('');
+    const npubBtn = popupMenu.querySelector('[data-copy-npub]');
+    if (npubBtn) {
+        npubBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(npub);
+        });
+    }
+    const ludBtn = popupMenu.querySelector('[data-copy-lud16]');
+    if (ludBtn) {
+        ludBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(lud16);
+        });
+    }
 
-    if (userProfile.picture && userProfile.picture.startsWith('https:')) {
-        pictureElement.innerHTML = `<img draggable="false" class="pfp" src="${userProfile.picture}" onerror="this.src='https://kaspahub.org/assets/icons/user.svg'">`;
+    if (escapedPictureUrl) {
+        pictureElement.innerHTML = `<img draggable="false" class="pfp" src="${escapedPictureUrl}" onerror="this.src='https://kaspahub.org/assets/icons/user.svg'">`;
     } else {
         pictureElement.innerHTML = `<img draggable="false" class="pfp" src="https://kaspahub.org/assets/icons/user.svg" alt="Profile Picture">`;
     }
 
     if (userProfile.display_name) {
-        displaynameElement.innerHTML = userProfile.display_name;
+        displaynameElement.innerHTML = escapedDisplayName;
     }
 
     if (userProfile.about) {
-        aboutElement.innerHTML = userProfile.about;
+        aboutElement.innerHTML = escapedAbout;
     } else {
         aboutElement.innerHTML = "";
     }
 
-     if (userProfile.username) {
-        usernameElement.innerHTML = `@${userProfile.username}`;
+    if (userProfile.username) {
+        usernameElement.innerHTML = `@${escapedUsername}`;
         document.title = `@${userProfile.username}`;
         setMetaTag('kaspa:title', '@' + userProfile.username);
     } else if (userProfile.display_name) {
@@ -297,15 +305,11 @@ popupMenu.innerHTML = menuItems.join('');
 
     button.style.display = 'inline-block';
 
-    const walletAddress = userProfile.kaspa;
-
-    
-
-  qrCodeElement.innerHTML = `
+    qrCodeElement.innerHTML = `
 <div class="w-container">
 <div data-qr></div>
 <p class="w-message">Scan or copy the Kaspa address</p>
-<pre class="w-data">${escHtml(walletAddress)}</pre>
+<pre class="w-data">${escapedWalletAddress}</pre>
 <button class="button" data-copy>Copy</button>
 </div>
   `;
@@ -326,44 +330,37 @@ popupMenu.innerHTML = menuItems.join('');
       }, 1500);
     });
 
-    // if (window.innerHeight > window.innerWidth) {
-    //     openButton.style.display = "inline-block";
-    //     openButton.href = walletAddress;
-    // }
-
     setMetaTag('kaspa:wallet', walletAddress);
 
-}
-});
-
-const button = document.getElementById('menuButton');
-const popupMenu = document.getElementById('popupMenu');
-
-button.addEventListener('click', (e) => {
-e.stopPropagation();
-popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
-});
-
-document.addEventListener('click', () => {
-popupMenu.style.display = 'none';
-});
-
-function runSearch(npub) {
-    if (npub) {
-        window.location.href = `https://kaspahub.org/n/?user=${npub}`;
-    }
+    pool.close(relays);
 }
 
-document.addEventListener('click', function(e) {
-    if (e.target.id === 'searchBtn') {
-        runSearch(document.getElementById('searchBox')?.value);
-    }
-});
+    button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+    });
 
-document.addEventListener('keydown', function(e) {
-    if (e.target.id === 'searchBox' && e.key === 'Enter') {
-        runSearch(e.target.value);
+    document.addEventListener('click', () => {
+        popupMenu.style.display = 'none';
+    });
+
+    function runSearch(npubInput) {
+        if (npubInput) {
+            window.location.href = `https://kaspahub.org/n/?user=${npubInput}`;
+        }
     }
+
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'searchBtn') {
+            runSearch(document.getElementById('searchBox')?.value);
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.target.id === 'searchBox' && e.key === 'Enter') {
+            runSearch(e.target.value);
+        }
+    });
 });
 </script>
 </body>

@@ -132,7 +132,7 @@ html#dark {
 	user-select: none;
 }
 
-h1 {font-size: 2em;}
+h1 {font-size: 1.5em;}
 h2 {font-size: 1.295em;}
 h3 {font-size: 1.215em;}
 h4 {font-size: 1.135em;}
@@ -895,8 +895,12 @@ article table tr:hover {
 }
 
 /* fade v */
-.fade-in, #itemGrid, #msg, #results {
+.fade-in, #itemGrid, #msg {
 	animation: fadeIn ease 0.7s;
+}
+
+#results {
+	transition: opacity 0.7s;
 }
 
 @keyframes fadeIn {
