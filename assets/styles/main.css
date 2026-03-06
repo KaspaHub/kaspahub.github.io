@@ -1062,6 +1062,7 @@ footer {
 	padding: 20px;
 	gap: 20px;
 	text-align: center;
+	justify-items: center;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 }
@@ -1070,6 +1071,7 @@ footer {
 	color: #6C757D;
 	opacity: 0.9;
 	font-size: 0.9rem;
+	max-width: 350px;
 }
 
 .social-icons {
@@ -1145,28 +1147,28 @@ footer {
 /* notification v */
 
 .toast-container {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 8px;
-    z-index: 99;
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 8px;
+	z-index: 99;
 }
 
 .toast {
-    display: inline-block;
-    max-width: 420px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid #000000;
-    background: #FFFFDE;
-    color: #040404;
+	display: inline-block;
+	max-width: 420px;
+	padding: 10px 12px;
+	border-radius: 12px;
+	border: 1px solid #000000;
+	background: #FFFFDE;
+	color: #040404;
 }
 
 .toast .m {
-    font-size: 13px;
-    line-height: 1.35;
+	font-size: 13px;
+	line-height: 1.35;
 }
 /* popup v */
 dialog {

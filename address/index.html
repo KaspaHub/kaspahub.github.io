@@ -737,7 +737,7 @@
 
     const addr = String(inputAddr || "").trim();
     if (!addr.startsWith("kaspa:")) {
-      add("Invalid address", "Please enter a valid Kaspa address starting with 'kaspa:'.");
+      addToast("Invalid address", "Please enter a valid Kaspa address starting with: kaspa:");
       busy = false;
       return;
     }
