@@ -465,10 +465,6 @@
     return s.slice(0, head) + "..." + s.slice(-tail);
   }
 
-  function escHtml(s){
-    return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
-  }
-
   function explorerAddressUrl(addr){
     const a = String(addr ?? "").trim();
     return a ? `/address/?q=${encodeURIComponent(a)}` : "#";

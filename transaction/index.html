@@ -287,10 +287,6 @@
     return s.slice(0, maxLength) + "...";
   }
 
-  function escHtml(s) {
-    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
-
   function walletUrl(addr) {
     const a = String(addr ?? "").trim();
     return a ? WALLET_BASE + encodeURIComponent(a) : "#";
