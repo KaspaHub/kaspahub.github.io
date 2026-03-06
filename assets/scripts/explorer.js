@@ -350,16 +350,14 @@ async function loadAddress(searchQuery) {
     if (frac) frac = '.' + frac;
     return withSeparators(int.toString()) + frac;
   }
-  function formatDateTime(dt) {
-    return dt.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) + ", " + dt.toLocaleTimeString(undefined, { hour12: true });
-  }
+
   function renderTransactions(txs, addr) {
     if (!txs.length) {
       return `<tr><td colspan="5" class="muted">No transactions found.</td></tr>`;
     }
     return txs.map(tx => {
       const hash = String(tx.transaction_id || "-");
-      const age = tx.block_time ? formatDateTime(new Date(Number(tx.block_time))) : "-";
+      const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
       const net = getNetChange(tx, addr);
       const { from, to } = getFromTo(tx, addr, net);
       const amt = formatAmount(net);
@@ -404,7 +402,7 @@ async function loadAddress(searchQuery) {
     }
     return doms.map(d => {
       const name = escHtml(d.asset);
-      const created = d.creationBlockTime ? formatDateTime(new Date(d.creationBlockTime)) : "-";
+      const created = d.creationBlockTime ? formatDate(new Date(d.creationBlockTime)) : "-";
       const status = escHtml(d.status);
       const shortTx = shortenHash(d.transactionId);
       return `
