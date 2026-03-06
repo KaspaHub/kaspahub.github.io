@@ -44,21 +44,20 @@
 <script async src="/assets/scripts/main.js"></script>
 
 <main id="container-1">
-  <div class="pageHead">
-    <div id="walletHeader">
-      <div style="max-width: 100%; overflow: hidden;">
-        <h1 id="hdrLine">Kaspa Transaction</h1>
-        <div class="sub" id="hdrSub">-</div>
-      </div>
-    </div>
 
-<div class="searchRow">
-  <div class="input" title="Transaction ID">
-    <input id="q" placeholder="e.g. qwerty..." />
+<section class="pageHead">
+
+  <div id="explorerHdr">
+    <div id="explorerPic"></div>
+    <div style="max-width: 100%; overflow: hidden;">
+      <h1 id="hdrLine">Kaspa Transaction</h1>
+      <div class="sub" id="hdrSub">-</div>
+    </div>
   </div>
-  <button class="btn" id="go">Search</button>
-</div>
-</div>
+
+  <div class="searchRow"><div class="input" title="Transaction ID"><input id="q" placeholder="e.g. qwerty..." /></div><button class="btn" id="go">Search</button></div>
+
+</section>
 
   <section id="pageData">
 
@@ -403,7 +402,7 @@
           const amt = out.amount ?? 0;
           html += `
             <tr>
-              <td class="muted">Miner Reward</td>
+              <td class="muted">Miner reward</td>
               <td>${linkAddress(addr)}</td>
               <td class="right"><span style="color:#2ee59d">${formatKas(amt, true)}</span></td>
             </tr>
@@ -412,7 +411,7 @@
       } else {
         html += `
           <tr>
-            <td colspan="3" class="muted">Block reward – no outputs</td>
+            <td colspan="3" class="muted">Burned</td>
           </tr>
         `;
       }
@@ -471,7 +470,7 @@
             } else {
               toCellContent = `
                 <details>
-                  <summary class="expandable-row">multiple addresses (${receivers.length})</summary>
+                  <summary class="expandable-row muted">Multiple addresses (${receivers.length})</summary>
                   <div class="receiver-list">${receiverItems}</div>
                 </details>
               `;
@@ -504,10 +503,10 @@
     transferRows.innerHTML = html;
   }
 
-function renderScript(script, type) {
-  if (!script) return "-";
-  return `<details><summary>${type}</summary><pre>${escHtml(script)}</pre></details>`;
-}
+  function renderScript(script, type) {
+    if (!script) return "-";
+    return `<details><summary class="muted">${type}</summary><pre>${escHtml(script)}</pre></details>`;
+  }
 
   function renderIORows(inputs, outputs, txid) {
     let html = '';
@@ -543,7 +542,7 @@ function renderScript(script, type) {
           <tr>
             <td>${index}</td>
             <td>-</td>
-            <td>${outpointHtml}</td>
+            <td><span class="muted">${outpointHtml}</span></td>
             <td>${renderScript(out.script_public_key, "Public Key Script")}</td>
             <td>${escHtml(out.script_public_key_type || "Output")}</td>
             <td class="right">${amtHtml}</td>
@@ -581,6 +580,23 @@ function renderScript(script, type) {
         payloadContent.innerHTML += `<h3>UTF-8</h3><pre>${escHtml(text)}</pre>`;
       }
     } catch {}
+  }
+
+  function determineTx(payload, outputs) {
+    let isK = false;
+    if (payload) {
+      try {
+        const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
+        const utf8 = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
+        if (utf8.startsWith("k:1:")) {
+          console.log("K");
+          isK = true;
+        }
+      } catch {}
+    }
+    if (!isK && Array.isArray(outputs) && outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")) {
+      console.log("KNS");
+    }
   }
 
   async function runSearch(inputTxId) {
@@ -623,6 +639,7 @@ function renderScript(script, type) {
     renderIORows(json.inputs, json.outputs, txid);
     renderDetails(json);
     renderPayload(json.payload);
+    determineTx(json.payload, json.outputs);
 
     go.disabled = false;
     busy = false;
