@@ -895,7 +895,7 @@ article table tr:hover {
 }
 
 /* fade v */
-.fade-in, #itemGrid {
+.fade-in, #itemGrid, #msg, #results {
 	animation: fadeIn ease 0.7s;
 }
 
