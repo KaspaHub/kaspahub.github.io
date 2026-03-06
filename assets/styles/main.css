@@ -264,10 +264,19 @@ nav {
 	margin-right: 10px;
 }
 
+#container-f {
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 100px;
+	justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+}
+
 #container-h {
 	max-width: 1300px;
 	padding-bottom: 100px;
-	justify-content: space-between;
 	display: flex;
 	flex-direction: column;
 }

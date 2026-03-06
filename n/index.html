@@ -34,7 +34,10 @@
 <script async src="/assets/scripts/main.js"></script>
 
 
-<main id="container-0">
+<main id="container-f">
+
+<div id="userBanner" class="intro" style="background-image: url(/assets/bg-light.webp);"></div>
+
 
     <section id="profile-section" class="theme-1 fade-in" style="display:none;">
 
@@ -42,10 +45,6 @@
 
             <div style="display: flex; gap: 20px;">
                 <div id="picture"></div>
-                <div>
-                    <h1 id="display_name"></h1>
-                    <p id="name" style="opacity: 0.8;"></p>
-                </div>
             </div>
 
             <div class="menu-button" id="menuButton">
@@ -62,6 +61,11 @@
             </div>
 
         </div>
+
+
+        <h1 id="display_name"></h1>
+        <p id="name" style="opacity: 0.8;"></p>
+
 
         <div id="about"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading data…</span></div></div>
         <div id="qr-code" style="margin: 20px 0px; justify-content: space-around; display: flex; min-height: 100px;"></div>
@@ -96,26 +100,44 @@
 </div>
 
 <style>
+@media (max-aspect-ratio: 1/1) {
+
+    #userBanner {
+        background-size: auto 100%; 
+        background-position: center;
+    }
+}
+
+#userBanner {
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 #display_name {
-    font-size: 20px;
+    /*font-size: 1.5rem;*/
+}
+
+#profile-section {
+    border-radius: 0;
 }
 
 .pfp {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    user-select: none;
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
 }
 
 #picture {
     flex-shrink: 0;
-    height: 100px;
-    width: 100px;
+    width: 150px;
+    height: 150px;
+    margin-top: -65%;
 }
 
 #about {
-    margin: 10px;
 }
 
 .menu-button {

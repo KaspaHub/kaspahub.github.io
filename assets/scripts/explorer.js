@@ -629,5 +629,5 @@ async function loadAddress(searchQuery) {
     }
   }
 
-results.style.opacity= "1";
+results.style.opacity= "unset";
 }
