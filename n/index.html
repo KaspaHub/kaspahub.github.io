@@ -115,13 +115,7 @@
     text-align: center;
 }
 
-@media (max-aspect-ratio: 1/1) {
 
-    #userBanner {
-        background-size: auto 100%; 
-        background-position: center;
-    }
-}
 
 #userBanner {
     margin: 0;
@@ -137,7 +131,8 @@
 
 #profile-section {
     border-radius: 0;
-
+    padding: 30px 20%;
+    flex-grow: 1;
 }
 
 #search-section {
@@ -155,7 +150,7 @@
     flex-shrink: 0;
     width: 150px;
     height: 150px;
-    margin-top: -65%;
+    margin-top: -70%;
 }
 
 #about {
@@ -211,6 +206,20 @@
 
 .popup-menu a:hover, .popup-menu button:hover {
     background-color: #555;
+}
+
+@media (max-aspect-ratio: 1/1) {
+
+    #userBanner {
+        background-size: auto 100%; 
+        background-position: center;
+    }
+    
+    #profile-section {
+        border-radius: 0;
+        padding: 30px 17px;
+    }
+
 }
 </style>
 <script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>

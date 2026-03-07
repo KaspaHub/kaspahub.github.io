@@ -272,7 +272,6 @@
 }
 
 body {
-	position: relative;
 	overflow-y: scroll;
 	overflow: overlay;
 	overflow-x: hidden;
@@ -297,9 +296,9 @@ body {
 	margin-bottom: 50px;
 }
 
-@media (max-width: 800px) {
+@media (max-aspect-ratio: 1/1) {
 
-	#searchBar, nav, footer {
+	#searchBar, footer {
 		display: none;
 	}
 
@@ -310,37 +309,34 @@ body {
 
 	body {
 		margin: 0;
-		padding: 0;
 		min-height: 100vh;
 		max-height: 100vh;
 	}
 
 	#container-reels {
-		margin-top: 0;
 		scroll-snap-type: y mandatory;
 		overflow-y: scroll;
-		position: relative;
-		object-fit: contain;
-		padding: 0px;
-		border-radius: unset;
-		position: fixed;
-		min-height: 100vh;
-		max-height: 100vh;
+    	margin-top: 0;
+		scroll-padding-top: 87px;
+		padding-top: 87px;
+		height: 100vh; 
+
 	}
 
 	.short {
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
-		position: relative;
-		min-height: 100vh;
-		max-height: 100vh;
-		max-width: 100vw;
-		min-width: 100vw;
+		padding: 13px;
+		min-height: calc(100vh - 94px);
+		max-height: calc(100vh - 94px);
+		max-width: 100%;
+		min-width: 100%;
 	}
 }
 .card:hover {
 	transform: none;
 }
 </style>
+
 </body>
 </html>

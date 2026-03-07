@@ -8,7 +8,6 @@ checkbox.checked = isLightTheme;
 
 let testing = false;
 
-
 // function initServiceWorker() {
 //     if (!('serviceWorker' in navigator)) {
 //         console.log('%c[Main] Service workers are not supported in this browser.', 'color: #EC6A5E;');
@@ -341,6 +340,7 @@ function populateMenu() {
     <div class="drawer-section">Settings</div>
     <div class="drawer-item" id="toggle-experiments">⚙️ Beta Features</div>
     <div class="drawer-item" id="toggle-theme">☀️ Toggle Theme</div>
+    <div class="drawer-item" id="clear-cache">🗑️ Clear Cache</div>
   `;
 
   const drawerList = document.getElementById("drawer-list");
@@ -359,6 +359,25 @@ function populateMenu() {
 
   document.getElementById("toggle-theme").onclick = () => {
     checkbox.click();
+  };
+
+  document.getElementById("clear-cache").onclick = async () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    if ('caches' in window) {
+      const cacheNames = await caches.keys();
+      for (const cacheName of cacheNames) {
+        await caches.delete(cacheName);
+      }
+    }
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+    showDialog("Cache, local storage, session storage, and cookies cleared.");
   };
 }
 
