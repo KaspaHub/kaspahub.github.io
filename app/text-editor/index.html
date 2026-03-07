@@ -65,9 +65,9 @@
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 <script async src="/assets/scripts/main.js"></script>
 
-<main id="container-1">
+<main id="container-r">
 
-<div class="theme-1">
+<div class="theme-1 app">
 
     <div class="w-header">
         <span>Text Editor</span>
@@ -76,8 +76,8 @@
 
     <div id="toolbar">
         <button class="ebtn" id="clear"></button>
-        <button class="ebtn" id="undo"><</button>
-        <button class="ebtn" id="redo">></button>
+        <button class="ebtn" id="undo">↶</button>
+        <button class="ebtn" id="redo">↷</button>
         <button id="toggleCode"></button>
     </div>
     <div id="toolbar">
@@ -92,6 +92,14 @@
         <button class="ebtn" id="alignCenter"></button>
         <button class="ebtn" id="alignRight"></button>
         <button class="ebtn" class="advanced" id="alignJustify"></button>
+        <button class="ebtn" id="insertLink"></button>
+        <button class="ebtn" id="insertImage"></button>
+        <select class="ebtn" id="insertTable">
+            <option value=""></option>
+            <option value="2x2">2 x 2</option>
+            <option value="3x3">3 x 3</option>
+            <option value="4x4">4 x 4</option>
+        </select>
         <select class="ebtn" id="format">
             <option value="">Text Format</option>
             <option value="p">Paragraph</option>
@@ -124,14 +132,7 @@
             <input class="ebtn" type="color" id="bgColor" style="max-width: 40px;">
             <button class="ebtn" id="applyBgColor">✔</button>
         </div>
-        <select class="ebtn" id="insertTable">
-            <option value=""></option>
-            <option value="2x2">2 x 2</option>
-            <option value="3x3">3 x 3</option>
-            <option value="4x4">4 x 4</option>
-        </select>
-        <button class="ebtn" id="insertLink"></button>
-        <button class="ebtn" id="insertImage"></button>
+
 
     </div>
     <div id="editor" contenteditable="true"><p><br><p></div>
@@ -209,8 +210,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    height: 40px;
-    min-width: 48px;
+    height: 30px;
+    min-width: 35px;
     /*border: 2px solid black;*/
     border-radius: 10px;
     color: black;

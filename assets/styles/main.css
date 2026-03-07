@@ -309,9 +309,6 @@ a:active {color: var(--link-active);; text-decoration: underline; }
 
 #container-r {
 	overflow: hidden;
-	box-sizing: border-box;
-	margin-top: 20px;
-	padding-bottom: 10px;
 	min-height: 100vh;
 	justify-items: center;
 }
@@ -322,6 +319,10 @@ a:active {color: var(--link-active);; text-decoration: underline; }
 	padding: 0;
 	display: flex;
 	flex-direction: column;
+}
+
+.app {
+	max-width: 100%;
 }
 
 .main-content-area {
@@ -1283,6 +1284,13 @@ dialog.theme-1::backdrop {
 	margin: 0.4rem 0;
 }
 
+
+@media (min-aspect-ratio: 1/1) {
+	.app {
+		margin: 30px 20%;
+	}
+}
+
 @media (max-aspect-ratio: 1/1) {
 	.mobile-only {
 		display: initial !important;
@@ -1318,7 +1326,6 @@ dialog.theme-1::backdrop {
 	#container-r {
 		scroll-snap-type: y mandatory;
 		overflow-y: scroll;
-		margin-top: 0;
 		scroll-padding-top: 61px;
 		padding-top: 61px;
 		height: 100vh; 
@@ -1343,6 +1350,9 @@ dialog.theme-1::backdrop {
 		padding: 13px;
 		max-width: 100%;
 		min-width: 100%;
+	}
+	.app {
+		padding: 13px;
 	}
 	.snaps {
 		min-height: calc(100vh - 68px);

@@ -65,9 +65,9 @@
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 <script async src="/assets/scripts/main.js"></script>
 
-<main style="justify-items: center; padding-bottom: 0;">
+<main id="container-r">
 
-<div class="fade-in theme-1" id="container-calculator">
+<div class="theme-1 app" id="container-calculator">
 
     <div class="w-header">
         <span>Calculator</span>
@@ -205,7 +205,7 @@ iframe {
     width: 232px;
 }
 
-@media (max-width: 600px) {
+@media (max-aspect-ratio: 1/1) {
     .e-button {
         min-height: 19vw;
         max-height: 19vw;
