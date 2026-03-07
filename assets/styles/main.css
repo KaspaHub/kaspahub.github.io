@@ -885,7 +885,7 @@ input::placeholder, textarea::placeholder {
 	color: inherit;
 }
 
-textarea, input[type="text"], input[type="password"], div[contenteditable="true"] {
+textarea, input[type="text"], input[type="password"], input[type="number"], input[type="range"], div[contenteditable="true"] {
 	border:2px solid #757575;
 	background-color: var(--input-bg-color);
 	border-radius: 10px;
@@ -898,9 +898,10 @@ textarea, input[type="text"], input[type="password"], div[contenteditable="true"
 	word-wrap: break-word;
 
 	cursor: default;
+	transition: border-color 0.4s ease;
 }
 
-textarea:focus, input[type="text"]:focus, input[type="password"]:focus, div[contenteditable="true"]:focus {
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="range"]:focus, div[contenteditable="true"]:focus {
 	border-color: #70C7BA;
 }
 
