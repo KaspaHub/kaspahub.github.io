@@ -88,52 +88,64 @@
     <button class="e-button button" onclick="downloadQR()">Download PNG</button>
     <div class="filter-group"><input type="checkbox" id="saveSettings" ><label for="saveSettings">Save Settings to Local Storage</label></div>
 
-    <label for="qr-value">Value</label>
-    <textarea id="qr-value" placeholder="Enter text or URL" spellcheck="false">Hello World</textarea>
+    <div class="tab-buttons">
+        <button class="tab-button active" data-tab="basic" onclick="openTab('basic')">Basic</button>
+        <button class="tab-button" data-tab="colors" onclick="openTab('colors')">Colors</button>
+        <button class="tab-button" data-tab="advanced" onclick="openTab('advanced')">Advanced</button>
+    </div>
 
-    <label for="size">Size</label>
-    <input class="e-button" type="number" id="size" min="100" max="1000" value="200">
+    <div id="basic" class="tab-content active">
+        <label for="qr-value">Value</label>
+        <textarea id="qr-value" placeholder="Enter text or URL" spellcheck="false">Hello World</textarea>
 
-    <label for="padding">Padding</label>
-    <input class="e-button" type="number" id="padding" min="0" max="500" value="5">
+        <label for="size">Size</label>
+        <input class="e-button" type="number" id="size" min="100" max="1000" value="200">
 
-    <label for="foreground">Foreground Color</label>
-    <input type="color" id="foreground" value="#000000">
+        <label for="padding">Padding</label>
+        <input class="e-button" type="number" id="padding" min="0" max="500" value="5">
 
-    <label for="background">Background Color</label>
-    <input type="color" id="background" value="#ffffff">
+        <label for="level">Error Correction Level</label>
+        <select id="level">
+            <option value="L">L - 7% damage</option>
+            <option value="M">M - 15% damage</option>
+            <option value="Q">Q - 25% damage</option>
+            <option value="H" selected>H - 30% damage</option>
+        </select>
+    </div>
 
-   <div style="display: inline-flex;"><label for="foregroundAlpha">Foreground Alpha</label><span id="foregroundAlphaValue">1</span></div>
-    <input type="range" id="foregroundAlpha" min="0" max="1" step="0.1" value="1">
-    
-   <div style="display: inline-flex;"><label for="backgroundAlpha">Background Alpha</label><span id="backgroundAlphaValue">1</span></div>
-    <input type="range" id="backgroundAlpha" min="0" max="1" step="0.1" value="1">
+    <div id="colors" class="tab-content">
+        <label for="foreground">Foreground Color</label>
+        <input type="color" id="foreground" value="#000000">
 
-    <label for="level">Error Correction Level</label>
-    <select id="level">
-        <option value="L">L - 7% damage</option>
-        <option value="M">M - 15% damage</option>
-        <option value="Q">Q - 25% damage</option>
-        <option value="H" selected>H - 30% damage</option>
-    </select>
+        <label for="background">Background Color</label>
+        <input type="color" id="background" value="#ffffff">
 
-    <div class="filter-group"><input type="checkbox" id="positionSep" ><label for="positionSep">Separate Position</label></div>
-    <div class="filter-group"><input type="checkbox" id="dataSep" ><label for="dataSep">Separate Data</label></div>
+       <div style="display: inline-flex;"><label for="foregroundAlpha">Foreground Alpha</label><span id="foregroundAlphaValue">1</span></div>
+        <input type="range" id="foregroundAlpha" min="0" max="1" step="0.1" value="1">
+        
+       <div style="display: inline-flex;"><label for="backgroundAlpha">Background Alpha</label><span id="backgroundAlphaValue">1</span></div>
+        <input type="range" id="backgroundAlpha" min="0" max="1" step="0.1" value="1">
+    </div>
 
-    <label for="positionCorner">Position Corner Radius</label>
-    <input class="e-button" type="number" id="positionCorner" min="0" max="500" value="0">
+    <div id="advanced" class="tab-content">
+        <div class="filter-group"><input type="checkbox" id="positionSep" ><label for="positionSep">Separate Position</label></div>
+        <div class="filter-group"><input type="checkbox" id="dataSep" ><label for="dataSep">Separate Data</label></div>
 
-    <label for="dataCornerTL">Data Corner TL Radius</label>
-    <input class="e-button" type="number" id="dataCornerTL" min="0" max="500" value="0">
+        <label for="positionCorner">Position Corner Radius</label>
+        <input class="e-button" type="number" id="positionCorner" min="0" max="500" value="0">
 
-    <label for="dataCornerTR">Data Corner TR Radius</label>
-    <input class="e-button" type="number" id="dataCornerTR" min="0" max="500" value="0">
+        <label for="dataCornerTL">Data Corner TL Radius</label>
+        <input class="e-button" type="number" id="dataCornerTL" min="0" max="500" value="0">
 
-    <label for="dataCornerBR">Data Corner BR Radius</label>
-    <input class="e-button" type="number" id="dataCornerBR" min="0" max="500" value="0">
+        <label for="dataCornerTR">Data Corner TR Radius</label>
+        <input class="e-button" type="number" id="dataCornerTR" min="0" max="500" value="0">
 
-    <label for="dataCornerBL">Data Corner BL Radius</label>
-    <input class="e-button" type="number" id="dataCornerBL" min="0" max="500" value="0">
+        <label for="dataCornerBR">Data Corner BR Radius</label>
+        <input class="e-button" type="number" id="dataCornerBR" min="0" max="500" value="0">
+
+        <label for="dataCornerBL">Data Corner BL Radius</label>
+        <input class="e-button" type="number" id="dataCornerBL" min="0" max="500" value="0">
+    </div>
 
 
 
@@ -187,6 +199,7 @@
 
 select {
    all: revert;
+   height: 30px;
 }
 
 #container-qr {
@@ -262,6 +275,49 @@ select {
 }
 #dark .rwrap.theme-filter span {
   color: #bbb;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #ddd;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: contents;
+}
+
+#dark .tab-button {
+  background: #333;
+  color: #fff;
+}
+
+#dark .tab-button.active {
+  background: #444;
+}
+
+.rwrap.theme-filter input[type="color"] {
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
 
@@ -349,6 +405,21 @@ function downloadQR() {
   link.download = 'qrcode.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
+}
+
+function openTab(tabName) {
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+
+  const buttons = document.querySelectorAll('.tab-button');
+  buttons.forEach(btn => {
+    if (btn.dataset.tab === tabName) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
 }
 
 window.addEventListener('load', () => {
