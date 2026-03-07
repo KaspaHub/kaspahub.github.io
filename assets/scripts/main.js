@@ -124,11 +124,14 @@ function copyToClipboard(textToCopy) {
 }
 
 
-function generateQRCode(container, text, size) {
-  new QRCode(container, {
-    text: text,
-    width: size,
-    height: size
+function generateQRCode(canvas, text, size, padding = 5) {
+  new QRious({
+    element: canvas,
+    value: text,
+    size: size,
+    foreground: 'black',
+    background: 'white',
+    padding: padding
   });
 }
 
@@ -187,7 +190,7 @@ function showWalletPopup(wallet) {
 <span>Kaspa address</span>
 <span class="w-close" data-close></span>
 </div>
-<div data-qr></div>
+<canvas id="qrcode-crypto" class="qrcode-crypto"></canvas>
 <p class="w-message">Scan or copy the Kaspa address</p>
 <pre class="w-data">${escHtml(wallet)}</pre>
 <button class="button" data-copy>Copy</button>
@@ -196,10 +199,10 @@ function showWalletPopup(wallet) {
 
   document.body.insertAdjacentHTML('beforeend', html);
 
+  const qrContainer = document.getElementById('qrcode-crypto');
   const dialog = document.getElementById('dialog');
   const closeBtn = dialog.querySelector('[data-close]');
   const copyButton = dialog.querySelector('[data-copy]');
-  const qrContainer = dialog.querySelector('[data-qr]');
 
   dialog.showModal();
 

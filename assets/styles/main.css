@@ -539,7 +539,7 @@ img {
 	min-height: 200px;
 	width: stretch;
 	margin: 0 auto;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 pre {
@@ -750,12 +750,15 @@ code {
 	filter: brightness(1.03);
 }
 
-.qr-code {
-	user-select: none;
-	overflow: hidden;
-	display: flex;
-	border-radius: 15px; 
-	margin: 20px 0;
+.qrcode-crypto {
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: white;
+  background-image: linear-gradient(to top right, #70C7BA, transparent, #ddd6fe);
 }
 
 input[type="radio"]:hover, input[type="checkbox"]:hover {
@@ -1359,6 +1362,7 @@ dialog.theme-1::backdrop {
 		max-height: calc(100vh - 68px);
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
+		margin-bottom: 61px;
 	}
 	main, body, html {
 		scrollbar-width: none;

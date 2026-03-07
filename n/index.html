@@ -161,16 +161,6 @@
     justify-items: center;
 }
 
-.data-qr {
-    max-width: 200px;
-    max-height: 200px;
-    width: 200px;
-    height: 200px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 15px;
-}
-
 .menu-button {
     width: 30px;
     height: 30px;
@@ -222,7 +212,7 @@
 
 }
 </style>
-<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/nostr.bundle.js"></script>
 <script type="text/javascript">
 'use strict';
@@ -374,13 +364,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     qrCodeElement.innerHTML = `
 <div class="d-container">
-<div data-qr class="data-qr"></div>
+<canvas id="qrcode-crypto" class="qrcode-crypto"></canvas>
 <p class="w-message">Scan or copy the Kaspa address</p>
 <pre class="w-data">${escapedWalletAddress}</pre>
 <button class="button" data-copy>Copy</button>
 </div>
   `;
-    generateQRCode(document.querySelector('[data-qr]'), walletAddress, 200);
+    generateQRCode(document.getElementById('qrcode-crypto'), walletAddress, 200);
 
     const copyButton = document.querySelector('[data-copy]');
 
