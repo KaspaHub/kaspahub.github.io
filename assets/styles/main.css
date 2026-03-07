@@ -276,6 +276,7 @@ nav {
 #container-h {
 	max-width: 1300px;
 	padding-bottom: 80px;
+	padding-top: 80px;
 	display: flex;
 	flex-direction: column;
 }
@@ -310,7 +311,7 @@ hr {
 	opacity: 0.3;
 }
 
-.sidebar h3 {
+.sidebar h3, .sidebar h2 {
 	border-bottom: 2px solid #757575;
 	margin-bottom: 15px;
 	font-weight: 600;
