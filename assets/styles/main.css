@@ -25,28 +25,56 @@ html {
 	cursor: default;
 	overflow-wrap: break-word;
 	word-break: normal;
-	overflow: hidden;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 
 body {
-	/*min-height: 100vh;*/
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
 }
 
 main {
-	min-height: calc(100vh - 80px);
+	overflow: hidden;
+	min-height: calc(100vh - 54px);
 	width: 100%;
 	margin: 0 auto;
 	justify-items: stretch;
-	padding: 0 7px;
+	padding: 100px 7px;
 	flex: 1;
+}
+
+nav {
+	min-height: 54px;
+	max-height: 54px;
+	padding: 2px;
+	line-height: 50px;
+	font-size: 25px;
+	display: flex;
+	overflow: hidden;
+	justify-content: space-between;
+}
+
+footer {
+	background-color: var(--input-bg-color);
+	min-height: 300px;
+	width: 100%;
+	margin: 0;
+	padding: 20px;
+	gap: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+footer::after {
+	font-size: 14px;
+	content: "© 2026 Kaspa Hub – v2.4";
+	color: #6C757D;
+	opacity: 0.9;
+	text-align: center;
 }
 
 br {
@@ -164,15 +192,6 @@ a:visited {color: var(--link); }
 a:hover {color: var(--link-hover);; text-decoration: underline; }
 a:active {color: var(--link-active);; text-decoration: underline; }
 
-nav {
-	height: 80px;
-	padding: 15px 20px 0;
-	line-height: 50px;
-	font-size: 25px;
-	display: flex;
-	justify-content: space-between;
-	overflow: hidden;
-}
 .navTag {
 	margin: 10px;
 	color: inherit !important;
@@ -200,6 +219,21 @@ nav {
 
 #intro {
 	text-align: center;
+}
+
+.intro {
+	padding: 7px;
+	min-height: 200px;
+	align-content: center;
+}
+
+.intro p {
+	padding: 0 7px;
+}
+
+#userBanner {
+	padding: 7px;
+	min-height: 280px;
 }
 
 #thumbnail {
@@ -233,16 +267,6 @@ nav {
 	border-radius: 15px;*/
 }
 
-.intro {
-	padding: 7px;
-	min-height: 280px;
-	align-content: center;
-}
-
-.intro p {
-	padding: 0 7px;
-}
-
 #postInfo {
 	margin: 3%;
 	opacity: 0.8;
@@ -265,18 +289,8 @@ nav {
 	margin-right: 10px;
 }
 
-#container-f {
-	width: 100vw;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-}
-
 #container-h {
 	max-width: 1300px;
-	padding-bottom: 80px;
-	padding-top: 80px;
 	display: flex;
 	flex-direction: column;
 }
@@ -287,12 +301,27 @@ nav {
 
 #container-1 {
 	max-width: 1000px;
-	padding-bottom: 80px;
 }
 
 #container-2 {
 	max-width: 1300px;
-	padding-bottom: 80px;
+}
+
+#container-r {
+	overflow: hidden;
+	box-sizing: border-box;
+	margin-top: 20px;
+	padding-bottom: 10px;
+	min-height: 100vh;
+	justify-items: center;
+}
+
+#container-f {
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .main-content-area {
@@ -498,6 +527,18 @@ img {
 	border-radius: 15px;
 	height: auto;
 	aspect-ratio: 16 / 9;
+}
+
+.note {
+	overflow: hidden;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	max-width: 900px;
+	max-height: 800px;
+	min-height: 200px;
+	width: stretch;
+	margin: 0 auto;
+	margin-bottom: 50px;
 }
 
 pre {
@@ -1061,25 +1102,6 @@ dialog {
 	font-size: 18px;
 }
 
-footer::after {
-	font-size: 14px;
-	content: "© 2026 Kaspa Hub – v2.4";
-	color: #6C757D;
-	opacity: 0.9;
-	text-align: center;
-}
-
-footer {
-	background-color: var(--input-bg-color);
-	min-height: 300px;
-	width: 100%;
-	margin: 0;
-	padding: 20px;
-	gap: 20px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-}
-
 .resources {
 	color: #6C757D;
 	opacity: 0.9;
@@ -1260,8 +1282,11 @@ dialog.theme-1::backdrop {
 }
 
 @media (max-aspect-ratio: 1/1) {
-	main {
-		padding-top: 80px;
+	.mobile-only {
+		display: initial !important;
+	}
+	.widescreen-only {
+		display: none !important;
 	}
 	nav {
 		position: fixed;
@@ -1288,11 +1313,13 @@ dialog.theme-1::backdrop {
 		max-width: 100%;
 		padding: 0 7px;
 	}
-	.mobile-only {
-		display: initial !important;
-	}
-	.widescreen-only {
-		display: none !important;
+	#container-r {
+		scroll-snap-type: y mandatory;
+		overflow-y: scroll;
+		margin-top: 0;
+		scroll-padding-top: 61px;
+		padding-top: 61px;
+		height: 100vh; 
 	}
 	.articleVid {
 		min-width: 100%;
@@ -1309,5 +1336,19 @@ dialog.theme-1::backdrop {
 	
 	#light, #dark {
 		background-image: none;
+	}
+	.note {
+		padding: 13px;
+		max-width: 100%;
+		min-width: 100%;
+	}
+	.snaps {
+		min-height: calc(100vh - 68px);
+		max-height: calc(100vh - 68px);
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
+	}
+	main, body, html {
+		scrollbar-width: none;
 	}
 }
