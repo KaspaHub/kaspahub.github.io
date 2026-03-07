@@ -49,7 +49,7 @@
 
 
 
-            <div class="menu-button" id="menuButton">
+            <div class="menu-button" id="nMenuBtn">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
               <circle cx="20" cy="20" r="20" fill="#333"/>
@@ -70,7 +70,7 @@
         <p id="name" style="opacity: 0.8;"></p>
         <div id="about"></div>
     </div>
-    <div class="content">
+    <div id="content">
 
 
     <div id="wallets-container"><div id="qr-code"></div></div>
@@ -111,6 +111,8 @@
 <style>
 .w-container {
     justify-items: center;
+    max-width: 350px;
+    text-align: center;
 }
 
 @media (max-aspect-ratio: 1/1) {
@@ -155,6 +157,7 @@
 
 #content {
     flex-grow: 1;
+    justify-items: center;
 }
 
 .data-qr {
@@ -162,6 +165,9 @@
     max-height: 200px;
     width: 200px;
     height: 200px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 .menu-button {
@@ -217,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorDiv = document.getElementById("error");
     const profileSection = document.getElementById("profile-section");
     const searchSection = document.getElementById("search-section");
-    const button = document.getElementById('menuButton');
+    const nMenuBtn = document.getElementById('nMenuBtn');
     const popupMenu = document.getElementById('popupMenu');
 
     const relays = [
@@ -349,7 +355,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         setMetaTag('kaspa:title', fallbackName);
     }
 
-    button.style.display = 'inline-block';
+    nMenuBtn.style.display = 'inline-block';
 
     qrCodeElement.innerHTML = `
 <div class="w-container">
@@ -362,8 +368,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     generateQRCode(document.querySelector('[data-qr]'), walletAddress, 200);
 
     const copyButton = document.querySelector('[data-copy]');
-
-    copyButton.style.display = "inline-block";
 
     copyButton.addEventListener('click', () => {
       copyToClipboard(walletAddress);
@@ -381,7 +385,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     pool.close(relays);
 }
 
-    button.addEventListener('click', (e) => {
+    nMenuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
     });
