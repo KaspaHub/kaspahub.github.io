@@ -69,88 +69,78 @@
 
 <div class="theme-1 app">
 
-    <div class="w-header">
-        <span>QR Code Generator</span>
-        <a class="w-close" draggable="false" href="/apps/"></a>
-    </div>
-
-
-<div class="main-content-area">
+<div class="w-header">
+    <span>QR Code Generator</span>
+    <a class="w-close" draggable="false" href="/apps/"></a>
+</div><div class="main-content-area">
 
    <section class="sidebar">
 
-    <div class="qr-display">
-        <canvas id="qrious"></canvas>
-    </div>
-
-   </section>
+<div class="qr-display">
+    <canvas id="qrCode"></canvas>
+</div>   </section>
 
    <section class="filter-list-main">
 <section id="qr-generator">
 
-    <div class="rwrap theme-filter">
+<div class="rwrap theme-filter">
 
-        <button class="e-button button" onclick="downloadQR()">Download PNG</button>
+    <button class="e-button button" onclick="downloadQR()">Download PNG</button>
+    <div class="filter-group"><input type="checkbox" id="saveSettings" ><label for="saveSettings">Save Settings to Local Storage</label></div>
 
-        <label for="qr-value">Value</label>
-        <textarea id="qr-value" placeholder="Enter text or URL" spellcheck="false">QRious</textarea>
+    <label for="qr-value">Value</label>
+    <textarea id="qr-value" placeholder="Enter text or URL" spellcheck="false">Hello World</textarea>
 
-        <label for="size">Size</label>
-        <input class="e-button" type="number" id="size" min="100" max="1000" value="150">
+    <label for="size">Size</label>
+    <input class="e-button" type="number" id="size" min="100" max="1000" value="200">
 
-        <label for="padding">Padding</label>
-        <input class="e-button" type="number" id="padding" min="0" max="500" value="0">
+    <label for="padding">Padding</label>
+    <input class="e-button" type="number" id="padding" min="0" max="500" value="5">
 
-        <label for="foreground">Foreground Color</label>
-        <input type="color" id="foreground" value="#000000">
+    <label for="foreground">Foreground Color</label>
+    <input type="color" id="foreground" value="#000000">
 
-        <label for="background">Background Color</label>
-        <input type="color" id="background" value="#ffffff">
+    <label for="background">Background Color</label>
+    <input type="color" id="background" value="#ffffff">
 
-        <label for="foregroundAlpha">Foreground Alpha</label>
-        <input type="range" id="foregroundAlpha" min="0" max="1" step="0.1" value="1">
-        <span id="foregroundAlphaValue">1</span>
+   <div style="display: inline-flex;"><label for="foregroundAlpha">Foreground Alpha</label><span id="foregroundAlphaValue">1</span></div>
+    <input type="range" id="foregroundAlpha" min="0" max="1" step="0.1" value="1">
+    
+   <div style="display: inline-flex;"><label for="backgroundAlpha">Background Alpha</label><span id="backgroundAlphaValue">1</span></div>
+    <input type="range" id="backgroundAlpha" min="0" max="1" step="0.1" value="1">
 
-        <label for="backgroundAlpha">Background Alpha</label>
-        <input type="range" id="backgroundAlpha" min="0" max="1" step="0.1" value="1">
-        <span id="backgroundAlphaValue">1</span>
+    <label for="level">Error Correction Level</label>
+    <select id="level">
+        <option value="L">L - 7% damage</option>
+        <option value="M">M - 15% damage</option>
+        <option value="Q">Q - 25% damage</option>
+        <option value="H" selected>H - 30% damage</option>
+    </select>
 
-        <label for="level">Error Correction Level</label>
-        <select id="level">
-            <option value="L">L - 7% damage</option>
-            <option value="M">M - 15% damage</option>
-            <option value="Q">Q - 25% damage</option>
-            <option value="H" selected>H - 30% damage</option>
-        </select>
+    <div class="filter-group"><input type="checkbox" id="positionSep" ><label for="positionSep">Separate Position</label></div>
+    <div class="filter-group"><input type="checkbox" id="dataSep" ><label for="dataSep">Separate Data</label></div>
 
-        <label for="positionSep">Separate Position</label>
-        <input type="checkbox" id="positionSep">
+    <label for="positionCorner">Position Corner Radius</label>
+    <input class="e-button" type="number" id="positionCorner" min="0" max="500" value="0">
 
-        <label for="dataSep">Separate Data</label>
-        <input type="checkbox" id="dataSep">
+    <label for="dataCornerTL">Data Corner TL Radius</label>
+    <input class="e-button" type="number" id="dataCornerTL" min="0" max="500" value="0">
 
-        <label for="positionCorner">Position Corner Radius</label>
-        <input class="e-button" type="number" id="positionCorner" min="0" max="500" value="0">
+    <label for="dataCornerTR">Data Corner TR Radius</label>
+    <input class="e-button" type="number" id="dataCornerTR" min="0" max="500" value="0">
 
-        <label for="dataCornerTL">Data Corner TL Radius</label>
-        <input class="e-button" type="number" id="dataCornerTL" min="0" max="500" value="0">
+    <label for="dataCornerBR">Data Corner BR Radius</label>
+    <input class="e-button" type="number" id="dataCornerBR" min="0" max="500" value="0">
 
-        <label for="dataCornerTR">Data Corner TR Radius</label>
-        <input class="e-button" type="number" id="dataCornerTR" min="0" max="500" value="0">
+    <label for="dataCornerBL">Data Corner BL Radius</label>
+    <input class="e-button" type="number" id="dataCornerBL" min="0" max="500" value="0">
 
-        <label for="dataCornerBR">Data Corner BR Radius</label>
-        <input class="e-button" type="number" id="dataCornerBR" min="0" max="500" value="0">
 
-        <label for="dataCornerBL">Data Corner BL Radius</label>
-        <input class="e-button" type="number" id="dataCornerBL" min="0" max="500" value="0">
 
-    </div>
-</section>
+</div></section>
    </section>
    
 </div>
-
-
 </div>
 
 </main>
@@ -194,28 +184,17 @@
 </footer>
 
 <style type="text/css">
+
+select {
+   all: revert;
+}
+
 #container-qr {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.w-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.w-close {
-  text-decoration: none;
-  color: currentColor;
-  font-size: 1.5rem;
-  line-height: 1;
 }
 
 #qr-generator {
@@ -240,7 +219,7 @@
   padding: 10px;
 }
 
-#qrious {
+#qrCode {
   max-width: 100%;
   height: auto;
 }
@@ -252,14 +231,6 @@
   width: 100%;
 }
 
-.rwrap.theme-filter input[type="color"] {
-  width: 100%;
-  height: 40px;
-  padding: 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
 .rwrap.theme-filter span {
   display: inline-block;
@@ -289,8 +260,6 @@
   background-color: #1e1e1e;
   color: #f0f0f0;
 }
-
-
 #dark .rwrap.theme-filter span {
   color: #bbb;
 }
@@ -300,7 +269,7 @@
 <script type="text/javascript">
 'use strict';
 
-const canvas = document.getElementById('qrious');
+const canvas = document.getElementById('qrCode');
 const qrValue = document.getElementById('qr-value');
 const size = document.getElementById('size');
 const padding = document.getElementById('padding');
@@ -318,12 +287,13 @@ const dataCornerTL = document.getElementById('dataCornerTL');
 const dataCornerTR = document.getElementById('dataCornerTR');
 const dataCornerBR = document.getElementById('dataCornerBR');
 const dataCornerBL = document.getElementById('dataCornerBL');
+const saveSettings = document.getElementById('saveSettings');
 
 function updateQR() {
   new QRious({
     element: canvas,
-    value: qrValue.value || 'QRious',
-    size: parseInt(size.value) || 150,
+    value: qrValue.value || 'Hello World',
+    size: parseInt(size.value) || 200,
     padding: parseInt(padding.value) || 0,
     foreground: foreground.value,
     background: background.value,
@@ -341,29 +311,37 @@ function updateQR() {
   foregroundAlphaValue.textContent = foregroundAlpha.value;
   backgroundAlphaValue.textContent = backgroundAlpha.value;
 
-  localStorage.setItem('qrSettings', JSON.stringify({
-    value: qrValue.value,
-    size: size.value,
-    padding: padding.value,
-    foreground: foreground.value,
-    background: background.value,
-    foregroundAlpha: foregroundAlpha.value,
-    backgroundAlpha: backgroundAlpha.value,
-    level: level.value,
-    positionSep: positionSep.checked,
-    dataSep: dataSep.checked,
-    positionCorner: positionCorner.value,
-    dataCornerTL: dataCornerTL.value,
-    dataCornerTR: dataCornerTR.value,
-    dataCornerBR: dataCornerBR.value,
-    dataCornerBL: dataCornerBL.value
-  }));
+  if (saveSettings.checked) {
+    localStorage.setItem('qrSettings', JSON.stringify({
+      value: qrValue.value,
+      size: size.value,
+      padding: padding.value,
+      foreground: foreground.value,
+      background: background.value,
+      foregroundAlpha: foregroundAlpha.value,
+      backgroundAlpha: backgroundAlpha.value,
+      level: level.value,
+      positionSep: positionSep.checked,
+      dataSep: dataSep.checked,
+      positionCorner: positionCorner.value,
+      dataCornerTL: dataCornerTL.value,
+      dataCornerTR: dataCornerTR.value,
+      dataCornerBR: dataCornerBR.value,
+      dataCornerBL: dataCornerBL.value
+    }));
+  }
 }
 
 const inputs = document.querySelectorAll('#qr-generator input, #qr-generator select, #qr-generator textarea');
 inputs.forEach(input => {
   input.addEventListener('input', updateQR);
   input.addEventListener('change', updateQR);
+});
+
+saveSettings.addEventListener('change', () => {
+  if (!saveSettings.checked) {
+    localStorage.removeItem('qrSettings');
+  }
 });
 
 function downloadQR() {
@@ -374,9 +352,9 @@ function downloadQR() {
 }
 
 window.addEventListener('load', () => {
-  const savedSettings = localStorage.getItem('qrSettings');
-  if (savedSettings) {
-    const settings = JSON.parse(savedSettings);
+  const savedSettingsData = localStorage.getItem('qrSettings');
+  if (savedSettingsData) {
+    const settings = JSON.parse(savedSettingsData);
     qrValue.value = settings.value;
     size.value = settings.size;
     padding.value = settings.padding;
@@ -392,6 +370,7 @@ window.addEventListener('load', () => {
     dataCornerTR.value = settings.dataCornerTR;
     dataCornerBR.value = settings.dataCornerBR;
     dataCornerBL.value = settings.dataCornerBL;
+    saveSettings.checked = true;
   }
   updateQR();
 });
