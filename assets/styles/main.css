@@ -298,6 +298,7 @@ nav {
 .main-content-area {
 	display: flex;
 	gap: 25px;
+	flex-direction: row;
 }
 
 .sidebar {

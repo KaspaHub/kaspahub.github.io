@@ -47,6 +47,8 @@
                 <div id="picture"></div>
             </div>
 
+
+
             <div class="menu-button" id="menuButton">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
@@ -62,34 +64,41 @@
 
         </div>
 
-
+<div class="main-content-area">
+    <div class="sidebar">
         <h1 id="display_name"></h1>
         <p id="name" style="opacity: 0.8;"></p>
+        <div id="about"></div>
+    </div>
+    <div class="content">
 
 
-        <div id="about"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading data…</span></div></div>
-        <div id="qr-code" style="margin: 20px 0px; justify-content: space-around; display: flex; min-height: 100px;"></div>
+    <div id="wallets-container"><div id="qr-code"></div></div>
 
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <!-- <a class="button" id="open-button" style="display: none;" href="" target="_blank">Open Wallet</a> -->
-        </div>
+    <!-- <div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div> -->
 
-        <div id="error" style="color: red; margin-top: 10px;"></div>
 
-    </section>
 
-    <section id="search-section" class="theme-1" style="display:none;">
-        <div class="w-header">
-        <span>Donation Pages</span>
-        <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-        </div>
-        <p>Please enter Nostr public key</p>
-        <input type="text" id="searchBox" placeholder="npub..." required="">
-        <div class="w-footer">
-            <p><a href="/nostr/register/">Create a donation page</a></p>
-            <button class="button" id="searchBtn">Search</button>
-        </div>
-    </section>
+    </div>
+
+</div>
+
+<div id="error" style="color: red; margin-top: 10px;"></div>
+
+</section>
+
+<section id="search-section" class="theme-1" style="display:none;">
+    <div class="w-header">
+    <span>Donation Pages</span>
+    <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
+    </div>
+    <p>Please enter Nostr public key</p>
+    <input type="text" id="searchBox" placeholder="npub..." required="">
+    <div class="w-footer">
+        <p><a href="/nostr/register/">Create a donation page</a></p>
+        <button class="button" id="searchBtn">Search</button>
+    </div>
+</section>
 
 </main>
 
@@ -100,6 +109,10 @@
 </div>
 
 <style>
+.w-container {
+    justify-items: center;
+}
+
 @media (max-aspect-ratio: 1/1) {
 
     #userBanner {
@@ -138,6 +151,17 @@
 }
 
 #about {
+}
+
+#content {
+    flex-grow: 1;
+}
+
+.data-qr {
+    max-width: 200px;
+    max-height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 .menu-button {
@@ -329,7 +353,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     qrCodeElement.innerHTML = `
 <div class="w-container">
-<div data-qr></div>
+<div data-qr class="data-qr"></div>
 <p class="w-message">Scan or copy the Kaspa address</p>
 <pre class="w-data">${escapedWalletAddress}</pre>
 <button class="button" data-copy>Copy</button>
