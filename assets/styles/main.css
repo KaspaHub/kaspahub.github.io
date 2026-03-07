@@ -1221,9 +1221,11 @@ dialog.theme-1::backdrop {
 
 #drawer {
 	position: fixed;
-	top: 80px;
+	top: 54px;
 	left: -250px;
-	width: 250px;
+	min-width: 250px;
+	max-width: 250px;
+	width: stretch;
 	height: 100%;
 	overflow-y: auto;
 	transition: left 0.3s ease;
