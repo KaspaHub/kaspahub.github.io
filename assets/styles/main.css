@@ -1065,6 +1065,7 @@ footer::after {
 	content: "© 2026 Kaspa Hub – v2.4";
 	color: #6C757D;
 	opacity: 0.9;
+	text-align: center;
 }
 
 footer {
