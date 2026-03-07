@@ -16,12 +16,11 @@
 }
 
 html {
+	min-height: 100vh;
 	max-height: 100vh;
 	font-family: "Mulish", sans-serif;
 	font-size: 1.1rem;
 	font-weight: 500;
-	margin: 0;
-	padding: 0;
 	cursor: default;
 	overflow-wrap: break-word;
 	word-break: normal;
@@ -29,12 +28,16 @@ html {
 	overflow-x: hidden;
 }
 
+body, html {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	margin: 0;
-	padding: 0;
+	height: 100%;
 }
 
 main {
