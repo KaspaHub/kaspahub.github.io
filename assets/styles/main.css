@@ -1074,7 +1074,6 @@ footer {
 	margin: 0;
 	padding: 20px;
 	gap: 20px;
-	text-align: center;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 }
@@ -1084,6 +1083,8 @@ footer {
 	opacity: 0.9;
 	font-size: 0.9rem;
 	max-width: 350px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .social-icons {
