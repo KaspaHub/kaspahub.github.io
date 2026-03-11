@@ -261,35 +261,33 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 (() => {
 
-  const el = id => document.getElementById(id);
+  const hdrSub = document.getElementById("hdrSub");
 
-  const hdrSub = el("hdrSub");
+  const balanceKas = document.getElementById("balanceKas");
+  const balanceUsd = document.getElementById("balanceUsd");
 
-  const balanceKas = el("balanceKas");
-  const balanceUsd = el("balanceUsd");
+  const labelEl = document.getElementById("label");
+  const txCount = document.getElementById("txCount");
+  const lastTransaction = document.getElementById("lastTransaction");
 
-  const labelEl = el("label");
-  const txCount = el("txCount");
-  const lastTransaction = el("lastTransaction");
+  const transfersLoading = document.getElementById("transfersLoading");
+  const transfersRows = document.getElementById("transfersRows");
+  const counterpartyTh = document.getElementById("counterpartyTh");
+  const prevTransfers = document.getElementById("prevTransfers");
+  const nextTransfers = document.getElementById("nextTransfers");
+  const cursorTransfers = document.getElementById("cursorTransfers");
 
-  const transfersTitle = el("transfersTitle");
-  const transfersLoading = el("transfersLoading");
-  const transfersRows = el("transfersRows");
-  const counterpartyTh = el("counterpartyTh");
-  const prevTransfers = el("prevTransfers");
-  const nextTransfers = el("nextTransfers");
-  const cursorTransfers = el("cursorTransfers");
+  const tokenLoading = document.getElementById("tokenLoading");
+  const tokenRows = document.getElementById("tokenRows");
 
-  const tokenLoading = el("tokenLoading");
-  const tokenRows = el("tokenRows");
+  const domainLoading = document.getElementById("domainLoading");
+  const domainRows = document.getElementById("domainRows");
 
-  const domainLoading = el("domainLoading");
-  const domainRows = el("domainRows");
+  const utxoLoading = document.getElementById("utxoLoading");
+  const utxoRows = document.getElementById("utxoRows");
 
-  const utxoLoading = el("utxoLoading");
-  const utxoRows = el("utxoRows");
-
-  const transferType = el("transferType");
+  const transferType = document.getElementById("transferType");
+  const explorerPic = document.getElementById("explorerPic");
 
   let busy = false;
   let currentAddr = "";
@@ -297,7 +295,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   let domains = null;
   let utxos = null;
 
-  const txLimit = 50;
+  const txLimit = 40;
 
   let allTxs = [];
   let allOffset = 0;
@@ -318,17 +316,14 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   const configs = {
     all: {
-      title: "",
       th: "Counterparty",
       render: renderAll
     },
     received: {
-      title: "",
       th: "Sender",
       render: renderReceived
     },
     sent: {
-      title: "",
       th: "Receiver",
       render: renderSent
     }
@@ -384,7 +379,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       tabPanels.forEach(p => p.classList.remove('active'));
-      el(tab.dataset.tab).classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
 
       if (tab.dataset.tab === 'tabTransfers') {
         const selected = transferType.value;
@@ -409,7 +404,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   transferType.addEventListener('change', () => {
     const value = transferType.value;
-    transfersTitle.textContent = configs[value].title;
     counterpartyTh.textContent = configs[value].th;
     if (getTxs(value).length === 0) {
       loadType(value);
@@ -526,7 +520,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   async function fetchAllDomains(addr) {
     let all = [];
     let page = 1;
-    const pageSize = 50;
+    const pageSize = 40;
     while (true) {
       const url = `https://api.knsdomains.org/mainnet/api/v1/assets/?owner=${addr}&page=${page}&pageSize=${pageSize}`;
       const res = await fetch(url);
@@ -695,7 +689,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       const shortHash = shortenEnd(hash);
       const isAccepted = tx.is_accepted ?? true;
       const statusText = isAccepted ? "Accepted" : "Rejected";
-      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+      const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
 
       let counterpartyHtml;
       let isMultiple = false;
@@ -732,9 +726,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       }
 
       if (isMultiple) {
+        let totalContrib = 0n;
+        for (const item of items) {
+          totalContrib += item.amt;
+        }
+        const netAbs = net > 0n ? net : -net;
         const itemHtml = items.map(item => {
+          const propSomes = (item.amt * netAbs) / totalContrib;
+          const remainder = (item.amt * netAbs) % totalContrib;
+          let finalSomes = propSomes;
+          if (remainder * 2n >= totalContrib) finalSomes += 1n;
+          const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
           const short = shortenMiddle(item.addr);
-          const itemAmt = (Number(item.amt) / 1e8).toFixed(8);
           return `${linkAddress(item.addr, short)} - <span style="color:${itemColor}">${itemAmt} KAS</span><br>`;
         }).join('');
         counterpartyHtml = `
@@ -773,19 +776,28 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       const amt = formatAmount(net);
       const shortHash = shortenEnd(hash);
       const isAccepted = tx.is_accepted ?? true;
-      const statusText = isAccepted ? "Finalized" : "Rejected";
-      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+      const statusText = isAccepted ? "Accepted" : "Rejected";
+      const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
 
       let senderHtml;
       if (from === "Multiple") {
-        const receiverItems = fromItems.map(item => {
+        let totalContrib = 0n;
+        for (const item of fromItems) {
+          totalContrib += item.amt;
+        }
+        const itemHtml = fromItems.map(item => {
+          const propSomes = (item.amt * net) / totalContrib;
+          const remainder = (item.amt * net) % totalContrib;
+          let finalSomes = propSomes;
+          if (remainder * 2n >= totalContrib) finalSomes += 1n;
+          const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
           const short = shortenMiddle(item.addr);
-          return `${linkAddress(item.addr, short)} - <span style="color:#2ee59d">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span><br>`;
+          return `${linkAddress(item.addr, short)} - <span style="color:#2ee59d">${itemAmt} KAS</span><br>`;
         }).join('');
         senderHtml = `
           <details>
             <summary class="expandable-row muted">Multiple addresses (${fromItems.length})</summary>
-            <div class="receiver-list">${receiverItems}</div>
+            <div class="receiver-list">${itemHtml}</div>
           </details>
         `;
       } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
@@ -822,19 +834,29 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       const amt = formatAmount(net);
       const shortHash = shortenEnd(hash);
       const isAccepted = tx.is_accepted ?? true;
-      const statusText = isAccepted ? "Finalized" : "Rejected";
-      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+      const statusText = isAccepted ? "Accepted" : "Rejected";
+      const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
 
       let receiverHtml;
       if (to === "Multiple") {
-        const receiverItems = toItems.map(item => {
+        let totalContrib = 0n;
+        for (const item of toItems) {
+          totalContrib += item.amt;
+        }
+        const netAbs = -net;
+        const itemHtml = toItems.map(item => {
+          const propSomes = (item.amt * netAbs) / totalContrib;
+          const remainder = (item.amt * netAbs) % totalContrib;
+          let finalSomes = propSomes;
+          if (remainder * 2n >= totalContrib) finalSomes += 1n;
+          const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
           const short = shortenMiddle(item.addr);
-          return `${linkAddress(item.addr, short)} - <span style="color:#ff6b6b">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span><br>`;
+          return `${linkAddress(item.addr, short)} - <span style="color:#ff6b6b">${itemAmt} KAS</span><br>`;
         }).join('');
         receiverHtml = `
           <details>
             <summary class="expandable-row muted">Multiple addresses (${toItems.length})</summary>
-            <div class="receiver-list">${receiverItems}</div>
+            <div class="receiver-list">${itemHtml}</div>
           </details>
         `;
       } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
@@ -931,7 +953,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   async function loadBatch(type) {
     const txsArray = getTxs(type);
     const page = getPage(type);
-    while (txsArray.length < (page + 1) * 50 && getHasMore(type)) {
+    while (txsArray.length < (page + 1) * 40 && getHasMore(type)) {
       const offset = getOffset(type);
       const txsFull = await fetchTransactions(currentAddr, offset, txLimit + 1);
       setHasMore(type, txsFull.length > txLimit);
@@ -971,12 +993,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   function renderPage(type) {
     const page = getPage(type);
-    const start = page * 50;
+    const start = page * 40;
     const txsArray = getTxs(type);
-    const pageTxs = txsArray.slice(start, start + 50);
+    const pageTxs = txsArray.slice(start, start + 40);
     configs[type].render(pageTxs, currentAddr);
     prevTransfers.disabled = page === 0;
-    nextTransfers.disabled = txsArray.length <= start + 50 && !getHasMore(type);
+    nextTransfers.disabled = txsArray.length <= start + 40 && !getHasMore(type);
     cursorTransfers.textContent = txsArray.length > 0 ? `Page ${page + 1}` : "";
   }
 
@@ -1026,11 +1048,24 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     }
   }
 
+
+  function determineWallet(address) {
+
+    if (address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn") {
+      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp";
+    } 
+    else {
+      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
+    }
+
+  }
+
   async function runSearch(inputAddr) {
     if (busy) return;
     busy = true;
 
-    const addr = String(inputAddr || "").trim();
+    const addr = String(inputAddr || "").trim().toLowerCase();
+
     if (!addr.startsWith("kaspa:")) {
       addToast("Invalid address", "Please enter a valid Kaspa address starting with: kaspa:");
       busy = false;
@@ -1064,7 +1099,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       [balanceSomes, txCountVal, txs] = await Promise.all([
         fetchBalance(addr),
         fetchTxCount(addr),
-        fetchTransactions(addr, 0, txLimit)
+        fetchTransactions(addr, 0, txLimit),
+        determineWallet(addr)
       ]);
     } catch (err) {
       addToast("Error", "Could not load wallet data.");
@@ -1106,7 +1142,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     setPage(type, getPage(type) + 1);
     const txsArray = getTxs(type);
     const page = getPage(type);
-    if (txsArray.length < (page + 1) * 50 && getHasMore(type)) {
+    if (txsArray.length < (page + 1) * 40 && getHasMore(type)) {
       transfersLoading.classList.remove("hidden");
       try {
         await loadBatch(type);
@@ -1135,7 +1171,7 @@ document.getElementById('searchContainer').addEventListener('submit', (event) =>
   if (throttle) return;
   throttle = true;
   setTimeout(() => throttle = false, 100);
-  explorerSearch(sanitizeSearch(searchQueryInput.value), '[form] ');
+  explorerSearch(sanitizeSearch(document.getElementById("searchQueryInput").value), '[form] ');
 });
 
 </script>

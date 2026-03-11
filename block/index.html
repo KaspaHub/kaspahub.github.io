@@ -89,10 +89,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <h3>Overview</h3>
       <div class="rows">
         <div class="row">
-          <div class="k">Hash</div>
-          <div class="v" id="hash">-</div>
-        </div>
-        <div class="row">
           <div class="k">Parents</div>
           <div class="v" id="parentsCount">-</div>
         </div>
@@ -236,7 +232,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   const blueScore = document.getElementById("blueScore");
   const difficulty = document.getElementById("difficulty");
   const blockTime = document.getElementById("blockTime");
-  const hashEl = document.getElementById("hash");
   const parentsCount = document.getElementById("parentsCount");
   const childrenCount = document.getElementById("childrenCount");
   const isChainBlock = document.getElementById("isChainBlock");
@@ -266,9 +261,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  function formatKas(amountSomes, fixed = false) {
-    if (amountSomes == null) return "-";
-    const n = Number(amountSomes) / 1e8;
+  function formatKas(somis, fixed = false) {
+    if (somis == null) return "-";
+    const n = Number(somis) / 1e8;
     if (fixed) {
       return n.toFixed(8) + " KAS";
     }
@@ -351,14 +346,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     let totalIn = 0n;
     let totalOut = 0n;
     if (Array.isArray(inputs)) {
-      inputs.forEach(inp => {
-        totalIn += BigInt(inp.previous_outpoint_amount || 0);
-      });
+      inputs.forEach(inp => totalIn += BigInt(inp.previous_outpoint_amount || 0));
     }
     if (Array.isArray(outputs)) {
-      outputs.forEach(out => {
-        totalOut += BigInt(out.amount || 0);
-      });
+      outputs.forEach(out => totalOut += BigInt(out.amount || 0));
     }
     const fee = totalIn ? totalIn - totalOut : 0n;
 
@@ -373,23 +364,41 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     if (Array.isArray(outputs)) {
       outputs.forEach(out => {
         const addr = out.script_public_key_address;
-        if (addr && !inputAddrs.has(addr)) {
-          totalTransferred += BigInt(out.amount || 0);
+        if (addr) {
+          if (!inputAddrs.has(addr)) {
+            totalTransferred += BigInt(out.amount || 0);
+          }
         }
       });
     }
 
-    return { totalIn, totalOut, fee, totalTransferred };
+    return { totalIn, totalOut, fee, totalTransferred, inputAddrs };
   }
 
-  function renderAddrsCell(addrs, title, color, map = null) {
+  function renderAddrsCell(addrs, title, color, map = null, totalTarget = null) {
     if (addrs.length === 0) return "-";
     if (addrs.length === 1) return linkAddress(addrs[0]);
-    let list = addrs.map(addr => linkAddress(addr)).join('<br>');
+
+    let content = '';
     if (map && addrs.length > 1) {
-      list = addrs.map(addr => `${linkAddress(addr)} - <span style="color:${color}">${formatKas(map.get(addr), true)}</span>`).join('<br>');
+      let totalContrib = 0n;
+      addrs.forEach(a => totalContrib += map.get(a) || 0n);
+
+      const useTarget = totalTarget !== null ? totalTarget : totalContrib;
+
+      content = addrs.map(addr => {
+        const rawAmt = map.get(addr) || 0n;
+        const prop = (rawAmt * useTarget) / totalContrib;
+        const rem = (rawAmt * useTarget) % totalContrib;
+        let finalSomes = prop;
+        if (rem * 2n >= totalContrib) finalSomes += 1n;
+        return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(finalSomes, true)}</span>`;
+      }).join('<br>');
+    } else {
+      content = addrs.map(addr => linkAddress(addr)).join('<br>');
     }
-    return `<details><summary class="expandable-row muted">${title} (${addrs.length})</summary><div class="receiver-list">${list}</div></details>`;
+
+    return `<details><summary class="expandable-row muted">${title} (${addrs.length})</summary><div class="receiver-list">${content}</div></details>`;
   }
 
   function setUrlBlockHash(blockHash) {
@@ -412,7 +421,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   }
 
   function renderOverview(json) {
-    hashEl.textContent = json.verboseData?.hash || "-";
     parentsCount.textContent = (json.header?.parents || []).length || "0";
     childrenCount.textContent = (json.verboseData?.childrenHashes || []).length || "0";
     isChainBlock.textContent = json.verboseData?.isChainBlock ? "Yes" : "No";
@@ -427,8 +435,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         const inputs = fullTx?.inputs || tx.inputs || [];
         const outputs = fullTx?.outputs || tx.outputs || [];
         const isCoinbase = fullTx?.subnetwork_id === "0100000000000000000000000000000000000000" || inputs.length === 0;
-        const totals = computeTotals(inputs, outputs);
-        const mass = withSeparators(fullTx.mass || 0);
+        const { totalTransferred, inputAddrs, fee } = computeTotals(inputs, outputs);
+        const mass = withSeparators(fullTx?.mass || 0);
 
         const inputMap = new Map();
         inputs.forEach(inp => {
@@ -454,22 +462,21 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         const isSelfTx = !isCoinbase && fromAddrs.length === 1 && toAddrs.length === 1 && fromAddrs[0] === toAddrs[0];
 
         let fromCell, toCell, amountHtml;
-        let amount = formatKas(isCoinbase ? totals.totalOut : totals.totalTransferred, true);
-        amountHtml = `<span style="color:#2ee59d">${amount}</span>`;
 
         if (isCoinbase) {
           fromCell = '<span class="muted">Block reward</span>';
           toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap);
+          amountHtml = `<span style="color:#2ee59d">${formatKas(BigInt(outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n)), true)}</span>`;
+        } else if (isSelfTx) {
+          fromCell = linkAddress(fromAddrs[0]);
+          toCell = `${linkAddress(toAddrs[0])} <span class="muted">(self)</span>`;
+          amountHtml = fee > 0n
+            ? `<span style="color:#ff6b6b">${formatKas(fee, true)}</span> <span class="muted">(fee)</span>`
+            : `<span style="color:#2ee59d">0.00000000 KAS</span>`;
         } else {
-          if (isSelfTx) {
-            fromCell = linkAddress(fromAddrs[0]);
-            toCell = `${linkAddress(toAddrs[0])} <span class="muted">(self)</span>`;
-            amount = formatKas(totals.fee, true);
-            amountHtml = totals.fee > 0n ? `<span style="color:#ff6b6b">${amount}</span> <span class="muted">(fee)</span>` : `<span style="color:#2ee59d">${amount}</span>`;
-          } else {
-            fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap);
-            toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap);
-          }
+          fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap, totalTransferred);
+          toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
+          amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
         }
 
         html += `
@@ -573,6 +580,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     busy = true;
 
     const blockHash = String(inputHash || "").trim().toLowerCase();
+
     if (blockHash.length !== 64 || !/^[0-9a-f]+$/.test(blockHash)) {
       addToast("Invalid block hash", "Please enter a valid 64-character hexadecimal Kaspa block hash.");
       busy = false;
@@ -613,7 +621,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     blueScore.textContent = "-";
     difficulty.textContent = "-";
     blockTime.textContent = "-";
-    hashEl.textContent = "-";
     parentsCount.textContent = "-";
     childrenCount.textContent = "-";
     isChainBlock.textContent = "-";

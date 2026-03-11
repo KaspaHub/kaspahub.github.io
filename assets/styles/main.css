@@ -198,6 +198,9 @@ a:visited {color: var(--link); }
 a:hover {color: var(--link-hover);; text-decoration: underline; }
 a:active {color: var(--link-active);; text-decoration: underline; }
 
+.left {text-align: left;}
+.right {text-align: right;}
+
 .navTag, #priceTag {
 	margin: 0 10px;
 	color: inherit !important;

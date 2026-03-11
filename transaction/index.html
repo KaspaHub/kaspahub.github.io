@@ -232,22 +232,20 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   const TRANSACTION_BASE = "/transaction/?q=";
   const WALLET_BASE = "/address/?q=";
 
-  const el = id => document.getElementById(id);
-
-  const hdrSub = el("hdrSub");
-  const totalSent = el("totalSent");
-  const fee = el("fee");
-  const ioCount = el("ioCount");
-  const status = el("status");
-  const massEl = el("mass");
-  const blueScore = el("blueScore");
-  const blockTime = el("blockTime");
-  const acceptingBlockTime = el("acceptingBlockTime");
-  const ioRows = el("ioRows");
-  const detailsRows = el("detailsRows");
-  const payloadContent = el("payloadContent");
-  const transferRows = el("transferRows");
-  const explorerPic = el("explorerPic");
+  const hdrSub = document.getElementById("hdrSub");
+  const totalSent = document.getElementById("totalSent");
+  const fee = document.getElementById("fee");
+  const ioCount = document.getElementById("ioCount");
+  const status = document.getElementById("status");
+  const massEl = document.getElementById("mass");
+  const blueScore = document.getElementById("blueScore");
+  const blockTime = document.getElementById("blockTime");
+  const acceptingBlockTime = document.getElementById("acceptingBlockTime");
+  const ioRows = document.getElementById("ioRows");
+  const detailsRows = document.getElementById("detailsRows");
+  const payloadContent = document.getElementById("payloadContent");
+  const transferRows = document.getElementById("transferRows");
+  const explorerPic = document.getElementById("explorerPic");
 
   let busy = false;
   let currentTxId = "";
@@ -260,7 +258,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       tabPanels.forEach(p => p.classList.remove('active'));
-      el(tab.dataset.tab).classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
     });
   });
 
@@ -269,9 +267,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  function formatKas(amountSomes, fixed = false) {
-    if (amountSomes == null) return "-";
-    const n = Number(amountSomes) / 1e8;
+  function formatKas(somis, fixed = false) {
+    if (somis == null) return "-";
+    const n = Number(somis) / 1e8;
     if (fixed) {
       return n.toFixed(8) + " KAS";
     }
@@ -393,10 +391,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     const feeKas = Number(totals.fee) / 1e8;
     const transferredFiat = await formatPrice(KASVALUE, CURRENCY, transferredKas);
     const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas);
+
     totalSent.innerHTML = `${formatKas(totals.totalTransferred, true)} <span class="muted">(${transferredFiat})</span>`;
     fee.innerHTML = `${formatKas(totals.fee, true)} <span class="muted">(${feeFiat})</span>`;
     ioCount.textContent = `${(inputs || []).length} / ${outputs.length}`;
-    status.textContent = json.is_accepted ? "Confirmed" : "Rejected";
+    status.textContent = json.is_accepted ? "Accepted" : "Rejected";
 
     massEl.textContent = withSeparators(json.mass) || "-";
     blueScore.textContent = withSeparators(json.accepting_block_blue_score) || "-";
@@ -417,7 +416,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <tr>
               <td class="muted">Miner reward</td>
               <td>${linkAddress(addr)}</td>
-              <td><span style="color:#2ee59d">${formatKas(amt, true)}</span></td>
+              <td><span style="color:#2ee59d">${formatKas(BigInt(amt), true)}</span></td>
             </tr>
           `;
         });
@@ -465,47 +464,82 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           </tr>
         `;
       } else {
-        inputMap.forEach((inAmt, fromAddr) => {
-          const changeAmt = outputMap.get(fromAddr) || 0n;
-          const transferredAmt = inAmt - changeAmt;
-          let receivers = trueExternals;
-          if (receivers.length === 0) {
-            receivers = outputKeys.filter(a => allSenders.includes(a) && a !== fromAddr);
-          }
-          if (transferredAmt > 0n && receivers.length > 0) {
-            let toCellContent = '';
-            const receiverItems = receivers.map(addr => {
+        const distinctInputCount = inputMap.size;
+        const hasNoChange = changeReceivers.length === 0;
+
+        if (distinctInputCount > 1 && hasNoChange) {
+          let fromContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + distinctInputCount + ')</summary><div class="receiver-list">';
+          let totalInput = 0n;
+          inputMap.forEach(amt => totalInput += amt);
+
+          inputMap.forEach((amt, addr) => {
+            const prop = (amt * totals.totalTransferred) / totalInput;
+            const rem = (amt * totals.totalTransferred) % totalInput;
+            let final = prop;
+            if (rem * 2n >= totalInput) final += 1n;
+            fromContent += linkAddress(addr) + ' - <span style="color:#ff6b6b">' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+          });
+          fromContent += '</div></details>';
+
+          let toContent = '';
+          const numExternals = trueExternals.length;
+          if (numExternals === 1) {
+            toContent = linkAddress(trueExternals[0]);
+          } else {
+            toContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + numExternals + ')</summary><div class="receiver-list">';
+            let totalExternal = 0n;
+            trueExternals.forEach(a => totalExternal += outputMap.get(a) || 0n);
+
+            trueExternals.forEach(addr => {
               const amt = outputMap.get(addr) || 0n;
-              return `${linkAddress(addr)} - <span style="color:#2ee59d">${formatKas(amt, true)}</span><br>`;
-            }).join('');
-            if (receivers.length === 1) {
-              toCellContent = linkAddress(receivers[0]);
-            } else {
-              toCellContent = `
-                <details>
-                  <summary class="expandable-row muted">Multiple addresses (${receivers.length})</summary>
-                  <div class="receiver-list">${receiverItems}</div>
-                </details>
-              `;
+              const prop = (amt * totals.totalTransferred) / totalExternal;
+              const rem = (amt * totals.totalTransferred) % totalExternal;
+              let final = prop;
+              if (rem * 2n >= totalExternal) final += 1n;
+              toContent += linkAddress(addr) + ' - <span style="color:#2ee59d">' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+            });
+            toContent += '</div></details>';
+          }
+
+          html += '<tr><td>' + fromContent + '</td><td>' + toContent + '</td><td><span style="color:#2ee59d">' + formatKas(totals.totalTransferred, true) + '</span></td></tr>';
+        } else {
+          inputMap.forEach((inAmt, fromAddr) => {
+            const changeAmt = outputMap.get(fromAddr) || 0n;
+            const transferredAmt = inAmt - changeAmt;
+
+            let receivers = trueExternals;
+            if (receivers.length === 0) {
+              receivers = outputKeys.filter(a => allSenders.includes(a) && a !== fromAddr);
             }
-            html += `
-              <tr>
-                <td>${linkAddress(fromAddr)}</td>
-                <td>${toCellContent}</td>
-                <td><span style="color:#2ee59d">${formatKas(transferredAmt, true)}</span></td>
-              </tr>
-            `;
-          }
-          if (changeAmt > 0n) {
-            html += `
-              <tr>
-                <td>${linkAddress(fromAddr)}</td>
-                <td>${linkAddress(fromAddr)} <span class="muted">(change)</span></td>
-                <td><span style="color:#2ee59d">${formatKas(changeAmt, true)}</span></td>
-              </tr>
-            `;
-          }
-        });
+
+            if (transferredAmt > 0n && receivers.length > 0) {
+              let toCellContent = '';
+              let totalRecv = 0n;
+              receivers.forEach(r => totalRecv += outputMap.get(r) || 0n);
+
+              const receiverItems = receivers.map(addr => {
+                const amt = outputMap.get(addr) || 0n;
+                const prop = (amt * transferredAmt) / totalRecv;
+                const rem = (amt * transferredAmt) % totalRecv;
+                let final = prop;
+                if (rem * 2n >= totalRecv) final += 1n;
+                return `${linkAddress(addr)} - <span style="color:#2ee59d">${(Number(final) / 1e8).toFixed(8)} KAS</span><br>`;
+              }).join('');
+
+              if (receivers.length === 1) {
+                toCellContent = linkAddress(receivers[0]);
+              } else {
+                toCellContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + receivers.length + ')</summary><div class="receiver-list">' + receiverItems + '</div></details>';
+              }
+
+              html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span style="color:#2ee59d">' + formatKas(transferredAmt, true) + '</span></td></tr>';
+            }
+
+            if (changeAmt > 0n) {
+              html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + linkAddress(fromAddr) + ' <span class="muted">(change)</span></td><td><span style="color:#2ee59d">' + formatKas(changeAmt, true) + '</span></td></tr>';
+            }
+          });
+        }
       }
     }
 
@@ -530,7 +564,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         const outpointIndex = inp.previous_outpoint_index ?? "-";
         const outpoint = shortenEnd(outpointHash);
         const amount = inp.previous_outpoint_amount ?? 0;
-        const amtHtml = formatKas(amount, true);
+        const amtHtml = formatKas(BigInt(amount), true);
         const outpointHtml = (outpointHash === txid) ? escHtml(outpoint) : linkTx(outpointHash, outpoint);
         html += `
           <tr>
@@ -549,7 +583,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         const index = out.index ?? i;
         const outpoint = shortenEnd(txid);
         const amount = out.amount ?? 0;
-        const amtHtml = formatKas(amount, true);
+        const amtHtml = formatKas(BigInt(amount), true);
         const outpointHtml = escHtml(outpoint);
         html += `
           <tr>
@@ -595,43 +629,44 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     } catch {}
   }
 
-function determineTx(payload, outputs) {
-  let plOk = false;
-  let utf8 = "";
+  function determineTx(payload, outputs) {
+    let plOk = false;
+    let utf8 = "";
 
-  if (payload) {
-    try {
-      const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
-      utf8 = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
+    if (payload) {
+      try {
+        const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
+        utf8 = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
 
-      if (utf8.startsWith("k:1:")) {
-        explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-black.webp";
-        plOk = true;
+        if (utf8.startsWith("k:1:")) {
+          explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-black.webp";
+          plOk = true;
+        }
+      } catch {}
+    }
+
+    if (!plOk) {
+      if (utf8.startsWith("ciph_msg:1:")) {
+        explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp";
+      } 
+      else if (
+        Array.isArray(outputs) &&
+        outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")
+      ) {
+        explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp";
+      } 
+      else {
+        explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
       }
-    } catch {}
-  }
-
-  if (!plOk) {
-    if (utf8.startsWith("ciph_msg:1:")) {
-      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp";
-    } 
-    else if (
-      Array.isArray(outputs) &&
-      outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")
-    ) {
-      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp";
-    } 
-    else {
-      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
     }
   }
-}
 
   async function runSearch(inputTxId) {
     if (busy) return;
     busy = true;
 
-    const txid = String(inputTxId || "").trim();
+    const txid = String(inputTxId || "").trim().toLowerCase();
+
     if (txid.length !== 64 || !/^[0-9a-f]+$/.test(txid)) {
       addToast("Invalid transaction ID", "Please enter a valid 64-character hexadecimal Kaspa transaction ID.");
       busy = false;

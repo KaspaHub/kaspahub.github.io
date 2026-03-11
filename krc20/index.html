@@ -126,9 +126,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <thead>
           <tr>
             <th>#</th>
-            <th>Address</th>
-            <th>Quantity</th>
+            <th class="left">Address</th>
             <th>Percentage</th>
+            <th>Quantity</th>
           </tr>
         </thead>
         <tbody id="holderRows">
@@ -397,7 +397,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     try{
       const raw = BigInt(s);
       if(d >= 2){
-        const scale = pow10Big(d - 2);
+        const scale = 10n ** BigInt(d - 2);
         const half = scale / 2n;
         cents = (raw + half) / scale;
       }else if(d === 1){
@@ -419,7 +419,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   function pow10Big(n){
     if(n <= 0) return 1n;
-    return BigInt("1" + "0".repeat(n));
+    return 10n ** BigInt(n);
   }
 
   function ageFromMs(ms){
@@ -463,18 +463,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   async function fetchKasplexToken(t){
     const url = `https://api.kasplex.org/v1/krc20/token/${t}`;
-    const res = await fetch(url, { method:"GET" });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetch(url);
+    if(!res.ok) throw new Error(`Kasplex token fetch failed: ${res.status}`);
     const json = await res.json();
     const row = json?.result?.[0];
-    if(!row) throw new Error("Not found");
+    if(!row) throw new Error("Token not found on Kasplex");
     return row;
   }
 
   async function fetchBurnedAmountByAddress(t){
     const url = `https://api.kasplex.org/v1/krc20/address/${BURN_ADDR}/token/${String(t || "").trim()}`;
-    const res = await fetch(url, { method:"GET" });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetch(url);
+    if(!res.ok) return "0";
     const json = await res.json();
     const row = json?.result?.[0];
     const bal = row?.balance ?? "0";
@@ -487,13 +487,22 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
     let meta = null;
     try{
-      const r = await fetch(jsonUrl, { method:"GET", cache:"no-store" });
+      const r = await fetch(jsonUrl, { cache:"no-store" });
       if(r.ok) meta = await r.json();
     }catch{}
 
-    explorerPic.src = logoURL;
+    if(logoURL) explorerPic.src = logoURL;
 
     return meta;
+  }
+
+  async function fetchMarketData(){
+    const url = "https://api.kaspa.com/api/market-data";
+    const res = await fetch(url);
+    if(!res.ok) return null;
+    const json = await res.json();
+    if(!Array.isArray(json)) return null;
+    return json;
   }
 
   async function fetchOpList({ tick, next=null, prev=null }){
@@ -502,8 +511,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     if(next) u.searchParams.set("next", next);
     if(prev) u.searchParams.set("prev", prev);
 
-    const res = await fetch(u.toString(), { method:"GET" });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetch(u.toString());
+    if(!res.ok) throw new Error(`Op list fetch failed: ${res.status}`);
     const json = await res.json();
     return {
       prev: json?.prev ?? null,
@@ -522,9 +531,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   }
 
   function renderSummary(){
-    const t = currentTick;
-    const displayName = tokenMeta?.name || tokenInfo?.name || "-";
-
     tokenDec = Number(tokenInfo?.dec ?? "0");
     dec.textContent = String(tokenDec);
 
@@ -537,39 +543,39 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
     let circRaw = "0";
     try{
-      const m = BigInt(String(mintedRaw));
-      const b = BigInt(String(burnedRaw));
+      const m = BigInt(mintedRaw);
+      const b = BigInt(burnedRaw);
       circRaw = String(m - b);
-    }catch{
-      circRaw = "0";
-    }
+    }catch{}
     tokenCircRaw = circRaw;
 
     let mintedPct = "-";
     try{
-      const mintedN = tokenToNumber(mintedRaw, tokenDec);
-      const maxN = tokenToNumber(maxRaw, tokenDec);
-      if(mintedN != null && maxN != null && maxN > 0){
-        mintedPct = `${(mintedN / maxN * 100).toFixed(2)}%`;
+      const maxBig = BigInt(maxRaw);
+      const mintedBig = BigInt(mintedRaw);
+      if(maxBig > 0n){
+        const pct = Number((mintedBig * 10000n) / maxBig) / 100;
+        mintedPct = pct.toFixed(2) + "%";
       }
     }catch{}
     minted.textContent = mintedPct;
 
-    let maxN = null;
-    try {
-      maxN = tokenToNumber(maxRaw, tokenDec);
-    } catch {}
+    let maxBig = 0n;
+    try{ maxBig = BigInt(maxRaw); }catch{}
+
     const pctOfMax = (rawStr) => {
-      if (maxN == null || !(maxN > 0)) return "-";
-      const n = tokenToNumber(rawStr, tokenDec);
-      if (n == null || !(n >= 0)) return "-";
-      return (n / maxN * 100).toFixed(2) + "%";
+      if(maxBig === 0n) return "-";
+      try{
+        const n = BigInt(rawStr);
+        const pct = Number((n * 10000n) / maxBig) / 100;
+        return pct.toFixed(2) + "%";
+      }catch{ return "-"; }
     };
 
     preminted.innerHTML = `${formatTokenAmount(premintedRaw, tokenDec)}${pctOfMax(premintedRaw) === "-" ? "" : ` (${pctOfMax(premintedRaw)})`}`;
     burned.innerHTML = `${formatTokenAmount(burnedRaw, tokenDec)}${pctOfMax(burnedRaw) === "-" ? "" : ` (${pctOfMax(burnedRaw)})`}`;
     circ.innerHTML = `${formatTokenAmount2(circRaw, tokenDec)}${pctOfMax(circRaw) === "-" ? "" : ` (${pctOfMax(circRaw)})`}`;
-    max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxN != null && maxN > 0 ? " (100.00%)" : "-"}`;
+    max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxBig > 0n ? " (100.00%)" : "-"}`;
 
     holders.textContent = tokenInfo?.holderTotal != null ? withSeparators(tokenInfo.holderTotal) : "-";
     transfers.textContent = tokenInfo?.transferTotal != null ? withSeparators(tokenInfo.transferTotal) : "-";
@@ -578,11 +584,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   function renderAboutTab(){
     const meta = tokenMeta || {};
-
-    const desc    = meta.description || "";
-    const updated = meta.updated  || "";
-
-    infoDescription.innerHTML = desc  ? escHtml(desc) : "-";
+    infoDescription.innerHTML = meta.description ? escHtml(meta.description) : "-";
   }
 
   function renderPriceMissing(){
@@ -602,7 +604,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     const start = holderOffset;
     const end = Math.min(start + HOLDER_LIMIT, holderList.length);
     const pageList = holderList.slice(start, end);
-    const circN = tokenToNumber(tokenCircRaw, tokenDec);
+    let circBig = 0n;
+    try{ circBig = BigInt(tokenCircRaw); }catch{}
 
     holderRows.innerHTML = pageList.map((h, i) => {
       const globalI = start + i;
@@ -611,19 +614,20 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       const amtFmt = formatTokenAmount(amtRaw, tokenDec);
 
       let share = "-";
-      if(circN != null){
-        const n = tokenToNumber(amtRaw, tokenDec);
-        if(n != null && circN > 0){
-          share = (n / circN * 100).toFixed(2) + "%";
-        }
+      if(circBig > 0n){
+        try{
+          const amtBig = BigInt(amtRaw);
+          const pct = Number((amtBig * 10000n) / circBig) / 100;
+          share = pct.toFixed(2) + "%";
+        }catch{}
       }
 
       return `
         <tr>
           <td>${globalI+1}</td>
-          <td>${linkAddress(addr, addr)}</td>
-          <td>${amtFmt}</td>
+          <td class="left">${linkAddress(addr, addr)}</td>
           <td>${share}</td>
+          <td>${amtFmt}</td>
         </tr>
       `;
     }).join("");
@@ -711,9 +715,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     const vol = parseFloatSafe(tokenMarket.volumeUsd);
     const volFmt = vol == null ? "-" : formatCompact(vol);
     let priceFmt = "-";
-    const circN = tokenToNumber(tokenCircRaw, tokenDec);
-    if(mcapVal != null && circN != null && circN > 0){
-      const compUsd = mcapVal / circN;
+    let circBig = 0n;
+    try{ circBig = BigInt(tokenCircRaw); }catch{}
+    if(circBig > 0n && mcapVal != null){
+      const compUsd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
       priceFmt = formatUsd(compUsd);
     }else if(tokenMarket.price != null){
       priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
@@ -747,24 +752,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     try{
       tokenInfo = await fetchKasplexToken(T);
 
-      tokenMarket = null;
-      try{
-        const mres = await fetch("https://api.kaspa.com/api/market-data");
-        if(mres.ok){
-          const mjson = await mres.json();
-          if(Array.isArray(mjson)){
-            tokenMarket = mjson.find(r => r.ticker === T);
-          }
-        }
-      }catch{}
+      tokenMeta = await fetchDirectoryMeta(T).catch(() => null);
 
-      tokenMeta = await fetchDirectoryMeta(T);
+      tokenBurnedRaw = await fetchBurnedAmountByAddress(T).catch(() => "0");
 
-      try{
-        tokenBurnedRaw = await fetchBurnedAmountByAddress(T);
-      }catch{
-        tokenBurnedRaw = "0";
-      }
+      const marketData = await fetchMarketData().catch(() => null);
+      tokenMarket = marketData ? marketData.find(r => r.ticker === T.toUpperCase()) : null;
 
       renderHeader();
       renderSummary();
@@ -778,10 +771,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         const mcapVal = parseFloatSafe(tokenMarket.marketCap);
         const vol = parseFloatSafe(tokenMarket.volumeUsd);
         const ch = parseFloatSafe(tokenMarket.changeMarketCap);
-        const circN = tokenToNumber(tokenCircRaw, tokenDec);
+        let circBig = 0n;
+        try{ circBig = BigInt(tokenCircRaw); }catch{}
         let usd = null;
-        if(mcapVal != null && circN != null && circN > 0){
-          usd = mcapVal / circN;
+        if(mcapVal != null && circBig > 0n){
+          usd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
         }else{
           usd = parseFloatSafe(tokenMarket.price);
         }
@@ -792,8 +786,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         if(mcapVal != null){
           mcap.textContent = formatUsd0(mcapVal);
         }else{
-          if(circN != null && usd != null){
-            mcap.textContent = formatUsd0(circN * usd);
+          if(circBig > 0n && usd != null){
+            mcap.textContent = formatUsd0(Number(circBig) * usd / Math.pow(10, tokenDec));
           }else{
             mcap.textContent = "-";
           }
@@ -864,10 +858,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     setHolderPaging();
   });
 
-    optionsCtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
-    });
+  optionsCtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
+  });
 
   (function init(){
     const urlTick = getUrlTick();
