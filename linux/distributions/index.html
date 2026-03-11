@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Linux Distros - Kaspa Hub</title>
+<meta name="twitter:title" content="Linux Distributions - Kaspa Hub" />
+<meta property="og:title" content="Linux Distributions - Kaspa Hub" />
+
+<meta name="description" content="Compare Linux distributions. Filter by base family (Arch / Debian / Fedora / …), features and desktop environments." />
+<meta name="twitter:description" content="Find your ideal Linux distro. Filter by family, rolling release, immutable design, desktop environment, etc." />
+<meta property="og:description" content="Find your ideal Linux distro. Filter by family, rolling release, immutable design, desktop environment, etc." />
+
+<link rel="canonical" href="https://kaspahub.org/linux/distributions/" />
+<meta name="twitter:url" content="https://kaspahub.org/linux/distributions/" />
+<meta property="og:url" content="https://kaspahub.org/linux/distributions/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+<div class="intro">
+  <h1>Linux Distribution Comparison</h1>
+  <p>Filter and compare popular Linux distributions by base family, features and desktop environments.</p>
+</div>
+
+<div class="main-content-area">
+
+<section class="sidebar theme-1">
+  <h3>Base Family<span id="counter"></span></h3>
+  <div class="filter-category">
+    <div class="filter-group">
+      <input type="radio" name="family" id="fam-all" data-family="all" checked>
+      <label for="fam-all">Any</label>
+    </div>
+    <div class="filter-group">
+      <input type="radio" name="family" id="fam-arch" data-family="arch">
+      <label for="fam-arch">Arch-based</label>
+    </div>
+    <div class="filter-group">
+      <input type="radio" name="family" id="fam-debian" data-family="debian">
+      <label for="fam-debian">Debian-based</label>
+    </div>
+    <div class="filter-group">
+      <input type="radio" name="family" id="fam-fedora" data-family="fedora">
+      <label for="fam-fedora">Fedora-based</label>
+    </div>
+  </div>
+
+  <h3>Built in Features</h3>
+  <div class="filter-category">
+    <!-- <div class="filter-group"><input type="checkbox" id="f-drivers" data-feature="drivers"><label for="f-drivers">Codecs & Drivers</label></div> -->
+    <div class="filter-group"><input type="checkbox" id="f-secureboot" data-feature="secureboot"><label for="f-secureboot">Secure Boot</label></div>
+    <div class="filter-group"><input type="checkbox" id="f-snaps" data-feature="snaps"><label for="f-snaps">Snaps Support</label></div>
+    <div class="filter-group"><input type="checkbox" id="f-flatpak" data-feature="flatpak"><label for="f-flatpak">Flatpak Support</label></div>
+    <!-- <div class="filter-group"><input type="checkbox" id="f-nvidia" data-feature="nvidia"><label for="f-nvidia">Nvidia Support</label></div> -->
+    <div class="filter-group"><input type="checkbox" id="f-ventoy" data-feature="ventoy"><label for="f-ventoy">Ventoy Support</label></div>
+  </div>
+
+  <h3>Desktop Environment</h3>
+  <div class="filter-category">
+    <div class="filter-group"><input type="checkbox" id="de-budgie" data-feature="budgie"><label for="de-budgie">Budgie</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-cinnamon" data-feature="cinnamon"><label for="de-cinnamon">Cinnamon</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-cosmic" data-feature="cosmic"><label for="de-cosmic">Cosmic</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-gnome" data-feature="gnome"><label for="de-gnome">Gnome</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-kde" data-feature="kde"><label for="de-kde">KDE Plasma</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-mate" data-feature="mate"><label for="de-mate">Mate</label></div>
+    <div class="filter-group"><input type="checkbox" id="de-xfce" data-feature="xfce"><label for="de-xfce">XFCE</label></div>
+  </div>
+</section>
+
+<section class="filter-list-main">
+  <div class="theme-1 search-sort-controls">
+    <input type="text" id="searchInput" placeholder="Search distro..." />
+    <select id="sortSelect" aria-label="Sort">
+      <option value="default">Default</option>
+      <option value="az">A - Z</option>
+      <option value="za">Z - A</option>
+    </select>
+  </div>
+  <div class="filter-grid" id="itemGrid"></div>
+  <button class="theme-1" id="loadMoreBtn">Load More</button>
+</section>
+
+</div>
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script type="text/javascript">
+'use strict';
+
+let items = [];
+let filteredItems = [];
+let currentIndex = 0;
+const itemsPerPage = 42;
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const familyRadios = document.querySelectorAll('input[type="radio"][data-family]');
+const featureCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+
+const featureTags = {
+    reviewed: { label: '', class: 'reviewed' },
+    verified: { label: '', class: 'verified' }
+};
+
+function renderItems(reset = false) {
+    if (reset) {
+        itemGrid.innerHTML = '';
+        currentIndex = 0;
+    }
+    const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < slice.length; i++) {
+        const item = slice[i];
+        const card = document.createElement('a');
+        card.className = 'filter-card theme-1';
+        card.href = item.link;
+        card.target = '_blank';
+
+        let featuresHtml = '';
+        for (let j = 0; j < item.features.length; j++) {
+            const f = item.features[j];
+            if (featureTags[f]) featuresHtml += `<span class="feature-tag ${featureTags[f].class}">${featureTags[f].label}</span>`;
+        }
+
+        card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
+        fragment.appendChild(card);
+    }
+    itemGrid.appendChild(fragment);
+    currentIndex += slice.length;
+    counter.textContent = `(${filteredItems.length} of ${items.length})`;
+    loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+  const selectedFamily = document.querySelector('input[type="radio"][data-family]:checked')?.dataset.family || 'all';
+  const activeFeatures = Array.from(featureCheckboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.dataset.feature);
+
+  const searchTerm = searchInput.value.trim().toLowerCase();
+
+  filteredItems = items.filter(item => {
+    const familyMatch = selectedFamily === 'all' || item.features.includes(selectedFamily);
+
+    const featureMatch = activeFeatures.length === 0 ||
+      activeFeatures.every(f => item.features.includes(f));
+
+    const searchMatch = !searchTerm ||
+      item.name.toLowerCase().includes(searchTerm) ||
+      item.description.toLowerCase().includes(searchTerm);
+
+    return familyMatch && featureMatch && searchMatch;
+  });
+
+  const sortMode = sortSelect.value;
+  if (sortMode === 'az') {
+    filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortMode === 'za') {
+    filteredItems.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
+  if (filteredItems.length === 0) {
+    itemGrid.innerHTML = '<p class="no-items-message">No distributions match your filters.</p>';
+    loadMoreBtn.style.display = 'none';
+    counter.textContent = ` (0 of ${items.length})`;
+    return;
+  }
+
+  renderItems(true);
+}
+
+familyRadios.forEach(r => r.addEventListener('change', filterItems));
+featureCheckboxes.forEach(cb => cb.addEventListener('change', filterItems));
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+loadMoreBtn.addEventListener('click', () => renderItems());
+
+fetch('/linux/assets/linux-distros.json?v=0')
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to load');
+    return res.json();
+  })
+  .then(data => {
+    items = data;
+    filteredItems = [...items];
+    renderItems(true);
+  })
+  .catch(err => {
+    console.error(err);
+    itemGrid.innerHTML = '<p class="no-items-message">Failed to load distributions.</p>';
+  });
+</script>
+</body>
+</html>

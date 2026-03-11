@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa Price Tracker</title>
+<meta name="twitter:title" content="Live Kaspa Price Tracker and Market Data" />
+<meta property="og:title" content="Live Kaspa Price Tracker and Market Data" />
+
+<meta name="description" content="Follow the live price of Kaspa with real-time updates. View market cap, fully diluted valuation, circulating and max supply, and more." />
+<meta name="twitter:description" content="Track Kaspa price movements in real time. See updated market cap, supply metrics, and valuation data." />
+<meta property="og:description" content="Real-time price and supply metrics for Kaspa including market cap and valuation updates." />
+
+<link rel="canonical" href="https://kaspahub.org/price/" />
+<meta name="twitter:url" content="https://kaspahub.org/price/" />
+<meta property="og:url" content="https://kaspahub.org/price/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+<div style="text-align: center; margin-top: 100px;">
+<p id="price">Loading...</p>
+
+<div id="market-stats" style="text-align: center; margin-top: 30px;">
+<div class="stats-container">
+	<div class="stat-item">
+		<div class="label">Market Cap</div>
+		<div class="value" id="market-cap">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Fully Diluted Valuation</div>
+		<div class="value" id="fdv">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Circulating Supply</div>
+		<div class="value" id="circ-supply">...</div>
+	</div>
+	<div class="stat-item">
+		<div class="label">Max Supply</div>
+		<div class="value" id="max-supply">...</div>
+	</div>
+</div>
+</div>
+</div>
+<div style="text-align: center; margin-bottom: 20px;">
+<button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">📈 Open Chart</button>
+</div>
+<div id="chart-container"></div>
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style type="text/css">
+#chart-container { height: 700px; }
+@media (max-width: 800px) and (max-aspect-ratio: 1/1) {
+#chart-container { height: 500px; }
+}
+
+#price {
+font-size: 3rem;
+font-weight: bold;
+transition: color 0.4s ease-in-out;
+}
+
+#price.updated {
+animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+from { opacity: 0.3; transform: scale(0.97); }
+to { opacity: 1; transform: scale(1); }
+}
+
+.stats-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 24px;
+font-size: 1.1rem;
+margin-top: 20px;
+}
+
+.stat-item {
+min-width: 180px;
+text-align: center;
+padding: 12px;
+background-color: rgba(255, 255, 255, 0.05);
+border-radius: 12px;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item .label {
+font-weight: bold;
+margin-bottom: 6px;
+}
+
+.stat-item .value {
+margin: 0;
+}
+</style>
+
+<script type="text/javascript">
+'use strict';
+
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("load-chart-btn");
+  const container = document.getElementById("chart-container");
+  let loaded = false;
+
+  button.addEventListener("click", () => {
+    if (!loaded) {
+      const widget = document.createElement("div");
+      widget.className = "tradingview-widget-container";
+      widget.style = "height:100%; width:100%";
+      widget.innerHTML = `
+        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+        <div class="tradingview-widget-copyright">
+          <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+            <span class="blue-text">Track all markets on TradingView</span>
+          </a>
+        </div>
+      `;
+
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      script.async = true;
+      script.innerHTML = JSON.stringify({
+        symbol: "MEXC:KASUSDT",
+        interval: "60",
+        theme: "dark",
+        style: "1",
+        locale: "en",
+        autosize: true,
+        backgroundColor: "#0F0F0F",
+        gridColor: "rgba(242, 242, 242, 0.06)",
+        timezone: "Etc/UTC",
+        allow_symbol_change: true,
+        hide_top_toolbar: false,
+        hide_side_toolbar: true,
+        hide_volume: false,
+        calendar: false,
+        details: false,
+        save_image: true,
+      });
+
+      widget.appendChild(script);
+      container.appendChild(widget);
+      loaded = true;
+      button.textContent = "❌ Close Chart";
+    } else {
+      container.innerHTML = "";
+      loaded = false;
+      button.textContent = "📈 Open Chart";
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+'use strict';
+
+const priceBox = document.getElementById("price");
+const marketCapBox = document.getElementById("market-cap");
+const fdvBox = document.getElementById("fdv");
+const circBox = document.getElementById("circ-supply");
+const maxBox = document.getElementById("max-supply");
+
+const maxSupply = 28704026601;
+let circSupply = 27071902916;
+let price = 0.10;
+
+function getCirculatingSupply() {
+  fetch("https://api.kaspa.org/info/coinsupply/circulating")
+    .then(res => res.json())
+    .then(data => {
+      if (typeof data === "number" && !isNaN(data)) {
+        circSupply = data;
+        console.log("Circulating Supply:", circSupply);
+      }
+    })
+    .catch(err => {
+      console.warn("Using fallback circulating supply:", err);
+    });
+}
+
+function getPrice() {
+  fetch("https://api.kaspa.org/info/price")
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (!data || typeof data.price !== 'number' || isNaN(data.price)) {
+        throw new Error("Invalid price data");
+      }
+      price = data.price;
+      console.log("Price:", price);
+      updatePage(price);
+    })
+    .catch(err => {
+      console.error("Failed to fetch Kaspa price:", err);
+      if (price !== null) {
+        updatePage(price);
+      } else {
+        priceBox.textContent = "Error loading price";
+      }
+    });
+}
+
+function updatePage(price) {
+  const price6 = price.toFixed(6);
+  const pageTitle = `$${price.toFixed(4)} - KAS`;
+  document.title = pageTitle;
+
+  // Price
+  priceBox.textContent = `$${price6}`;
+  priceBox.classList.remove("updated");
+  void priceBox.offsetWidth;
+  priceBox.classList.add("updated");
+
+  // Market stats
+  const marketCap = price * circSupply;
+  const fdv = price * maxSupply;
+  marketCapBox.textContent = formatNumber(marketCap);
+  fdvBox.textContent = formatNumber(fdv);
+  circBox.textContent = `${(circSupply / 1e9).toFixed(2)}B KAS`;
+  maxBox.textContent = `${(maxSupply / 1e9).toFixed(2)}B KAS`;
+
+  // Meta tags
+  let twitterMeta = document.querySelector('meta[name="twitter:title"]');
+  if (!twitterMeta) {
+    twitterMeta = document.createElement("meta");
+    twitterMeta.setAttribute("name", "twitter:title");
+    document.head.appendChild(twitterMeta);
+  }
+  twitterMeta.setAttribute("content", pageTitle);
+
+  let ogMeta = document.querySelector('meta[property="og:title"]');
+  if (!ogMeta) {
+    ogMeta = document.createElement("meta");
+    ogMeta.setAttribute("property", "og:title");
+    document.head.appendChild(ogMeta);
+  }
+  ogMeta.setAttribute("content", pageTitle);
+}
+
+function formatNumber(value) {
+  if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
+  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+  return `$${value.toFixed(2)}`;
+}
+
+getCirculatingSupply();
+getPrice();
+setInterval(getPrice, 15000);
+</script>
+
+</body>
+</html>

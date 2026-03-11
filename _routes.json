@@ -1,0 +1,3 @@
+[
+  { "pattern": "/address*", "method": "GET", "path": "/address/index.html" }
+]

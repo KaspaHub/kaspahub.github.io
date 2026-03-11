@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa Wallet Comparison</title>
+<meta name="twitter:title" content="Kaspa Wallet Comparison" />
+<meta property="og:title" content="Kaspa KAS Cryptocurrency Wallets - Comparison" />
+
+<meta name="description" content="Explore a detailed comparison of Kaspa wallets, evaluating key features like self-custody, multi-chain support, KRC20/KRC721 compatibility, and platform availability to find the best wallet for your needs." />
+<meta name="twitter:description" content="Discover how Kaspa wallets compare in terms of security, open-source status, token support, and platform compatibility to choose the ideal wallet for managing your Kaspa assets." />
+<meta property="og:description" content="Compare top Kaspa wallets based on self-custody, KRC-20/KRC-721 support, platform availability, and more to understand their features and suitability for the Kaspa ecosystem." />
+
+<link rel="canonical" href="https://kaspahub.org/post/kaspa-wallet-comparison/" />
+<meta name="twitter:url" content="https://kaspahub.org/post/kaspa-wallet-comparison/" />
+<meta property="og:url" content="https://kaspahub.org/post/kaspa-wallet-comparison/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "Kaspa Wallet Comparison",
+"description": "Compare Kaspa wallets to understand their features, security, and compatibility within the Kaspa ecosystem.",
+"url": "https://kaspahub.org/post/kaspa-wallet-comparison/",
+"publisher": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"author": {
+	"@type": "Person",
+	"name": "Classic",
+	"url": "https://x.com/Classicgyt",
+	"image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2025-09-15T22:21:00+03:00",
+"dateModified": "2025-12-12T08:00:00+08:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+
+<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- Horizontal bar ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="3951210451"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+<h1>Kaspa Wallet Comparison</h1>
+<p>Compare Kaspa wallets to evaluate their features, security, platform availability, and compatibility with KRC-20, KRC-721, and KNS domains within the Kaspa ecosystem.</p>
+<h2>Comparison Table</h2>
+<div class="table-container">
+<table>
+<tr>
+	<th>Wallet</th>
+	<th>Self-Custodial</th>
+	<th>Open Source</th>
+	<th>Multi-Chain</th>
+	<th>KRC-20</th>
+	<th>KRC-721</th>
+	<th>KNS Domains</th>
+	<th>Hardware</th>
+	<th>Desktop</th>
+	<th>Mobile</th>
+	<th>Browser Extension</th>
+	<th>Web</th>
+</tr>
+<tr>
+	<td><a href="https://onekey.so" target="_blank">OneKey</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://tangem.com" target="_blank">Tangem</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.ledger.com" target="_blank">Ledger</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://web3.okx.com" target="_blank">OKX Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://kaspium.io" target="_blank">Kaspium</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.kasware.xyz" target="_blank">Kasware</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://kastle.cc" target="_blank">Kastle</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.kurncy.com" target="_blank">Kurncy</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://kaskeeper.vercel.app" target="_blank">KasKeeper</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://wallet.kaspa.com" target="_blank">Kaspacom Wallet</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://kaspa-ng.org" target="_blank">Kaspa NG</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://coin.space" target="_blank">Coin Wallet</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://kasanova.app" target="_blank">Kasanova</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://dex.cc/app" target="_blank">DEX.cc Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://wallet.kaspanet.io" target="_blank">Kaspanet</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://www.ghostwallet.org" target="_blank">Ghost Wallet</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://chromewebstore.google.com/detail/kaspian/cidcgacclonccobcbihholdncmehnlpl" target="_blank">Kaspian</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://kaskold.com" target="_blank">Kaspa Kold</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://github.com/Atomik-Global/atomik-wallet" target="_blank">Atomik Wallet</a></td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://kspr-bot.xyz" target="_blank">KSPR Bot</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.safepal.com" target="_blank">SafePal</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.goldshell.com/product/goldshell-wallet/" target="_blank">Goldshell</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://www.coolwallet.io" target="_blank">Cool Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://guarda.com" target="_blank">Guarda</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://zelcore.io" target="_blank">Zelcore</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://wallet.coinex.com" target="_blank">CoinEx Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://coinrabbit.io/wallet/" target="_blank">CoinRabbit</a></td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+</tr>
+<tr>
+	<td><a href="https://walletnow.app" target="_blank">NOW Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://pluswallet.app" target="_blank">Plus Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+</tr>
+<tr>
+	<td><a href="https://mathwallet.org" target="_blank">Math Wallet</a></td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>❌</td>
+	<td>✅</td>
+	<td>✅</td>
+	<td>✅</td>
+</tr>
+</table>
+</div>
+<br><br>
+
+<h2>Feature Explanations</h2>
+<br>
+<h3>Self-Custodial</h3>
+<p>Self-custodial wallets allow users to maintain complete control over their private keys and digital assets without depending on third parties. This approach maximizes security but requires careful key management by the user. Custodial wallets, on the other hand, entrust private keys to a service provider, simplifying access but introducing potential security risks.</p>
+
+<h3>Open Source</h3>
+<p>Open-source wallets make their code publicly available, allowing the community to audit and review it for transparency and security. This collaborative model builds trust and helps identify vulnerabilities more quickly. Closed-source wallets may provide unique features but lack the same level of independent community oversight.</p>
+
+<h3>Multi-Chain</h3>
+<p>Multi-chain wallets support cryptocurrencies across multiple blockchains, offering flexibility for users with diverse digital portfolios. This ensures that assets from different ecosystems can be managed in one place, while single-chain wallets focus on supporting just one blockchain network.</p>
+
+<h3>KRC-20</h3>
+<p>KRC20 is Kaspa’s fungible token standard, similar to Ethereum’s ERC-20. Wallets that support KRC-20 enable users to store, send, and interact with Kaspa-based tokens, unlocking opportunities in decentralized finance (DeFi) and other applications within the Kaspa ecosystem.</p>
+
+<h3>KRC-721</h3>
+<p>KRC721 is the Kaspa network’s non-fungible token (NFT) standard. Wallets that support KRC-721 allow users to manage and trade NFTs on Kaspa, making them essential for digital collectibles, gaming assets, and unique tokenized items.</p>
+
+<h3>KNS Domains</h3>
+<p>Kaspa Name Service (KNS) provides human-readable domain-style addresses to simplify transactions. Instead of copying long cryptographic addresses, users can send and receive Kaspa using personalized names, improving accessibility and reducing errors.</p>
+
+<h3>Hardware</h3>
+<p>Hardware wallets store private keys offline, providing one of the highest levels of protection against online attacks. They are ideal for long-term storage of significant assets but may require additional software or companion apps for full compatibility with specific blockchain features.</p>
+
+<h3>Desktop</h3>
+<p>Desktop wallets run directly on a computer, often offering advanced features for developers, traders, or power users. They provide robust control over assets and may include tools not available on lighter wallet versions.</p>
+
+<h3>Mobile</h3>
+<p>Mobile wallets are designed for smartphones, giving users convenient access to their assets anytime, anywhere. They are widely used for daily transactions, ecosystem participation, and quick interaction with decentralized applications.</p>
+
+<h3>Browser Extension</h3>
+<p>Browser extension wallets integrate directly into web browsers, enabling seamless use of decentralized applications (dApps) and fast transactions without leaving the browser environment. They are especially useful for interacting with web-based blockchain platforms.</p>
+
+<h3>Web</h3>
+<p>Web wallets can be accessed through a browser without installation, offering a quick and user-friendly way to manage assets. While highly accessible, they generally provide less security than hardware or desktop wallets, making them better suited for smaller amounts or frequent transactions.</p>
+<br>
+<h2>Wallet Descriptions</h2>
+<ul>
+	<li><strong>OneKey</strong>: Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices. <a href="https://onekey.so" target="_blank">Visit OneKey</a></li>
+	<li><strong>Tangem</strong>: Popular hardware wallet with EAL6+ certified chip, audited by Kudelski Security and Riscure, offering multi-chain asset management with an open-source app. <a href="https://tangem.com" target="_blank">Visit Tangem</a></li>
+	<li><strong>Ledger</strong>: Industry-leading cold wallet for multi-chain asset management on desktop & mobile. Secure, self-custodial hardware wallet audited by Friedman LLP & Kudelski IoT. <a href="https://www.ledger.com" target="_blank">Visit Ledger</a></li>
+	<li><strong>OKX Wallet</strong>: User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains. <a href="https://web3.okx.com" target="_blank">Visit OKX Wallet</a></li>
+	<li><strong>Kaspium</strong>: Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments. <a href="https://kaspium.io" target="_blank">Visit Kaspium</a></li>
+	<li><strong>Kasware</strong>: The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains. <a href="https://www.kasware.xyz" target="_blank">Visit Kasware</a></li>
+	<li><strong>Kastle</strong>: A secure, user-friendly Kaspa wallet supporting $KAS, KRC20, KRC721, KNS domains, and Ledger integration, giving you full control over your assets. <a href="https://kastle.cc" target="_blank">Visit Kastle</a></li>
+	<li><strong>Kurncy</strong>: Lightweight and user-friendly Kaspa wallet for iOS & Android with optional custody, supporting KRC20, KRC721, KNS, and seamless integration with the ecosystem. <a href="https://www.kurncy.com" target="_blank">Visit Kurncy</a></li>
+	<li><strong>KasKeeper</strong>: Web3 wallet for Kaspa with KRC20 token support, backed by KEF, designed for secure self-custodial storage and daily transactions. <a href="https://kaskeeper.vercel.app" target="_blank">Visit KasKeeper</a></li>
+	<li><strong>Kaspacom Wallet</strong>: An open-source KaspaCom web wallet, formerly known as Kaspiano, fully integrated with both Layer 1 and Layer 2 of the Kaspa network.<a href="https://github.com/KASPACOM/kaspacom-web-wallet" target="_blank">Visit Kaspacom Wallet</a></li>
+	<li><strong>Kaspa NG</strong>: KNG is a Kaspa wallet with advanced features, including tools for full-node runners and developers, with a strong focus on security. <a href="https://kaspa-ng.org" target="_blank">Visit Kaspa NG</a></li>
+	<li><strong>Coin Wallet</strong>: Simple and lightweight cross-platform, multi-chain, self-custodial wallet with built-in swaps, and Mecto for geo-location based address sharing. <a href="https://coin.space" target="_blank">Visit Coin Wallet</a></li>
+	<li><strong>DEX.cc Wallet</strong>: A non-custodial wallet by DEX.cc Lab, offering multi-account management, built-in bridge, integration with AMM swaps, and more. <a href="https://dex.cc/app" target="_blank">Visit DEX.cc</a></li>
+	<li><strong>Kasanova</strong>: Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management. <a href="https://kasanova.app" target="_blank">Visit Kasanova</a></li>
+	<li><strong>Kaspanet</strong>: Open-source web wallet for Kaspa, designed for ease of use and accessibility. <a href="https://wallet.kaspanet.io" target="_blank">Visit Kaspanet</a></li>
+	<li><strong>Ghost Wallet</strong>: Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens. <a href="https://www.ghostwallet.org" target="_blank">Visit Ghost Wallet</a></li>
+	<li><strong>Kaspian</strong>: Simple and lightweight Chrome extension wallet for Kaspa, offering seamless self-custodial storage and management of coins. <a href="https://chromewebstore.google.com/detail/kaspian/cidcgacclonccobcbihholdncmehnlpl" target="_blank">Visit Kaspian</a></li>
+	<li><strong>Kaspa Kold</strong>: Offline air-gapped cold storage solution for Kaspa, supporting secure wallet creation, transaction management, and message signing with mnemonic phrase security. <a href="https://kaskold.com" target="_blank">Visit Kaspa Kold</a></li>
+	<li><strong>Atomik Wallet</strong>: A cross-platform wallet from Kasway designed for easy and secure payments on the Kaspa network, focused on simplicity for all users. <b>Work in progress.</b> <a href="https://github.com/Atomik-Global/atomik-wallet" target="_blank">Visit Atomik Wallet</a></li>
+	<li><strong>KSPR Bot</strong>: Telegram-based wallet for Kaspa, offering seamless KRC20 token management and self-custodial storage, ideal for users seeking convenience and integration with messaging platforms. <a href="https://kspr-bot.xyz" target="_blank">Visit KSPR Bot</a></li>
+	<li><strong>SafePal</strong>: Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping. <a href="https://www.safepal.com" target="_blank">Visit SafePal</a></li>
+	<li><strong>Goldshell</strong>: Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring. <a href="https://www.goldshell.com/product/goldshell-wallet/" target="_blank">Visit Goldshell</a></li>
+	<li><strong>Cool Wallet</strong>: Secure wallet with both cold and hot wallet functionality, supporting multi-chain assets and built-in token swapping. <a href="https://www.coolwallet.io" target="_blank">Visit Cool Wallet</a></li>
+	<li><strong>Guarda</strong>: Multiplatform non-custodial wallet with features for managing, buying, exchanging, and staking a wide range of cryptocurrencies. <a href="https://guarda.com" target="_blank">Visit Guarda</a></li>
+	<li><strong>Zelcore</strong>: Non-custodial multi-chain wallet for mobile and desktop, supporting assets across a wide range of blockchains. <a href="https://zelcore.io" target="_blank">Visit Zelcore</a></li>
+	<li><strong>CoinEx Wallet</strong>: Multi-chain non-custodial wallet with DeFi integration for secure storage and trading. Formerly known as ViaWallet. <a href="https://wallet.coinex.com" target="_blank">Visit CoinEx Wallet</a></li>
+	<li><strong>CoinRabbit</strong>: Custodial multi-currency wallet offering storage, swapping, lending, and borrowing crypto in one platform, focusing on user convenience. <a href="https://coinrabbit.io/wallet/" target="_blank">Visit CoinRabbit</a></li>
+	<li><strong>NOW Wallet</strong>: Cross-platform non-custodial wallet with multi-chain support, staking, NFTs, dApps, and fiat-to-crypto swap feature. <a href="https://walletnow.app" target="_blank">Visit NOW Wallet</a></li>
+	<li><strong>Plus Wallet</strong>: Lightweight multi-chain wallet with built-in swap feature, available on mobile and web for easy use. <a href="https://pluswallet.app" target="_blank">Visit Plus Wallet</a></li>
+	<li><strong>Math Wallet</strong>: Versatile multi-chain wallet with support for hundreds of blockchains, featuring hardware integration and cross-platform access. <a href="https://mathwallet.org" target="_blank">Visit Math Wallet</a></li>
+</ul>
+</article>
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>

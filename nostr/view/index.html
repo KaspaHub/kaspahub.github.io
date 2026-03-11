@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Nostr Raw User Data by Relay</title>
+<meta name="twitter:title" content="View Nostr User Data by Relay" />
+<meta property="og:title" content="Nostr Profile & Raw Event Viewer with Kaspa Support" />
+
+<meta name="description" content="View raw Nostr user data directly from multiple relays. Enter your public key (npub or hex) to fetch events, kind 0 profiles, and explore decentralized identity with Kaspa integration.">
+<meta name="twitter:description" content="Fetch and display Nostr raw events by relay using your public key. Supports npub or hex formats for quick decentralized data viewing.">
+<meta property="og:description" content="Explore Nostr raw events across multiple relays. Enter your public key to view profile data and activity in real time.">
+
+<link rel="canonical" href="https://kaspahub.org/nostr/view/" />
+<meta name="twitter:url" content="https://kaspahub.org/nostr/view/" />
+<meta property="og:url" content="https://kaspahub.org/nostr/view/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/nostr.bundle.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-0">
+
+<section id="login-section" class="theme-1 section">
+
+    <div class="w-header">
+      <span>Nostr Raw Data Viewer</span>
+      <a class="w-close" draggable="false" href="/nostr/"></a>
+    </div>
+
+    <p for="public-key">Public Key (npub or hex):</p>
+    <input type="text" id="public-key" placeholder="Enter your public key">
+
+    <div class="w-footer">
+        <p>
+            <input type="checkbox" id="fetch-all-events">
+            <label for="fetch-all-events">Fetch all event kinds</label>
+        </p>
+        <button class="button" id="fetch-btn" onclick="fetchEvents()" ><span id="spinner-button" class="spinner fade-in hidden"></span> Fetch Events</button>
+    </div>
+
+    <div id="error"></div>
+</section>
+
+<section id="profile-section" class="section theme-1 hidden">
+
+    <div class="w-header">
+      <span>Nostr Raw Data</span>
+      <a class="w-close" draggable="false" href="/nostr/view/"></a>
+    </div>
+
+    <p id="profile-title">All Raw User Events by Relay</p>
+    <div id="profiles"></div>
+</section>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style>
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button {
+    max-width: 200px;
+    align-self: end;
+}
+
+#error {
+    color: red;
+    margin-top: 10px;
+}
+.relay-data {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.relay-data h3 {
+    margin-top: 0;
+}
+pre {
+    font-size: 1rem;
+}
+
+</style>
+<script type="text/javascript">
+'use strict';
+
+let publicKey;
+let pool;
+const relays = [
+    'wss://relay.damus.io',
+    'wss://relay.snort.social',
+    'wss://relay.primal.net',
+    'wss://nos.lol',
+    'wss://nostr.mom',
+    // 'wss://relay.nostr.band',
+    'wss://nostr.bitcoiner.social',
+    'wss://relay.nos.social',
+    'wss://nostr.oxtr.dev',
+    'wss://relay.0xchat.com',
+    'wss://relay.noswhere.com',
+    'wss://no.str.cr',
+    'wss://nostr-pub.wellorder.net',
+    'wss://nostr.mutinywallet.com',
+    'wss://purplepag.es'
+];
+
+async function fetchEvents() {
+    const input = document.getElementById('public-key').value.trim();
+    const fetchAllEvents = document.getElementById('fetch-all-events').checked;
+    const errorDiv = document.getElementById('error');
+    const fetchBtn = document.getElementById('fetch-btn');
+    const loadingDiv = document.getElementById('spinner-button');
+
+    errorDiv.textContent = '';
+
+    fetchBtn.disabled = true;
+    loadingDiv.classList.remove('hidden');
+
+    try {
+        if (input.startsWith('npub')) {
+            publicKey = window.NostrTools.nip19.decode(input).data;
+        } else {
+            publicKey = input;
+        }
+
+        if (!/^[0-9a-f]{64}$/.test(publicKey)) {
+            throw new Error('Invalid public key: Must be 64-character hex or valid npub');
+        }
+        console.log('Public key:', publicKey);
+
+        document.getElementById('profile-title').textContent = fetchAllEvents
+            ? 'All Raw User Events by Relay'
+            : 'Raw Kind 0 Event Data by Relay';
+
+        pool = new window.NostrTools.SimplePool();
+
+        const connectedRelays = [];
+        await Promise.all(relays.map(async (url) => {
+            try {
+                const relay = await pool.ensureRelay(url);
+                console.log(`Connected to ${url}`);
+                connectedRelays.push(url);
+            } catch (err) {
+                console.error(`Failed to connect to ${url}:`, err);
+            }
+        }));
+
+        if (connectedRelays.length === 0) {
+            throw new Error('Failed to connect to any relays');
+        }
+
+        await loadRawEventsByRelay(connectedRelays, fetchAllEvents);
+
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('profile-section').classList.remove('hidden');
+    } catch (err) {
+        errorDiv.textContent = 'Error: ' + err.message;
+        console.error('Fetch events error:', err);
+    } finally {
+        fetchBtn.disabled = false;
+        loadingDiv.classList.add('hidden');
+    }
+}
+
+async function loadRawEventsByRelay(connectedRelays, fetchAllEvents) {
+    const profilesDiv = document.getElementById('profiles');
+    profilesDiv.innerHTML = '';
+
+    try {
+        for (const relayUrl of connectedRelays) {
+            console.log(`Fetching events from ${relayUrl} for pubkey: ${publicKey}`);
+            const filter = fetchAllEvents
+                ? { authors: [publicKey] }
+                : { kinds: [0], authors: [publicKey], limit: 1 };
+            let events = [];
+            try {
+                events = await pool.querySync([relayUrl], filter);
+                if (events && events.length > 0) {
+                    console.log(`Events found on ${relayUrl}:`, events);
+                } else {
+                    console.log(`No events found on ${relayUrl} for pubkey: ${publicKey}`);
+                    events = [{ message: fetchAllEvents ? 'No events found' : 'No kind 0 event found' }];
+                }
+            } catch (err) {
+                console.error(`Error fetching from ${relayUrl}:`, err);
+                events = [{ error: `Failed to fetch data: ${err.message}` }];
+            }
+
+            const relayDiv = document.createElement('div');
+            relayDiv.className = 'relay-data';
+            relayDiv.innerHTML = `
+                <h3>${relayUrl}</h3>
+                <pre>${JSON.stringify(events, null, 2)}</pre>
+            `;
+            profilesDiv.appendChild(relayDiv);
+        }
+    } catch (err) {
+        const errorDiv = document.getElementById('error');
+        errorDiv.textContent = 'Error loading events: ' + err.message;
+        console.error('Load events error:', err);
+    }
+}
+
+window.addEventListener('unload', () => {
+    if (pool) {
+        pool.close(relays);
+        console.log('Closed all relay connections');
+    }
+});
+</script>
+
+</body>
+</html>

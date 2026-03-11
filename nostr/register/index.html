@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Create a Donation Page - Kaspa Hub</title>
+<meta name="twitter:title" content="Create a Crypto Donation Page - Kaspa Hub" />
+<meta property="og:title" content="Nostr Account Registration with Kaspa Support - Kaspa Hub" />
+
+<meta name="description" content="Create your custom Kaspa cryptocurrency donation page in seconds. Enter your Kaspa wallet address to generate a QR code and shareable donation link. Fast, free, and secure.">
+<meta name="twitter:description" content="Create your custom Kaspa cryptocurrency donation page in seconds. Join the decentralized community today.">
+<meta property="og:description" content="Create your Nostr account with one click and save your private key securely. Start connecting across Web3 and Nostr with Kaspa integration.">
+
+<link rel="canonical" href="https://kaspahub.org/nostr/register/" />
+<meta name="twitter:url" content="https://kaspahub.org/nostr/register/" />
+<meta property="og:url" content="https://kaspahub.org/nostr/register/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/nostr.bundle.js"></script>
+
+<style type="text/css">
+  label { display: block; margin: 5px 0; }
+  #status { color: green; }
+  #error { color: red; margin-top: 10px; }
+  .hidden { display: none; }
+</style>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-0">
+
+<section class="theme-1">
+
+  <div class="w-header">
+      <span>Create Account</span>
+      <a class="w-close" draggable="false" href="/nostr/"></a>
+  </div>
+
+  <div id="register-section" class="section">
+    <p>Welcome! Create your account to get started.<br>Click below to generate your Nostr private key.</p>
+    
+    <div class="w-footer">
+        <p>Have an account? <a href="/nostr/edit/">Log in</a></p>
+        <button onclick="generateKeys()" class="button">Create Account</button>
+    </div>
+
+    <div id="error"></div>
+  </div>
+
+  <div id="key-section" class="section hidden">
+
+    <h2>Your Private Key</h2>
+    <p><strong>Save this key securely!</strong></p><p>You'll need it to log in to your account, it cannot be recovered if lost, so do not lose it and do not share it with anyone.</p>
+    <pre id="private-key-display" style="width: 100%; font-size: 1em;"></pre>
+
+    <div>
+    <input type="checkbox" id="key-saved">
+    <label for="key-saved">I have saved my private key</label>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="w-footer">
+      <button onclick="copyKey()" class="button" id="copy">Copy Key</button>
+      <a href="/nostr/edit/" id="login-link" class="button" style="opacity: 0.5; pointer-events: none;">Proceed to Login</a>
+    </div>
+  
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script type="text/javascript">
+'use strict';
+
+  let privateKey;
+  let nsecKey;
+
+  function generateKeys() {
+    const errorDiv = document.getElementById('error');
+    const statusDiv = document.getElementById('status');
+    errorDiv.textContent = '';
+    statusDiv.textContent = '';
+
+    try {
+      privateKey = window.NostrTools.generateSecretKey();
+      nsecKey = window.NostrTools.nip19.nsecEncode(privateKey);
+      document.getElementById('private-key-display').textContent = nsecKey;
+      document.getElementById('register-section').classList.add('hidden');
+      document.getElementById('key-section').classList.remove('hidden');
+      document.getElementById('key-saved').addEventListener('change', updateLoginButton);
+    } catch (err) {
+      errorDiv.textContent = 'Error generating keys: ' + err.message;
+      console.error('Key generation error:', err);
+    }
+  }
+
+function copyKey() {
+  const copyButton = document.getElementById('copy');
+  const statusDiv = document.getElementById('status');
+  const errorDiv = document.getElementById('error');
+  statusDiv.textContent = '';
+  errorDiv.textContent = '';
+
+  try {
+    navigator.clipboard.writeText(nsecKey).then(() => {
+      const originalText = copyButton.textContent;
+      copyButton.textContent = 'Copied!';
+      setTimeout(() => {
+        copyButton.textContent = originalText;
+      }, 1500);
+    }).catch(err => {
+      errorDiv.textContent = 'Failed to copy key: ' + err.message;
+      console.error('Copy error:', err);
+    });
+  } catch (err) {
+    errorDiv.textContent = 'Error accessing clipboard: ' + err.message;
+    console.error('Clipboard error:', err);
+  }
+}
+
+    function updateLoginButton() {
+      const loginLink = document.getElementById('login-link');
+      const checkbox = document.getElementById('key-saved');
+      loginLink.style.opacity = checkbox.checked ? '1' : '0.5';
+      loginLink.style.pointerEvents = checkbox.checked ? 'auto' : 'none';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>What's Kaspa Time to Finality?</title>
+<meta name="twitter:title" content="Kaspa Transaction Finality - How Fast Is It?" />
+<meta property="og:title" content="How Fast Is Kaspa (KAS) Blockchain Finality?" />
+
+<meta name="description" content="Curious how quickly Kaspa transactions confirm? Discover typical settlement times, how soon transactions become spendable, and why finality is nearly instant." />
+<meta name="twitter:description" content="Looking for Kaspa blockchain confirmation times? Find out how fast transactions reach finality, become spendable, and appear on the network." />
+<meta property="og:description" content="Ever ask how soon Kaspa payments become spendable? Learn about instant visibility, confirmation speeds, and probabilistic finality in seconds." />
+
+<link rel="canonical" href="https://kaspahub.org/post/kaspa-time-to-finality/" />
+<meta name="twitter:url" content="https://kaspahub.org/post/kaspa-time-to-finality/" />
+<meta property="og:url" content="https://kaspahub.org/post/kaspa-time-to-finality/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "Understanding Kaspa TTF - How Quickly Are Transactions Finalized?",
+"description": "Curious how fast Kaspa transactions confirm? Discover when payments become spendable and reach finality.",
+"url": "https://kaspahub.org/post/kaspa-time-to-finality/",
+"publisher": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"author": {
+	"@type": "Person",
+	"name": "Classic",
+	"url": "https://x.com/Classicgyt",
+	"image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2026-01-25T08:00:00+08:00",
+"dateModified": "2026-01-26T08:00:00+08:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- Horizontal bar ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="3951210451"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+<h1>What Is Kaspa Transaction Finality Time?</h1>
+<p>Different wallets, exchanges, and applications may recognize transactions as final at different points, based on their confirmation thresholds.</p>
+<p>Kaspa is designed around extremely fast confirmation and settlement times. It features <strong>instant transaction visibility</strong> and typically achieves full probabilistic <strong>Time to Finality</strong> (TTF) in under <strong>7 seconds</strong>, with some transactions finalizing in as little as <strong>3 seconds</strong>. Most transactions are fully settled in under <strong>5 seconds</strong>, meaning they are already spendable.</p>
+<p>As soon as a transaction is broadcast to the Kaspa network, it becomes visible immediately. This is largely enabled by Kaspa’s <strong>100 millisecond</strong> block time (10 blocks per second), which ensures that new blocks - and the transactions inside them - are created and propagated across the network at extremely high frequency, eliminating the long waiting periods.</p>
+
+
+<h2>Why Kaspa Is So Fast</h2>
+<p>Kaspa currently produces 10 blocks per second using the <strong>PHANTOM GHOSTDAG protocol</strong>, a rate that has been live since the Crescendo hardfork on May 5, 2025. Because blocks are created every 100 milliseconds and processed in parallel, confirmations accumulate extremely quickly, pushing transactions toward near-instant settlement.</p>
+
+<h2>Future Improvements to Finality</h2>
+<p>Future upgrades, including the <strong>DAG KNIGHT protocol</strong> (a parameterless generalization of Nakamoto consensus), are designed to raise block production to 32 blocks per second and eventually 100 blocks per second.</p>
+<p>Higher block rates will further reduce confirmation times and make time to finality even faster, while preserving the same security model.</p>
+
+</article>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>

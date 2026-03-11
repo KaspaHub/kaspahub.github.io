@@ -1,0 +1,135 @@
+[
+{
+  "name": "Debian",
+  "description": "Community-driven free operating system emphasizing collaboration and reliability.",
+  "link": "https://www.debian.org",
+  "logo": "/linux/assets/logos/debian.webp",
+  "features": ["debian", "debian", "offline", "liveusb", "secureboot", "ventoy", "gnome", "kde", "xfce", "cinnamon", "mate", "lxde", "lqqt"]
+},
+{
+  "name": "Fedora",
+  "description": "Innovative distribution sponsored by Red Hat for desktops, servers, clouds, and IoT.",
+  "link": "https://fedoraproject.org",
+  "logo": "/linux/assets/logos/fedora.webp",
+  "features": ["fedora", "offline", "immutable", "flatpak", "secureboot", "ventoy", "gnome", "kde"]
+},
+{
+  "name": "Arch Linux",
+  "description": "Lightweight, flexible distribution emphasizing simplicity, with a strong community and community-operated package repository.",
+  "link": "https://archlinux.org",
+  "logo": "/linux/assets/logos/arch.webp",
+  "features": ["arch", "rolling", "ventoy"]
+},
+{
+  "name": "Linux Mint",
+  "description": "Beginner-friendly distribution developed by Linux Mint team, designed to work out of the box with focus on ease of use and speed.",
+  "link": "https://linuxmint.com",
+  "logo": "/linux/assets/logos/mint.webp",
+  "features": ["debian", "secureboot", "ventoy", "nvidia", "flatpak", "cinnamon", "xfce"]
+},
+{
+  "name": "Zorin OS",
+  "description": "Beginner-friendly distribution developed by Zorin Group designed to make your computer faster.",
+  "link": "https://zorin.com",
+  "logo": "/linux/assets/logos/zorin.webp",
+  "features": ["debian", "secureboot", "ventoy", "flatpak", "snaps", "liveusb", "offline", "gnome"]
+},
+{
+  "name": "openSUSE",
+  "description": "Versatile distribution sponsored by SUSE for desktops, servers, and containers with stable and rolling options.",
+  "link": "https://www.opensuse.org",
+  "logo": "/linux/assets/logos/suse.webp",
+  "features": ["offline", "secureboot", "gnome", "kde", "xfce"]
+},
+{
+  "name": "Ubuntu",
+  "description": "Open source distribution developed by Canonical, designed for stability, security, and broad enterprise use across cloud, edge, and IoT.",
+  "link": "https://ubuntu.com",
+  "logo": "/linux/assets/logos/ubuntu.webp",
+  "features": ["debian", "secureboot", "nvidia", "ventoy", "gnome"]
+},
+{
+  "name": "Kubuntu",
+  "description": "Community-driven Ubuntu flavor for a smooth, customizable experience.",
+  "link": "https://kubuntu.org",
+  "logo": "/linux/assets/logos/kubuntu.webp",
+  "features": ["debian", "secureboot", "snaps", "ventoy", "kde"]
+},
+{
+  "name": "NixOS",
+  "description": "Declarative distribution focused on reproducible, reliable builds and deployments.",
+  "link": "https://nixos.org/",
+  "logo": "/linux/assets/logos/nix.webp",
+  "features": ["liveusb"]
+},
+{
+  "name": "CachyOS",
+  "description": "Performance-focused distribution rebuilt with CPU optimizations for faster experience.",
+  "link": "https://cachyos.org",
+  "logo": "/linux/assets/logos/cachyos.webp",
+  "features": ["arch", "kde", "liveusb"]
+},
+{
+  "name": "Solus",
+  "description": "Community-driven distribution built for personal computers, offering a modern open-source OS to enhance daily use and hardware performance.",
+  "link": "https://getsol.us",
+  "logo": "/linux/assets/logos/solus.webp",
+  "features": ["budgie", "gnome", "kde", "xfce", "liveusb"]
+},
+{
+  "name": "AnduinOS",
+  "description": "Beginner-friendly distribution designed for easy transition, privacy, and performance.",
+  "link": "https://www.anduinos.com",
+  "logo": "/linux/assets/logos/anduinos.webp",
+  "features": ["debian", "ventoy", "gnome", "secureboot", "lightweight", "liveusb"]
+},
+{
+  "name": "TUXEDO OS",
+  "description": "Optimized distribution from TUXEDO Computers for seamless operation.",
+  "link": "https://www.tuxedocomputers.com",
+  "logo": "/linux/assets/logos/tuxedo.webp",
+  "features": ["debian", "ventoy", "offline", "kde", "nvidia"]
+},
+{
+  "name": "EndeavourOS",
+  "description": "Community-driven distribution offering a lightweight, terminal-centric system ready for personalization with strong community support.",
+  "link": "https://endeavouros.com",
+  "logo": "/linux/assets/logos/endeavour.webp",
+  "features": ["arch", "rolling", "ventoy", "xfce", "kde", "gnome", "mate", "cinnamon", "budgie", "lxqt", "lxde", "i3"]
+},
+{
+  "name": "PikaOS",
+  "description": "Gaming-focused distribution with custom packages for performance and compatibility.",
+  "link": "https://pika-os.com",
+  "logo": "/linux/assets/logos/pika.webp",
+  "features": ["debian", "gnome", "kde", "hyperland", "niri", "cosmic"]
+},
+{
+  "name": "Pop! OS",
+  "description": "Distribution developed by System76 to enhance productivity and user control.",
+  "link": "https://system76.com/pop/",
+  "logo": "/linux/assets/logos/pop.webp",
+  "features": ["debian", "flatpak", "ventoy", "gnome", "cosmic"]
+},
+{
+  "name": "Manjaro",
+  "description": "Distribution enhancing accessibility for people and organizations with enterprise-grade support.",
+  "link": "https://manjaro.org",
+  "logo": "/linux/assets/logos/manjaro.webp",
+  "features": ["arch", "rolling", "flatpak", "kde", "gnome", "xfce"]
+},
+{
+  "name": "Nobara",
+  "description": "Hobby project tuned for gaming, streaming, and content creation with preconfigured tools.",
+  "link": "https://nobaraproject.org",
+  "logo": "/linux/assets/logos/nobara.webp",
+  "features": ["fedora", "ventoy", "kde", "gnome"]
+},
+{
+  "name": "Endless OS",
+  "description": "Distribution from Endless Foundation, empowers youth via game-based learning to build digital skills and create futures.",
+  "link": "https://endlessglobal.com",
+  "logo": "/linux/assets/logos/endlessos.webp",
+  "features": ["debian", "flatpak"]
+}
+]

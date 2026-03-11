@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>What Is Kaspa Transaction Speed?</title>
+<meta name="twitter:title" content="What Is Kaspa Transaction Speed?" />
+<meta property="og:title" content="What Is Kaspa (KAS) Transaction Speed?" />
+
+<meta name="description" content="Learn how fast Kaspa transactions are, what determines Kaspa transaction speed, and why its BlockDAG architecture enables near-instant finality." />
+<meta name="twitter:description" content="Kaspa offers some of the fastest transaction speeds in crypto. Here’s how it works and why it matters." />
+<meta property="og:description" content="Kaspa combines 100ms blocks with rapid finality to deliver industry-leading transaction speed." />
+
+<link rel="canonical" href="https://kaspahub.org/post/kaspa-transaction-speed/" />
+<meta name="twitter:url" content="https://kaspahub.org/post/kaspa-transaction-speed/" />
+<meta property="og:url" content="https://kaspahub.org/post/kaspa-transaction-speed/" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://kaspahub.org/post/kaspa-transaction-speed/thumbnail.jpg" />
+<meta property="og:image" content="https://kaspahub.org/post/kaspa-transaction-speed/thumbnail.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "What Is Kaspa Transaction Speed?",
+"description": "Kaspa delivers near-instant transaction visibility and fast finality using a high-speed BlockDAG and Proof of Work consensus.",
+"url": "https://kaspahub.org/post/kaspa-transaction-speed/",
+"image": "https://kaspahub.org/post/kaspa-transaction-speed/thumbnail.jpg",
+"publisher": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"author": {
+	"@type": "Person",
+	"name": "Classic",
+	"url": "https://x.com/Classicgyt",
+	"image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2026-01-01T08:00:00+08:00",
+"dateModified": "2026-01-25T08:00:00+08:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- Horizontal bar ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="3951210451"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+<h1>What Is Kaspa Transaction Speed?</h1>
+
+<p>Kaspa transaction speed delivers instant visibility on the network, enabling real-time interactions with external events in a fully decentralized manner. Unlike traditional blockchains limited by sequential processing and slow block intervals, Kaspa operates at 10 blocks per second with a high-performance architecture powered by proof-of-work, allowing parallel block creation and rapid sampling of the honest majority to achieve transaction propagation, confirmation, and practical finality in seconds.</p>
+
+<h2>Block Time</h2>
+
+<p>Kaspa’s current block time of approximately 0.1 seconds, or 100 milliseconds, is among the fastest for major Layer 1 cryptocurrencies. This ultra-short block interval dramatically reduces confirmation latency, allowing transactions to be included almost instantly.</p>
+
+<p>Because blocks are produced so frequently, the network experiences smooth transaction flow and minimal mempool buildup. Even during periods of high activity, transactions continue to move quickly, keeping fees extremely low and predictable.</p>
+
+<h2>Time to Finality</h2>
+
+<p>Time to finality describes how long it takes before a transaction becomes practically irreversible. On Kaspa, practical finality is typically achieved in under 7 seconds on average under normal network conditions - although the number of confirmations required can vary across different platforms. For smaller amounts and self-custodial wallets, it will often be under 3 seconds with instant transaction visibility. This is dramatically quicker than Bitcoin, where users often wait tens of minutes or even hours for comparable confidence.</p>
+
+<h2>Why Kaspa Transactions Are So Fast</h2>
+
+<p>The foundation of Kaspa’s transaction speed is its BlockDAG distributed ledger technology. Instead of forcing the network to choose a single chain and discard competing blocks, Kaspa allows multiple blocks to be created in parallel and later ordered through consensus. This eliminates the bottleneck that slows down traditional blockchains.</p>
+
+<p>Kaspa’s GHOSTDAG consensus protocol, a generalization of Bitcoin’s Nakamoto Consensus, ensures that all valid blocks contribute to security and ordering. By incorporating parallel blocks rather than orphaning them, Kaspa can safely operate at extremely high block rates without sacrificing decentralization or security. This enables real-time decentralization, where the network can quickly sample the honest majority for attestations to external events, all within proof-of-work security.</p>
+
+<h2>Real-World Transaction Performance</h2>
+
+<p>Kaspa’s transaction speed is not theoretical. The network has repeatedly demonstrated the ability to process thousands of transactions per second on its live mainnet. On October 2, 2025, Kaspa recorded peak throughput of over 5,584 transactions per second while maintaining fast confirmation and stable operation.</p>
+
+<p>These results highlight that Kaspa’s fast transaction speed holds up under real-world conditions, not just in simulations or benchmarks.</p>
+
+<h2>Future Improvements to Transaction Speed</h2>
+
+<p>Kaspa’s current transaction speed is already industry-leading, but the protocol is designed to scale further. Planned upgrades such as increasing block production to 32 blocks per second and eventually 100 blocks per second will further reduce latency and increase throughput.</p>
+
+<p>These upgrades will enhance transaction speed without increasing block size, ensuring the network remains decentralized and accessible.</p>
+
+<h2>Conclusion</h2>
+
+<p>Kaspa transaction speed is the result of deliberate protocol design rather than shortcuts or trade-offs. With 100 millisecond block times, instant transaction visibility, and roughly seven-second finality, Kaspa delivers one of the fastest transaction experiences in the cryptocurrency space.</p>
+
+<p>Most importantly, it achieves this speed within a fully decentralized, Proof of Work framework. Kaspa proves that fast transactions do not require sacrificing security or openness, redefining what is possible for Layer 1 networks.</p>
+</article>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>

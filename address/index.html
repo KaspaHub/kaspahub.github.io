@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Address Explorer - Kaspa Hub</title>
+<meta property="og:title" content="Address Explorer - Kaspa Hub" />
+<meta name="twitter:title" content="Address Explorer - Kaspa Hub" />
+
+<meta name="description" content="Explore Kaspa wallets with real-time transaction history, balance, and more. Look up any Kaspa wallet address to track activity." />
+<meta property="og:description" content="Discover Kaspa wallets with detailed data including transactions, balance, and activity. Search any Kaspa address instantly." />
+<meta name="twitter:description" content="Search and explore Kaspa wallets. View live transactions, balance, and activity for any address on the Kaspa network." />
+
+<link rel="canonical" href="https://kaspahub.org/address/" />
+<meta property="og:url" content="https://kaspahub.org/address/" />
+<meta name="twitter:url" content="https://kaspahub.org/address/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
+<script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/explorer.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-$:]*" title="Alphanumeric, dots, colons or hyphens only" /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+
+<section class="pageHead">
+
+  <div id="explorerHdr">
+    <img id="explorerPic" alt="" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
+    <div class="explorerCtn">
+      <h1 id="hdrLine">Kaspa Wallet Address</h1>
+      <div class="sub" id="hdrSub">-</div>
+    </div>
+  </div>
+
+</section>
+
+<section id="msg"></section>
+<section id="pageData">
+
+  <div class="grid-1" aria-label="Summary">
+    <div class="theme-1">
+      <h3>Balance</h3>
+      <div class="big" id="balanceKas">-</div>
+      <div class="muted" id="balanceUsd">-</div>
+    </div>
+
+  <div class="theme-1">
+    <h3>Overview</h3>
+    <div class="rows">
+      <div class="row">
+        <div class="k">Label</div>
+        <div class="v" id="label">-</div>
+      </div>
+      <div class="row">
+        <div class="k">Transactions</div>
+        <div class="v" id="txCount">-</div>
+      </div>
+      <div class="row">
+        <div class="k">Last active</div>
+        <div class="v" id="lastTransaction">-</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs" role="tablist" aria-label="Wallet tabs">
+  <button class="tab active" data-tab="tabTransfers">Transfers</button>
+  <button class="tab" data-tab="tabKRC20">Tokens</button>
+  <button class="tab" data-tab="tabKNS">Domains</button>
+  <button class="tab" data-tab="tabUTXOs">UTXOs</button>
+</div>
+
+<div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <select id="transferType" style="padding: 8px; font-size: 16px;">
+      <option value="all">Transactions</option>
+      <option value="received">Received</option>
+      <option value="sent">Sent</option>
+    </select>
+    <h3 id="transfersTitle"></h3>
+    <div id="transfersLoading" class="muted loading hidden">
+      <span class="spinner"></span>
+      <span>Loading…</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+      <thead>
+          <tr>
+              <th>TxID</th>
+              <th>Age</th>
+              <th id="counterpartyTh">Counterparty</th>
+              <th>Status</th> <th>Amount</th>
+          </tr>
+      </thead>
+        <tbody id="transfersRows">
+          <tr>
+            <td colspan="4" class="muted">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="miniBtns">
+      <button class="btn" id="prevTransfers" disabled>Prev</button>
+      <button class="btn" id="nextTransfers" disabled>Next</button>
+      <span class="muted" style="margin: auto 0;" id="cursorTransfers"></span>
+    </div>
+  </div>
+</div>
+
+<div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>KRC20 Tokens</h3>
+    <div id="tokenLoading" class="muted loading hidden">
+      <span class="spinner"></span>
+      <span>Loading…</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Balance</th>
+            <th>Locked</th>
+            <th>Decimals</th>
+          </tr>
+        </thead>
+        <tbody id="tokenRows">
+          <tr>
+            <td colspan="4" class="muted">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>KNS Domains</h3>
+    <div id="domainLoading" class="muted loading hidden">
+      <span class="spinner"></span>
+      <span>Loading…</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>TxID</th>
+            <th>Mint date</th>
+            <th>Status</th>
+            <th>Domain</th>
+          </tr>
+        </thead>
+        <tbody id="domainRows">
+          <tr>
+            <td colspan="4" class="muted">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="tabUTXOs" class="tabPanel" aria-label="UTXOs panel">
+  <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+    <h3>UTXOs</h3>
+    <div id="utxoLoading" class="muted loading hidden">
+      <span class="spinner"></span>
+      <span>Loading…</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>TxID</th>
+            <th>Index</th>
+            <th>Block DAA Score</th>
+            <th>Block reward?</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="utxoRows">
+          <tr>
+            <td colspan="5" class="muted">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script type="text/javascript">
+'use strict';
+
+(() => {
+
+  const el = id => document.getElementById(id);
+
+  const hdrSub = el("hdrSub");
+
+  const balanceKas = el("balanceKas");
+  const balanceUsd = el("balanceUsd");
+
+  const labelEl = el("label");
+  const txCount = el("txCount");
+  const lastTransaction = el("lastTransaction");
+
+  const transfersTitle = el("transfersTitle");
+  const transfersLoading = el("transfersLoading");
+  const transfersRows = el("transfersRows");
+  const counterpartyTh = el("counterpartyTh");
+  const prevTransfers = el("prevTransfers");
+  const nextTransfers = el("nextTransfers");
+  const cursorTransfers = el("cursorTransfers");
+
+  const tokenLoading = el("tokenLoading");
+  const tokenRows = el("tokenRows");
+
+  const domainLoading = el("domainLoading");
+  const domainRows = el("domainRows");
+
+  const utxoLoading = el("utxoLoading");
+  const utxoRows = el("utxoRows");
+
+  const transferType = el("transferType");
+
+  let busy = false;
+  let currentAddr = "";
+  let tokens = null;
+  let domains = null;
+  let utxos = null;
+
+  const txLimit = 50;
+
+  let allTxs = [];
+  let allOffset = 0;
+  let allHasMore = true;
+  let allPage = 0;
+
+  let receivedTxs = [];
+  let receivedOffset = 0;
+  let receivedHasMore = true;
+  let receivedPage = 0;
+
+  let sentTxs = [];
+  let sentOffset = 0;
+  let sentHasMore = true;
+  let sentPage = 0;
+
+  let namesCache = null;
+
+  const configs = {
+    all: {
+      title: "",
+      th: "Counterparty",
+      render: renderAll
+    },
+    received: {
+      title: "",
+      th: "Sender",
+      render: renderReceived
+    },
+    sent: {
+      title: "",
+      th: "Receiver",
+      render: renderSent
+    }
+  };
+
+  const getTxs = (type) => {
+    if (type === 'all') return allTxs;
+    if (type === 'received') return receivedTxs;
+    if (type === 'sent') return sentTxs;
+  };
+
+  const getOffset = (type) => {
+    if (type === 'all') return allOffset;
+    if (type === 'received') return receivedOffset;
+    if (type === 'sent') return sentOffset;
+  };
+
+  const setOffset = (type, value) => {
+    if (type === 'all') allOffset = value;
+    if (type === 'received') receivedOffset = value;
+    if (type === 'sent') sentOffset = value;
+  };
+
+  const getHasMore = (type) => {
+    if (type === 'all') return allHasMore;
+    if (type === 'received') return receivedHasMore;
+    if (type === 'sent') return sentHasMore;
+  };
+
+  const setHasMore = (type, value) => {
+    if (type === 'all') allHasMore = value;
+    if (type === 'received') receivedHasMore = value;
+    if (type === 'sent') sentHasMore = value;
+  };
+
+  const getPage = (type) => {
+    if (type === 'all') return allPage;
+    if (type === 'received') return receivedPage;
+    if (type === 'sent') return sentPage;
+  };
+
+  const setPage = (type, value) => {
+    if (type === 'all') allPage = value;
+    if (type === 'received') receivedPage = value;
+    if (type === 'sent') sentPage = value;
+  };
+
+  const tabs = document.querySelectorAll('.tabs .tab');
+  const tabPanels = document.querySelectorAll('.tabPanel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      tabPanels.forEach(p => p.classList.remove('active'));
+      el(tab.dataset.tab).classList.add('active');
+
+      if (tab.dataset.tab === 'tabTransfers') {
+        const selected = transferType.value;
+        if (getTxs(selected).length === 0) {
+          loadType(selected);
+        }
+      } else if (tab.dataset.tab === 'tabKRC20') {
+        if (currentAddr && tokens === null) {
+          loadTokens();
+        }
+      } else if (tab.dataset.tab === 'tabKNS') {
+        if (currentAddr && domains === null) {
+          loadDomains();
+        }
+      } else if (tab.dataset.tab === 'tabUTXOs') {
+        if (currentAddr && utxos === null) {
+          loadUTXOs();
+        }
+      }
+    });
+  });
+
+  transferType.addEventListener('change', () => {
+    const value = transferType.value;
+    transfersTitle.textContent = configs[value].title;
+    counterpartyTh.textContent = configs[value].th;
+    if (getTxs(value).length === 0) {
+      loadType(value);
+    } else {
+      renderPage(value);
+    }
+  });
+
+  async function preloadNames() {
+    try {
+      const res = await fetch("https://api.kaspa.org/addresses/names");
+      if (!res.ok) return;
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        namesCache = data;
+      }
+    } catch {}
+  }
+
+  function fetchAddressLabel(addr) {
+    if (!namesCache) return null;
+    const match = namesCache.find(item => item.address === addr);
+    return match?.name || null;
+  }
+
+  function withSeparators(numStr) {
+    const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function formatKas(amountSomes) {
+    if (amountSomes == null) return "-";
+    const n = Number(amountSomes) / 1e8;
+    const fixed = n.toFixed(8);
+    const [int, dec] = fixed.split('.');
+    return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
+  }
+
+  function walletUrl(addr) {
+    const a = String(addr ?? "").trim();
+    return a ? "/address/?q=" + a : "#";
+  }
+
+  function transactionUrl(hash) {
+    const h = String(hash ?? "").trim();
+    return h ? "/transaction/?q=" + h : "#";
+  }
+
+  function linkAddress(addr, label) {
+    const a = String(addr ?? "").trim();
+    const text = escHtml(label != null ? label : a);
+    if (!a) return "-";
+    return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
+  }
+
+  function linkTx(hash, label) {
+    const h = String(hash ?? "").trim();
+    const text = escHtml(label != null ? label : h);
+    if (!h) return "-";
+    return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
+  }
+
+  async function fetchBalance(addr) {
+    const res = await fetch(`https://api.kaspa.org/addresses/${addr}/balance`);
+    if (res.status === 404) return 0;
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json?.balance ?? 0;
+  }
+
+  async function fetchTxCount(addr) {
+    const res = await fetch(`https://api.kaspa.org/addresses/${addr}/transactions-count`);
+    if (res.status === 404) return 0;
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json?.total ?? 0;
+  }
+
+  async function fetchTransactions(addr, offset, limit) {
+    const url = `https://api.kaspa.org/addresses/${addr}/full-transactions?offset=${offset}&limit=${limit}&resolve_previous_outpoints=light`;
+    const res = await fetch(url);
+    if (res.status === 404) return [];
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return Array.isArray(json) ? json : [];
+  }
+
+  async function fetchAllTokens(addr) {
+    let all = [];
+    let start = '';
+    const seen = new Set();
+    do {
+      const param = start ? `?start=${start}` : '';
+      const url = `https://api.kasplex.org/v1/krc20/address/${addr}/tokenlist${param}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.message !== 'successful') throw new Error(json.message || 'Failed');
+      const newResult = json.result || [];
+      let isNew = false;
+      for (const t of newResult) {
+        if (!seen.has(t.tick)) {
+          seen.add(t.tick);
+          all.push(t);
+          isNew = true;
+        }
+      }
+      start = json.next || '';
+      if (!isNew && newResult.length > 0) break;
+    } while (start);
+    return all;
+  }
+
+  async function fetchAllDomains(addr) {
+    let all = [];
+    let page = 1;
+    const pageSize = 50;
+    while (true) {
+      const url = `https://api.knsdomains.org/mainnet/api/v1/assets/?owner=${addr}&page=${page}&pageSize=${pageSize}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (!json.success) throw new Error(json.message || 'Failed');
+      const assets = json.data.assets || [];
+      all.push(...assets.filter(a => a.isDomain));
+      const pagination = json.data.pagination || {};
+      if (page >= pagination.totalPages) break;
+      page++;
+    }
+    return all;
+  }
+
+  async function fetchUTXOs(addr) {
+    const url = `https://api.kaspa.org/addresses/${addr}/utxos`;
+    const res = await fetch(url);
+    if (res.status === 404) return [];
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return Array.isArray(json) ? json : [];
+  }
+
+  function setUrlAddr(addr) {
+    const u = new URL(window.location.href);
+    u.search = "?q=" + addr;
+    history.replaceState({}, "", u.toString());
+  }
+
+  function renderHeader(addr) {
+    hdrSub.textContent = addr;
+  }
+
+  async function renderSummary(addr, balanceSomes, txCountVal, txs) {
+    const label = fetchAddressLabel(addr);
+    labelEl.textContent = label || "-";
+    document.title = label || addr;
+
+    balanceKas.textContent = formatKas(balanceSomes);
+    balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8);
+    txCount.textContent = withSeparators(txCountVal);
+
+    const times = txs
+      .map(t => Number(t.block_time))
+      .filter(Number.isFinite)
+      .sort((a, b) => a - b);
+
+    lastTransaction.textContent = times.length ? formatDate(times[times.length - 1]) : "-";
+  }
+
+  function getTransactionType(tx) {
+    if (!tx.inputs || tx.inputs.length === 0) {
+      return "coinbase";
+    } else {
+      return "transfer";
+    }
+  }
+
+  function getNetChange(tx, addr) {
+    let net = 0n;
+    if (Array.isArray(tx.outputs)) {
+      for (const out of tx.outputs) {
+        if (out.script_public_key_address === addr) {
+          net += BigInt(out.amount || 0);
+        }
+      }
+    }
+    if (Array.isArray(tx.inputs)) {
+      for (const inp of tx.inputs) {
+        const amt = inp.previous_outpoint_amount || 0;
+        if (inp.previous_outpoint_address === addr) {
+          net -= BigInt(amt);
+        }
+      }
+    }
+    return net;
+  }
+
+  function getFromTo(tx, addr, net) {
+    let fromMap = new Map();
+    if (Array.isArray(tx.inputs)) {
+      tx.inputs.forEach(inp => {
+        const inpAddr = inp.previous_outpoint_address;
+        const amt = BigInt(inp.previous_outpoint_amount || 0);
+        if (inpAddr) {
+          fromMap.set(inpAddr, (fromMap.get(inpAddr) || 0n) + amt);
+        }
+      });
+    }
+    let toMap = new Map();
+    if (Array.isArray(tx.outputs)) {
+      tx.outputs.forEach(out => {
+        const outAddr = out.script_public_key_address;
+        const amt = BigInt(out.amount || 0);
+        if (outAddr) {
+          toMap.set(outAddr, (toMap.get(outAddr) || 0n) + amt);
+        }
+      });
+    }
+    const type = getTransactionType(tx);
+    let fromItems = [];
+    let toItems = [];
+    let fromStr, toStr;
+    if (net > 0n) {
+      fromMap.forEach((amt, a) => {
+        if (a !== addr) fromItems.push({addr: a, amt});
+      });
+      if (fromItems.length > 1) {
+        fromStr = "Multiple";
+      } else if (fromItems.length === 1) {
+        fromStr = fromItems[0].addr;
+      } else {
+        fromStr = (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : (type === "coinbase" ? "Block reward" : addr);
+      }
+      toStr = addr;
+    } else if (net < 0n) {
+      fromStr = addr;
+      toMap.forEach((amt, a) => {
+        if (a !== addr) toItems.push({addr: a, amt});
+      });
+      if (toItems.length > 1) {
+        toStr = "Multiple";
+      } else if (toItems.length === 1) {
+        toStr = toItems[0].addr;
+      } else {
+        toStr = addr;
+      }
+    } else {
+      fromStr = addr;
+      toStr = addr;
+    }
+    return { from: fromStr, to: toStr, fromItems, toItems };
+  }
+
+  function formatAmount(net) {
+    const n = Number(net) / 1e8;
+    const sign = n > 0 ? "+" : "";
+    const color = n > 0 ? "color:#2ee59d" : (n < 0 ? "color:#ff6b6b" : "");
+    return `<span style="${color}">${sign}${n.toFixed(8)} KAS</span>`;
+  }
+
+  function formatTokenAmount(amount, dec) {
+    if (!amount) return "0";
+    const n = BigInt(amount);
+    const decimals = Number(dec) || 0;
+    const div = 10n ** BigInt(decimals);
+    const int = n / div;
+    let frac = ((n % div).toString()).padStart(decimals, '0').replace(/0+$/, '');
+    if (frac) frac = '.' + frac;
+    return withSeparators(int.toString()) + frac;
+  }
+
+  function renderAll(pageTxs, addr) {
+    if (!pageTxs.length) {
+      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No transactions found.</td></tr>`;
+      return;
+    }
+
+    transfersRows.innerHTML = pageTxs.map(tx => {
+      const hash = String(tx.transaction_id || "-");
+      const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
+      const net = getNetChange(tx, addr);
+      const amt = formatAmount(net);
+      const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
+      const shortHash = shortenEnd(hash);
+      const isAccepted = tx.is_accepted ?? true;
+      const statusText = isAccepted ? "Accepted" : "Rejected";
+      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+
+      let counterpartyHtml;
+      let isMultiple = false;
+      let items = [];
+      let summaryText = "";
+      let itemColor = net > 0n ? "#2ee59d" : "#ff6b6b";
+
+      if (net > 0n) {
+        if (from === "Multiple") {
+          isMultiple = true;
+          items = fromItems;
+          summaryText = `Multiple addresses (${fromItems.length})`;
+        } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
+          const shortFrom = shortenMiddle(from);
+          counterpartyHtml = linkAddress(from, shortFrom);
+        } else {
+          const shortFrom = shortenMiddle(from);
+          counterpartyHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
+        }
+      } else if (net < 0n) {
+        if (to === "Multiple") {
+          isMultiple = true;
+          items = toItems;
+          summaryText = `Multiple addresses (${toItems.length})`;
+        } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
+          const shortTo = shortenMiddle(to);
+          counterpartyHtml = linkAddress(to, shortTo);
+        } else {
+          const shortTo = shortenMiddle(to);
+          counterpartyHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
+        }
+      } else {
+        counterpartyHtml = `<span class="muted">Self</span>`;
+      }
+
+      if (isMultiple) {
+        const itemHtml = items.map(item => {
+          const short = shortenMiddle(item.addr);
+          const itemAmt = (Number(item.amt) / 1e8).toFixed(8);
+          return `${linkAddress(item.addr, short)} - <span style="color:${itemColor}">${itemAmt} KAS</span><br>`;
+        }).join('');
+        counterpartyHtml = `
+          <details>
+            <summary class="expandable-row muted">${summaryText}</summary>
+            <div class="receiver-list">${itemHtml}</div>
+          </details>
+        `;
+      } else if (!counterpartyHtml) {
+        counterpartyHtml = `<span class="muted">-</span>`;
+      }
+
+      return `
+        <tr>
+          <td>${linkTx(hash, shortHash)}</td>
+          <td>${age}</td>
+          <td>${counterpartyHtml}</td>
+          <td><span style="color:${statusColor}">${statusText}</span></td>
+          <td>${amt}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderReceived(pageTxs, addr) {
+    if (!pageTxs.length) {
+      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No received transactions found.</td></tr>`;
+      return;
+    }
+
+    transfersRows.innerHTML = pageTxs.map(tx => {
+      const hash = String(tx.transaction_id || "-");
+      const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
+      const net = getNetChange(tx, addr);
+      const { from, fromItems } = getFromTo(tx, addr, net);
+      const amt = formatAmount(net);
+      const shortHash = shortenEnd(hash);
+      const isAccepted = tx.is_accepted ?? true;
+      const statusText = isAccepted ? "Finalized" : "Rejected";
+      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+
+      let senderHtml;
+      if (from === "Multiple") {
+        const receiverItems = fromItems.map(item => {
+          const short = shortenMiddle(item.addr);
+          return `${linkAddress(item.addr, short)} - <span style="color:#2ee59d">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span><br>`;
+        }).join('');
+        senderHtml = `
+          <details>
+            <summary class="expandable-row muted">Multiple addresses (${fromItems.length})</summary>
+            <div class="receiver-list">${receiverItems}</div>
+          </details>
+        `;
+      } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
+        const shortFrom = shortenMiddle(from);
+        senderHtml = linkAddress(from, shortFrom);
+      } else {
+        const shortFrom = shortenMiddle(from);
+        senderHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
+      }
+
+      return `
+        <tr>
+          <td>${linkTx(hash, shortHash)}</td>
+          <td>${age}</td>
+          <td>${senderHtml}</td>
+          <td><span style="color:${statusColor}">${statusText}</span></td>
+          <td>${amt}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderSent(pageTxs, addr) {
+    if (!pageTxs.length) {
+      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No sent transactions found.</td></tr>`;
+      return;
+    }
+
+    transfersRows.innerHTML = pageTxs.map(tx => {
+      const hash = String(tx.transaction_id || "-");
+      const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
+      const net = getNetChange(tx, addr);
+      const { to, toItems } = getFromTo(tx, addr, net);
+      const amt = formatAmount(net);
+      const shortHash = shortenEnd(hash);
+      const isAccepted = tx.is_accepted ?? true;
+      const statusText = isAccepted ? "Finalized" : "Rejected";
+      const statusColor = isAccepted ? "#2ee59d" : "#ffb86c";
+
+      let receiverHtml;
+      if (to === "Multiple") {
+        const receiverItems = toItems.map(item => {
+          const short = shortenMiddle(item.addr);
+          return `${linkAddress(item.addr, short)} - <span style="color:#ff6b6b">${(Number(item.amt) / 1e8).toFixed(8)} KAS</span><br>`;
+        }).join('');
+        receiverHtml = `
+          <details>
+            <summary class="expandable-row muted">Multiple addresses (${toItems.length})</summary>
+            <div class="receiver-list">${receiverItems}</div>
+          </details>
+        `;
+      } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
+        const shortTo = shortenMiddle(to);
+        receiverHtml = linkAddress(to, shortTo);
+      } else {
+        const shortTo = shortenMiddle(to);
+        receiverHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
+      }
+
+      return `
+        <tr>
+          <td>${linkTx(hash, shortHash)}</td>
+          <td>${age}</td>
+          <td>${receiverHtml}</td>
+          <td><span style="color:${statusColor}">${statusText}</span></td>
+          <td>${amt}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderTokens(tokens) {
+    if (!tokens.length) {
+      tokenRows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
+      return;
+    }
+
+    tokenRows.innerHTML = tokens.map(token => {
+      const tick = escHtml(token.tick || "-");
+      const balance = formatTokenAmount(token.balance, token.dec);
+      const locked = formatTokenAmount(token.locked, token.dec);
+      const dec = token.dec || 0;
+      const tokenUrl = `/krc20/?q=${encodeURIComponent(token.tick)}`;
+      return `
+        <tr>
+          <td><a class="explorerTx" href="${tokenUrl}">${tick}</a></td>
+          <td>${balance}</td>
+          <td>${locked}</td>
+          <td>${dec}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderDomains(domains) {
+    if (!domains.length) {
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">No domains found.</td></tr>`;
+      return;
+    }
+
+    domainRows.innerHTML = domains.map(d => {
+      const name = escHtml(d.asset || "-");
+      const mintDate = d.creationBlockTime ? formatDate(new Date(d.creationBlockTime)) : "-";
+      const status = escHtml(d.status || "-");
+      const txId = d.transactionId || "-";
+      const shortTxId = shortenEnd(txId);
+      return `
+        <tr>
+          <td>${linkTx(txId, shortTxId)}</td>
+          <td>${mintDate}</td>
+          <td>${status}</td>
+          <td>${name}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function renderUTXOs(utxos) {
+    if (!utxos.length) {
+      utxoRows.innerHTML = `<tr><td colspan="5" class="muted">No UTXOs found.</td></tr>`;
+      return;
+    }
+
+    utxoRows.innerHTML = utxos.map(utxo => {
+      const txId = utxo.outpoint.transactionId || "-";
+      const index = utxo.outpoint.index ?? "-";
+      const amount = formatKas(utxo.utxoEntry.amount);
+      const daaScore = utxo.utxoEntry.blockDaaScore || "-";
+      const isCoinbase = utxo.isCoinbase ? "Yes" : "No";
+      const shortTxId = shortenEnd(txId);
+      return `
+        <tr>
+          <td>${linkTx(txId, shortTxId)}</td>
+          <td>${index}</td>
+          <td>${daaScore}</td>
+          <td>${isCoinbase}</td>
+          <td>${amount}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  async function loadBatch(type) {
+    const txsArray = getTxs(type);
+    const page = getPage(type);
+    while (txsArray.length < (page + 1) * 50 && getHasMore(type)) {
+      const offset = getOffset(type);
+      const txsFull = await fetchTransactions(currentAddr, offset, txLimit + 1);
+      setHasMore(type, txsFull.length > txLimit);
+      let txs = txsFull;
+      if (type !== 'all') {
+        const filterFn = type === 'received' ? (tx) => getNetChange(tx, currentAddr) > 0n : (tx) => getNetChange(tx, currentAddr) < 0n;
+        txs = txsFull.filter(filterFn);
+        setHasMore(type, true);
+        if (txsFull.length <= txLimit) setHasMore(type, false);
+      } else {
+        txs = getHasMore(type) ? txsFull.slice(0, txLimit) : txsFull;
+      }
+      txsArray.push(...txs);
+      setOffset(type, offset + txsFull.length);
+    }
+  }
+
+  async function loadType(type) {
+    transfersLoading.classList.remove("hidden");
+    const txsArray = getTxs(type);
+    txsArray.length = 0;
+    setOffset(type, 0);
+    setHasMore(type, true);
+    setPage(type, 0);
+    try {
+      await loadBatch(type);
+      renderPage(type);
+    } catch {
+      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transactions.</td></tr>`;
+      prevTransfers.disabled = true;
+      nextTransfers.disabled = true;
+      cursorTransfers.textContent = "";
+    } finally {
+      transfersLoading.classList.add("hidden");
+    }
+  }
+
+  function renderPage(type) {
+    const page = getPage(type);
+    const start = page * 50;
+    const txsArray = getTxs(type);
+    const pageTxs = txsArray.slice(start, start + 50);
+    configs[type].render(pageTxs, currentAddr);
+    prevTransfers.disabled = page === 0;
+    nextTransfers.disabled = txsArray.length <= start + 50 && !getHasMore(type);
+    cursorTransfers.textContent = txsArray.length > 0 ? `Page ${page + 1}` : "";
+  }
+
+  async function loadTokens() {
+    if (!currentAddr) return;
+    tokenLoading.classList.remove("hidden");
+    try {
+      tokens = await fetchAllTokens(currentAddr);
+      tokens.sort((a, b) => {
+        const diff = BigInt(b.balance) - BigInt(a.balance);
+        if (diff > 0n) return 1;
+        if (diff < 0n) return -1;
+        return 0;
+      });
+      renderTokens(tokens);
+    } catch {
+      tokenRows.innerHTML =
+        `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
+    } finally {
+      tokenLoading.classList.add("hidden");
+    }
+  }
+
+  async function loadDomains() {
+    if (!currentAddr) return;
+    domainLoading.classList.remove("hidden");
+    try {
+      domains = await fetchAllDomains(currentAddr);
+      renderDomains(domains);
+    } catch {
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">Failed to load domains.</td></tr>`;
+    } finally {
+      domainLoading.classList.add("hidden");
+    }
+  }
+
+  async function loadUTXOs() {
+    if (!currentAddr) return;
+    utxoLoading.classList.remove("hidden");
+    try {
+      utxos = await fetchUTXOs(currentAddr);
+      renderUTXOs(utxos);
+    } catch {
+      utxoRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load UTXOs.</td></tr>`;
+    } finally {
+      utxoLoading.classList.add("hidden");
+    }
+  }
+
+  async function runSearch(inputAddr) {
+    if (busy) return;
+    busy = true;
+
+    const addr = String(inputAddr || "").trim();
+    if (!addr.startsWith("kaspa:")) {
+      addToast("Invalid address", "Please enter a valid Kaspa address starting with: kaspa:");
+      busy = false;
+      return;
+    }
+
+    currentAddr = addr;
+    setUrlAddr(addr);
+
+    allTxs = [];
+    allOffset = 0;
+    allHasMore = true;
+    allPage = 0;
+    receivedTxs = [];
+    receivedOffset = 0;
+    receivedHasMore = true;
+    receivedPage = 0;
+    sentTxs = [];
+    sentOffset = 0;
+    sentHasMore = true;
+    sentPage = 0;
+    tokens = null;
+    domains = null;
+    utxos = null;
+
+    let balanceSomes = 0;
+    let txCountVal = 0;
+    let txs = [];
+
+    try {
+      [balanceSomes, txCountVal, txs] = await Promise.all([
+        fetchBalance(addr),
+        fetchTxCount(addr),
+        fetchTransactions(addr, 0, txLimit)
+      ]);
+    } catch (err) {
+      addToast("Error", "Could not load wallet data.");
+      balanceKas.textContent = "-";
+      balanceUsd.textContent = "-";
+      labelEl.textContent = "-";
+      txCount.textContent = "-";
+      lastTransaction.textContent = "-";
+      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+      tokenRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+      domainRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+      utxoRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+      busy = false;
+      return;
+    }
+
+    renderHeader(addr);
+    await renderSummary(addr, balanceSomes, txCountVal, txs);
+
+    busy = false;
+
+    const activeTab = document.querySelector('.tabs .tab.active');
+    if (activeTab) {
+      activeTab.click();
+    }
+  }
+
+  prevTransfers.addEventListener("click", () => {
+    const type = transferType.value;
+    const page = getPage(type);
+    if (page > 0) {
+      setPage(type, page - 1);
+      renderPage(type);
+    }
+  });
+
+  nextTransfers.addEventListener("click", async () => {
+    const type = transferType.value;
+    setPage(type, getPage(type) + 1);
+    const txsArray = getTxs(type);
+    const page = getPage(type);
+    if (txsArray.length < (page + 1) * 50 && getHasMore(type)) {
+      transfersLoading.classList.remove("hidden");
+      try {
+        await loadBatch(type);
+      } catch {
+        transfersRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load more transactions.</td></tr>`;
+      } finally {
+        transfersLoading.classList.add("hidden");
+      }
+    }
+    renderPage(type);
+  });
+
+  (async () => {
+    await preloadNames();
+    const urlAddr = new URL(window.location.href).searchParams.get("q");
+    if (urlAddr) {
+      runSearch(urlAddr);
+    }
+  })();
+})();
+
+let throttle = false;
+
+document.getElementById('searchContainer').addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (throttle) return;
+  throttle = true;
+  setTimeout(() => throttle = false, 100);
+  explorerSearch(sanitizeSearch(searchQueryInput.value), '[form] ');
+});
+
+</script>
+
+</body>
+</html>

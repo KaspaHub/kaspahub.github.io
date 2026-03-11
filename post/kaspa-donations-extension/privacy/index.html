@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa Donations - Extension Privacy Policy</title>
+
+<meta name="description" content="Privacy policy for the Kaspa Donations browser extension. Learn how we handle data and protect your privacy." />
+
+<link rel="canonical" href="https://kaspahub.org/post/kaspa-donations-extension/privacy/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"headline": "Kaspa Donations - Extension Privacy Policy",
+"description": "Privacy policy for the Kaspa Donations browser extension. Learn how we handle data and protect your privacy.",
+"url": "https://kaspahub.org/post/kaspa-donations-extension/privacy/",
+"publisher": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"author": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"datePublished": "2025-06-25T08:00:00+08:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+<h1>Kaspa Donations Privacy Policy</h1>
+<p><strong>Kaspa Donations</strong> is a browser extension designed to help users discover and use Kaspa donation addresses on websites. This Privacy Policy explains what data we collect, how we use it, and your rights.</p>
+
+<h3>1. Data We Collect</h3>
+<p>Kaspa Donations is built from the ground up with privacy in mind. The extension does <strong>not</strong> collect, store, or transmit any personal or sensitive information. We follow a strict privacy philosophy that includes:</p>
+<ul>
+	<li><strong>No advertising</strong> - The extension contains no ads or ad-related code.</li>
+	<li><strong>No telemetry</strong> - We do not monitor, record, or report any usage data.</li>
+	<li><strong>No tracking</strong> - It doesn't track you or your activity in any way.</li>
+	<li><strong>No AI intrusion</strong> - There is no AI involvement in analyzing your data, behavior, or interactions.</li>
+</ul>
+<p>Specifically:</p>
+<ul>
+	<li>We do not collect your IP address, browsing history, or any personally identifiable information.</li>
+	<li>We do not send any data to external servers or third parties.</li>
+	<li>We do not use cookies, analytics, trackers, or fingerprinting techniques.</li>
+</ul>
+
+<h3>2. How the Extension Works</h3>
+<p>Kaspa Donations operates entirely within your browser. When active, it does the following:</p>
+<ul>
+<li>Injects a script on web pages you visit (limited to HTTP/HTTPS pages) to look for specific <code>&lt;meta&gt;</code> tags: <code>kaspa:wallet</code> and optionally <code>kaspa:title</code>.</li>
+<li>If a valid Kaspa address is found, it displays the address and generates a QR code for your convenience. All of this happens locally in your browser session.</li>
+<li>It uses icon changes and popup behavior to give visual feedback but does not track user actions or interactions.</li>
+</ul>
+
+<h3>3. Permissions</h3>
+<p>To function properly, the extension requests the following minimal permissions:</p>
+<ul>
+<li><strong>activeTab</strong> - Allows the extension to run only on the currently active browser tab when you activate it.</li>
+<li><strong>scripting</strong> - Enables the extension to inject and execute a script that reads the meta tags from the page.</li>
+</ul>
+
+<h3>4. Content Script Behavior</h3>
+<p>The extension includes a content script that runs on all HTTP and HTTPS pages. This script checks for Kaspa-related meta tags and sends a message to the background script to update the extension icon accordingly. No data is stored or transmitted beyond this internal messaging.</p>
+
+<h3>5. Changes to This Policy</h3>
+<p>If we make changes to this Privacy Policy, they will be posted here with updated date.</p>
+
+<h3>6. Contact</h3>
+<p>If you have any questions or concerns about this privacy policy, please reach out at <a href="https://x.com/KaspaHub">https://x.com/KaspaHub</a>.</p>
+</article>
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>

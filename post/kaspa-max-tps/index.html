@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>What's Kaspa Max TPS?</title>
+<meta name="twitter:title" content="What Is Kaspa Max TPS?" />
+<meta property="og:title" content="What Is Kaspa (KAS) Max TPS?" />
+
+<meta name="description" content="Explore Kaspa's maximum transactions per second, its real-world records, and how its BlockDAG architecture enables unmatched PoW throughput." />
+<meta name="twitter:description" content="Kaspa holds world records for Proof of Work throughput. Learn what Kaspa max TPS is and how it scales." />
+<meta property="og:description" content="Kaspa has redefined Proof of Work performance. Here’s what Kaspa max TPS really means." />
+
+<link rel="canonical" href="https://kaspahub.org/post/kaspa-max-tps/" />
+<meta name="twitter:url" content="https://kaspahub.org/post/kaspa-max-tps/" />
+<meta property="og:url" content="https://kaspahub.org/post/kaspa-max-tps/" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://kaspahub.org/post/kaspa-max-tps/thumbnail.jpg" />
+<meta property="og:image" content="https://kaspahub.org/post/kaspa-max-tps/thumbnail.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "What Is Kaspa Max TPS?",
+"description": "Kaspa is the fastest Proof of Work network ever measured. This article explains Kaspa max TPS, real-world records, and theoretical limits.",
+"url": "https://kaspahub.org/post/kaspa-max-tps/",
+"image": "https://kaspahub.org/post/kaspa-max-tps/thumbnail.jpg",
+"publisher": {
+	"@type": "Organization",
+	"name": "Kaspa Hub",
+	"url": "https://kaspahub.org",
+	"logo": "https://kaspahub.org/assets/logo.jpg",
+	"sameAs": [
+		"https://x.com/KaspaHub",
+		"https://discord.gg/7umFvjcANE"
+	]
+},
+"author": {
+	"@type": "Person",
+	"name": "Classic",
+	"url": "https://x.com/Classicgyt",
+	"image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2026-01-01T08:00:00+08:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- Horizontal bar ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="3951210451"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+<h1>What Is Kaspa Max TPS?</h1>
+
+<p>Theoretically, once Kaspa’s 100 blocks per second upgrade goes live on mainnet, it will be able to process, as a minimum, 30,000 transactions per second. This estimate is based on current block capacity, where a single block can hold over 300 transactions, and conservative network assumptions. In practice, under current network parameters at 10 blocks per second, Kaspa is already capable of processing more than 5,000 transactions per second, which supports the conservative nature of the 30,000 TPS minimum projection at 100 blocks per second. While throughput could be increased further by allowing larger blocks, there are currently no plans to do so, as it is unnecessary at the present level of adoption. Kaspa’s developers deliberately avoid increasing block size, as larger blocks are well known to degrade decentralization and network security.</p>
+
+<p>As of today, Kaspa already operates at a level that no other Proof of Work network has ever reached. Since the Crescendo hardfork, which occurred on May 5, 2025, Kaspa has been running at 10 blocks per second. Even at this stage, the network has repeatedly demonstrated performance that rivals and exceeds many leading Proof of Stake chains.</p>
+
+<h2>Understanding TPS in Kaspa</h2>
+
+<p>TPS, or transactions per second, measures how many transactions a network can include and process over time. In traditional blockchains like Bitcoin, TPS is constrained by long block intervals and a linear chain structure where only one block can be added at a time. Kaspa fundamentally changes this model.</p>
+
+<p>Kaspa is built on a BlockDAG, a directed acyclic graph structure that allows multiple blocks to be created in parallel and ordered later through consensus. Instead of discarding parallel blocks as waste, Kaspa incorporates them into the ledger. This architectural shift is the core reason Kaspa can push TPS far beyond what linear blockchains can achieve.</p>
+
+<h2>Kaspa’s Real-World TPS Records</h2>
+
+<p>On October 2, 2025, Kaspa set a new world record for Proof of Work throughput by reaching 5,584 transactions per second in real network conditions. This surpassed its own previous record of 4,757 TPS, which had been achieved just days earlier on September 28, 2025.</p>
+
+<p>These numbers are not theoretical benchmarks or lab simulations. They were recorded on Kaspa’s live mainnet under genuine transaction load. In doing so, Kaspa not only broke its own records but also surpassed the publicly reported throughput of major Proof of Stake networks such as $SOL, $XRP, and $BNB.</p>
+
+<h2>Daily Transaction Throughput at Scale</h2>
+
+<p>Kaspa’s scalability is not only visible in peak TPS bursts but also in sustained throughput over long periods. On October 5, 2025, the network processed 158,441,966 transactions within a single 24-hour window. This marked the highest number of daily transactions ever recorded on a Proof of Work network.</p>
+
+<p>This achievement significantly exceeded Kaspa’s previous daily record of 61,836,207 transactions, which had been set on September 28, 2025. The ability to sustain such volume without congestion or degradation highlights the practical scalability of Kaspa’s design.</p>
+
+<h2>Why Kaspa Can Scale TPS So High</h2>
+
+<p>The key to Kaspa’s performance lies in its GHOSTDAG consensus protocol, a generalization of Bitcoin’s Nakamoto Consensus. GHOSTDAG allows the network to safely increase block rates while preserving decentralization and security. Combined with its kHeavyHash Proof of Work algorithm and efficient block propagation, Kaspa can scale throughput simply by increasing block frequency rather than relying on complex secondary layers.</p>
+
+<p>Because blocks are produced frequently and in parallel, transaction inclusion becomes smoother and more continuous. This reduces congestion, keeps fees extremely low, and allows the network to absorb sudden spikes in demand without disruption.</p>
+
+<h2>What Kaspa Max TPS Really Means</h2>
+
+<p>Kaspa max TPS is not a single static number. It is a function of block rate, block size, and network optimization. At 10 blocks per second, Kaspa has already proven it can exceed 5,500 TPS in practice. With the planned progression toward 100 blocks per second, the network’s minimum projected capacity rises to roughly 30,000 TPS, with headroom beyond that as optimizations continue.</p>
+
+<p>What makes this especially notable is that Kaspa achieves this within a pure Proof of Work framework. No staking, no validators, no leader nodes, and no reliance on synthetic or auxiliary transactions to inflate metrics. The throughput is real, measurable, and directly tied to actual user transactions.</p>
+
+<h2>Conclusion</h2>
+
+<p>Kaspa has redefined what is possible for Proof of Work blockchains. Its current max TPS records already place it ahead of most Layer 1 networks in existence, regardless of consensus model. With future block rate upgrades, Kaspa’s maximum TPS is expected to scale by an order of magnitude while preserving the properties that made PoW trustworthy in the first place.</p>
+
+<p>In short, Kaspa max TPS is not just a headline number. It is proof that high throughput, decentralization, and security can coexist on a global Proof of Work network.</p>
+</article>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>News - Kaspa Hub</title>
+<meta name="twitter:title" content="News - Kaspa Hub" />
+<meta property="og:title" content="News - Kaspa Hub" />
+
+<meta name="description" content="Stay updated with decentralized news from Nostr. Kaspa Hub aggregates real-time posts, crypto discussions, and announcements directly from Nostr relays." />
+<meta name="twitter:description" content="Real-time news powered by Nostr. Discover Kaspa cryptocurrency updates, community discussions, and announcements curated by Kaspa Hub." />
+<meta property="og:description" content="Explore live Nostr news on Kaspa Hub. Aggregated from decentralized relays, featuring crypto updates, announcements, and community-driven content." />
+
+<link rel="canonical" href="https://kaspahub.org/news/" />
+<meta name="twitter:url" content="https://kaspahub.org/news/" />
+<meta property="og:url" content="https://kaspahub.org/news/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-r">
+
+    <div class="fade-in" id="loading"><span class="spinner"></span><span>Loading…</span></div>
+    <button class="theme-1" id="loadMoreBtn" style="display:none">Load More</button>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style type="text/css">
+
+.note-user {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.note-content {
+    white-space: pre-line;
+}
+.note-media {
+    border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+    display: block;
+    margin: 15px auto;
+}
+
+
+</style>
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/nostr.bundle.js"></script>
+<script type="module">
+'use strict';
+
+(async () => {
+    const widgetContainer = document.getElementById('container-r');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const npub = 'npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt';
+    const relays = [
+        'wss://nos.lol',
+        'wss://relay.primal.net',
+        'wss://relay.damus.io'
+    ];
+    const FIRST_RELAY_LIMIT = 7;
+    const OTHER_RELAY_LIMIT = 50;
+    const CHUNK_SIZE = 15;
+
+    const pool = new window.NostrTools.SimplePool();
+    let publicKey;
+    try { 
+        publicKey = window.NostrTools.nip19.decode(npub).data; 
+        console.log("Decoded npub:", publicKey);
+    } catch {
+        widgetContainer.innerHTML = "Invalid npub.";
+        console.error("Failed to decode npub");
+        return; 
+    }
+
+    let userProfile = null;
+
+    for (const relay of relays) {
+        try {
+            console.log(`Connecting to ${relay} for profile`);
+            const events = await pool.querySync([relay], { kinds: [0], authors: [publicKey], limit: 1 });
+            if (events?.length) {
+                userProfile = JSON.parse(events[0].content);
+                console.log(`Profile found on ${relay}:`, userProfile);
+                break;
+            }
+        } catch (err) { 
+            console.error(`Failed to query ${relay} for profile:`, err); 
+        }
+    }
+
+    if (!userProfile) { 
+        widgetContainer.innerHTML = "User profile not found."; 
+        console.error("User profile not found on any relay");
+        pool.close(relays); 
+        return; 
+    }
+
+    const container = widgetContainer;
+    let mergedPosts = new Map();
+    let deletedPostIds = new Set();
+    let firstRenderDone = false;
+    let allPostsArray = [];
+    let currentIndex = 0;
+
+    function processPostContent(content) {
+        const urlRegex = /(https:\/\/[^\s<>"']+)/g;
+        const imageRegex = /(https:\/\/[^\s<>"']+\.(?:jpg|jpeg|png|gif|webp))/g;
+        let processed = content.replace(imageRegex, url => `<img src="${url}" class="note-media">`);
+        processed = processed.replace(urlRegex, url => !url.match(imageRegex) ? `<a href="${url}" target="_blank">${url}</a>` : url);
+        return processed;
+    }
+
+    function createArticle(post) {
+        const date = new Date(post.created_at * 1000).toLocaleString();
+        const article = document.createElement('article');
+        article.className = "theme-1 note";
+        article.innerHTML = `
+            <div class="note-user">
+                <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
+                <a style="color: inherit; text-decoration: none;" href="https://kaspahub.org/n/?user=${npub}">
+                    <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
+                    <p style="color:#555;margin:0">@${userProfile.username || ''}</p>
+                </a>
+            </div>
+            <p class="note-content">${processPostContent(post.content)}</p>
+            <p style="color:#666;font-size:0.85em">Posted on ${date}</p>
+        `;
+        return article;
+    }
+
+    function renderPostsChunk(reset = false) {
+        if (reset) {
+            container.innerHTML = '';
+            currentIndex = 0;
+        }
+
+        const chunk = allPostsArray.slice(currentIndex, currentIndex + CHUNK_SIZE);
+        chunk.forEach(post => container.appendChild(createArticle(post)));
+        currentIndex += chunk.length;
+
+        loadMoreBtn.style.display = currentIndex < allPostsArray.length ? 'block' : 'none';
+    }
+
+    async function fetchPostsFromRelay(relay, limit) {
+        try {
+            console.log(`Connected to ${relay} for posts and deletions`);
+
+            const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: [publicKey] });
+            deletionEvents.forEach(ev => {
+                ev.tags.filter(tag => tag[0]==='e')
+                       .map(tag => tag[1])
+                       .forEach(id => deletedPostIds.add(id));
+            });
+            console.log(`Fetched ${deletionEvents.length} deletion events from ${relay}`);
+
+            const events = await pool.querySync([relay], { kinds: [1], authors: [publicKey], limit });
+            const posts = [];
+            events.forEach(ev => {
+                const isReply = ev.tags.some(tag => tag[0] === 'e');
+                if (!isReply && !deletedPostIds.has(ev.id)) posts.push(ev);
+            });
+            console.log(`Fetched ${posts.length} posts from ${relay}`);
+
+            if (!firstRenderDone && posts.length > 0) {
+                console.log(`First render using ${posts.length} posts from ${relay}`);
+                allPostsArray = posts.slice(0, FIRST_RELAY_LIMIT);
+                renderPostsChunk(true);
+                firstRenderDone = true;
+            }
+
+            return posts;
+        } catch (err) { 
+            console.error(`Failed to query ${relay} for posts:`, err); 
+            return []; 
+        }
+    }
+
+    const postsPromises = relays.map((relay, i) => fetchPostsFromRelay(relay, i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT));
+    const allPostsByRelay = await Promise.all(postsPromises);
+
+    // merge, dedupe, sort
+    allPostsByRelay.flat().forEach(ev => { if (!mergedPosts.has(ev.id)) mergedPosts.set(ev.id, ev); });
+    allPostsArray = Array.from(mergedPosts.values()).sort((a,b) => b.created_at - a.created_at);
+
+    console.log(`Total merged posts: ${allPostsArray.length}`);
+
+    renderPostsChunk(true);
+
+    if (allPostsArray.length > CHUNK_SIZE) loadMoreBtn.style.display = 'block';
+
+    loadMoreBtn.addEventListener('click', () => renderPostsChunk());
+
+    pool.close(relays);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | MIT License (see LICENSE file)
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<!-- <link rel="manifest" href="wm.json" />
+<script defer src="app.js"></script>
+ -->
+<title>QR Code Generator - Kaspa Hub</title>
+<meta name="twitter:title" content="QR Code Generator - Kaspa Hub" />
+<meta property="og:title" content="QR Code Generator - Kaspa Hub" />
+
+<meta name="description" content="Free online QR code generator with customization options for size, colors, transparency, error correction, and more. Install as a Progressive Web App (PWA) for offline access." />
+<meta name="twitter:description" content="Generate custom QR codes easily. Works online or offline, mobile-ready, and no installation required—perfect for quick QR code creation." />
+<meta property="og:description" content="Create personalized QR codes effortlessly with our advanced generator. Fast, intuitive, and accessible on any device—installable as a PWA too!" />
+
+<link rel="canonical" href="https://kaspahub.org/app/qr-code-generator/" />
+<meta name="twitter:url" content="https://kaspahub.org/app/qr-code-generator/" />
+<meta property="og:url" content="https://kaspahub.org/app/qr-code-generator/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QR Code Generator - Kaspa Hub",
+    "url": "https://kaspahub.org/app/qr-code-generator/",
+    "description": "Generate custom QR codes easily. Works online or offline, mobile-ready, and no installation required—perfect for quick QR code creation.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Kaspa Hub",
+        "url": "https://kaspahub.org",
+        "logo": "https://kaspahub.org/assets/logo.jpg",
+        "sameAs": [
+            "https://x.com/KaspaHub",
+            "https://discord.gg/7umFvjcANE"
+        ]
+    },
+    "applicationCategory": "Utilities",
+    "operatingSystem": "Any"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-r">
+
+<div class="theme-1 app">
+
+<div class="w-header">
+    <span>QR Code Generator</span>
+    <a class="w-close" draggable="false" href="/apps/"></a>
+</div><div class="main-content-area">
+
+   <section class="sidebar">
+
+<div class="qr-display">
+    <canvas id="qrCode"></canvas>
+</div>   </section>
+
+   <section class="filter-list-main">
+<section id="qr-generator">
+
+<div class="rwrap theme-filter">
+
+    <button class="e-button button" onclick="downloadQR()">Download PNG</button>
+    <div class="filter-group"><input type="checkbox" id="saveSettings" ><label for="saveSettings">Save Settings to Local Storage</label></div>
+
+    <div class="tab-buttons">
+        <button class="tab-button active" data-tab="basic" onclick="openTab('basic')">Basic</button>
+        <button class="tab-button" data-tab="colors" onclick="openTab('colors')">Colors</button>
+        <button class="tab-button" data-tab="advanced" onclick="openTab('advanced')">Advanced</button>
+    </div>
+
+    <div id="basic" class="tab-content active">
+        <label for="qr-value">Value</label>
+        <textarea id="qr-value" placeholder="Enter text or URL" spellcheck="false">Hello World</textarea>
+
+        <label for="size">Size</label>
+        <input class="e-button" type="number" id="size" min="100" max="1000" value="200">
+
+        <label for="padding">Padding</label>
+        <input class="e-button" type="number" id="padding" min="0" max="500" value="5">
+
+        <label for="level">Error Correction Level</label>
+        <select id="level">
+            <option value="L">L - 7% damage</option>
+            <option value="M">M - 15% damage</option>
+            <option value="Q">Q - 25% damage</option>
+            <option value="H" selected>H - 30% damage</option>
+        </select>
+    </div>
+
+    <div id="colors" class="tab-content">
+        <label for="foreground">Foreground Color</label>
+        <input type="color" id="foreground" value="#000000">
+
+        <label for="background">Background Color</label>
+        <input type="color" id="background" value="#ffffff">
+
+       <div style="display: inline-flex;"><label for="foregroundAlpha">Foreground Alpha</label><span id="foregroundAlphaValue">1</span></div>
+        <input type="range" id="foregroundAlpha" min="0" max="1" step="0.1" value="1">
+        
+       <div style="display: inline-flex;"><label for="backgroundAlpha">Background Alpha</label><span id="backgroundAlphaValue">1</span></div>
+        <input type="range" id="backgroundAlpha" min="0" max="1" step="0.1" value="1">
+    </div>
+
+    <div id="advanced" class="tab-content">
+        <div class="filter-group"><input type="checkbox" id="positionSep" ><label for="positionSep">Separate Position</label></div>
+        <div class="filter-group"><input type="checkbox" id="dataSep" ><label for="dataSep">Separate Data</label></div>
+
+        <label for="positionCorner">Position Corner Radius</label>
+        <input class="e-button" type="number" id="positionCorner" min="0" max="500" value="0">
+
+        <label for="dataCornerTL">Data Corner TL Radius</label>
+        <input class="e-button" type="number" id="dataCornerTL" min="0" max="500" value="0">
+
+        <label for="dataCornerTR">Data Corner TR Radius</label>
+        <input class="e-button" type="number" id="dataCornerTR" min="0" max="500" value="0">
+
+        <label for="dataCornerBR">Data Corner BR Radius</label>
+        <input class="e-button" type="number" id="dataCornerBR" min="0" max="500" value="0">
+
+        <label for="dataCornerBL">Data Corner BL Radius</label>
+        <input class="e-button" type="number" id="dataCornerBL" min="0" max="500" value="0">
+    </div>
+
+
+
+</div></section>
+   </section>
+   
+</div>
+</div>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style type="text/css">
+
+select {
+   all: revert;
+   height: 30px;
+}
+
+#container-qr {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#qr-generator {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  #qr-generator {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.qr-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+#qrCode {
+  max-width: 100%;
+  height: auto;
+}
+
+.rwrap.theme-filter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  width: 100%;
+}
+
+
+.rwrap.theme-filter span {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.e-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.e-button[style*="background: #42A611"] {
+  background-color: #42A611;
+  color: #E1E1E1;
+}
+
+.e-button[style*="background: #42A611"]:hover {
+  background-color: #38950e;
+}
+
+#dark #container-qr {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+#dark .rwrap.theme-filter span {
+  color: #bbb;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #ddd;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: contents;
+}
+
+#dark .tab-button {
+  background: #333;
+  color: #fff;
+}
+
+#dark .tab-button.active {
+  background: #444;
+}
+
+.rwrap.theme-filter input[type="color"] {
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
+<script type="text/javascript">
+'use strict';
+
+const canvas = document.getElementById('qrCode');
+const qrValue = document.getElementById('qr-value');
+const size = document.getElementById('size');
+const padding = document.getElementById('padding');
+const foreground = document.getElementById('foreground');
+const background = document.getElementById('background');
+const foregroundAlpha = document.getElementById('foregroundAlpha');
+const backgroundAlpha = document.getElementById('backgroundAlpha');
+const foregroundAlphaValue = document.getElementById('foregroundAlphaValue');
+const backgroundAlphaValue = document.getElementById('backgroundAlphaValue');
+const level = document.getElementById('level');
+const positionSep = document.getElementById('positionSep');
+const dataSep = document.getElementById('dataSep');
+const positionCorner = document.getElementById('positionCorner');
+const dataCornerTL = document.getElementById('dataCornerTL');
+const dataCornerTR = document.getElementById('dataCornerTR');
+const dataCornerBR = document.getElementById('dataCornerBR');
+const dataCornerBL = document.getElementById('dataCornerBL');
+const saveSettings = document.getElementById('saveSettings');
+
+function updateQR() {
+  new QRious({
+    element: canvas,
+    value: qrValue.value || 'Hello World',
+    size: parseInt(size.value) || 200,
+    padding: parseInt(padding.value) || 0,
+    foreground: foreground.value,
+    background: background.value,
+    foregroundAlpha: parseFloat(foregroundAlpha.value),
+    backgroundAlpha: parseFloat(backgroundAlpha.value),
+    level: level.value,
+    positionSep: positionSep.checked ? 'E' : 'D',
+    dataSep: dataSep.checked ? 'E' : 'D',
+    positionCorner: parseInt(positionCorner.value) || 0,
+    dataCornerTL: parseInt(dataCornerTL.value) || 0,
+    dataCornerTR: parseInt(dataCornerTR.value) || 0,
+    dataCornerBR: parseInt(dataCornerBR.value) || 0,
+    dataCornerBL: parseInt(dataCornerBL.value) || 0
+  });
+  foregroundAlphaValue.textContent = foregroundAlpha.value;
+  backgroundAlphaValue.textContent = backgroundAlpha.value;
+
+  if (saveSettings.checked) {
+    localStorage.setItem('qrSettings', JSON.stringify({
+      value: qrValue.value,
+      size: size.value,
+      padding: padding.value,
+      foreground: foreground.value,
+      background: background.value,
+      foregroundAlpha: foregroundAlpha.value,
+      backgroundAlpha: backgroundAlpha.value,
+      level: level.value,
+      positionSep: positionSep.checked,
+      dataSep: dataSep.checked,
+      positionCorner: positionCorner.value,
+      dataCornerTL: dataCornerTL.value,
+      dataCornerTR: dataCornerTR.value,
+      dataCornerBR: dataCornerBR.value,
+      dataCornerBL: dataCornerBL.value
+    }));
+  }
+}
+
+const inputs = document.querySelectorAll('#qr-generator input, #qr-generator select, #qr-generator textarea');
+inputs.forEach(input => {
+  input.addEventListener('input', updateQR);
+  input.addEventListener('change', updateQR);
+});
+
+saveSettings.addEventListener('change', () => {
+  if (!saveSettings.checked) {
+    localStorage.removeItem('qrSettings');
+  }
+});
+
+function downloadQR() {
+  const link = document.createElement('a');
+  link.download = 'qrcode.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function openTab(tabName) {
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+
+  const buttons = document.querySelectorAll('.tab-button');
+  buttons.forEach(btn => {
+    if (btn.dataset.tab === tabName) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+window.addEventListener('load', () => {
+  const savedSettingsData = localStorage.getItem('qrSettings');
+  if (savedSettingsData) {
+    const settings = JSON.parse(savedSettingsData);
+    qrValue.value = settings.value;
+    size.value = settings.size;
+    padding.value = settings.padding;
+    foreground.value = settings.foreground;
+    background.value = settings.background;
+    foregroundAlpha.value = settings.foregroundAlpha;
+    backgroundAlpha.value = settings.backgroundAlpha;
+    level.value = settings.level;
+    positionSep.checked = settings.positionSep;
+    dataSep.checked = settings.dataSep;
+    positionCorner.value = settings.positionCorner;
+    dataCornerTL.value = settings.dataCornerTL;
+    dataCornerTR.value = settings.dataCornerTR;
+    dataCornerBR.value = settings.dataCornerBR;
+    dataCornerBL.value = settings.dataCornerBL;
+    saveSettings.checked = true;
+  }
+  updateQR();
+});
+
+</script>
+</body>
+</html>
