@@ -9,9 +9,9 @@ A community-powered, open-source platform that brings together resources, initia
 
 </div>
 
-## New Project Submissions
-Have a project to share? We’d love to feature it on Kaspa Hub! You can:
-* Submit your project on our [Discord](https://discord.gg/7umFvjcANE) server.
+## New Project Submissions, Reviews & Support
+Have a project to share? We’d love to feature it on Kaspa Hub! You can submit your project on our Discord server.
+* [https://discord.gg/7umFvjcANE](https://discord.gg/7umFvjcANE)
 
 ## Contributions
 Want to help improve the website or report an issue? Open a GitHub issue or make a PR to suggest improvements, report bugs, or contribute ideas.
