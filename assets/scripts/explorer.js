@@ -105,7 +105,7 @@ async function explorerSearch(query, source = '[unknown] ') {
       outerValidator: validators.containsDots,
       validator: validators.isDomainName,
       action: () => {
-        window.location.href = '/reviews/?q=' + query;
+        window.location.href = '/domain/?q=' + query;
         // return source + 'Web domain: ' + query;
       }
     },
