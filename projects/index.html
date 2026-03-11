@@ -40,7 +40,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><span id="priceTag" aria-live="polite"></span><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer" class="theme-1"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
-<main id="container-2" style="padding-bottom: 0; display: flex; flex-direction: column;">
+<main id="container-2" style="display: flex; flex-direction: column;">
 
     <div style="text-align: center; margin-bottom: 70px;">
         <h1 style="font-size: 3em; filter: brightness(0.7);">Projects Building on Kaspa </h1>
@@ -152,11 +152,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
   </a>
 
-  <a href="https://thecryptosky.com" class="project-card theme-1" style="--card-bg: url('/projects/thecryptosky.webp');">
-    <div class="card-icon" style="background-image: url('/assets/logos/thecryptosky.webp');"></div>
+  <a href="https://kasshi.io" class="project-card theme-1" style="--card-bg: url('/projects/kasshi.webp');">
+    <div class="card-icon" style="background-image: url('/assets/logos/kasshi.webp');"></div>
     <div class="card-text">
-      <h2 class="card-title">TheCryptoSky</h2>
-      <p class="card-description">Marketplace</p>
+      <h2 class="card-title">KasShi</h2>
+      <p class="card-description">Video Platform</p>
     </div>
   </a>
 
@@ -170,7 +170,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </div>
 
-<a href="https://kaspahub.org/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; margin-top: 100px;">Find out more</a>
+<a href="https://kaspahub.org/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; max-width: fit-content;">Find out more</a>
 
 </main>
 
@@ -216,13 +216,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .theme-1 {
   border: 1px solid rgba(80, 255, 200, 0.2);
 }
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 100px;
 }
 .project-card {
   position: relative;
@@ -234,7 +234,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   text-align: left;
   height: 120px;
   border-radius: 15px;
-  color: inherit !important;
+  color: white !important;
   text-decoration: none !important;
   font-weight: inherit !important;
 }

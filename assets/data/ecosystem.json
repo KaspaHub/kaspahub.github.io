@@ -2076,7 +2076,7 @@
   "description": "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
   "link": "https://nowpayments.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
-  "features": ["solutions"]
+  "features": ["reviewed", "solutions"]
 },
 {
   "name": "CoinPal",
