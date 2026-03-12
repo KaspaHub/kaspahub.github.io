@@ -45,26 +45,26 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-  <div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
 
+<section class="explorerHead">
 
-  <section class="pageHead" id="pageHead">
-
-    <div id="explorerHdr">
-      <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
-      <div class="explorerCtn">
-        <h1 id="hdrLine">Token</h1>
-        <div class="sub" id="hdrSub">-</div>
-      </div>
+  <div id="explorerHdr">
+    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
+    <div id="explorerInfo">
+      <h1 id="hdrLine">KRC20 Token</h1>
+      <div class="sub" id="hdrSub">-</div>
     </div>
+  </div>
 
-    <button id="optionsCtn" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
-    <div id="optionsMenu" role="menu" popover></div>
+  <button id="optionsCtn" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
+  <div id="optionsMenu" role="menu" popover></div>
 
-  </section>
+</section>
 
-  <section id="pageData" class="grid-1" aria-label="Summary">
+<section id="explorerData">
 
+  <div class="grid-1" aria-label="Summary">
     <div class="theme-1 third">
       <h3>Market</h3>
       <div class="big" id="priceUsd">-</div>
@@ -74,7 +74,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <div class="row"><div class="k">Market cap</div><div class="v" id="mcap">-</div></div>
       </div>
     </div>
-
     <div class="theme-1 half">
       <h3>Stats</h3>
       <div class="rows">
@@ -84,21 +83,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <div class="row"><div class="k">Minted</div><div class="v" id="minted">-</div></div>
       </div>
     </div>
-
-  </section>
-
+  </div>
   <div class="tabs" role="tablist" aria-label="Token tabs">
     <button class="tab active" data-tab="tabAbout">About</button>
     <button class="tab" data-tab="tabHolders">Top Holders</button>
     <button class="tab" data-tab="tabTransfers">Transfers</button>
     <button class="tab" data-tab="tabMarkets" style="display: none;">Markets</button>
   </div>
-
-  <section id="tabAbout" class="tabPanel active" aria-label="About panel">
+  <div id="tabAbout" class="tabPanel active" aria-label="About panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-
       <p id="infoDescription"></p>
-
       <h4>Tokenomics</h4>
       <div class="rows">
         <div class="row"><div class="k">Preminted</div><div class="v" id="preminted">-</div></div>
@@ -108,11 +102,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <div class="row"><div class="k">Decimals</div><div class="v" id="dec">-</div></div>
         <div class="row"><div class="k">Deployed</div><div class="v" id="deployDate">-</div></div>
       </div>
-
     </div>
-  </section>
-
-  <section id="tabHolders" class="tabPanel" aria-label="Holders panel">
+  </div>
+  <div id="tabHolders" class="tabPanel" aria-label="Holders panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Top Holders</h3>
       <div class="tableWrap">
@@ -137,9 +129,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       </div>
       <div class="muted" style="margin-top:10px" id="holderNote"></div>
     </div>
-  </section>
-
-  <section id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
+  </div>
+  <div id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Transfers</h3>
       <div id="txLoading" class="muted loading"><span class="spinner"></span><span>Loading…</span></div>
@@ -165,9 +156,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <span class="muted" style="margin: auto 0;" id="txCursor"></span>
       </div>
     </div>
-  </section>
-
-  <section id="tabMarkets" class="tabPanel" aria-label="Markets panel">
+  </div>
+  <div id="tabMarkets" class="tabPanel" aria-label="Markets panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Markets</h3>
       <div class="tableWrap">
@@ -185,7 +175,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         </table>
       </div>
     </div>
-  </section>
+  </div>
+
+</section>
 
 </main>
 
@@ -232,7 +224,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
 
 const explorerPic = document.getElementById("explorerPic");
-const hdrLine = document.getElementById("hdrLine");
 const hdrSub = document.getElementById("hdrSub");
 
 const priceUsd = document.getElementById("priceUsd");
@@ -273,7 +264,6 @@ const holderCursor = document.getElementById("holderCursor");
 const optionsCtn = document.getElementById("optionsCtn");
 const optionsMenu = document.getElementById("optionsMenu");
 
-let currentTick = "";
 let tokenInfo = null;
 let tokenMeta = null;
 let tokenCircRaw = "0";
@@ -290,6 +280,9 @@ let tokenMarket = null;
 let holderList = [];
 let holderOffset = 0;
 const HOLDER_LIMIT = 20;
+
+let T;
+let t;
 
 function withSeparators(numStr){
   const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
@@ -508,12 +501,10 @@ async function fetchOpList({ tick, next=null, prev=null }){
 }
 
 function renderHeader(){
-  const t = currentTick;
   const displayName = tokenMeta?.name || tokenInfo?.name || t;
 
-  hdrLine.textContent = `Token`;
-  hdrSub.textContent = `${displayName} (${t})`;
-  document.title = `${t} Token - Kaspa Hub`;
+  hdrSub.textContent = `${displayName} (${T})`;
+  document.title = `${T} Token - Kaspa Hub`;
 }
 
 function renderSummary(){
@@ -681,7 +672,7 @@ function setActiveTab(tabId){
 async function loadTransfers({ next=null, prev=null } = {}){
   txLoading.classList.remove("hidden");
   try{
-    const page = await fetchOpList({ tick: currentTick, next, prev });
+    const page = await fetchOpList({ tick: QUERY, next, prev });
     setTxPaging(page.prev, page.next);
     renderTransfers(page.result);
   }catch{
@@ -718,32 +709,32 @@ function renderMarkets(){
   `;
 }
 
-async function runSearch(t){
-  if(BUSY) return;
+async function runSearch(query){
+  if (BUSY) return;
   BUSY = true;
 
-  const T = (t || "").trim().toLowerCase();
+  T = (query || "").trim().toUpperCase();
+  t = (query || "").trim().toLowerCase();
 
-  if(!T){
+  if(!t){
     addToast("Missing token", "Enter a ticker.");
     BUSY = false;
     return;
   }
 
-  currentTick = T;
-  setUrlTick(T);
+  setUrlTick(t);
 
   explorerPic.removeAttribute("src");
 
   try{
-    tokenInfo = await fetchKasplexToken(T);
+    tokenInfo = await fetchKasplexToken(t);
 
-    tokenMeta = await fetchDirectoryMeta(T).catch(() => null);
+    tokenMeta = await fetchDirectoryMeta(t).catch(() => null);
 
-    tokenBurnedRaw = await fetchBurnedAmountByAddress(T).catch(() => "0");
+    tokenBurnedRaw = await fetchBurnedAmountByAddress(t).catch(() => "0");
 
     const marketData = await fetchMarketData().catch(() => null);
-    tokenMarket = marketData ? marketData.find(r => r.ticker === T.toUpperCase()) : null;
+    tokenMarket = marketData ? marketData.find(r => r.ticker === T) : null;
 
     renderHeader();
     renderSummary();
@@ -848,6 +839,7 @@ nextHolder.addEventListener("click", () => {
 if (QUERY) {
   (async () => {
     // await preloadNames();
+    document.getElementById('explorerData').style.opacity = 'unset';
     runSearch(sanitizeSearch(QUERY));
   })();
 } else {

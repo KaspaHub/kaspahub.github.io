@@ -45,189 +45,179 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-  <div class="intro">
-    <form id="searchContainer" class="searchBar">
-      <input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." />
-      <button id="searchQuerySubmit" type="submit">
-        <svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg">
-          <g stroke="currentColor" stroke-width="1.5">
-            <circle cx="6.75" cy="6.75" r="4.25"/>
-            <path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/>
-          </g>
-        </svg>
-      </button>
-    </form>
-    <section id="msg"></section>
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+
+<section class="explorerHead">
+
+  <div id="explorerHdr">
+    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
+    <div id="explorerInfo">
+      <h1 id="hdrLine">Kaspa Address</h1>
+      <div class="sub" id="hdrSub">-</div>
+    </div>
   </div>
 
-  <section class="pageHead">
+  <button id="optionsCtn" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
+  <div id="optionsMenu" role="menu" popover></div>
 
-    <div id="explorerHdr">
-      <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
-      <div class="explorerCtn">
-        <h1 id="hdrLine">Kaspa Wallet Address</h1>
-        <div class="sub" id="hdrSub">-</div>
-      </div>
+</section>
+
+<section id="explorerData">
+
+  <div class="grid-1" aria-label="Summary">
+    <div class="theme-1">
+      <h3>Balance</h3>
+      <div class="big" id="balanceKas">-</div>
+      <div class="muted" id="balanceUsd">-</div>
     </div>
 
-  </section>
-
-  <section id="pageData">
-
-    <div class="grid-1" aria-label="Summary">
-      <div class="theme-1">
-        <h3>Balance</h3>
-        <div class="big" id="balanceKas">-</div>
-        <div class="muted" id="balanceUsd">-</div>
-      </div>
-
-      <div class="theme-1">
-        <h3>Overview</h3>
-        <div class="rows">
-          <div class="row">
-            <div class="k">Label</div>
-            <div class="v" id="label">-</div>
-          </div>
-          <div class="row">
-            <div class="k">Transactions</div>
-            <div class="v" id="txCount">-</div>
-          </div>
-          <div class="row">
-            <div class="k">Last active</div>
-            <div class="v" id="lastTransaction">-</div>
-          </div>
+    <div class="theme-1">
+      <h3>Overview</h3>
+      <div class="rows">
+        <div class="row">
+          <div class="k">Label</div>
+          <div class="v" id="label">-</div>
+        </div>
+        <div class="row">
+          <div class="k">Transactions</div>
+          <div class="v" id="txCount">-</div>
+        </div>
+        <div class="row">
+          <div class="k">Last active</div>
+          <div class="v" id="lastTransaction">-</div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="tabs" role="tablist" aria-label="Wallet tabs">
-      <button class="tab active" data-tab="tabTransfers">Transfers</button>
-      <button class="tab" data-tab="tabKRC20">Tokens</button>
-      <button class="tab" data-tab="tabKNS">Domains</button>
-      <button class="tab" data-tab="tabUTXOs">UTXOs</button>
-    </div>
+  <div class="tabs" role="tablist" aria-label="Wallet tabs">
+    <button class="tab active" data-tab="tabTransfers">Transfers</button>
+    <button class="tab" data-tab="tabKRC20">Tokens</button>
+    <button class="tab" data-tab="tabKNS">Domains</button>
+    <button class="tab" data-tab="tabUTXOs">UTXOs</button>
+  </div>
 
-    <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <select id="transferType" style="padding: 8px; font-size: 16px;">
-          <option value="all">Transactions</option>
-          <option value="received">Received</option>
-          <option value="sent">Sent</option>
-        </select>
-        <h3 id="transfersTitle"></h3>
-        <div id="transfersLoading" class="muted loading hidden">
-          <span class="spinner"></span>
-          <span>Loading…</span>
-        </div>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>TxID</th>
-                <th>Age</th>
-                <th id="counterpartyTh">Counterparty</th>
-                <th>Status</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody id="transfersRows">
-              <tr>
-                <td colspan="4" class="muted">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="miniBtns">
-          <button class="btn" id="prevTransfers" disabled>Prev</button>
-          <button class="btn" id="nextTransfers" disabled>Next</button>
-          <span class="muted" style="margin: auto 0;" id="cursorTransfers"></span>
-        </div>
+  <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <select id="transferType" style="padding: 8px; font-size: 16px;">
+        <option value="all">Transactions</option>
+        <option value="received">Received</option>
+        <option value="sent">Sent</option>
+      </select>
+      <h3 id="transfersTitle"></h3>
+      <div id="transfersLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TxID</th>
+              <th>Age</th>
+              <th id="counterpartyTh">Counterparty</th>
+              <th>Status</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="transfersRows">
+            <tr>
+              <td colspan="4" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="miniBtns">
+        <button class="btn" id="prevTransfers" disabled>Prev</button>
+        <button class="btn" id="nextTransfers" disabled>Next</button>
+        <span class="muted" style="margin: auto 0;" id="cursorTransfers"></span>
       </div>
     </div>
+  </div>
 
-    <div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>KRC20 Tokens</h3>
-        <div id="tokenLoading" class="muted loading hidden">
-          <span class="spinner"></span>
-          <span>Loading…</span>
-        </div>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Token</th>
-                <th>Balance</th>
-                <th>Locked</th>
-                <th>Decimals</th>
-              </tr>
-            </thead>
-            <tbody id="tokenRows">
-              <tr>
-                <td colspan="4" class="muted">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>KRC20 Tokens</h3>
+      <div id="tokenLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Balance</th>
+              <th>Locked</th>
+              <th>Decimals</th>
+            </tr>
+          </thead>
+          <tbody id="tokenRows">
+            <tr>
+              <td colspan="4" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-    <div id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>KNS Domains</h3>
-        <div id="domainLoading" class="muted loading hidden">
-          <span class="spinner"></span>
-          <span>Loading…</span>
-        </div>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>TxID</th>
-                <th>Mint date</th>
-                <th>Status</th>
-                <th>Domain</th>
-              </tr>
-            </thead>
-            <tbody id="domainRows">
-              <tr>
-                <td colspan="4" class="muted">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>KNS Domains</h3>
+      <div id="domainLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TxID</th>
+              <th>Mint date</th>
+              <th>Status</th>
+              <th>Domain</th>
+            </tr>
+          </thead>
+          <tbody id="domainRows">
+            <tr>
+              <td colspan="4" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-    <div id="tabUTXOs" class="tabPanel" aria-label="UTXOs panel">
-      <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-        <h3>UTXOs</h3>
-        <div id="utxoLoading" class="muted loading hidden">
-          <span class="spinner"></span>
-          <span>Loading…</span>
-        </div>
-        <div class="tableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>TxID</th>
-                <th>Index</th>
-                <th>Block DAA Score</th>
-                <th>Block reward?</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody id="utxoRows">
-              <tr>
-                <td colspan="5" class="muted">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div id="tabUTXOs" class="tabPanel" aria-label="UTXOs panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h3>UTXOs</h3>
+      <div id="utxoLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TxID</th>
+              <th>Index</th>
+              <th>Block DAA Score</th>
+              <th>Block reward?</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="utxoRows">
+            <tr>
+              <td colspan="5" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-  </section>
+</section>
 
 </main>
 
@@ -1149,10 +1139,10 @@ nextTransfers.addEventListener("click", async () => {
 
 
 
-
 if (QUERY) {
   (async () => {
     await preloadNames();
+    document.getElementById('explorerData').style.opacity = 'unset';
     runSearch(sanitizeSearch(QUERY));
   })();
 } else {
