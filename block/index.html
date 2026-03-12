@@ -45,7 +45,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-$:]*" title="Alphanumeric, dots, colons or hyphens only" /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
 
 <section class="pageHead">
 
@@ -59,7 +59,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </section>
 
-<section id="msg"></section>
 <section id="pageData">
 
   <div class="grid-1" aria-label="Summary">
@@ -222,421 +221,419 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </footer>
 
-<script type="text/javascript">
-'use strict';
+<script type="module">
 
-(() => {
+const hdrSub = document.getElementById("hdrSub");
+const txCount = document.getElementById("txCount");
+const blueScore = document.getElementById("blueScore");
+const difficulty = document.getElementById("difficulty");
+const blockTime = document.getElementById("blockTime");
+const parentsCount = document.getElementById("parentsCount");
+const childrenCount = document.getElementById("childrenCount");
+const isChainBlock = document.getElementById("isChainBlock");
+const txRows = document.getElementById("txRows");
+const headerRows = document.getElementById("headerRows");
+const parentsRows = document.getElementById("parentsRows");
+const detailsRows = document.getElementById("detailsRows");
+const explorerPic = document.getElementById("explorerPic");
 
-  const hdrSub = document.getElementById("hdrSub");
-  const txCount = document.getElementById("txCount");
-  const blueScore = document.getElementById("blueScore");
-  const difficulty = document.getElementById("difficulty");
-  const blockTime = document.getElementById("blockTime");
-  const parentsCount = document.getElementById("parentsCount");
-  const childrenCount = document.getElementById("childrenCount");
-  const isChainBlock = document.getElementById("isChainBlock");
-  const txRows = document.getElementById("txRows");
-  const headerRows = document.getElementById("headerRows");
-  const parentsRows = document.getElementById("parentsRows");
-  const detailsRows = document.getElementById("detailsRows");
-  const explorerPic = document.getElementById("explorerPic");
+let currentBlockHash = "";
 
-  let busy = false;
-  let currentBlockHash = "";
+const tabs = document.querySelectorAll('.tabs .tab');
+const tabPanels = document.querySelectorAll('.tabPanel');
 
-  const tabs = document.querySelectorAll('.tabs .tab');
-  const tabPanels = document.querySelectorAll('.tabPanel');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      tabPanels.forEach(p => p.classList.remove('active'));
-      document.getElementById(tab.dataset.tab).classList.add('active');
-    });
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    tabPanels.forEach(p => p.classList.remove('active'));
+    document.getElementById(tab.dataset.tab).classList.add('active');
   });
+});
 
-  function withSeparators(numStr) {
-    const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
-    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function withSeparators(numStr) {
+  const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function formatKas(somis, fixed = false) {
+  if (somis == null) return "-";
+  const n = Number(somis) / 1e8;
+  if (fixed) {
+    return n.toFixed(8) + " KAS";
   }
+  const fixedStr = n.toFixed(8);
+  const [int, dec] = fixedStr.split('.');
+  return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
+}
 
-  function formatKas(somis, fixed = false) {
-    if (somis == null) return "-";
-    const n = Number(somis) / 1e8;
-    if (fixed) {
-      return n.toFixed(8) + " KAS";
+function transactionUrl(hash) {
+  const h = String(hash ?? "").trim();
+  return h ? "/transaction/?q=" + encodeURIComponent(h) : "#";
+}
+
+function blockUrl(hash) {
+  const h = String(hash ?? "").trim();
+  return h ? "/block/?q=" + encodeURIComponent(h) : "#";
+}
+
+function walletUrl(addr) {
+  const a = String(addr ?? "").trim();
+  return a ? "/address/?q=" + encodeURIComponent(a) : "#";
+}
+
+function linkAddress(addr, label) {
+  const a = String(addr ?? "").trim();
+  const text = escHtml(label != null ? label : shortenMiddle(a));
+  if (!a) return "-";
+  return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
+}
+
+function linkTx(hash, label) {
+  const h = String(hash ?? "").trim();
+  const text = escHtml(label != null ? label : shortenEnd(h));
+  if (!h) return "-";
+  return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
+}
+
+function linkBlock(hash, label) {
+  const h = String(hash ?? "").trim();
+  const text = escHtml(label != null ? label : shortenEnd(h));
+  if (!h) return "-";
+  return `<a class="explorerTx" href="${blockUrl(h)}">${text}</a>`;
+}
+
+async function fetchBlock(blockHash) {
+  const url = `https://api.kaspa.org/blocks/${encodeURIComponent(blockHash)}?includeTransactions=true`;
+  const res = await fetch(url);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
+async function fetchTransaction(txid) {
+  const url = `https://api.kaspa.org/transactions/${encodeURIComponent(txid)}?resolve_previous_outpoints=full`;
+  const res = await fetch(url);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+
+  const resolvePromises = (json.inputs || []).map(async (inp) => {
+    if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
+      const prevUrl = `https://api.kaspa.org/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
+      const prevRes = await fetch(prevUrl);
+      if (!prevRes.ok) return;
+      const prevJson = await prevRes.json();
+      const outIndex = Number(inp.previous_outpoint_index);
+      const prevOut = prevJson.outputs[outIndex];
+      if (prevOut) {
+        inp.previous_outpoint_amount = prevOut.amount;
+        inp.previous_outpoint_address = prevOut.script_public_key_address;
+      }
     }
-    const fixedStr = n.toFixed(8);
-    const [int, dec] = fixedStr.split('.');
-    return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
+  });
+  await Promise.all(resolvePromises);
+
+  return json;
+}
+
+function computeTotals(inputs, outputs) {
+  let totalIn = 0n;
+  let totalOut = 0n;
+  if (Array.isArray(inputs)) {
+    inputs.forEach(inp => totalIn += BigInt(inp.previous_outpoint_amount || 0));
   }
-
-  function transactionUrl(hash) {
-    const h = String(hash ?? "").trim();
-    return h ? "/transaction/?q=" + encodeURIComponent(h) : "#";
+  if (Array.isArray(outputs)) {
+    outputs.forEach(out => totalOut += BigInt(out.amount || 0));
   }
+  const fee = totalIn ? totalIn - totalOut : 0n;
 
-  function blockUrl(hash) {
-    const h = String(hash ?? "").trim();
-    return h ? "/block/?q=" + encodeURIComponent(h) : "#";
+  let totalTransferred = 0n;
+  const inputAddrs = new Set();
+  if (Array.isArray(inputs)) {
+    inputs.forEach(inp => {
+      const addr = inp.previous_outpoint_address;
+      if (addr) inputAddrs.add(addr);
+    });
   }
-
-  function walletUrl(addr) {
-    const a = String(addr ?? "").trim();
-    return a ? "/address/?q=" + encodeURIComponent(a) : "#";
-  }
-
-  function linkAddress(addr, label) {
-    const a = String(addr ?? "").trim();
-    const text = escHtml(label != null ? label : shortenMiddle(a));
-    if (!a) return "-";
-    return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
-  }
-
-  function linkTx(hash, label) {
-    const h = String(hash ?? "").trim();
-    const text = escHtml(label != null ? label : shortenEnd(h));
-    if (!h) return "-";
-    return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
-  }
-
-  function linkBlock(hash, label) {
-    const h = String(hash ?? "").trim();
-    const text = escHtml(label != null ? label : shortenEnd(h));
-    if (!h) return "-";
-    return `<a class="explorerTx" href="${blockUrl(h)}">${text}</a>`;
-  }
-
-  async function fetchBlock(blockHash) {
-    const url = `https://api.kaspa.org/blocks/${encodeURIComponent(blockHash)}?includeTransactions=true`;
-    const res = await fetch(url);
-    if (res.status === 404) return null;
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  }
-
-  async function fetchTransaction(txid) {
-    const url = `https://api.kaspa.org/transactions/${encodeURIComponent(txid)}?resolve_previous_outpoints=full`;
-    const res = await fetch(url);
-    if (res.status === 404) return null;
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-
-    const resolvePromises = (json.inputs || []).map(async (inp) => {
-      if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
-        const prevUrl = `https://api.kaspa.org/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
-        const prevRes = await fetch(prevUrl);
-        if (!prevRes.ok) return;
-        const prevJson = await prevRes.json();
-        const outIndex = Number(inp.previous_outpoint_index);
-        const prevOut = prevJson.outputs[outIndex];
-        if (prevOut) {
-          inp.previous_outpoint_amount = prevOut.amount;
-          inp.previous_outpoint_address = prevOut.script_public_key_address;
+  if (Array.isArray(outputs)) {
+    outputs.forEach(out => {
+      const addr = out.script_public_key_address;
+      if (addr) {
+        if (!inputAddrs.has(addr)) {
+          totalTransferred += BigInt(out.amount || 0);
         }
       }
     });
-    await Promise.all(resolvePromises);
-
-    return json;
   }
 
-  function computeTotals(inputs, outputs) {
-    let totalIn = 0n;
-    let totalOut = 0n;
-    if (Array.isArray(inputs)) {
-      inputs.forEach(inp => totalIn += BigInt(inp.previous_outpoint_amount || 0));
-    }
-    if (Array.isArray(outputs)) {
-      outputs.forEach(out => totalOut += BigInt(out.amount || 0));
-    }
-    const fee = totalIn ? totalIn - totalOut : 0n;
+  return { totalIn, totalOut, fee, totalTransferred, inputAddrs };
+}
 
-    let totalTransferred = 0n;
-    const inputAddrs = new Set();
-    if (Array.isArray(inputs)) {
+function renderAddrsCell(addrs, title, color, map = null, totalTarget = null) {
+  if (addrs.length === 0) return "-";
+  if (addrs.length === 1) return linkAddress(addrs[0]);
+
+  let content = '';
+  if (map && addrs.length > 1) {
+    let totalContrib = 0n;
+    addrs.forEach(a => totalContrib += map.get(a) || 0n);
+
+    const useTarget = totalTarget !== null ? totalTarget : totalContrib;
+
+    content = addrs.map(addr => {
+      const rawAmt = map.get(addr) || 0n;
+      const prop = (rawAmt * useTarget) / totalContrib;
+      const rem = (rawAmt * useTarget) % totalContrib;
+      let finalSomes = prop;
+      if (rem * 2n >= totalContrib) finalSomes += 1n;
+      return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(finalSomes, true)}</span>`;
+    }).join('<br>');
+  } else {
+    content = addrs.map(addr => linkAddress(addr)).join('<br>');
+  }
+
+  return `<details><summary class="expandable-row muted">${title} (${addrs.length})</summary><div class="receiver-list">${content}</div></details>`;
+}
+
+function setUrlBlockHash(blockHash) {
+  const u = new URL(window.location.href);
+  u.searchParams.set("q", blockHash);
+  history.replaceState({}, "", u.toString());
+}
+
+function renderHeader(blockHash) {
+  hdrSub.textContent = shortenEnd(blockHash);
+  document.title = `Block ${shortenEnd(blockHash)} - Kaspa Hub`;
+}
+
+function renderSummary(json) {
+  const txs = json.transactions || [];
+  txCount.textContent = txs.length;
+  blueScore.textContent = withSeparators(json.verboseData?.blueScore) || "-";
+  difficulty.textContent = withSeparators(json.header?.difficulty) || "-";
+  blockTime.textContent = formatDate(json.header?.timestamp) || "-";
+}
+
+function renderOverview(json) {
+  parentsCount.textContent = (json.header?.parents || []).length || "0";
+  childrenCount.textContent = (json.verboseData?.childrenHashes || []).length || "0";
+  isChainBlock.textContent = json.verboseData?.isChainBlock ? "Yes" : "No";
+}
+
+async function renderTransactions(txs) {
+  let html = '';
+  if (Array.isArray(txs)) {
+    for (const tx of txs) {
+      const txId = tx.verboseData?.transactionId || tx.transaction_id || "-";
+      const fullTx = await fetchTransaction(txId);
+      const inputs = fullTx?.inputs || tx.inputs || [];
+      const outputs = fullTx?.outputs || tx.outputs || [];
+      const isCoinbase = fullTx?.subnetwork_id === "0100000000000000000000000000000000000000" || inputs.length === 0;
+      const { totalTransferred, inputAddrs, fee } = computeTotals(inputs, outputs);
+      const mass = withSeparators(fullTx?.mass || 0);
+
+      const inputMap = new Map();
       inputs.forEach(inp => {
         const addr = inp.previous_outpoint_address;
-        if (addr) inputAddrs.add(addr);
+        if (addr) {
+          const amt = BigInt(inp.previous_outpoint_amount || 0);
+          inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
+        }
       });
-    }
-    if (Array.isArray(outputs)) {
+
+      const outputMap = new Map();
       outputs.forEach(out => {
         const addr = out.script_public_key_address;
         if (addr) {
-          if (!inputAddrs.has(addr)) {
-            totalTransferred += BigInt(out.amount || 0);
-          }
+          const amt = BigInt(out.amount || 0);
+          outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
         }
       });
-    }
 
-    return { totalIn, totalOut, fee, totalTransferred, inputAddrs };
-  }
+      const fromAddrs = Array.from(inputMap.keys());
+      const toAddrs = Array.from(outputMap.keys());
 
-  function renderAddrsCell(addrs, title, color, map = null, totalTarget = null) {
-    if (addrs.length === 0) return "-";
-    if (addrs.length === 1) return linkAddress(addrs[0]);
+      const isSelfTx = !isCoinbase && fromAddrs.length === 1 && toAddrs.length === 1 && fromAddrs[0] === toAddrs[0];
 
-    let content = '';
-    if (map && addrs.length > 1) {
-      let totalContrib = 0n;
-      addrs.forEach(a => totalContrib += map.get(a) || 0n);
+      let fromCell, toCell, amountHtml;
 
-      const useTarget = totalTarget !== null ? totalTarget : totalContrib;
-
-      content = addrs.map(addr => {
-        const rawAmt = map.get(addr) || 0n;
-        const prop = (rawAmt * useTarget) / totalContrib;
-        const rem = (rawAmt * useTarget) % totalContrib;
-        let finalSomes = prop;
-        if (rem * 2n >= totalContrib) finalSomes += 1n;
-        return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(finalSomes, true)}</span>`;
-      }).join('<br>');
-    } else {
-      content = addrs.map(addr => linkAddress(addr)).join('<br>');
-    }
-
-    return `<details><summary class="expandable-row muted">${title} (${addrs.length})</summary><div class="receiver-list">${content}</div></details>`;
-  }
-
-  function setUrlBlockHash(blockHash) {
-    const u = new URL(window.location.href);
-    u.searchParams.set("q", blockHash);
-    history.replaceState({}, "", u.toString());
-  }
-
-  function renderHeader(blockHash) {
-    hdrSub.textContent = shortenEnd(blockHash);
-    document.title = `Block ${shortenEnd(blockHash)} - Kaspa Hub`;
-  }
-
-  function renderSummary(json) {
-    const txs = json.transactions || [];
-    txCount.textContent = txs.length;
-    blueScore.textContent = withSeparators(json.verboseData?.blueScore) || "-";
-    difficulty.textContent = withSeparators(json.header?.difficulty) || "-";
-    blockTime.textContent = formatDate(json.header?.timestamp) || "-";
-  }
-
-  function renderOverview(json) {
-    parentsCount.textContent = (json.header?.parents || []).length || "0";
-    childrenCount.textContent = (json.verboseData?.childrenHashes || []).length || "0";
-    isChainBlock.textContent = json.verboseData?.isChainBlock ? "Yes" : "No";
-  }
-
-  async function renderTransactions(txs) {
-    let html = '';
-    if (Array.isArray(txs)) {
-      for (const tx of txs) {
-        const txId = tx.verboseData?.transactionId || tx.transaction_id || "-";
-        const fullTx = await fetchTransaction(txId);
-        const inputs = fullTx?.inputs || tx.inputs || [];
-        const outputs = fullTx?.outputs || tx.outputs || [];
-        const isCoinbase = fullTx?.subnetwork_id === "0100000000000000000000000000000000000000" || inputs.length === 0;
-        const { totalTransferred, inputAddrs, fee } = computeTotals(inputs, outputs);
-        const mass = withSeparators(fullTx?.mass || 0);
-
-        const inputMap = new Map();
-        inputs.forEach(inp => {
-          const addr = inp.previous_outpoint_address;
-          if (addr) {
-            const amt = BigInt(inp.previous_outpoint_amount || 0);
-            inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
-          }
-        });
-
-        const outputMap = new Map();
-        outputs.forEach(out => {
-          const addr = out.script_public_key_address;
-          if (addr) {
-            const amt = BigInt(out.amount || 0);
-            outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
-          }
-        });
-
-        const fromAddrs = Array.from(inputMap.keys());
-        const toAddrs = Array.from(outputMap.keys());
-
-        const isSelfTx = !isCoinbase && fromAddrs.length === 1 && toAddrs.length === 1 && fromAddrs[0] === toAddrs[0];
-
-        let fromCell, toCell, amountHtml;
-
-        if (isCoinbase) {
-          fromCell = '<span class="muted">Block reward</span>';
-          toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap);
-          amountHtml = `<span style="color:#2ee59d">${formatKas(BigInt(outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n)), true)}</span>`;
-        } else if (isSelfTx) {
-          fromCell = linkAddress(fromAddrs[0]);
-          toCell = `${linkAddress(toAddrs[0])} <span class="muted">(self)</span>`;
-          amountHtml = fee > 0n
-            ? `<span style="color:#ff6b6b">${formatKas(fee, true)}</span> <span class="muted">(fee)</span>`
-            : `<span style="color:#2ee59d">0.00000000 KAS</span>`;
-        } else {
-          fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap, totalTransferred);
-          toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
-          amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
-        }
-
-        html += `
-          <tr>
-            <td>${linkTx(txId)}</td>
-            <td>${fromCell}</td>
-            <td>${toCell}</td>
-            <td>${mass}</td>
-            <td>${amountHtml}</td>
-          </tr>
-        `;
+      if (isCoinbase) {
+        fromCell = '<span class="muted">Block reward</span>';
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap);
+        amountHtml = `<span style="color:#2ee59d">${formatKas(BigInt(outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n)), true)}</span>`;
+      } else if (isSelfTx) {
+        fromCell = linkAddress(fromAddrs[0]);
+        toCell = `${linkAddress(toAddrs[0])} <span class="muted">(self)</span>`;
+        amountHtml = fee > 0n
+          ? `<span style="color:#ff6b6b">${formatKas(fee, true)}</span> <span class="muted">(fee)</span>`
+          : `<span style="color:#2ee59d">0.00000000 KAS</span>`;
+      } else {
+        fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap, totalTransferred);
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
+        amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
       }
-    }
-    if (!html) {
-      html = `<tr><td colspan="5" class="muted">No transactions in this block.</td></tr>`;
-    }
-    txRows.innerHTML = html;
-  }
 
-  function renderHeaderDetails(header) {
-    let html = '';
-    if (header) {
-      Object.entries(header).forEach(([key, value]) => {
-        let valStr = typeof value === 'object' ? JSON.stringify(value, null, 2) : value;
-        if (key === 'parents') return;
-        html += `
-          <div class="row">
-            <div class="k">${escHtml(key)}</div>
-            <div class="v"><pre>${escHtml(valStr)}</pre></div>
-          </div>
-        `;
-      });
-    }
-    if (!html) {
-      html = `<div class="row"><div class="k">No header data</div><div class="v">-</div></div>`;
-    }
-    headerRows.innerHTML = html;
-  }
-
-  function renderParents(parents) {
-    let html = '';
-    if (Array.isArray(parents)) {
-      parents.forEach((parentGroup, index) => {
-        const hashes = parentGroup.parentHashes || [];
-        let hashesHtml = hashes.map(h => linkBlock(h)).join('<br>');
-        html += `
-          <tr>
-            <td>${hashesHtml || "-"}</td>
-            <td>${index + 1}</td>
-          </tr>
-        `;
-      });
-    }
-    if (!html) {
-      html = `<tr><td colspan="2" class="muted">No parents.</td></tr>`;
-    }
-    parentsRows.innerHTML = html;
-  }
-
-  function renderDetails(verboseData, extra) {
-    let html = '';
-    if (verboseData) {
-      Object.entries(verboseData).forEach(([key, value]) => {
-        let valStr = Array.isArray(value) ? value.map(v => linkBlock(v, shortenMiddle(v))).join('<br>') : value;
-        html += `
-          <div class="row">
-            <div class="k">${escHtml(key)}</div>
-            <div class="v">${valStr}</div>
-          </div>
-        `;
-      });
-    }
-    if (extra) {
-      Object.entries(extra).forEach(([key, value]) => {
-        let valStr = value ?? "-";
-        html += `
-          <div class="row">
-            <div class="k">${escHtml(key)}</div>
-            <div class="v">${escHtml(valStr)}</div>
-          </div>
-        `;
-      });
-    }
-    if (!html) {
-      html = `<div class="row"><div class="k">No details</div><div class="v">-</div></div>`;
-    }
-    detailsRows.innerHTML = html;
-  }
-
-  function determineBlockImage(extra) {
-    const minerInfo = extra?.minerInfo || "";
-    if (minerInfo.includes("viabtc")) {
-      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/viabtc.webp";
-    } else {
-      explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
+      html += `
+        <tr>
+          <td>${linkTx(txId)}</td>
+          <td>${fromCell}</td>
+          <td>${toCell}</td>
+          <td>${mass}</td>
+          <td>${amountHtml}</td>
+        </tr>
+      `;
     }
   }
+  if (!html) {
+    html = `<tr><td colspan="5" class="muted">No transactions in this block.</td></tr>`;
+  }
+  txRows.innerHTML = html;
+}
 
-  async function runSearch(inputHash) {
-    if (busy) return;
-    busy = true;
+function renderHeaderDetails(header) {
+  let html = '';
+  if (header) {
+    Object.entries(header).forEach(([key, value]) => {
+      let valStr = typeof value === 'object' ? JSON.stringify(value, null, 2) : value;
+      if (key === 'parents') return;
+      html += `
+        <div class="row">
+          <div class="k">${escHtml(key)}</div>
+          <div class="v"><pre>${escHtml(valStr)}</pre></div>
+        </div>
+      `;
+    });
+  }
+  if (!html) {
+    html = `<div class="row"><div class="k">No header data</div><div class="v">-</div></div>`;
+  }
+  headerRows.innerHTML = html;
+}
 
-    const blockHash = String(inputHash || "").trim().toLowerCase();
+function renderParents(parents) {
+  let html = '';
+  if (Array.isArray(parents)) {
+    parents.forEach((parentGroup, index) => {
+      const hashes = parentGroup.parentHashes || [];
+      let hashesHtml = hashes.map(h => linkBlock(h)).join('<br>');
+      html += `
+        <tr>
+          <td>${hashesHtml || "-"}</td>
+          <td>${index + 1}</td>
+        </tr>
+      `;
+    });
+  }
+  if (!html) {
+    html = `<tr><td colspan="2" class="muted">No parents.</td></tr>`;
+  }
+  parentsRows.innerHTML = html;
+}
 
-    if (blockHash.length !== 64 || !/^[0-9a-f]+$/.test(blockHash)) {
-      addToast("Invalid block hash", "Please enter a valid 64-character hexadecimal Kaspa block hash.");
-      busy = false;
-      return;
-    }
+function renderDetails(verboseData, extra) {
+  let html = '';
+  if (verboseData) {
+    Object.entries(verboseData).forEach(([key, value]) => {
+      let valStr = Array.isArray(value) ? value.map(v => linkBlock(v, shortenMiddle(v))).join('<br>') : value;
+      html += `
+        <div class="row">
+          <div class="k">${escHtml(key)}</div>
+          <div class="v">${valStr}</div>
+        </div>
+      `;
+    });
+  }
+  if (extra) {
+    Object.entries(extra).forEach(([key, value]) => {
+      let valStr = value ?? "-";
+      html += `
+        <div class="row">
+          <div class="k">${escHtml(key)}</div>
+          <div class="v">${escHtml(valStr)}</div>
+        </div>
+      `;
+    });
+  }
+  if (!html) {
+    html = `<div class="row"><div class="k">No details</div><div class="v">-</div></div>`;
+  }
+  detailsRows.innerHTML = html;
+}
 
-    currentBlockHash = blockHash;
-    setUrlBlockHash(blockHash);
+function determineBlockImage(extra) {
+  const minerInfo = extra?.minerInfo || "";
+  if (minerInfo.includes("viabtc")) {
+    explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/viabtc.webp";
+  } else {
+    explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
+  }
+}
 
-    let json = null;
+async function runSearch(inputHash) {
+  if (BUSY) return;
+  BUSY = true;
 
-    try {
-      json = await fetchBlock(blockHash);
-      if (!json) {
-        throw new Error("Block not found.");
-      }
-    } catch (err) {
-      addToast("Error", "Could not load block data.");
-      resetUI();
-      busy = false;
-      return;
-    }
+  const blockHash = String(inputHash || "").trim().toLowerCase();
 
-    renderHeader(blockHash);
-    renderSummary(json);
-    renderOverview(json);
-    await renderTransactions(json.transactions);
-    renderHeaderDetails(json.header);
-    renderParents(json.header?.parents);
-    renderDetails(json.verboseData, json.extra);
-    determineBlockImage(json.extra);
-
-    busy = false;
+  if (blockHash.length !== 64 || !/^[0-9a-f]+$/.test(blockHash)) {
+    addToast("Invalid block hash", "Please enter a valid 64-character hexadecimal Kaspa block hash.");
+    BUSY = false;
+    return;
   }
 
-  function resetUI() {
-    txCount.textContent = "-";
-    blueScore.textContent = "-";
-    difficulty.textContent = "-";
-    blockTime.textContent = "-";
-    parentsCount.textContent = "-";
-    childrenCount.textContent = "-";
-    isChainBlock.textContent = "-";
-    txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
-    headerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
-    parentsRows.innerHTML = `<tr><td colspan="2" class="muted">-</td></tr>`;
-    detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  currentBlockHash = blockHash;
+  setUrlBlockHash(blockHash);
+
+  let json = null;
+
+  try {
+    json = await fetchBlock(blockHash);
+    if (!json) {
+      throw new Error("Block not found.");
+    }
+  } catch (err) {
+    addToast("Error", "Could not load block data.");
+    resetUI();
+    BUSY = false;
+    return;
   }
 
-  (function init() {
-    const urlBlockHash = new URL(window.location.href).searchParams.get("q");
-    if (urlBlockHash) {
-      runSearch(urlBlockHash);
-    }
+  renderHeader(blockHash);
+  renderSummary(json);
+  renderOverview(json);
+  await renderTransactions(json.transactions);
+  renderHeaderDetails(json.header);
+  renderParents(json.header?.parents);
+  renderDetails(json.verboseData, json.extra);
+  determineBlockImage(json.extra);
+
+  BUSY = false;
+}
+
+function resetUI() {
+  txCount.textContent = "-";
+  blueScore.textContent = "-";
+  difficulty.textContent = "-";
+  blockTime.textContent = "-";
+  parentsCount.textContent = "-";
+  childrenCount.textContent = "-";
+  isChainBlock.textContent = "-";
+  txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+  headerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  parentsRows.innerHTML = `<tr><td colspan="2" class="muted">-</td></tr>`;
+  detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+}
+
+if (QUERY) {
+  (async () => {
+    // await preloadNames();
+    runSearch(sanitizeSearch(QUERY));
   })();
-})();
+} else {
+  preloadNames();
+}
+
 </script>
 
 </body>

@@ -1,5 +1,8 @@
 'use strict';
 
+let BUSY = false;
+const QUERY = new URL(window.location.href).searchParams.get("q");
+
 
 const validators = {
   invalidFormet: (query) => {
@@ -65,7 +68,6 @@ function sanitizeSearch(query) {
 
   return query;
 }
-
 
 async function explorerSearch(query, source = '[unknown] ') {
 
@@ -184,3 +186,37 @@ async function explorerSearch(query, source = '[unknown] ') {
   setStatus('No results found for this query.');
   return false;
 }
+
+
+
+let LABELS = null;
+
+async function preloadNames() {
+  try {
+    const res = await fetch("/assets/data/labels.json");
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        LABELS = data;
+      }
+    }
+  } catch (err) {
+    console.error("Labels failed to load:", err);
+  }
+}
+
+function fetchAddressLabel(addr) {
+  if (!LABELS) return null;
+  const match = LABELS.find(item => item.address === addr);
+  return match ? match.name : null;
+}
+
+
+
+document.getElementById('searchContainer').addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (BUSY) return;
+  BUSY = true;
+  setTimeout(() => BUSY = false, 100);
+  explorerSearch(sanitizeSearch(searchQueryInput.value), '[form] ');
+});

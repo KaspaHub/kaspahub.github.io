@@ -45,7 +45,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-$:]*" title="Alphanumeric, dots, colons or hyphens only" /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
 
 <section class="pageHead">
 
@@ -59,7 +59,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </section>
 
-<section id="msg"></section>
 <section id="pageData" class="theme-1" style="display: none;"></section>
 
 </main>
@@ -102,12 +101,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </footer>
 
-<script type="text/javascript">
-'use strict';
+<script type="module">
 
 const reviewers = [
   { name: "Kaspa Hub", url: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/data/reviews.json" },
-  { name: "test 1", url: "https://kaspahub.github.io/directory/reviews-test.json" }
+  { name: "test 1", url: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/data/reviews-test.json" }
 ];
 
 let dataReady = false;
@@ -188,15 +186,25 @@ function renderResults(query, allResults) {
   pageData.style.display = 'block';
 }
 
-async function performSearch(queryInput, updateHistory = true) {
-  if (!dataReady) return;
+function setUrlQuery(query) {
+  const u = new URL(window.location.href);
+  u.searchParams.set("q", query);
+  history.replaceState({}, "", u.toString());
+}
+
+async function runSearch(queryInput, updateHistory = true) {
+  if (!dataReady || BUSY) return;
+  BUSY = true;
 
   const query = normalizeDomain(queryInput);
   if (!query) {
     pageData.innerHTML = `<span style="margin: 10px;">Invalid domain. Use example.com</span>`;
     pageData.style.display = 'block';
+    BUSY = false;
     return;
   }
+
+  setUrlQuery(query);
 
   pageData.innerHTML = `<div class="fade-in"><span class="spinner"></span><span>Loading...</span></div>`;
   pageData.style.display = 'block';
@@ -225,12 +233,13 @@ async function performSearch(queryInput, updateHistory = true) {
   renderResults(query, allResults);
 
   if (updateHistory) {
-    const newUrl = `/domain/?q=${encodeURIComponent(query)}`;
-    history.pushState({ query }, '', newUrl);
+    history.pushState({ query }, '', `/domain/?q=${encodeURIComponent(query)}`);
   }
+
+  BUSY = false;
 }
 
-async function init() {
+(async () => {
   for (let reviewer of reviewers) {
     reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
   }
@@ -240,22 +249,11 @@ async function init() {
   const initialQuery = params.get('q');
   if (typeof initialQuery === 'string' && initialQuery.trim()) {
     const cleaned = initialQuery.trim();
-    await performSearch(cleaned, false);
+    await runSearch(cleaned, false);
     history.replaceState({ query: normalizeDomain(cleaned) }, '', location.href);
   }
-}
+})();
 
-init();
-
-let throttle = false;
-
-document.getElementById('searchContainer').addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (throttle) return;
-  throttle = true;
-  setTimeout(() => throttle = false, 100);
-  explorerSearch(sanitizeSearch(searchQueryInput.value), '[form] ');
-});
 
 </script>
 

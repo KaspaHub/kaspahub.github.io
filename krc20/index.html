@@ -45,7 +45,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-$:]*" title="Alphanumeric, dots, colons or hyphens only" /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+<div class="intro"><form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
 
 <section class="pageHead" id="pageHead">
 
@@ -232,654 +232,637 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </footer>
 
-<script type="text/javascript">
-'use strict';
+<script type="module">
 
-(() => {
+const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
 
-  const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
+const explorerPic = document.getElementById("explorerPic");
+const hdrLine = document.getElementById("hdrLine");
+const hdrSub = document.getElementById("hdrSub");
 
-  const explorerPic = document.getElementById("explorerPic");
-  const hdrLine = document.getElementById("hdrLine");
-  const hdrSub = document.getElementById("hdrSub");
+const priceUsd = document.getElementById("priceUsd");
+const priceChg = document.getElementById("priceChg");
+const priceVol = document.getElementById("priceVol");
+const mcap = document.getElementById("mcap");
 
-  const priceUsd = document.getElementById("priceUsd");
-  const priceChg = document.getElementById("priceChg");
-  const priceVol = document.getElementById("priceVol");
-  const mcap = document.getElementById("mcap");
+const dec = document.getElementById("dec");
+const deployDate = document.getElementById("deployDate");
 
-  const dec = document.getElementById("dec");
-  const deployDate = document.getElementById("deployDate");
+const circ = document.getElementById("circ");
+const minted = document.getElementById("minted");
+const preminted = document.getElementById("preminted");
+const burned = document.getElementById("burned");
+const max = document.getElementById("max");
 
-  const circ = document.getElementById("circ");
-  const minted = document.getElementById("minted");
-  const preminted = document.getElementById("preminted");
-  const burned = document.getElementById("burned");
-  const max = document.getElementById("max");
+const holders = document.getElementById("holders");
+const transfers = document.getElementById("transfers");
+const mintOps = document.getElementById("mintOps");
 
-  const holders = document.getElementById("holders");
-  const transfers = document.getElementById("transfers");
-  const mintOps = document.getElementById("mintOps");
+const holderRows = document.getElementById("holderRows");
+const holderNote = document.getElementById("holderNote");
 
-  const holderRows = document.getElementById("holderRows");
-  const holderNote = document.getElementById("holderNote");
+const infoDescription = document.getElementById("infoDescription");
 
-  const infoDescription = document.getElementById("infoDescription");
+const marketRows = document.getElementById("marketRows");
 
-  const marketRows = document.getElementById("marketRows");
+const txLoading = document.getElementById("txLoading");
+const txRows = document.getElementById("txRows");
+const prevTx = document.getElementById("prevTx");
+const nextTx = document.getElementById("nextTx");
+const txCursor = document.getElementById("txCursor");
 
-  const txLoading = document.getElementById("txLoading");
-  const txRows = document.getElementById("txRows");
-  const prevTx = document.getElementById("prevTx");
-  const nextTx = document.getElementById("nextTx");
-  const txCursor = document.getElementById("txCursor");
+const prevHolder = document.getElementById("prevHolder");
+const nextHolder = document.getElementById("nextHolder");
+const holderCursor = document.getElementById("holderCursor");
 
-  const prevHolder = document.getElementById("prevHolder");
-  const nextHolder = document.getElementById("nextHolder");
-  const holderCursor = document.getElementById("holderCursor");
+const optionsCtn = document.getElementById("optionsCtn");
+const optionsMenu = document.getElementById("optionsMenu");
 
-  const optionsCtn = document.getElementById("optionsCtn");
-  const optionsMenu = document.getElementById("optionsMenu");
+let currentTick = "";
+let tokenInfo = null;
+let tokenMeta = null;
+let tokenCircRaw = "0";
+let tokenDec = 0;
 
-  let busy = false;
-  let currentTick = "";
-  let tokenInfo = null;
-  let tokenMeta = null;
-  let tokenCircRaw = "0";
-  let tokenDec = 0;
+let txPrev = null;
+let txNext = null;
+let txOffset = 0;
 
-  let txPrev = null;
-  let txNext = null;
-  let txOffset = 0;
+let tokenBurnedRaw = "0";
 
-  let tokenBurnedRaw = "0";
+let tokenMarket = null;
 
-  let tokenMarket = null;
+let holderList = [];
+let holderOffset = 0;
+const HOLDER_LIMIT = 20;
 
-  let holderList = [];
-  let holderOffset = 0;
-  const HOLDER_LIMIT = 20;
+function withSeparators(numStr){
+  const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-  function withSeparators(numStr){
-    const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
-    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+function formatUsd(x){
+  if(x == null || !isFinite(x)) return "-";
+  return new Intl.NumberFormat(undefined, {
+    style:"currency", currency:"USD", maximumFractionDigits: 10
+  }).format(x);
+}
 
-  function formatUsd(x){
-    if(x == null || !isFinite(x)) return "-";
-    return new Intl.NumberFormat(undefined, {
-      style:"currency", currency:"USD", maximumFractionDigits: 10
-    }).format(x);
-  }
+function formatUsd0(x){
+  if(x == null || !isFinite(x)) return "-";
+  return new Intl.NumberFormat(undefined, {
+    style:"currency", currency:"USD", maximumFractionDigits: 0
+  }).format(x);
+}
 
-  function formatUsd0(x){
-    if(x == null || !isFinite(x)) return "-";
-    return new Intl.NumberFormat(undefined, {
-      style:"currency", currency:"USD", maximumFractionDigits: 0
-    }).format(x);
-  }
+function formatCompact(x){
+  if(x == null || !isFinite(x)) return "-";
+  return new Intl.NumberFormat(undefined, { notation:"compact", maximumFractionDigits: 3 }).format(x);
+}
 
-  function formatCompact(x){
-    if(x == null || !isFinite(x)) return "-";
-    return new Intl.NumberFormat(undefined, { notation:"compact", maximumFractionDigits: 3 }).format(x);
-  }
+function parseFloatSafe(v){
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
 
-  function parseFloatSafe(v){
-    const n = Number(v);
-    return Number.isFinite(n) ? n : null;
-  }
+function setUrlTick(t){
+  const u = new URL(window.location.href);
+  u.searchParams.set("q", t);
+  history.replaceState({}, "", u.toString());
+}
 
-  function setUrlTick(t){
-    const u = new URL(window.location.href);
-    u.searchParams.set("q", t);
-    history.replaceState({}, "", u.toString());
-  }
-
-  function getUrlTick(){
-    const u = new URL(window.location.href);
-    return u.searchParams.get("q");
-  }
-
-  async function copyToClipboard(text){
+async function copyToClipboard(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    return true;
+  }catch{
     try{
-      await navigator.clipboard.writeText(text);
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
       return true;
     }catch{
+      return false;
+    }
+  }
+}
+
+function tokenToNumber(rawStr, dec){
+  if(rawStr == null) return null;
+  const d = Number(dec || 0);
+  if(!/^\d+$/.test(String(rawStr))) return null;
+  return Number(rawStr) / Math.pow(10, d);
+}
+
+function formatTokenAmount(rawStr, dec){
+  if(rawStr == null) return "-";
+  const s = String(rawStr);
+  const d = Number(dec || 0);
+
+  if(!/^\d+$/.test(s)) return s;
+  if(d === 0) return withSeparators(s);
+
+  const pad = d - s.length + 1;
+  const full = (pad > 0 ? ("0".repeat(pad) + s) : s);
+  const i = full.length - d;
+
+  const intPart = full.slice(0, i);
+  const fracPart = full.slice(i).replace(/0+$/, "");
+
+  const intFmt = withSeparators(intPart === "" ? "0" : intPart);
+  return fracPart ? `${intFmt}.${fracPart}` : intFmt;
+}
+
+function formatTokenAmount2(rawStr, dec){
+  if(rawStr == null) return "-";
+  const s = String(rawStr);
+  const d = Number(dec || 0);
+  if(!/^\d+$/.test(s)) return s;
+
+  let cents = 0n;
+  try{
+    const raw = BigInt(s);
+    if(d >= 2){
+      const scale = 10n ** BigInt(d - 2);
+      const half = scale / 2n;
+      cents = (raw + half) / scale;
+    }else if(d === 1){
+      cents = raw * 10n;
+    }else{
+      cents = raw * 100n;
+    }
+  }catch{
+    return "-";
+  }
+
+  const intPart = cents / 100n;
+  const fracPart = cents % 100n;
+
+  const intFmt = withSeparators(intPart.toString());
+  const fracStr = fracPart.toString().padStart(2, "0");
+  return `${intFmt}.${fracStr}`;
+}
+
+function pow10Big(n){
+  if(n <= 0) return 1n;
+  return 10n ** BigInt(n);
+}
+
+function ageFromMs(ms){
+  const t = Number(ms);
+  if(!isFinite(t)) return "-";
+  const diff = Date.now() - t;
+  if(diff < 0) return "-";
+  const s = Math.floor(diff/1000);
+  if(s < 60) return `${s}s`;
+  const m = Math.floor(s/60);
+  if(m < 60) return `${m}m`;
+  const h = Math.floor(m/60);
+  if(h < 24) return `${h}h`;
+  const d = Math.floor(h/24);
+  return `${d}d`;
+}
+
+function explorerAddressUrl(addr){
+  const a = String(addr ?? "").trim();
+  return a ? `/address/?q=${a}` : "#";
+}
+
+function explorerTxUrl(hash){
+  const h = String(hash ?? "").trim();
+  return h ? `/transaction/?q=${h}` : "#";
+}
+
+function linkAddress(addr, label){
+  const a = String(addr ?? "").trim();
+  const text = escHtml(label != null ? label : a);
+  if(!a) return "-";
+  return `<a class="explorerLink" href="${explorerAddressUrl(a)}">${text}</a>`;
+}
+
+function linkTx(hash, label){
+  const h = String(hash ?? "").trim();
+  const text = escHtml(label != null ? label : h);
+  if(!h) return "-";
+  return `<a class="explorerLink" href="${explorerTxUrl(h)}">${text}</a>`;
+}
+
+async function fetchKasplexToken(t){
+  const url = `https://api.kasplex.org/v1/krc20/token/${t}`;
+  const res = await fetch(url);
+  if(!res.ok) throw new Error(`Kasplex token fetch failed: ${res.status}`);
+  const json = await res.json();
+  const row = json?.result?.[0];
+  if(!row) throw new Error("Token not found on Kasplex");
+  return row;
+}
+
+async function fetchBurnedAmountByAddress(t){
+  const url = `https://api.kasplex.org/v1/krc20/address/${BURN_ADDR}/token/${String(t || "").trim()}`;
+  const res = await fetch(url);
+  if(!res.ok) return "0";
+  const json = await res.json();
+  const row = json?.result?.[0];
+  const bal = row?.balance ?? "0";
+  return /^\d+$/.test(String(bal)) ? String(bal) : "0";
+}
+
+async function fetchDirectoryMeta(t){
+  const jsonUrl = `https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/data/cryptos/krc20/${t}.json`;
+  const logoURL  = `https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cryptos/krc20/${t}.webp`;
+
+  let meta = null;
+  try{
+    const r = await fetch(jsonUrl, { cache:"no-store" });
+    if(r.ok) meta = await r.json();
+  }catch{}
+
+  if(logoURL) explorerPic.src = logoURL;
+
+  return meta;
+}
+
+async function fetchMarketData(){
+  const url = "https://api.kaspa.com/api/market-data";
+  const res = await fetch(url);
+  if(!res.ok) return null;
+  const json = await res.json();
+  if(!Array.isArray(json)) return null;
+  return json;
+}
+
+async function fetchOpList({ tick, next=null, prev=null }){
+  const u = new URL(`https://api.kasplex.org/v1/krc20/oplist`);
+  u.searchParams.set("tick", tick);
+  if(next) u.searchParams.set("next", next);
+  if(prev) u.searchParams.set("prev", prev);
+
+  const res = await fetch(u.toString());
+  if(!res.ok) throw new Error(`Op list fetch failed: ${res.status}`);
+  const json = await res.json();
+  return {
+    prev: json?.prev ?? null,
+    next: json?.next ?? null,
+    result: Array.isArray(json?.result) ? json.result : []
+  };
+}
+
+function renderHeader(){
+  const t = currentTick;
+  const displayName = tokenMeta?.name || tokenInfo?.name || t;
+
+  hdrLine.textContent = `Token`;
+  hdrSub.textContent = `${displayName} (${t})`;
+  document.title = `${t} Token - Kaspa Hub`;
+}
+
+function renderSummary(){
+  tokenDec = Number(tokenInfo?.dec ?? "0");
+  dec.textContent = String(tokenDec);
+
+  deployDate.textContent = formatDate(tokenInfo?.mtsAdd);
+
+  const mintedRaw = tokenInfo?.minted ?? "0";
+  const burnedRaw = tokenBurnedRaw ?? "0";
+  const maxRaw = tokenInfo?.max ?? "0";
+  const premintedRaw = tokenInfo?.pre ?? "0";
+
+  let circRaw = "0";
+  try{
+    const m = BigInt(mintedRaw);
+    const b = BigInt(burnedRaw);
+    circRaw = String(m - b);
+  }catch{}
+  tokenCircRaw = circRaw;
+
+  let mintedPct = "-";
+  try{
+    const maxBig = BigInt(maxRaw);
+    const mintedBig = BigInt(mintedRaw);
+    if(maxBig > 0n){
+      const pct = Number((mintedBig * 10000n) / maxBig) / 100;
+      mintedPct = pct.toFixed(2) + "%";
+    }
+  }catch{}
+  minted.textContent = mintedPct;
+
+  let maxBig = 0n;
+  try{ maxBig = BigInt(maxRaw); }catch{}
+
+  const pctOfMax = (rawStr) => {
+    if(maxBig === 0n) return "-";
+    try{
+      const n = BigInt(rawStr);
+      const pct = Number((n * 10000n) / maxBig) / 100;
+      return pct.toFixed(2) + "%";
+    }catch{ return "-"; }
+  };
+
+  preminted.innerHTML = `${formatTokenAmount(premintedRaw, tokenDec)}${pctOfMax(premintedRaw) === "-" ? "" : ` (${pctOfMax(premintedRaw)})`}`;
+  burned.innerHTML = `${formatTokenAmount(burnedRaw, tokenDec)}${pctOfMax(burnedRaw) === "-" ? "" : ` (${pctOfMax(burnedRaw)})`}`;
+  circ.innerHTML = `${formatTokenAmount2(circRaw, tokenDec)}${pctOfMax(circRaw) === "-" ? "" : ` (${pctOfMax(circRaw)})`}`;
+  max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxBig > 0n ? " (100.00%)" : "-"}`;
+
+  holders.textContent = tokenInfo?.holderTotal != null ? withSeparators(tokenInfo.holderTotal) : "-";
+  transfers.textContent = tokenInfo?.transferTotal != null ? withSeparators(tokenInfo.transferTotal) : "-";
+  mintOps.textContent = tokenInfo?.mintTotal != null ? withSeparators(tokenInfo.mintTotal) : "-";
+}
+
+function renderAboutTab(){
+  const meta = tokenMeta || {};
+  infoDescription.innerHTML = meta.description ? escHtml(meta.description) : "-";
+}
+
+function renderPriceMissing(){
+  priceUsd.textContent = "-";
+  priceChg.textContent = "-";
+  priceChg.style.color = "rgba(255,255,255,.70)";
+  priceVol.textContent = "-";
+  mcap.textContent = "-";
+}
+
+function renderHoldersPage(){
+  if(!holderList.length){
+    holderRows.innerHTML = `<tr><td colspan="4" class="muted">No holder data.</td></tr>`;
+    return;
+  }
+
+  const start = holderOffset;
+  const end = Math.min(start + HOLDER_LIMIT, holderList.length);
+  const pageList = holderList.slice(start, end);
+  let circBig = 0n;
+  try{ circBig = BigInt(tokenCircRaw); }catch{}
+
+  holderRows.innerHTML = pageList.map((h, i) => {
+    const globalI = start + i;
+    const addr = String(h.address || "-");
+    const amtRaw = String(h.amount ?? "0");
+    const amtFmt = formatTokenAmount(amtRaw, tokenDec);
+
+    let share = "-";
+    if(circBig > 0n){
       try{
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        return true;
-      }catch{
-        return false;
-      }
-    }
-  }
-
-  function tokenToNumber(rawStr, dec){
-    if(rawStr == null) return null;
-    const d = Number(dec || 0);
-    if(!/^\d+$/.test(String(rawStr))) return null;
-    return Number(rawStr) / Math.pow(10, d);
-  }
-
-  function formatTokenAmount(rawStr, dec){
-    if(rawStr == null) return "-";
-    const s = String(rawStr);
-    const d = Number(dec || 0);
-
-    if(!/^\d+$/.test(s)) return s;
-    if(d === 0) return withSeparators(s);
-
-    const pad = d - s.length + 1;
-    const full = (pad > 0 ? ("0".repeat(pad) + s) : s);
-    const i = full.length - d;
-
-    const intPart = full.slice(0, i);
-    const fracPart = full.slice(i).replace(/0+$/, "");
-
-    const intFmt = withSeparators(intPart === "" ? "0" : intPart);
-    return fracPart ? `${intFmt}.${fracPart}` : intFmt;
-  }
-
-  function formatTokenAmount2(rawStr, dec){
-    if(rawStr == null) return "-";
-    const s = String(rawStr);
-    const d = Number(dec || 0);
-    if(!/^\d+$/.test(s)) return s;
-
-    let cents = 0n;
-    try{
-      const raw = BigInt(s);
-      if(d >= 2){
-        const scale = 10n ** BigInt(d - 2);
-        const half = scale / 2n;
-        cents = (raw + half) / scale;
-      }else if(d === 1){
-        cents = raw * 10n;
-      }else{
-        cents = raw * 100n;
-      }
-    }catch{
-      return "-";
+        const amtBig = BigInt(amtRaw);
+        const pct = Number((amtBig * 10000n) / circBig) / 100;
+        share = pct.toFixed(2) + "%";
+      }catch{}
     }
 
-    const intPart = cents / 100n;
-    const fracPart = cents % 100n;
-
-    const intFmt = withSeparators(intPart.toString());
-    const fracStr = fracPart.toString().padStart(2, "0");
-    return `${intFmt}.${fracStr}`;
-  }
-
-  function pow10Big(n){
-    if(n <= 0) return 1n;
-    return 10n ** BigInt(n);
-  }
-
-  function ageFromMs(ms){
-    const t = Number(ms);
-    if(!isFinite(t)) return "-";
-    const diff = Date.now() - t;
-    if(diff < 0) return "-";
-    const s = Math.floor(diff/1000);
-    if(s < 60) return `${s}s`;
-    const m = Math.floor(s/60);
-    if(m < 60) return `${m}m`;
-    const h = Math.floor(m/60);
-    if(h < 24) return `${h}h`;
-    const d = Math.floor(h/24);
-    return `${d}d`;
-  }
-
-  function explorerAddressUrl(addr){
-    const a = String(addr ?? "").trim();
-    return a ? `/address/?q=${a}` : "#";
-  }
-
-  function explorerTxUrl(hash){
-    const h = String(hash ?? "").trim();
-    return h ? `/transaction/?q=${h}` : "#";
-  }
-
-  function linkAddress(addr, label){
-    const a = String(addr ?? "").trim();
-    const text = escHtml(label != null ? label : a);
-    if(!a) return "-";
-    return `<a class="explorerLink" href="${explorerAddressUrl(a)}">${text}</a>`;
-  }
-
-  function linkTx(hash, label){
-    const h = String(hash ?? "").trim();
-    const text = escHtml(label != null ? label : h);
-    if(!h) return "-";
-    return `<a class="explorerLink" href="${explorerTxUrl(h)}">${text}</a>`;
-  }
-
-  async function fetchKasplexToken(t){
-    const url = `https://api.kasplex.org/v1/krc20/token/${t}`;
-    const res = await fetch(url);
-    if(!res.ok) throw new Error(`Kasplex token fetch failed: ${res.status}`);
-    const json = await res.json();
-    const row = json?.result?.[0];
-    if(!row) throw new Error("Token not found on Kasplex");
-    return row;
-  }
-
-  async function fetchBurnedAmountByAddress(t){
-    const url = `https://api.kasplex.org/v1/krc20/address/${BURN_ADDR}/token/${String(t || "").trim()}`;
-    const res = await fetch(url);
-    if(!res.ok) return "0";
-    const json = await res.json();
-    const row = json?.result?.[0];
-    const bal = row?.balance ?? "0";
-    return /^\d+$/.test(String(bal)) ? String(bal) : "0";
-  }
-
-  async function fetchDirectoryMeta(t){
-    const jsonUrl = `https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/data/cryptos/krc20/${t}.json`;
-    const logoURL  = `https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cryptos/krc20/${t}.webp`;
-
-    let meta = null;
-    try{
-      const r = await fetch(jsonUrl, { cache:"no-store" });
-      if(r.ok) meta = await r.json();
-    }catch{}
-
-    if(logoURL) explorerPic.src = logoURL;
-
-    return meta;
-  }
-
-  async function fetchMarketData(){
-    const url = "https://api.kaspa.com/api/market-data";
-    const res = await fetch(url);
-    if(!res.ok) return null;
-    const json = await res.json();
-    if(!Array.isArray(json)) return null;
-    return json;
-  }
-
-  async function fetchOpList({ tick, next=null, prev=null }){
-    const u = new URL(`https://api.kasplex.org/v1/krc20/oplist`);
-    u.searchParams.set("tick", tick);
-    if(next) u.searchParams.set("next", next);
-    if(prev) u.searchParams.set("prev", prev);
-
-    const res = await fetch(u.toString());
-    if(!res.ok) throw new Error(`Op list fetch failed: ${res.status}`);
-    const json = await res.json();
-    return {
-      prev: json?.prev ?? null,
-      next: json?.next ?? null,
-      result: Array.isArray(json?.result) ? json.result : []
-    };
-  }
-
-  function renderHeader(){
-    const t = currentTick;
-    const displayName = tokenMeta?.name || tokenInfo?.name || t;
-
-    hdrLine.textContent = `Token`;
-    hdrSub.textContent = `${displayName} (${t})`;
-    document.title = `${t} Token - Kaspa Hub`;
-  }
-
-  function renderSummary(){
-    tokenDec = Number(tokenInfo?.dec ?? "0");
-    dec.textContent = String(tokenDec);
-
-    deployDate.textContent = formatDate(tokenInfo?.mtsAdd);
-
-    const mintedRaw = tokenInfo?.minted ?? "0";
-    const burnedRaw = tokenBurnedRaw ?? "0";
-    const maxRaw = tokenInfo?.max ?? "0";
-    const premintedRaw = tokenInfo?.pre ?? "0";
-
-    let circRaw = "0";
-    try{
-      const m = BigInt(mintedRaw);
-      const b = BigInt(burnedRaw);
-      circRaw = String(m - b);
-    }catch{}
-    tokenCircRaw = circRaw;
-
-    let mintedPct = "-";
-    try{
-      const maxBig = BigInt(maxRaw);
-      const mintedBig = BigInt(mintedRaw);
-      if(maxBig > 0n){
-        const pct = Number((mintedBig * 10000n) / maxBig) / 100;
-        mintedPct = pct.toFixed(2) + "%";
-      }
-    }catch{}
-    minted.textContent = mintedPct;
-
-    let maxBig = 0n;
-    try{ maxBig = BigInt(maxRaw); }catch{}
-
-    const pctOfMax = (rawStr) => {
-      if(maxBig === 0n) return "-";
-      try{
-        const n = BigInt(rawStr);
-        const pct = Number((n * 10000n) / maxBig) / 100;
-        return pct.toFixed(2) + "%";
-      }catch{ return "-"; }
-    };
-
-    preminted.innerHTML = `${formatTokenAmount(premintedRaw, tokenDec)}${pctOfMax(premintedRaw) === "-" ? "" : ` (${pctOfMax(premintedRaw)})`}`;
-    burned.innerHTML = `${formatTokenAmount(burnedRaw, tokenDec)}${pctOfMax(burnedRaw) === "-" ? "" : ` (${pctOfMax(burnedRaw)})`}`;
-    circ.innerHTML = `${formatTokenAmount2(circRaw, tokenDec)}${pctOfMax(circRaw) === "-" ? "" : ` (${pctOfMax(circRaw)})`}`;
-    max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxBig > 0n ? " (100.00%)" : "-"}`;
-
-    holders.textContent = tokenInfo?.holderTotal != null ? withSeparators(tokenInfo.holderTotal) : "-";
-    transfers.textContent = tokenInfo?.transferTotal != null ? withSeparators(tokenInfo.transferTotal) : "-";
-    mintOps.textContent = tokenInfo?.mintTotal != null ? withSeparators(tokenInfo.mintTotal) : "-";
-  }
-
-  function renderAboutTab(){
-    const meta = tokenMeta || {};
-    infoDescription.innerHTML = meta.description ? escHtml(meta.description) : "-";
-  }
-
-  function renderPriceMissing(){
-    priceUsd.textContent = "-";
-    priceChg.textContent = "-";
-    priceChg.style.color = "rgba(255,255,255,.70)";
-    priceVol.textContent = "-";
-    mcap.textContent = "-";
-  }
-
-  function renderHoldersPage(){
-    if(!holderList.length){
-      holderRows.innerHTML = `<tr><td colspan="4" class="muted">No holder data.</td></tr>`;
-      return;
-    }
-
-    const start = holderOffset;
-    const end = Math.min(start + HOLDER_LIMIT, holderList.length);
-    const pageList = holderList.slice(start, end);
-    let circBig = 0n;
-    try{ circBig = BigInt(tokenCircRaw); }catch{}
-
-    holderRows.innerHTML = pageList.map((h, i) => {
-      const globalI = start + i;
-      const addr = String(h.address || "-");
-      const amtRaw = String(h.amount ?? "0");
-      const amtFmt = formatTokenAmount(amtRaw, tokenDec);
-
-      let share = "-";
-      if(circBig > 0n){
-        try{
-          const amtBig = BigInt(amtRaw);
-          const pct = Number((amtBig * 10000n) / circBig) / 100;
-          share = pct.toFixed(2) + "%";
-        }catch{}
-      }
-
-      return `
-        <tr>
-          <td>${globalI+1}</td>
-          <td class="left">${linkAddress(addr, addr)}</td>
-          <td>${share}</td>
-          <td>${amtFmt}</td>
-        </tr>
-      `;
-    }).join("");
-  }
-
-  function setHolderPaging(){
-    const hasPrev = holderOffset > 0;
-    const hasNext = holderOffset + HOLDER_LIMIT < holderList.length;
-    prevHolder.disabled = !hasPrev;
-    nextHolder.disabled = !hasNext;
-    holderCursor.textContent = (hasPrev || hasNext) ? `Page offset: ${holderOffset}` : "";
-  }
-
-  function renderHolders(){
-    holderList = Array.isArray(tokenInfo?.holder) ? tokenInfo.holder : [];
-    holderOffset = 0;
-    renderHoldersPage();
-    setHolderPaging();
-  }
-
-  function renderTransfers(result){
-    const rows = (result || []).filter(r => (r?.op || "") === "transfer").slice(0, 60);
-
-    if(!rows.length){
-      txRows.innerHTML = `<tr><td colspan="5" class="muted">No transfers found.</td></tr>`;
-      return;
-    }
-
-    txRows.innerHTML = rows.map((r) => {
-      const hash = String(r.hashRev || "-");
-      const age = r.mtsAdd ? ageFromMs(r.mtsAdd) : "-";
-      const from = String(r.from || "-");
-      const to = String(r.to || "-");
-      const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
-
-      const shortHash = hash.length > 16 ? hash.slice(0, 16) + "..." : hash;
-      const shortFrom = shortenMiddle(from);
-      const shortTo  = shortenMiddle(to);
-
-      return `
-        <tr>
-          <td>${linkTx(hash, shortHash)}</td>
-          <td>${age}</td>
-          <td>${linkAddress(from, shortFrom)}</td>
-          <td>${linkAddress(to, shortTo)}</td>
-          <td>${amt}</td>
-        </tr>
-      `;
-    }).join("");
-  }
-
-  function setTxPaging(prev, next){
-    txPrev = prev;
-    txNext = next;
-    prevTx.disabled = txOffset === 0;
-    nextTx.disabled = !txNext;
-    txCursor.textContent = (txPrev || txNext) ? `Page offset: ${txOffset}` : "";
-  }
-
-  function setActiveTab(tabId){
-    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
-    document.querySelectorAll(".tabPanel").forEach(p => p.classList.toggle("active", p.id === tabId));
-  }
-
-  async function loadTransfers({ next=null, prev=null } = {}){
-    txLoading.classList.remove("hidden");
-    try{
-      const page = await fetchOpList({ tick: currentTick, next, prev });
-      setTxPaging(page.prev, page.next);
-      renderTransfers(page.result);
-    }catch{
-      txRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transfers.</td></tr>`;
-      setTxPaging(null, null);
-    }finally{
-      txLoading.classList.add("hidden");
-    }
-  }
-
-  function renderMarkets(){
-    if(!tokenMarket){
-      marketRows.innerHTML = `<tr><td colspan="3" class="muted">No markets listed.</td></tr>`;
-      return;
-    }
-    const mcapVal = parseFloatSafe(tokenMarket.marketCap);
-    const vol = parseFloatSafe(tokenMarket.volumeUsd);
-    const volFmt = vol == null ? "-" : formatCompact(vol);
-    let priceFmt = "-";
-    let circBig = 0n;
-    try{ circBig = BigInt(tokenCircRaw); }catch{}
-    if(circBig > 0n && mcapVal != null){
-      const compUsd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
-      priceFmt = formatUsd(compUsd);
-    }else if(tokenMarket.price != null){
-      priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
-    }
-    marketRows.innerHTML = `
-    <tr>
-      <td>kaspa.com</td>
-      <td>${priceFmt}</td>
-      <td>${volFmt}</td>
-    </tr>
+    return `
+      <tr>
+        <td>${globalI+1}</td>
+        <td class="left">${linkAddress(addr, addr)}</td>
+        <td>${share}</td>
+        <td>${amtFmt}</td>
+      </tr>
     `;
+  }).join("");
+}
+
+function setHolderPaging(){
+  const hasPrev = holderOffset > 0;
+  const hasNext = holderOffset + HOLDER_LIMIT < holderList.length;
+  prevHolder.disabled = !hasPrev;
+  nextHolder.disabled = !hasNext;
+  holderCursor.textContent = (hasPrev || hasNext) ? `Page offset: ${holderOffset}` : "";
+}
+
+function renderHolders(){
+  holderList = Array.isArray(tokenInfo?.holder) ? tokenInfo.holder : [];
+  holderOffset = 0;
+  renderHoldersPage();
+  setHolderPaging();
+}
+
+function renderTransfers(result){
+  const rows = (result || []).filter(r => (r?.op || "") === "transfer").slice(0, 60);
+
+  if(!rows.length){
+    txRows.innerHTML = `<tr><td colspan="5" class="muted">No transfers found.</td></tr>`;
+    return;
   }
 
-  async function runSearch(t){
-    if(busy) return;
-    busy = true;
+  txRows.innerHTML = rows.map((r) => {
+    const hash = String(r.hashRev || "-");
+    const age = r.mtsAdd ? ageFromMs(r.mtsAdd) : "-";
+    const from = String(r.from || "-");
+    const to = String(r.to || "-");
+    const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
 
-    const T = (t || "").trim().toLowerCase();
+    const shortHash = hash.length > 16 ? hash.slice(0, 16) + "..." : hash;
+    const shortFrom = shortenMiddle(from);
+    const shortTo  = shortenMiddle(to);
 
-    if(!T){
-      addToast("Missing token", "Enter a ticker.");
-      busy = false;
-      return;
-    }
+    return `
+      <tr>
+        <td>${linkTx(hash, shortHash)}</td>
+        <td>${age}</td>
+        <td>${linkAddress(from, shortFrom)}</td>
+        <td>${linkAddress(to, shortTo)}</td>
+        <td>${amt}</td>
+      </tr>
+    `;
+  }).join("");
+}
 
-    currentTick = T;
-    setUrlTick(T);
+function setTxPaging(prev, next){
+  txPrev = prev;
+  txNext = next;
+  prevTx.disabled = txOffset === 0;
+  nextTx.disabled = !txNext;
+  txCursor.textContent = (txPrev || txNext) ? `Page offset: ${txOffset}` : "";
+}
 
-    explorerPic.removeAttribute("src");
+function setActiveTab(tabId){
+  document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
+  document.querySelectorAll(".tabPanel").forEach(p => p.classList.toggle("active", p.id === tabId));
+}
 
-    try{
-      tokenInfo = await fetchKasplexToken(T);
+async function loadTransfers({ next=null, prev=null } = {}){
+  txLoading.classList.remove("hidden");
+  try{
+    const page = await fetchOpList({ tick: currentTick, next, prev });
+    setTxPaging(page.prev, page.next);
+    renderTransfers(page.result);
+  }catch{
+    txRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transfers.</td></tr>`;
+    setTxPaging(null, null);
+  }finally{
+    txLoading.classList.add("hidden");
+  }
+}
 
-      tokenMeta = await fetchDirectoryMeta(T).catch(() => null);
+function renderMarkets(){
+  if(!tokenMarket){
+    marketRows.innerHTML = `<tr><td colspan="3" class="muted">No markets listed.</td></tr>`;
+    return;
+  }
+  const mcapVal = parseFloatSafe(tokenMarket.marketCap);
+  const vol = parseFloatSafe(tokenMarket.volumeUsd);
+  const volFmt = vol == null ? "-" : formatCompact(vol);
+  let priceFmt = "-";
+  let circBig = 0n;
+  try{ circBig = BigInt(tokenCircRaw); }catch{}
+  if(circBig > 0n && mcapVal != null){
+    const compUsd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
+    priceFmt = formatUsd(compUsd);
+  }else if(tokenMarket.price != null){
+    priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
+  }
+  marketRows.innerHTML = `
+  <tr>
+    <td>kaspa.com</td>
+    <td>${priceFmt}</td>
+    <td>${volFmt}</td>
+  </tr>
+  `;
+}
 
-      tokenBurnedRaw = await fetchBurnedAmountByAddress(T).catch(() => "0");
+async function runSearch(t){
+  if(BUSY) return;
+  BUSY = true;
 
-      const marketData = await fetchMarketData().catch(() => null);
-      tokenMarket = marketData ? marketData.find(r => r.ticker === T.toUpperCase()) : null;
+  const T = (t || "").trim().toLowerCase();
 
-      renderHeader();
-      renderSummary();
-      renderAboutTab();
-      renderHolders();
+  if(!T){
+    addToast("Missing token", "Enter a ticker.");
+    BUSY = false;
+    return;
+  }
 
-      txOffset = 0;
-      await loadTransfers({ next:null, prev:null });
+  currentTick = T;
+  setUrlTick(T);
 
-      if(tokenMarket){
-        const mcapVal = parseFloatSafe(tokenMarket.marketCap);
-        const vol = parseFloatSafe(tokenMarket.volumeUsd);
-        const ch = parseFloatSafe(tokenMarket.changeMarketCap);
-        let circBig = 0n;
-        try{ circBig = BigInt(tokenCircRaw); }catch{}
-        let usd = null;
-        if(mcapVal != null && circBig > 0n){
-          usd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
-        }else{
-          usd = parseFloatSafe(tokenMarket.price);
-        }
-        priceUsd.textContent = formatUsd(usd);
-        priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
-        priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
-        priceVol.textContent = vol == null ? "-" : formatCompact(vol);
-        if(mcapVal != null){
-          mcap.textContent = formatUsd0(mcapVal);
-        }else{
-          if(circBig > 0n && usd != null){
-            mcap.textContent = formatUsd0(Number(circBig) * usd / Math.pow(10, tokenDec));
-          }else{
-            mcap.textContent = "-";
-          }
-        }
+  explorerPic.removeAttribute("src");
+
+  try{
+    tokenInfo = await fetchKasplexToken(T);
+
+    tokenMeta = await fetchDirectoryMeta(T).catch(() => null);
+
+    tokenBurnedRaw = await fetchBurnedAmountByAddress(T).catch(() => "0");
+
+    const marketData = await fetchMarketData().catch(() => null);
+    tokenMarket = marketData ? marketData.find(r => r.ticker === T.toUpperCase()) : null;
+
+    renderHeader();
+    renderSummary();
+    renderAboutTab();
+    renderHolders();
+
+    txOffset = 0;
+    await loadTransfers({ next:null, prev:null });
+
+    if(tokenMarket){
+      const mcapVal = parseFloatSafe(tokenMarket.marketCap);
+      const vol = parseFloatSafe(tokenMarket.volumeUsd);
+      const ch = parseFloatSafe(tokenMarket.changeMarketCap);
+      let circBig = 0n;
+      try{ circBig = BigInt(tokenCircRaw); }catch{}
+      let usd = null;
+      if(mcapVal != null && circBig > 0n){
+        usd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
       }else{
-        renderPriceMissing();
+        usd = parseFloatSafe(tokenMarket.price);
       }
-
-      renderMarkets();
-
-      const hasLinks = !!(tokenMeta?.website || tokenMeta?.x || tokenMeta?.telegram);
-      optionsCtn.style.display = hasLinks ? 'block' : 'none';
-      if(hasLinks){
-        optionsMenu.innerHTML = '';
-        if(tokenMeta.website) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.website)}" target="_blank" rel="noreferrer">Website</a>`;
-        if(tokenMeta.x) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.x)}" target="_blank" rel="noreferrer">X</a>`;
-        if(tokenMeta.telegram) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.telegram)}" target="_blank" rel="noreferrer">Telegram</a>`;
+      priceUsd.textContent = formatUsd(usd);
+      priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
+      priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
+      priceVol.textContent = vol == null ? "-" : formatCompact(vol);
+      if(mcapVal != null){
+        mcap.textContent = formatUsd0(mcapVal);
+      }else{
+        if(circBig > 0n && usd != null){
+          mcap.textContent = formatUsd0(Number(circBig) * usd / Math.pow(10, tokenDec));
+        }else{
+          mcap.textContent = "-";
+        }
       }
-    }catch(err){
-      addToast("Not available", String(err?.message || err));
-
-      hdrSub.textContent = "-";
+    }else{
       renderPriceMissing();
-      holderRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
-      holderNote.textContent = "";
-      txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
-      infoDescription.textContent = "-";
-    }finally{
-      busy = false;
     }
+
+    renderMarkets();
+
+    const hasLinks = !!(tokenMeta?.website || tokenMeta?.x || tokenMeta?.telegram);
+    optionsCtn.style.display = hasLinks ? 'block' : 'none';
+    if(hasLinks){
+      optionsMenu.innerHTML = '';
+      if(tokenMeta.website) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.website)}" target="_blank" rel="noreferrer">Website</a>`;
+      if(tokenMeta.x) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.x)}" target="_blank" rel="noreferrer">X</a>`;
+      if(tokenMeta.telegram) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.telegram)}" target="_blank" rel="noreferrer">Telegram</a>`;
+    }
+  }catch(err){
+    addToast("Not available", String(err?.message || err));
+
+    hdrSub.textContent = "-";
+    renderPriceMissing();
+    holderRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+    holderNote.textContent = "";
+    txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+    infoDescription.textContent = "-";
+  }finally{
+    BUSY = false;
   }
+}
 
-  document.addEventListener("click", async (e) => {
-    const t = e.target;
-    if(t && t.classList && t.classList.contains("tab")){
-      setActiveTab(t.dataset.tab);
-      return;
-    }
-    if(t && t.dataset && t.dataset.copy){
-      const ok = await copyToClipboard(t.dataset.copy);
-      addToast(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
-    }
-  });
+document.addEventListener("click", async (e) => {
+  const t = e.target;
+  if(t && t.classList && t.classList.contains("tab")){
+    setActiveTab(t.dataset.tab);
+    return;
+  }
+  if(t && t.dataset && t.dataset.copy){
+    const ok = await copyToClipboard(t.dataset.copy);
+    addToast(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
+  }
+});
 
-  prevTx.addEventListener("click", () => {
-    if (txOffset > 0 && txPrev) {
-      txOffset -= 50;
-      loadTransfers({ prev: txPrev, next: null });
-    }
-  });
-  nextTx.addEventListener("click", () => {
-    if (txNext) {
-      txOffset += 50;
-      loadTransfers({ next: txNext, prev: null });
-    }
-  });
+prevTx.addEventListener("click", () => {
+  if (txOffset > 0 && txPrev) {
+    txOffset -= 50;
+    loadTransfers({ prev: txPrev, next: null });
+  }
+});
+nextTx.addEventListener("click", () => {
+  if (txNext) {
+    txOffset += 50;
+    loadTransfers({ next: txNext, prev: null });
+  }
+});
 
-  prevHolder.addEventListener("click", () => {
-    if (holderOffset > 0) {
-      holderOffset -= HOLDER_LIMIT;
-      renderHoldersPage();
-      setHolderPaging();
-    }
-  });
-  nextHolder.addEventListener("click", () => {
-    holderOffset += HOLDER_LIMIT;
+prevHolder.addEventListener("click", () => {
+  if (holderOffset > 0) {
+    holderOffset -= HOLDER_LIMIT;
     renderHoldersPage();
     setHolderPaging();
-  });
-
-  optionsCtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
-  });
-
-  (function init(){
-    const urlTick = getUrlTick();
-    if(urlTick){
-      runSearch(urlTick);
-    }
-  })();
-})();
-
-let throttle = false;
-
-document.getElementById('searchContainer').addEventListener('submit', (event) => {
-  event.preventDefault();
-  if (throttle) return;
-  throttle = true;
-  setTimeout(() => throttle = false, 100);
-  explorerSearch(sanitizeSearch(searchQueryInput.value), '[form] ');
+  }
 });
+nextHolder.addEventListener("click", () => {
+  holderOffset += HOLDER_LIMIT;
+  renderHoldersPage();
+  setHolderPaging();
+});
+
+optionsCtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+
+if (QUERY) {
+  (async () => {
+    // await preloadNames();
+    runSearch(sanitizeSearch(QUERY));
+  })();
+} else {
+  preloadNames();
+}
 
 </script>
 
