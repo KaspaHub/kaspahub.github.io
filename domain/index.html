@@ -18,9 +18,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:title" content="Reviews - Kaspa Hub" />
 <meta property="og:title" content="Website Review Checker - Kaspa Hub" />
 
-<meta name="description" content="Check the trust rating of any Kaspa project with a 1-5 star score from multiple independent vendors. Quickly see which projects are safe, unreviewed, or risky.">
-<meta name="twitter:description" content="Get the trust rating of Kaspa projects with a 1-5 star score from independent reviewers. Identify safe, unreviewed, or risky projects instantly.">
-<meta property="og:description" content="Discover the trust rating of Kaspa projects on a 1-5 star scale, based on data from multiple independent sources. Spot safe, unreviewed, or risky projects quickly.">
+<meta name="description" content="Check website trust ratings (1-5 stars) from multiple independent sources. View average score, individual reviews, and basic domain details including registration dates and registrar info.">
+<meta name="twitter:description" content="Get independent trust ratings for any website (1-5 stars), see reviewer scores, average rating, and domain metadata (creation date, registrar, etc.).">
+<meta property="og:description" content="Evaluate any domain's trustworthiness with 1-5 star ratings from multiple reviewers. Includes average score, detailed reviews, and key WHOIS information such as registration and expiration dates. Spot trustworthy or suspicious sites at a glance quickly.">
 
 <link rel="canonical" href="https://kaspahub.org/domain/" />
 <meta name="twitter:url" content="https://kaspahub.org/domain/" />
@@ -111,6 +111,9 @@ const reviewers = [
 let dataReady = false;
 const pageData = document.getElementById("pageData");
 
+const explorerPic = document.getElementById("explorerPic");
+const hdrSub = document.getElementById("hdrSub");
+
 async function loadReviewerData(url, name) {
   try {
     const res = await fetch(url);
@@ -192,7 +195,7 @@ function setUrlQuery(query) {
   history.replaceState({}, "", u.toString());
 }
 
-async function runSearch(queryInput, updateHistory = true) {
+async function runSearch(queryInput) {
   if (!dataReady || BUSY) return;
   BUSY = true;
 
@@ -203,6 +206,10 @@ async function runSearch(queryInput, updateHistory = true) {
     BUSY = false;
     return;
   }
+
+  explorerPic.src = `https://${query}/favicon.ico`;
+  hdrSub.textContent = `https://${query}`;
+  document.title = `${query} — Reviews - Kaspa Hub`;
 
   setUrlQuery(query);
 
@@ -232,28 +239,23 @@ async function runSearch(queryInput, updateHistory = true) {
 
   renderResults(query, allResults);
 
-  if (updateHistory) {
-    history.pushState({ query }, '', `/domain/?q=${encodeURIComponent(query)}`);
-  }
-
   BUSY = false;
 }
 
-(async () => {
-  for (let reviewer of reviewers) {
+
+
+if (QUERY) {
+  (async () => {
+    for (let reviewer of reviewers) {
     reviewer.cache = await loadReviewerData(reviewer.url, reviewer.name);
-  }
-  dataReady = true;
-
-  const params = new URLSearchParams(location.search);
-  const initialQuery = params.get('q');
-  if (typeof initialQuery === 'string' && initialQuery.trim()) {
-    const cleaned = initialQuery.trim();
-    await runSearch(cleaned, false);
-    history.replaceState({ query: normalizeDomain(cleaned) }, '', location.href);
-  }
-})();
-
+    }
+    dataReady = true;
+    // await preloadNames();
+    runSearch(sanitizeSearch(QUERY));
+  })();
+} else {
+  preloadNames();
+}
 
 </script>
 

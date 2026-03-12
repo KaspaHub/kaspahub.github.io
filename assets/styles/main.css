@@ -152,8 +152,6 @@ html#dark {
 	box-shadow: var(--box-shadow);
 	border-radius: 25px;
 	padding: 17px;
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
 }
 
 .filter-dark {
@@ -1209,40 +1207,68 @@ dialog {
 	height: 30px;
 	opacity: 0.9;
 	cursor: pointer;
-	position: relative;
-	display: none;
-	z-index: 9;
+	border: none;
+	padding: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	anchor-name: --options-trigger;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23333'/%3E%3Ccircle cx='10' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23fff'/%3E%3C/svg%3E") center / 30px 30px no-repeat;
 }
 
 #optionsMenu {
 	position: absolute;
-	top: 35px;
-	left: -140px;
 	background-color: #333;
 	color: white;
 	border-radius: 15px;
-	display: none;
 	min-width: 180px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-	z-index: 10;
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.17);
 	overflow: hidden;
+	padding: 0;
+	position-anchor: --options-trigger;
+	top: anchor(--options-trigger bottom);
+	left: anchor(--options-trigger left);
+	margin-top: 5px;
+	margin-left: -140px;
+	opacity: 1;
+	transform: scale(1) translateY(0);
+	transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#optionsMenu a, #optionsMenu button {
+@starting-style {
+	#optionsMenu {
+		opacity: 0;
+		transform: scale(0.95) translateY(-8px);
+	}
+}
+
+#optionsMenu a,
+#optionsMenu button {
 	display: block;
-	padding: 8px 12px;
+	padding: 10px 16px;
 	color: white;
 	text-decoration: none;
 	cursor: pointer;
 	width: 100%;
 	text-align: left;
 	font-weight: 500;
+	border: none;
+	background: none;
+	font-size: 14px;
 }
 
-#optionsMenu a:hover, #optionsMenu button:hover {
+#optionsMenu a:hover,
+#optionsMenu button:hover {
 	background-color: #555;
+}
+
+#optionsMenu a:focus-visible,
+#optionsMenu button:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: -2px;
 }
 /* popup v */
 dialog {

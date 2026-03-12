@@ -38,8 +38,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-f">
 
-<div id="userBanner" style="background-image: url(/assets/bg-light.webp);"></div>
-
+    <div id="userBanner" style="background-image: url(/assets/bg-light.webp);"></div>
 
     <section id="profile-section" class="theme-1 fade-in" style="display:none;">
 
@@ -49,56 +48,44 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                 <div id="picture"></div>
             </div>
 
-            <div id="optionsCtn">
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40">
-                  <circle cx="20" cy="20" r="20" fill="#333"/>
-                  <circle cx="10" cy="20" r="3" fill="#fff"/>
-                  <circle cx="20" cy="20" r="3" fill="#fff"/>
-                  <circle cx="30" cy="20" r="3" fill="#fff"/>
-                </svg>
-
-                <div id="optionsMenu"></div>
-
-            </div>
+            <button id="optionsCtn" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
+            <div id="optionsMenu" role="menu" popover></div>
 
         </div>
 
-<div class="main-content-area">
-    <div class="sidebar">
-        <h1 id="display_name"></h1>
-        <p id="name" style="opacity: 0.8;"></p>
-        <div id="about"></div>
-    </div>
-    <div id="content">
+        <div class="main-content-area">
+            <div class="sidebar">
+                <h1 id="display_name"></h1>
+                <p id="name" style="opacity: 0.8;"></p>
+                <div id="about"></div>
+            </div>
+            <div id="content">
+                <div id="wallets-container">
+                    <div id="qr-code"></div>
+                </div>
+            </div>
+        </div>
 
+        <div id="error" style="color: red; margin-top: 10px;"></div>
 
-    <div id="wallets-container"><div id="qr-code"></div></div>
+    </section>
 
-    <!-- <div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div> -->
-
-
-
-    </div>
-
-</div>
-
-<div id="error" style="color: red; margin-top: 10px;"></div>
-
-</section>
-
-<section id="search-section" class="theme-1" style="display:none;">
-    <div class="w-header">
-    <span>Donation Pages</span>
-    <a draggable="false" href="/nostr/"><svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E"><circle cx="10" cy="10" r="10"></circle></svg></a>
-    </div>
-    <p>Please enter Nostr public key</p>
-    <input type="text" id="searchBox" placeholder="npub..." required="">
-    <div class="w-footer">
-        <p><a href="/nostr/register/">Create a donation page</a></p>
-        <button class="button" id="searchBtn">Search</button>
-    </div>
-</section>
+    <section id="search-section" class="theme-1" style="display:none;">
+        <div class="w-header">
+            <span>Donation Pages</span>
+            <a draggable="false" href="/nostr/">
+                <svg width="20px" height="20px" viewBox="0 0 20 20" fill="#EC6A5E">
+                    <circle cx="10" cy="10" r="10"></circle>
+                </svg>
+            </a>
+        </div>
+        <p>Please enter Nostr public key</p>
+        <input type="text" id="searchBox" placeholder="npub..." required="">
+        <div class="w-footer">
+            <p><a href="/nostr/register/">Create a donation page</a></p>
+            <button class="button" id="searchBtn">Search</button>
+        </div>
+    </section>
 
 </main>
 
@@ -362,19 +349,8 @@ if (acceptsKAS) {
 }
 
 
-
-
     pool.close(relays);
 }
-
-    optionsCtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', () => {
-        optionsMenu.style.display = 'none';
-    });
 
     function runSearch(npubInput) {
         if (npubInput) {
