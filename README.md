@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="/assets/logo.webp" alt="Kaspa Hub Logo" title="Kaspa Hub Logo" width="80"/>
+<img src="https://kaspahub.org/assets/logo.webp" alt="Kaspa Hub Logo" title="Kaspa Hub Logo" width="80"/>
 
 # Kaspa Hub
 

@@ -10,9 +10,9 @@ Location: Global
 To the Kaspa community for their support and contributions.
 
 /* SITE */
-Purpose: Providing a hub for Kaspa cryptocurrency resources, including exchange listings, wallets, merchant solutions, developer tools and more.
+Purpose: Providing a hub for Kaspa, Bitcoin, Linux and Nostr resources.
 Open Source: Kaspa Hub is an entirely open-source project. We welcome community contributions!
 GitHub: https://github.com/KaspaHub/kaspahub.github.io
-Last Update: 2026-02-27
+Last Update: 2026-03-13
 Technologies: HTML, CSS, JavaScript
 Language: English
