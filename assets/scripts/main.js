@@ -222,6 +222,17 @@ function shortenMiddle(str, head = 13, tail = 8) {
   return s.slice(0, head) + "..." + s.slice(-tail);
 }
 
+function shortenAddress(str, head = 13, tail = 8) {
+  let s = String(str ?? "");
+
+  if (s.startsWith("kaspa:")) {
+    s = s.slice(6);
+  }
+
+  if (s.length <= head + tail + 3) return s;
+  return s.slice(0, head) + "..." + s.slice(-tail);
+}
+
 function shortenEnd(str, maxLength = 13) {
   const s = String(str ?? "");
   if (s.length <= maxLength) return s;

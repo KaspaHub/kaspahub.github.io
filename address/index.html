@@ -671,7 +671,7 @@ function renderAll(pageTxs, addr) {
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
     const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
+    const statusClass = isAccepted ? "accepted" : "notAccepted";
 
     let counterpartyHtml;
     let isMultiple = false;
@@ -737,7 +737,7 @@ function renderAll(pageTxs, addr) {
         <td>${linkTx(hash, shortHash)}</td>
         <td>${age}</td>
         <td>${counterpartyHtml}</td>
-        <td><span style="color:${statusColor}">${statusText}</span></td>
+        <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
     `;
@@ -759,7 +759,7 @@ function renderReceived(pageTxs, addr) {
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
     const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
+    const statusClass = isAccepted ? "accepted" : "notAccepted";
 
     let senderHtml;
     if (from === "Multiple") {
@@ -795,7 +795,7 @@ function renderReceived(pageTxs, addr) {
         <td>${linkTx(hash, shortHash)}</td>
         <td>${age}</td>
         <td>${senderHtml}</td>
-        <td><span style="color:${statusColor}">${statusText}</span></td>
+        <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
     `;
@@ -817,7 +817,7 @@ function renderSent(pageTxs, addr) {
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
     const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusColor = isAccepted ? "#70C7BA" : "#ffb86c";
+    const statusClass = isAccepted ? "accepted" : "notAccepted";
 
     let receiverHtml;
     if (to === "Multiple") {
@@ -832,7 +832,7 @@ function renderSent(pageTxs, addr) {
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
         const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
-        const short = shortenMiddle(item.addr);
+        const short = shortenMiddle(toItems[0].addr);
         return `${linkAddress(item.addr, short)} - <span style="color:#ff6b6b">${itemAmt} KAS</span><br>`;
       }).join('');
       receiverHtml = `
@@ -854,7 +854,7 @@ function renderSent(pageTxs, addr) {
         <td>${linkTx(hash, shortHash)}</td>
         <td>${age}</td>
         <td>${receiverHtml}</td>
-        <td><span style="color:${statusColor}">${statusText}</span></td>
+        <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
     `;
@@ -1073,34 +1073,43 @@ async function runSearch(inputAddr) {
   domains = null;
   utxos = null;
 
-  let balanceSomes = 0;
-  let txCountVal = 0;
-  let txs = [];
-
-  try {
-    [balanceSomes, txCountVal, txs] = await Promise.all([
-      fetchBalance(addr),
-      fetchTxCount(addr),
-      fetchTransactions(addr, 0, txLimit),
-      determineWallet(addr)
-    ]);
-  } catch (err) {
-    addToast("Error", "Could not load wallet data.");
-    balanceKas.textContent = "-";
-    balanceUsd.textContent = "-";
-    labelEl.textContent = "-";
-    txCount.textContent = "-";
-    lastTransaction.textContent = "-";
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
-    tokenRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
-    domainRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
-    utxoRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
-    BUSY = false;
-    return;
-  }
-
   renderHeader(addr);
-  await renderSummary(addr, balanceSomes, txCountVal, txs);
+  const label = fetchAddressLabel(addr);
+  labelEl.textContent = label || "-";
+  document.title = label || addr;
+  (async () => {
+    try {
+      const balanceSomes = await fetchBalance(addr);
+      balanceKas.textContent = formatKas(balanceSomes);
+      balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8);
+    } catch (err) {
+      balanceKas.textContent = "-";
+      balanceUsd.textContent = "-";
+    }
+  })();
+  setTimeout(async () => {
+    try {
+      const txCountVal = await fetchTxCount(addr);
+      txCount.textContent = withSeparators(txCountVal);
+    } catch (err) {
+      txCount.textContent = "-";
+    }
+  }, 100);
+  setTimeout(async () => {
+    try {
+      const txs = await fetchTransactions(addr, 0, txLimit);
+      const times = txs
+        .map(t => Number(t.block_time))
+        .filter(Number.isFinite)
+        .sort((a, b) => a - b);
+      lastTransaction.textContent = times.length ? formatDate(times[times.length - 1]) : "-";
+    } catch (err) {
+      lastTransaction.textContent = "-";
+    }
+  }, 310);
+  setTimeout(() => {
+    determineWallet(addr);
+  }, 200);
 
   BUSY = false;
 

@@ -43,7 +43,12 @@
   word-break: break-all;
 }
 
-
+.accepted {
+  color: #70C7BA;
+}
+.notAccepted {
+  color: #FFB86C;
+}
 
 .qrCode {
   background-image: url('/assets/icons/qr.svg');
@@ -102,12 +107,13 @@ html#dark {
 
 .grid-2 { grid-template-rows:repeat(2,1fr);}
 
-/* Typography + Data */
 .theme-1 h3 {
-  margin: 0 0 10px;
   font-size: 14px;
   letter-spacing: .2px;
   text-transform: uppercase;
+}
+.theme-1 h3:first-child {
+    margin: 0 0 10px;
 }
 
 .rows { display: grid;gap: 8px;}

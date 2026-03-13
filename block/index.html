@@ -73,24 +73,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="v" id="txCount">-</div>
         </div>
         <div class="row">
-          <div class="k">Blue score</div>
-          <div class="v" id="blueScore">-</div>
-        </div>
-        <div class="row">
-          <div class="k">Difficulty</div>
-          <div class="v" id="difficulty">-</div>
-        </div>
-        <div class="row">
-          <div class="k">Block time</div>
-          <div class="v" id="blockTime">-</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="theme-1">
-      <h3>Overview</h3>
-      <div class="rows">
-        <div class="row">
           <div class="k">Parents</div>
           <div class="v" id="parentsCount">-</div>
         </div>
@@ -99,8 +81,30 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="v" id="childrenCount">-</div>
         </div>
         <div class="row">
-          <div class="k">Is Chain Block</div>
-          <div class="v" id="isChainBlock">-</div>
+          <div class="k">Timestamp</div>
+          <div class="v" id="timestamp">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="theme-1">
+      <h3>Overview</h3>
+      <div class="rows">
+        <div class="row">
+          <div class="k">Bits</div>
+          <div class="v" id="bits">-</div>
+        </div>
+        <div class="row">
+          <div class="k">Blue score</div>
+          <div class="v" id="blueScore">-</div>
+        </div>
+        <div class="row">
+          <div class="k">DAA score</div>
+          <div class="v" id="daaScore">-</div>
+        </div>
+        <div class="row">
+          <div class="k">Color</div>
+          <div class="v" id="color">-</div>
         </div>
       </div>
     </div>
@@ -108,8 +112,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div class="tabs" role="tablist" aria-label="Block tabs">
     <button class="tab active" data-tab="tabTransactions">Transfers</button>
-    <button class="tab" data-tab="tabHeader">Header</button>
-    <button class="tab" data-tab="tabParents">Parents</button>
+    <button class="tab" data-tab="tabRelated">Related Blocks</button>
     <button class="tab" data-tab="tabDetails">Details</button>
   </div>
 
@@ -125,11 +128,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
               <th>To</th>
               <th>Mass</th>
               <th>For</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody id="txRows">
             <tr>
-              <td colspan="5" class="muted">-</td>
+              <td colspan="6" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -137,35 +141,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
   </div>
 
-  <div id="tabHeader" class="tabPanel" aria-label="Header panel">
+  <div id="tabRelated" class="tabPanel" aria-label="Related Blocks panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Header</h3>
-      <div class="rows" id="headerRows">
-        <div class="row">
-          <div class="k">-</div>
-          <div class="v">-</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="tabParents" class="tabPanel" aria-label="Parents panel">
-    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Parents</h3>
-      <div class="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Parent Hashes</th>
-              <th>Group</th>
-            </tr>
-          </thead>
-          <tbody id="parentsRows">
-            <tr>
-              <td colspan="2" class="muted">-</td>
-            </tr>
-          </tbody>
-        </table>
+      <h3>Related Blocks</h3>
+      <div id="relatedContent">
+        <p class="muted">-</p>
       </div>
     </div>
   </div>
@@ -174,6 +154,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Details</h3>
       <div class="rows" id="detailsRows">
+        <div class="row">
+          <div class="k">-</div>
+          <div class="v">-</div>
+        </div>
+      </div>
+      <h3>Miner Information</h3>
+      <div class="rows" id="minerRows">
         <div class="row">
           <div class="k">-</div>
           <div class="v">-</div>
@@ -228,16 +215,17 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 const hdrSub = document.getElementById("hdrSub");
 const txCount = document.getElementById("txCount");
-const blueScore = document.getElementById("blueScore");
-const difficulty = document.getElementById("difficulty");
-const blockTime = document.getElementById("blockTime");
 const parentsCount = document.getElementById("parentsCount");
 const childrenCount = document.getElementById("childrenCount");
-const isChainBlock = document.getElementById("isChainBlock");
+const timestamp = document.getElementById("timestamp");
+const blueScore = document.getElementById("blueScore");
+const daaScore = document.getElementById("daaScore");
+const color = document.getElementById("color");
+const bits = document.getElementById("bits");
 const txRows = document.getElementById("txRows");
-const headerRows = document.getElementById("headerRows");
-const parentsRows = document.getElementById("parentsRows");
+const relatedContent = document.getElementById("relatedContent");
 const detailsRows = document.getElementById("detailsRows");
+const minerRows = document.getElementById("minerRows");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentBlockHash = "";
@@ -299,7 +287,7 @@ function linkTx(hash, label) {
   return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
 }
 
-function linkBlock(hash, label) {
+function linkBlock(hash, label = null) {
   const h = String(hash ?? "").trim();
   const text = escHtml(label != null ? label : shortenEnd(h));
   if (!h) return "-";
@@ -413,15 +401,23 @@ function renderHeader(blockHash) {
 function renderSummary(json) {
   const txs = json.transactions || [];
   txCount.textContent = txs.length;
-  blueScore.textContent = withSeparators(json.verboseData?.blueScore) || "-";
-  difficulty.textContent = withSeparators(json.header?.difficulty) || "-";
-  blockTime.textContent = formatDate(json.header?.timestamp) || "-";
+  timestamp.textContent = formatDate(json.header?.timestamp) || "-";
 }
 
 function renderOverview(json) {
-  parentsCount.textContent = (json.header?.parents || []).length || "0";
+  let parentHashesArr = [];
+  if (json.header?.parents) {
+    json.header.parents.forEach(group => {
+      if (group.parentHashes) group.parentHashes.forEach(h => parentHashesArr.push(h));
+    });
+  }
+  parentsCount.textContent = [...new Set(parentHashesArr)].length || "0";
   childrenCount.textContent = (json.verboseData?.childrenHashes || []).length || "0";
-  isChainBlock.textContent = json.verboseData?.isChainBlock ? "Yes" : "No";
+  blueScore.textContent = withSeparators(json.verboseData?.blueScore) || "-";
+  daaScore.textContent = withSeparators(json.header?.daaScore) || "-";
+  bits.textContent = withSeparators(json.header?.bits) || "-";
+  const hasColorKey = json.extra && 'color' in json.extra;
+  color.textContent = (hasColorKey && json.extra.color === null) ? "Blue" : "Red";
 }
 
 async function renderTransactions(txs) {
@@ -477,6 +473,8 @@ async function renderTransactions(txs) {
         amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
       }
 
+      let status = (fullTx?.is_accepted === true) ? '<span class="accepted">Accepted</span>' : '<span class="notAccepted">Not accepted</span>';
+
       html += `
         <tr>
           <td>${linkTx(txId)}</td>
@@ -484,72 +482,76 @@ async function renderTransactions(txs) {
           <td>${toCell}</td>
           <td>${mass}</td>
           <td>${amountHtml}</td>
+          <td>${status}</td>
         </tr>
       `;
     }
   }
   if (!html) {
-    html = `<tr><td colspan="5" class="muted">No transactions in this block.</td></tr>`;
+    html = `<tr><td colspan="6" class="muted">No transactions in this block.</td></tr>`;
   }
   txRows.innerHTML = html;
 }
 
-function renderHeaderDetails(header) {
+function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRedsHashes, selectedParentHash, pruningPoint) {
   let html = '';
+  const renderCategory = (name, hashes) => {
+    const unique = [...new Set(hashes || [])].sort();
+    if (!unique.length) return '';
+    const links = unique.map(h => linkBlock(h, h)).join('<br>');
+    return `<details><summary>${name} (${unique.length})</summary><div class="receiver-list">${links}</div></details>`;
+  };
+  let parentHashesArr = [];
+  if (Array.isArray(parents)) {
+    parents.forEach(group => {
+      if (Array.isArray(group.parentHashes)) {
+        parentHashesArr = [...parentHashesArr, ...group.parentHashes];
+      }
+    });
+  }
+  html += renderCategory('Parents', parentHashesArr);
+  html += renderCategory('Children', childrenHashes);
+  html += renderCategory('Merge Set Blues', mergeSetBluesHashes);
+  html += renderCategory('Merge Set Reds', mergeSetRedsHashes);
+  if (selectedParentHash) {
+    html += `<div>Selected Parent: ${linkBlock(selectedParentHash, selectedParentHash)}</div>`;
+  }
+  if (pruningPoint) {
+    html += `<div>Pruning Point: ${linkBlock(pruningPoint, pruningPoint)}</div>`;
+  }
+  if (!html) {
+    html = '<p class="muted">No related blocks.</p>';
+  }
+  relatedContent.innerHTML = html;
+}
+
+function renderDetails(header, verboseData, extra) {
+  let html = '';
+  const skippedHeader = ['parents', 'timestamp', 'daaScore', 'version', 'hash', 'pruningPoint', 'bits', 'blueScore'];
+  const skippedVerbose = ['childrenHashes', 'mergeSetBluesHashes', 'mergeSetRedsHashes', 'blueScore', 'transactionIds', 'hash', 'selectedParentHash', 'isChainBlock'];
+  const skippedExtra = ['color', 'minerAddress', 'minerInfo'];
+
   if (header) {
     Object.entries(header).forEach(([key, value]) => {
-      let valStr = typeof value === 'object' ? JSON.stringify(value, null, 2) : value;
-      if (key === 'parents') return;
+      if (skippedHeader.includes(key)) return;
+      let valStr = typeof value === 'object' ? JSON.stringify(value) : value;
       html += `
         <div class="row">
           <div class="k">${escHtml(key)}</div>
-          <div class="v"><pre>${escHtml(valStr)}</pre></div>
+          <div class="v">${escHtml(valStr)}</div>
         </div>
       `;
     });
   }
-  if (!html) {
-    html = `<div class="row"><div class="k">No header data</div><div class="v">-</div></div>`;
-  }
-  headerRows.innerHTML = html;
-}
-
-function renderParents(parents) {
-  let html = '';
-  if (Array.isArray(parents)) {
-    parents.forEach((parentGroup, index) => {
-      const hashes = parentGroup.parentHashes || [];
-      let hashesHtml = hashes
-        .map(h => {
-          const fullHash = escHtml(h);
-          return `<a class="explorerTx" href="${blockUrl(h)}">${fullHash}</a>`;
-        })
-        .join('<br>');
-      html += `
-        <tr>
-          <td>${hashesHtml || "-"}</td>
-          <td>${index + 1}</td>
-        </tr>
-      `;
-    });
-  }
-  if (!html) {
-    html = `<tr><td colspan="2" class="muted">No parents.</td></tr>`;
-  }
-  parentsRows.innerHTML = html;
-}
-
-function renderDetails(verboseData, extra) {
-  let html = '';
   if (verboseData) {
     Object.entries(verboseData).forEach(([key, value]) => {
-      if (key === "hash") return;
+      if (skippedVerbose.includes(key)) return;
       let valStr;
       if (Array.isArray(value)) {
-        const isTxIds = key === "transactionIds";
+        const isTxIds = key === 'transactionIds';
         const linkFn = isTxIds ? linkTx : linkBlock;
         valStr = value.map(v => linkFn(v, v)).join('<br>');
-      } else if (key === "selectedParentHash" && value) {
+      } else if (key === 'selectedParentHash' && value) {
         valStr = linkBlock(value, value);
       } else {
         valStr = value;
@@ -564,11 +566,11 @@ function renderDetails(verboseData, extra) {
   }
   if (extra) {
     Object.entries(extra).forEach(([key, value]) => {
-      if (key === "hash") return;
+      if (skippedExtra.includes(key)) return;
       let valStr = value ?? "-";
-      if (key === "minerAddress" && typeof valStr === "string") {
+      if (key === 'minerAddress' && typeof valStr === "string") {
         valStr = linkAddress(valStr, valStr);
-      } else if (key === "selectedParentHash" && typeof valStr === "string") {
+      } else if (key === 'selectedParentHash' && typeof valStr === "string") {
         valStr = linkBlock(valStr, valStr);
       } else {
         valStr = escHtml(valStr);
@@ -585,6 +587,30 @@ function renderDetails(verboseData, extra) {
     html = `<div class="row"><div class="k">No details</div><div class="v">-</div></div>`;
   }
   detailsRows.innerHTML = html;
+
+  let minerHtml = '';
+  const minerAddress = extra?.minerAddress;
+  const minerInfoVal = extra?.minerInfo;
+  if (minerAddress) {
+    minerHtml += `
+      <div class="row">
+        <div class="k">minerAddress</div>
+        <div class="v">${linkAddress(minerAddress)}</div>
+      </div>
+    `;
+  }
+  if (minerInfoVal) {
+    minerHtml += `
+      <div class="row">
+        <div class="k">minerInfo</div>
+        <div class="v">${escHtml(minerInfoVal)}</div>
+      </div>
+    `;
+  }
+  if (!minerHtml) {
+    minerHtml = `<div class="row"><div class="k">No miner information</div><div class="v">-</div></div>`;
+  }
+  minerRows.innerHTML = minerHtml;
 }
 
 function determineBlockImage(extra) {
@@ -629,9 +655,8 @@ async function runSearch(inputHash) {
   renderSummary(json);
   renderOverview(json);
   await renderTransactions(json.transactions);
-  renderHeaderDetails(json.header);
-  renderParents(json.header?.parents);
-  renderDetails(json.verboseData, json.extra);
+  renderRelated(json.header?.parents, json.verboseData?.childrenHashes, json.verboseData?.mergeSetBluesHashes, json.verboseData?.mergeSetRedsHashes, json.verboseData?.selectedParentHash, json.header?.pruningPoint);
+  renderDetails(json.header, json.verboseData, json.extra);
   determineBlockImage(json.extra);
 
   BUSY = false;
@@ -639,21 +664,21 @@ async function runSearch(inputHash) {
 
 function resetUI() {
   txCount.textContent = "-";
-  blueScore.textContent = "-";
-  difficulty.textContent = "-";
-  blockTime.textContent = "-";
   parentsCount.textContent = "-";
   childrenCount.textContent = "-";
-  isChainBlock.textContent = "-";
-  txRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
-  headerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
-  parentsRows.innerHTML = `<tr><td colspan="2" class="muted">-</td></tr>`;
+  timestamp.textContent = "-";
+  blueScore.textContent = "-";
+  daaScore.textContent = "-";
+  bits.textContent = "-";
+  color.textContent = "-";
+  txRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
+  relatedContent.innerHTML = `<p class="muted">-</p>`;
   detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  minerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
 }
 
 if (QUERY) {
   (async () => {
-    // await preloadNames();
     document.getElementById('explorerData').style.opacity = 'unset';
     runSearch(sanitizeSearch(QUERY));
   })();
