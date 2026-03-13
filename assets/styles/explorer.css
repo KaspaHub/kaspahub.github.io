@@ -4,20 +4,21 @@
   align-items:center;justify-content:space-between;
   padding-bottom:14px;margin-bottom:14px;
 }
-
+#explorerIntro {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  user-select: none;
+}
 #explorerHdr {
   display:flex;gap:10px;align-items:center;
   min-width:260px;
 }
-
 #explorerHdr h1 {
   margin:0;font-size:16px;letter-spacing:.2px;
 }
-
 #explorerHdr .sub {
   margin:2px 0 0;font-size:12px;
 }
-
 #explorerPic {
   min-width:34px;
   min-height:34px;
@@ -33,12 +34,10 @@
   opacity: 0;
   transition: opacity 0.5s ease;
 }
-
 #explorerInfo {
   max-width: 100%;
   overflow: hidden;
 }
-
 .explorerTx {
   word-break: break-all;
 }
