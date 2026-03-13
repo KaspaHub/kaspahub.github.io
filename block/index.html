@@ -622,6 +622,21 @@ function determineBlockImage(extra) {
   }
 }
 
+function resetUI() {
+  txCount.textContent = "-";
+  parentsCount.textContent = "-";
+  childrenCount.textContent = "-";
+  timestamp.textContent = "-";
+  blueScore.textContent = "-";
+  daaScore.textContent = "-";
+  bits.textContent = "-";
+  color.textContent = "-";
+  txRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
+  relatedContent.innerHTML = `<p class="muted">-</p>`;
+  detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  minerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+}
+
 async function runSearch(inputHash) {
   if (BUSY) return;
   BUSY = true;
@@ -639,42 +654,32 @@ async function runSearch(inputHash) {
 
   let json = null;
 
-  try {
-    json = await fetchBlock(blockHash);
-    if (!json) {
-      throw new Error("Block not found.");
+  (async () => {
+    try {
+      json = await fetchBlock(blockHash);
+      if (!json) {
+        throw new Error("Block not found.");
+      }
+      renderHeader(blockHash);
+      renderSummary(json);
+      renderOverview(json);
+      renderRelated(json.header?.parents, json.verboseData?.childrenHashes, json.verboseData?.mergeSetBluesHashes, json.verboseData?.mergeSetRedsHashes, json.verboseData?.selectedParentHash, json.header?.pruningPoint);
+      renderDetails(json.header, json.verboseData, json.extra);
+      determineBlockImage(json.extra);
+      setTimeout(async () => {
+        try {
+          await renderTransactions(json.transactions || []);
+        } catch {
+          txRows.innerHTML = `<tr><td colspan="6" class="muted">Failed to load transactions.</td></tr>`;
+        }
+      }, 100);
+    } catch (err) {
+      addToast("Error", "Could not load block data.");
+      resetUI();
     }
-  } catch (err) {
-    addToast("Error", "Could not load block data.");
-    resetUI();
-    BUSY = false;
-    return;
-  }
-
-  renderHeader(blockHash);
-  renderSummary(json);
-  renderOverview(json);
-  await renderTransactions(json.transactions);
-  renderRelated(json.header?.parents, json.verboseData?.childrenHashes, json.verboseData?.mergeSetBluesHashes, json.verboseData?.mergeSetRedsHashes, json.verboseData?.selectedParentHash, json.header?.pruningPoint);
-  renderDetails(json.header, json.verboseData, json.extra);
-  determineBlockImage(json.extra);
+  })();
 
   BUSY = false;
-}
-
-function resetUI() {
-  txCount.textContent = "-";
-  parentsCount.textContent = "-";
-  childrenCount.textContent = "-";
-  timestamp.textContent = "-";
-  blueScore.textContent = "-";
-  daaScore.textContent = "-";
-  bits.textContent = "-";
-  color.textContent = "-";
-  txRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
-  relatedContent.innerHTML = `<p class="muted">-</p>`;
-  detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
-  minerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
 }
 
 if (QUERY) {

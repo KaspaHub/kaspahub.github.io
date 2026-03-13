@@ -158,7 +158,7 @@
   "description": "A decentralized messenger on the Kaspa network with end-to-end encrypted private messages, groups, channels, and a dedicated SDK for building decentralized applications.",
   "link": "https://kaspeak.net",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspeak.webp",
-  "features": ["social"]
+  "features": ["reviewed", "social"]
 },
 {
   "name": "Travala.com",

@@ -1094,7 +1094,7 @@ async function runSearch(inputAddr) {
     } catch (err) {
       txCount.textContent = "-";
     }
-  }, 100);
+  }, 50);
   setTimeout(async () => {
     try {
       const txs = await fetchTransactions(addr, 0, txLimit);
@@ -1106,10 +1106,10 @@ async function runSearch(inputAddr) {
     } catch (err) {
       lastTransaction.textContent = "-";
     }
-  }, 310);
+  }, 200);
   setTimeout(() => {
     determineWallet(addr);
-  }, 200);
+  }, 100);
 
   BUSY = false;
 
