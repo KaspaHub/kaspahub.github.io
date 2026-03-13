@@ -1331,6 +1331,9 @@ dialog.theme-1::backdrop {
 	transition: left 0.3s ease;
 	z-index: 5;
 	border-radius: 0 20px 0 0;
+	backdrop-filter: blur(10px);
+	background-color: rgba(255, 255, 255, 0.15);
+	padding: 17px;
 }
 
 #drawer.open {

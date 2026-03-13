@@ -107,7 +107,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   </div>
 
   <div class="tabs" role="tablist" aria-label="Block tabs">
-    <button class="tab active" data-tab="tabTransactions">Transactions</button>
+    <button class="tab active" data-tab="tabTransactions">Transfers</button>
     <button class="tab" data-tab="tabHeader">Header</button>
     <button class="tab" data-tab="tabParents">Parents</button>
     <button class="tab" data-tab="tabDetails">Details</button>
@@ -115,7 +115,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabTransactions" class="tabPanel active" aria-label="Transactions panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Transactions</h3>
+      <h3>Transfers</h3>
       <div class="tableWrap">
         <table>
           <thead>
@@ -124,7 +124,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
               <th>From</th>
               <th>To</th>
               <th>Mass</th>
-              <th>Amount</th>
+              <th>For</th>
             </tr>
           </thead>
           <tbody id="txRows">
@@ -406,8 +406,8 @@ function setUrlBlockHash(blockHash) {
 }
 
 function renderHeader(blockHash) {
-  hdrSub.textContent = shortenEnd(blockHash);
-  document.title = `Block ${shortenEnd(blockHash)} - Kaspa Hub`;
+  hdrSub.textContent = blockHash;
+  document.title = `Block ${blockHash}`;
 }
 
 function renderSummary(json) {
@@ -473,7 +473,7 @@ async function renderTransactions(txs) {
           : `<span style="color:#2ee59d">0.00000000 KAS</span>`;
       } else {
         fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap, totalTransferred);
-        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
+        toCell = renderAddrsCell(toAddrs.filter(addr => !inputAddrs.has(addr)), "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
         amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
       }
 
@@ -519,7 +519,12 @@ function renderParents(parents) {
   if (Array.isArray(parents)) {
     parents.forEach((parentGroup, index) => {
       const hashes = parentGroup.parentHashes || [];
-      let hashesHtml = hashes.map(h => linkBlock(h)).join('<br>');
+      let hashesHtml = hashes
+        .map(h => {
+          const fullHash = escHtml(h);
+          return `<a class="explorerTx" href="${blockUrl(h)}">${fullHash}</a>`;
+        })
+        .join('<br>');
       html += `
         <tr>
           <td>${hashesHtml || "-"}</td>
@@ -538,7 +543,17 @@ function renderDetails(verboseData, extra) {
   let html = '';
   if (verboseData) {
     Object.entries(verboseData).forEach(([key, value]) => {
-      let valStr = Array.isArray(value) ? value.map(v => linkBlock(v, shortenMiddle(v))).join('<br>') : value;
+      if (key === "hash") return;
+      let valStr;
+      if (Array.isArray(value)) {
+        const isTxIds = key === "transactionIds";
+        const linkFn = isTxIds ? linkTx : linkBlock;
+        valStr = value.map(v => linkFn(v, v)).join('<br>');
+      } else if (key === "selectedParentHash" && value) {
+        valStr = linkBlock(value, value);
+      } else {
+        valStr = value;
+      }
       html += `
         <div class="row">
           <div class="k">${escHtml(key)}</div>
@@ -549,11 +564,19 @@ function renderDetails(verboseData, extra) {
   }
   if (extra) {
     Object.entries(extra).forEach(([key, value]) => {
+      if (key === "hash") return;
       let valStr = value ?? "-";
+      if (key === "minerAddress" && typeof valStr === "string") {
+        valStr = linkAddress(valStr, valStr);
+      } else if (key === "selectedParentHash" && typeof valStr === "string") {
+        valStr = linkBlock(valStr, valStr);
+      } else {
+        valStr = escHtml(valStr);
+      }
       html += `
         <div class="row">
           <div class="k">${escHtml(key)}</div>
-          <div class="v">${escHtml(valStr)}</div>
+          <div class="v">${valStr}</div>
         </div>
       `;
     });
