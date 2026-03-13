@@ -183,26 +183,23 @@ function formatDate(ts, locale = 'en-US') {
   if (!isFinite(d.getTime())) return "-";
 
   const now = new Date();
-  const isToday = d.getFullYear() === now.getFullYear() &&
-                  d.getMonth() === now.getMonth() &&
-                  d.getDate() === now.getDate();
 
-  const dateOptions = {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  };
+  const dateStr =
+    d.getFullYear() === now.getFullYear() &&
+    d.getMonth() === now.getMonth() &&
+    d.getDate() === now.getDate()
+      ? "Today"
+      : d.toLocaleDateString(locale, {
+          month: "short",
+          day: "numeric",
+          ...(d.getFullYear() === now.getFullYear() ? {} : { year: "numeric" })
+        });
 
-  const timeOptions = {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: locale === 'en-US'
-  };
-
-  const dateStr = isToday ? 'Today' : d.toLocaleDateString(locale, dateOptions);
-  const timeStr = d.toLocaleTimeString(locale, timeOptions);
-
-  return `${dateStr}, ${timeStr}`;
+  return `${dateStr}, ${d.toLocaleTimeString(locale, {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: locale === "en-US"
+  })}`;
 }
 
 function escHtml(input) {
