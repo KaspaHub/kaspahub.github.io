@@ -144,7 +144,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>TxId</th>
-              <th>Age</th>
+              <th>Time</th>
               <th>From</th>
               <th>To</th>
               <th>Amount</th>
@@ -406,21 +406,6 @@ function pow10Big(n){
   return 10n ** BigInt(n);
 }
 
-function ageFromMs(ms){
-  const t = Number(ms);
-  if(!isFinite(t)) return "-";
-  const diff = Date.now() - t;
-  if(diff < 0) return "-";
-  const s = Math.floor(diff/1000);
-  if(s < 60) return `${s}s`;
-  const m = Math.floor(s/60);
-  if(m < 60) return `${m}m`;
-  const h = Math.floor(m/60);
-  if(h < 24) return `${h}h`;
-  const d = Math.floor(h/24);
-  return `${d}d`;
-}
-
 function explorerAddressUrl(addr){
   const a = String(addr ?? "").trim();
   return a ? `/address/?q=${a}` : "#";
@@ -640,7 +625,7 @@ function renderTransfers(result){
 
   txRows.innerHTML = rows.map((r) => {
     const hash = String(r.hashRev || "-");
-    const age = r.mtsAdd ? ageFromMs(r.mtsAdd) : "-";
+    const age = r.mtsAdd ? formatDate(r.mtsAdd) : "-";
     const from = String(r.from || "-");
     const to = String(r.to || "-");
     const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
