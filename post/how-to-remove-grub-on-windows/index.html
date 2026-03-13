@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>How to Remove GRUB from UEFI Dual Boot Using Windows</title>
+<meta name="twitter:title" content="How to Remove GRUB from UEFI Dual Boot Using Windows" />
+<meta property="og:title" content="How to Remove GRUB from UEFI Dual Boot Using Windows 10/11 (Ubuntu, Debian, Arch, Fedora)" />
+
+<meta name="description" content="Step-by-step guide to permanently remove GRUB bootloader from UEFI dual boot (Windows 10/11 + Linux) using only built-in Windows tools. Works for Ubuntu, Debian, Arch, Fedora, Kali Linux. Restore Windows Boot Manager in minutes without reinstalling anything." />
+<meta name="twitter:description" content="Learn the exact Diskpart + EFI folder deletion method to delete GRUB from UEFI dual boot on Windows. No Linux USB required. Clean boot directly to Windows 10 or 11." />
+<meta property="og:description" content="Complete tutorial: Remove GRUB from UEFI dual boot system using Windows Command Prompt. Fix dual boot issues with Ubuntu, Debian, Fedora, Arch, or Kali Linux instantly." />
+
+<link rel="canonical" href="https://kaspahub.org/post/how-to-remove-grub-on-windows/" />
+<meta name="twitter:url" content="https://kaspahub.org/post/how-to-how-to-remove-grub-on-windows/" />
+<meta property="og:url" content="https://kaspahub.org/post/how-to-remove-grub-on-windows/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/assets/manifest.json" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<script id="schema" type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Article",
+"headline": "How to Remove GRUB from UEFI Dual Boot Using Windows 10/11 (Ubuntu, Debian, Arch, Fedora)",
+"description": "Step-by-step guide to permanently remove GRUB bootloader from UEFI dual boot (Windows 10/11 + Linux) using only built-in Windows tools. Works for Ubuntu, Debian, Arch, Fedora, Kali Linux. Restore Windows Boot Manager in minutes.",
+"url": "https://kaspahub.org/post/how-to-remove-grub-on-windows/",
+"image": "https://kaspahub.org/post/how-to-remove-grub-on-windows/thumbnail.jpg",
+"publisher": {
+  "@type": "Organization",
+  "name": "Kaspa Hub",
+  "url": "https://kaspahub.org",
+  "logo": "https://kaspahub.org/assets/logo.jpg",
+  "sameAs": [
+    "https://x.com/KaspaHub",
+    "https://discord.gg/7umFvjcANE"
+  ]
+},
+"author": {
+  "@type": "Person",
+  "name": "Classic",
+  "url": "https://x.com/Classicgyt",
+  "image": "https://kaspahub.org/articles/assets/pfp/classicgyt.webp"
+},
+"datePublished": "2026-03-13T19:10:00+01:00",
+"dateModified": "2026-03-13T19:10:00+01:00"
+}
+</script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<div style="max-height: 280px; margin-bottom: 30px; text-align: center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- Horizontal bar ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="3951210451"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
+
+<article class="theme-1">
+   <h1>How to Remove GRUB from UEFI Dual Boot Using Windows 10/11</h1>
+
+   <p>This step-by-step tutorial explains how to remove the GRUB bootloader from a UEFI-based dual-boot setup (Windows 10/11 + Linux) directly from Windows. The method uses only the built-in Diskpart utility and Command Prompt to mount the EFI System Partition and delete the Linux bootloader folder. This restores the Windows Boot Manager as the sole bootloader.</p>
+
+   <p><strong>Important notes before starting:</strong></p>
+   <ul>
+   <li>This process works only on UEFI systems (not Legacy BIOS/MBR). If your system is Legacy, this method will not work.</li>
+   <li>It removes GRUB and prevents Linux from booting. Your Linux partitions remain intact unless you delete them separately using Disk Management.</li>
+   <li>Backup important data before proceeding.</li>
+   <li>Be extremely careful when selecting the correct disk and partition in Diskpart - choosing the wrong one can cause data loss.</li>
+   </ul>
+
+   <h2>Step 1: Open Command Prompt as Administrator</h2>
+   <p>Press the Windows key and type <code>CMD</code> in the search bar.</p>
+   <p>Right-click on <strong>Command Prompt</strong> and select <strong>Run as administrator</strong>.</p>
+   <p>Click <strong>Yes</strong> when the User Account Control prompt appears.</p>
+
+   <center><img src="https://i.imgur.com/D7CDBAj.png"></center>
+
+   <h2>Step 2: Launch Diskpart and Identify the EFI Partition</h2>
+   <p>In the Command Prompt window, type the following command and press Enter:</p>
+   <code>diskpart</code>
+
+   <p>Now run these commands one by one (press Enter after each):</p>
+   <code>list disk</code><br><br>
+   <code>select disk 0</code>
+
+   <p><strong>Note:</strong> Replace <code>0</code> with the number of your main system disk (usually Disk 0 - the one containing Windows and the EFI partition). Confirm by checking the size.</p>
+
+   <p>Next, list the partitions:</p>
+   <code>list partition</code>
+
+   <p>Identify the EFI System Partition:</p>
+   <ul>
+   <li>It is usually 100-500 MB in size.</li>
+   <li>Type is listed as <strong>System</strong>.</li>
+   </ul>
+
+   <p>Select it (replace <code>1</code> with the actual partition number shown):</p>
+   <code>select partition 1</code>
+
+   <center><img src="https://i.imgur.com/Pp5VGKX.png"></center>
+
+   <h2>Step 3: Assign a Drive Letter to the EFI Partition</h2>
+   <p>Assign a temporary drive letter (we will use <code>X</code> in this example - choose any unused letter such as <code>Z</code> or <code>W</code> if <code>X</code> is already in use):</p>
+   <code>assign letter=X</code>
+
+   <p>Type the following to exit Diskpart:</p>
+   <code>exit</code>
+
+   <h2>Step 4: Access the EFI Partition and Delete the Linux Bootloader Folder</h2>
+   <p>Type the assigned drive letter followed by a colon and press Enter:</p>
+   <code>X:</code>
+
+   <p>List the contents to confirm:</p>
+   <code>dir</code>
+
+   <p>Change into the EFI directory:</p>
+   <code>cd EFI</code>
+
+   <p>List the folders inside:</p>
+   <code>dir</code>
+
+   <p>You will see folders such as:</p>
+   <ul>
+   <li><code>Microsoft</code> (Windows bootloader - do NOT delete)</li>
+   <li><code>BOOT</code> (fallback boot folder)</li>
+   <li>A folder named after your Linux distribution (examples below)</li>
+   </ul>
+
+   <p>Common Linux bootloader folder names:</p>
+   <ul>
+   <li>Ubuntu → <code>ubuntu</code></li>
+   <li>Fedora → <code>fedora</code></li>
+   <li>Arch Linux → <code>arch</code></li>
+   </ul>
+
+   <p>Delete the Linux folder (replace <code>ubuntu</code> with your actual folder name):</p>
+   <code>rmdir ubuntu /s</code>
+
+   <p>When prompted <strong>Are you sure (Y/N)?</strong>, type <code>Y</code> and press Enter.</p>
+
+   <center><img src="https://i.imgur.com/YUDyHL0.png"></center>
+
+   <h2>Step 5: Clean Up and Restart</h2>
+   <p>Type the following to return to the root and exit Command Prompt:</p>
+   <code>cd \</code><br><br>
+   <code>exit</code>
+
+   <p>Close the Command Prompt window.</p>
+
+   <p>Restart your computer completely.</p>
+
+   <!-- Placeholder for Screenshot 5: Windows restarting and booting directly into Windows without GRUB menu -->
+
+   <h2>Verification After Restart</h2>
+   <p>Your system should now boot directly into Windows without showing the GRUB menu. The Windows Boot Manager is now the only bootloader.</p>
+   <p>Done.</p>
+</article>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+</div>
+
+<div id="advertisement">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1682291217022161"
+     crossorigin="anonymous"></script>
+<!-- footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1682291217022161"
+     data-ad-slot="6582596191"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+</body>
+</html>
