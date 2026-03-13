@@ -998,6 +998,9 @@ dialog {
 	max-width: 100%;
 	min-width: 100px;
 	width: 300px;
+	backdrop-filter: blur(10px);
+	background-color: rgba(255, 255, 255, 0.15);
+	padding: 17px;
 }
 
 .w-container {
