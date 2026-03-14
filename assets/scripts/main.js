@@ -177,7 +177,7 @@ async function setPriceTag() {
 // initServiceWorker();
 //sw ^
 
-function formatDate(ts, locale = 'en-US') {
+function formatDate(ts, includeSeconds = false, locale = "en-US") {
   if (!ts) return "-";
   const d = new Date(Number(ts));
   if (!isFinite(d.getTime())) return "-";
@@ -198,9 +198,11 @@ function formatDate(ts, locale = 'en-US') {
   return `${dateStr}, ${d.toLocaleTimeString(locale, {
     hour: "numeric",
     minute: "2-digit",
+    ...(includeSeconds ? { second: "2-digit" } : {}),
     hour12: locale === "en-US"
   })}`;
 }
+
 
 function escHtml(input) {
   return String(input).replace(/[&<>"'`]/g, char => ({
@@ -213,8 +215,13 @@ function escHtml(input) {
   })[char]);
 }
 
-function shortenMiddle(str, head = 13, tail = 8) {
-  const s = String(str ?? "");
+function shortenMiddle(str, head = 8, tail = 8) {
+  let s = String(str ?? "");
+
+  if (s.startsWith("kaspa:")) {
+    s = s.slice(6);
+  }
+
   if (s.length <= head + tail + 3) return s;
   return s.slice(0, head) + "..." + s.slice(-tail);
 }
