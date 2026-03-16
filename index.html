@@ -12,6 +12,10 @@
 
 document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
 
+const user = new URLSearchParams(location.search).get("user");
+if (user && /^[a-z0-9]+$/.test(user)) {
+	location.replace(`/n/?user=${user}`);
+}
 </script>
 
 <title>Kaspa Hub</title>
