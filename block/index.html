@@ -406,7 +406,7 @@ function renderHeader(blockHash) {
 function renderSummary(json) {
   const txs = json.transactions || [];
   txCount.textContent = txs.length;
-  timestamp.textContent = formatDate(json.header?.timestamp) || "-";
+  timestamp.textContent = formatDate(json.header?.timestamp, true) || "-";
 }
 
 function renderOverview(json) {

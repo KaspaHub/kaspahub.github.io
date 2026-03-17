@@ -402,8 +402,8 @@ async function renderSummary(json, totals, inputs, outputs) {
 
   massEl.textContent = withSeparators(json.mass) || "-";
   blueScore.textContent = withSeparators(json.accepting_block_blue_score) || "-";
-  blockTime.textContent = formatDate(json.block_time);
-  acceptingBlockTime.textContent = formatDate(json.accepting_block_time);
+  blockTime.textContent = formatDate(json.block_time, true);
+  acceptingBlockTime.textContent = formatDate(json.accepting_block_time, true);
 }
 
 function renderTransfers(json, totals) {

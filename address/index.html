@@ -669,7 +669,7 @@ function renderAll(pageTxs, addr) {
 
   transfersRows.innerHTML = pageTxs.map(tx => {
     const hash = String(tx.transaction_id || "-");
-    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
+    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
     const net = getNetChange(tx, addr);
     const amt = formatAmount(net);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);

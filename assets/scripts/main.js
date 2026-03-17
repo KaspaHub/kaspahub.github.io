@@ -216,28 +216,33 @@ async function setPriceTag() {
 
 function formatDate(ts, includeSeconds = false, locale = "en-US") {
   if (!ts) return "-";
+
   const d = new Date(Number(ts));
   if (!isFinite(d.getTime())) return "-";
 
   const now = new Date();
 
-  const dateStr =
-    d.getFullYear() === now.getFullYear() &&
-    d.getMonth() === now.getMonth() &&
-    d.getDate() === now.getDate()
-      ? "Today"
-      : d.toLocaleDateString(locale, {
-          month: "short",
-          day: "numeric",
-          ...(d.getFullYear() === now.getFullYear() ? {} : { year: "numeric" })
-        });
+  const showSeconds =
+    includeSeconds &&
+    (typeof window === "undefined" || window.innerWidth > window.innerHeight);
 
-  return `${dateStr}, ${d.toLocaleTimeString(locale, {
+  const isToday = d.toDateString() === now.toDateString();
+
+  const dateStr = isToday
+    ? "Today"
+    : d.toLocaleDateString(locale, {
+        month: "short",
+        day: "numeric",
+        ...(d.getFullYear() === now.getFullYear() ? {} : { year: "numeric" }),
+      });
+
+  const timeOptions = {
     hour: "numeric",
     minute: "2-digit",
-    ...(includeSeconds ? { second: "2-digit" } : {}),
-    hour12: locale === "en-US"
-  })}`;
+    ...(showSeconds ? { second: "2-digit" } : {}),
+  };
+
+  return `${dateStr}, ${d.toLocaleTimeString(locale, timeOptions)}`;
 }
 
 
@@ -573,7 +578,7 @@ function populateMenu() {
       </select>
     </div>
 
-    <div class="drawer-item">
+    <div class="drawer-item" style="display: none;">
       📡
       <select id="relay-select" style="width:100%" disabled>
         <option value="" disabled selected hidden>Relay (${RELAY})</option>
