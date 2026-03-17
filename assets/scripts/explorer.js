@@ -45,28 +45,25 @@ function setLoading(value) {
 
 }
 
-function setMsg(value) {
-    if (typeof value === "string") {
-        msg.innerHTML = `<div class="ok">${value}</div>`;
-    } else if (value) {
-        msg.innerHTML = `
-            <div id="fetching" class="loading-2">
-                <div class="loading-dots dot-1"></div>
-                <div class="loading-dots dot-2"></div>
-                <div class="loading-dots dot-3"></div>
-            </div>`;
-    } else {
-        msg.innerHTML = "";
-    }
+function setStatus(message, status = undefined) {
+  msg.classList.remove('hidden');
+  if (status === true) {
+    msg.innerHTML = `<div class="ok">${message}</div>`;
+  } else if (status === false) {
+    msg.innerHTML = `<div class="error">${message}</div>`;
+  } else {
+    msg.innerHTML = `<div class="loading">${message}</div>`;
+  }
 }
 
-function setStatus(value) {
-  if (value === false) {
-    msg.classList.add('hidden');
-    msg.innerHTML = '';
-  } else if (typeof value === "string") {
-    msg.innerHTML = `<div class="error">${value}</div>`;
-    msg.classList.remove('hidden');
+function setStatus(message, status = null) {
+  msg.classList.remove('hidden');
+  if (status === true) {
+    msg.innerHTML = `<div class="ok">${message}</div>`;
+  } else if (status === false) {
+    msg.innerHTML = `<div class="error">${message}</div>`;
+  } else {
+    msg.innerHTML = `<div class="info">${message}</div>`;
   }
 }
 
@@ -113,10 +110,43 @@ async function explorerSearch(query, source = '[unknown] ') {
     kns: {
       outerValidator: validators.containsDots,
       validator: validators.isKns,
-      action: () => {
-        setStatus('This feature is not yet supported.');
-        // return source + 'Kaspa Name Service (.kas): ' + query;
-      }
+      action: async () => {
+        setStatus('Resolving KNS domain...');
+
+        try {
+          const encodedDomain = encodeURIComponent(query);
+          const apiUrl = `https://api.knsdomains.org/mainnet/api/v1/${encodedDomain}/owner`;
+
+          const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            },
+            signal: AbortSignal.timeout(10000),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const result = await response.json();
+
+          if (result.success && result.data?.owner) {
+            const ownerAddress = String(result.data.owner).trim();
+
+            if (ownerAddress.startsWith('kaspa:')) {
+              window.location.href = `/address/?q=${encodeURIComponent(ownerAddress)}`;
+              return;
+            }
+          }
+
+          setStatus('Domain not found.');
+
+        } catch (error) {
+          console.error('KNS resolution failed:', error);
+          setStatus('Domain not found.');
+        }
+      },
     },
     domain: {
       outerValidator: validators.containsDots,
