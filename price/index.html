@@ -116,45 +116,45 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 }
 
 #price {
-font-size: 3rem;
-font-weight: bold;
-transition: color 0.4s ease-in-out;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: color 0.4s ease-in-out;
 }
 
 #price.updated {
-animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.6s ease-out;
 }
 
 @keyframes fadeIn {
-from { opacity: 0.3; transform: scale(0.97); }
-to { opacity: 1; transform: scale(1); }
+  from { opacity: 0.3; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .stats-container {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 24px;
-font-size: 1.1rem;
-margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  font-size: 1.1rem;
+  margin-top: 20px;
 }
 
 .stat-item {
-min-width: 180px;
-text-align: center;
-padding: 12px;
-background-color: rgba(255, 255, 255, 0.05);
-border-radius: 12px;
-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  text-align: center;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .stat-item .label {
-font-weight: bold;
-margin-bottom: 6px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
 .stat-item .value {
-margin: 0;
+  margin: 0;
 }
 </style>
 <script type="text/javascript">
@@ -215,8 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-<script type="text/javascript">
-'use strict';
+<script type="module">
 
 const priceBox = document.getElementById("price");
 const marketCapBox = document.getElementById("market-cap");
@@ -266,9 +265,8 @@ function getPrice() {
 }
 
 async function updatePage() {
-  const toCurrency = (localStorage.getItem('currency') || 'usd').toLowerCase();
 
-  const priceFormatted = await formatPrice(KASVALUE, toCurrency, 1, 6);
+  const priceFormatted = await formatPrice(KASVALUE, CURRENCY, 1, 6);
   const pageTitle = priceFormatted + " - KAS";
   document.title = pageTitle;
 
@@ -277,8 +275,8 @@ async function updatePage() {
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  marketCapBox.textContent = await formatPrice(KASVALUE, toCurrency, circSupply, 2);
-  fdvBox.textContent = await formatPrice(KASVALUE, toCurrency, maxSupply, 2);
+  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 2);
+  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 2);
   circBox.textContent = `${(circSupply / 1e9).toFixed(2)}B KAS`;
   maxBox.textContent = `${(maxSupply / 1e9).toFixed(2)}B KAS`;
 
@@ -300,7 +298,8 @@ async function updatePage() {
 }
 
 getCirculatingSupply();
-getPrice();
+
+priceBox.textContent = await formatPrice(KASVALUE, CURRENCY, 1, 6);
 setInterval(getPrice, 15000);
 </script>
 
