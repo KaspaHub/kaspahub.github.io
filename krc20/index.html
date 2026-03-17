@@ -144,9 +144,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>TxId</th>
-              <th>Time</th>
               <th>From</th>
               <th>To</th>
+              <th>Timestamp</th>
               <th>Amount</th>
             </tr>
           </thead>
@@ -637,9 +637,9 @@ function renderTransfers(result){
     return `
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
-        <td>${age}</td>
         <td>${linkAddress(from, shortFrom)}</td>
         <td>${linkAddress(to, shortTo)}</td>
+        <td>${age}</td>
         <td>${amt}</td>
       </tr>
     `;

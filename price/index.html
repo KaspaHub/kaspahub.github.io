@@ -42,25 +42,25 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 <div style="text-align: center; margin-top: 100px;">
-<p id="price">Loading...</p>
+<p id="priceBox">Loading...</p>
 
 <div id="market-stats" style="text-align: center; margin-top: 30px;">
 <div class="stats-container">
     <div class="stat-item">
         <div class="label">Market Cap</div>
-        <div class="value" id="market-cap">...</div>
+        <div class="value" id="marketCapBox">...</div>
     </div>
     <div class="stat-item">
         <div class="label">Fully Diluted Valuation</div>
-        <div class="value" id="fdv">...</div>
+        <div class="value" id="fdvBox">...</div>
     </div>
     <div class="stat-item">
         <div class="label">Circulating Supply</div>
-        <div class="value" id="circ-supply">...</div>
+        <div class="value" id="circBox">...</div>
     </div>
     <div class="stat-item">
         <div class="label">Max Supply</div>
-        <div class="value" id="max-supply">...</div>
+        <div class="value" id="maxBox">...</div>
     </div>
 </div>
 </div>
@@ -115,7 +115,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 #chartContainer { height: 500px; }
 }
 
-#price {
+#priceBox {
   font-size: 3rem;
   font-weight: bold;
   transition: color 0.4s ease-in-out;
@@ -217,11 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script type="module">
 
-const priceBox = document.getElementById("price");
-const marketCapBox = document.getElementById("market-cap");
-const fdvBox = document.getElementById("fdv");
-const circBox = document.getElementById("circ-supply");
-const maxBox = document.getElementById("max-supply");
+const priceBox = document.getElementById("priceBox");
+const marketCapBox = document.getElementById("marketCapBox");
+const fdvBox = document.getElementById("fdvBox");
+const circBox = document.getElementById("circBox");
+const maxBox = document.getElementById("maxBox");
 
 const maxSupply = 28704026601;
 let circSupply = 27277908482;
@@ -275,10 +275,10 @@ async function updatePage() {
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 2);
-  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 2);
-  circBox.textContent = `${(circSupply / 1e9).toFixed(2)}B KAS`;
-  maxBox.textContent = `${(maxSupply / 1e9).toFixed(2)}B KAS`;
+  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 0);
+  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 0);
+  circBox.textContent = `${circSupply.toLocaleString()} KAS`;
+  maxBox.textContent = `${maxSupply.toLocaleString()} KAS`;
 
   let twitterMeta = document.querySelector('meta[name="twitter:title"]');
   if (!twitterMeta) {
@@ -300,6 +300,11 @@ async function updatePage() {
 getCirculatingSupply();
 
 priceBox.textContent = await formatPrice(KASVALUE, CURRENCY, 1, 6);
+marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 0);
+fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 0);
+circBox.textContent = `${circSupply.toLocaleString()} KAS`;
+maxBox.textContent = `${maxSupply.toLocaleString()} KAS`;
+
 setInterval(getPrice, 15000);
 </script>
 
