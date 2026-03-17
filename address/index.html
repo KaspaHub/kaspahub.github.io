@@ -119,9 +119,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>TxID</th>
-              <th>Timestamp</th>
               <th id="counterpartyTh">Peer</th>
               <th>Status</th>
+              <th>Timestamp</th>
               <th>Amount</th>
             </tr>
           </thead>
@@ -740,9 +740,9 @@ function renderAll(pageTxs, addr) {
     return `
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
-        <td>${age}</td>
         <td>${counterpartyHtml}</td>
         <td><span class="${statusClass}">${statusText}</span></td>
+        <td>${age}</td>
         <td>${amt}</td>
       </tr>
     `;
