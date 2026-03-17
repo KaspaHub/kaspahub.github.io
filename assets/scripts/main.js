@@ -16,17 +16,6 @@ const PRICEAPI = localStorage.getItem("priceApi") || "CG";
 const RELAY = localStorage.getItem("relay") || "Damus";
 let TESTING = false;
 
-
-const MAXSUPPLY = 28704026601;
-let CIRCSUPPLY = 27287908721;
-let KASVALUE = 0.035;
-let KASPRICE = "$0.035";
-let USDRATE = 1;
-
-
-
-const CACHE_TIME = 5 * 60 * 1000;
-
 const exchangeRates = {
   AED: 3.6725,
   CNY: 6.90705,
@@ -37,7 +26,48 @@ const exchangeRates = {
   ZAR: 16.3375
 };
 
+const MAXSUPPLY = 28704026601;
+let CIRCSUPPLY = 27287908721;
+
+let KASPRICE = "$0.035";
+let USDRATE = 1;
+
+let KASVALUE = getCache?.("kaspa_price_usd") ?? null;
+
+async function getKaspaValue() {
+
+  if (!KASVALUE) {
+    try {
+      const res = await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd"
+      );
+
+      const data = await res.json();
+
+      KASVALUE = data?.kaspa?.usd;
+
+      if (res.ok && Number.isFinite(KASVALUE)) {
+        setCache("kaspa_price_usd", KASVALUE);
+        console.log("%c[API] %s", "color: #9980FF;", KASVALUE);
+      } else {
+        console.log("API failure or invalid price, using fallback");
+        KASVALUE = 0.034;
+      }
+    } catch (err) {
+      console.log("Kaspa price fetch failed, using fallback:", err.message || err);
+      KASVALUE = 0.033;
+    }
+  } else {
+  
+  }
+
+  return KASVALUE;
+}
+
 function getCache(key) {
+
+  const CACHE_TIME = 5 * 60 * 1000;
+
   const cached = localStorage.getItem(key);
   if (!cached) return null;
 
@@ -611,18 +641,13 @@ function populateMenu() {
 
 
 
-
-
-(async function init() {
-  try {
+async function initKasPrice(currency) {
   USDRATE = await getExchangeRate();
-  KASVALUE = await updateKasValue();
-
+  KASVALUE = await getKaspaValue();
   KASPRICE = await formatPrice(KASVALUE, CURRENCY);
   setPriceTag();
-  } catch (err) {
-    console.error("Kaspa price / init failed:", err);
-  }
-})();
+}
 
+
+initKasPrice(CURRENCY);
 populateMenu();

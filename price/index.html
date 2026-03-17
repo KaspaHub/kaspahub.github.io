@@ -169,8 +169,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </style>
 <script type="module">
 
+const priceBox = document.getElementById("priceBox");
+const marketCapBox = document.getElementById("marketCapBox");
+const fdvBox = document.getElementById("fdvBox");
+const circBox = document.getElementById("circBox");
+const maxBox = document.getElementById("maxBox");
 const msg = document.getElementById('msg');
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("load-chart-btn");
@@ -226,14 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-</script>
-<script type="module">
 
-const priceBox = document.getElementById("priceBox");
-const marketCapBox = document.getElementById("marketCapBox");
-const fdvBox = document.getElementById("fdvBox");
-const circBox = document.getElementById("circBox");
-const maxBox = document.getElementById("maxBox");
 
 function getCirculatingSupply() {
   fetch("https://api.kaspa.org/info/coinsupply/circulating")
@@ -241,7 +238,7 @@ function getCirculatingSupply() {
     .then(data => {
       if (typeof data === "number" && !isNaN(data)) {
         CIRCSUPPLY = data;
-        console.log("%c[getCirculatingSupply API] %s", "color: #9980FF;", price);
+        console.log("%c[getCirculatingSupply API] %s", "color: #9980FF;", CIRCSUPPLY);
       }
     })
     .catch(err => {
@@ -249,7 +246,7 @@ function getCirculatingSupply() {
     });
 }
 
-function getPrice() {
+function getPrice(kaspaValue) {
   fetch("https://api.kaspa.org/info/price")
     .then(res => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -259,13 +256,13 @@ function getPrice() {
       if (!data || typeof data.price !== 'number' || isNaN(data.price)) {
         throw new Error("Invalid price data");
       }
-      KASVALUE = data.price;
-      console.log("Price:", KASVALUE);
+      kaspaValue = data.price;
+      console.log("%c[getPrice API] %s", "color: #9980FF;", kaspaValue);
       updatePage();
     })
     .catch(err => {
       console.error("Failed to fetch Kaspa price:", err);
-      if (KASVALUE != null) {
+      if (kaspaValue != null) {
         updatePage();
       } else {
         priceBox.textContent = "Error loading price";
@@ -273,9 +270,9 @@ function getPrice() {
     });
 }
 
-async function updatePage() {
+async function updatePage(kaspaValue) {
 
-  const priceFormatted = await formatPrice(KASVALUE, CURRENCY, 1, 6);
+  const priceFormatted = await formatPrice(kaspaValue, CURRENCY, 1, 6);
   const pageTitle = priceFormatted + " - KAS";
   document.title = pageTitle;
 
@@ -284,8 +281,8 @@ async function updatePage() {
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, CIRCSUPPLY, 0);
-  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, MAXSUPPLY, 0);
+  marketCapBox.textContent = await formatPrice(kaspaValue, CURRENCY, CIRCSUPPLY, 0);
+  fdvBox.textContent = await formatPrice(kaspaValue, CURRENCY, MAXSUPPLY, 0);
   circBox.textContent = `${CIRCSUPPLY.toLocaleString()} KAS`;
   maxBox.textContent = `${MAXSUPPLY.toLocaleString()} KAS`;
 
@@ -306,15 +303,19 @@ async function updatePage() {
   ogMeta.setAttribute("content", pageTitle);
 }
 
-getCirculatingSupply();
 
-priceBox.textContent = await formatPrice(KASVALUE, CURRENCY, 1, 6);
-marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, CIRCSUPPLY, 0);
-fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, MAXSUPPLY, 0);
-circBox.textContent = `${CIRCSUPPLY.toLocaleString()} KAS`;
-maxBox.textContent = `${MAXSUPPLY.toLocaleString()} KAS`;
 
-setInterval(getPrice, 15000);
+
+(async function() {
+  while (!KASVALUE) {
+    await new Promise(r => setTimeout(r, 100));
+  }
+
+  updatePage(KASVALUE);
+  setInterval(getPrice, 15000);
+})();
+
+
 </script>
 
 </body>
