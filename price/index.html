@@ -51,19 +51,19 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="stats-container">
         <div class="stat-item">
           <div class="label">Market Cap</div>
-          <div class="value" id="marketCapBox">...</div>
+          <div class="" id="marketCapBox">...</div>
         </div>
         <div class="stat-item">
           <div class="label">Fully Diluted Valuation</div>
-          <div class="value" id="fdvBox">...</div>
+          <div class="" id="fdvBox">...</div>
         </div>
         <div class="stat-item">
           <div class="label">Circulating Supply</div>
-          <div class="value" id="circBox">...</div>
+          <div class="" id="circBox">...</div>
         </div>
         <div class="stat-item">
           <div class="label">Max Supply</div>
-          <div class="value" id="maxBox">...</div>
+          <div class="" id="maxBox">...</div>
         </div>
       </div>
     </div>
@@ -119,54 +119,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </footer>
 
-<style type="text/css">
-#chartContainer { height: 700px; }
-@media (max-width: 800px) and (max-aspect-ratio: 1/1) {
-#chartContainer { height: 500px; }
-}
-
-#priceBox {
-  font-size: 3rem;
-  font-weight: bold;
-  transition: color 0.4s ease-in-out;
-}
-
-#price.updated {
-  animation: fadeIn 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0.3; transform: scale(0.97); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  font-size: 1.1rem;
-  margin-top: 20px;
-}
-
-.stat-item {
-  min-width: 180px;
-  text-align: center;
-  padding: 12px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.stat-item .label {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.stat-item .value {
-  margin: 0;
-}
-</style>
 <script type="module">
 
 const priceBox = document.getElementById("priceBox");
@@ -258,12 +210,12 @@ function getPrice(kaspaValue) {
       }
       kaspaValue = data.price;
       console.log("%c[getPrice API] %s", "color: #9980FF;", kaspaValue);
-      updatePage();
+      updatePage(kaspaValue);
     })
     .catch(err => {
       console.error("Failed to fetch Kaspa price:", err);
       if (kaspaValue != null) {
-        updatePage();
+        updatePage(KASVALUE);
       } else {
         priceBox.textContent = "Error loading price";
       }
@@ -283,8 +235,8 @@ async function updatePage(kaspaValue) {
 
   marketCapBox.textContent = await formatPrice(kaspaValue, CURRENCY, CIRCSUPPLY, 0);
   fdvBox.textContent = await formatPrice(kaspaValue, CURRENCY, MAXSUPPLY, 0);
-  circBox.textContent = `${CIRCSUPPLY.toLocaleString()} KAS`;
-  maxBox.textContent = `${MAXSUPPLY.toLocaleString()} KAS`;
+  circBox.textContent = `ʞ ${CIRCSUPPLY.toLocaleString()}`;
+  maxBox.textContent = `ʞ ${MAXSUPPLY.toLocaleString()}`;
 
   let twitterMeta = document.querySelector('meta[name="twitter:title"]');
   if (!twitterMeta) {
@@ -302,7 +254,6 @@ async function updatePage(kaspaValue) {
   }
   ogMeta.setAttribute("content", pageTitle);
 }
-
 
 
 
