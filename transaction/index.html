@@ -72,7 +72,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <section id="explorerData" style="opacity: 0;">
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
-      <h3>Summary</h3>
+      <h2>Summary</h2>
       <div class="rows">
         <div class="row">
           <div class="k">Amount transferred</div>
@@ -94,7 +94,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
 
     <div class="theme-1">
-      <h3>Overview</h3>
+      <h2>Overview</h2>
       <div class="rows">
         <div class="row">
           <div class="k">Mass</div>
@@ -148,36 +148,24 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="tabIO" class="tabPanel" aria-label="Inputs & Outputs panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Inputs & Outputs</h3>
-      <div class="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Index</th>
-              <th>Sig</th>
-              <th>Outpoint</th>
-              <th>Script</th>
-              <th>Type</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="ioRows">
-            <tr>
-              <td colspan="6" class="muted">-</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="ioRows">
+        <div class="muted">-</div>
       </div>
     </div>
   </div>
 
   <div id="tabDetails" class="tabPanel" aria-label="Details panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Details</h3>
-      <div class="rows" id="detailsRows">
-        <div class="row">
-          <div class="k">-</div>
-          <div class="v">-</div>
-        </div>
+      <h3>Transaction information</h3>
+      <div class="tableWrap">
+        <table>
+          <tbody id="detailsRows">
+            <tr>
+              <td class="k">-</td>
+              <td class="v">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -471,7 +459,7 @@ function renderTransfers(json, totals) {
       const hasNoChange = changeReceivers.length === 0;
 
       if (distinctInputCount > 1 && hasNoChange) {
-        let fromContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + distinctInputCount + ')</summary><div class="receiver-list">';
+        let fromContent = '<details><summary class="expandable-row muted">Multiple addresses (' + distinctInputCount + ')</summary><div class="receiver-list">';
         let totalInput = 0n;
         inputMap.forEach(amt => totalInput += amt);
 
@@ -489,7 +477,7 @@ function renderTransfers(json, totals) {
         if (numExternals === 1) {
           toContent = linkAddress(trueExternals[0]);
         } else {
-          toContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + numExternals + ')</summary><div class="receiver-list">';
+          toContent = '<details><summary class="expandable-row muted">Multiple addresses (' + numExternals + ')</summary><div class="receiver-list">';
           let totalExternal = 0n;
           trueExternals.forEach(a => totalExternal += outputMap.get(a) || 0n);
 
@@ -532,7 +520,7 @@ function renderTransfers(json, totals) {
             if (receivers.length === 1) {
               toCellContent = linkAddress(receivers[0]);
             } else {
-              toCellContent = '<details open=""><summary class="expandable-row muted">Multiple addresses (' + receivers.length + ')</summary><div class="receiver-list">' + receiverItems + '</div></details>';
+              toCellContent = '<details><summary class="expandable-row muted">Multiple addresses (' + receivers.length + ')</summary><div class="receiver-list">' + receiverItems + '</div></details>';
             }
 
             html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span style="color:#2ee59d">' + formatKas(transferredAmt, true) + '</span></td></tr>';
@@ -553,66 +541,33 @@ function renderTransfers(json, totals) {
   transferRows.innerHTML = html;
 }
 
-function renderScript(script, type) {
-  if (!script) return "-";
-  return `<details><summary class="muted">${type}</summary><pre>${escHtml(script)}</pre></details>`;
-}
-
 function renderIORows(inputs, outputs, txid) {
   let html = '';
-  if (Array.isArray(inputs)) {
+  if (Array.isArray(inputs) && inputs.length > 0) {
     inputs.forEach((inp, i) => {
-      const index = inp.index ?? i;
-      const outpointHash = inp.previous_outpoint_hash ?? "-";
-      const outpointIndex = inp.previous_outpoint_index ?? "-";
-      const outpoint = shortenEnd(outpointHash);
-      const amount = inp.previous_outpoint_amount ?? 0;
-      const amtHtml = formatKas(BigInt(amount), true);
-      const outpointHtml = (outpointHash === txid) ? escHtml(outpoint) : linkTx(outpointHash, outpoint);
-      html += `
-        <tr>
-          <td>${index}</td>
-          <td>${inp.sig_op_count || "-"}</td>
-          <td>${outpointHtml}</td>
-          <td>${renderScript(inp.signature_script, "Signature Script")}</td>
-          <td>${escHtml(inp.script_public_key_type || "Input")}</td>
-          <td>${amtHtml}</td>
-        </tr>
-      `;
+      const jsonStr = JSON.stringify(inp, null, 2);
+      html += `<div><h5>Input ${i}:</h5><pre>${escHtml(jsonStr)}</pre></div>`;
     });
   }
-  if (Array.isArray(outputs)) {
+  if (Array.isArray(outputs) && outputs.length > 0) {
     outputs.forEach((out, i) => {
-      const index = out.index ?? i;
-      const outpoint = shortenEnd(txid);
-      const amount = out.amount ?? 0;
-      const amtHtml = formatKas(BigInt(amount), true);
-      const outpointHtml = escHtml(outpoint);
-      html += `
-        <tr>
-          <td>${index}</td>
-          <td>-</td>
-          <td><span class="explorerTx muted">${outpointHtml}</span></td>
-          <td>${renderScript(out.script_public_key, "Public Key Script")}</td>
-          <td>${escHtml(out.script_public_key_type || "Output")}</td>
-          <td>${amtHtml}</td>
-        </tr>
-      `;
+      const jsonStr = JSON.stringify(out, null, 2);
+      html += `<div><h5>Output ${i}:</h5><pre>${escHtml(jsonStr)}</pre></div>`;
     });
   }
-  if (!html) {
-    html = `<tr><td colspan="6" class="muted">No inputs or outputs found.</td></tr>`;
+  if (html === '') {
+    html = `<div class="muted">No inputs or outputs found.</div>`;
   }
   ioRows.innerHTML = html;
 }
 
 function renderDetails(json) {
   let html = `
-    <div class="row"><div class="k">Subnetwork ID</div><div class="v">${escHtml(json.subnetwork_id) || "-"}</div></div>
-    <div class="row"><div class="k">Transaction ID</div><div class="v">${escHtml(json.transaction_id) || "-"}</div></div>
-    <div class="row"><div class="k">Hash</div><div class="v">${escHtml(json.hash) || "-"}</div></div>
-    <div class="row"><div class="k">Block hashes</div><div class="v">${Array.isArray(json.block_hash) ? json.block_hash.map(h => linkBlock(h, shortenMiddle(h))).join("<br>") : "-"}</div></div>
-    <div class="row"><div class="k">Accepting block hash</div><div class="v">${linkBlock(json.accepting_block_hash, shortenMiddle(json.accepting_block_hash)) || "-"}</div></div>
+    <tr><td>Subnetwork ID</td><td>${escHtml(json.subnetwork_id) || "-"}</td></tr>
+    <tr><td>Transaction ID</td><td>${escHtml(json.transaction_id) || "-"}</td></tr>
+    <tr><td>Hash</td><td>${escHtml(json.hash) || "-"}</td></tr>
+    <tr><td>Accepting block hash</td><td>${linkBlock(json.accepting_block_hash, json.accepting_block_hash) || "-"}</td></tr>
+    <tr><td>Block hashes</td><td>${Array.isArray(json.block_hash) ? `<details><summary class="expandable-row muted">Block hashes (${json.block_hash.length})</summary>${json.block_hash.map(h => linkBlock(h, h)).join("<br>")}</details>` : "-"}</td></tr>
   `;
   detailsRows.innerHTML = html;
 }
@@ -717,8 +672,8 @@ function resetUI() {
   blockTime.textContent = "-";
   acceptingBlockTime.textContent = "-";
   transferRows.innerHTML = `<tr><td colspan="3" class="muted">-</td></tr>`;
-  ioRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
-  detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  ioRows.innerHTML = `<div class="muted">-</div>`;
+  detailsRows.innerHTML = `<tr><td class="k">-</td><td class="v">-</td></tr>`;
   payloadContent.textContent = "-";
 }
 

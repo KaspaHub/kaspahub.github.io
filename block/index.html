@@ -151,27 +151,31 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="tabRelated" class="tabPanel" aria-label="Related Blocks panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <h3>Related Blocks</h3>
-      <div id="relatedContent">
-        <p class="muted">-</p>
+      <div class="tableWrap">
+        <table>
+          <tbody id="relatedContent">
+            <tr>
+              <td class="k">-</td>
+              <td class="v">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
   <div id="tabDetails" class="tabPanel" aria-label="Details panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Details</h3>
-      <div class="rows" id="detailsRows">
-        <div class="row">
-          <div class="k">-</div>
-          <div class="v">-</div>
-        </div>
-      </div>
-      <h3>Miner Information</h3>
-      <div class="rows" id="minerRows">
-        <div class="row">
-          <div class="k">-</div>
-          <div class="v">-</div>
-        </div>
+      <h3>Block information</h3>
+      <div class="tableWrap">
+        <table>
+          <tbody id="detailsRows">
+            <tr>
+              <td class="k">-</td>
+              <td class="v">-</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -232,7 +236,6 @@ const bits = document.getElementById("bits");
 const txRows = document.getElementById("txRows");
 const relatedContent = document.getElementById("relatedContent");
 const detailsRows = document.getElementById("detailsRows");
-const minerRows = document.getElementById("minerRows");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentBlockHash = "";
@@ -502,12 +505,6 @@ async function renderTransactions(txs) {
 
 function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRedsHashes, selectedParentHash, pruningPoint) {
   let html = '';
-  const renderCategory = (name, hashes) => {
-    const unique = [...new Set(hashes || [])].sort();
-    if (!unique.length) return '';
-    const links = unique.map(h => `<p>${linkBlock(h, h)}</p>`).join('');
-    return `<details><summary>${name} (${unique.length})</summary><div class="block-list">${links}</div></details>`;
-  };
   let parentHashesArr = [];
   if (Array.isArray(parents)) {
     parents.forEach(group => {
@@ -516,19 +513,31 @@ function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRed
       }
     });
   }
+  const addRow = (k, v) => {
+    html += `<tr><td>${escHtml(k)}</td><td>${v}</td></tr>`;
+  };
+  const renderCategoryContent = (name, hashes) => {
+    const unique = [...new Set(hashes || [])].sort();
+    if (!unique.length) return null;
+    const links = unique.map(h => linkBlock(h, h)).join('<br>');
+    return `<details><summary class="expandable-row muted">${name} (${unique.length})</summary><div class="block-list">${links}</div></details>`;
+  };
   if (selectedParentHash) {
-    html += `<p>Selected Parent:<br><span>${linkBlock(selectedParentHash, selectedParentHash)}</span></p>`;
+    addRow('Selected Parent', linkBlock(selectedParentHash, selectedParentHash));
   }
   if (pruningPoint) {
-    html += `<p>Pruning Point:<br><span>${linkBlock(pruningPoint, pruningPoint)}</span></p>`;
+    addRow('Pruning Point', linkBlock(pruningPoint, pruningPoint));
   }
-  html += renderCategory('Parents', parentHashesArr);
-  html += renderCategory('Children', childrenHashes);
-  html += renderCategory('Merge Set Blues', mergeSetBluesHashes);
-  html += renderCategory('Merge Set Reds', mergeSetRedsHashes);
-
-  if (!html) {
-    html = '<p class="muted">No related blocks.</p>';
+  const parentsContent = renderCategoryContent('Parents', parentHashesArr);
+  if (parentsContent) addRow('Parents', parentsContent);
+  const childrenContent = renderCategoryContent('Children', childrenHashes);
+  if (childrenContent) addRow('Children', childrenContent);
+  const bluesContent = renderCategoryContent('Merge Set Blues', mergeSetBluesHashes);
+  if (bluesContent) addRow('Merge Set Blues', bluesContent);
+  const redsContent = renderCategoryContent('Merge Set Reds', mergeSetRedsHashes);
+  if (redsContent) addRow('Merge Set Reds', redsContent);
+  if (html === '') {
+    html = `<tr><td class="k">No related blocks</td><td class="v">-</td></tr>`;
   }
   relatedContent.innerHTML = html;
 }
@@ -543,12 +552,7 @@ function renderDetails(header, verboseData, extra) {
     Object.entries(header).forEach(([key, value]) => {
       if (skippedHeader.includes(key)) return;
       let valStr = typeof value === 'object' ? JSON.stringify(value) : value;
-      html += `
-        <div class="row">
-          <div class="k">${escHtml(key)}</div>
-          <div class="v">${escHtml(valStr)}</div>
-        </div>
-      `;
+      html += `<tr><td>${escHtml(key)}</td><td>${escHtml(valStr)}</td></tr>`;
     });
   }
   if (verboseData) {
@@ -564,12 +568,7 @@ function renderDetails(header, verboseData, extra) {
       } else {
         valStr = value;
       }
-      html += `
-        <div class="row">
-          <div class="k">${escHtml(key)}</div>
-          <div class="v">${valStr}</div>
-        </div>
-      `;
+      html += `<tr><td>${escHtml(key)}</td><td>${valStr}</td></tr>`;
     });
   }
   if (extra) {
@@ -583,42 +582,21 @@ function renderDetails(header, verboseData, extra) {
       } else {
         valStr = escHtml(valStr);
       }
-      html += `
-        <div class="row">
-          <div class="k">${escHtml(key)}</div>
-          <div class="v">${valStr}</div>
-        </div>
-      `;
+      html += `<tr><td>${escHtml(key)}</td><td>${valStr}</td></tr>`;
     });
   }
-  if (!html) {
-    html = `<div class="row"><div class="k">No details</div><div class="v">-</div></div>`;
-  }
-  detailsRows.innerHTML = html;
-
-  let minerHtml = '';
   const minerAddress = extra?.minerAddress;
   const minerInfoVal = extra?.minerInfo;
   if (minerAddress) {
-    minerHtml += `
-      <div class="row">
-        <div class="k">minerAddress</div>
-        <div class="v">${linkAddress(minerAddress)}</div>
-      </div>
-    `;
+    html += `<tr><td>minerAddress</td><td><a href="${minerAddress}">${minerAddress}</a></td></tr>`;
   }
   if (minerInfoVal) {
-    minerHtml += `
-      <div class="row">
-        <div class="k">minerInfo</div>
-        <div class="v">${escHtml(minerInfoVal)}</div>
-      </div>
-    `;
+    html += `<tr><td>minerInfo</td><td>${escHtml(minerInfoVal)}</td></tr>`;
   }
-  if (!minerHtml) {
-    minerHtml = `<div class="row"><div class="k">No miner information</div><div class="v">-</div></div>`;
+  if (!html) {
+    html = `<tr><td>No details</td><td>-</td></tr>`;
   }
-  minerRows.innerHTML = minerHtml;
+  detailsRows.innerHTML = html;
 }
 
 function determineBlockImage(extra) {
@@ -640,9 +618,8 @@ function resetUI() {
   bits.textContent = "-";
   color.textContent = "-";
   txRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
-  relatedContent.innerHTML = `<p class="muted">-</p>`;
-  detailsRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
-  minerRows.innerHTML = `<div class="row"><div class="k">-</div><div class="v">-</div></div>`;
+  relatedContent.innerHTML = `<tr><td>-</td><td>-</td></tr>`;
+  detailsRows.innerHTML = `<tr><td>-</td><td>-</td></tr>`;
 }
 
 async function runSearch(inputHash) {
