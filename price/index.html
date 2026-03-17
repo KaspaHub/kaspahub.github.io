@@ -46,29 +46,29 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <div id="market-stats" style="text-align: center; margin-top: 30px;">
 <div class="stats-container">
-	<div class="stat-item">
-		<div class="label">Market Cap</div>
-		<div class="value" id="market-cap">...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Fully Diluted Valuation</div>
-		<div class="value" id="fdv">...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Circulating Supply</div>
-		<div class="value" id="circ-supply">...</div>
-	</div>
-	<div class="stat-item">
-		<div class="label">Max Supply</div>
-		<div class="value" id="max-supply">...</div>
-	</div>
+    <div class="stat-item">
+        <div class="label">Market Cap</div>
+        <div class="value" id="market-cap">...</div>
+    </div>
+    <div class="stat-item">
+        <div class="label">Fully Diluted Valuation</div>
+        <div class="value" id="fdv">...</div>
+    </div>
+    <div class="stat-item">
+        <div class="label">Circulating Supply</div>
+        <div class="value" id="circ-supply">...</div>
+    </div>
+    <div class="stat-item">
+        <div class="label">Max Supply</div>
+        <div class="value" id="max-supply">...</div>
+    </div>
 </div>
 </div>
 </div>
 <div style="text-align: center; margin-bottom: 20px;">
 <button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">📈 Open Chart</button>
 </div>
-<div id="chart-container"></div>
+<div id="chartContainer"></div>
 </main>
 
 <footer>
@@ -110,9 +110,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </footer>
 
 <style type="text/css">
-#chart-container { height: 700px; }
+#chartContainer { height: 700px; }
 @media (max-width: 800px) and (max-aspect-ratio: 1/1) {
-#chart-container { height: 500px; }
+#chartContainer { height: 500px; }
 }
 
 #price {
@@ -157,28 +157,28 @@ margin-bottom: 6px;
 margin: 0;
 }
 </style>
-
 <script type="text/javascript">
 'use strict';
 
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("load-chart-btn");
-  const container = document.getElementById("chart-container");
+  const chartContainer = document.getElementById("chartContainer");
   let loaded = false;
 
   button.addEventListener("click", () => {
     if (!loaded) {
-      const widget = document.createElement("div");
-      widget.className = "tradingview-widget-container";
-      widget.style = "height:100%; width:100%";
-      widget.innerHTML = `
-        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-        <div class="tradingview-widget-copyright">
-          <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-            <span class="blue-text">Track all markets on TradingView</span>
-          </a>
+      chartContainer.innerHTML = `
+        <div class="tradingview-widget-container" style="height:100%; width:100%">
+          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+          <div class="tradingview-widget-copyright">
+            <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+              <span class="blue-text">Track all markets on TradingView</span>
+            </a>
+          </div>
         </div>
       `;
+
+      const widget = chartContainer.querySelector(".tradingview-widget-container");
 
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -204,11 +204,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       widget.appendChild(script);
-      container.appendChild(widget);
+
       loaded = true;
       button.textContent = "❌ Close Chart";
     } else {
-      container.innerHTML = "";
+      chartContainer.innerHTML = "";
       loaded = false;
       button.textContent = "📈 Open Chart";
     }
@@ -226,7 +226,6 @@ const maxBox = document.getElementById("max-supply");
 
 const maxSupply = 28704026601;
 let circSupply = 27277908482;
-let price = 0.10;
 
 function getCirculatingSupply() {
   fetch("https://api.kaspa.org/info/coinsupply/circulating")
@@ -252,40 +251,37 @@ function getPrice() {
       if (!data || typeof data.price !== 'number' || isNaN(data.price)) {
         throw new Error("Invalid price data");
       }
-      price = data.price;
-      console.log("Price:", price);
-      updatePage(price);
+      KASVALUE = data.price;
+      console.log("Price:", KASVALUE);
+      updatePage();
     })
     .catch(err => {
       console.error("Failed to fetch Kaspa price:", err);
-      if (price !== null) {
-        updatePage(price);
+      if (KASVALUE != null) {
+        updatePage();
       } else {
         priceBox.textContent = "Error loading price";
       }
     });
 }
 
-function updatePage(price) {
-  const price6 = price.toFixed(6);
-  const pageTitle = `$${price.toFixed(4)} - KAS`;
+async function updatePage() {
+  const toCurrency = (localStorage.getItem('currency') || 'usd').toLowerCase();
+
+  const priceFormatted = await formatPrice(KASVALUE, toCurrency, 1, 6);
+  const pageTitle = priceFormatted + " - KAS";
   document.title = pageTitle;
 
-  // Price
-  priceBox.textContent = `$${price6}`;
+  priceBox.textContent = priceFormatted;
   priceBox.classList.remove("updated");
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  // Market stats
-  const marketCap = price * circSupply;
-  const fdv = price * maxSupply;
-  marketCapBox.textContent = formatNumber(marketCap);
-  fdvBox.textContent = formatNumber(fdv);
+  marketCapBox.textContent = await formatPrice(KASVALUE, toCurrency, circSupply, 2);
+  fdvBox.textContent = await formatPrice(KASVALUE, toCurrency, maxSupply, 2);
   circBox.textContent = `${(circSupply / 1e9).toFixed(2)}B KAS`;
   maxBox.textContent = `${(maxSupply / 1e9).toFixed(2)}B KAS`;
 
-  // Meta tags
   let twitterMeta = document.querySelector('meta[name="twitter:title"]');
   if (!twitterMeta) {
     twitterMeta = document.createElement("meta");
@@ -301,13 +297,6 @@ function updatePage(price) {
     document.head.appendChild(ogMeta);
   }
   ogMeta.setAttribute("content", pageTitle);
-}
-
-function formatNumber(value) {
-  if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
-  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
-  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
-  return `$${value.toFixed(2)}`;
 }
 
 getCirculatingSupply();

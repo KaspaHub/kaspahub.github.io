@@ -111,7 +111,7 @@ async function getExchangeRate(currency) {
   return fallbackRate;
 }
 
-async function formatPrice(value = KASVALUE, toCurrency = "usd", amount = 1) {
+async function formatPrice(value = KASVALUE, toCurrency = "usd", amount = 1, decimals = 3) {
   if (!isFinite(value) || !isFinite(amount)) return;
 
   const currencySymbols = {
@@ -129,9 +129,9 @@ async function formatPrice(value = KASVALUE, toCurrency = "usd", amount = 1) {
 
   const symbol = currencySymbols[toCurrency] || toCurrency;
 
-  const formatted = Number(converted.toFixed(3)).toLocaleString("en-US", {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3
+  const formatted = Number(converted.toFixed(decimals)).toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
   });
 
   return symbol + formatted;
