@@ -132,8 +132,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
               <th>From</th>
               <th>To</th>
               <th>Mass</th>
-              <th>For</th>
               <th>Status</th>
+              <th>For</th>
             </tr>
           </thead>
           <tbody id="txRows">
@@ -486,8 +486,8 @@ async function renderTransactions(txs) {
           <td>${fromCell}</td>
           <td>${toCell}</td>
           <td>${mass}</td>
-          <td>${amountHtml}</td>
           <td>${status}</td>
+          <td>${amountHtml}</td>
         </tr>
       `;
     }
