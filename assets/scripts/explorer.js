@@ -45,6 +45,21 @@ function setLoading(value) {
 
 }
 
+function setMsg(value) {
+    if (typeof value === "string") {
+        msg.innerHTML = `<div class="ok">${value}</div>`;
+    } else if (value) {
+        msg.innerHTML = `
+            <div id="fetching" class="loading-2">
+                <div class="loading-dots dot-1"></div>
+                <div class="loading-dots dot-2"></div>
+                <div class="loading-dots dot-3"></div>
+            </div>`;
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
 function setStatus(value) {
   if (value === false) {
     msg.classList.add('hidden');
@@ -213,7 +228,7 @@ function fetchAddressLabel(addr) {
 
 
 
-document.getElementById('searchContainer').addEventListener('submit', (event) => {
+document.getElementById('searchContainer')?.addEventListener('submit', (event) => {
   event.preventDefault();
   if (BUSY) return;
   BUSY = true;

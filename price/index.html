@@ -31,9 +31,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="manifest" href="/assets/manifest.json" />
 <script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/explorer.js"></script>
 
 </head>
 <body>
@@ -41,34 +43,42 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-1">
-<div style="text-align: center; margin-top: 100px;">
-<p id="priceBox">Loading...</p>
 
-<div id="market-stats" style="text-align: center; margin-top: 30px;">
-<div class="stats-container">
-    <div class="stat-item">
-        <div class="label">Market Cap</div>
-        <div class="value" id="marketCapBox">...</div>
+  <section style="text-align: center; margin-top: 100px;">
+    <p id="priceBox">Loading...</p>
+
+    <div id="market-stats" style="text-align: center; margin-top: 30px;">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="label">Market Cap</div>
+          <div class="value" id="marketCapBox">...</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">Fully Diluted Valuation</div>
+          <div class="value" id="fdvBox">...</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">Circulating Supply</div>
+          <div class="value" id="circBox">...</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">Max Supply</div>
+          <div class="value" id="maxBox">...</div>
+        </div>
+      </div>
     </div>
-    <div class="stat-item">
-        <div class="label">Fully Diluted Valuation</div>
-        <div class="value" id="fdvBox">...</div>
-    </div>
-    <div class="stat-item">
-        <div class="label">Circulating Supply</div>
-        <div class="value" id="circBox">...</div>
-    </div>
-    <div class="stat-item">
-        <div class="label">Max Supply</div>
-        <div class="value" id="maxBox">...</div>
-    </div>
-</div>
-</div>
-</div>
-<div style="text-align: center; margin-bottom: 20px;">
-<button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">📈 Open Chart</button>
-</div>
-<div id="chartContainer"></div>
+  </section>
+
+  <section style="text-align: center; margin-bottom: 20px;">
+    <button id="load-chart-btn" style="color: inherit; padding: 12px 24px; font-size: 1rem; cursor: pointer;">
+      📈 Open Chart
+    </button>
+  </section>
+
+  <section id="msg"></section>
+
+  <section id="chartContainer"></section>
+
 </main>
 
 <footer>
@@ -160,6 +170,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <script type="text/javascript">
 'use strict';
 
+const msg = document.getElementById('msg');
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("load-chart-btn");
   const chartContainer = document.getElementById("chartContainer");
@@ -167,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   button.addEventListener("click", () => {
     if (!loaded) {
+
+    setMsg(true);
+
       chartContainer.innerHTML = `
         <div class="tradingview-widget-container" style="height:100%; width:100%">
           <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
@@ -202,6 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
         details: false,
         save_image: true,
       });
+
+      script.onload = () => {
+        setMsg(false);
+      };
 
       widget.appendChild(script);
 
