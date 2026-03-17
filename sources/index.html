@@ -191,7 +191,7 @@ const items = [
 	features: { threads: true }
 },
 {
-	name: "Kaspa Industrial Initiative",
+	name: "Kaspa Kii",
 	description: "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
 	link: "https://x.com/KaspaKii",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/x.webp",
@@ -784,8 +784,8 @@ const featureTags = {
 	verified: { label: '', class: 'verified' },
 };
 
-function renderItems(initial = false) {
-	if (initial) {
+function renderItems(reset = false) {
+	if (reset) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
@@ -797,7 +797,7 @@ function renderItems(initial = false) {
 	card.href = item.link;
 	card.target = '_blank';
 
-	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p>`;
+	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} <span class="feature-tag reviewed"></span></h3><p class="filter-description">${item.description}</p>`;
 
 		itemGrid.appendChild(card);
 	});

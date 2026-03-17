@@ -75,9 +75,16 @@ function sanitizeSearch(query) {
   query = query.trim().toLowerCase();
 
   if (validators.containsDots(query)) {
-    if (query.startsWith("http://")) query = query.slice(7);
-    if (query.startsWith("https://")) query = query.slice(8);
-    if (query.startsWith("www.")) query = query.slice(4);
+
+    if (query.startsWith("http")) {
+      if (query.startsWith("https://www.")) query = query.slice(12);
+      else if (query.startsWith("https://m.")) query = query.slice(10);
+      else if (query.startsWith("http://www.")) query = query.slice(11);
+      else if (query.startsWith("http://m.")) query = query.slice(9);
+      else if (query.startsWith("https://")) query = query.slice(8);
+      else if (query.startsWith("http://")) query = query.slice(7);
+    }
+
     if (query.indexOf('/') !== -1) query = query.slice(0, query.indexOf('/'));
     return query;
   }

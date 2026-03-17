@@ -46,32 +46,32 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	{
 		"@type": "ListItem",
 		"position": 1,
-		"name": "Kasway",
-		"url": "https://kasway.xyz/"
+		"name": "OnChain POS",
+		"url": "https://onchainpos.live"
 	},
 	{
 		"@type": "ListItem",
 		"position": 2,
 		"name": "Topper",
-		"url": "https://www.topperpay.com/"
+		"url": "https://www.topperpay.com"
 	},
 	{
 		"@type": "ListItem",
 		"position": 3,
 		"name": "ChangeNOW",
-		"url": "https://changenow.io/"
+		"url": "https://changenow.io"
 	},
 	{
 		"@type": "ListItem",
 		"position": 4,
 		"name": "NOWPayments",
-		"url": "https://nowpayments.io/"
+		"url": "https://nowpayments.io"
 	},
 	{
 		"@type": "ListItem",
 		"position": 5,
 		"name": "Simplex",
-		"url": "https://www.simplex.com/"
+		"url": "https://www.simplex.com"
 	}
 ]
 }
@@ -183,29 +183,31 @@ const items = [
 	link: "https://kas.coffee",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascoffee.webp",
 	features: {
+		reviewed: true,
 		onlinePayments: true,
 		donations: true
 	}
 },
-{
-	name: "Kasway",
-	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
-	link: "https://kasway.xyz",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-	features: {
-		api: false,
-		openSource: false,
-		onlinePayments: false,
-		pointOfSale: true,
-		donations: false
-	}
-},
+// {
+// 	name: "Kasway",
+// 	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
+// 	link: "https://kasway.xyz",
+// 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
+// 	features: {
+// 		api: false,
+// 		openSource: false,
+// 		onlinePayments: false,
+// 		pointOfSale: true,
+// 		donations: false
+// 	}
+// },
 {
 	name: "OnChain POS",
 	description: "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
 	link: "https://onchainpos.live",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
 	features: {
+		reviewed: true,
 		api: false,
 		pointOfSale: true
 	}
@@ -225,6 +227,7 @@ const items = [
 	link: "https://kaspa-store.com/merchant",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasperopay.webp",
 	features: {
+		reviewed: true,
 		onlinePayments: true
 	}
 },
@@ -234,6 +237,7 @@ const items = [
 	link: "https://kasla.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasla.webp",
 	features: {
+		reviewed: true,
 		donations: true
 	}
 },
@@ -243,6 +247,7 @@ const items = [
 	link: "https://kaspawoo.com",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-2.webp",
 	features: {
+		reviewed: true,
 		onlinePayments: true
 	}
 },
@@ -252,6 +257,7 @@ const items = [
 	link: "https://www.bitrequest.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitrequest.webp",
 	features: {
+		reviewed: true,
 		onlinePayments: true
 	}
 },
@@ -261,6 +267,18 @@ const items = [
 	link: "https://www.topperpay.com",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/topper.webp",
 	features: {
+		reviewed: true,
+		api: true,
+		onlinePayments: true
+	}
+},
+{
+	name: "Changelly",
+	description: "Changelly is a cryptocurrency exchange platform supporting over 1000 cryptocurrencies, offering instant swaps and competitive rates. It supports buying crypto with fiat via Visa, Mastercard, bank transfer, and Apple Pay, with 24/7 support and integrations with over 20 crypto platforms.",
+	link: "https://changelly.com",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changelly.webp",
+	features: {
+		reviewed: true,
 		api: true,
 		onlinePayments: true
 	}
@@ -271,6 +289,7 @@ const items = [
 	link: "https://changenow.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changenow.webp",
 	features: {
+		reviewed: true,
 		api: true,
 		onlinePayments: true
 	}
@@ -281,6 +300,7 @@ const items = [
 	link: "https://nowpayments.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
 	features: {
+		reviewed: true,
 		api: true,
 		onlinePayments: true,
 		donations: true
@@ -301,16 +321,6 @@ const items = [
 	description: "Simple Swap is a non-custodial cryptocurrency exchange supporting over 1500 cryptocurrencies, allowing instant swaps without registration.",
 	link: "https://simpleswap.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/simpleswap.webp",
-	features: {
-		api: true,
-		onlinePayments: true
-	}
-},
-{
-	name: "Changelly",
-	description: "Changelly is a cryptocurrency exchange platform supporting over 1000 cryptocurrencies, offering instant swaps and competitive rates. It supports buying crypto with fiat via Visa, Mastercard, bank transfer, and Apple Pay, with 24/7 support and integrations with over 20 crypto platforms.",
-	link: "https://changelly.com",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changelly.webp",
 	features: {
 		api: true,
 		onlinePayments: true
@@ -491,20 +501,22 @@ const items = [
 	link: "/nostr/register/",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
 	features: {
-		donations: true
-	}
-},
-{
-	name: "Kaspa Hub Donation Extension ",
-	description: "Kaspa Donations is a simple browser extension for Chromium-based browsers (Chrome, Brave, Edge, Opera) that enables easy Kaspa cryptocurrency donations to websites and authors. It uses meta tags for integration.",
-	link: "https://kaspahub.org/post/kaspa-donations-extension/",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-	features: {
-		openSource: true,
-		onlinePayments: true,
+		reviewed: true,
 		donations: true
 	}
 }
+// {
+// 	name: "Kaspa Hub Donation Extension ",
+// 	description: "Kaspa Donations is a simple browser extension for Chromium-based browsers (Chrome, Brave, Edge, Opera) that enables easy Kaspa cryptocurrency donations to websites and authors. It uses meta tags for integration.",
+// 	link: "https://kaspahub.org/post/kaspa-donations-extension/",
+// 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
+// 	features: {
+// 		reviewed: true,
+// 		openSource: true,
+// 		onlinePayments: true,
+// 		donations: true
+// 	}
+// }
 ];
 
 const itemGrid = document.getElementById('itemGrid');
@@ -519,8 +531,13 @@ let currentIndex = 0;
 
 let filteredItems = [...items];
 
-function renderItems(initial = false) {
-	if (initial) {
+const featureTags = {
+	reviewed: { label: '', class: 'reviewed' },
+	verified: { label: '', class: 'verified' },
+};
+
+function renderItems(reset = false) {
+	if (reset) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
@@ -532,14 +549,21 @@ function renderItems(initial = false) {
 	card.href = item.link;
 	card.target = '_blank';
 
-	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p>`;
+	const featuresHtml = Object.entries(item.features)
+	.filter(([key, value]) => value && featureTags[key])
+	.map(([key]) => {
+	const { label, class: extraClass = '' } = featureTags[key];
+	return `<span class="feature-tag ${extraClass}">${label}</span>`;
+	})
+	.join('');
 
-		itemGrid.appendChild(card);
+	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
+
+	itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
 	counter.textContent = `(${filteredItems.length} of ${items.length})`;
-
 	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 

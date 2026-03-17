@@ -168,6 +168,13 @@
   "features": ["reviewed", "marketplace"]
 },
 {
+  "name": "TheCryptoSky",
+  "description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
+  "link": "https://thecryptosky.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/thecryptosky.webp",
+  "features": ["jobs", "marketplace"]
+},
+{
   "name": "KasMart",
   "description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
   "link": "https://kasmart.org",
@@ -264,13 +271,6 @@
   "link": "https://fluxkmail.base44.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/fluxkmail.webp",
   "features": []
-},
-{
-  "name": "Kasway",
-  "description": "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
-  "link": "https://kasway.xyz",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-  "features": ["reviewed", "solutions"]
 },
 {
   "name": "OnChain POS",
@@ -467,13 +467,6 @@
   "link": "https://moonbound.gg",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/moonbound.webp",
   "features": ["reviewed", "layer2", "launchpad"]
-},
-{
-  "name": "Tokify",
-  "description": "No-code platform for Web3 builders to simplify token creation and management. Enables instant token deployment with features like minting/burning/pausing support, and customizable vesting schedules.",
-  "link": "https://tokify.pro",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/tokify.webp",
-  "features": ["layer2", "launchpad"]
 },
 {
   "name": "SeaSwap",
@@ -725,7 +718,7 @@
   "description": "A simple, non-custodial, open source app (web + mobile) that lets you create and share payment requests for cryptocurrencies.",
   "link": "https://www.bitrequest.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitrequest.webp",
-  "features": ["development", "solutions"]
+  "features": ["reviewed", "development", "solutions"]
 },
 {
   "name": "ChainVsDag",
@@ -2139,7 +2132,7 @@
   "description": "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
   "link": "https://github.com/kloakprotocol/kloak_node",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Kaspium",
@@ -2153,14 +2146,14 @@
   "description": "A secure, production-safe JavaScript SDK for generating watch-only Kaspa addresses from extended public keys (KPUB/XPUB/TPUB). Supports major wallet formats, and Legacy KDX.",
   "link": "https://www.npmjs.com/package/kaspa-simple-wallet",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "KasPaper",
   "description": "A lightweight Go-based tool for generating secure Kaspa paper wallets. It provides a simple way to create offline storage for Kaspa assets by generating seed phrases and printable wallet files. Users can customize the wallet's appearance by editing the template.html file before compilation.",
   "link": "https://github.com/svarogg/kaspaper",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Kaspa-ng",
@@ -2209,7 +2202,7 @@
   "description": "An SDK for developing decentralized applications on the Kaspa network. It simplifies low-level tasks like message handling, cryptography, and transaction management, allowing developers to focus on application logic.",
   "link": "https://github.com/kaspeak/kaspeak-sdk",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Kaspian",
@@ -2237,14 +2230,14 @@
   "description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
   "link": "https://github.com/deokman420/KasOS",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Kasmage",
   "description": "A whimsical, lightweight frog-wizard themed CLI for monitoring Kaspa ($KAS) transactions with live alerts, history, and receipts. Supports real-time transaction streaming, threshold alerts, direction filtering, and TXT/JSON receipt generation.",
   "link": "https://github.com/ethanvillalobos8/kasmage",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["development"]
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Kaspa REST Proxy",
@@ -2280,13 +2273,6 @@
   "link": "https://github.com/ShaiW/blanim",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
   "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Hub Donation Extension",
-  "description": "Contribute Kaspa cryptocurrency to websites that accept it. A simple browser extension that makes donations easy.",
-  "link": "https://kaspahub.org/post/kaspa-donations-extension/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "solutions"]
 },
 {
   "name": "Kaspa Hub Donation Pages",

@@ -231,6 +231,7 @@ function renderItems(reset = false) {
         itemGrid.innerHTML = '';
         currentIndex = 0;
     }
+
     const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < slice.length; i++) {

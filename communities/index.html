@@ -164,6 +164,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 const items = [
 {
+	name: "Kaspa",
+	description: "A subreddit (r/kaspa) where users share news, updates, and engage in discussions about the Kaspa ecosystem.",
+	link: "https://www.reddit.com/r/kaspa/",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/reddit.webp",
+	platform: "reddit"
+},
+{
 	name: "Kaspa Community",
 	description: "A community on X (formerly Twitter) where users and developers share updates, discuss Kaspa, and connect with others in the ecosystem.",
 	link: "https://x.com/i/communities/1670849604105928715",
@@ -176,13 +183,6 @@ const items = [
 	link: "https://discord.gg/kaspa",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/discord.webp",
 	platform: "discord"
-},
-{
-	name: "Kaspa",
-	description: "A subreddit (r/kaspa) where users share news, updates, and engage in discussions about the Kaspa ecosystem.",
-	link: "https://www.reddit.com/r/kaspa/",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/reddit.webp",
-	platform: "reddit"
 },
 {
 	name: "Kaspa English",
@@ -444,8 +444,8 @@ let currentIndex = 0;
 let lastCheckedRadio = null;
 let filteredItems = [...items];
 
-function renderItems(initial = false) {
-	if (initial) {
+function renderItems(reset = false) {
+	if (reset) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
@@ -457,7 +457,7 @@ function renderItems(initial = false) {
 	card.href = item.link;
 	card.target = '_blank';
 
-	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p>`;
+	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} <span class="feature-tag reviewed"></span></h3><p class="filter-description">${item.description}</p>`;
 
 		itemGrid.appendChild(card);
 	});

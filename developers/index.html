@@ -441,20 +441,39 @@ function getRandomColor() {
 	return color;
 }
 
-function renderItems(initial = false) {
-	if (initial) {
+const featureTags = {
+	reviewed: { label: '', class: 'reviewed' },
+	verified: { label: '', class: 'verified' },
+};
+
+function renderItems(reset = false) {
+	if (reset) {
 		itemGrid.innerHTML = '';
 		currentIndex = 0;
 	}
 
+	const getFeatureTag = (key) => {
+		if (!featureTags[key]) return '';
+		const { label, class: extraClass = '' } = featureTags[key];
+		return `<span class="feature-tag ${extraClass}">${label}</span>`;
+	};
+
 	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
 	slice.forEach(item => {
-	const card = document.createElement('a');
-	card.classList.add('filter-card', 'theme-1');
-	card.href = item.link;
-	card.target = '_blank';
+		const card = document.createElement('a');
+			card.classList.add('filter-card', 'theme-1');
+			card.href = item.link;
+			card.target = '_blank';
+
+		const featuresHtml = Object.entries(item.features)
+			.filter(([key, value]) => value && featureTags[key] && !['reviewed', 'verified'].includes(key))
+			.map(([key]) => getFeatureTag(key))
+			.join('');
+
+		const badgeKey = item.features?.verified ? 'verified' : 'reviewed';
+		const badgeHtml = getFeatureTag(badgeKey);
 	const randomColor = getRandomColor();
-	card.innerHTML = `<div class="item-header"><div class="filter-logo random-logo" style="background-color: ${randomColor};"><h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${item.name.charAt(0)}</h2></div><div class="item-top-actions"></div></div><h3>${item.name}</h3><p class="filter-description">${item.description}</p>`;
+	card.innerHTML = `<div class="item-header"><div class="filter-logo random-logo" style="background-color: ${randomColor};"><h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${item.name.charAt(0)}</h2></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
 
 		itemGrid.appendChild(card);
 	});

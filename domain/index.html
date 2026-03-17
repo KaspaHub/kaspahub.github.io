@@ -51,7 +51,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     <p class="hint">Explore Kaspa transactions, wallets, tokens, domains, and more.</p>
   </div>
   <form id="searchContainer" class="searchBar">
-    <input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-:]*" title="Alphanumeric, dots, colons or hyphens only">
+    <input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0">
     <button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
   </form>
   <div id="msg"></div>
@@ -175,7 +175,7 @@ function renderResults(query, allResults) {
 
     if (avgNum < 2.6) {
       headerClass = ' class="low-rating"';
-    } else if (avgNum > 4.4) {
+    } else if (avgNum > 4) {
       headerClass = ' class="high-rating"';
     }
   }
