@@ -1,13 +1,13 @@
 [
 {
-  "name": "PHANTOM GHOSTDAG Whitepaper",
+  "name": "PHANTOM GHOSTDAG",
   "description": "The PHANTOM GHOSTDAG whitepaper introduces a scalable generalization of Nakamoto Consensus, utilizing a blockDAG structure to enhance throughput and security, implemented in the Kaspa cryptocurrency.",
   "link": "https://eprint.iacr.org/2018/104.pdf",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
   "features": ["reviewed", "education"]
 },
 {
-  "name": "DAG KNIGHT Whitepaper",
+  "name": "DAG KNIGHT",
   "description": "The DAG KNIGHT whitepaper presents a parameterless evolution of the PHANTOM protocol, enabling a permissionless consensus without a priori latency bounds, enhancing speed and security for Kaspa’s blockDAG.",
   "link": "https://eprint.iacr.org/2022/1494.pdf",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
