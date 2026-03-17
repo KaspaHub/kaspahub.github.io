@@ -45,26 +45,28 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <main id="container-1">
 
-<div class="intro">
-<div id="explorerIntro" style="opacity: 0;">
+<section class="intro">
+  <div id="explorerIntro" style="opacity: 0;">
     <h1>Kaspa Explorer</h1>
     <p class="hint">Explore Kaspa transactions, wallets, tokens, domains, and more.</p>
-</div>
-<form id="searchContainer" class="searchBar"><input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" pattern="[a-zA-Z0-9.-:]*" title="Only letters, numbers, dots, colons, and hyphens are allowed." /><button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button></form><section id="msg"></section></div>
+  </div>
+  <form id="searchContainer" class="searchBar">
+    <input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Search" value="" minlength="0" pattern="[a-zA-Z0-9\s\.\-:]*" title="Alphanumeric, dots, colons or hyphens only">
+    <button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
+  </form>
+  <div id="msg"></div>
+</section>
 
 <section id="explorerHead" style="opacity: 0;">
-
   <div id="explorerHdr">
-    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" />
+    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">KRC20 Token</h1>
+      <h1 id="hdrLine">Token</h1>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-
   <button id="optionsCtn" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
   <div id="optionsMenu" role="menu" popover></div>
-
 </section>
 
 <section id="explorerData" style="opacity: 0;">
@@ -501,7 +503,7 @@ function renderSummary(){
   tokenDec = Number(tokenInfo?.dec ?? "0");
   dec.textContent = String(tokenDec);
 
-  deployDate.textContent = formatDate(tokenInfo?.mtsAdd);
+  deployDate.textContent = formatDate(tokenInfo?.mtsAdd, true);
 
   const mintedRaw = tokenInfo?.minted ?? "0";
   const burnedRaw = tokenBurnedRaw ?? "0";
@@ -625,7 +627,7 @@ function renderTransfers(result){
 
   txRows.innerHTML = rows.map((r) => {
     const hash = String(r.hashRev || "-");
-    const age = r.mtsAdd ? formatDate(r.mtsAdd) : "-";
+    const age = r.mtsAdd ? formatDate(r.mtsAdd, true) : "-";
     const from = String(r.from || "-");
     const to = String(r.to || "-");
     const amt = formatTokenAmount(String(r.amt ?? "0"), tokenDec);
