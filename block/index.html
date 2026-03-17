@@ -505,8 +505,8 @@ function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRed
   const renderCategory = (name, hashes) => {
     const unique = [...new Set(hashes || [])].sort();
     if (!unique.length) return '';
-    const links = unique.map(h => linkBlock(h, h)).join('<br>');
-    return `<details><summary>${name} (${unique.length})</summary><div class="receiver-list">${links}</div></details>`;
+    const links = unique.map(h => `<p>${linkBlock(h, h)}</p>`).join('');
+    return `<details><summary>${name} (${unique.length})</summary><div class="block-list">${links}</div></details>`;
   };
   let parentHashesArr = [];
   if (Array.isArray(parents)) {
@@ -516,16 +516,17 @@ function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRed
       }
     });
   }
+  if (selectedParentHash) {
+    html += `<p>Selected Parent:<br><span>${linkBlock(selectedParentHash, selectedParentHash)}</span></p>`;
+  }
+  if (pruningPoint) {
+    html += `<p>Pruning Point:<br><span>${linkBlock(pruningPoint, pruningPoint)}</span></p>`;
+  }
   html += renderCategory('Parents', parentHashesArr);
   html += renderCategory('Children', childrenHashes);
   html += renderCategory('Merge Set Blues', mergeSetBluesHashes);
   html += renderCategory('Merge Set Reds', mergeSetRedsHashes);
-  if (selectedParentHash) {
-    html += `<div>Selected Parent: ${linkBlock(selectedParentHash, selectedParentHash)}</div>`;
-  }
-  if (pruningPoint) {
-    html += `<div>Pruning Point: ${linkBlock(pruningPoint, pruningPoint)}</div>`;
-  }
+
   if (!html) {
     html = '<p class="muted">No related blocks.</p>';
   }

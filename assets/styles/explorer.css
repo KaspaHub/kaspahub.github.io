@@ -198,6 +198,9 @@ html#dark {
   display: inline;
   white-space: nowrap;
 }
+#relatedContent {
+  font-size: 14px;
+}
 /* Tabs */
 .tabs {
   margin-top:12px;

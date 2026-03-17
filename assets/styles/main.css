@@ -196,6 +196,10 @@ a:visited {color: var(--link); }
 a:hover {color: var(--link-hover);; text-decoration: underline; }
 a:active {color: var(--link-active);; text-decoration: underline; }
 
+summary {
+	user-select: none;
+}
+
 .left {text-align: left;}
 .right {text-align: right;}
 
