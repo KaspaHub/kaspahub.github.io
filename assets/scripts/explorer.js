@@ -45,15 +45,19 @@ function setLoading(value) {
 
 }
 
-function setStatus(message, status = undefined) {
-  msg.classList.remove('hidden');
-  if (status === true) {
-    msg.innerHTML = `<div class="ok">${message}</div>`;
-  } else if (status === false) {
-    msg.innerHTML = `<div class="error">${message}</div>`;
-  } else {
-    msg.innerHTML = `<div class="loading">${message}</div>`;
-  }
+function setMsg(value) {
+    if (typeof value === "string") {
+        msg.innerHTML = `<div class="ok">${value}</div>`;
+    } else if (value) {
+        msg.innerHTML = `
+            <div id="fetching" class="loading-2">
+                <div class="loading-dots dot-1"></div>
+                <div class="loading-dots dot-2"></div>
+                <div class="loading-dots dot-3"></div>
+            </div>`;
+    } else {
+        msg.innerHTML = "";
+    }
 }
 
 function setStatus(message, status = null) {

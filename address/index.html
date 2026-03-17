@@ -74,8 +74,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
       <h3>Balance</h3>
-      <div class="big" id="balanceKas">-</div>
-      <div class="muted" id="balanceUsd">-</div>
+      <div class="big" id="balanceUsd">-</div>
+      <div class="muted" id="balanceKas">-</div>
     </div>
 
     <div class="theme-1">
@@ -107,7 +107,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
       <select id="transferType" style="padding: 8px; font-size: 16px;">
-        <option value="all">Transactions</option>
+        <option value="all">Activity</option>
         <option value="received">Received</option>
         <option value="sent">Sent</option>
       </select>
@@ -898,9 +898,9 @@ function renderDomains(domains) {
   }
 
   domainRows.innerHTML = domains.map(d => {
-    const name = escHtml(d.asset || "-");
+    const name = d.asset || "-";
     const mintDate = d.creationBlockTime ? formatDate(new Date(d.creationBlockTime)) : "-";
-    const status = escHtml(d.status || "-");
+    const status = d.status || "-";
     const txId = d.transactionId || "-";
     const shortTxId = shortenEnd(txId);
     return `
@@ -1088,7 +1088,7 @@ async function runSearch(inputAddr) {
     try {
       const balanceSomes = await fetchBalance(addr);
       balanceKas.textContent = formatKas(balanceSomes);
-      balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8);
+      balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8, 2);
     } catch (err) {
       balanceKas.textContent = "-";
       balanceUsd.textContent = "-";

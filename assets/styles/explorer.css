@@ -406,3 +406,7 @@ p.hint { margin: 0 0 16px;font-size: 0.95rem;}
 .low-rating {
   color: #ff6b6b;
 }
+.high-rating {
+  color: #2ecc71;
+  font-weight: 700;
+}

@@ -166,16 +166,21 @@ function normalizeDomain(input) {
 function renderResults(query, allResults) {
   const validReviews = allResults.filter(r => r.review !== null);
   let average = "N/A";
+  let headerClass = "";
+
   if (validReviews.length > 0) {
     const rawAvg = validReviews.reduce((acc, r) => acc + r.review, 0) / validReviews.length;
     average = parseFloat(rawAvg).toFixed(1);
+    const avgNum = parseFloat(average);
+
+    if (avgNum < 2.6) {
+      headerClass = ' class="low-rating"';
+    } else if (avgNum > 4.4) {
+      headerClass = ' class="high-rating"';
+    }
   }
 
-  const avgNum = validReviews.length > 0 ? parseFloat(average) : null;
-  const isLow = avgNum !== null && avgNum <= 2;
-  const headerClass = isLow ? ' class="low-rating"' : '';
-
-  let html = `<h2 style="margin: 30px; text-align: center;"${headerClass}>${query} — <span>${average}</span></h2>`;
+  let html = `<p style="margin: 30px; text-align: center; font-size: 20px; text-transform: uppercase; font-weight: 600;"${headerClass}>${query} — <span>${average}</span></p>`;
   html += `<div class="tableWrap"><table cellspacing="0" cellpadding="6"><thead><tr><th>Source</th><th></th><th>Rating</th></tr></thead><tbody>`;
 
   for (let result of allResults) {

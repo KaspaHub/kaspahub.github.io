@@ -161,7 +161,7 @@ html#dark {
 .muted {
 	color: inherit;
 	opacity: 0.8;
-	user-select: none;
+	/*user-select: none;*/
 }
 
 h1 {font-size: 1.5em;}
