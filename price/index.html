@@ -243,16 +243,13 @@ const fdvBox = document.getElementById("fdvBox");
 const circBox = document.getElementById("circBox");
 const maxBox = document.getElementById("maxBox");
 
-const maxSupply = 28704026601;
-let circSupply = 27277908482;
-
 function getCirculatingSupply() {
   fetch("https://api.kaspa.org/info/coinsupply/circulating")
     .then(res => res.json())
     .then(data => {
       if (typeof data === "number" && !isNaN(data)) {
-        circSupply = data;
-        console.log("Circulating Supply:", circSupply);
+        CIRCSUPPLY = data;
+        console.log("Circulating Supply:", CIRCSUPPLY);
       }
     })
     .catch(err => {
@@ -295,10 +292,10 @@ async function updatePage() {
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 0);
-  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 0);
-  circBox.textContent = `${circSupply.toLocaleString()} KAS`;
-  maxBox.textContent = `${maxSupply.toLocaleString()} KAS`;
+  marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, CIRCSUPPLY, 0);
+  fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, MAXSUPPLY, 0);
+  circBox.textContent = `${CIRCSUPPLY.toLocaleString()} KAS`;
+  maxBox.textContent = `${MAXSUPPLY.toLocaleString()} KAS`;
 
   let twitterMeta = document.querySelector('meta[name="twitter:title"]');
   if (!twitterMeta) {
@@ -320,10 +317,10 @@ async function updatePage() {
 getCirculatingSupply();
 
 priceBox.textContent = await formatPrice(KASVALUE, CURRENCY, 1, 6);
-marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, circSupply, 0);
-fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, maxSupply, 0);
-circBox.textContent = `${circSupply.toLocaleString()} KAS`;
-maxBox.textContent = `${maxSupply.toLocaleString()} KAS`;
+marketCapBox.textContent = await formatPrice(KASVALUE, CURRENCY, CIRCSUPPLY, 0);
+fdvBox.textContent = await formatPrice(KASVALUE, CURRENCY, MAXSUPPLY, 0);
+circBox.textContent = `${CIRCSUPPLY.toLocaleString()} KAS`;
+maxBox.textContent = `${MAXSUPPLY.toLocaleString()} KAS`;
 
 setInterval(getPrice, 15000);
 </script>

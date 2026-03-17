@@ -17,9 +17,13 @@ const RELAY = localStorage.getItem("relay") || "Damus";
 let TESTING = false;
 
 
+const MAXSUPPLY = 28704026601;
+let CIRCSUPPLY = 27287908721;
 let KASVALUE = 0.035;
 let KASPRICE = "$0.035";
 let USDRATE = 1;
+
+
 
 const CACHE_TIME = 5 * 60 * 1000;
 
