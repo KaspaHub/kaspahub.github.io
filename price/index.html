@@ -167,8 +167,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   margin: 0;
 }
 </style>
-<script type="text/javascript">
-'use strict';
+<script type="module">
 
 const msg = document.getElementById('msg');
 
@@ -242,7 +241,7 @@ function getCirculatingSupply() {
     .then(data => {
       if (typeof data === "number" && !isNaN(data)) {
         CIRCSUPPLY = data;
-        console.log("Circulating Supply:", CIRCSUPPLY);
+        console.log("%c[getCirculatingSupply API] %s", "color: #9980FF;", price);
       }
     })
     .catch(err => {

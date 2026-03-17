@@ -11,7 +11,7 @@ if (THEME === "dark") {
 }
 
 
-let CURRENCY = localStorage.getItem("currency") || "usd";
+let CURRENCY = localStorage.getItem("currency") || "USD";
 const PRICEAPI = localStorage.getItem("priceApi") || "CG";
 const RELAY = localStorage.getItem("relay") || "Damus";
 let TESTING = false;
@@ -28,13 +28,13 @@ let USDRATE = 1;
 const CACHE_TIME = 5 * 60 * 1000;
 
 const exchangeRates = {
-  usd: 1,
-  aed: 3.6725,
-  cny: 6.90705,
-  eur: 0.860845,
-  gbp: 0.744962,
-  rub: 78.25,
-  zar: 16.3375
+  AED: 3.6725,
+  CNY: 6.90705,
+  EUR: 0.860845,
+  GBP: 0.744962,
+  RUB: 78.25,
+  USD: 1,
+  ZAR: 16.3375
 };
 
 function getCache(key) {
@@ -74,6 +74,7 @@ async function updateKasValue() {
 
     if (Number.isFinite(price)) {
       setCache(cacheKey, price);
+      console.log("%c[updateKasValue API] %s", "color: #9980FF;", price);
       return price;
     }
   } catch (err) {
@@ -82,22 +83,24 @@ async function updateKasValue() {
 
 }
 
-async function getExchangeRate(currency) {
+async function getExchangeRate(userCurrency = CURRENCY) {
 
-  if (currency === "USD") return 1;
+  if (userCurrency === "USD") return 1;
 
-  const cacheKey = `kaspa_rate_${currency}`;
+  const cacheKey = `kaspa_rate_${userCurrency}`;
   const cached = getCache(cacheKey);
 
   if (cached) {
     return cached;
   }
 
-  const fallbackRate = exchangeRates[currency.toLowerCase()] || 1;
+  const fallbackRate = exchangeRates[userCurrency] || 1;
+
+  userCurrency = userCurrency.toLowerCase();
 
   (async () => {
     try {
-      const res = await fetch(`https://hexarate.paikama.co/api/rates/USD/${currency}/latest`);
+      const res = await fetch(`https://hexarate.paikama.co/api/rates/usd/${userCurrency}/latest`);
       if (!res.ok) throw new Error("API fetch failed");
 
       const data = await res.json();
@@ -106,26 +109,26 @@ async function getExchangeRate(currency) {
       if (!rate) throw new Error("Invalid rate");
 
       setCache(cacheKey, rate);
-      console.info(`USD/${currency}: ${rate}`);
+      console.log("%c[getExchangeRate API] %s", "color: #9980FF;", rate);
     } catch (err) {
-      console.warn(`Background fetch failed for ${currency} (will retry next call):`, err);
+      console.warn(`Background fetch failed for ${userCurrency} (will retry next call):`, err);
     }
   })();
 
   return fallbackRate;
 }
 
-async function formatPrice(value = KASVALUE, toCurrency = "usd", amount = 1, decimals = 3) {
+async function formatPrice(value = KASVALUE, toCurrency = "USD", amount = 1, decimals = 3) {
   if (!isFinite(value) || !isFinite(amount)) return;
 
   const currencySymbols = {
-    aed: "د.إ",
-    cny: "¥",
-    eur: "€",
-    gbp: "£",
-    rub: "₽",
-    usd: "$",
-    zar: "R",
+    AED: "د.إ",
+    CNY: "¥",
+    EUR: "€",
+    GBP: "£",
+    RUB: "₽",
+    USD: "$",
+    ZAR: "R",
   };
 
   const totalValue = value * amount;
@@ -520,13 +523,13 @@ function populateMenu() {
       💵
       <select id="currency-select" style="width:100%">
         <option value="" disabled selected hidden>Currency (${CURRENCY})</option>
-        <option value="aed">AED</option>
-        <option value="cny">CNY</option>
-        <option value="eur">EUR</option>
-        <option value="gbp">GBP</option>
-        <option value="rub">RUB</option>
-        <option value="usd">USD</option>
-        <option value="zar">ZAR</option>
+        <option value="AED">AED</option>
+        <option value="CNY">CNY</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="RUB">RUB</option>
+        <option value="USD">USD</option>
+        <option value="ZAR">ZAR</option>
       </select>
     </div>
 
@@ -607,15 +610,19 @@ function populateMenu() {
 }
 
 
-async function initKasPrice(currency) {
-  USDRATE = await getExchangeRate(currency);
+
+
+
+(async function init() {
+  try {
+  USDRATE = await getExchangeRate();
   KASVALUE = await updateKasValue();
 
-  KASPRICE = await formatPrice(KASVALUE, currency);
+  KASPRICE = await formatPrice(KASVALUE, CURRENCY);
   setPriceTag();
-  console.log(KASPRICE);
-}
+  } catch (err) {
+    console.error("Kaspa price / init failed:", err);
+  }
+})();
 
-
-initKasPrice(CURRENCY);
 populateMenu();
