@@ -221,6 +221,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           </tbody>
         </table>
       </div>
+      <div class="miniBtns">
+        <button class="btn" id="prevUtxos" disabled>Prev</button>
+        <button class="btn" id="nextUtxos" disabled>Next</button>
+        <span class="muted" style="margin: auto 0;" id="cursorUtxos"></span>
+      </div>
     </div>
   </div>
 
@@ -292,6 +297,9 @@ const domainRows = document.getElementById("domainRows");
 
 const utxoLoading = document.getElementById("utxoLoading");
 const utxoRows = document.getElementById("utxoRows");
+const prevUtxos = document.getElementById("prevUtxos");
+const nextUtxos = document.getElementById("nextUtxos");
+const cursorUtxos = document.getElementById("cursorUtxos");
 
 const transferType = document.getElementById("transferType");
 const explorerPic = document.getElementById("explorerPic");
@@ -300,6 +308,7 @@ let currentAddr = "";
 let tokens = null;
 let domains = null;
 let utxos = null;
+let utxosPage = 0;
 
 const txLimit = 40;
 
@@ -917,18 +926,18 @@ function renderDomains(domains) {
   }).join("");
 }
 
-function renderUTXOs(utxos) {
-  if (!utxos.length) {
+function renderUTXOs(pageUtxos) {
+  if (!pageUtxos.length) {
     utxoRows.innerHTML = `<tr><td colspan="5" class="muted">No UTXOs found.</td></tr>`;
     return;
   }
 
-  utxoRows.innerHTML = utxos.map(utxo => {
+  utxoRows.innerHTML = pageUtxos.map(utxo => {
     const txId = utxo.outpoint.transactionId || "-";
     const index = utxo.outpoint.index ?? "-";
     const amount = formatKas(utxo.utxoEntry.amount);
     const daaScore = utxo.utxoEntry.blockDaaScore || "-";
-    const isCoinbase = utxo.isCoinbase ? "Yes" : "No";
+    const isCoinbase = utxo.utxoEntry.isCoinbase ? "Yes" : "No";
     const shortTxId = shortenEnd(txId);
     return `
       <tr>
@@ -940,6 +949,15 @@ function renderUTXOs(utxos) {
       </tr>
     `;
   }).join("");
+}
+
+function renderUtxoPage() {
+  const start = utxosPage * 40;
+  const pageUtxos = (utxos || []).slice(start, start + 40);
+  renderUTXOs(pageUtxos);
+  prevUtxos.disabled = utxosPage === 0;
+  nextUtxos.disabled = !utxos || utxos.length <= start + 40;
+  cursorUtxos.textContent = utxos && utxos.length > 0 ? `Page ${utxosPage + 1}` : "";
 }
 
 async function loadBatch(type) {
@@ -1032,7 +1050,8 @@ async function loadUTXOs() {
   utxoLoading.classList.remove("hidden");
   try {
     utxos = await fetchUTXOs(currentAddr);
-    renderUTXOs(utxos);
+    utxosPage = 0;
+    renderUtxoPage();
   } catch {
     utxoRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load UTXOs.</td></tr>`;
   } finally {
@@ -1082,6 +1101,7 @@ async function runSearch(inputAddr) {
   tokens = null;
   domains = null;
   utxos = null;
+  utxosPage = 0;
 
   renderHeader(addr);
   const label = fetchAddressLabel(addr);
@@ -1154,6 +1174,21 @@ nextTransfers.addEventListener("click", async () => {
     }
   }
   renderPage(type);
+});
+
+prevUtxos.addEventListener("click", () => {
+  if (utxosPage > 0) {
+    utxosPage--;
+    renderUtxoPage();
+  }
+});
+
+nextUtxos.addEventListener("click", () => {
+  const start = utxosPage * 40;
+  if (utxos && utxos.length > start + 40) {
+    utxosPage++;
+    renderUtxoPage();
+  }
 });
 
 
