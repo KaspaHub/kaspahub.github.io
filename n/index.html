@@ -82,7 +82,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <p>Please enter Nostr public key</p>
         <input type="text" id="searchBox" placeholder="npub..." required="">
         <div class="w-footer">
-            <p><a href="/nostr/register/">Create a donation page</a></p>
+            <p><a href="https://tiptr.ee/account/create/">Create a donation page</a></p>
             <button class="button" id="searchBtn">Search</button>
         </div>
     </section>
@@ -90,7 +90,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </main>
 
 <div id="footer" style="text-align:center; padding:16px;">
-  <a href="/nostr/register/">
+  <a href="https://tiptr.ee/account/create/">
     Join me on Nostr!
   </a>
 </div>
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const escapedWalletAddress = escHtml(walletAddress);
 
     const menuItems = [];
-    menuItems.push(`<a href="https://kaspahub.org/nostr/register/">Sign up</a><button type="button" data-copy-npub>Copy Public Key</button>`);
+    menuItems.push(`<a href="https://tiptr.ee/account/create/">Sign up</a><button type="button" data-copy-npub>Copy Public Key</button>`);
     if (lud16) {
         menuItems.push(`<button type="button" data-copy-lud16>Copy Lightning</button>`);
     }

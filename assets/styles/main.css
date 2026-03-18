@@ -103,7 +103,7 @@ time {
 html#light {
 	--background-color: #F7F8F9;
 	--border-color: #c0cedd;
-	--box-shadow: unset;
+	--box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 	--input-bg-color: #EEF0F3;
 	--card-hover-bg: #E8EAED;
 	--link: #1C62B9;
@@ -114,7 +114,7 @@ html#light {
 html#dark {
 	--background-color: rgba(255, 255, 255, 0.1);
 	--border-color: rgba(255, 255, 255, 0.17);
-	--box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+	--box-shadow: unset;
 	--input-bg-color: rgba(0,0,0, 0.1);
 	--card-hover-bg: rgba(255, 255, 255, 0.15);
 	--link: #6AB5DB;
