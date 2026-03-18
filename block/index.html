@@ -346,7 +346,7 @@ function computeTotals(inputs, outputs) {
   return { totalIn, totalOut, fee, totalTransferred, inputAddrs };
 }
 
-function renderAddrsCell(addrs, title, color, map = null) {
+function renderAddrsCell(addrs, title, color = "inherit", map = null) {
   if (addrs.length === 0) return "-";
   if (addrs.length === 1) return linkAddress(addrs[0]);
 
@@ -426,14 +426,14 @@ async function renderTransactions(txs) {
 
       if (isCoinbase) {
         fromCell = '<span class="muted">Block reward</span>';
-        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
-        amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", 'inherit', outMap);
+        amountHtml = `<span>${formatKas(totalOut, true)}</span>`;
       } else {
         let fromContent = fromAddrs.map(id => linkTx(id)).join('<br>');
         fromCell = fromAddrs.length > 1 ? `<details><summary class="expandable-row muted">Multiple sources (${fromAddrs.length})</summary><div class="receiver-list">${fromContent}</div></details>` : (fromAddrs[0] ? linkTx(fromAddrs[0]) : '-');
 
-        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
-        amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", 'inherit', outMap);
+        amountHtml = `<span>${formatKas(totalOut, true)}</span>`;
       }
 
       let status = '<span class="accepted">Accepted</span>';
