@@ -4,21 +4,21 @@
   "description": "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
   "link": "https://kaspa.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa.com",
   "description": "Leading Kaspa DeFi Platform with L2 DEX, lending & borrowing, and launchpad. Seamless L1 marketplace for trading KRC-721 NFTs, KRC-20 tokens, and KNS domains on Kaspa’s BlockDAG.",
   "link": "https://www.kaspa.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspacom.webp",
-  "features": ["reviewed", "dex", "marketplace", "launchpad", "education"]
+  "features": ["reviewed", "dex", "marketplace", "launchpad"]
 },
 {
   "name": "KASmedia",
   "description": "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
   "link": "https://www.kasmedia.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasmedia.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa Kii",
@@ -172,21 +172,21 @@
   "description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
   "link": "https://kaspa.news",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-black.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed", "social"]
 },
 {
   "name": "Kaspa Social",
   "description": "A community-driven social media platform for the Kaspa ecosystem, enabling users to share news, articles, X and YouTube content, and engage in forums with minimal moderation and personalized dashboards.",
   "link": "https://kaspa.social",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.social.webp",
-  "features": ["reviewed", "education", "social"]
+  "features": ["reviewed", "social"]
 },
 {
   "name": "KasLens",
   "description": "AI-powered tool for real-time Kaspa market analysis, offering sentiment analysis, news summaries, predictive charting, and instant price movement notifications.",
   "link": "https://kaspa-lens.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaslens.webp",
-  "features": ["reviewed", "analytics", "education"]
+  "features": ["reviewed", "analytics"]
 },
 {
   "name": "Kaspa Network Hashrate",
@@ -487,35 +487,35 @@
   "description": "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
   "link": "https://kasparchive.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa Daily",
   "description": "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
   "link": "https://kaspadaily.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspadaily.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kasbun",
   "description": "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
   "link": "https://www.kasbun.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasbun.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa University",
   "description": "The first Learn-to-Earn platform on Kaspa L1. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
   "link": "https://kaspa.university",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.university.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "BMT University",
   "description": "A learn-to-earn educational platform offering in-depth courses on Kaspa technology and cryptocurrency topics, with interactive quizzes, progress tracking, certificates, and token rewards for completion.",
   "link": "https://bmtuniversity.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bmtuniversity.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "MyKai",
@@ -529,21 +529,21 @@
   "description": "Explains how UTXOs work and how covenants enable programmable spending rules in Kaspa.",
   "link": "https://utxo-covenants.vercel.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "KIGS",
   "description": "An interactive learning platform focused on Kaspa, offering engaging modules on network, wallets, transactions, UTXOs, and BlockDAG, designed for beginners with links to deeper resources.",
   "link": "https://kigs.pages.dev",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kigs.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa FAQ",
   "description": "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
   "link": "https://www.kaspafaq.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspafaq.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "Mineable Money",
@@ -557,21 +557,21 @@
   "description": "Brazilian Kaspa community focused on creating educational content, tutorials, blog posts, and actively participating in real-life events and conferences.",
   "link": "https://kaspaflow.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspaflow.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "BuyKas",
   "description": "A comprehensive Chinese-language resource introducing Kaspa, covering its technology, history, ecosystem, and key resources.",
   "link": "https://buykas.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "education"]
+  "features": ["reviewed"]
 },
 {
   "name": "KaspHub",
   "description": "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
   "link": "https://kasphub.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "education", "tool"]
+  "features": ["reviewed", "tool"]
 },
 {
   "name": "Kaspa Map",
@@ -2230,7 +2230,7 @@
   "description": "A collection of articles exploring Kaspa and the cryptocurrency ecosystem, providing insights and practical information for users.",
   "link": "https://kaspahub.org/posts/",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "education"]
+  "features": ["verified"]
 },
 {
   "name": "Kaspa Hub KRC20 Explorer",
@@ -2244,13 +2244,13 @@
   "description": "A visual infographic showing the current state of Kaspa at a glance, with essential technical highlights and a clear map of the growing ecosystem.",
   "link": "https://kaspahub.org/overview/",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "education"]
+  "features": ["verified"]
 },
 {
   "name": "Kaspa Hub Speed",
   "description": "An interactive real-time visualization comparing blockchain block speeds across major networks.",
   "link": "https://kaspahub.org/speed/",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "education", "visualizer"]
+  "features": ["verified", "visualizer"]
 }
 ]

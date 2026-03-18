@@ -484,8 +484,7 @@ hr {
 	width: 1em;
 }
 
-.checked::after, .reviewed::after, .verified::after {
-	content: "Reviewed by Kaspa Hub Team.";
+.reviewed::after, .verified::after {
 	position: absolute;
 	bottom: 125%;
 	left: 50%;
@@ -510,11 +509,11 @@ hr {
 }
 
 .reviewed::after {
-	content: "Reviewed by Kaspa Hub Team";
+	content: "Reviewed";
 }
 
 .verified::after {
-	content: "Sponsored";
+	content: "Verified";
 }
 
 .reviewed:hover::after, .verified:hover::after {
@@ -1047,7 +1046,7 @@ dialog {
 
 .w-footer {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin-top: 20px;
 	vertical-align: baseline;
 }
