@@ -21,14 +21,14 @@
   "features": ["reviewed", "education"]
 },
 {
-  "name": "Kaspa Industrial Initiative",
+  "name": "Kaspa Kii",
   "description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
   "link": "https://kaspa-kii.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kii.webp",
   "features": ["reviewed"]
 },
 {
-  "name": "Kaspa Ecosystem Foundation",
+  "name": "Kaspa Eco Foundation",
   "description": "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
   "link": "https://www.kaspafoundation.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kef.webp",
