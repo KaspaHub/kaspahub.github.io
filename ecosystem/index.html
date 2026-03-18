@@ -43,36 +43,36 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 "url": "https://kaspahub.org/ecosystem/",
 "description": "The projects and initiatives building Kaspa. Explore apps, protocols, and community-driven efforts shaping the ecosystem.",
 "itemListElement": [
-	{
-		"@type": "ListItem",
-		"position": 1,
-		"name": "Kaspa Hub",
-		"url": "https://kaspahub.org"
-	},
-	{
-		"@type": "ListItem",
-		"position": 2,
-		"name": "Kaspa.org",
-		"url": "https://www.kaspa.org"
-	},
-	{
-		"@type": "ListItem",
-		"position": 3,
-		"name": "Kaspa.com",
-		"url": "https://www.kaspa.com"
-	},
-	{
-		"@type": "ListItem",
-		"position": 4,
-		"name": "KASmedia",
-		"url": "https://www.kasmedia.com"
-	},
-	{
-		"@type": "ListItem",
-		"position": 5,
-		"name": "Kasia",
-		"url": "https://kasia.fyi"
-	}
+    {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Kaspa Hub",
+        "url": "https://kaspahub.org"
+    },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kaspa.org",
+        "url": "https://www.kaspa.org"
+    },
+    {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Kaspa.com",
+        "url": "https://www.kaspa.com"
+    },
+    {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "KASmedia",
+        "url": "https://www.kasmedia.com"
+    },
+    {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Kasia",
+        "url": "https://kasia.fyi"
+    }
 ]
 }
 </script>
@@ -83,39 +83,35 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-2">
-
 <div class="intro">
-	<h1>Ecosystem</h1>
-	<p>Explore the projects and initiatives building Kaspa.</p>
+    <h1>Ecosystem</h1>
+    <p>Explore the projects and initiatives building Kaspa.</p>
 </div>
 
 <div class="search-sort-controls">
-	<select id="sortSelect" aria-label="Sort Menu">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
+    <select id="sortSelect" aria-label="Sort Menu">
+        <option value="default">Default</option>
+        <option value="az">A - Z</option>
+        <option value="za">Z - A</option>
+    </select>
 </div>
 
 <div class="main-content-area">
 
 <section class="sidebar theme-1">
-	
-	<input type="search" id="searchInput" placeholder="Search..."/>
+    
+    <input type="search" id="searchInput" placeholder="Search..."/>
 
-	<h3>Category<span id="counter"></span></h3>
+    <h3>Category<span id="counter"></span></h3>
         <div class="category-pills">
             <button class="category-pill active" data-feature="all">All</button>
             <button class="category-pill" data-feature="analytics">Analytics</button>
-            <button class="category-pill" data-feature="book">Books</button>
             <button class="category-pill" data-feature="bridge">Bridges</button>
             <button class="category-pill" data-feature="cex">CEX</button>
             <button class="category-pill" data-feature="dex">DEX</button>
-            <button class="category-pill" data-feature="development">For Developers</button>
-            <button class="category-pill" data-feature="education">Education</button>
+            <button class="category-pill" data-feature="development">Developer Tools</button>
             <button class="category-pill" data-feature="blockExplorer">Explorers</button>
             <button class="category-pill" data-feature="gaming">Gaming</button>
-            <button class="category-pill" data-feature="layer2">Layer 2</button>
             <button class="category-pill" data-feature="launchpad">Launchpads</button>
             <button class="category-pill" data-feature="marketplace">Marketplaces</button>
             <button class="category-pill" data-feature="mining">Mining</button>
@@ -127,11 +123,17 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <button class="category-pill" data-feature="visualizer">Visualizers</button>
             <button class="category-pill" data-feature="wallet">Wallets</button>
         </div>
+
+        <div class="layer2-toggle"><input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label for="layer2Toggle">Include Layer 2</label></div>
+
+
+
+
 </section>
 
 <section class="filter-list-main">
-	<div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
-	<button class="theme-1" id="loadMoreBtn">Load More</button>
+    <div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
+    <button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 
 </div>
@@ -204,6 +206,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .category-pill:hover {
     filter: brightness(1.1);
 }
+.layer2-toggle {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
 </style>
 <script type="text/javascript">
@@ -220,6 +228,7 @@ const categoryPills = document.querySelectorAll('.category-pill');
 const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
+const layer2Toggle = document.getElementById('layer2Toggle');
 
 const featureTags = {
     reviewed: { label: '', class: 'reviewed' },
@@ -259,10 +268,12 @@ function renderItems(reset = false) {
 function filterItems() {
     const selectedFeature = document.querySelector('.category-pill.active')?.dataset.feature || 'all';
     const searchTerm = searchInput.value.trim().toLowerCase();
+    const includeLayer2 = layer2Toggle.checked;
     filteredItems = [];
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (selectedFeature !== 'all' && !item.features.includes(selectedFeature)) continue;
+        if (!includeLayer2 && item.features.includes('layer2')) continue;
         if (searchTerm && !item.name.toLowerCase().includes(searchTerm) && !item.description.toLowerCase().includes(searchTerm)) continue;
         filteredItems.push(item);
     }
@@ -288,6 +299,7 @@ categoryPills.forEach(pill => pill.addEventListener('click', () => {
 
 searchInput.addEventListener('input', filterItems);
 sortSelect.addEventListener('change', filterItems);
+layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
 fetch('/assets/data/ecosystem.json')
