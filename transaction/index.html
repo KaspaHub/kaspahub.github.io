@@ -405,7 +405,7 @@ function renderTransfers(json, totals) {
         const amt = out.amount ?? 0;
         html += `
           <tr>
-            <td class="muted">Miner reward</td>
+            <td class="muted">Block reward</td>
             <td>${linkAddress(addr)}</td>
             <td><span>${formatKas(BigInt(amt), true)}</span></td>
           </tr>
@@ -639,7 +639,11 @@ async function runSearch(inputTxId) {
   try {
     json = await fetchTransaction(txid);
     if (!json) {
-      throw new Error("Transaction not found.");
+      await new Promise(r => setTimeout(r, 100));
+      json = await fetchTransaction(txid);
+      if (!json) {
+        throw new Error("Transaction not found.");
+      }
     }
   } catch (err) {
     // addToast("Error", "Could not load transaction data.");
