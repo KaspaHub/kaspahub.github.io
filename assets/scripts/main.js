@@ -214,6 +214,17 @@ async function setPriceTag() {
 // initServiceWorker();
 //sw ^
 
+function escHtml(input) {
+  return String(input).replace(/[&<>"'`]/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '`': '&#96;',
+  })[char]);
+}
+
 function formatDate(ts, includeSeconds = false, locale = "en-US") {
   if (!ts) return "-";
 
@@ -245,22 +256,13 @@ function formatDate(ts, includeSeconds = false, locale = "en-US") {
   return `${dateStr}, ${d.toLocaleTimeString(locale, timeOptions)}`;
 }
 
-
-function escHtml(input) {
-  return String(input).replace(/[&<>"'`]/g, char => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '`': '&#96;',
-  })[char]);
-}
-
 function shortenMiddle(str, head = 8, tail = 8) {
   let s = String(str ?? "");
 
-  if (s.startsWith("kaspa:")) {
+  if (
+    s.startsWith("kaspa:") &&
+    !(typeof window === "undefined" || window.innerWidth > window.innerHeight)
+  ) {
     s = s.slice(6);
   }
 
