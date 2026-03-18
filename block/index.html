@@ -270,17 +270,17 @@ function formatKas(somis, fixed = false) {
 
 function transactionUrl(hash) {
   const h = String(hash ?? "").trim();
-  return h ? "/transaction/?q=" + encodeURIComponent(h) : "#";
+  return h ? "/transaction/?q=" + h : "#";
 }
 
 function blockUrl(hash) {
   const h = String(hash ?? "").trim();
-  return h ? "/block/?q=" + encodeURIComponent(h) : "#";
+  return h ? "/block/?q=" + h : "#";
 }
 
 function walletUrl(addr) {
   const a = String(addr ?? "").trim();
-  return a ? "/address/?q=" + encodeURIComponent(a) : "#";
+  return a ? "/address/?q=" + a : "#";
 }
 
 function linkAddress(addr, label) {
@@ -305,7 +305,7 @@ function linkBlock(hash, label = null) {
 }
 
 async function fetchBlock(blockHash) {
-  const url = `https://api.kaspa.org/blocks/${encodeURIComponent(blockHash)}?includeTransactions=true`;
+  const url = `https://api.kaspa.org/blocks/${blockHash}?includeTransactions=true`;
   const res = await fetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`HTTP ${res.status}`);

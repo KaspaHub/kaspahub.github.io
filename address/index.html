@@ -879,7 +879,7 @@ function renderTokens(tokens) {
     const balance = formatTokenAmount(token.balance, token.dec);
     const locked = formatTokenAmount(token.locked, token.dec);
     const dec = token.dec || 0;
-    const tokenUrl = `/krc20/?q=${encodeURIComponent(token.tick)}`;
+    const tokenUrl = `/krc20/?q=${token.tick}`;
     return `
       <tr>
         <td><a class="explorerTx" href="${tokenUrl}">${tick}</a></td>

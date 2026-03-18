@@ -256,18 +256,23 @@ function formatDate(ts, includeSeconds = false, locale = "en-US") {
   return `${dateStr}, ${d.toLocaleTimeString(locale, timeOptions)}`;
 }
 
-function shortenMiddle(str, head = 8, tail = 8) {
+function shortenMiddle(str, head = 6, tail = 6) {
   let s = String(str ?? "");
 
-  if (
-    s.startsWith("kaspa:") &&
-    !(typeof window === "undefined" || window.innerWidth > window.innerHeight)
-  ) {
-    s = s.slice(6);
+  if (s.length < 10) return s;
+
+  if (s.startsWith("kaspa:")) {
+
+    if (typeof window === "undefined" || window.innerWidth > window.innerHeight) {
+
+      return s.slice(0, head + 6) + "..." + s.slice(-tail);
+
+    } else {
+      return s.slice(6, head + 6) + "..." + s.slice(-tail);
+    }
+
   }
 
-  if (s.length <= head + tail + 3) return s;
-  return s.slice(0, head) + "..." + s.slice(-tail);
 }
 
 function shortenAddress(str, head = 13, tail = 8) {

@@ -271,17 +271,17 @@ function formatKas(somis, fixed = false) {
 
 function walletUrl(addr) {
   const a = String(addr ?? "").trim();
-  return a ? WALLET_BASE + encodeURIComponent(a) : "#";
+  return a ? WALLET_BASE + a : "#";
 }
 
 function transactionUrl(hash) {
   const h = String(hash ?? "").trim();
-  return h ? TRANSACTION_BASE + encodeURIComponent(h) : "#";
+  return h ? TRANSACTION_BASE + h : "#";
 }
 
 function blockUrl(hash) {
   const h = String(hash ?? "").trim();
-  return h ? BLOCK_BASE + encodeURIComponent(h) : "#";
+  return h ? BLOCK_BASE + h : "#";
 }
 
 function linkAddress(addr, label) {
@@ -306,7 +306,7 @@ function linkBlock(hash, label) {
 }
 
 async function fetchTransaction(txid) {
-  const url = `https://api.kaspa.org/transactions/${encodeURIComponent(txid)}?resolve_previous_outpoints=full`;
+  const url = `https://api.kaspa.org/transactions/${txid}?resolve_previous_outpoints=full`;
   const res = await fetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -314,7 +314,7 @@ async function fetchTransaction(txid) {
 
   const resolvePromises = (json.inputs || []).map(async (inp) => {
     if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
-      const prevUrl = `https://api.kaspa.org/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
+      const prevUrl = `https://api.kaspa.org/transactions/${inp.previous_outpoint_hash}`;
       const prevRes = await fetch(prevUrl);
       if (!prevRes.ok) return;
       const prevJson = await prevRes.json();
