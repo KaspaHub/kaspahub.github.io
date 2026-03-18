@@ -8,8 +8,6 @@
 <script type="text/javascript">
 'use strict';
 
-// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
-
 document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
 
 </script>
@@ -259,13 +257,16 @@ function withSeparators(numStr) {
 
 function formatKas(somis, fixed = false) {
   if (somis == null) return "-";
-  const n = Number(somis) / 1e8;
+  const n = BigInt(somis);
+  const kas = n / 100000000n;
+  const rem = n % 100000000n;
+  const dec = rem.toString().padStart(8, '0');
+  const intStr = kas.toString();
   if (fixed) {
-    return n.toFixed(8) + " KAS";
+    return intStr + '.' + dec + " KAS";
   }
-  const fixedStr = n.toFixed(8);
-  const [int, dec] = fixedStr.split('.');
-  return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
+  const s = intStr.replace(/^0+(?=\d)/, "");
+  return withSeparators(s) + '.' + dec + " KAS";
 }
 
 function transactionUrl(hash) {
@@ -345,24 +346,15 @@ function computeTotals(inputs, outputs) {
   return { totalIn, totalOut, fee, totalTransferred, inputAddrs };
 }
 
-function renderAddrsCell(addrs, title, color, map = null, totalTarget = null) {
+function renderAddrsCell(addrs, title, color, map = null) {
   if (addrs.length === 0) return "-";
   if (addrs.length === 1) return linkAddress(addrs[0]);
 
   let content = '';
   if (map && addrs.length > 1) {
-    let totalContrib = 0n;
-    addrs.forEach(a => totalContrib += map.get(a) || 0n);
-
-    const useTarget = totalTarget !== null ? totalTarget : totalContrib;
-
     content = addrs.map(addr => {
       const rawAmt = map.get(addr) || 0n;
-      const prop = (rawAmt * useTarget) / totalContrib;
-      const rem = (rawAmt * useTarget) % totalContrib;
-      let finalSomes = prop;
-      if (rem * 2n >= totalContrib) finalSomes += 1n;
-      return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(finalSomes, true)}</span>`;
+      return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(rawAmt, true)}</span>`;
     }).join('<br>');
   } else {
     content = addrs.map(addr => linkAddress(addr)).join('<br>');
@@ -418,30 +410,28 @@ async function renderTransactions(txs) {
         return inp.previousOutpoint?.transactionId || "-";
       }).filter(Boolean);
 
-      const toAddrs = outputs.map(out => out.verboseData?.scriptPublicKeyAddress).filter(Boolean);
-
       let fromCell, toCell, amountHtml;
 
       const totalOut = outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n);
 
+      const outMap = new Map();
+      outputs.forEach(out => {
+        const addr = out.verboseData?.scriptPublicKeyAddress;
+        if (addr) {
+          const amt = BigInt(out.amount || 0);
+          outMap.set(addr, (outMap.get(addr) || 0n) + amt);
+        }
+      });
+      const toAddrs = Array.from(outMap.keys());
+
       if (isCoinbase) {
         fromCell = '<span class="muted">Block reward</span>';
-        const outMap = new Map();
-        outputs.forEach(out => {
-          const addr = out.verboseData?.scriptPublicKeyAddress;
-          if (addr) outMap.set(addr, BigInt(out.amount || 0));
-        });
         toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
         amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
       } else {
         let fromContent = fromAddrs.map(id => linkTx(id)).join('<br>');
         fromCell = fromAddrs.length > 1 ? `<details><summary class="expandable-row muted">Multiple sources (${fromAddrs.length})</summary><div class="receiver-list">${fromContent}</div></details>` : (fromAddrs[0] ? linkTx(fromAddrs[0]) : '-');
 
-        const outMap = new Map();
-        outputs.forEach(out => {
-          const addr = out.verboseData?.scriptPublicKeyAddress;
-          if (addr) outMap.set(addr, BigInt(out.amount || 0));
-        });
         toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
         amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
       }
