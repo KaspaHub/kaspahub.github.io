@@ -47,7 +47,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section class="intro">
   <div id="explorerIntro" style="opacity: 0;">
-    <h1>Kaspa Explorer</h1>
+    <h1>Block Explorer</h1>
     <p class="hint">Explore Kaspa transactions, wallets, tokens, domains, and more.</p>
   </div>
   <form id="searchContainer" class="searchBar">
@@ -61,7 +61,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="explorerHdr">
     <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">Kaspa Block</h1>
+      <h1 id="hdrLine">Kaspa Address</h1>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
@@ -312,32 +312,6 @@ async function fetchBlock(blockHash) {
   return await res.json();
 }
 
-async function fetchTransaction(txid) {
-  const url = `https://api.kaspa.org/transactions/${encodeURIComponent(txid)}?resolve_previous_outpoints=full`;
-  const res = await fetch(url);
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
-
-  const resolvePromises = (json.inputs || []).map(async (inp) => {
-    if (inp.previous_outpoint_amount == null || inp.previous_outpoint_address == null) {
-      const prevUrl = `https://api.kaspa.org/transactions/${encodeURIComponent(inp.previous_outpoint_hash)}`;
-      const prevRes = await fetch(prevUrl);
-      if (!prevRes.ok) return;
-      const prevJson = await prevRes.json();
-      const outIndex = Number(inp.previous_outpoint_index);
-      const prevOut = prevJson.outputs[outIndex];
-      if (prevOut) {
-        inp.previous_outpoint_amount = prevOut.amount;
-        inp.previous_outpoint_address = prevOut.script_public_key_address;
-      }
-    }
-  });
-  await Promise.all(resolvePromises);
-
-  return json;
-}
-
 function computeTotals(inputs, outputs) {
   let totalIn = 0n;
   let totalOut = 0n;
@@ -435,55 +409,44 @@ async function renderTransactions(txs) {
   if (Array.isArray(txs)) {
     for (const tx of txs) {
       const txId = tx.verboseData?.transactionId || tx.transaction_id || "-";
-      const fullTx = await fetchTransaction(txId);
-      const inputs = fullTx?.inputs || tx.inputs || [];
-      const outputs = fullTx?.outputs || tx.outputs || [];
-      const isCoinbase = fullTx?.subnetwork_id === "0100000000000000000000000000000000000000" || inputs.length === 0;
-      const { totalTransferred, inputAddrs, fee } = computeTotals(inputs, outputs);
-      const mass = withSeparators(fullTx?.mass || 0);
+      const inputs = tx.inputs || [];
+      const outputs = tx.outputs || [];
+      const isCoinbase = tx.subnetworkId === "0100000000000000000000000000000000000000" || inputs.length === 0;
+      const mass = withSeparators(tx.mass || 0);
 
-      const inputMap = new Map();
-      inputs.forEach(inp => {
-        const addr = inp.previous_outpoint_address;
-        if (addr) {
-          const amt = BigInt(inp.previous_outpoint_amount || 0);
-          inputMap.set(addr, (inputMap.get(addr) || 0n) + amt);
-        }
-      });
+      const fromAddrs = inputs.map(inp => {
+        return inp.previousOutpoint?.transactionId || "-";
+      }).filter(Boolean);
 
-      const outputMap = new Map();
-      outputs.forEach(out => {
-        const addr = out.script_public_key_address;
-        if (addr) {
-          const amt = BigInt(out.amount || 0);
-          outputMap.set(addr, (outputMap.get(addr) || 0n) + amt);
-        }
-      });
-
-      const fromAddrs = Array.from(inputMap.keys());
-      const toAddrs = Array.from(outputMap.keys());
-
-      const isSelfTx = !isCoinbase && fromAddrs.length === 1 && toAddrs.length === 1 && fromAddrs[0] === toAddrs[0];
+      const toAddrs = outputs.map(out => out.verboseData?.scriptPublicKeyAddress).filter(Boolean);
 
       let fromCell, toCell, amountHtml;
 
+      const totalOut = outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n);
+
       if (isCoinbase) {
         fromCell = '<span class="muted">Block reward</span>';
-        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outputMap);
-        amountHtml = `<span style="color:#2ee59d">${formatKas(BigInt(outputs.reduce((s, o) => s + BigInt(o.amount || 0), 0n)), true)}</span>`;
-      } else if (isSelfTx) {
-        fromCell = linkAddress(fromAddrs[0]);
-        toCell = `${linkAddress(toAddrs[0])} <span class="muted">(self)</span>`;
-        amountHtml = fee > 0n
-          ? `<span style="color:#ff6b6b">${formatKas(fee, true)}</span> <span class="muted">(fee)</span>`
-          : `<span style="color:#2ee59d">0.00000000 KAS</span>`;
+        const outMap = new Map();
+        outputs.forEach(out => {
+          const addr = out.verboseData?.scriptPublicKeyAddress;
+          if (addr) outMap.set(addr, BigInt(out.amount || 0));
+        });
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
+        amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
       } else {
-        fromCell = renderAddrsCell(fromAddrs, "Multiple sources", '#ff6b6b', inputMap, totalTransferred);
-        toCell = renderAddrsCell(toAddrs.filter(addr => !inputAddrs.has(addr)), "Multiple recipients", '#2ee59d', outputMap, totalTransferred);
-        amountHtml = `<span style="color:#2ee59d">${formatKas(totalTransferred, true)}</span>`;
+        let fromContent = fromAddrs.map(id => linkTx(id)).join('<br>');
+        fromCell = fromAddrs.length > 1 ? `<details><summary class="expandable-row muted">Multiple sources (${fromAddrs.length})</summary><div class="receiver-list">${fromContent}</div></details>` : (fromAddrs[0] ? linkTx(fromAddrs[0]) : '-');
+
+        const outMap = new Map();
+        outputs.forEach(out => {
+          const addr = out.verboseData?.scriptPublicKeyAddress;
+          if (addr) outMap.set(addr, BigInt(out.amount || 0));
+        });
+        toCell = renderAddrsCell(toAddrs, "Multiple recipients", '#2ee59d', outMap);
+        amountHtml = `<span style="color:#2ee59d">${formatKas(totalOut, true)}</span>`;
       }
 
-      let status = (fullTx?.is_accepted === true) ? '<span class="accepted">Accepted</span>' : '<span class="notAccepted">Not accepted</span>';
+      let status = '<span class="accepted">Accepted</span>';
 
       html += `
         <tr>
