@@ -122,8 +122,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <tr>
               <th>TxID</th>
               <th id="counterpartyTh">Peer</th>
-              <th>Status</th>
               <th>Timestamp</th>
+              <th>Status</th>
               <th>Amount</th>
             </tr>
           </thead>
@@ -564,9 +564,12 @@ async function renderSummary(addr, balanceSomes, txCountVal, txs) {
 function getTransactionType(tx) {
   if (!tx.inputs || tx.inputs.length === 0) {
     return "coinbase";
-  } else {
-    return "transfer";
   }
+  const firstInput = tx.inputs[0];
+  if (tx.inputs.length === 1 && (!firstInput || !firstInput.previous_outpoint_address)) {
+    return "coinbase";
+  }
+  return "transfer";
 }
 
 function getNetChange(tx, addr) {
@@ -623,7 +626,7 @@ function getFromTo(tx, addr, net) {
     } else if (fromItems.length === 1) {
       fromStr = fromItems[0].addr;
     } else {
-      fromStr = (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : (type === "coinbase" ? "Block reward" : addr);
+      fromStr = type === "coinbase" ? "Block reward" : (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : addr;
     }
     toStr = addr;
   } else if (net < 0n) {
@@ -695,7 +698,7 @@ function renderAll(pageTxs, addr) {
         const shortFrom = shortenMiddle(from);
         counterpartyHtml = linkAddress(from, shortFrom);
       } else {
-        const shortFrom = shortenMiddle(from);
+        const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
         counterpartyHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
       }
     } else if (net < 0n) {
@@ -707,7 +710,7 @@ function renderAll(pageTxs, addr) {
         const shortTo = shortenMiddle(to);
         counterpartyHtml = linkAddress(to, shortTo);
       } else {
-        const shortTo = shortenMiddle(to);
+        const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
         counterpartyHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
       }
     } else {
@@ -743,8 +746,8 @@ function renderAll(pageTxs, addr) {
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
         <td>${counterpartyHtml}</td>
-        <td><span class="${statusClass}">${statusText}</span></td>
         <td>${age}</td>
+        <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
     `;
@@ -793,7 +796,7 @@ function renderReceived(pageTxs, addr) {
       const shortFrom = shortenMiddle(from);
       senderHtml = linkAddress(from, shortFrom);
     } else {
-      const shortFrom = shortenMiddle(from);
+      const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
       senderHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
     }
 
@@ -852,7 +855,7 @@ function renderSent(pageTxs, addr) {
       const shortTo = shortenMiddle(to);
       receiverHtml = linkAddress(to, shortTo);
     } else {
-      const shortTo = shortenMiddle(to);
+      const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
       receiverHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
     }
 
