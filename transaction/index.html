@@ -407,7 +407,7 @@ function renderTransfers(json, totals) {
           <tr>
             <td class="muted">Miner reward</td>
             <td>${linkAddress(addr)}</td>
-            <td><span style="color:#2ee59d">${formatKas(BigInt(amt), true)}</span></td>
+            <td><span>${formatKas(BigInt(amt), true)}</span></td>
           </tr>
         `;
       });
@@ -451,7 +451,7 @@ function renderTransfers(json, totals) {
         <tr>
           <td>${linkAddress(inputKeys[0])}</td>
           <td>${linkAddress(outputKeys[0])} <span class="muted">(self)</span></td>
-          <td><span style="color:${totals.fee ? '#ff6b6b' : '#2ee59d'}">${formatKas(totals.fee, true)}</span> <span class="muted">(fee)</span></td>
+          <td><span style="color:${totals.fee ? '#ff6b6b' : 'inherit'}">${formatKas(totals.fee, true)}</span> <span class="muted">(fee)</span></td>
         </tr>
       `;
     } else {
@@ -487,12 +487,12 @@ function renderTransfers(json, totals) {
             const rem = (amt * totals.totalTransferred) % totalExternal;
             let final = prop;
             if (rem * 2n >= totalExternal) final += 1n;
-            toContent += linkAddress(addr) + ' - <span style="color:#2ee59d">' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+            toContent += linkAddress(addr) + ' - <span>' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
           });
           toContent += '</div></details>';
         }
 
-        html += '<tr><td>' + fromContent + '</td><td>' + toContent + '</td><td><span style="color:#2ee59d">' + formatKas(totals.totalTransferred, true) + '</span></td></tr>';
+        html += '<tr><td>' + fromContent + '</td><td>' + toContent + '</td><td><span>' + formatKas(totals.totalTransferred, true) + '</span></td></tr>';
       } else {
         inputMap.forEach((inAmt, fromAddr) => {
           const changeAmt = outputMap.get(fromAddr) || 0n;
@@ -514,7 +514,7 @@ function renderTransfers(json, totals) {
               const rem = (amt * transferredAmt) % totalRecv;
               let final = prop;
               if (rem * 2n >= totalRecv) final += 1n;
-              return `${linkAddress(addr)} - <span style="color:#2ee59d">${(Number(final) / 1e8).toFixed(8)} KAS</span><br>`;
+              return `${linkAddress(addr)} - <span>${(Number(final) / 1e8).toFixed(8)} KAS</span><br>`;
             }).join('');
 
             if (receivers.length === 1) {
@@ -523,11 +523,11 @@ function renderTransfers(json, totals) {
               toCellContent = '<details><summary class="expandable-row muted">Multiple addresses (' + receivers.length + ')</summary><div class="receiver-list">' + receiverItems + '</div></details>';
             }
 
-            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span style="color:#2ee59d">' + formatKas(transferredAmt, true) + '</span></td></tr>';
+            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span>' + formatKas(transferredAmt, true) + '</span></td></tr>';
           }
 
           if (changeAmt > 0n) {
-            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + linkAddress(fromAddr) + ' <span class="muted">(change)</span></td><td><span style="color:#2ee59d">' + formatKas(changeAmt, true) + '</span></td></tr>';
+            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + linkAddress(fromAddr) + ' <span class="muted">(change)</span></td><td><span>' + formatKas(changeAmt, true) + '</span></td></tr>';
           }
         });
       }
