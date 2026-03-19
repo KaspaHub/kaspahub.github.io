@@ -559,7 +559,7 @@ function populateMenu() {
 
     <div class="drawer-item">
       💵
-      <select id="currency-select" style="width:100%">
+      <select id="currency-select" name="currency" aria-label="Choose currency">
         <option value="" disabled selected hidden>Currency (${CURRENCY})</option>
         <option value="AED">AED</option>
         <option value="CNY">CNY</option>
@@ -573,7 +573,7 @@ function populateMenu() {
 
     <div class="drawer-item">
       💹
-      <select id="price-api-select" style="width:100%" disabled>
+      <select id="price-api-select" name="price-api" aria-label="Select price API" disabled>
         <option value="" disabled selected hidden>Price API (${PRICEAPI})</option>
         <option value="CG">CoinGecko</option>
         <option value="KO">Kaspa.org</option>
@@ -583,7 +583,7 @@ function populateMenu() {
 
     <div class="drawer-item" style="display: none;">
       📡
-      <select id="relay-select" style="width:100%" disabled>
+      <select id="relay-select" name="currency" aria-label="Choose Nostr Relay" disabled>
         <option value="" disabled selected hidden>Relay (${RELAY})</option>
         <option value="Damus">Damus</option>
         <option value="Nos">Nos</option>
