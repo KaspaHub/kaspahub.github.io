@@ -1,20 +1,19 @@
 {
-  "name": "Apps",
-  "short_name": "Apps",
-  "description": "Web Applications by Kaspa Hub",
-  "lang": "en",
-  "start_url": "/apps/?source=pwa",
-  "scope": "/",
-  "id": "/",
+  "name": "Kaspa Hub - Explorer",
+  "short_name": "Kaspa Explorer",
+  "description": "Your starting point for everything Kaspa.",
+  "lang": "en-US",
+  "start_url": "/explorer/?source=pwa",
+  "scope": "/explorer/",
+  "id": "/explorer/",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#000000",
-  "background_color": "#000000",
+  "background_color": "#231F20",
   "icons": [
     { "src": "/assets/logo-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "/assets/logo-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/assets/logo-180.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/assets/logo-144.png", "sizes": "144x144", "type": "image/png" },
     { "src": "/assets/logo-96.png", "sizes": "96x96", "type": "image/png" }
   ]
 }

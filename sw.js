@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 'v2.4.1';
+const CACHE_VERSION = 'v2.6';
 const START_URL = '/';
 const OFFLINE_URL = '/offline/';
 const ASSETS = [

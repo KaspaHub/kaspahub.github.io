@@ -3,9 +3,7 @@
 <img src="https://kaspahub.org/assets/logo.webp" alt="Kaspa Hub Logo" title="Kaspa Hub Logo" width="80"/>
 
 # Kaspa Hub
-
-A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.
-<br/><a href="https://kaspahub.org">Kaspa</a>, <a href="https://kaspahub.org/nostr/">Nostr</a>, <a href="https://kaspahub.org/linux/distributions/">Linux</a>.
+An open-source, community-driven platform that brings together resources, initiatives, tools, and connections for anyone interested in the Kaspa network.
 
 </div>
 
@@ -21,14 +19,14 @@ Want to help improve the website or report an issue? Open a GitHub issue or make
 Send feedback and help us improve.
 * [mail@kaspahub.org](mailto:mail@kaspahub.org)
 
-## Donations
-Support Kaspa Hub development with a donation:
-* [https://tiptr.ee/KaspaHub](https://tiptr.ee/KaspaHub)
+## Contact Us
+Feel free to reach out if you have any questions on X.
+* [https://x.com/KaspaHub](https://x.com/KaspaHub)
 
 ## License
 Kaspa Hub is licensed under the MIT License with a **custom clause**. See the LICENSE file for details.
 * [LICENSE](LICENSE)
 
-## Contact Us
-Feel free to reach out if you have any questions on X.
-* [https://x.com/KaspaHub](https://x.com/KaspaHub)
+## Donations
+Support Kaspa Hub development with a donation:
+* [https://tiptr.ee/KaspaHub](https://tiptr.ee/KaspaHub)

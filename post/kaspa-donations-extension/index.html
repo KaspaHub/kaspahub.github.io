@@ -30,10 +30,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="manifest" href="/assets/manifest.json" />
-<script defer src="/assets/scripts/main.js"></script>
+<link rel="stylesheet" type="text/css" href="https://kaspahub.org/assets/styles/main.css" />
+<script defer src="https://kaspahub.org/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/posts/manifest.json" />
 
 <script id="schema" type="application/ld+json">
 {
@@ -77,31 +78,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <article class="theme-1">
 <h1>Kaspa Donations Extension</h1>
-<a href="https://chromewebstore.google.com/detail/agcnkekgijcaffdpjfaimacnininmdej"><img style="border-radius: 20px; height: 58px;" src="https://kaspahub.org/assets/chromewebstore.webp" alt="Chrome Web Store badge, with border"></a>
-	<br>
-	<br>
-	<h3>What is Kaspa Donations?</h3>
-	<p>Kaspa Donations is a browser extension for Chromium-based browsers (such as Chrome, Brave, Edge, and Opera) that makes it easy to donate Kaspa cryptocurrency to participating websites and authors. Simple and direct!</p>
-	<br>
-	<h3>What is Kaspa?</h3>
-	<p>Kaspa is the fastest, most scalable proof-of-work cryptocurrency, utilizing a BlockDAG-based distributed ledger technology and the energy-efficient kHeavyHash algorithm to deliver sub-second block times, high throughput, and robust decentralization. Learn more at <a href="https://kaspa.org" target="_blank">kaspa.org</a>.</p>
-	<br>
-	<h3>I own a website. How to accept Kaspa Donations?</h3>
-	<p>Simply add Kaspa meta tags to the &lt;head&gt; section of your HTML using this format:</p>
-	<pre>&lt;meta name="kaspa:wallet" content="YOUR_KASPA_WALLET_ADDRESS_HERE" /&gt;<br>&lt;meta name="kaspa:title" content="YOUR_MESSAGE_HERE" /&gt; <span style="color: orange;">(optional)</span></pre>
-	<p>Extension will detect these tags and display your donation info to users. You can specify a Kaspa address for your entire site, set different addresses per page, or even assign addresses to individual article author - it’s up to you!</p>
-	<br>
-	<h3>Who Is Accepting Kaspa Donations?</h3>
-	<p>These websites are now accepting Kaspa donations from their visitors:</p>
-	<ul>
-		<li><a href="https://kaspahub.org/" target="_blank">kaspahub.org</a></li>
-		<li><a href="https://kaspahub.github.io/" target="_blank">kaspahub.github.io</a></li>
-	</ul>
-	<br>
-	<h3>Privacy</h3>
-	<p>If you’re concerned about privacy, rest assured: Kaspa Donations is fully open source, just like all our projects. It’s lightweight, simple, and runs locally on your device. You can review the code anytime on <a href="https://github.com/KaspaHub/kaspa-donations-extension-chrome" target="_blank" rel="noopener noreferrer">GitHub</a>. Learn more in our <a href="/post/kaspa-donations-extension/privacy/">Privacy Policy</a>.</p>
-<img src="thumbnail.webp" alt="kaspa qr code">
+<a href="https://chromewebstore.google.com/detail/agcnkekgijcaffdpjfaimacnininmdej"><img style="border-radius: 20px; height: 58px;" src="https://kaspahub.org/assets/chromewebstore.webp" alt="Chrome Web Store badge, with border"></a> <br> <br> <h3>What is Kaspa Donations?</h3> <p>Kaspa Donations is a browser extension for Chromium-based browsers (such as Chrome, Brave, Edge, and Opera) that makes it easy to donate Kaspa cryptocurrency to participating websites and authors. Simple and direct!</p> <br> <h3>What is Kaspa?</h3> <p>Kaspa is the fastest, most scalable proof-of-work cryptocurrency, utilizing a BlockDAG-based distributed ledger technology and the energy-efficient kHeavyHash algorithm to deliver sub-second block times, high throughput, and robust decentralization. Learn more at <a href="https://kaspa.org" target="_blank">kaspa.org</a>.</p> <br> <h3>I own a website. How to accept Kaspa Donations?</h3> <p>Simply add Kaspa meta tags to the &lt;head&gt; section of your HTML using this format:</p> <pre>&lt;meta name="kaspa:wallet" content="YOUR_KASPA_WALLET_ADDRESS_HERE" /&gt;<br>&lt;meta name="kaspa:title" content="YOUR_MESSAGE_HERE" /&gt; <span style="color: orange;">(optional)</span></pre> <p>Extension will detect these tags and display your donation info to users. You can specify a Kaspa address for your entire site, set different addresses per page, or even assign addresses to individual article author - it’s up to you!</p> <br> <h3>Who Is Accepting Kaspa Donations?</h3> <p>These websites are now accepting Kaspa donations from their visitors:</p> <ul> <li><a href="https://kaspahub.org/" target="_blank">kaspahub.org</a></li> <li><a href="https://kaspahub.github.io/" target="_blank">kaspahub.github.io</a></li> </ul> <br> <h3>Privacy</h3> <p>If you’re concerned about privacy, rest assured: Kaspa Donations is fully open source, just like all our projects. It’s lightweight, simple, and runs locally on your device. You can review the code anytime on <a href="https://github.com/KaspaHub/kaspa-donations-extension-chrome" target="_blank" rel="noopener noreferrer">GitHub</a>. Learn more in our <a href="/post/kaspa-donations-extension/privacy/">Privacy Policy</a>.</p> <img src="thumbnail.webp" alt="kaspa qr code">
 </article>
+
 </main>
 
 <footer>
@@ -109,10 +88,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
 </div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
 
 <div id="advertisement">

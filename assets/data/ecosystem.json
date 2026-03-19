@@ -105,13 +105,6 @@
   "features": ["reviewed", "marketplace"]
 },
 {
-  "name": "TheCryptoSky",
-  "description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
-  "link": "https://thecryptosky.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/thecryptosky.webp",
-  "features": ["jobs", "marketplace"]
-},
-{
   "name": "KasMart",
   "description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
   "link": "https://kasmart.org",
@@ -655,7 +648,7 @@
   "description": "A simple, non-custodial, open source app (web + mobile) that lets you create and share payment requests for cryptocurrencies.",
   "link": "https://www.bitrequest.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitrequest.webp",
-  "features": ["reviewed", "development", "solutions"]
+  "features": ["development", "solutions"]
 },
 {
   "name": "ChainVsDag",

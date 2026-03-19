@@ -30,10 +30,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="manifest" href="/assets/manifest.json" />
-<script defer src="/assets/scripts/main.js"></script>
+<link rel="stylesheet" type="text/css" href="https://kaspahub.org/assets/styles/main.css" />
+<script defer src="https://kaspahub.org/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/posts/manifest.json" />
 
 <script id="schema" type="application/ld+json">
 {
@@ -88,25 +89,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <article class="theme-1">
 <h1>What Is Kaspa’s Block Time and Why Does It Matter?</h1>
-<p>Kaspa now processes a new block every 0.10 seconds. But how is that possible, and what does it mean for mining, security, and decentralization?</p>
-<p>On May 5, 2025, around 15:00 UTC, Kaspa activated its <strong>Crescendo hardfork</strong>. Since then, the network has been producing <strong>10 blocks per second</strong>-which means a new block every <strong>100 milliseconds</strong>.</p>
-<p>That’s faster than any other major cryptocurrency, and it’s not just for show.</p>
-<h2>How Can It Go That Fast and Still Be Secure?</h2>
-<p>Most proof-of-work networks slow things down to stay secure. If block times are too short, miners start producing competing blocks, and the network wastes energy rejecting them. That makes it easier for bad actors to disrupt the system.</p>
-<p>Kaspa solves this by using a <strong>blockDAG</strong> distributed ledger technology, which lets blocks be created and confirmed in <strong>parallel</strong>-not just one at a time. That design allows the network to stay fast, while its consensus protocol (<strong>GHOSTDAG</strong>) ensures everyone still agrees on the order of events.</p>
-<p>So even at 10 blocks per second, Kaspa remains secure and coordinated-without slowing down or centralizing.</p>
-<h2>What About Miners?</h2>
-<p>With 864,000 blocks produced daily, small miners have more chances to earn rewards-far more than on slower networks. Instead of fighting over a handful of blocks, more miners can win over time, which spreads rewards and keeps mining decentralized.</p>
-<p>To avoid flooding the network with too many coins, Kaspa adjusted its reward system during the Crescendo upgrade. Block rewards were reduced to one-tenth of what they were before. For example, if the reward was 55 KAS at 1 block per second, it’s now 5.5 KAS at 10 blocks per second.</p>
-<p>The result? Same overall payout-more evenly distributed.</p>
-<h2>So… What’s Next?</h2>
-<p>Kaspa’s 10 blocks per second is just the beginning. Developers plan to scale the network to <strong>32 blocks per second</strong>, and eventually <strong>100 BPS</strong>. That would mean a block every 10 milliseconds.</p>
-<p>Even at that speed, Kaspa remains lightweight. It uses pruning and compact proofs to reduce the data each node has to store, so running a full node stays cheap and accessible. That’s a big deal for keeping the network open to anyone-not just big players.</p>
-<p>And, with the <strong>DAG KNIGHT</strong> upgrade, the protocol will become even simpler and more efficient under the hood-without changing how it works for users or miners.</p>
-<h2>Final Thought</h2>
-<p>Kaspa’s 100ms block time isn’t just a technical achievement-it’s a shift in how we think about proof-of-work networks. It’s fast, secure, and decentralized all at once.</p>
-<p>And with more upgrades coming, it’s only getting better.</p>
+<p>Kaspa now processes a new block every 0.10 seconds. But how is that possible, and what does it mean for mining, security, and decentralization?</p> <p>On May 5, 2025, around 15:00 UTC, Kaspa activated its <strong>Crescendo hardfork</strong>. Since then, the network has been producing <strong>10 blocks per second</strong>-which means a new block every <strong>100 milliseconds</strong>.</p> <p>That’s faster than any other major cryptocurrency, and it’s not just for show.</p> <h2>How Can It Go That Fast and Still Be Secure?</h2> <p>Most proof-of-work networks slow things down to stay secure. If block times are too short, miners start producing competing blocks, and the network wastes energy rejecting them. That makes it easier for bad actors to disrupt the system.</p> <p>Kaspa solves this by using a <strong>blockDAG</strong> distributed ledger technology, which lets blocks be created and confirmed in <strong>parallel</strong>-not just one at a time. That design allows the network to stay fast, while its consensus protocol (<strong>GHOSTDAG</strong>) ensures everyone still agrees on the order of events.</p> <p>So even at 10 blocks per second, Kaspa remains secure and coordinated-without slowing down or centralizing.</p> <h2>What About Miners?</h2> <p>With 864,000 blocks produced daily, small miners have more chances to earn rewards-far more than on slower networks. Instead of fighting over a handful of blocks, more miners can win over time, which spreads rewards and keeps mining decentralized.</p> <p>To avoid flooding the network with too many coins, Kaspa adjusted its reward system during the Crescendo upgrade. Block rewards were reduced to one-tenth of what they were before. For example, if the reward was 55 KAS at 1 block per second, it’s now 5.5 KAS at 10 blocks per second.</p> <p>The result? Same overall payout-more evenly distributed.</p> <h2>So… What’s Next?</h2> <p>Kaspa’s 10 blocks per second is just the beginning. Developers plan to scale the network to <strong>32 blocks per second</strong>, and eventually <strong>100 BPS</strong>. That would mean a block every 10 milliseconds.</p> <p>Even at that speed, Kaspa remains lightweight. It uses pruning and compact proofs to reduce the data each node has to store, so running a full node stays cheap and accessible. That’s a big deal for keeping the network open to anyone-not just big players.</p> <p>And, with the <strong>DAG KNIGHT</strong> upgrade, the protocol will become even simpler and more efficient under the hood-without changing how it works for users or miners.</p> <h2>Final Thought</h2> <p>Kaspa’s 100ms block time isn’t just a technical achievement-it’s a shift in how we think about proof-of-work networks. It’s fast, secure, and decentralized all at once.</p> <p>And with more upgrades coming, it’s only getting better.</p>
 </article>
+
 </main>
 
 <footer>
@@ -114,10 +99,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
 </div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
 
 <div id="advertisement">

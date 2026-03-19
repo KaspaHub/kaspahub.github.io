@@ -30,10 +30,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="manifest" href="manifest.json" />
-<script defer src="/assets/scripts/main.js"></script>
+<link rel="stylesheet" type="text/css" href="https://kaspahub.org/assets/styles/main.css" />
+<script defer src="https://kaspahub.org/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/news/manifest.json" />
 
 </head>
 <body>
@@ -52,10 +53,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
 </div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
 
 <div id="advertisement">
@@ -183,7 +184,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                 <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
                 <a style="color: inherit; text-decoration: none;" href="https://kaspahub.org/n/?user=${npub}">
                     <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
-                    <p style="color:#555;margin:0">@${userProfile.username || ''}</p>
+                    <span class="muted">@${userProfile.username || ''}</span>
                 </a>
             </div>
             <p class="note-content">${processPostContent(post.content)}</p>

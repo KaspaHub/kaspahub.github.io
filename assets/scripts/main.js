@@ -542,11 +542,7 @@ function populateMenu() {
     { name: "Home", icon: "🏠", href: "/" },
     { name: "Articles", icon: "📚", href: "/posts/" },
     { name: "News", icon: "📰", href: "/news/" },
-    { name: "Explorer", icon: "🌐", href: "/explorer/" },
-    { name: "Apps", icon: "✨", href: "/apps/" },
-    { name: "Kaspa", icon: "⛓️", href: "/ecosystem/" },
-    { name: "Linux", icon: "🐧", href: "/linux/distributions/" },
-    { name: "Nostr", icon: "📡", href: "/nostr/" }
+    { name: "Explorer", icon: "🌐", href: "/explorer/" }
   ];
 
   let html = items.map(item => {

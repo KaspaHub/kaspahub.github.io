@@ -10,9 +10,9 @@ Location: Global
 To the Kaspa community for their support and contributions.
 
 /* SITE */
-Purpose: Providing a hub for Kaspa, Bitcoin, Linux and Nostr resources.
-Open Source: Kaspa Hub is an entirely open-source project. We welcome community contributions!
+Purpose: Providing a information about Kaspa protocol.
+Open Source: Kaspa Hub is an entirely open-source project.
 GitHub: https://github.com/KaspaHub/kaspahub.github.io
-Last Update: 2026-03-13
+Last Update: 2026-03-20
 Technologies: HTML, CSS, JavaScript
 Language: English

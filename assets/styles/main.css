@@ -77,7 +77,7 @@ footer {
 
 footer::after {
 	font-size: 14px;
-	content: "© 2026 Kaspa Hub – v2.5";
+	content: "© 2026 Kaspa Hub – v2.6";
 	color: #6C757D;
 	opacity: 0.9;
 	text-align: center;
@@ -550,10 +550,15 @@ img {
 	word-wrap: break-word;
 	max-width: 900px;
 	max-height: 800px;
-	min-height: 200px;
 	width: stretch;
 	margin: 0 auto;
 	margin-bottom: 20px;
+}
+
+#avatar {
+	width: 150px;
+	height: 150px;
+	border-radius: 20px;
 }
 
 pre {

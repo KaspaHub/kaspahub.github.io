@@ -30,10 +30,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
 <meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
 
-<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="manifest" href="/assets/manifest.json" />
-<script defer src="/assets/scripts/main.js"></script>
+<link rel="stylesheet" type="text/css" href="https://kaspahub.org/assets/styles/main.css" />
+<script defer src="https://kaspahub.org/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/posts/manifest.json" />
 
 <script id="schema" type="application/ld+json">
 {
@@ -59,7 +60,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   "image": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/userdata/u7/profile_image.webp"
 },
 "datePublished": "2026-01-02T08:00:00+08:00",
-"dateModified": "2026-01-26T08:00:00+08:00"
+"dateModified": "2026-03-20T08:00:00+08:00"
 }
 </script>
 
@@ -88,69 +89,69 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <header id="intro"></header><script async src="/assets/scripts/intro.js"></script>
 
 <article class="theme-1">
-    <h1 id="coinName">Kaspa (KAS)</h1>
+<h1 id="coinName">Kaspa (KAS)</h1>
 
-        <section class="coin-section">
-          <h2>Overview</h2>
-          <p>Kaspa is a proof-of-work cryptocurrency implementing the GHOSTDAG protocol, a generalization of Bitcoin’s Nakamoto Consensus that allows multiple blocks to coexist and be ordered without orphaning. This enables extremely high block rates while maintaining decentralization, security, and scalability — a trilemma solution within a PoW framework.</p>
-          <ul>
-            <li><strong>Launch Year:</strong> 2021</li>
-            <li><strong>Origin:</strong> Original</li>
-            <li><strong>Team:</strong> Yonatan Sompolinsky and Michael Sutton</li>
-          </ul>
-        </section>
+<section class="coin-section">
+  <h2>Overview</h2>
+  <p>Kaspa is a proof-of-work cryptocurrency implementing the GHOSTDAG protocol, a generalization of Bitcoin’s Nakamoto Consensus that allows multiple blocks to coexist and be ordered without orphaning. This enables extremely high block rates while maintaining decentralization, security, and scalability — a trilemma solution within a PoW framework.</p>
+  <ul>
+    <li><strong>Launch Year:</strong> 2021</li>
+    <li><strong>Origin:</strong> Original</li>
+    <li><strong>Team:</strong> Yonatan Sompolinsky and Michael Sutton</li>
+  </ul>
+</section>
 
-        <section class="coin-section">
-          <h2>Technical Details</h2>
-          <ul>
-            <li><strong>Distributed Ledger Technology:</strong> BlockDAG (Directed Acyclic Graph)</li>
-            <li><strong>Consensus Mechanism:</strong> Proof of Work (PoW)</li>
-            <li><strong>Consensus Protocol:</strong> PHANTOM GHOSTDAG (Generalization of Nakamoto Consensus)</li>
-            <li><strong>Hashing Algorithm:</strong> kHeavyHash</li>
-            <li><strong>Block Time:</strong> ≈ 0.1 seconds</li>
-            <li><strong>Transaction Finality:</strong> < 7 seconds (probabilistic), instant visibility.</li>
-            <li><strong>Max TPS Achieved:</strong> ≈ 5,584 TPS (On October 2, 2025)</li>
-            <li><strong>Theoretical TPS Capacity:</strong> ≈ 40,000+ TPS (with 100 BPS upgrade)</li>
-            <li><strong>Average Transaction Fee:</strong> ≈ $0.00001</li>
-          </ul>
-        </section>
+<section class="coin-section">
+  <h2>Technical Details</h2>
+  <ul>
+    <li><strong>Distributed Ledger Technology:</strong> BlockDAG (Directed Acyclic Graph)</li>
+    <li><strong>Consensus Mechanism:</strong> Proof of Work (PoW)</li>
+    <li><strong>Consensus Protocol:</strong> PHANTOM GHOSTDAG (Generalization of Nakamoto Consensus)</li>
+    <li><strong>Hashing Algorithm:</strong> kHeavyHash</li>
+    <li><strong>Block Time:</strong> ≈ 0.1 seconds</li>
+    <li><strong>Transaction Finality:</strong> < 7 seconds (probabilistic), instant visibility.</li>
+    <li><strong>Max TPS Achieved:</strong> ≈ 5,584 TPS (On October 2, 2025)</li>
+    <li><strong>Theoretical TPS Capacity:</strong> ≈ 40,000+ TPS (with 100 BPS upgrade)</li>
+    <li><strong>Average Transaction Fee:</strong> ≈ $0.00001</li>
+  </ul>
+</section>
 
-        <section class="coin-section">
-          <h2>Tokenomics</h2>
-          <ul>
-            <li><strong>Circulating Supply:</strong> > 27,144,783,296 KAS</li>
-            <li><strong>Max Supply:</strong> 28,704,026,601 KAS (calculated), 29,000,000,000 KAS (hardcoded)</li>
-            <li><strong>Distribution Model:</strong> Fair launch — no pre-mine, ICO, or VC allocation. Emission follows a geometric decay model, with block rewards reducing smoothly over time instead of abrupt halvings.</li>
-            <li><strong>Issue Price:</strong> N/A (fair-mined from genesis)</li>
-          </ul>
-        </section>
+<section class="coin-section">
+  <h2>Tokenomics</h2>
+  <ul>
+    <li><strong>Circulating Supply:</strong> > 27,144,783,296 KAS</li>
+    <li><strong>Max Supply:</strong> 28,704,026,601 KAS (calculated), 29,000,000,000 KAS (hardcoded)</li>
+    <li><strong>Distribution Model:</strong> Fair launch — no pre-mine, ICO, or VC allocation. Emission follows a geometric decay model, with block rewards reducing smoothly over time instead of abrupt halvings.</li>
+    <li><strong>Issue Price:</strong> N/A (fair-mined from genesis)</li>
+  </ul>
+</section>
 
-        <section class="coin-section">
-          <h2>Decentralization</h2>
-          <p>High — Kaspa is open-source and ASIC-friendly, encouraging broad participation in mining and node operation. Anyone with compatible hardware can join the network, making it one of the most decentralized PoW systems today.</p>
-        </section>
+<section class="coin-section">
+  <h2>Decentralization</h2>
+  <p>High — Kaspa is open-source and ASIC-friendly, encouraging broad participation in mining and node operation. Anyone with compatible hardware can join the network, making it one of the most decentralized PoW systems today.</p>
+</section>
 
-        <section class="coin-section">
-          <h2>Security</h2>
-          <p>High — Backed by robust proof-of-work and the GHOSTDAG protocol, Kaspa achieves fast block confirmation without sacrificing the probabilistic security model of PoW. Its DAG structure resists 51% attacks more effectively than linear blockchains under high throughput.</p>
-        </section>
+<section class="coin-section">
+  <h2>Security</h2>
+  <p>High — Backed by robust proof-of-work and the GHOSTDAG protocol, Kaspa achieves fast block confirmation without sacrificing the probabilistic security model of PoW. Its DAG structure resists 51% attacks more effectively than linear blockchains under high throughput.</p>
+</section>
 
-        <section class="coin-section">
-          <h2>Energy Efficiency</h2>
-          <p>Moderate — While still PoW-based, Kaspa’s efficient block propagation and lower individual block energy cost make it significantly more energy-efficient per transaction than Bitcoin or Litecoin.</p>
-        </section>
+<section class="coin-section">
+  <h2>Energy Efficiency</h2>
+  <p>Moderate — While still PoW-based, Kaspa’s efficient block propagation and lower individual block energy cost make it significantly more energy-efficient per transaction than Bitcoin or Litecoin.</p>
+</section>
 
-        <section class="coin-section">
-          <h2>Links</h2>
-          <ul>
-            <li><a href="https://kaspa.org" target="_blank">Main Website</a></li>
-            <li><a href="https://eprint.iacr.org/2018/104.pdf" target="_blank">Whitepaper</a></li>
-          </ul>
-        </section>
+<section class="coin-section">
+  <h2>Links</h2>
+  <ul>
+    <li><a href="https://kaspa.org" target="_blank">Main Website</a></li>
+    <li><a href="https://eprint.iacr.org/2018/104.pdf" target="_blank">Whitepaper</a></li>
+  </ul>
+</section>
 
-      <section class="coin-section">
-        <h2>Price Chart</h2>
-      </section>
+<section class="coin-section">
+<h2>Price Chart</h2>
+</section>
 
 <style type="text/css">
 #chart-container { height: 700px; }
@@ -194,6 +195,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </div>
 
 </article>
+
 </main>
 
 <footer>
@@ -201,10 +203,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kaspahub.org/n/?user=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt" aria-label="Nostr" class="icon-nostr"></a>
+<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
 </div>
-<p>A community-powered, open-source platform that brings together resources, initiatives, and connections for everyone interested in decentralized technologies.</p>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
 
 <div id="advertisement">
