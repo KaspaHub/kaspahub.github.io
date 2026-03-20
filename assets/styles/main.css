@@ -1007,6 +1007,7 @@ dialog {
 	min-width: 100px;
 	width: 300px;
 	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
 	background-color: rgba(255, 255, 255, 0.15);
 	padding: 17px;
 }
@@ -1238,7 +1239,6 @@ dialog {
 	margin-top: 5px;
 	margin-left: -148px;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.17);
 	padding: 0;
 	transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1341,6 +1341,7 @@ dialog.theme-1::backdrop {
 	z-index: 5;
 	border-radius: 0 20px 0 0;
 	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
 	background-color: rgba(255, 255, 255, 0.15);
 	padding: 17px;
 }
@@ -1420,6 +1421,7 @@ dialog.theme-1::backdrop {
 		right: 0;
 		z-index: 9;
 		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 		background-color: rgba(255, 255, 255, 0.15);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.17);
 	}
