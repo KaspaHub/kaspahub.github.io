@@ -1120,17 +1120,24 @@
   "features": ["reviewed", "wallet"]
 },
 {
-  "name": "Kastle",
-  "description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
-  "link": "https://kastle.cc",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kastlewallet.webp",
-  "features": ["reviewed", "wallet"]
-},
-{
   "name": "OKX Wallet",
   "description": "User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains.",
   "link": "https://web3.okx.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/okxwallet.webp",
+  "features": ["reviewed", "wallet"]
+},
+{
+  "name": "ELLIPAL",
+  "description": "Air-gapped cold storage hardware wallet with EAL5+ secure element and anti-tamper self-destruct protection. Supports Kaspa and Kasplex L2.",
+  "link": "https://www.ellipal.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ellipal.webp",
+  "features": ["wallet"]
+},
+{
+  "name": "Kastle",
+  "description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
+  "link": "https://kastle.cc",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kastlewallet.webp",
   "features": ["reviewed", "wallet"]
 },
 {
@@ -1180,13 +1187,6 @@
   "description": "Lightweight, open-source Kaspa browser extension wallet (a fork of Kasware) with full Kasplex L2 support, KRC-20 token management, and seamless Web3 interactions.",
   "link": "https://kasperia-doc.github.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasperia.webp",
-  "features": ["wallet"]
-},
-{
-  "name": "ELLIPAL",
-  "description": "Air-gapped cold storage hardware wallet with EAL5+ secure element and anti-tamper self-destruct protection. Supports Kaspa and Kasplex L2.",
-  "link": "https://www.ellipal.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ellipal.webp",
   "features": ["wallet"]
 },
 {
