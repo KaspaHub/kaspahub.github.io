@@ -182,7 +182,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         article.innerHTML = `
             <div class="note-user">
                 <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
-                <a style="color: inherit; text-decoration: none;" href="https://kaspahub.org/n/?user=${npub}">
+                <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npub}">
                     <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
                     <span class="muted">@${userProfile.username || ''}</span>
                 </a>

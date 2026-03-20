@@ -1183,10 +1183,10 @@
   "features": ["wallet"]
 },
 {
-  "name": "DEX.cc Wallet",
-  "description": "A non-custodial wallet by DEX.cc Lab, offering multi-account management, built-in bridge, integration with AMM swaps, and more.",
-  "link": "https://dex.cc/app",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/dexcc.webp",
+  "name": "ELLIPAL",
+  "description": "Air-gapped cold storage hardware wallet with EAL5+ secure element and anti-tamper self-destruct protection. Supports Kaspa and Kasplex L2.",
+  "link": "https://www.ellipal.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ellipal.webp",
   "features": ["wallet"]
 },
 {
@@ -1222,6 +1222,13 @@
   "description": "Offline air-gapped cold storage solution for Kaspa, supporting secure wallet creation, transaction management, and message signing with mnemonic phrase security.",
   "link": "https://kaskold.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaskold.webp",
+  "features": ["wallet"]
+},
+{
+  "name": "DEX.cc Wallet",
+  "description": "A non-custodial wallet by DEX.cc Lab, offering multi-account management, built-in bridge, integration with AMM swaps, and more.",
+  "link": "https://dex.cc/app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/dexcc.webp",
   "features": ["wallet"]
 },
 {
