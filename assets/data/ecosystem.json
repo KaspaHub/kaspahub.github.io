@@ -312,7 +312,7 @@
   "description": "Decentralized B2B AI directory on Kaspa connecting businesses for networking, collaboration, and growth with AI-driven tools for discovery, insights, automation, and seamless connectivity.",
   "link": "https://tbd.directory",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/tbdai.webp",
-  "features": []
+  "features": ["reviewed"]
 },
 {
   "name": "SeedBuster",
