@@ -2203,47 +2203,5 @@
   "link": "https://github.com/ShaiW/blanim",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
   "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Hub Donation Pages",
-  "description": "Create Kaspa donation page in seconds. Ideal for creators, streamers, developers, and causes to receive tips directly to your own wallet.",
-  "link": "https://kaspahub.org/nostr/register/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "solutions"]
-},
-{
-  "name": "Kaspa Hub Reviews",
-  "description": "Evaluate any website by entering its domain and see trust ratings from multiple independent reviewers to spot safe, unrated, or risky projects.",
-  "link": "https://kaspahub.org/reviews/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "security"]
-},
-{
-  "name": "Kaspa Hub Articles",
-  "description": "A collection of articles exploring Kaspa and the cryptocurrency ecosystem, providing insights and practical information for users.",
-  "link": "https://kaspahub.org/posts/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified"]
-},
-{
-  "name": "Kaspa Hub KRC20 Explorer",
-  "description": "A dedicated KRC20 token explorer for viewing detailed information on individual tokens deployed on the Kaspa network.",
-  "link": "https://kaspahub.org/krc20/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "tool"]
-},
-{
-  "name": "Kaspa Hub Overview",
-  "description": "A visual infographic showing the current state of Kaspa at a glance, with essential technical highlights and a clear map of the growing ecosystem.",
-  "link": "https://kaspahub.org/overview/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified"]
-},
-{
-  "name": "Kaspa Hub Speed",
-  "description": "An interactive real-time visualization comparing blockchain block speeds across major networks.",
-  "link": "https://kaspahub.org/speed/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "visualizer"]
 }
 ]
