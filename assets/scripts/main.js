@@ -542,7 +542,10 @@ function populateMenu() {
     { name: "Home", icon: "🏠", href: "/" },
     { name: "Articles", icon: "📚", href: "/posts/" },
     { name: "News", icon: "📰", href: "/news/" },
-    { name: "Explorer", icon: "🌐", href: "/explorer/" }
+    { name: "Explorer", icon: "🔍", href: "/explorer/" },
+    { name: "Overview", icon: "📊", href: "/overview/" },
+    { name: "Projects", icon: "💼", href: "/projects/" },
+    { name: "Donations", icon: "💸", href: "https://tiptr.ee/KaspaHub" }
   ];
 
   let html = items.map(item => {
