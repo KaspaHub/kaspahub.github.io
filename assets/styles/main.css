@@ -19,7 +19,7 @@ html {
 	min-height: 100vh;
 	max-height: 100vh;
 	font-family: "Mulish", sans-serif;
-	font-size: 1.1rem;
+	font-size: 1.07rem;
 	font-weight: 500;
 	cursor: default;
 	overflow-wrap: break-word;
@@ -1147,7 +1147,6 @@ dialog {
 #resources, #information {
 	color: #6C757D;
 	opacity: 0.9;
-	font-size: 0.9rem;
 	max-width: 350px;
 	margin: 0 auto;
 	text-align: center;
