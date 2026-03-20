@@ -254,19 +254,17 @@ summary {
 #thumbnail {
 	border-radius: 20px;
 	width: 100%;
-	/*aspect-ratio: 16 / 5;*/
-	height: calc(80vw * 5 / 16);
+	aspect-ratio: 16 / 5;
 	object-fit: cover;
-	transition: height 0.7s ease 0s;
+	transition: transform 0.7s ease;
 	display: block;
 	cursor: zoom-in;
 }
 
 #thumbnail:hover {
-	height: calc(80vw * 6 / 16);
+	transform: scale(1.05);
 	transition-delay: 0.3s;
 }
-
 
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
