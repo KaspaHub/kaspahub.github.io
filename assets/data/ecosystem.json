@@ -336,13 +336,6 @@
   "features": ["reviewed"]
 },
 {
-  "name": "KasOS",
-  "description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
-  "link": "https://github.com/deokman420/KasOS",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasos.webp",
-  "features": []
-},
-{
   "name": "Kasia Book",
   "description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
   "link": "https://kasiabook.com",
@@ -2058,6 +2051,13 @@
   "features": ["reviewed", "development"]
 },
 {
+  "name": "KasOS",
+  "description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
+  "link": "https://github.com/deokman420/KasOS",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasos.webp",
+  "features": ["reviewed", "development"]
+},
+{
   "name": "Kloak Node",
   "description": "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
   "link": "https://github.com/kloakprotocol/kloak_node",
@@ -2152,13 +2152,6 @@
   "name": "KaspaCom Wallet",
   "description": "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps).",
   "link": "https://github.com/KASPACOM/kaspacom-web-wallet",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KasOS",
-  "description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
-  "link": "https://github.com/deokman420/KasOS",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
   "features": ["reviewed", "development"]
 },
