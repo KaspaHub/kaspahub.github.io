@@ -262,11 +262,11 @@ summary {
 	cursor: zoom-in;
 }
 
-/*#thumbnail:hover {
+#thumbnail:hover {
 	height: calc(80vw * 9 / 16);
 	transition-delay: 0.3s;
 }
-*/
+
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
 	background-size: 80%;
