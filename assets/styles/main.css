@@ -254,8 +254,8 @@ summary {
 #thumbnail {
 	border-radius: 20px;
 	width: 100%;
-	aspect-ratio: 16 / 5;
-	/*height: calc(80vw * 5 / 16);*/
+	/*aspect-ratio: 16 / 5;*/
+	height: calc(80vw * 5 / 16);
 	object-fit: cover;
 	transition: height 0.7s ease 0s;
 	display: block;
@@ -263,9 +263,10 @@ summary {
 }
 
 #thumbnail:hover {
-	height: calc(80vw * 9 / 16);
+	height: calc(80vw * 6 / 16);
 	transition-delay: 0.3s;
 }
+
 
 .enlarged-image {
 	background: rgba(0,0,0,0.6) no-repeat center;
