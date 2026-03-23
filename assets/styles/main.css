@@ -1217,69 +1217,68 @@ dialog {
 }
 /* options v */
 #optionsCtn {
-	width: 30px;
-	height: 30px;
-	opacity: 0.9;
-	cursor: pointer;
-	border: none;
-	padding: 0;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	anchor-name: --options-trigger;
-	margin-left: auto;
-	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23333'/%3E%3Ccircle cx='10' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23fff'/%3E%3C/svg%3E") center / 30px 30px no-repeat;
+    width: 30px;
+    height: 30px;
+    opacity: 0.9;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23333'/%3E%3Ccircle cx='10' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23fff'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23fff'/%3E%3C/svg%3E") center / 30px 30px no-repeat;
 }
 
 #optionsMenu {
-	position: absolute;
-	overflow: hidden;
-	background-color: #333;
-	color: white;
-	border-radius: 15px;
-	min-width: 180px;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-	border: 1px solid rgba(255, 255, 255, 0.17);
-	padding: 0;
-	position-anchor: --options-trigger;
-	margin: 10px -5px;
-	inset: auto;
-	position-area: bottom span-right;
-	position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
-	transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    popover: auto;
+    position: absolute;
+    inset: auto;
+    position-area: bottom right;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+    overflow: hidden;
+    background-color: #333;
+    color: white;
+    border-radius: 15px;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    padding: 0;
+    margin: 10px 0;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @starting-style {
-	#optionsMenu {
-		opacity: 0;
-		transform: scale(0.95) translateY(-8px);
-	}
+    #optionsMenu {
+        opacity: 0;
+        transform: scale(0.95) translateY(-8px);
+    }
 }
 
 #optionsMenu a,
 #optionsMenu button {
-	text-decoration: none;
-	border: none;
-	background: none;
-	display: block;
-	color: white;
-	padding: 10px 16px;
-	width: 100%;
-	text-align: left;
-	font-weight: 500;
-	font-size: 14px;
-	cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background: none;
+    display: block;
+    color: white;
+    padding: 10px 16px;
+    width: 100%;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 #optionsMenu a:hover,
 #optionsMenu button:hover {
-	background-color: #555;
+    background-color: #555;
 }
 
 #optionsMenu a:focus-visible,
 #optionsMenu button:focus-visible {
-	outline: 2px solid #fff;
-	outline-offset: -2px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
 }
 /* popup v */
 dialog {
