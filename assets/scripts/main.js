@@ -324,6 +324,10 @@ function theme() {
   }
 }
 
+function options() {
+  document.getElementById("optionsCtn").classList.toggle("shown");
+}
+
 function share() {
   if (navigator.share) {
     navigator.share({
