@@ -112,6 +112,13 @@
   "features": ["marketplace"]
 },
 {
+  "name": "Kasway",
+  "description": "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
+  "link": "https://github.com/Kasway-Tech/pos",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
+  "features": ["reviewed", "solutions"]
+},
+{
   "name": "KaspaJobs",
   "description": "The first job board for Kaspa-based payments. Browse jobs, post work, find talent, and get paid in KAS.",
   "link": "https://kaspajobs.com",
