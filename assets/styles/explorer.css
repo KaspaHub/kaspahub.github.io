@@ -65,7 +65,7 @@
 
 /* price v */
 #chartContainer { height: 700px; }
-@media (max-width: 800px) and (max-aspect-ratio: 1/1) {
+@media (max-aspect-ratio: 1/1) {
 #chartContainer { height: 500px; }
 }
 
@@ -284,7 +284,7 @@ tr:hover td { background: rgba(255,255,255,.03);}
 
 /* Links */
 
-@media (max-width:800px){
+@media (max-aspect-ratio: 1/1) {
   .grid-1,
   .grid-2 {
   grid-template-columns: 1fr;

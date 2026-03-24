@@ -49,9 +49,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <iframe
   src="https://kasmap.org/embed/merchants?key=kaspahub-map-345gh-hui88-p43uz-l1f8x&search=true"
-  width="100%"
-  height="700"
-  id="mapCtn"
+  id="iframeCtn"
   title="Kaspa Merchant Map"
 ></iframe>
 
@@ -104,12 +102,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </footer>
 
 <style>
-#mapCtn {
-   border:none; border-radius: 20px; margin-bottom: 150px; border: 1px solid var(--border-color);
+#iframeCtn {
+     height: 700px; 
+     width: 100%; 
+     border-radius: 20px; 
+     margin-bottom: 150px; 
+     border: 1px solid var(--border-color);
 }
 
-@media (max-width: 800px) and (max-aspect-ratio: 1 / 1) {
-    #mapCtn {
+@media (max-aspect-ratio: 1/1) {
+    #iframeCtn {
         height: 500px;
     }
 }
