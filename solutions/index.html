@@ -179,29 +179,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 const items = [
 {
-	name: "kas.coffee",
-	description: "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
-	link: "https://kas.coffee",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascoffee.webp",
+	name: "Kasway",
+	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
+	link: "https://github.com/Kasway-Tech/pos",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
 	features: {
-		reviewed: true,
-		onlinePayments: true,
-		donations: true
+		api: false,
+		openSource: true,
+		onlinePayments: false,
+		pointOfSale: true,
+		donations: false
 	}
 },
-// {
-// 	name: "Kasway",
-// 	description: "Kasway POS is the first decentralized POS for Kaspa, enabling direct in-person payments with real-time wallet settlements. Built on Kaspa’s fast BlockDAG, it’s perfect for stores and events, with a user-friendly interface adaptable to various devices.",
-// 	link: "https://kasway.xyz",
-// 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-// 	features: {
-// 		api: false,
-// 		openSource: false,
-// 		onlinePayments: false,
-// 		pointOfSale: true,
-// 		donations: false
-// 	}
-// },
 {
 	name: "OnChain POS",
 	description: "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
@@ -250,6 +239,17 @@ const items = [
 	features: {
 		reviewed: true,
 		onlinePayments: true
+	}
+},
+{
+	name: "kas.coffee",
+	description: "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	link: "https://kas.coffee",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascoffee.webp",
+	features: {
+		reviewed: true,
+		onlinePayments: true,
+		donations: true
 	}
 },
 {
