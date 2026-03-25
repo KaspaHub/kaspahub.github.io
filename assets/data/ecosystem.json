@@ -144,7 +144,7 @@
   "description": "A community-driven platform for Kaspa, enabling users to find merchants, connect with local communities, join events, compete on leaderboards, try Kaspa apps, and promote real-world $KAS adoption.",
   "link": "https://kasmap.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasmap.webp",
-  "features": ["reviewed", "social", "visualizer"]
+  "features": ["verified", "social", "visualizer"]
 },
 {
   "name": "Kaspa Research",
