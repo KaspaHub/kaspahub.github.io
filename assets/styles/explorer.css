@@ -248,11 +248,10 @@ tbody {
   font-family: Consolas;
 }
 table {
-  width: 100%;
   font-size: 14px;
   width: max-content;
   margin: 0 auto;
-  min-width: stretch;
+  min-width: 100%;
 }
 
 th, td {
