@@ -318,7 +318,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         }
     }
 
-    const rssUrl = encodeURIComponent("https://news.google.com/rss/search?q=kaspa+crypto");
+    const rssUrl = encodeURIComponent("https://news.google.com/rss/search?q=kaspa");
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
     try {
         console.log("Fetching Google News RSS for Kaspa");
