@@ -18,9 +18,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <meta name="twitter:title" content="News - Kaspa Hub" />
 <meta property="og:title" content="News - Kaspa Hub" />
 
-<meta name="description" content="Stay updated with decentralized news from Nostr. Kaspa Hub aggregates real-time posts, crypto discussions, and announcements directly from Nostr relays." />
-<meta name="twitter:description" content="Real-time news powered by Nostr. Discover Kaspa cryptocurrency updates, community discussions, and announcements curated by Kaspa Hub." />
-<meta property="og:description" content="Explore live Nostr news on Kaspa Hub. Aggregated from decentralized relays, featuring crypto updates, announcements, and community-driven content." />
+<meta name="description" content="Latest Kaspa news from Google News and real-time Nostr posts. Kaspa Hub aggregates pure Kaspa updates, market news, ecosystem developments, and community discussions." />
+<meta name="twitter:description" content="Kaspa cryptocurrency news from trusted sources. Stay updated with market moves, announcements, and community insights in one place." />
+<meta property="og:description" content="Real-time Kaspa news combining Google News articles and decentralized Nostr content. Pure Kaspa updates, ecosystem news, and community discussions curated by Kaspa Hub." />
 
 <link rel="canonical" href="https://kaspahub.org/news/" />
 <meta name="twitter:url" content="https://kaspahub.org/news/" />
@@ -38,15 +38,15 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </head>
 <body>
-<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" class="menuBusy" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-r">
 
     <div class="fade-in" id="loading"><span class="spinner"></span><span>Loading…</span></div>
-    <button class="theme-1" id="loadMoreBtn" style="display:none">Load More</button>
 
 </main>
+<button class="theme-1" id="loadMoreBtn" style="display:none">Load More</button>
 
 <footer>
 
@@ -163,9 +163,88 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     const container = widgetContainer;
     let mergedPosts = new Map();
     let deletedPostIds = new Set();
-    let firstRenderDone = false;
     let allPostsArray = [];
     let currentIndex = 0;
+    let googleFakePosts = [];
+
+    const OTHER_CRYPTOS = [
+        'solana', 'ripple', 'cardano', 'dogecoin', 'polkadot', 'avalanche', 'shiba', 'aptos', 'injective', 'kaspa vs', 'vs kaspa', 'bittensor'
+    ];
+
+    function getImageSrc(item) {
+        if (item.thumbnail && item.thumbnail.startsWith('http')) return item.thumbnail;
+        if (item.description) {
+            const match = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
+            if (match && match[1] && match[1].startsWith('http')) return match[1];
+        }
+        return null;
+    }
+
+    function getCleanTitleAndSource(item) {
+        let fullTitle = (item.title || '').trim();
+        const lastDashIndex = fullTitle.lastIndexOf(' - ');
+        
+        if (lastDashIndex > 15) {
+            const source = fullTitle.substring(lastDashIndex + 3).trim();
+            const cleanTitle = fullTitle.substring(0, lastDashIndex).trim();
+            return { cleanTitle, source };
+        }
+        
+        return { cleanTitle: fullTitle, source: 'Kaspa News' };
+    }
+
+    function extractDomain(item) {
+        let domain = 'news.google.com';
+        const link = item.link || '';
+        let parsedSuccessfully = false;
+        try {
+            const match = link.match(/news\.google\.com\/(?:rss\/)?articles\/([A-Za-z0-9+/=]+)/);
+            if (match) {
+                const encodedPart = match[1];
+                try {
+                    const decoded = atob(encodedPart.split('?')[0]);
+                    if (decoded.startsWith('http')) {
+                        const url = new URL(decoded);
+                        domain = url.hostname.replace('www.', '');
+                        parsedSuccessfully = true;
+                    }
+                } catch (e) {}
+            }
+            if (!parsedSuccessfully && !link.includes('news.google.com')) {
+                const url = new URL(link);
+                domain = url.hostname.replace('www.', '');
+                parsedSuccessfully = true;
+            }
+            if (!parsedSuccessfully) {
+                const urlObj = new URL(link);
+                let realUrl = urlObj.searchParams.get('url') || urlObj.searchParams.get('q');
+                if (realUrl && realUrl.startsWith('http')) {
+                    const parsed = new URL(realUrl);
+                    domain = parsed.hostname.replace('www.', '');
+                    parsedSuccessfully = true;
+                }
+            }
+        } catch (e) {}
+        if (!parsedSuccessfully) {
+            const { source } = getCleanTitleAndSource(item);
+            let cleanSource = source.toLowerCase().trim();
+            if (cleanSource.includes('.')) {
+                domain = cleanSource.replace(/[^a-z0-9.]/g, '');
+            } else {
+                domain = cleanSource.replace(/[^a-z0-9]/g, '') + '.com';
+            }
+        }
+        return domain;
+    }
+
+    function filterPureKaspaItems(items) {
+        return items.filter(item => {
+            const text = item.title.toLowerCase();
+            const hasKaspa = text.includes('kaspa') || text.includes('kas ');
+            const hasOtherCrypto = OTHER_CRYPTOS.some(coin => text.includes(coin));
+            return hasKaspa && !hasOtherCrypto;
+        });
+    }
 
     function processPostContent(content) {
         const urlRegex = /(https:\/\/[^\s<>"']+)/g;
@@ -176,20 +255,36 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     }
 
     function createArticle(post) {
-        const date = new Date(post.created_at * 1000).toLocaleString();
+        const date = formatDate(post.created_at * 1000);
         const article = document.createElement('article');
         article.className = "theme-1 note";
-        article.innerHTML = `
-            <div class="note-user">
-                <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
-                <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npub}">
-                    <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
-                    <span class="muted">@${userProfile.username || ''}</span>
-                </a>
-            </div>
-            <p class="note-content">${processPostContent(post.content)}</p>
-            <p style="color:#666;font-size:0.85em">Posted on ${date}</p>
-        `;
+        if (post.id && post.id.startsWith('google-')) {
+            let mediaHTML = post.imageSrc ? `<img src="${post.imageSrc}" class="note-media">` : '';
+            article.innerHTML = `
+                <div class="note-user">
+                    <img src="${post.favicon}" style="width:50px;height:50px;border-radius:50%">
+                    <a style="color: inherit; text-decoration: none;" href="https://${post.domain}" target="_blank">
+                        <p style="font-weight:bold;margin:0">${post.source}</p>
+                        <span class="muted">${post.domain}</span>
+                    </a>
+                </div>
+                <p class="note-content">${post.content}<br><a href="${post.link}" target="_blank" style="color:#00d4ff;font-weight:500;display:inline-flex;align-items:center;gap:4px;margin-top:8px">Read more <span style="font-size:1.3em;line-height:1">→</span></a></p>
+                ${mediaHTML}
+                <p class="muted" style="font-size:0.85em">Posted on ${date}</p>
+            `;
+        } else {
+            article.innerHTML = `
+                <div class="note-user">
+                    <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
+                    <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npub}">
+                        <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
+                        <span class="muted">@${userProfile.username || ''}</span>
+                    </a>
+                </div>
+                <p class="note-content">${processPostContent(post.content)}</p>
+                <p class="muted" style="font-size:0.85em">Posted on ${date}</p>
+            `;
+        }
         return article;
     }
 
@@ -208,16 +303,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
     async function fetchPostsFromRelay(relay, limit) {
         try {
-            console.log(`Connected to ${relay} for posts and deletions`);
-
-            const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: [publicKey] });
-            deletionEvents.forEach(ev => {
-                ev.tags.filter(tag => tag[0]==='e')
-                       .map(tag => tag[1])
-                       .forEach(id => deletedPostIds.add(id));
-            });
-            console.log(`Fetched ${deletionEvents.length} deletion events from ${relay}`);
-
+            console.log(`Connected to ${relay} for posts`);
             const events = await pool.querySync([relay], { kinds: [1], authors: [publicKey], limit });
             const posts = [];
             events.forEach(ev => {
@@ -225,14 +311,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                 if (!isReply && !deletedPostIds.has(ev.id)) posts.push(ev);
             });
             console.log(`Fetched ${posts.length} posts from ${relay}`);
-
-            if (!firstRenderDone && posts.length > 0) {
-                console.log(`First render using ${posts.length} posts from ${relay}`);
-                allPostsArray = posts.slice(0, FIRST_RELAY_LIMIT);
-                renderPostsChunk(true);
-                firstRenderDone = true;
-            }
-
             return posts;
         } catch (err) { 
             console.error(`Failed to query ${relay} for posts:`, err); 
@@ -240,18 +318,73 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         }
     }
 
-    const postsPromises = relays.map((relay, i) => fetchPostsFromRelay(relay, i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT));
-    const allPostsByRelay = await Promise.all(postsPromises);
+    const rssUrl = encodeURIComponent("https://news.google.com/rss/search?q=kaspa+crypto");
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
+    try {
+        console.log("Fetching Google News RSS for Kaspa");
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        if (data.items && data.items.length > 0) {
+            const filtered = filterPureKaspaItems(data.items);
+            console.log(`Fetched ${data.items.length} raw Google News items, filtered to ${filtered.length} pure Kaspa articles`);
+            googleFakePosts = filtered.map((item, idx) => {
+                const { cleanTitle, source } = getCleanTitleAndSource(item);
+                const imageSrc = getImageSrc(item);
+                const domain = extractDomain(item);
+                const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+                return {
+                    id: `google-${idx}`,
+                    content: cleanTitle,
+                    link: item.link,
+                    source: source,
+                    favicon: faviconUrl,
+                    domain: domain,
+                    imageSrc: imageSrc,
+                    created_at: Math.floor(new Date(item.pubDate).getTime() / 1000)
+                };
+            });
+        }
+    } catch(e) {
+        console.error("Failed to fetch Google News:", e);
+    }
 
-    // merge, dedupe, sort
-    allPostsByRelay.flat().forEach(ev => { if (!mergedPosts.has(ev.id)) mergedPosts.set(ev.id, ev); });
-    allPostsArray = Array.from(mergedPosts.values()).sort((a,b) => b.created_at - a.created_at);
-
-    console.log(`Total merged posts: ${allPostsArray.length}`);
-
+    allPostsArray = [...googleFakePosts].sort((a, b) => b.created_at - a.created_at);
+    console.log(`Initial Google News render: ${googleFakePosts.length} articles`);
     renderPostsChunk(true);
 
-    if (allPostsArray.length > CHUNK_SIZE) loadMoreBtn.style.display = 'block';
+    const menuCheck = document.getElementById('menuCheck');
+    // if (menuCheck) menuCheck.classList.add('menuBusy');
+
+    try {
+        await Promise.all(relays.map(async (relay) => {
+            try {
+                console.log(`Connecting to ${relay} for deletions`);
+                const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: [publicKey] });
+                deletionEvents.forEach(ev => {
+                    ev.tags.filter(tag => tag[0]==='e')
+                           .map(tag => tag[1])
+                           .forEach(id => deletedPostIds.add(id));
+                });
+                console.log(`Fetched ${deletionEvents.length} deletion events from ${relay}`);
+            } catch (err) { 
+                console.error(`Failed to query ${relay} for deletions:`, err); 
+            }
+        }));
+
+        const postsPromises = relays.map((relay, i) => fetchPostsFromRelay(relay, i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT));
+        const allPostsByRelay = await Promise.all(postsPromises);
+
+        allPostsByRelay.flat().forEach(ev => { if (!mergedPosts.has(ev.id)) mergedPosts.set(ev.id, ev); });
+        const nostrPosts = Array.from(mergedPosts.values()).sort((a,b) => b.created_at - a.created_at);
+        console.log(`Fetched ${nostrPosts.length} Nostr posts`);
+
+        allPostsArray = [...googleFakePosts, ...nostrPosts].sort((a, b) => b.created_at - a.created_at);
+        console.log(`Total merged posts (Google + Nostr): ${allPostsArray.length}`);
+
+        renderPostsChunk(true);
+    } finally {
+        if (menuCheck) menuCheck.classList.remove('menuBusy');
+    }
 
     loadMoreBtn.addEventListener('click', () => renderPostsChunk());
 

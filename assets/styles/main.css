@@ -1328,6 +1328,21 @@ dialog.theme-1::backdrop {
 	animation: fadeIn 0.3s forwards;
 }
 
+.menuBusy {
+	pointer-events: none;
+}
+
+.menuBusy::before {
+	content: "" !important;
+	width: 40px;
+	height: 40px;
+	background-image: url('/assets/icons/loading.gif');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: background-image 0.3s ease;
+}
+
 #drawer {
 	position: fixed;
 	top: 54px;
