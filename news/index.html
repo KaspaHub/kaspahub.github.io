@@ -270,7 +270,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                 </div>
                 <p class="note-content">${post.content}<br><a href="${post.link}" target="_blank" style="color:#00d4ff;font-weight:500;display:inline-flex;align-items:center;gap:4px;margin-top:8px">Read more <span style="font-size:1.3em;line-height:1">→</span></a></p>
                 ${mediaHTML}
-                <p class="muted" style="font-size:0.85em">Posted on ${date}</p>
+                <p class="muted" style="font-size:0.85em">${date}</p>
             `;
         } else {
             article.innerHTML = `
@@ -282,7 +282,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                     </a>
                 </div>
                 <p class="note-content">${processPostContent(post.content)}</p>
-                <p class="muted" style="font-size:0.85em">Posted on ${date}</p>
+                <p class="muted" style="font-size:0.85em">${date}</p>
             `;
         }
         return article;

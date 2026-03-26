@@ -146,6 +146,10 @@ html#dark {
 	background-size: cover;
 }
 
+#btc {
+	background: linear-gradient(to bottom right, #FFD054, #F67454);
+}
+
 .theme-1 {
 	background-color: var(--background-color);
 	border: 1px solid var(--border-color);
