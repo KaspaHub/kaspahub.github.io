@@ -8,19 +8,19 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/posts/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.9</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/news/</loc>
-	<lastmod>2026-03-26</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.9</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/price/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.9</priority>
 </url>
@@ -49,8 +49,14 @@
 	<priority>0.9</priority>
 </url>
 <url>
+	<loc>https://kaspahub.org/merchants/</loc>
+	<lastmod>2026-03-27</lastmod>
+	<changefreq>weekly</changefreq>
+	<priority>0.8</priority>
+</url>
+<url>
 	<loc>https://kaspahub.org/wallets/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -62,13 +68,13 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/ecosystem/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/resources/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -80,13 +86,13 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/solutions/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/developers/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -104,19 +110,19 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/overview/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/projects/</loc>
-	<lastmod>2026-03-20</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/comparison/</loc>
-	<lastmod>2026-03-22</lastmod>
+	<lastmod>2026-03-27</lastmod>
 	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -152,13 +158,13 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-case-for-kaspa-continues/</loc>
-	<lastmod>2025-03-20</lastmod>
+	<lastmod>2025-03-27</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-kaspa-galaxy-mission/</loc>
-	<lastmod>2025-03-20</lastmod>
+	<lastmod>2025-03-27</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -212,12 +218,6 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/post/kaspa-2026-hardfork/</loc>
-	<lastmod>2026-03-20</lastmod>
-	<changefreq>monthly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/post/kaspa/</loc>
 	<lastmod>2026-03-20</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
