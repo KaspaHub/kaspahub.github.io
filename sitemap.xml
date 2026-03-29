@@ -139,12 +139,6 @@
 	<priority>0.8</priority>
 </url>
 <url>
-	<loc>https://kaspahub.org/post/wallet-safety-basics/</loc>
-	<lastmod>2025-08-08</lastmod>
-	<changefreq>monthly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
 	<loc>https://kaspahub.org/post/what-is-kaspa-block-time/</loc>
 	<lastmod>2025-08-25</lastmod>
 	<changefreq>monthly</changefreq>
@@ -152,19 +146,19 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-case-for-kaspa/</loc>
-	<lastmod>2026-03-28</lastmod>
+	<lastmod>2026-03-29</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-case-for-kaspa-continues/</loc>
-	<lastmod>2025-03-27</lastmod>
+	<lastmod>2025-03-29</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-kaspa-galaxy-mission/</loc>
-	<lastmod>2025-03-27</lastmod>
+	<lastmod>2025-03-29</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -200,7 +194,7 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/post/solving-the-blockchain-trilemma/</loc>
-	<lastmod>2026-01-26</lastmod>
+	<lastmod>2026-03-29</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
