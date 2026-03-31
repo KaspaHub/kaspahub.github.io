@@ -200,7 +200,7 @@
   "description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
   "link": "https://tttz.xyz",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ttt.webp",
-  "features": []
+  "features": ["social"]
 },
 {
   "name": "Flux Kmail",
