@@ -561,7 +561,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   }
 }
 
-@media (max-width: 900px) {
+@media (max-aspect-ratio: 1/1) {
+
+  .chart {
+    transform: scale(0.5);
+    transform-origin: bottom right;
+  }
+
   .records-container {
     flex-direction: column;
     gap: 30px;
