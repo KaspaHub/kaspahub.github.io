@@ -168,19 +168,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     let allPostsArray = [];
     let currentIndex = 0;
 
-    function formatDate(timestamp) {
-        const date = new Date(timestamp * 1000);
-        const now = Date.now();
-        const diffMs = now - date.getTime();
-        const diffMins = Math.floor(diffMs / 60000);
-
-        if (diffMins < 1) return 'just now';
-        if (diffMins < 60) return `${diffMins}m`;
-        const diffHours = Math.floor(diffMins / 60);
-        if (diffHours < 24) return `${diffHours}h`;
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-
     function processPostContent(content) {
         const urlRegex = /(https:\/\/[^\s<>"']+)/g;
         const isImage = url => /\.(?:jpg|jpeg|png|gif|webp)$/i.test(url);
@@ -202,7 +189,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
         const npub = window.NostrTools.nip19.npubEncode(post.pubkey);
         const noteId = window.NostrTools.nip19.noteEncode(post.id);
-        const dateStr = formatDate(post.created_at);
+        const dateStr = formatDate(post.created_at * 1000);
 
         const article = document.createElement('article');
         article.className = "theme-1 note";
