@@ -111,12 +111,15 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 (async () => {
     const widgetContainer = document.getElementById('container-r');
+    if (!widgetContainer) return;
+
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     const npubs = ['npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt', 'npub1sg6plzptd64u62a878hep2kev88swjh3tw00gjsfl8f237lmu63q0uf63m'];
     const relays = ['wss://nos.lol', 'wss://relay.primal.net', 'wss://relay.damus.io'];
-    const FIRST_RELAY_LIMIT = 7;
-    const OTHER_RELAY_LIMIT = 50;
-    const CHUNK_SIZE = 15;
+
+    const FIRST_RELAY_LIMIT = 10;
+    const OTHER_RELAY_LIMIT = 60;
+    const CHUNK_SIZE = 20;
 
     const pool = new window.NostrTools.SimplePool();
 
@@ -124,45 +127,53 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     try {
         publicKeys = npubs.map(npub => window.NostrTools.nip19.decode(npub).data);
     } catch {
-        widgetContainer.innerHTML = "Invalid npub.";
-        return;
-    }
-
-    let profiles = new Map();
-    let profileEvents = new Map();
-    await Promise.all(relays.map(async relay => {
-        try {
-            const events = await pool.querySync([relay], { kinds: [0], authors: publicKeys });
-            events.forEach(ev => {
-                const pk = ev.pubkey;
-                if (!profileEvents.has(pk) || ev.created_at > profileEvents.get(pk).created_at) {
-                    profileEvents.set(pk, ev);
-                }
-            });
-        } catch {}
-    }));
-    profileEvents.forEach(ev => {
-        try {
-            profiles.set(ev.pubkey, JSON.parse(ev.content));
-        } catch {}
-    });
-    if (profiles.size === 0) {
-        widgetContainer.innerHTML = "User profiles not found.";
+        widgetContainer.innerHTML = '<p class="error">Invalid npub format.</p>';
         pool.close(relays);
         return;
     }
 
-    const container = widgetContainer;
-    let mergedPosts = new Map();
-    let deletedPostIds = new Set();
+    const profiles = new Map();
+    await Promise.all(relays.map(async relay => {
+        try {
+            const events = await pool.querySync([relay], { kinds: [0], authors: publicKeys, limit: 2 });
+            events.forEach(ev => {
+                if (!profiles.has(ev.pubkey) || ev.created_at > (profiles.get(ev.pubkey)?.created_at ?? 0)) {
+                    try {
+                        profiles.set(ev.pubkey, JSON.parse(ev.content));
+                    } catch {}
+                }
+            });
+        } catch {}
+    }));
+
+    if (profiles.size === 0) {
+        widgetContainer.innerHTML = '<p class="error">User profiles not found.</p>';
+        pool.close(relays);
+        return;
+    }
+
+    const deletedPostIds = new Set();
+    await Promise.all(relays.map(async relay => {
+        try {
+            const delEvents = await pool.querySync([relay], { kinds: [5], authors: publicKeys, limit: 200 });
+            delEvents.forEach(ev => {
+                ev.tags
+                    .filter(tag => tag[0] === 'e')
+                    .forEach(tag => deletedPostIds.add(tag[1]));
+            });
+        } catch {}
+    }));
+
+    const mergedPosts = new Map();
     let allPostsArray = [];
     let currentIndex = 0;
 
     function formatDate(timestamp) {
         const date = new Date(timestamp * 1000);
-        const now = new Date();
-        const diffMs = now - date;
+        const now = Date.now();
+        const diffMs = now - date.getTime();
         const diffMins = Math.floor(diffMs / 60000);
+
         if (diffMins < 1) return 'just now';
         if (diffMins < 60) return `${diffMins}m`;
         const diffHours = Math.floor(diffMins / 60);
@@ -172,112 +183,137 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
     function processPostContent(content) {
         const urlRegex = /(https:\/\/[^\s<>"']+)/g;
-        const imageRegex = /(https:\/\/[^\s<>"']+\.(?:jpg|jpeg|png|gif|webp))/g;
-        let processed = content.replace(imageRegex, url => `<img src="${url}" class="note-media" loading="lazy" alt="">`);
-        processed = processed.replace(urlRegex, url => !url.match(imageRegex) ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>` : url);
-        return processed;
+        const isImage = url => /\.(?:jpg|jpeg|png|gif|webp)$/i.test(url);
+
+        return content.replace(urlRegex, url => {
+            if (isImage(url)) {
+                return `<img src="${url}" class="note-media" loading="lazy" alt="Nostr image">`;
+            }
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        });
     }
 
     function createArticle(post) {
-        const date = formatDate(post.created_at);
+        const profile = profiles.get(post.pubkey) || {
+            picture: 'https://kaspahub.org/assets/logos/kaspahub.webp',
+            display_name: '',
+            name: ''
+        };
+
+        const npub = window.NostrTools.nip19.npubEncode(post.pubkey);
+        const noteId = window.NostrTools.nip19.noteEncode(post.id);
+        const dateStr = formatDate(post.created_at);
+
         const article = document.createElement('article');
         article.className = "theme-1 note";
-        const profile = profiles.get(post.pubkey) || { picture: 'https://kaspahub.org/assets/logos/kaspahub.webp', display_name: '', name: '' };
-        const npubForLink = window.NostrTools.nip19.npubEncode(post.pubkey);
         article.innerHTML = `
             <div class="note-user">
-                <img src="${profile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%" loading="lazy" alt="">
-                <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npubForLink}">
-                    <p style="font-weight:bold;margin:0">${profile.display_name || profile.name || 'Nostr User'}</p>
-                    <span class="muted">@${profile.username || profile.name || ''}</span>
+                <img src="${profile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" 
+                     style="width:50px;height:50px;border-radius:50%" 
+                     alt="${profile.display_name || profile.name}">
+                <a href="https://primal.net/p/${npub}" style="color:inherit;text-decoration:none;">
+                    <p style="font-weight:bold;margin:0">${profile.display_name || profile.name || 'Anonymous'}</p>
+                    <span class="muted">@${profile.username || profile.name || post.pubkey.slice(0, 8)}</span>
                 </a>
             </div>
             <p class="note-content">${processPostContent(post.content)}</p>
-            <p class="muted" style="font-size:0.85em">${date}</p>
+            <p class="muted note-footer">
+                <a href="https://primal.net/e/${noteId}" 
+                   style="color:inherit;text-decoration:none;" 
+                   target="_blank" rel="noopener">
+                    ${dateStr}
+                </a>
+            </p>
         `;
         return article;
     }
 
     function renderPostsChunk(reset = false) {
         if (reset) {
-            container.innerHTML = '';
+            widgetContainer.innerHTML = '';
             currentIndex = 0;
         }
+
         const chunk = allPostsArray.slice(currentIndex, currentIndex + CHUNK_SIZE);
-        chunk.forEach(post => container.appendChild(createArticle(post)));
+        if (chunk.length === 0) return;
+
+        const fragment = document.createDocumentFragment();
+        chunk.forEach(post => fragment.appendChild(createArticle(post)));
+
+        widgetContainer.appendChild(fragment);
         currentIndex += chunk.length;
-        loadMoreBtn.style.display = currentIndex < allPostsArray.length ? 'block' : 'none';
+
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = currentIndex < allPostsArray.length ? 'block' : 'none';
+        }
     }
 
     async function fetchPostsFromRelay(relay, limit) {
         try {
-            const events = await pool.querySync([relay], { kinds: [1], authors: publicKeys, limit });
-            return events;
+            const events = await pool.querySync([relay], {
+                kinds: [1],
+                authors: publicKeys,
+                limit
+            });
+
+            const validPosts = [];
+            for (const ev of events) {
+                const isReply = ev.tags.some(t => t[0] === 'e' && t[1]);
+                if (!isReply && !deletedPostIds.has(ev.id)) {
+                    validPosts.push(ev);
+                }
+            }
+            return validPosts;
         } catch {
             return [];
         }
+    }
+
+    function updateFeed(newPosts) {
+        let changed = false;
+        for (const post of newPosts) {
+            if (!mergedPosts.has(post.id)) {
+                mergedPosts.set(post.id, post);
+                changed = true;
+            }
+        }
+
+        if (!changed) return;
+
+        allPostsArray = Array.from(mergedPosts.values())
+            .sort((a, b) => b.created_at - a.created_at);
+
+        renderPostsChunk(true);
     }
 
     const menuCheck = document.getElementById('menuCheck');
     if (menuCheck) menuCheck.classList.add('menuBusy');
 
     try {
-        const deletionsPromise = Promise.all(relays.map(async relay => {
-            try {
-                const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: publicKeys });
-                deletionEvents.forEach(ev => {
-                    ev.tags
-                        .filter(tag => tag[0] === 'e' && tag[1])
-                        .forEach(tag => deletedPostIds.add(tag[1]));
+        const postsPromises = relays.map((relay, index) => {
+            const limit = index === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT;
+            return fetchPostsFromRelay(relay, limit)
+                .then(posts => {
+                    updateFeed(posts);
+                    return posts;
                 });
-            } catch {}
-        }));
-
-        const cleanDeleted = () => {
-            let changed = false;
-            deletedPostIds.forEach(id => {
-                if (mergedPosts.has(id)) {
-                    mergedPosts.delete(id);
-                    changed = true;
-                }
-            });
-            if (changed) {
-                allPostsArray = Array.from(mergedPosts.values()).sort((a, b) => b.created_at - a.created_at);
-                renderPostsChunk(true);
-            }
-        };
-        deletionsPromise.then(cleanDeleted);
-
-        const updateFeed = newPosts => {
-            let changed = false;
-            newPosts.forEach(ev => {
-                if (!mergedPosts.has(ev.id) && !deletedPostIds.has(ev.id)) {
-                    mergedPosts.set(ev.id, ev);
-                    changed = true;
-                }
-            });
-            if (changed) {
-                allPostsArray = Array.from(mergedPosts.values()).sort((a, b) => b.created_at - a.created_at);
-                renderPostsChunk(true);
-            }
-        };
-
-        const postsPromises = relays.map((relay, i) => {
-            const limit = i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT;
-            return fetchPostsFromRelay(relay, limit).then(posts => {
-                updateFeed(posts);
-                return posts;
-            });
         });
 
         await Promise.all(postsPromises);
+
+        if (allPostsArray.length > 0) {
+            renderPostsChunk(true);
+        } else {
+            widgetContainer.innerHTML = '<p class="empty">No posts found.</p>';
+        }
     } finally {
         if (menuCheck) menuCheck.classList.remove('menuBusy');
+        pool.close(relays);
     }
 
-    loadMoreBtn.addEventListener('click', () => renderPostsChunk());
-
-    pool.close(relays);
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => renderPostsChunk());
+    }
 })();
 </script>
 
