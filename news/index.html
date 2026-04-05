@@ -112,48 +112,44 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 (async () => {
     const widgetContainer = document.getElementById('container-r');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const npub = 'npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt';
-    const relays = [
-        'wss://nos.lol',
-        'wss://relay.primal.net',
-        'wss://relay.damus.io'
-    ];
+    const npubs = ['npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt', 'npub1sg6plzptd64u62a878hep2kev88swjh3tw00gjsfl8f237lmu63q0uf63m'];
+    const relays = ['wss://nos.lol', 'wss://relay.primal.net', 'wss://relay.damus.io'];
     const FIRST_RELAY_LIMIT = 7;
     const OTHER_RELAY_LIMIT = 50;
     const CHUNK_SIZE = 15;
 
     const pool = new window.NostrTools.SimplePool();
-    let publicKey;
-    try { 
-        publicKey = window.NostrTools.nip19.decode(npub).data; 
-        console.log("Decoded npub:", publicKey);
+
+    let publicKeys = [];
+    try {
+        publicKeys = npubs.map(npub => window.NostrTools.nip19.decode(npub).data);
     } catch {
         widgetContainer.innerHTML = "Invalid npub.";
-        console.error("Failed to decode npub");
-        return; 
+        return;
     }
 
-    let userProfile = null;
-
-    for (const relay of relays) {
+    let profiles = new Map();
+    let profileEvents = new Map();
+    await Promise.all(relays.map(async relay => {
         try {
-            console.log(`Connecting to ${relay} for profile`);
-            const events = await pool.querySync([relay], { kinds: [0], authors: [publicKey], limit: 1 });
-            if (events?.length) {
-                userProfile = JSON.parse(events[0].content);
-                console.log(`Profile found on ${relay}:`, userProfile);
-                break;
-            }
-        } catch (err) { 
-            console.error(`Failed to query ${relay} for profile:`, err); 
-        }
-    }
-
-    if (!userProfile) { 
-        widgetContainer.innerHTML = "User profile not found."; 
-        console.error("User profile not found on any relay");
-        pool.close(relays); 
-        return; 
+            const events = await pool.querySync([relay], { kinds: [0], authors: publicKeys });
+            events.forEach(ev => {
+                const pk = ev.pubkey;
+                if (!profileEvents.has(pk) || ev.created_at > profileEvents.get(pk).created_at) {
+                    profileEvents.set(pk, ev);
+                }
+            });
+        } catch {}
+    }));
+    profileEvents.forEach(ev => {
+        try {
+            profiles.set(ev.pubkey, JSON.parse(ev.content));
+        } catch {}
+    });
+    if (profiles.size === 0) {
+        widgetContainer.innerHTML = "User profiles not found.";
+        pool.close(relays);
+        return;
     }
 
     const container = widgetContainer;
@@ -161,126 +157,44 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     let deletedPostIds = new Set();
     let allPostsArray = [];
     let currentIndex = 0;
-    let googleFakePosts = [];
 
-    const OTHER_CRYPTOS = [
-        'solana', 'ripple', 'cardano', 'dogecoin', 'signals', 'hyperliquid', 'worth by', '(kas) price', 'compared', 'moving averages', 'polkadot', 'presale', 'shiba', 'aptos', 'kaspa vs', 'vs kaspa', 'bittensor'
-    ];
-
-    function getImageSrc(item) {
-        if (item.thumbnail && item.thumbnail.startsWith('http')) return item.thumbnail;
-        if (item.description) {
-            const match = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
-            if (match && match[1] && match[1].startsWith('http')) return match[1];
-        }
-        return null;
-    }
-
-    function getCleanTitleAndSource(item) {
-        let fullTitle = (item.title || '').trim();
-        const lastDashIndex = fullTitle.lastIndexOf(' - ');
-        
-        if (lastDashIndex > 15) {
-            const source = fullTitle.substring(lastDashIndex + 3).trim();
-            const cleanTitle = fullTitle.substring(0, lastDashIndex).trim();
-            return { cleanTitle, source };
-        }
-        
-        return { cleanTitle: fullTitle, source: 'Kaspa News' };
-    }
-
-    function extractDomain(item) {
-        let domain = 'news.google.com';
-        const link = item.link || '';
-        let parsedSuccessfully = false;
-        try {
-            const match = link.match(/news\.google\.com\/(?:rss\/)?articles\/([A-Za-z0-9+/=]+)/);
-            if (match) {
-                const encodedPart = match[1];
-                try {
-                    const decoded = atob(encodedPart.split('?')[0]);
-                    if (decoded.startsWith('http')) {
-                        const url = new URL(decoded);
-                        domain = url.hostname.replace('www.', '');
-                        parsedSuccessfully = true;
-                    }
-                } catch (e) {}
-            }
-            if (!parsedSuccessfully && !link.includes('news.google.com')) {
-                const url = new URL(link);
-                domain = url.hostname.replace('www.', '');
-                parsedSuccessfully = true;
-            }
-            if (!parsedSuccessfully) {
-                const urlObj = new URL(link);
-                let realUrl = urlObj.searchParams.get('url') || urlObj.searchParams.get('q');
-                if (realUrl && realUrl.startsWith('http')) {
-                    const parsed = new URL(realUrl);
-                    domain = parsed.hostname.replace('www.', '');
-                    parsedSuccessfully = true;
-                }
-            }
-        } catch (e) {}
-        if (!parsedSuccessfully) {
-            const { source } = getCleanTitleAndSource(item);
-            let cleanSource = source.toLowerCase().trim();
-            if (cleanSource.includes('.')) {
-                domain = cleanSource.replace(/[^a-z0-9.]/g, '');
-            } else {
-                domain = cleanSource.replace(/[^a-z0-9]/g, '') + '.com';
-            }
-        }
-        return domain;
-    }
-
-    function filterPureKaspaItems(items) {
-        return items.filter(item => {
-            const text = item.title.toLowerCase();
-            const hasKaspa = text.includes('kaspa') || text.includes('kas ');
-            const hasOtherCrypto = OTHER_CRYPTOS.some(coin => text.includes(coin));
-            return hasKaspa && !hasOtherCrypto;
-        });
+    function formatDate(timestamp) {
+        const date = new Date(timestamp * 1000);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        if (diffMins < 1) return 'just now';
+        if (diffMins < 60) return `${diffMins}m`;
+        const diffHours = Math.floor(diffMins / 60);
+        if (diffHours < 24) return `${diffHours}h`;
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
 
     function processPostContent(content) {
         const urlRegex = /(https:\/\/[^\s<>"']+)/g;
         const imageRegex = /(https:\/\/[^\s<>"']+\.(?:jpg|jpeg|png|gif|webp))/g;
-        let processed = content.replace(imageRegex, url => `<img src="${url}" class="note-media">`);
-        processed = processed.replace(urlRegex, url => !url.match(imageRegex) ? `<a href="${url}" target="_blank">${url}</a>` : url);
+        let processed = content.replace(imageRegex, url => `<img src="${url}" class="note-media" loading="lazy" alt="">`);
+        processed = processed.replace(urlRegex, url => !url.match(imageRegex) ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>` : url);
         return processed;
     }
 
     function createArticle(post) {
-        const date = formatDate(post.created_at * 1000);
+        const date = formatDate(post.created_at);
         const article = document.createElement('article');
         article.className = "theme-1 note";
-        if (post.id && post.id.startsWith('google-')) {
-            let mediaHTML = post.imageSrc ? `<img src="${post.imageSrc}" class="note-media">` : '';
-            article.innerHTML = `
-                <div class="note-user">
-                    <img src="${post.favicon}" style="width:50px;height:50px;border-radius:50%">
-                    <a style="color: inherit; text-decoration: none;" href="https://${post.domain}" target="_blank">
-                        <p style="font-weight:bold;margin:0">${post.source}</p>
-                        <span class="muted">${post.domain}</span>
-                    </a>
-                </div>
-                <p class="note-content">${post.content}<br><a href="${post.link}" target="_blank" style="color:#00d4ff;font-weight:500;display:inline-flex;align-items:center;gap:4px;margin-top:8px">Read more <span style="font-size:1.3em;line-height:1">→</span></a></p>
-                ${mediaHTML}
-                <p class="muted" style="font-size:0.85em">${date}</p>
-            `;
-        } else {
-            article.innerHTML = `
-                <div class="note-user">
-                    <img src="${userProfile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%">
-                    <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npub}">
-                        <p style="font-weight:bold;margin:0">${userProfile.display_name || ''}</p>
-                        <span class="muted">@${userProfile.username || ''}</span>
-                    </a>
-                </div>
-                <p class="note-content">${processPostContent(post.content)}</p>
-                <p class="muted" style="font-size:0.85em">${date}</p>
-            `;
-        }
+        const profile = profiles.get(post.pubkey) || { picture: 'https://kaspahub.org/assets/logos/kaspahub.webp', display_name: '', name: '' };
+        const npubForLink = window.NostrTools.nip19.npubEncode(post.pubkey);
+        article.innerHTML = `
+            <div class="note-user">
+                <img src="${profile.picture || 'https://kaspahub.org/assets/logos/kaspahub.webp'}" style="width:50px;height:50px;border-radius:50%" loading="lazy" alt="">
+                <a style="color: inherit; text-decoration: none;" href="https://primal.net/p/${npubForLink}">
+                    <p style="font-weight:bold;margin:0">${profile.display_name || profile.name || 'Nostr User'}</p>
+                    <span class="muted">@${profile.username || profile.name || ''}</span>
+                </a>
+            </div>
+            <p class="note-content">${processPostContent(post.content)}</p>
+            <p class="muted" style="font-size:0.85em">${date}</p>
+        `;
         return article;
     }
 
@@ -289,95 +203,74 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             container.innerHTML = '';
             currentIndex = 0;
         }
-
         const chunk = allPostsArray.slice(currentIndex, currentIndex + CHUNK_SIZE);
         chunk.forEach(post => container.appendChild(createArticle(post)));
         currentIndex += chunk.length;
-
         loadMoreBtn.style.display = currentIndex < allPostsArray.length ? 'block' : 'none';
     }
 
     async function fetchPostsFromRelay(relay, limit) {
         try {
-            console.log(`Connected to ${relay} for posts`);
-            const events = await pool.querySync([relay], { kinds: [1], authors: [publicKey], limit });
-            const posts = [];
-            events.forEach(ev => {
-                const isReply = ev.tags.some(tag => tag[0] === 'e');
-                if (!isReply && !deletedPostIds.has(ev.id)) posts.push(ev);
-            });
-            console.log(`Fetched ${posts.length} posts from ${relay}`);
-            return posts;
-        } catch (err) { 
-            console.error(`Failed to query ${relay} for posts:`, err); 
-            return []; 
+            const events = await pool.querySync([relay], { kinds: [1], authors: publicKeys, limit });
+            return events;
+        } catch {
+            return [];
         }
     }
-
-    const rssUrl = encodeURIComponent("https://news.google.com/rss/search?q=kaspa");
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
-    try {
-        console.log("Fetching Google News RSS for Kaspa");
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        if (data.items && data.items.length > 0) {
-            const filtered = filterPureKaspaItems(data.items);
-            console.log(`Fetched ${data.items.length} raw Google News items, filtered to ${filtered.length} pure Kaspa articles`);
-            googleFakePosts = filtered.map((item, idx) => {
-                const { cleanTitle, source } = getCleanTitleAndSource(item);
-                const imageSrc = getImageSrc(item);
-                const domain = extractDomain(item);
-                const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
-                return {
-                    id: `google-${idx}`,
-                    content: cleanTitle,
-                    link: item.link,
-                    source: source,
-                    favicon: faviconUrl,
-                    domain: domain,
-                    imageSrc: imageSrc,
-                    created_at: Math.floor(new Date(item.pubDate).getTime() / 1000)
-                };
-            });
-        }
-    } catch(e) {
-        console.error("Failed to fetch Google News:", e);
-    }
-
-    allPostsArray = [...googleFakePosts].sort((a, b) => b.created_at - a.created_at);
-    console.log(`Initial Google News render: ${googleFakePosts.length} articles`);
-    renderPostsChunk(true);
 
     const menuCheck = document.getElementById('menuCheck');
-    // if (menuCheck) menuCheck.classList.add('menuBusy');
+    if (menuCheck) menuCheck.classList.add('menuBusy');
 
     try {
-        await Promise.all(relays.map(async (relay) => {
+        const deletionsPromise = Promise.all(relays.map(async relay => {
             try {
-                console.log(`Connecting to ${relay} for deletions`);
-                const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: [publicKey] });
+                const deletionEvents = await pool.querySync([relay], { kinds: [5], authors: publicKeys });
                 deletionEvents.forEach(ev => {
-                    ev.tags.filter(tag => tag[0]==='e')
-                           .map(tag => tag[1])
-                           .forEach(id => deletedPostIds.add(id));
+                    ev.tags
+                        .filter(tag => tag[0] === 'e' && tag[1])
+                        .forEach(tag => deletedPostIds.add(tag[1]));
                 });
-                console.log(`Fetched ${deletionEvents.length} deletion events from ${relay}`);
-            } catch (err) { 
-                console.error(`Failed to query ${relay} for deletions:`, err); 
-            }
+            } catch {}
         }));
 
-        const postsPromises = relays.map((relay, i) => fetchPostsFromRelay(relay, i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT));
-        const allPostsByRelay = await Promise.all(postsPromises);
+        const cleanDeleted = () => {
+            let changed = false;
+            deletedPostIds.forEach(id => {
+                if (mergedPosts.has(id)) {
+                    mergedPosts.delete(id);
+                    changed = true;
+                }
+            });
+            if (changed) {
+                allPostsArray = Array.from(mergedPosts.values()).sort((a, b) => b.created_at - a.created_at);
+                renderPostsChunk(true);
+            }
+        };
+        deletionsPromise.then(cleanDeleted);
 
-        allPostsByRelay.flat().forEach(ev => { if (!mergedPosts.has(ev.id)) mergedPosts.set(ev.id, ev); });
-        const nostrPosts = Array.from(mergedPosts.values()).sort((a,b) => b.created_at - a.created_at);
-        console.log(`Fetched ${nostrPosts.length} Nostr posts`);
+        const updateFeed = newPosts => {
+            let changed = false;
+            newPosts.forEach(ev => {
+                if (!mergedPosts.has(ev.id) && !deletedPostIds.has(ev.id)) {
+                    mergedPosts.set(ev.id, ev);
+                    changed = true;
+                }
+            });
+            if (changed) {
+                allPostsArray = Array.from(mergedPosts.values()).sort((a, b) => b.created_at - a.created_at);
+                renderPostsChunk(true);
+            }
+        };
 
-        allPostsArray = [...googleFakePosts, ...nostrPosts].sort((a, b) => b.created_at - a.created_at);
-        console.log(`Total merged posts (Google + Nostr): ${allPostsArray.length}`);
+        const postsPromises = relays.map((relay, i) => {
+            const limit = i === 0 ? FIRST_RELAY_LIMIT : OTHER_RELAY_LIMIT;
+            return fetchPostsFromRelay(relay, limit).then(posts => {
+                updateFeed(posts);
+                return posts;
+            });
+        });
 
-        renderPostsChunk(true);
+        await Promise.all(postsPromises);
     } finally {
         if (menuCheck) menuCheck.classList.remove('menuBusy');
     }
