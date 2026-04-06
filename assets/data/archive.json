@@ -21,20 +21,6 @@
   "features": ["reviewed", "solutions"]
 },
 {
-  "name": "Kaspa Hub Donation Extension",
-  "description": "Contribute Kaspa cryptocurrency to websites that accept it. A simple browser extension that makes donations easy.",
-  "link": "https://kaspahub.org/post/kaspa-donations-extension/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-  "features": ["verified", "solutions"]
-},
-{
-  "name": "TheCryptoSky",
-  "description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
-  "link": "https://thecryptosky.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/thecryptosky.webp",
-  "features": ["jobs", "marketplace"]
-},
-{
   "name": "Kaspa DAO",
   "description": "The first decentralized autonomous organization on the Kaspa network, funding innovation and supporting projects that advance decentralization, transparency, and community empowerment.",
   "link": "https://kaspadao.org",
