@@ -35,7 +35,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <script defer src="https://kaspahub.org/assets/scripts/main.js"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
-<link rel="stylesheet" type="text/css" href="https://kaspahub.org/assets/styles/explorer.css" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
 <script defer src="https://kaspahub.org/assets/scripts/explorer.js"></script>
 
@@ -60,14 +60,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section id="explorerHead" style="opacity: 0;">
   <div id="explorerHdr">
-    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" alt="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
+    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
       <h1 id="hdrLine">Kaspa Block</h1>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-  <button id="optionsCtn" style="display: none;" type="button" popovertarget="optionsMenu" aria-label="Options"></button>
-  <div id="optionsMenu" role="menu" popover></div>
+  <div class="explorerNav" style="display: none;">
+    <button class="sbtn scopy"></button>
+    <button class="sbtn sqr"></button>
+  </div>
 </section>
 
 <section id="explorerData" style="opacity: 0;">

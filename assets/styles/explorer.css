@@ -39,6 +39,30 @@
 .explorerTx {
   word-break: break-all;
 }
+.explorerNav {
+  display: flex; 
+  flex-direction: row;
+}
+.sbtn {
+  appearance: none;
+  border: none;
+  outline: none;
+  display: block;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-image 0.3s ease;
+}
+.scopy {
+  background-image: url("/assets/icons/copy.webp");
+}
+.sqr {
+  background-image: url("/assets/icons/qr.webp");
+}
 
 .accepted {
   color: #70C7BA;
