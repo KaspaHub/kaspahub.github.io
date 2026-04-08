@@ -134,19 +134,13 @@
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-case-for-kaspa/</loc>
-	<lastmod>2026-03-29</lastmod>
+	<lastmod>2026-04-08</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://kaspahub.org/post/the-case-for-kaspa-continues/</loc>
-	<lastmod>2025-03-29</lastmod>
-	<changefreq>monthly</changefreq>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/post/the-kaspa-galaxy-mission/</loc>
-	<lastmod>2025-03-29</lastmod>
+	<lastmod>2025-04-08</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
 </url>
@@ -209,11 +203,5 @@
 	<lastmod>2026-02-04</lastmod>
 	<changefreq>monthly</changefreq>
 	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://kaspahub.org/post/sitemap/</loc>
-	<lastmod>2026-03-21</lastmod>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
 </url>
 </urlset>
