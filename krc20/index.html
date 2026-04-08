@@ -37,7 +37,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
-<script defer src="https://kaspahub.org/assets/scripts/explorer.js"></script>
+<script defer src="/assets/scripts/explorer.js"></script>
 
 </head>
 <body>
@@ -66,9 +66,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-  <div class="explorerNav" style="display: none;">
-    <button class="sbtn scopy"></button>
-    <button class="sbtn sqr"></button>
+  <div id="explorerNav">
+    <button class="sbtn"></button>
   </div>
 </section>
 
@@ -267,8 +266,7 @@ const prevHolder = document.getElementById("prevHolder");
 const nextHolder = document.getElementById("nextHolder");
 const holderCursor = document.getElementById("holderCursor");
 
-const optionsCtn = document.getElementById("optionsCtn");
-const optionsMenu = document.getElementById("optionsMenu");
+const explorerNav = document.getElementById("explorerNav");
 
 let tokenInfo = null;
 let tokenMeta = null;
@@ -767,13 +765,42 @@ async function runSearch(query){
     renderMarkets();
 
     const hasLinks = !!(tokenMeta?.website || tokenMeta?.x || tokenMeta?.telegram);
-    optionsCtn.style.display = hasLinks ? 'block' : 'none';
-    if(hasLinks){
-      optionsMenu.innerHTML = '';
-      if(tokenMeta.website) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.website)}" target="_blank" rel="noreferrer">Website</a>`;
-      if(tokenMeta.x) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.x)}" target="_blank" rel="noreferrer">X</a>`;
-      if(tokenMeta.telegram) optionsMenu.innerHTML += `<a href="${escHtml(tokenMeta.telegram)}" target="_blank" rel="noreferrer">Telegram</a>`;
-    }
+
+    explorerNav.style.display = hasLinks ? 'flex' : 'none';
+
+if (hasLinks) {
+  explorerNav.innerHTML = '';
+
+  const addLink = (url, icon) => {
+    explorerNav.innerHTML += `
+      <a class="sbtn" href="${escHtml(url)}" target="_blank" rel="noreferrer">
+        <img src="${icon}"
+             onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/web.webp';">
+      </a>`;
+  };
+
+  if (tokenMeta.website) {
+    addLink(
+      tokenMeta.website,
+      "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/web.webp"
+    );
+  }
+
+  if (tokenMeta.x) {
+    addLink(
+      tokenMeta.x,
+      "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/x.webp"
+    );
+  }
+
+  if (tokenMeta.telegram) {
+    addLink(
+      tokenMeta.telegram,
+      "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/telegram.webp"
+    );
+  }
+}
+
   }catch(err){
     addToast("Not available", String(err?.message || err));
 

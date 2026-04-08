@@ -39,9 +39,14 @@
 .explorerTx {
   word-break: break-all;
 }
-.explorerNav {
+#explorerNav {
   display: flex; 
   flex-direction: row;
+}
+.sbtn img {
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 .sbtn {
   appearance: none;
@@ -49,8 +54,8 @@
   outline: none;
   display: block;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-left: 10px;
   background-size: 20px;
   background-repeat: no-repeat;
