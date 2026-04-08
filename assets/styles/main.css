@@ -1420,6 +1420,9 @@ dialog.theme-1::backdrop {
 	margin: 0.4rem 0;
 }
 
+.drawerSelect {
+	margin-left: 4px;
+}
 
 @media (min-aspect-ratio: 1/1) {
 	.app {
