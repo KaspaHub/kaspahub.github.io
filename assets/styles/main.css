@@ -1373,6 +1373,9 @@ dialog.theme-1::backdrop {
 #drawer-list {
 	padding-bottom: 100px;
 }
+#drawer-list * {
+    font-weight: normal;
+}
 
 #drawer-overlay {
 	position: fixed;
