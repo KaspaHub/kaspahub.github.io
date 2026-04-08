@@ -208,6 +208,10 @@ summary {
 	user-select: none;
 }
 
+select {
+	padding: 0 10px
+}
+
 .left {text-align: left;}
 .right {text-align: right;}
 
@@ -1425,10 +1429,6 @@ dialog.theme-1::backdrop {
 	height: 1px;
 	background: rgba(0,0,0,0.12);
 	margin: 0.4rem 0;
-}
-
-.drawerSelect {
-	margin-left: 7px;
 }
 
 @media (min-aspect-ratio: 1/1) {
