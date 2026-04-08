@@ -13,7 +13,7 @@
   min-width:260px;
 }
 #explorerHdr h1 {
-  margin:0;font-size:16px;letter-spacing:.2px;
+  margin:0;font-size:16px;
 }
 #explorerHdr .sub {
   margin:2px 0 0;font-size:12px;
@@ -207,7 +207,6 @@ div > details {
 .big {
   font-size: 26px;
   font-weight: 850;
-  letter-spacing: -.2px;
   margin: 0 0 6px;
 }
 .loading {
@@ -288,7 +287,6 @@ th {
   font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: .2px;
 }
 
 tr:hover td { background: rgba(255,255,255,.03);}
@@ -317,7 +315,7 @@ tr:hover td { background: rgba(255,255,255,.03);}
 
 /*balv*/
 
-h1 { margin: 0 0 6px;font-weight: 700;letter-spacing: 0.2px;}
+h1 { margin: 0 0 6px;font-weight: 700;}
 p.hint { margin: 0 0 16px;font-size: 0.95rem;}
 
 #results { margin-top: 18px;}
