@@ -23,7 +23,7 @@
 html {
 	min-height: 100vh;
 	max-height: 100vh;
-	font-family: "Gilroy-Medium", sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-size: 1rem;
 	cursor: default;
 	overflow-wrap: break-word;
@@ -1428,7 +1428,7 @@ dialog.theme-1::backdrop {
 }
 
 .drawerSelect {
-	margin-left: 5px;
+	margin-left: 7px;
 }
 
 @media (min-aspect-ratio: 1/1) {
