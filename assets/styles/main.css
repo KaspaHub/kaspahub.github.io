@@ -20,7 +20,7 @@ html {
 	max-height: 100vh;
 	font-family: "Gilroy-Medium", sans-serif;
 	font-size: 1.07rem;
-	font-weight: 500;
+	letter-spacing: 0.1em;
 	cursor: default;
 	overflow-wrap: break-word;
 	word-break: normal;
