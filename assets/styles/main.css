@@ -13,14 +13,14 @@
 *::before,
 *::after {
 	box-sizing: border-box;
+	letter-spacing: 0.1em;
 }
 
 html {
 	min-height: 100vh;
 	max-height: 100vh;
 	font-family: "Gilroy-Medium", sans-serif;
-	font-size: 1.07rem;
-	letter-spacing: 0.1em;
+	font-size: 1rem;
 	cursor: default;
 	overflow-wrap: break-word;
 	word-break: normal;
