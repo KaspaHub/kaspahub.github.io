@@ -113,6 +113,7 @@ html#light {
 	--link: #1C62B9;
 	--link-hover: #3952C6;
 	--link-active: #D8B234;
+	--filter-white: invert(1);
 }
 
 html#dark {
@@ -164,6 +165,10 @@ html#dark {
 
 .filter-dark {
 	filter: invert(85%);
+}
+
+.fw {
+	filter: var(--filter-white);
 }
 
 .muted {

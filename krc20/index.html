@@ -771,18 +771,18 @@ async function runSearch(query){
 if (hasLinks) {
   explorerNav.innerHTML = '';
 
-  const addLink = (url, icon) => {
+  const addLink = (url, icon, isWeb = false) => {
     explorerNav.innerHTML += `
-      <a class="sbtn" href="${escHtml(url)}" target="_blank" rel="noreferrer">
-        <img src="${icon}"
-             onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/web.webp';">
+      <a class="sbtn${isWeb ? ' fw' : ''}" href="${escHtml(url)}" target="_blank" rel="noreferrer">
+        <img src="${icon}">
       </a>`;
   };
 
   if (tokenMeta.website) {
     addLink(
       tokenMeta.website,
-      "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/web.webp"
+      "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/web.webp",
+      true
     );
   }
 
