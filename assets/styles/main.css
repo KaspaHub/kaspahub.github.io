@@ -133,11 +133,11 @@ html#dark {
 #dark {
 	/*background-image: linear-gradient(to bottom, #1a1a2e, #003437);*/
 	/*background-image: linear-gradient(to bottom, #0F0F0F, #003437);*/
-	background: linear-gradient(to bottom right, #1a1a2e, #0c3f3a);
+	/*background: linear-gradient(to bottom right, #1a1a2e, #0c3f3a);*/
 	color: #F1F1F1;
 	--color: #F1F1F1;
 	background-color: #0F0F0F;
-	/*background-color: #231F20;*/
+	background-color: #231F20;
 }
 
 #light, #dark {
@@ -1506,8 +1506,8 @@ dialog.theme-1::backdrop {
 	.snaps {
 		min-height: calc(100vh - 68px);
 		max-height: calc(100vh - 68px);
-		scroll-snap-align: start;
-		scroll-snap-stop: always;
+/*		scroll-snap-align: start;
+		scroll-snap-stop: always;*/
 		margin-bottom: 61px;
 	}
 	main, body, html {
