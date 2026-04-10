@@ -340,12 +340,12 @@ function share() {
 }
 
 function copyToClipboard(textToCopy) {
+  if (!textToCopy) return;
   navigator.clipboard.writeText(textToCopy)
   .then(() => {
-
+    addToast("Copied!", "Copied to clipboard")
   });
 }
-
 
 function generateQRCode(canvas, text, size, padding = 5) {
   new QRious({
@@ -414,7 +414,7 @@ function showWalletPopup(wallet) {
 <span class="w-close" data-close></span>
 </div>
 <canvas id="qrcode-crypto" class="qrcode-crypto"></canvas>
-<p class="w-message">Scan or copy the Kaspa address</p>
+<p class="w-message">Scan or copy address</p>
 <pre class="w-data">${escHtml(wallet)}</pre>
 <button class="button" data-copy>Copy</button>
 </div></dialog>
@@ -527,18 +527,18 @@ function toggleBookmark(button) {
   }, 2000);
 }
 
-
-// toggle menu
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("drawer-overlay");
+const menuCheck = document.getElementById("menuCheck");
 
 function menu(forceClose = false) {
-  const drawer = document.getElementById("drawer");
-  const overlay = document.getElementById("drawer-overlay");
-  const menuCheck = document.getElementById("menuCheck");
   if (!drawer || !overlay || !menuCheck) return;
   if (forceClose) menuCheck.checked = false;
   const isOpen = menuCheck.checked;
   drawer.classList.toggle("open", isOpen);
   overlay.classList.toggle("open", isOpen);
+
+document.documentElement.style.overflow = isOpen ? "hidden" : "";
 }
 
 function populateMenu() {

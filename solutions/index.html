@@ -47,14 +47,14 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	{
 		"@type": "ListItem",
 		"position": 1,
-		"name": "OnChain POS",
-		"url": "https://onchainpos.live"
+		"name": "Kasway",
+		"url": "https://github.com/Kasway-Tech/pos"
 	},
 	{
 		"@type": "ListItem",
 		"position": 2,
-		"name": "Topper",
-		"url": "https://www.topperpay.com"
+		"name": "OnChain POS",
+		"url": "https://onchainpos.live"
 	},
 	{
 		"@type": "ListItem",
@@ -65,12 +65,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	{
 		"@type": "ListItem",
 		"position": 4,
+		"name": "Topper",
+		"url": "https://www.topperpay.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
 		"name": "NOWPayments",
 		"url": "https://nowpayments.io"
 	},
 	{
 		"@type": "ListItem",
-		"position": 5,
+		"position": 6,
 		"name": "Simplex",
 		"url": "https://www.simplex.com"
 	}
@@ -259,6 +265,18 @@ const items = [
 	}
 },
 {
+	name: "NOWPayments",
+	description: "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
+	link: "https://nowpayments.io",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
+	features: {
+		reviewed: true,
+		api: true,
+		onlinePayments: true,
+		donations: true
+	}
+},
+{
 	name: "Topper",
 	description: "Topper Pay is a fiat-to-crypto on-ramp developed by Uphold that allows users to buy over 200 cryptocurrencies directly to their self-custodial wallets using various payment methods like debit cards, credit cards, Apple Pay, Google Pay, and more.",
 	link: "https://www.topperpay.com",
@@ -281,34 +299,22 @@ const items = [
 	}
 },
 {
+	name: "Simplex",
+	description: "Simplex is a fiat-to-crypto onramp for buying Kaspa via credit cards or bank transfers. Integrated with exchanges, it helps merchants acquire KAS.",
+	link: "https://www.simplex.com",
+	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/simplex.webp",
+	features: {
+		api: true,
+		onlinePayments: true
+	}
+},
+{
 	name: "ChangeNOW",
 	description: "Change NOW is a leading non-custodial cryptocurrency exchange platform that facilitates instant swaps between over 900 cryptocurrencies without requiring user registration.",
 	link: "https://changenow.io",
 	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changenow.webp",
 	features: {
 		reviewed: true,
-		api: true,
-		onlinePayments: true
-	}
-},
-{
-	name: "NOWPayments",
-	description: "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
-	link: "https://nowpayments.io",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
-	features: {
-		reviewed: true,
-		api: true,
-		onlinePayments: true,
-		donations: true
-	}
-},
-{
-	name: "Simplex",
-	description: "Simplex is a fiat-to-crypto onramp for buying Kaspa via credit cards or bank transfers. Integrated with exchanges, it helps merchants acquire KAS.",
-	link: "https://www.simplex.com",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/simplex.webp",
-	features: {
 		api: true,
 		onlinePayments: true
 	}

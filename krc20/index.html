@@ -67,7 +67,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
   </div>
   <div id="explorerNav">
-    <button class="sbtn"></button>
   </div>
 </section>
 
@@ -773,7 +772,7 @@ if (hasLinks) {
 
   const addLink = (url, icon, isWeb = false) => {
     explorerNav.innerHTML += `
-      <a class="sbtn${isWeb ? ' fw' : ''}" href="${escHtml(url)}" target="_blank" rel="noreferrer">
+      <a class="sbtn${isWeb ? ' fw' : ''}" href="${escHtml(url)}" target="_blank">
         <img src="${icon}">
       </a>`;
   };

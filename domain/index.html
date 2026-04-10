@@ -66,9 +66,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-  <div id="explorerNav" style="display: none;">
-    <button class="sbtn scopy"></button>
-    <button class="sbtn sqr"></button>
+  <div id="explorerNav">
+    <button id="copyQuery" class="sbtn scopy fw"></button>
   </div>
 </section>
 
@@ -127,6 +126,8 @@ const explorerContent = document.getElementById("explorerContent");
 
 const explorerPic = document.getElementById("explorerPic");
 const hdrSub = document.getElementById("hdrSub");
+
+let normQuery = "";
 
 async function loadReviewerData(url, name) {
   try {
@@ -218,7 +219,8 @@ async function runSearch(queryInput) {
   if (!dataReady || BUSY) return;
   BUSY = true;
 
-  const query = normalizeDomain(queryInput);
+  normQuery = normalizeDomain(queryInput);
+
   if (!query) {
     explorerContent.innerHTML = `<span style="margin: 10px;">Invalid domain. Use example.com</span>`;
     explorerContent.style.display = 'block';
@@ -261,6 +263,10 @@ async function runSearch(queryInput) {
   BUSY = false;
 }
 
+document.getElementById('copyQuery')
+.addEventListener('click', function () {
+    copyToClipboard(currentBlockHash);
+});
 
 if (QUERY) {
   (async () => {

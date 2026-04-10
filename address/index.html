@@ -66,9 +66,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-  <div id="explorerNav" style="display: none;">
-    <button class="sbtn scopy"></button>
-    <button class="sbtn sqr"></button>
+  <div id="explorerNav">
+    <button id="copyWalletBtn" class="sbtn scopy fw"></button>
+    <button id="showWalletBtn" class="sbtn sqr fw"></button>
   </div>
 </section>
 
@@ -1190,7 +1190,15 @@ nextUtxos.addEventListener("click", () => {
   }
 });
 
+document.getElementById('showWalletBtn')
+.addEventListener('click', function () {
+    showWalletPopup(currentAddr);
+});
 
+document.getElementById('copyWalletBtn')
+.addEventListener('click', function () {
+    copyToClipboard(currentAddr);
+});
 
 if (QUERY) {
   (async () => {

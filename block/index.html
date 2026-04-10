@@ -66,9 +66,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
-  <div id="explorerNav" style="display: none;">
-    <button class="sbtn scopy"></button>
-    <button class="sbtn sqr"></button>
+  <div id="explorerNav">
+    <button id="copyQuery" class="sbtn scopy fw"></button>
   </div>
 </section>
 
@@ -237,7 +236,7 @@ const relatedContent = document.getElementById("relatedContent");
 const detailsRows = document.getElementById("detailsRows");
 const explorerPic = document.getElementById("explorerPic");
 
-let currentBlockHash = "";
+let normQuery = "";
 
 const tabs = document.querySelectorAll('.tabs .tab');
 const tabPanels = document.querySelectorAll('.tabPanel');
@@ -588,7 +587,7 @@ async function runSearch(inputHash) {
     return;
   }
 
-  currentBlockHash = blockHash;
+  normQuery = blockHash;
   setUrlBlockHash(blockHash);
 
   let json = null;
@@ -620,6 +619,11 @@ async function runSearch(inputHash) {
 
   BUSY = false;
 }
+
+document.getElementById('copyQuery')
+.addEventListener('click', function () {
+    copyToClipboard(normQuery);
+});
 
 if (QUERY) {
   (async () => {

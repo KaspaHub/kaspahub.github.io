@@ -30,6 +30,7 @@ html {
 	word-break: normal;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	scrollbar-gutter: stable;
 }
 
 body, html {
@@ -214,7 +215,7 @@ summary {
 }
 
 select {
-	padding: 0 10px
+	padding: 0 6px
 }
 
 .left {text-align: left;}
@@ -787,10 +788,12 @@ code {
 }
 
 .qrcode-crypto {
-	min-width: 200px;
-	min-height: 200px;
-	max-width: 200px;
-	max-height: 200px;
+	display: block;
+	margin: 0 auto;
+	min-width: 100px;
+	min-height: 100px;
+	max-width: 100%;
+	max-height: 100%;
 	padding: 10px;
 	border-radius: 15px;
 	background-color: white;
@@ -1516,8 +1519,8 @@ dialog.theme-1::backdrop {
 		min-height: calc(100vh - 68px);
 		max-height: calc(100vh - 68px);
 /*		scroll-snap-align: start;
-		scroll-snap-stop: always;*/
-		margin-bottom: 61px;
+		scroll-snap-stop: always;
+		margin-bottom: 61px;*/
 	}
 	main, body, html {
 		scrollbar-width: none;
