@@ -94,9 +94,6 @@
 
 /* price v */
 #chartContainer { height: 700px; }
-@media (max-aspect-ratio: 1/1) {
-#chartContainer { height: 500px; }
-}
 
 #priceBox {
   font-size: 3rem;
@@ -308,16 +305,6 @@ tr:hover td { background: rgba(255,255,255,.03);}
   margin-top: 12px;
 }
 
-/* Links */
-
-@media (max-aspect-ratio: 1/1) {
-  .grid-1,
-  .grid-2 {
-  grid-template-columns: 1fr;
-  }
-  .grid-2 { grid-template-rows: none;}
-}
-
 /*balv*/
 
 h1 { margin: 0 0 6px;font-weight: 700;}
@@ -435,4 +422,20 @@ p.hint { margin: 0 0 16px;font-size: 0.95rem;}
 .high-rating {
   color: #2ecc71;
   font-weight: 700;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  #hdrSub {
+    width: 200px;
+    overflow-wrap: anywhere;
+  }
+  #chartContainer { 
+    height: 500px; 
+  }
+  .grid-1, .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .grid-2 {
+    grid-template-rows: none;
+  }
 }
