@@ -267,42 +267,6 @@ function formatKas(somis, fixed = false) {
   return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
 }
 
-function walletUrl(addr) {
-  const a = String(addr ?? "").trim();
-  return a ? WALLET_BASE + a : "#";
-}
-
-function transactionUrl(hash) {
-  const h = String(hash ?? "").trim();
-  return h ? TRANSACTION_BASE + h : "#";
-}
-
-function blockUrl(hash) {
-  const h = String(hash ?? "").trim();
-  return h ? BLOCK_BASE + h : "#";
-}
-
-function linkAddress(addr, label) {
-  const a = String(addr ?? "").trim();
-  const text = escHtml(label != null ? label : shortenMiddle(a));
-  if (!a) return "-";
-  return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
-}
-
-function linkTx(hash, label) {
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : shortenMiddle(h));
-  if (!h) return "-";
-  return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
-}
-
-function linkBlock(hash, label) {
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : shortenMiddle(h));
-  if (!h) return "-";
-  return `<a class="explorerTx" href="${blockUrl(h)}">${text}</a>`;
-}
-
 async function fetchTransaction(txid) {
   const url = `https://api.kaspa.org/transactions/${txid}?resolve_previous_outpoints=full`;
   const res = await fetch(url);
@@ -564,8 +528,8 @@ function renderDetails(json) {
     <tr><td>Subnetwork ID</td><td>${escHtml(json.subnetwork_id) || "-"}</td></tr>
     <tr><td>Transaction ID</td><td>${escHtml(json.transaction_id) || "-"}</td></tr>
     <tr><td>Hash</td><td>${escHtml(json.hash) || "-"}</td></tr>
-    <tr><td>Accepting block hash</td><td>${linkBlock(json.accepting_block_hash, json.accepting_block_hash) || "-"}</td></tr>
-    <tr><td>Block hashes</td><td>${Array.isArray(json.block_hash) ? `<details><summary class="expandable-row muted">Block hashes (${json.block_hash.length})</summary>${json.block_hash.map(h => linkBlock(h, h)).join("<br>")}</details>` : "-"}</td></tr>
+    <tr><td>Accepting block hash</td><td>${linkBlock(json.accepting_block_hash, false) || "-"}</td></tr>
+    <tr><td>Block hashes</td><td>${Array.isArray(json.block_hash) ? `<details><summary class="expandable-row muted">Block hashes (${json.block_hash.length})</summary>${json.block_hash.map(h => linkBlock(h, false)).join("<br>")}</details>` : "-"}</td></tr>
   `;
   detailsRows.innerHTML = html;
 }
@@ -678,6 +642,11 @@ function resetUI() {
   detailsRows.innerHTML = `<tr><td class="k">-</td><td class="v">-</td></tr>`;
   payloadContent.textContent = "-";
 }
+
+document.getElementById('copyQuery')
+.addEventListener('click', function () {
+    copyToClipboard(currentTxId);
+});
 
 if (QUERY) {
   (async () => {

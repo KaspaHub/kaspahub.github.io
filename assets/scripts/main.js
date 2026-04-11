@@ -256,42 +256,6 @@ function formatDate(ts, includeSeconds = false, locale = "en-US") {
   return `${dateStr}, ${d.toLocaleTimeString(locale, timeOptions)}`;
 }
 
-function shortenMiddle(str, head = 6, tail = 6) {
-  let s = String(str ?? "");
-
-  if (s.length < 10) return s;
-
-  if (s.startsWith("kaspa:")) {
-
-    if (typeof window === "undefined" || window.innerWidth > window.innerHeight) {
-
-      return s.slice(0, head + 6) + "..." + s.slice(-tail);
-
-    } else {
-      return s.slice(6, head + 6) + "..." + s.slice(-tail);
-    }
-
-  }
-
-}
-
-function shortenAddress(str, head = 13, tail = 8) {
-  let s = String(str ?? "");
-
-  if (s.startsWith("kaspa:")) {
-    s = s.slice(6);
-  }
-
-  if (s.length <= head + tail + 3) return s;
-  return s.slice(0, head) + "..." + s.slice(-tail);
-}
-
-function shortenEnd(str, maxLength = 13) {
-  const s = String(str ?? "");
-  if (s.length <= maxLength) return s;
-  return s.slice(0, maxLength) + "...";
-}
-
 function addToast(title = "", msg = "") {
 
   let container = document.querySelector('.toast-container')
@@ -410,7 +374,7 @@ function showWalletPopup(wallet) {
 <dialog id="dialog" class="theme-1" data-popup>
 <div class="w-container">
 <div class="w-header">
-<span>Kaspa address</span>
+<span>Kaspa wallet</span>
 <span class="w-close" data-close></span>
 </div>
 <canvas id="qrcode-crypto" class="qrcode-crypto"></canvas>

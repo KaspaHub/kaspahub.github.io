@@ -221,18 +221,18 @@ async function runSearch(queryInput) {
 
   normQuery = normalizeDomain(queryInput);
 
-  if (!query) {
+  if (!normQuery) {
     explorerContent.innerHTML = `<span style="margin: 10px;">Invalid domain. Use example.com</span>`;
     explorerContent.style.display = 'block';
     BUSY = false;
     return;
   }
 
-  explorerPic.src = `https://${query}/favicon.ico`;
-  hdrSub.textContent = `https://${query}`;
-  document.title = `${query} — Reviews - Kaspa Hub`;
+  explorerPic.src = `https://${normQuery}/favicon.ico`;
+  hdrSub.textContent = `https://${normQuery}`;
+  document.title = `${normQuery} — Reviews - Kaspa Hub`;
 
-  setUrlQuery(query);
+  setUrlQuery(normQuery);
 
   explorerContent.innerHTML = `<div class="fade-in"><span class="spinner"></span><span>Loading...</span></div>`;
   explorerContent.style.display = 'block';
@@ -244,7 +244,7 @@ async function runSearch(queryInput) {
       allResults.push({ name: reviewer.name, review: null, comment: null });
       continue;
     }
-    const entry = data[query];
+    const entry = data[normQuery];
     let rating = null, comment = null;
     if (entry !== undefined) {
       if (Array.isArray(entry)) {
@@ -258,14 +258,14 @@ async function runSearch(queryInput) {
     allResults.push({ name: reviewer.name, review: rating, comment });
   }
 
-  renderResults(query, allResults);
+  renderResults(normQuery, allResults);
 
   BUSY = false;
 }
 
 document.getElementById('copyQuery')
 .addEventListener('click', function () {
-    copyToClipboard(currentBlockHash);
+    copyToClipboard(normQuery);
 });
 
 if (QUERY) {

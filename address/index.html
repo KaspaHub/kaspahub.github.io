@@ -424,8 +424,6 @@ transferType.addEventListener('change', () => {
   }
 });
 
-
-
 function withSeparators(numStr) {
   const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -437,30 +435,6 @@ function formatKas(amountSomes) {
   const fixed = n.toFixed(8);
   const [int, dec] = fixed.split('.');
   return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
-}
-
-function walletUrl(addr) {
-  const a = String(addr ?? "").trim();
-  return a ? "/address/?q=" + a : "#";
-}
-
-function transactionUrl(hash) {
-  const h = String(hash ?? "").trim();
-  return h ? "/transaction/?q=" + h : "#";
-}
-
-function linkAddress(addr, label) {
-  const a = String(addr ?? "").trim();
-  const text = escHtml(label != null ? label : a);
-  if (!a) return "-";
-  return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
-}
-
-function linkTx(hash, label) {
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : h);
-  if (!h) return "-";
-  return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
 }
 
 async function fetchBalance(addr) {
@@ -704,7 +678,7 @@ function renderAll(pageTxs, addr) {
         summaryText = `Multiple addresses (${fromItems.length})`;
       } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
         const shortFrom = shortenMiddle(from);
-        counterpartyHtml = linkAddress(from, shortFrom);
+        counterpartyHtml = linkAddress(from);
       } else {
         const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
         counterpartyHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
@@ -716,7 +690,7 @@ function renderAll(pageTxs, addr) {
         summaryText = `Multiple addresses (${toItems.length})`;
       } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
         const shortTo = shortenMiddle(to);
-        counterpartyHtml = linkAddress(to, shortTo);
+        counterpartyHtml = linkAddress(to);
       } else {
         const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
         counterpartyHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
@@ -738,7 +712,7 @@ function renderAll(pageTxs, addr) {
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
         const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(item.addr);
-        return `${linkAddress(item.addr, short)} - <span style="color:${itemColor}">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - <span style="color:${itemColor}">${itemAmt} KAS</span><br>`;
       }).join('');
       counterpartyHtml = `
         <details>
@@ -792,7 +766,7 @@ function renderReceived(pageTxs, addr) {
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
         const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(item.addr);
-        return `${linkAddress(item.addr, short)} - <span style="color:#2ee59d">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - <span style="color:#2ee59d">${itemAmt} KAS</span><br>`;
       }).join('');
       senderHtml = `
         <details>
@@ -802,7 +776,7 @@ function renderReceived(pageTxs, addr) {
       `;
     } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
       const shortFrom = shortenMiddle(from);
-      senderHtml = linkAddress(from, shortFrom);
+      senderHtml = linkAddress(from);
     } else {
       const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
       senderHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
@@ -851,7 +825,7 @@ function renderSent(pageTxs, addr) {
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
         const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(toItems[0].addr);
-        return `${linkAddress(item.addr, short)} - <span style="color:#ff6b6b">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - <span style="color:#ff6b6b">${itemAmt} KAS</span><br>`;
       }).join('');
       receiverHtml = `
         <details>
@@ -861,7 +835,7 @@ function renderSent(pageTxs, addr) {
       `;
     } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
       const shortTo = shortenMiddle(to);
-      receiverHtml = linkAddress(to, shortTo);
+      receiverHtml = linkAddress(to);
     } else {
       const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
       receiverHtml = `<span class="muted">${escHtml(shortTo)}</span>`;

@@ -267,6 +267,84 @@ function fetchAddressLabel(addr) {
   return match ? match.name : null;
 }
 
+function linkAddress(address, short = true) {
+  address = String(address ?? "").trim();
+
+  if (!validators.isKaspaAddress(address)) {
+    return "-";
+  }
+
+  if (short) {
+    return `<a class="explorerLink" href="/address/?q=${address}">${shortenMiddle(address)}</a>`;
+  } else {
+    return `<a class="explorerLink" href="/address/?q=${address}">${address}</a>`;
+  }
+
+}
+
+function linkTx(transaction, short = true) {
+  transaction = String(transaction ?? "").trim();
+
+  if (!validators.isTxOrBlock(transaction)) {
+    return "-";
+  }
+
+  if (short) {
+    return `<a class="explorerTx" href="/transaction/?q=${transaction}">${shortenEnd(transaction)}</a>`;
+  } else {
+    return `<a class="explorerTx" href="/transaction/?q=${transaction}">${transaction}</a>`;
+  }
+}
+
+function linkBlock(hash, short = true) {
+  hash = String(hash ?? "").trim();
+
+  if (!validators.isTxOrBlock(hash)) {
+    return "-";
+  }
+
+  if (short) {
+    return `<a class="explorerTx" href="/block/?q=${hash}">${shortenEnd(hash)}</a>`;
+  } else {
+    return `<a class="explorerTx" href="/block/?q=${hash}">${hash}</a>`;
+  }
+}
+
+function shortenMiddle(str, head = 6, tail = 6) {
+  let s = String(str ?? "");
+
+  if (s.length < 10) return s;
+
+  if (s.startsWith("kaspa:")) {
+
+    if (typeof window === "undefined" || window.innerWidth > window.innerHeight) {
+
+      return s.slice(0, head + 6) + "..." + s.slice(-tail);
+
+    } else {
+      return s.slice(6, head + 6) + "..." + s.slice(-tail);
+    }
+
+  }
+
+}
+
+function shortenAddress(str, head = 13, tail = 8) {
+  let s = String(str ?? "");
+
+  if (s.startsWith("kaspa:")) {
+    s = s.slice(6);
+  }
+
+  if (s.length <= head + tail + 3) return s;
+  return s.slice(0, head) + "..." + s.slice(-tail);
+}
+
+function shortenEnd(str, maxLength = 10) {
+  const s = String(str ?? "");
+  if (s.length <= maxLength) return s;
+  return s.slice(0, maxLength) + "...";
+}
 
 
 document.getElementById('searchContainer')?.addEventListener('submit', (event) => {

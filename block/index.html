@@ -269,42 +269,6 @@ function formatKas(somis, fixed = false) {
   return withSeparators(s) + '.' + dec + " KAS";
 }
 
-function transactionUrl(hash) {
-  const h = String(hash ?? "").trim();
-  return h ? "/transaction/?q=" + h : "#";
-}
-
-function blockUrl(hash) {
-  const h = String(hash ?? "").trim();
-  return h ? "/block/?q=" + h : "#";
-}
-
-function walletUrl(addr) {
-  const a = String(addr ?? "").trim();
-  return a ? "/address/?q=" + a : "#";
-}
-
-function linkAddress(addr, label) {
-  const a = String(addr ?? "").trim();
-  const text = escHtml(label != null ? label : shortenMiddle(a));
-  if (!a) return "-";
-  return `<a class="explorerTx" href="${walletUrl(a)}">${text}</a>`;
-}
-
-function linkTx(hash, label) {
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : shortenEnd(h));
-  if (!h) return "-";
-  return `<a class="explorerTx" href="${transactionUrl(h)}">${text}</a>`;
-}
-
-function linkBlock(hash, label = null) {
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : shortenEnd(h));
-  if (!h) return "-";
-  return `<a class="explorerTx" href="${blockUrl(h)}">${text}</a>`;
-}
-
 async function fetchBlock(blockHash) {
   const url = `https://api.kaspa.org/blocks/${blockHash}?includeTransactions=true`;
   const res = await fetch(url);
@@ -472,14 +436,14 @@ function renderRelated(parents, childrenHashes, mergeSetBluesHashes, mergeSetRed
   const renderCategoryContent = (name, hashes) => {
     const unique = [...new Set(hashes || [])].sort();
     if (!unique.length) return null;
-    const links = unique.map(h => linkBlock(h, h)).join('<br>');
+    const links = unique.map(h => linkBlock(h, false)).join('<br>');
     return `<details><summary class="expandable-row muted">${name} (${unique.length})</summary><div class="block-list">${links}</div></details>`;
   };
   if (selectedParentHash) {
-    addRow('Selected Parent', linkBlock(selectedParentHash, selectedParentHash));
+    addRow('Selected Parent', linkBlock(selectedParentHash, false));
   }
   if (pruningPoint) {
-    addRow('Pruning Point', linkBlock(pruningPoint, pruningPoint));
+    addRow('Pruning Point', linkBlock(pruningPoint, false));
   }
   const parentsContent = renderCategoryContent('Parents', parentHashesArr);
   if (parentsContent) addRow('Parents', parentsContent);
@@ -517,7 +481,7 @@ function renderDetails(header, verboseData, extra) {
         const linkFn = isTxIds ? linkTx : linkBlock;
         valStr = value.map(v => linkFn(v, v)).join('<br>');
       } else if (key === 'selectedParentHash' && value) {
-        valStr = linkBlock(value, value);
+        valStr = linkBlock(value, false);
       } else {
         valStr = value;
       }
@@ -529,9 +493,9 @@ function renderDetails(header, verboseData, extra) {
       if (skippedExtra.includes(key)) return;
       let valStr = value ?? "-";
       if (key === 'minerAddress' && typeof valStr === "string") {
-        valStr = linkAddress(valStr, valStr);
+        valStr = linkAddress(valStr);
       } else if (key === 'selectedParentHash' && typeof valStr === "string") {
-        valStr = linkBlock(valStr, valStr);
+        valStr = linkBlock(valStr, false);
       } else {
         valStr = escHtml(valStr);
       }

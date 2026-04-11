@@ -404,30 +404,6 @@ function pow10Big(n){
   return 10n ** BigInt(n);
 }
 
-function explorerAddressUrl(addr){
-  const a = String(addr ?? "").trim();
-  return a ? `/address/?q=${a}` : "#";
-}
-
-function explorerTxUrl(hash){
-  const h = String(hash ?? "").trim();
-  return h ? `/transaction/?q=${h}` : "#";
-}
-
-function linkAddress(addr, label){
-  const a = String(addr ?? "").trim();
-  const text = escHtml(label != null ? label : a);
-  if(!a) return "-";
-  return `<a class="explorerLink" href="${explorerAddressUrl(a)}">${text}</a>`;
-}
-
-function linkTx(hash, label){
-  const h = String(hash ?? "").trim();
-  const text = escHtml(label != null ? label : h);
-  if(!h) return "-";
-  return `<a class="explorerLink" href="${explorerTxUrl(h)}">${text}</a>`;
-}
-
 async function fetchKasplexToken(t){
   const url = `https://api.kasplex.org/v1/krc20/token/${t}`;
   const res = await fetch(url);
@@ -590,7 +566,7 @@ function renderHoldersPage(){
     return `
       <tr>
         <td>${globalI+1}</td>
-        <td class="left">${linkAddress(addr, addr)}</td>
+        <td class="left">${linkAddress(addr)}</td>
         <td>${share}</td>
         <td>${amtFmt}</td>
       </tr>
@@ -635,8 +611,8 @@ function renderTransfers(result){
     return `
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
-        <td>${linkAddress(from, shortFrom)}</td>
-        <td>${linkAddress(to, shortTo)}</td>
+        <td>${linkAddress(from)}</td>
+        <td>${linkAddress(to)}</td>
         <td>${age}</td>
         <td>${amt}</td>
       </tr>
