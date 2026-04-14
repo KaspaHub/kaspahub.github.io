@@ -746,28 +746,28 @@
   "description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
   "link": "https://kaspa.news",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-black.webp",
-  "features": []
+  "features": ["reviewed"]
 },
 {
   "name": "Kaspa FAQ",
   "description": "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
   "link": "https://www.kaspafaq.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspafaq.webp",
-  "features": []
+  "features": ["reviewed"]
 },
 {
   "name": "Mineable Money",
   "description": "Mineable.money provides Kaspa resources for developers and miners, offering links to mining tools, developer APIs, and network data for the decentralized Kaspa cryptocurrency.",
   "link": "https://mineable.money",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mineablemoney.webp",
-  "features": []
+  "features": ["reviewed"]
 },
 {
   "name": "KasBay",
   "description": "A comprehensive resource hub for the Kaspa ecosystem, featuring projects and dApps across the network to showcase innovation, utility, and growth within the community.",
   "link": "https://kasbay.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasbay.webp",
-  "features": []
+  "features": ["reviewed"]
 },
 {
   "name": "TradingView",
