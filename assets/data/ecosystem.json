@@ -88,7 +88,7 @@
   "description": "A video platform powered by $KAS micropayments that lets creators earn Kaspa through tipping, channel subscriptions, engagement, and paid videos.",
   "link": "https://kasshi.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasshi.webp",
-  "features": ["social"]
+  "features": ["reviewed", "social"]
 },
 {
   "name": "Kaspeak",
