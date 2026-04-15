@@ -231,6 +231,13 @@
   "features": ["reviewed"]
 },
 {
+  "name": "FrostCard",
+  "description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
+  "link": "https://frostcard.io",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/frostcard.webp",
+  "features": []
+},
+{
   "name": "KYO",
   "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
   "link": "https://kyocard.app",
@@ -362,6 +369,20 @@
   "link": "https://www.kaspatips.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-white.webp",
   "features": ["reviewed"]
+},
+{
+  "name": "KasFun",
+  "description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
+  "link": "https://kas.fun",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasfun.webp",
+  "features": ["layer2", "launchpad"]
+},
+{
+  "name": "KrokoSwap",
+  "description": "Decentralized exchange on Kasplex where users can swap tokens instantly with Uniswap V2 and V3 support, concentrated liquidity pools, smart routing, and seamless native KAS handling.",
+  "link": "https://krokoswap.io/",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/krokoswap.webp",
+  "features": ["layer2", "dex"]
 },
 {
   "name": "Zealous Swap",
@@ -497,10 +518,31 @@
   "features": ["reviewed"]
 },
 {
+  "name": "PoW Protocol University",
+  "description": "Interactive educational platform comparing the top 12 Proof of Work networks across 12 pillars including security budget, decentralization, fair launch, and more, with clickable protocols for detailed learning.",
+  "link": "https://protocol-university.web.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mining.webp",
+  "features": ["reviewed"]
+},
+{
+  "name": "Kaspa Genesis Proof",
+  "description": "Interactive cryptographic proof demonstrating Kaspa launched with zero premine, where users can click verify to watch the math, fingerprints, and chain integrity checks in real time.",
+  "link": "https://pow-protocol-university.web.app/kaspa-genesis-v3",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed"]
+},
+{
   "name": "Kaspa University",
   "description": "The first Learn-to-Earn platform on Kaspa L1. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
   "link": "https://kaspa.university",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.university.webp",
+  "features": ["reviewed"]
+},
+{
+  "name": "UTXO & Covenants",
+  "description": "Explains how UTXOs work and how covenants enable programmable spending rules in Kaspa.",
+  "link": "https://utxo-covenants.vercel.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
   "features": ["reviewed"]
 },
 {
@@ -516,13 +558,6 @@
   "link": "https://mykai.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
   "features": ["reviewed", "ai"]
-},
-{
-  "name": "UTXO & Covenants",
-  "description": "Explains how UTXOs work and how covenants enable programmable spending rules in Kaspa.",
-  "link": "https://utxo-covenants.vercel.app",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed"]
 },
 {
   "name": "KIGS",
@@ -571,6 +606,13 @@
   "description": "A map of public Kaspa nodes providing real-time data on node distribution and status, useful for monitoring network health and launching new nodes.",
   "link": "https://nodes.kaspa.ws",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed", "visualizer"]
+},
+{
+  "name": "Kaspadrome",
+  "description": "Real-time visualization of Kaspa's BlockDAG and transaction flow where users can boost network throughput to thousands of TPS by sending KAS to the fuel wallet and watch live high-performance activity.",
+  "link": "https://kaspadrome.xyz",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspadrome.webp",
   "features": ["reviewed", "visualizer"]
 },
 {
@@ -690,6 +732,13 @@
   "description": "An interactive 3D visualization of the Kaspa blockchain network, allowing users to observe real-time block creation and network dynamics, inspired by the book 'Kaspa: From Ghost to Knight'.",
   "link": "https://macmachi.github.io/kaspa-network-visualizer",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed", "visualizer"]
+},
+{
+  "name": "Kaspa Gravity",
+  "description": "A real-time 3D BlockDAG visualizer for Kaspa, rendering parallel blocks in a helix structure with address tracking and live transaction flow.",
+  "link": "https://kaspagravity.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspagravity.webp",
   "features": ["reviewed", "visualizer"]
 },
 {
