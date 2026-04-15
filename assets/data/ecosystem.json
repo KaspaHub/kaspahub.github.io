@@ -525,7 +525,7 @@
   "features": ["reviewed"]
 },
 {
-  "name": "PoW Protocol University",
+  "name": "PoW University",
   "description": "Interactive educational platform comparing the top 12 Proof of Work networks across 12 pillars including security budget, decentralization, fair launch, and more, with clickable protocols for detailed learning.",
   "link": "https://protocol-university.web.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mining.webp",
