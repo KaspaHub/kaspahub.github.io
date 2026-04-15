@@ -259,6 +259,20 @@
   "features": []
 },
 {
+  "name": "KasPlay",
+  "description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
+  "link": "https://kasplay.fun",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasplay.webp",
+  "features": ["reviewed", "gaming"]
+},
+{
+  "name": "Kaspas Flight",
+  "description": "Pixel-art Flappy Bird-style game powered by Kaspa where high scores are saved on the BlockDAG, users compete on the leaderboard, and set profiles.",
+  "link": "https://kaspas-flight.web.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspasflight.webp",
+  "features": ["reviewed", "gaming"]
+},
+{
   "name": "KasPixel",
   "description": "A collaborative canvas where users connect their KasWare wallet, pay for pixels, and place them to create community art, inspired by Reddit’s r/place, highlighting Kaspa’s fast transaction speeds.",
   "link": "https://kaspixel.xyz",
@@ -270,13 +284,6 @@
   "description": "A fun, retro-style arcade game where real Kaspa transactions appear as incoming missiles raining down on a city.",
   "link": "https://tx-missile-command.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/tx-missile-command.webp",
-  "features": ["reviewed", "gaming"]
-},
-{
-  "name": "KasPlay",
-  "description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
-  "link": "https://kasplay.fun",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasplay.webp",
   "features": ["reviewed", "gaming"]
 },
 {
