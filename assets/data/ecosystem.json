@@ -119,6 +119,13 @@
   "features": ["marketplace"]
 },
 {
+  "name": "KaspaJobs",
+  "description": "The first job board for Kaspa-based payments. Browse jobs, post work, find talent, and get paid in KAS.",
+  "link": "https://kaspajobs.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspero.webp",
+  "features": ["reviewed", "jobs"]
+},
+{
   "name": "Kasway",
   "description": "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
   "link": "https://github.com/Kasway-Tech/pos",
@@ -126,11 +133,53 @@
   "features": ["reviewed", "solutions"]
 },
 {
-  "name": "KaspaJobs",
-  "description": "The first job board for Kaspa-based payments. Browse jobs, post work, find talent, and get paid in KAS.",
-  "link": "https://kaspajobs.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspero.webp",
-  "features": ["reviewed", "jobs"]
+  "name": "OnChain POS",
+  "description": "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
+  "link": "https://onchainpos.live",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
+  "features": ["reviewed", "solutions"]
+},
+{
+  "name": "Kaspay POS",
+  "description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
+  "link": "https://kaspay.one",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspay.webp",
+  "features": ["solutions"]
+},
+{
+  "name": "Kaskad",
+  "description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
+  "link": "https://www.kaskad.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaskad.webp",
+  "features": ["reviewed"]
+},
+{
+  "name": "FrostCard",
+  "description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
+  "link": "https://frostcard.io",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/frostcard.webp",
+  "features": []
+},
+{
+  "name": "KYO",
+  "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
+  "link": "https://kyocard.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kyocard.app.webp",
+  "features": []
+},
+{
+  "name": "Overpass Finance",
+  "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
+  "link": "https://stroem.finance",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/overpass.webp",
+  "features": []
+},
+{
+  "name": "KASCompute",
+  "description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
+  "link": "https://kascompute.org",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascompute.webp",
+  "features": []
 },
 {
   "name": "Arkiv File Storage",
@@ -207,55 +256,6 @@
   "description": "A decentralized, wallet-based email application for the Kaspa ecosystem, using wallet addresses as identities for passwordless, secure communication. Open-source, integrating with TTT for app notifications and KAS transfers.",
   "link": "https://fluxkmail.base44.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/fluxkmail.webp",
-  "features": []
-},
-{
-  "name": "OnChain POS",
-  "description": "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
-  "link": "https://onchainpos.live",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
-  "features": ["reviewed", "solutions"]
-},
-{
-  "name": "Kaspay POS",
-  "description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
-  "link": "https://kaspay.one",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspay.webp",
-  "features": ["solutions"]
-},
-{
-  "name": "Kaskad",
-  "description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
-  "link": "https://www.kaskad.app",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaskad.webp",
-  "features": ["reviewed"]
-},
-{
-  "name": "FrostCard",
-  "description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
-  "link": "https://frostcard.io",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/frostcard.webp",
-  "features": []
-},
-{
-  "name": "KYO",
-  "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
-  "link": "https://kyocard.app",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kyocard.app.webp",
-  "features": []
-},
-{
-  "name": "Overpass Finance",
-  "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
-  "link": "https://stroem.finance",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/overpass.webp",
-  "features": []
-},
-{
-  "name": "KASCompute",
-  "description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
-  "link": "https://kascompute.org",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascompute.webp",
   "features": []
 },
 {
