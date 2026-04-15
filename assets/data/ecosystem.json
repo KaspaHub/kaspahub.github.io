@@ -21,6 +21,48 @@
   "features": ["reviewed"]
 },
 {
+  "name": "KasMap",
+  "description": "A community-driven platform for Kaspa, enabling users to find merchants, connect with local communities, join events, compete on leaderboards, try Kaspa apps, and promote real-world $KAS adoption.",
+  "link": "https://kasmap.org",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasmap.webp",
+  "features": ["verified", "social", "visualizer"]
+},
+{
+  "name": "Kaspa Research",
+  "description": "A community platform for discussing and developing on Kaspa, covering topics such as consensus, mining, privacy, and more.",
+  "link": "https://research.kas.pa",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasparesearch.webp",
+  "features": ["reviewed", "social"]
+},
+{
+  "name": "Kaspa Wiki",
+  "description": "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockchain, its protocol, and ecosystem.",
+  "link": "https://wiki.kaspa.org",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspawiki.webp",
+  "features": ["reviewed"]
+},
+{
+  "name": "Kaspa Q&A",
+  "description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockchain, technology, and ecosystem.",
+  "link": "https://qa.kas.pa",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/qa.kas.pa.webp",
+  "features": ["reviewed", "social"]
+},
+{
+  "name": "Kaspa Social",
+  "description": "A community-driven social media platform for the Kaspa ecosystem, enabling users to share news, articles, X and YouTube content, and engage in forums with minimal moderation and personalized dashboards.",
+  "link": "https://kaspa.social",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.social.webp",
+  "features": ["reviewed", "social"]
+},
+{
+  "name": "KasLens",
+  "description": "AI-powered tool for real-time Kaspa market analysis, offering sentiment analysis, news summaries, predictive charting, and instant price movement notifications.",
+  "link": "https://kaspa-lens.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaslens.webp",
+  "features": ["reviewed", "analytics"]
+},
+{
   "name": "Kaspa Kii",
   "description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
   "link": "https://kaspa-kii.org",
@@ -194,48 +236,6 @@
   "link": "https://kas.coffee",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascoffee.webp",
   "features": ["reviewed", "solutions"]
-},
-{
-  "name": "KasMap",
-  "description": "A community-driven platform for Kaspa, enabling users to find merchants, connect with local communities, join events, compete on leaderboards, try Kaspa apps, and promote real-world $KAS adoption.",
-  "link": "https://kasmap.org",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasmap.webp",
-  "features": ["verified", "social", "visualizer"]
-},
-{
-  "name": "Kaspa Research",
-  "description": "A community platform for discussing and developing on Kaspa, covering topics such as consensus, mining, privacy, and more.",
-  "link": "https://research.kas.pa",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasparesearch.webp",
-  "features": ["reviewed", "social"]
-},
-{
-  "name": "Kaspa Wiki",
-  "description": "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockchain, its protocol, and ecosystem.",
-  "link": "https://wiki.kaspa.org",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspawiki.webp",
-  "features": ["reviewed"]
-},
-{
-  "name": "Kaspa Q&A",
-  "description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockchain, technology, and ecosystem.",
-  "link": "https://qa.kas.pa",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/qa.kas.pa.webp",
-  "features": ["reviewed", "social"]
-},
-{
-  "name": "Kaspa Social",
-  "description": "A community-driven social media platform for the Kaspa ecosystem, enabling users to share news, articles, X and YouTube content, and engage in forums with minimal moderation and personalized dashboards.",
-  "link": "https://kaspa.social",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.social.webp",
-  "features": ["reviewed", "social"]
-},
-{
-  "name": "KasLens",
-  "description": "AI-powered tool for real-time Kaspa market analysis, offering sentiment analysis, news summaries, predictive charting, and instant price movement notifications.",
-  "link": "https://kaspa-lens.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaslens.webp",
-  "features": ["reviewed", "analytics"]
 },
 {
   "name": "Kaspa Network Hashrate",
