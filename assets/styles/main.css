@@ -956,6 +956,9 @@ textarea:focus, input[type="text"]:focus, input[type="search"]:focus, input[type
 	overflow-x: auto;
 	position: relative;
 }
+article {
+	overflow: hidden;
+}
 article table {
 	width: max-content;
 	margin: 0 auto;
