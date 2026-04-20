@@ -4,21 +4,21 @@
 	"description": "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
 	"link": "https://kaspa.org",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs", "videos"]
 },
 {
 	"name": "Kaspa.com",
 	"description": "Leading Kaspa DeFi Platform with L2 DEX, lending & borrowing, and launchpad. Seamless L1 marketplace for trading KRC-721 NFTs, KRC-20 tokens, and KNS domains on Kaspa’s BlockDAG.",
 	"link": "https://www.kaspa.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspacom.webp",
-	"features": ["reviewed", "dex", "marketplace", "launchpad"]
+	"features": ["reviewed", "dex", "marketplace", "launchpad", "blogs"]
 },
 {
 	"name": "KASmedia",
 	"description": "A media outlet publishing research and articles on Kaspa’s financial markets, distributed systems, and philosophy, while supporting PR, events, and ecosystem collaboration.",
 	"link": "https://www.kasmedia.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasmedia.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "KasMap",
@@ -53,7 +53,7 @@
 	"description": "A community-driven social media platform for the Kaspa ecosystem, enabling users to share news, articles, X and YouTube content, and engage in forums with minimal moderation and personalized dashboards.",
 	"link": "https://kaspa.social",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.social.webp",
-	"features": ["reviewed", "social"]
+	"features": ["reviewed", "social", "blogs"]
 },
 {
 	"name": "KasLens",
@@ -67,14 +67,14 @@
 	"description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
 	"link": "https://kaspa-kii.org",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kii.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "videos"]
 },
 {
 	"name": "Kaspa Eco Foundation",
 	"description": "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
 	"link": "https://www.kaspafoundation.org",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kef.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "videos"]
 },
 {
 	"name": "Kasplex",
@@ -487,28 +487,28 @@
 	"description": "Personal website of Yonatan Sompolinsky featuring writings on coordination markets, blockchain philosophy, and Kaspa-related ideas.",
 	"link": "https://hashd.ag",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "KaspArchive",
 	"description": "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
 	"link": "https://kasparchive.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "Kaspa Daily",
 	"description": "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
 	"link": "https://kaspadaily.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspadaily.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "Kasbun",
 	"description": "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
 	"link": "https://www.kasbun.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasbun.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "PoW University",
@@ -564,14 +564,14 @@
 	"description": "Brazilian Kaspa community focused on creating educational content, tutorials, blog posts, and actively participating in real-life events and conferences.",
 	"link": "https://kaspaflow.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspaflow.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs", "videos"]
 },
 {
 	"name": "BuyKas",
 	"description": "A comprehensive Chinese-language resource introducing Kaspa, covering its technology, history, ecosystem, and key resources.",
 	"link": "https://buykas.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "KaspHub",

@@ -107,6 +107,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <button class="category-pill" data-feature="gaming">Gaming</button>
         <button class="category-pill" data-feature="swap">Instant Swaps</button>
         <button class="category-pill" data-feature="launchpad">Launchpads</button>
+        <button class="category-pill" data-feature="blogs">Media</button>
         <button class="category-pill" data-feature="marketplace">Marketplaces</button>
         <button class="category-pill" data-feature="mining">Mining</button>
         <button class="category-pill" data-feature="solutions">Payment Solutions</button>
@@ -116,7 +117,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <button class="category-pill" data-feature="wallet">Wallets</button>
     </div>
 
-    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between; margin: 10px;">
 
         <input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
 
@@ -188,7 +189,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     flex-wrap: wrap;
     gap: 0.75rem;
     justify-content: center;
-    margin-bottom: 20px;
 }
 .category-pill {
     padding: 0.35rem 0.9rem;
