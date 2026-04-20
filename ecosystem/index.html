@@ -220,6 +220,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     align-items: center;
 }
 
+@media (max-aspect-ratio: 1/1) {
+    .category-pills {
+        justify-content: space-between;
+        gap: 0.3rem;
+    }
+    .category-pill {
+        padding: 0.15rem 0.3rem;
+        border: 1px solid rgba(80, 255, 200, 0.2);
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+}
 </style>
 <script type="text/javascript">
 'use strict';
