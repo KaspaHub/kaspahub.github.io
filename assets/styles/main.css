@@ -694,7 +694,7 @@ code {
 #loadMoreBtn {
 	text-decoration: none;
 	display: none;
-	margin: 20px auto;
+	margin: 20px auto 80px;
 	padding: 10px 20px;
 	font-size: 1rem;
 	cursor: pointer;
