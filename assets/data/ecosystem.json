@@ -728,6 +728,13 @@
 	"features": ["reviewed", "analytics", "mining", "calculator", "utilities"]
 },
 {
+	"name": "Mining Pool Stats",
+	"description": "A real-time mining pool statistics aggregator for Proof-of-Work cryptocurrencies, providing live hashrate distribution, pool fees, miner counts and more",
+	"link": "https://miningpoolstats.stream/kaspa",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/miningpoolstats.webp",
+	"features": ["reviewed", "mining", "analytics", "utilities"]
+},
+{
 	"name": "Kaspa vs. Bitcoin Miner Revenue Calculator",
 	"description": "A calculator comparing Kaspa and Bitcoin miner revenue, simulating future scenarios to demonstrate Kaspa’s potential to outperform Bitcoin in hashrate and security budget.",
 	"link": "https://cryptoodie.github.io/KASPA-VS.-BITCOIN-MINER-REVENUE-/",
