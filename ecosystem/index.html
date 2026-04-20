@@ -84,52 +84,56 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-2">
-<div class="intro">
-    <h1>Ecosystem</h1>
-    <p>Explore the projects and initiatives building Kaspa.</p>
-</div>
 
-<div class="search-sort-controls">
-    <select id="sortSelect" aria-label="Sort Menu">
-        <option value="default">Default</option>
-        <option value="az">A - Z</option>
-        <option value="za">Z - A</option>
-    </select>
+<div style="text-align: center; margin-bottom: 70px;">
+    <h1 style="font-size: 3em; filter: brightness(0.7);">Kaspa Hub</h1>
+    <p style="font-weight: bold;">Explore the growing ecosystem of projects and initiatives built on Kaspa.</p>
 </div>
 
 <div class="main-content-area">
 
-<section class="sidebar theme-1">
-    
+<section class="filter-list-main">
+
     <input type="search" id="searchInput" placeholder="Search..."/>
 
-    <h2>Category<span id="counter"></span></h2>
-    
-        <div class="category-pills">
-            <button class="category-pill active" data-feature="all">All</button>
-            <button class="category-pill" data-feature="analytics">Analytics</button>
-            <button class="category-pill" data-feature="blockExplorer">Block Explorers</button>
-            <button class="category-pill" data-feature="bridge">Bridges</button>
-            <button class="category-pill" data-feature="cex">CEXs</button>
-            <button class="category-pill" data-feature="dex">DEXs</button>
-            <button class="category-pill" data-feature="gaming">Gaming</button>
-            <button class="category-pill" data-feature="swap">Instant Swaps</button>
-            <button class="category-pill" data-feature="launchpad">Launchpads</button>
-            <button class="category-pill" data-feature="marketplace">Marketplaces</button>
-            <button class="category-pill" data-feature="mining">Mining</button>
-            <!-- <button class="category-pill" data-feature="rwa">RWA</button> -->
-            <button class="category-pill" data-feature="social">Social</button>
-            <button class="category-pill" data-feature="utilities">Utilities</button>
-            <button class="category-pill" data-feature="wallet">Wallets</button>
+    <div class="category-pills">
+        <button class="category-pill active" data-feature="all">All</button>
+        <button class="category-pill" data-feature="analytics">Analytics</button>
+        <button class="category-pill" data-feature="blockExplorer">Block Explorers</button>
+        <button class="category-pill" data-feature="bridge">Bridges</button>
+        <button class="category-pill" data-feature="cryptoCard">Crypto Cards</button>
+        <button class="category-pill" data-feature="cex">Centralized Exchanges</button>
+        <button class="category-pill" data-feature="dex">Decentralized Exchanges</button>
+        <button class="category-pill" data-feature="gaming">Gaming</button>
+        <button class="category-pill" data-feature="swap">Instant Swaps</button>
+        <button class="category-pill" data-feature="launchpad">Launchpads</button>
+        <button class="category-pill" data-feature="marketplace">Marketplaces</button>
+        <button class="category-pill" data-feature="mining">Mining</button>
+        <button class="category-pill" data-feature="solutions">Payment Solutions</button>
+        <!-- <button class="category-pill" data-feature="rwa">RWA</button> -->
+        <button class="category-pill" data-feature="social">Social</button>
+        <button class="category-pill" data-feature="utilities">Utilities</button>
+        <button class="category-pill" data-feature="wallet">Wallets</button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+
+        <input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
+
+        <div style="display: inline-flex;">
+            <p id="counter" style="font-size: 0.8rem;"></p>
+            <select id="sortSelect" aria-label="Sort Menu">
+                <option value="default">Default</option>
+                <option value="az">A - Z</option>
+                <option value="za">Z - A</option>
+            </select>
         </div>
 
-        <div class="layer2-toggle"><input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label for="layer2Toggle">Include Layer 2</label></div>
+    </div>
 
-</section>
-
-<section class="filter-list-main">
     <div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
     <button class="theme-1" id="loadMoreBtn">Load More</button>
+
 </section>
 
 </div>
@@ -170,6 +174,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </footer>
 
 <style>
+.main-content-area {
+    min-height: 1300px;
+}
 
 .category-selector {
     margin-bottom: 1.5rem;
@@ -177,11 +184,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .category-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3rem;
-    justify-content: start;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 .category-pill {
-    padding: 0.15rem 0.3rem;
+    padding: 0.35rem 0.9rem;
     background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
     border-radius: 10px;
     border: 1px solid rgba(80, 255, 200, 0.2);
@@ -198,11 +206,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .category-pill:hover {
     filter: brightness(1.1);
 }
-.layer2-toggle {
-    margin-top: 1.5rem;
+#searchInput {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 50px 0 20px;
+    font-size: 1rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 0.5rem;
 }
 
 </style>
@@ -212,7 +225,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 let items = [];
 let filteredItems = [];
 let currentIndex = 0;
-const itemsPerPage = 45;
+const itemsPerPage = 48;
 
 const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');

@@ -200,14 +200,14 @@
 	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
 	"link": "https://frostcard.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/frostcard.webp",
-	"features": []
+	"features": ["cryptoCard"]
 },
 {
 	"name": "KYO",
 	"description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
 	"link": "https://kyocard.app",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kyocard.app.webp",
-	"features": []
+	"features": ["cryptoCard"]
 },
 {
 	"name": "Overpass Finance",
@@ -347,7 +347,7 @@
 	"description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
 	"link": "https://kasiabook.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "KasStamp",
@@ -620,7 +620,7 @@
 	"description": "A tool to suggest labels for Kaspa wallet addresses, which, upon approval, are published in the Kaspa API and Explorer to identify key addresses in the ecosystem.",
 	"link": "https://labels.kaspa.ws",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "Kaspero Pay",
@@ -1348,7 +1348,7 @@
 	"description": "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
 	"link": "https://www.kraken.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kraken.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "cryptoCard"]
 },
 {
 	"name": "Uphold",
