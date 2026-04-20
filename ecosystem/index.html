@@ -117,12 +117,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <button class="category-pill" data-feature="wallet">Wallets</button>
     </div>
 
-    <div style="display: flex; justify-content: space-between; margin: 10px;">
+    <div class="searchControls">
 
         <input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
 
         <div style="display: inline-flex;">
-            <p id="counter" style="font-size: 0.8rem;"></p>
+            <p id="counter"></p>
             <select id="sortSelect" aria-label="Sort Menu">
                 <option value="default">Default</option>
                 <option value="az">A - Z</option>

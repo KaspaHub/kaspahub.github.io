@@ -95,12 +95,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<p>Buy, sell, and trade Kaspa on many exchanges, swap services, or custodians.</p>
 </div>
 
-<div class="search-sort-controls">
-	<select id="sortSelect" aria-label="Sort Menu">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
+<div class="searchControls">
+	<div></div>
+	<div style="display: inline-flex;">
+		<p id="counter"></p>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 </div>
 
 <div class="main-content-area">
@@ -109,7 +113,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	
 	<input type="search" id="searchInput" placeholder="Search..."/>
 
-	<h2>Features<span id="counter"></span></h2>
+	<h2>Features</h2>
 	<div class="filter-category">
 		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
 		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
@@ -123,11 +127,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section class="filter-list-main">
 	<div class="filter-grid" id="itemGrid"></div>
-	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 	
 </div>
 </main>
+
+<button class="theme-1" id="loadMoreBtn">Load More</button>
 
 <footer>
 

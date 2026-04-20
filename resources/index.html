@@ -95,12 +95,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<p>Study Kaspa with a curated selection of tools and research materials, delivering valuable insights into on-chain data and network activity.</p>
 </div>
 
-<div class="search-sort-controls">
-	<select id="sortSelect" aria-label="Sort Menu">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
+<div class="searchControls">
+	<div></div>
+	<div style="display: inline-flex;">
+		<p id="counter"></p>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 </div>
 
 <div class="main-content-area">
@@ -109,7 +113,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	
 	<input type="search" id="searchInput" placeholder="Search..."/>
 
-	<h2>Features<span id="counter"></span></h2>
+	<h2>Features</h2>
 	<div class="filter-category">
 		<div class="filter-group"><input type="radio" name="feature" id="blogs" data-feature="blogs"><label for="blogs">Blogs</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="book" data-feature="book"><label for="book">Books</label></div>
@@ -122,11 +126,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section class="filter-list-main">
 	<div class="filter-grid" id="itemGrid"></div>
-	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 
 </div>
 </main>
+
+<button class="theme-1" id="loadMoreBtn">Load More</button>
 
 <footer>
 
@@ -171,7 +176,7 @@ const items = [
 	"description": "The PHANTOM GHOSTDAG whitepaper introduces a scalable generalization of Nakamoto Consensus, utilizing a blockDAG structure to enhance throughput and security, implemented in the Kaspa cryptocurrency.",
 	"link": "https://eprint.iacr.org/2018/104.pdf",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed", "analytics", "blockExplorer", "videos", "visualizer"]
+	"features": ["reviewed"]
 },
 {
 	"name": "DAG KNIGHT",
@@ -636,11 +641,11 @@ const items = [
 	"features": ["reviewed", "calculator", "utilities"]
 },
 {
-  "name": "Kaspa Mining Calculator",
-  "description": "A straightforward Kaspa mining profitability calculator that estimates net cost, daily/weekly/monthly profits in USD and KAS coins, expected block finds, and more.",
-  "link": "https://kaspacalc.net",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "calculator", "utilities"]
+	"name": "Kaspa Mining Calculator",
+	"description": "A straightforward Kaspa mining profitability calculator that estimates net cost, daily/weekly/monthly profits in USD and KAS coins, expected block finds, and more.",
+	"link": "https://kaspacalc.net",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+	"features": ["reviewed", "calculator", "utilities"]
 },
 {
 	"name": "Kaspa GHOSTDAG Visualizer",
@@ -803,16 +808,19 @@ function renderItems(reset = false) {
 	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
 	slice.forEach(item => {
 		const card = document.createElement('a');
-			card.classList.add('filter-card', 'theme-1');
-			card.href = item.link;
-			card.target = '_blank';
+		card.classList.add('filter-card', 'theme-1');
+		card.href = item.link;
+		card.target = '_blank';
 
-	const featuresHtml = item.features
-		.filter(key => featureTags[key])
-		.map(key => getFeatureTag(key))
-		.join('');
+		const badgeKey = item.features.includes('verified') ? 'verified' : item.features.includes('reviewed') ? 'reviewed' : null;
+		const badgeHtml = badgeKey ? getFeatureTag(badgeKey) : '';
 
-	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
+		const featuresHtml = item.features
+			.filter(key => featureTags[key] && key !== 'verified' && key !== 'reviewed')
+			.map(key => getFeatureTag(key))
+			.join('');
+
+		card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
 
 		itemGrid.appendChild(card);
 	});

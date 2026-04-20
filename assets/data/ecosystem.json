@@ -169,14 +169,14 @@
 },
 {
 	"name": "Kasway",
-	"description": "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
+	"description": "The world’s first decentralized, open-source point-of-sale solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	"link": "https://github.com/Kasway-Tech/pos",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-	"features": ["reviewed", "development", "solutions"]
+	"features": ["reviewed", "dart", "development", "solutions"]
 },
 {
 	"name": "OnChain POS",
-	"description": "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
+	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
 	"link": "https://onchainpos.live",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
 	"features": ["reviewed", "development", "solutions"]

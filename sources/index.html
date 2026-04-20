@@ -65,12 +65,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<p>Follow Kaspa community channels to stay updated on the latest news and developments.</p>
 </div>
 
-<div class="search-sort-controls">
-	<select id="sortSelect" aria-label="Sort Menu">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
+<div class="searchControls">
+	<div></div>
+	<div style="display: inline-flex;">
+		<p id="counter"></p>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 </div>
 
 <div class="main-content-area">
@@ -79,7 +83,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	
 	<input type="search" id="searchInput" placeholder="Search..."/>
 
-	<h2>Platform<span id="counter"></span></h2>
+	<h2>Platform</h2>
 	<div class="filter-category">
 		<div class="filter-group"><input type="radio" name="feature" id="x" data-feature="x"><label for="x">X</label></div>
 		<div class="filter-group"><input type="radio" name="feature" id="bluesky" data-feature="bluesky"><label for="bluesky">Bluesky</label></div>
@@ -94,11 +98,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section class="filter-list-main">
 	<div class="filter-grid" id="itemGrid"></div>
-	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 
 </div>
 </main>
+
+<button class="theme-1" id="loadMoreBtn">Load More</button>
 
 <footer>
 

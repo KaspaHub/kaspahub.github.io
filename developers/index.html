@@ -89,12 +89,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<p>Build on Kaspa with open-source code and software that powers the future.</p>
 </div>
 
-<div class="search-sort-controls">
-	<select id="sortSelect" aria-label="Sort Menu">
-		<option value="default">Default</option>
-		<option value="az">A - Z</option>
-		<option value="za">Z - A</option>
-	</select>
+<div class="searchControls">
+	<div></div>
+	<div style="display: inline-flex;">
+		<p id="counter"></p>
+		<select id="sortSelect" aria-label="Sort Menu">
+			<option value="default">Default</option>
+			<option value="az">A - Z</option>
+			<option value="za">Z - A</option>
+		</select>
+	</div>
 </div>
 
 <div class="main-content-area">
@@ -103,7 +107,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	
 	<input type="search" id="searchInput" placeholder="Search..."/>
 
-	<h2>Languages<span id="counter"></span></h2>
+	<h2>Languages</h2>
 	<div class="filter-category">
 		<div class="filter-group">
 			<input type="radio" name="language" id="rust" data-feature="rust">
@@ -138,11 +142,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <section class="filter-list-main">
 	<div class="filter-grid" id="itemGrid"></div>
-	<button class="theme-1" id="loadMoreBtn">Load More</button>
 </section>
 
 </div>
 </main>
+
+<button class="theme-1" id="loadMoreBtn">Load More</button>
 
 <footer>
 
@@ -183,244 +188,185 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 const items = [
 {
-	name: "Kasway",
-	description: "The World's First Decentralized Point of Sale Solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
-	link: "https://github.com/Kasway-Tech/pos",
-	logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-	features: {
-	}
+	"name": "Kasway",
+	"description": "The world’s first decentralized, open-source point-of-sale solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
+	"link": "https://github.com/Kasway-Tech/pos",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
+	"features": ["reviewed", "dart", "development", "solutions"]
 },
 {
-	name: "Kaspa REST API",
-	description: "The REST-API server for the Kaspa network, providing an HTTP interface to interact with Kaspa nodes. It allows developers to build applications that communicate with the Kaspa blockchain using standard HTTP methods.",
-	link: "https://api.kaspa.org/docs",
-	features: {
-	}
+	"name": "Kaspa REST API",
+	"description": "The REST-API server for the Kaspa network, providing an HTTP interface to interact with Kaspa nodes. It allows developers to build applications that communicate with the Kaspa blockchain using standard HTTP methods.",
+	"link": "https://api.kaspa.org/docs",
+	"features": ["reviewed"]
 },
 {
-	name: "Kasplex API",
-	description: "Official public API for the Kasplex protocol on Kaspa, providing access to KRC-20 token data via an open-source indexer.",
-	link: "https://docs-kasplex.gitbook.io/krc20",
-	features: {
-	}
+	"name": "Kasplex API",
+	"description": "Official public API for the Kasplex protocol on Kaspa, providing access to KRC-20 token data via an open-source indexer.",
+	"link": "https://docs-kasplex.gitbook.io/krc20",
+	"features": ["reviewed"]
 },
 {
-	name: "Kaspa.com API",
-	description: "API for the KaspaCom platform, providing real-time data on KRC20 tokens, KRC721 NFTs, and KNS domains. Includes endpoints for trade statistics, floor prices, fulfilled orders, hot mints, open orders, recent mints, collection details, token filtering, and more.",
-	link: "https://api.kaspa.com/api-docs",
-	// link: "https://docs.google.com/document/d/1Cfk0AcmahhcxsunH1EIudNRs1LpNAqqHswnBXhzKnHE/edit?tab=t.0",
-	features: {
-	}
+	"name": "Kaspa.com API",
+	"description": "API for the KaspaCom platform, providing real-time data on KRC20 tokens, KRC721 NFTs, and KNS domains. Includes endpoints for trade statistics, floor prices, fulfilled orders, hot mints, open orders, recent mints, collection details, token filtering, and more.",
+	"link": "https://api.kaspa.com/api-docs",
+	"features": ["reviewed"]
 },
 {
-	name: "KNS API",
-	description: "API documentation for Kaspa Name Service (KNS), providing endpoints for querying assets by owner, asset details, domain resolution to addresses (case-insensitive), domain availability checks, profile data (website, avatar, bio, socials), and primary name management by owner address or setting for users. Supports mainnet and testnet (TN10) with URL-encoded domains required for accurate queries.",
-	link: "https://apidoc.knsdomains.org/mainnet/",
-	features: {
-	}
+	"name": "KNS API",
+	"description": "API documentation for Kaspa Name Service (KNS), providing endpoints for querying assets by owner, asset details, domain resolution to addresses (case-insensitive), domain availability checks, profile data (website, avatar, bio, socials), and primary name management by owner address or setting for users. Supports mainnet and testnet (TN10) with URL-encoded domains required for accurate queries.",
+	"link": "https://apidoc.knsdomains.org/mainnet/",
+	"features": ["reviewed"]
 },
 {
-	name: "Rusty Kaspa",
-	description: "The official Rust implementation of the Kaspa full-node and related libraries, designed for high-performance and scalability. It supports the BlockDAG protocol, enabling rapid transaction confirmations and high throughput.",
-	link: "https://github.com/kaspanet/rusty-kaspa",
-	features: {
-		rust: true
-	}
+	"name": "Rusty Kaspa",
+	"description": "The official Rust implementation of the Kaspa full-node and related libraries, designed for high-performance and scalability. It supports the BlockDAG protocol, enabling rapid transaction confirmations and high throughput.",
+	"link": "https://github.com/kaspanet/rusty-kaspa",
+	"features": ["reviewed", "rust"]
 },
 {
-	name: "WASM32 SDK",
-	description: "WASM bindings for Rusty Kaspa, enabling Rust code integration in JavaScript and TypeScript environments. Ideal for developers building Kaspa applications with web compatibility and high performance.",
-	link: "https://kaspa.aspectron.org/docs/index.html",
-	features: {
-		rust: true,
-		javascript: true,
-		typescript: true
-	}
+	"name": "WASM32 SDK",
+	"description": "WASM bindings for Rusty Kaspa, enabling Rust code integration in JavaScript and TypeScript environments. Ideal for developers building Kaspa applications with web compatibility and high performance.",
+	"link": "https://kaspa.aspectron.org/docs/index.html",
+	"features": ["reviewed", "rust", "javascript", "typescript"]
 },
 {
-	name: "Simply Kaspa Indexer",
-	description: "A Rust-based PostgreSQL indexer for Kaspa, optimized for concurrency and compatibility with kaspa-rest-server. Ideal for developers needing efficient blockchain data indexing.",
-	link: "https://hub.docker.com/r/supertypo/simply-kaspa-indexer",
-	features: {
-		rust: true
-	}
+	"name": "Simply Kaspa Indexer",
+	"description": "A Rust-based PostgreSQL indexer for Kaspa, optimized for concurrency and compatibility with kaspa-rest-server. Ideal for developers needing efficient blockchain data indexing.",
+	"link": "https://hub.docker.com/r/supertypo/simply-kaspa-indexer",
+	"features": ["reviewed", "rust"]
 },
 {
-    name: "Kloak Node",
-    description: "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
-    link: "https://github.com/kloakprotocol/kloak_node",
-    features: {
-        python: true
-    }
+	"name": "Kloak Node",
+	"description": "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
+	"link": "https://github.com/kloakprotocol/kloak_node",
+	"features": ["reviewed", "python"]
 },
 {
-	name: "Kaspium",
-	description: "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
-	link: "https://kaspium.io",
-	features: {
-		dart: true
-	}
+	"name": "Kaspium",
+	"description": "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
+	"link": "https://kaspium.io",
+	"features": ["reviewed", "dart"]
 },
 {
-	name: "Kaspa Simple Wallet",
-	description: "A secure, production-safe JavaScript SDK for generating watch-only Kaspa addresses from extended public keys (KPUB/XPUB/TPUB). Supports major wallet formats, and Legacy KDX.",
-	link: "https://www.npmjs.com/package/kaspa-simple-wallet",
-	features: {
-		javascript: true
-	}
+	"name": "Kaspa Simple Wallet",
+	"description": "A secure, production-safe JavaScript SDK for generating watch-only Kaspa addresses from extended public keys (KPUB/XPUB/TPUB). Supports major wallet formats, and Legacy KDX.",
+	"link": "https://www.npmjs.com/package/kaspa-simple-wallet",
+	"features": ["reviewed", "javascript"]
 },
 {
-	name: "KasPaper",
-	description: "A lightweight Go-based tool for generating secure Kaspa paper wallets. It provides a simple way to create offline storage for Kaspa assets by generating seed phrases and printable wallet files. Users can customize the wallet's appearance by editing the template.html file before compilation.",
-	link: "https://github.com/svarogg/kaspaper",
-	features: {
-		go: true
-	}
+	"name": "KasPaper",
+	"description": "A lightweight Go-based tool for generating secure Kaspa paper wallets. It provides a simple way to create offline storage for Kaspa assets by generating seed phrases and printable wallet files. Users can customize the wallet's appearance by editing the template.html file before compilation.",
+	"link": "https://github.com/svarogg/kaspaper",
+	"features": ["reviewed", "go"]
 },
 {
-	name: "Kaspa-ng",
-	description: "A desktop application for running a Kaspa p2p node, wallet, and BlockDAG visualizer. Written in Rust, it offers a high-performance interface for managing transactions and exploring the Kaspa network. Suited for developers and enthusiasts seeking a comprehensive tool for decentralized operations, with support for solo mining via a stratum bridge.",
-	link: "https://github.com/aspectron/kaspa-ng",
-	features: {
-		rust: true
-	}
+	"name": "Kaspa-ng",
+	"description": "A desktop application for running a Kaspa p2p node, wallet, and BlockDAG visualizer. Written in Rust, it offers a high-performance interface for managing transactions and exploring the Kaspa network. Suited for developers and enthusiasts seeking a comprehensive tool for decentralized operations, with support for solo mining via a stratum bridge.",
+	"link": "https://github.com/aspectron/kaspa-ng",
+	"features": ["reviewed", "rust"]
 },
 {
-	name: "Kdapp",
-	description: "A Rust-based framework for building high-frequency, interactive decentralized applications (k-dApps) on Kaspa's BlockDAG. It supports time-sensitive 'Episodes' like tic-tac-toe, leveraging Kaspa's 10 blocks-per-second capability. Designed for rapid development, it avoids state persistence for simplicity and includes rollback handling for reorgs.",
-	link: "https://github.com/michaelsutton/kdapp",
-	features: {
-		rust: true
-	}
+	"name": "Kdapp",
+	"description": "A Rust-based framework for building high-frequency, interactive decentralized applications (k-dApps) on Kaspa's BlockDAG. It supports time-sensitive 'Episodes' like tic-tac-toe, leveraging Kaspa's 10 blocks-per-second capability. Designed for rapid development, it avoids state persistence for simplicity and includes rollback handling for reorgs.",
+	"link": "https://github.com/michaelsutton/kdapp",
+	"features": ["reviewed", "rust"]
 },
 {
-	name: "NOWNodes",
-	description: "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
-	link: "https://nownodes.io",
-	features: {
-	}
+	"name": "NOWNodes",
+	"description": "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
+	"link": "https://nownodes.io",
+	"features": ["reviewed"]
 },
 {
-	name: "Kaspa Payments",
-	description: "A WordPress plugin that integrates Kaspa (KAS) cryptocurrency payments into WooCommerce stores. Non-custodial using KPUB watch-only wallets, generates unique addresses per order, automatic real-time payment detection via Kaspa API, live exchange rates from CoinGecko, QR code support, and automatic order completion.",
-	link: "https://kaspawoo.com",
-	features: {
-		php: true
-	}
+	"name": "Kaspa Payments",
+	"description": "A WordPress plugin that integrates Kaspa (KAS) cryptocurrency payments into WooCommerce stores. Non-custodial using KPUB watch-only wallets, generates unique addresses per order, automatic real-time payment detection via Kaspa API, live exchange rates from CoinGecko, QR code support, and automatic order completion.",
+	"link": "https://kaspawoo.com",
+	"features": ["reviewed", "php"]
 },
 {
-	name: "KasPush",
-	description: "A simple HTML and JavaScript tool for tracking Kaspa wallet balances with real-time push notifications via Pushcut on iOS. Features multiple wallet support, USD value tooltips, and a clean, offline-capable design. Open-source and plug-and-play for easy setup.",
-	link: "https://github.com/kas-builder/KasPush_",
-	features: {
-		javascript: true
-	}
+	"name": "KasPush",
+	"description": "A simple HTML and JavaScript tool for tracking Kaspa wallet balances with real-time push notifications via Pushcut on iOS. Features multiple wallet support, USD value tooltips, and a clean, offline-capable design. Open-source and plug-and-play for easy setup.",
+	"link": "https://github.com/kas-builder/KasPush_",
+	"features": ["reviewed", "javascript"]
 },
 {
-	name: "Kaspa Register",
-	description: "An NFC Point of Sale web app built with Flask, enabling Kaspa payment request URIs to be written to NTAG21x NFC tags using PN532 (Raspberry Pi) or ACR1252 readers. Features a Bootstrap UI for entering AUD amounts, converting to KAS via Coingecko rates, and writing URIs to tags with optional verification.",
-	link: "https://github.com/laudena/kaspa_register",
-	features: {
-		python: true
-	}
+	"name": "Kaspa Register",
+	"description": "An NFC Point of Sale web app built with Flask, enabling Kaspa payment request URIs to be written to NTAG21x NFC tags using PN532 (Raspberry Pi) or ACR1252 readers. Features a Bootstrap UI for entering AUD amounts, converting to KAS via Coingecko rates, and writing URIs to tags with optional verification.",
+	"link": "https://github.com/laudena/kaspa_register",
+	"features": ["reviewed", "python"]
 },
 {
-	name: "Kaspeak SDK",
-	description: "An SDK for developing decentralized applications on the Kaspa network. It simplifies low-level tasks like message handling, cryptography, and transaction management, allowing developers to focus on application logic.",
-	link: "https://github.com/kaspeak/kaspeak-sdk",
-	features: {
-		javascript: true,
-		typescript: true
-	}
+	"name": "Kaspeak SDK",
+	"description": "An SDK for developing decentralized applications on the Kaspa network. It simplifies low-level tasks like message handling, cryptography, and transaction management, allowing developers to focus on application logic.",
+	"link": "https://github.com/kaspeak/kaspeak-sdk",
+	"features": ["reviewed", "javascript", "typescript"]
 },
 {
-	name: "Kaspian",
-	description: "A self-custodial Kaspa wallet with integrated merchant tools, built using JavaScript (Bun) and Rust (via WebAssembly). It supports wallet creation, transaction management, and merchant payment integrations, making it ideal for developers building user-facing applications or e-commerce solutions on the Kaspa network.",
-	link: "https://github.com/KaffinPX/Kaspian",
-	features: {
-		typescript: true
-	}
+	"name": "Kaspian",
+	"description": "A self-custodial Kaspa wallet with integrated merchant tools, built using JavaScript (Bun) and Rust (via WebAssembly). It supports wallet creation, transaction management, and merchant payment integrations, making it ideal for developers building user-facing applications or e-commerce solutions on the Kaspa network.",
+	"link": "https://github.com/KaffinPX/Kaspian",
+	"features": ["reviewed", "typescript"]
 },
 {
-	name: "Graph Inspector",
-	description: "A real-time visualization tool for the Kaspa BlockDAG, built with Go and JavaScript (Node.js). It includes database and API components for analyzing the network's block structure, making it valuable for developers studying Kaspa's DAG-based architecture or building analytical tools for network insights.",
-	link: "https://github.com/kaspa-live/kaspa-graph-inspector",
-	features: {
-		typescript: true,
-		go: true
-	}
+	"name": "Graph Inspector",
+	"description": "A real-time visualization tool for the Kaspa BlockDAG, built with Go and JavaScript (Node.js). It includes database and API components for analyzing the network's block structure, making it valuable for developers studying Kaspa's DAG-based architecture or building analytical tools for network insights.",
+	"link": "https://github.com/kaspa-live/kaspa-graph-inspector",
+	"features": ["reviewed", "typescript", "go"]
 },
 {
-	name: "BLanim",
-	description: "BLanim is a Python library that extends the Manim package to provide tools for creating animations of blockchain and blockDAG concepts. It is being utilized in creating educational content related to Kaspa, helping to visualize its BlockDAG architecture.",
-	link: "https://github.com/ShaiW/blanim",
-	features: {
-		python: true
-	}
+	"name": "BLanim",
+	"description": "BLanim is a Python library that extends the Manim package to provide tools for creating animations of blockchain and blockDAG concepts. It is being utilized in creating educational content related to Kaspa, helping to visualize its BlockDAG architecture.",
+	"link": "https://github.com/ShaiW/blanim",
+	"features": ["reviewed", "python"]
 },
 {
-	name: "KaspaCom Wallet",
-	description: "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps).",
-	link: "https://github.com/KASPACOM/kaspacom-web-wallet",
-	features: {
-		javascript: true
-	}
+	"name": "KaspaCom Wallet",
+	"description": "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps).",
+	"link": "https://github.com/KASPACOM/kaspacom-web-wallet",
+	"features": ["reviewed", "javascript"]
 },
 {
-	name: "KasOS",
-	description: "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
-	link: "https://github.com/deokman420/KasOS",
-	features: {
-		javascript: true
-	}
+	"name": "KasOS",
+	"description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
+	"link": "https://github.com/deokman420/KasOS",
+	"features": ["reviewed", "javascript"]
 },
 {
-	name: "Kasmage",
-	description: "A whimsical, lightweight frog-wizard themed CLI for monitoring Kaspa ($KAS) transactions with live alerts, history, and receipts. Supports real-time transaction streaming, threshold alerts, direction filtering, and TXT/JSON receipt generation.",
-	link: "https://github.com/ethanvillalobos8/kasmage",
-	features: {
-		python: true
-	}
+	"name": "Kasmage",
+	"description": "A whimsical, lightweight frog-wizard themed CLI for monitoring Kaspa ($KAS) transactions with live alerts, history, and receipts. Supports real-time transaction streaming, threshold alerts, direction filtering, and TXT/JSON receipt generation.",
+	"link": "https://github.com/ethanvillalobos8/kasmage",
+	"features": ["reviewed", "python"]
 },
 {
-	name: "Kaspa REST Proxy",
-	description: "A REST to Kaspad wRPC Proxy that mirrors most Rusty Kaspa wRPC operations via HTTP REST endpoints. Simplifies developer integration with Kaspad nodes by allowing standard REST calls instead of WebSocket RPC.",
-	link: "https://github.com/supertypo/kaspa-rest-proxy",
-	features: {
-		python: true
-	}
+	"name": "Kaspa REST Proxy",
+	"description": "A REST to Kaspad wRPC Proxy that mirrors most Rusty Kaspa wRPC operations via HTTP REST endpoints. Simplifies developer integration with Kaspad nodes by allowing standard REST calls instead of WebSocket RPC.",
+	"link": "https://github.com/supertypo/kaspa-rest-proxy",
+	"features": ["reviewed", "python"]
 },
 {
-	name: "Simply Kaspa UTXO Exporter",
-	description: "Tool that exports Kaspa UTXO set data (top scripts/rich list and address distribution) by reading Rusty-Kaspad directory in read-only mode.",
-	link: "https://github.com/supertypo/simply-kaspa-utxo-exporter",
-	features: {
-		rust: true
-	}
+	"name": "Simply Kaspa UTXO Exporter",
+	"description": "Tool that exports Kaspa UTXO set data (top scripts/rich list and address distribution) by reading Rusty-Kaspad directory in read-only mode.",
+	"link": "https://github.com/supertypo/simply-kaspa-utxo-exporter",
+	"features": ["reviewed", "rust"]
 },
 {
-	name: "Kaspa Kinesis",
-	description: "A serverless multiplayer engine using the Kaspa for verifiable randomness and as a global relay, enabling real-time CGNAT-to-CGNAT connectivity, fair gameplay, full auditability, and zero infrastructure or centralized servers.",
-	link: "https://github.com/peavey2787/KaspaKinesis",
-	features: {
-		javascript: true,
-		typescript: true
-	}
+	"name": "Kaspa Kinesis",
+	"description": "A serverless multiplayer engine using the Kaspa for verifiable randomness and as a global relay, enabling real-time CGNAT-to-CGNAT connectivity, fair gameplay, full auditability, and zero infrastructure or centralized servers.",
+	"link": "https://github.com/peavey2787/KaspaKinesis",
+	"features": ["reviewed", "javascript", "typescript"]
 },
 {
-	name: "Kaspa WASM JS Wrapper",
-	description: "Browser based JavaScript Wrapper with interactive demos showcasing the Kaspa WASM SDK",
-	link: "https://github.com/peavey2787/minKasWasm",
-	features: {
-		rust: true
-	}
+	"name": "Kaspa WASM JS Wrapper",
+	"description": "Browser based JavaScript Wrapper with interactive demos showcasing the Kaspa WASM SDK",
+	"link": "https://github.com/peavey2787/minKasWasm",
+	"features": ["reviewed", "rust"]
 },
 {
-	name: "ChainVsDag",
-	description: "An embeddable 3D visualization comparing Kaspa’s BlockDAG with traditional blockchains, featuring real-time animations, glass-morphism design, and customizable themes to illustrate Kaspa’s performance and scalability.",	
-	link: "https://chainvsdag.com",
-	features: {
-	}
+	"name": "ChainVsDag",
+	"description": "An embeddable 3D visualization comparing Kaspa’s BlockDAG with traditional blockchains, featuring real-time animations, glass-morphism design, and customizable themes to illustrate Kaspa’s performance and scalability.",
+	"link": "https://chainvsdag.com",
+	"features": ["reviewed"]
 }
 ];
 
@@ -466,26 +412,25 @@ function renderItems(reset = false) {
 	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
 	slice.forEach(item => {
 		const card = document.createElement('a');
-			card.classList.add('filter-card', 'theme-1');
-			card.href = item.link;
-			card.target = '_blank';
+		card.classList.add('filter-card', 'theme-1');
+		card.href = item.link;
+		card.target = '_blank';
 
-		const featuresHtml = Object.entries(item.features)
-			.filter(([key, value]) => value && featureTags[key] && !['reviewed', 'verified'].includes(key))
-			.map(([key]) => getFeatureTag(key))
+		const badgeKey = item.features.includes('verified') ? 'verified' : item.features.includes('reviewed') ? 'reviewed' : null;
+		const badgeHtml = badgeKey ? getFeatureTag(badgeKey) : '';
+
+		const featuresHtml = item.features
+			.filter(key => featureTags[key] && key !== 'verified' && key !== 'reviewed')
+			.map(key => getFeatureTag(key))
 			.join('');
 
-		const badgeKey = item.features?.verified ? 'verified' : 'reviewed';
-		const badgeHtml = getFeatureTag(badgeKey);
-	const randomColor = getRandomColor();
-	card.innerHTML = `<div class="item-header"><div class="filter-logo random-logo" style="background-color: ${randomColor};"><h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${item.name.charAt(0)}</h2></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
+		card.innerHTML = `<div class="item-header"><div class="filter-logo random-logo" style="background-color: ${getRandomColor()};"><h2 style="font-size: 35px; color: #F1F1F1; margin: 0;">${item.name.charAt(0)}</h2></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
 
 		itemGrid.appendChild(card);
 	});
 
 	currentIndex += slice.length;
 	counter.textContent = `(${filteredItems.length} of ${items.length})`;
-
 	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
@@ -495,24 +440,24 @@ function filterItems() {
 	const defaultOrder = [...items];
 
 	filteredItems = defaultOrder.filter(item => {
-		if (selectedFeature && !item.features[selectedFeature]) return false;
+		if (selectedFeature && !item.features.includes(selectedFeature)) return false;
 		return searchTerm === "" || item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
 	});
-	
+
 	const sortMode = sortSelect.value;
 	if (sortMode === 'az') {
 	filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
 	} else if (sortMode === 'za') {
 		filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
 	}
-	
+
 	if (filteredItems.length === 0) {
 		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
 		loadMoreBtn.style.display = 'none';
 		counter.textContent = `(0 of ${items.length})`;
 		return;
 	}
-	
+
 	renderItems(true);
 }
 
@@ -534,5 +479,6 @@ sortSelect.addEventListener('change', filterItems);
 
 renderItems(true);
 </script>
+
 </body>
 </html>

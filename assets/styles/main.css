@@ -945,9 +945,14 @@ textarea:focus, input[type="text"]:focus, input[type="search"]:focus, input[type
 	border-color: #70C7BA;
 }
 
-.search-sort-controls {
-	text-align: right;
-	margin-bottom: 20px;
+.searchControls {
+	display: flex; 
+	flex-direction: row;
+	justify-content: space-between; 
+	margin: 10px;
+}
+#counter {
+	font-size: 0.8rem;
 }
 
 /* table v */

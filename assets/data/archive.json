@@ -42,6 +42,24 @@
   "features": ["blockExplorer"]
 }
 ]
+//planned
+// {
+//  name: "Unstoppable Wallet",
+//  description: "Secure non-custodial open-source multi-chain wallet with TOR privacy, zero data collection, and professional audits by CertiK and ChainSecurity,",
+//  link: "https://unstoppable.money",
+//  logo: "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/unstoppable.webp",
+//  features: {
+//    reviewed: true,
+//    openSource: true,
+//    multiChain: true,
+//    selfCustodial: true,
+//    krc20: false,
+//    krc721: false,
+//    knsDomains: false,
+//    layer2: false,
+//    mobile: true
+//  }
+// }
 // {
 //   name: "KasMap",
 //   description: "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
