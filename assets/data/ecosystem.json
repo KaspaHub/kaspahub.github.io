@@ -1,7 +1,7 @@
 [
 {
-  "name": "Kaspa.org",
-  "description": "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
+	"name": "Kaspa.org",
+	"description": "A community website that provides comprehensive information about Kaspa technology and ecosystem, including links to wallets, explorers, development tools, and resources.",
   "link": "https://kaspa.org",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
   "features": ["reviewed"]
