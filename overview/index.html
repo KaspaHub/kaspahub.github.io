@@ -297,9 +297,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </div>
 
-<a href="https://kaspahub.org/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; max-width: fit-content;">Find out more</a>
-
 </main>
+
+<a href="/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; max-width: fit-content;">Find out more</a>
 
 <footer>
 
@@ -552,17 +552,28 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   line-height: 1.2;
 }
 
-@media (min-width: 900px) {
-  .right {
-    right: 100px;
-  }
-  .left {
-    left: 100px;
-  }
-}
-
 @media (max-aspect-ratio: 1/1) {
+  .ecosystem .section,
+  .ecosystem .icard,
+  .ecosystem .items {
+    min-width: 0;
+  }
 
+  .ecosystem .items.one-row,
+  .ecosystem .items.two-row,
+  .ecosystem .items.three-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ecosystem .item {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+
+  .section {
+    margin-bottom: 20px;
+  }
   .chart {
     transform: scale(0.5);
     transform-origin: bottom right;
@@ -590,6 +601,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 24px;
+    width: 100%;
   }
 
   .ecosystem .section,
@@ -606,45 +618,34 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   .core {
     display: none;
   }
-}
-@media (max-width: 570px) {
-  .ecosystem .section,
-  .ecosystem .icard,
-  .ecosystem .items {
-    min-width: 0;
-  }
 
-  .ecosystem .items.one-row,
+}
+
+@media (max-width: 1500px) {
+/*  .ecosystem .items.one-row,
   .ecosystem .items.two-row,
   .ecosystem .items.three-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr;
+  }*/
+  .ecosystem {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
   }
 
-  .ecosystem .item {
-    flex-direction: row;
-    justify-content: flex-start;
+  .core {
+      display: none;
+  }
+  .ecosystem {
+    gap: 2.8rem 1rem;
   }
 }
-
-.ecosystem {
-  transform-origin: top center;
-  place-self: center;
-}
-
-@media (max-width: 1580px) {
-  .ecosystem { transform: scale(0.8); }
-}
-
-@media (max-width: 1300px) {
-  .ecosystem { transform: scale(0.65); }
-}
-
-@media (max-width: 1000px) {
-  .ecosystem { transform: scale(0.5); }
-}
-
-@media (max-width: 900px) {
-  .ecosystem { transform: unset; }
+@media (min-width: 1500px) {
+  .right {
+    right: 100px;
+  }
+  .left {
+    left: 100px;
+  }
 }
 
 </style>

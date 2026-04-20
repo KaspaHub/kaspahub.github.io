@@ -514,7 +514,7 @@ function populateMenu() {
     { name: "Overview", icon: "📊", href: "/overview/" },
     { name: "Projects", icon: "💼", href: "/projects/" },
     { name: "Comparison", icon: "⚡", href: "/comparison/" },
-    { name: "Donations", icon: "💸", href: "https://tiptr.ee/KaspaHub" }
+    { name: "Donations", icon: "❤️", href: "https://tiptr.ee/KaspaHub" }
   ];
 
   let html = items.map(item => {
