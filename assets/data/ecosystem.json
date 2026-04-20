@@ -429,7 +429,7 @@
 {
 	"name": "Aporia Exchange",
 	"description": "The first order book (CLOB) DEX on Kaspa, MEV-resistant with cross-chain liquidity, atomic composability, and fully on-chain features. Building initially on Igra Labs L2 for smart contracts (transitioning to native vProgs later).",
-	"link": "https://linktr.ee/AporiaExchange",
+	"link": "https://aporia.exchange",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/aporiaexchange.webp",
 	"features": ["layer2", "dex"]
 },
@@ -659,9 +659,9 @@
 },
 {
 	"name": "NOWNodes",
-	"description": "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
+	"description": "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more.",
 	"link": "https://nownodes.io",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nownodes.webp",
 	"features": ["reviewed", "development"]
 },
 {
@@ -1113,6 +1113,13 @@
 	"features": ["blockExplorer"]
 },
 {
+	"name": "Ledger",
+	"description": "Industry-leading cold wallet for multi-chain asset management on desktop & mobile. Secure, self-custodial hardware wallet audited by Friedman LLP & Kudelski IoT.",
+	"link": "https://www.ledger.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ledgerwallet.webp",
+	"features": ["reviewed", "wallet"]
+},
+{
 	"name": "Tangem",
 	"description": "Popular hardware wallet with EAL6+ certified chip, audited by Kudelski Security and Riscure, offering multi-chain asset management with an open-source app.",
 	"link": "https://tangem.com",
@@ -1124,13 +1131,6 @@
 	"description": "Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices.",
 	"link": "https://onekey.so",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onekeywallet.webp",
-	"features": ["reviewed", "wallet"]
-},
-{
-	"name": "Ledger",
-	"description": "Industry-leading cold wallet for multi-chain asset management on desktop & mobile. Secure, self-custodial hardware wallet audited by Friedman LLP & Kudelski IoT.",
-	"link": "https://www.ledger.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ledgerwallet.webp",
 	"features": ["reviewed", "wallet"]
 },
 {
