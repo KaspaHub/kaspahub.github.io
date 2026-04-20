@@ -179,14 +179,14 @@
   "description": "A professional point-of-sale system for local businesses to accept cryptocurrency payments directly to their wallet, with real-time blockchain verification.",
   "link": "https://onchainpos.live",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
-  "features": ["reviewed", "solutions"]
+  "features": ["reviewed", "development", "solutions"]
 },
 {
   "name": "Kaspay POS",
   "description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
   "link": "https://kaspay.one",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspay.webp",
-  "features": ["solutions"]
+  "features": ["development", "solutions"]
 },
 {
   "name": "Kaskad",
@@ -333,14 +333,14 @@
   "description": "Community-powered scam defense platform for the crypto community. It tracks, reports, and helps take down malicious phishing sites targeting Kaspa and other cryptos through automated detection and evidence collection.",
   "link": "https://seedbuster.xyz",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/seedbuster.webp",
-  "features": ["reviewed", "security"]
+  "features": ["reviewed", "security", "utilities"]
 },
 {
   "name": "Kaspa Security Center",
   "description": "A community initiative for reporting and investigating security incidents on Kaspa, with public reports, status tracking, and efforts to trace funds and alert exchanges and authorities.",
   "link": "https://kaspasecuritycenter.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspasecuritycenter.webp",
-  "features": ["reviewed", "security"]
+  "features": ["reviewed", "security", "utilities"]
 },
 {
   "name": "Kasia Book",
@@ -354,14 +354,14 @@
   "description": "An open-source service for stamping digital artifacts on Kaspa's Layer-1, providing immutable, timestamped proof-of-existence and verifiable attestations with public or private disclosure options.",
   "link": "https://kasstamp.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasstamp.webp",
-  "features": ["reviewed"]
+  "features": ["reviewed", "utilities"]
 },
 {
   "name": "KasProve",
   "description": "A lightweight, open-source service to inscribe and verify digital signatures on Kaspa's Layer-1, enabling proof of existence for documents, videos, and more, without wallet connection.",
   "link": "https://kasprove.pages.dev",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasprove.webp",
-  "features": ["reviewed"]
+  "features": ["reviewed", "utilities"]
 },
 {
   "name": "KaspaTips",
@@ -578,28 +578,28 @@
   "description": "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
   "link": "https://kasphub.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "blogs", "calculator"]
+  "features": ["reviewed", "blogs", "calculator", "utilities"]
 },
 {
   "name": "Kaspa Map",
-  "description": "A community-driven map listing real-world locations where Kaspa is accepted as payment, with free downloadable 'Kaspa Accepted Here' buttons for businesses.",
+  "description": "A community-driven map listing real-world locations where Kaspa (KAS) is accepted as payment, with free downloadable 'Kaspa Accepted Here' buttons for businesses.",
   "link": "https://kaspamap.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed"]
+  "features": ["reviewed", "utilities"]
 },
 {
   "name": "Kaspa Globe",
   "description": "Interactive globe showing Kaspa network peers in real-time, with search, stats on nodes, connections, peers, and toggle for Peers/Peers-Graph views.",
   "link": "https://kaspaglo.be",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspaglobe.webp",
-  "features": ["reviewed", "visualizer"]
+  "features": ["reviewed", "visualizer", "utilities"]
 },
 {
   "name": "Kaspa Node Map",
   "description": "A map of public Kaspa nodes providing real-time data on node distribution and status, useful for monitoring network health and launching new nodes.",
   "link": "https://nodes.kaspa.ws",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "visualizer"]
+  "features": ["reviewed", "visualizer", "utilities"]
 },
 {
   "name": "Kaspadrome",
@@ -635,6 +635,34 @@
   "link": "https://kaspawoo.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-2.webp",
   "features": ["reviewed", "development", "solutions"]
+},
+{
+  "name": "NOWPayments",
+  "description": "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
+  "link": "https://nowpayments.io",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
+  "features": ["reviewed", "solutions"]
+},
+{
+  "name": "CoinPal",
+  "description": "Coin Pal is a secure cryptocurrency payment platform supporting Kaspa, bridging traditional finance and the evolving Web3 world. It offers seamless integration for e-commerce platforms, enabling merchants to accept KAS with low-fee, secure payments and multi-currency conversion options.",
+  "link": "https://www.coinpal.io",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinpal.webp",
+  "features": ["solutions"]
+},
+{
+  "name": "Cryptocurrency Checkout",
+  "description": "CryptocurrencyCheckout is a Free to Use, Non-Custodial & Decentralized Payment Gateway providing plugins that make accepting multiple cryptocurrencies for your products and services as easy as entering your wallet addresses.",
+  "link": "https://cryptocurrencycheckout.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cryptocurrencycheckout.webp",
+  "features": ["solutions"]
+},
+{
+  "name": "NOWNodes",
+  "description": "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
+  "link": "https://nownodes.io",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
+  "features": ["reviewed", "development"]
 },
 {
   "name": "Bitrequest",
@@ -676,28 +704,56 @@
   "description": "A tool to test if your Kaspa node is publicly accessible via P2P-gRPC, ensuring proper configuration for P2P connectivity in the Kaspa network.",
   "link": "https://kaspa.host",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed"]
+  "features": ["reviewed", "utilities"]
 },
 {
   "name": "Kaspa Hashrate",
   "description": "An interactive visualization tool displaying accurate Kaspa network hashrate data, providing real-time insights and historical measurements since genesis.",
   "link": "https://hashrate.kaspa.ws",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "mining", "analytics"]
+  "features": ["reviewed", "mining", "analytics", "utilities"]
 },
 {
   "name": "Kaspa Insights",
   "description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
   "link": "https://www.kaspainsights.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspainsights.webp",
-  "features": ["reviewed", "analytics", "visualizer"]
+  "features": ["reviewed", "analytics", "visualizer", "calculator", "utilities"]
+},
+{
+  "name": "Mining Now",
+  "description": "A cryptocurrency mining platform offering real-time data, profitability calculators, market trends, and efficient hardware solutions, with support for Kaspa.",
+  "link": "https://miningnow.com/coins/kaspa/",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/miningnow.webp",
+  "features": ["reviewed", "analytics", "mining", "calculator", "utilities"]
+},
+{
+  "name": "Kaspa vs. Bitcoin Miner Revenue Calculator",
+  "description": "A calculator comparing Kaspa and Bitcoin miner revenue, simulating future scenarios to demonstrate Kaspa’s potential to outperform Bitcoin in hashrate and security budget.",
+  "link": "https://cryptoodie.github.io/KASPA-VS.-BITCOIN-MINER-REVENUE-/",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed", "calculator", "utilities"]
 },
 {
   "name": "KasMetrix",
   "description": "A comprehensive tool for tracking Kaspa's price, converting currencies, simulating investments, and monitoring live rates and portfolio performance.",
   "link": "https://kasview.netlify.app",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "analytics"]
+  "features": ["reviewed", "calculator", "utilities"]
+},
+{
+  "name": "Kaspa Breakeven Calculator",
+  "description": "Kaspa Breakeven Calculator computes breakeven points for Kaspa mining or investments, helping users assess profitability with cost and revenue inputs.",
+  "link": "https://kas-breakeven-calc.vercel.app",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed", "calculator", "utilities"]
+},
+{
+  "name": "Kaspa Mining Calculator",
+  "description": "A straightforward Kaspa mining profitability calculator that estimates net cost, daily/weekly/monthly profits in USD and KAS coins, expected block finds, and more.",
+  "link": "https://kaspacalc.net",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+  "features": ["reviewed", "calculator", "utilities"]
 },
 {
   "name": "Kaspa News",
@@ -760,7 +816,7 @@
   "description": "An all-in-one price-tracking platform for cryptocurrency portfolio management, tracking wallets and exchanges, DeFi protocols, with analytics tools and calculators.",
   "link": "https://coinstats.app/coins/kaspa/",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinstats.webp",
-  "features": ["reviewed", "analytics", "calculator"]
+  "features": ["reviewed", "analytics"]
 },
 {
   "name": "Live Coin Watch",
@@ -880,13 +936,6 @@
   "link": "https://p.cash/en/coins/kaspa",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/pcash.webp",
   "features": ["reviewed", "analytics"]
-},
-{
-  "name": "Mining Now",
-  "description": "A cryptocurrency mining platform offering real-time data, profitability calculators, market trends, and efficient hardware solutions, with support for Kaspa.",
-  "link": "https://miningnow.com/coins/kaspa/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/miningnow.webp",
-  "features": ["reviewed", "analytics", "mining", "calculator"]
 },
 {
   "name": "Kaspa Pool",
@@ -1152,7 +1201,7 @@
   "description": "User-friendly Kaspa web wallet with a banking interface. Checking and savings accounts. Send Kaspa to an email address. oAuth-style logins & payments.",
   "link": "https://kasla.io",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasla.webp",
-  "features": ["reviewed", "solutions", "wallet"]
+  "features": ["reviewed", "development", "solutions", "wallet"]
 },
 {
   "name": "Kasperia",
@@ -1958,222 +2007,5 @@
   "link": "https://wirexapp.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/wirex.webp",
   "features": ["cex"]
-},
-{
-  "name": "NOWPayments",
-  "description": "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
-  "link": "https://nowpayments.io",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
-  "features": ["reviewed", "solutions"]
-},
-{
-  "name": "CoinPal",
-  "description": "Coin Pal is a secure cryptocurrency payment platform supporting Kaspa, bridging traditional finance and the evolving Web3 world. It offers seamless integration for e-commerce platforms, enabling merchants to accept KAS with low-fee, secure payments and multi-currency conversion options.",
-  "link": "https://www.coinpal.io",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinpal.webp",
-  "features": ["solutions"]
-},
-{
-  "name": "Cryptocurrency Checkout",
-  "description": "CryptocurrencyCheckout is a Free to Use, Non-Custodial & Decentralized Payment Gateway providing plugins that make accepting multiple cryptocurrencies for your products and services as easy as entering your wallet addresses.",
-  "link": "https://cryptocurrencycheckout.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cryptocurrencycheckout.webp",
-  "features": ["solutions"]
-},
-{
-  "name": "Kaspa REST API",
-  "description": "The REST-API server for the Kaspa network, providing an HTTP interface to interact with Kaspa nodes. It allows developers to build applications that communicate with the Kaspa blockchain using standard HTTP methods.",
-  "link": "http://api.kaspa.org/docs",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/rest-api.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kasplex API",
-  "description": "Official public API for the Kasplex protocol on Kaspa, providing access to KRC-20 token data via an open-source indexer.",
-  "link": "https://docs-kasplex.gitbook.io/krc20",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasplex.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa.com API",
-  "description": "API for the KaspaCom platform, providing real-time data on KRC20 tokens, KRC721 NFTs, and KNS domains. Includes endpoints for trade statistics, floor prices, fulfilled orders, hot mints, open orders, recent mints, collection details, token filtering, and more.",
-  "link": "https://api.kaspa.com/api-docs",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspacom.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KNS API",
-  "description": "API documentation for Kaspa Name Service (KNS), providing endpoints for querying assets by owner, asset details, domain resolution to addresses, domain availability checks, profile data, and primary name management by owner address or setting for users.",
-  "link": "https://apidoc.knsdomains.org/mainnet/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Rusty Kaspa",
-  "description": "The official Rust implementation of the Kaspa full-node and related libraries, designed for high-performance and scalability. It supports the BlockDAG protocol, enabling rapid transaction confirmations and high throughput.",
-  "link": "https://github.com/kaspanet/rusty-kaspa",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "WASM32 SDK",
-  "description": "WASM bindings for Rusty Kaspa, enabling Rust code integration in JavaScript and TypeScript environments. Ideal for developers building Kaspa applications with web compatibility and high performance.",
-  "link": "https://kaspa.aspectron.org/docs/index.html",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Simply Kaspa Indexer",
-  "description": "A Rust-based PostgreSQL indexer for Kaspa, optimized for concurrency and compatibility with kaspa-rest-server. Ideal for developers needing efficient blockchain data indexing.",
-  "link": "https://hub.docker.com/r/supertypo/simply-kaspa-indexer",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KasOS",
-  "description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
-  "link": "https://github.com/deokman420/KasOS",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasos.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kloak Node",
-  "description": "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
-  "link": "https://github.com/kloakprotocol/kloak_node",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspium",
-  "description": "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
-  "link": "https://github.com/azbuky/kaspium_wallet",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Simple Wallet",
-  "description": "A secure, production-safe JavaScript SDK for generating watch-only Kaspa addresses from extended public keys (KPUB/XPUB/TPUB). Supports major wallet formats, and Legacy KDX.",
-  "link": "https://www.npmjs.com/package/kaspa-simple-wallet",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KasPaper",
-  "description": "A lightweight Go-based tool for generating secure Kaspa paper wallets. It provides a simple way to create offline storage for Kaspa assets by generating seed phrases and printable wallet files. Users can customize the wallet's appearance by editing the template.html file before compilation.",
-  "link": "https://github.com/svarogg/kaspaper",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa-ng",
-  "description": "A desktop application for running a Kaspa p2p node, wallet, and BlockDAG visualizer. Written in Rust, it offers a high-performance interface for managing transactions and exploring the Kaspa network. Suited for developers and enthusiasts seeking a comprehensive tool for decentralized operations, with support for solo mining via a stratum bridge.",
-  "link": "https://github.com/aspectron/kaspa-ng",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kdapp",
-  "description": "A Rust-based framework for building high-frequency, interactive decentralized applications (k-dApps) on Kaspa's BlockDAG. It supports time-sensitive 'Episodes' like tic-tac-toe, leveraging Kaspa's 10 blocks-per-second capability. Designed for rapid development, it avoids state persistence for simplicity and includes rollback handling for reorgs.",
-  "link": "https://github.com/michaelsutton/kdapp",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "NOWNodes",
-  "description": "NOWNodes provides affordable blockchain developer APIs, offering access to over 100 blockchain RPC nodes and block explorers, including Kaspa, Ethereum, Bitcoin, and more. It supports shared and dedicated nodes, WebSocket connections, and testnet access, making it ideal for developers building on multiple blockchain networks, including Kaspa.",
-  "link": "https://nownodes.io",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Payments",
-  "description": "A WordPress plugin that integrates Kaspa cryptocurrency payments into WooCommerce stores. Non-custodial using KPUB watch-only wallets, generates unique addresses per order, automatic real-time payment detection via Kaspa API, live exchange rates from CoinGecko, QR code support, and automatic order completion.",
-  "link": "https://kaspawoo.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KasPush",
-  "description": "A simple HTML and JavaScript tool for tracking Kaspa wallet balances with real-time push notifications via Pushcut on iOS. Features multiple wallet support, USD value tooltips, and a clean, offline-capable design. Open-source and plug-and-play for easy setup.",
-  "link": "https://github.com/kas-builder/KasPush_",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Register",
-  "description": "An NFC Point of Sale web app built with Flask, enabling Kaspa payment request URIs to be written to NTAG21x NFC tags using PN532 (Raspberry Pi) or ACR1252 readers. Features a Bootstrap UI for entering AUD amounts, converting to KAS via Coingecko rates, and writing URIs to tags with optional verification.",
-  "link": "https://github.com/laudena/kaspa_register",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspeak SDK",
-  "description": "An SDK for developing decentralized applications on the Kaspa network. It simplifies low-level tasks like message handling, cryptography, and transaction management, allowing developers to focus on application logic.",
-  "link": "https://github.com/kaspeak/kaspeak-sdk",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspian",
-  "description": "A self-custodial Kaspa wallet with integrated merchant tools, built using JavaScript (Bun) and Rust (via WebAssembly). It supports wallet creation, transaction management, and merchant payment integrations, making it ideal for developers building user-facing applications or e-commerce solutions on the Kaspa network.",
-  "link": "https://github.com/KaffinPX/Kaspian",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Graph Inspector",
-  "description": "A real-time visualization tool for the Kaspa BlockDAG, built with Go and JavaScript (Node.js). It includes database and API components for analyzing the network's block structure, making it valuable for developers studying Kaspa's DAG-based architecture or building analytical tools for network insights.",
-  "link": "https://github.com/kaspa-live/kaspa-graph-inspector",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "KaspaCom Wallet",
-  "description": "An open-source web wallet for the Kaspa network, built with JavaScript and TypeScript, supporting both Layer 1 and Layer 2 transactions. It offers a secure and user-friendly interface for managing KAS assets, sending and receiving funds, and integrating with decentralized applications (dApps).",
-  "link": "https://github.com/KASPACOM/kaspacom-web-wallet",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kasmage",
-  "description": "A whimsical, lightweight frog-wizard themed CLI for monitoring Kaspa ($KAS) transactions with live alerts, history, and receipts. Supports real-time transaction streaming, threshold alerts, direction filtering, and TXT/JSON receipt generation.",
-  "link": "https://github.com/ethanvillalobos8/kasmage",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa REST Proxy",
-  "description": "A REST to Kaspad wRPC Proxy that mirrors most Rusty Kaspa wRPC operations via HTTP REST endpoints. Simplifies developer integration with Kaspad nodes by allowing standard REST calls instead of WebSocket RPC.",
-  "link": "https://github.com/supertypo/kaspa-rest-proxy",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Simply Kaspa UTXO Exporter",
-  "description": "Tool that exports Kaspa UTXO set data (top scripts/rich list and address distribution) by reading Rusty-Kaspad directory in read-only mode.",
-  "link": "https://github.com/supertypo/simply-kaspa-utxo-exporter",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa Kinesis",
-  "description": "A serverless multiplayer engine using the Kaspa for verifiable randomness and as a global relay, enabling real-time CGNAT-to-CGNAT connectivity, fair gameplay, full auditability, and zero infrastructure or centralized servers.",
-  "link": "https://github.com/peavey2787/KaspaKinesis",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "Kaspa WASM JS Wrapper",
-  "description": "Browser based JavaScript Wrapper with interactive demos showcasing the Kaspa WASM SDK",
-  "link": "https://github.com/peavey2787/minKasWasm",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
-},
-{
-  "name": "BLanim",
-  "description": "BLanim is a Python library that extends the Manim package to provide tools for creating animations of blockchain and blockDAG concepts. It is being utilized in creating educational content related to Kaspa, helping to visualize its BlockDAG architecture.",
-  "link": "https://github.com/ShaiW/blanim",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/github.webp",
-  "features": ["reviewed", "development"]
 }
 ]
