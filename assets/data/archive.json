@@ -34,6 +34,13 @@
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ghoadfi.webp",
   "features": ["rwa"]
 },
+{
+  "name": "Kaspa Scope",
+  "description": "A comprehensive platform for Kaspa cryptocurrency, offering real-time market data, utility tools, block explorer, and informative blogs to educate and engage enthusiasts with in-depth content.",
+  "link": "https://www.kaspascope.com",
+  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspascope.webp",
+  "features": ["blockExplorer"]
+}
 ]
 // {
 //   name: "KasMap",

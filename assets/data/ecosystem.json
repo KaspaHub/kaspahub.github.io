@@ -578,7 +578,7 @@
   "description": "KaspHub is a comprehensive dashboard for Kaspa cryptocurrency metrics, providing real-time data, market analysis, comparative insights, and tools like mining calculator.",
   "link": "https://kasphub.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "calculator"]
+  "features": ["reviewed", "blogs", "calculator"]
 },
 {
   "name": "Kaspa Map",
@@ -614,27 +614,6 @@
   "link": "https://nano-gpt.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nano-gpt.webp",
   "features": ["reviewed"]
-},
-{
-  "name": "Kaspa vs. Bitcoin Miner Revenue Calculator",
-  "description": "A calculator comparing Kaspa and Bitcoin miner revenue, simulating future scenarios to demonstrate Kaspa’s potential to outperform Bitcoin in hashrate and security budget.",
-  "link": "https://cryptoodie.github.io/KASPA-VS.-BITCOIN-MINER-REVENUE-/",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "calculator"]
-},
-{
-  "name": "Kaspa Breakeven Calculator",
-  "description": "Kaspa Breakeven Calculator computes breakeven points for Kaspa mining or investments, helping users assess profitability with cost and revenue inputs.",
-  "link": "https://kas-breakeven-calc.vercel.app",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "calculator"]
-},
-{
-  "name": "Kaspa Mining Calculator",
-  "description": "A straightforward Kaspa mining profitability calculator that estimates net cost, daily/weekly/monthly profits in USD and KAS coins, expected block finds, and more.",
-  "link": "https://kaspacalc.net",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-  "features": ["reviewed", "calculator"]
 },
 {
   "name": "Kaspa Address Labels",
@@ -1055,13 +1034,6 @@
   "link": "https://www.kasplore.com",
   "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
   "features": ["reviewed", "blockExplorer", "visualizer"]
-},
-{
-  "name": "Kaspa Scope",
-  "description": "A comprehensive platform for Kaspa cryptocurrency, offering real-time market data, utility tools, block explorer, and informative blogs to educate and engage enthusiasts with in-depth content.",
-  "link": "https://www.kaspascope.com",
-  "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspascope.webp",
-  "features": ["reviewed", "blockExplorer"]
 },
 {
   "name": "Look into Kaspa",
