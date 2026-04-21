@@ -78,7 +78,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
     </div>
 
-    <div class="info-card transactions theme-1">
+    <div class="info-card transactions chart theme-1">
         <div class="data-overlay" style="left: 20px;">
             <div class="info-title">World-Record</div>
             <!-- <div class="info-title">Highest Number of Daily Transactions</div> -->
@@ -86,20 +86,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <div class="info-extra">Transactions in 24 Hours on Proof of Work</div>
             <div class="info-extra">On October 5, 2025</div>
         </div>
-
-        <svg class="chart" viewBox="0 0 420 220" preserveAspectRatio="xMidYMid meet">
-            <rect x="30" y="200" width="22" height="20" fill="#4a6fa5"/>
-            <rect x="65" y="190" width="22" height="30" fill="#4a6fa5"/>
-            <rect x="100" y="180" width="22" height="40" fill="#4a6fa5"/>
-            <rect x="135" y="165" width="22" height="55" fill="#4a6fa5"/>
-            <rect x="170" y="140" width="22" height="80" fill="#4a6fa5"/>
-            <rect x="205" y="110" width="22" height="110" fill="#4dd4b8"/>
-            <rect x="240" y="80" width="22" height="140" fill="#4dd4b8"/>
-            <rect x="275" y="50" width="22" height="170" fill="#a0ffaa"/>
-            <rect x="310" y="30" width="22" height="190" fill="#a0ffaa"/>
-            <rect x="345" y="70" width="22" height="150" fill="#a0ffaa"/>
-            <rect x="380" y="110" width="22" height="110" fill="#4dd4b8"/>
-        </svg>
     </div>
 </div>
 
@@ -503,6 +489,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   flex: 2;
   padding: 0;
   overflow: hidden;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 220' preserveAspectRatio='xMidYMid meet'><rect x='30' y='200' width='22' height='20' fill='%234a6fa5'/><rect x='65' y='190' width='22' height='30' fill='%234a6fa5'/><rect x='100' y='180' width='22' height='40' fill='%234a6fa5'/><rect x='135' y='165' width='22' height='55' fill='%234a6fa5'/><rect x='170' y='140' width='22' height='80' fill='%234a6fa5'/><rect x='205' y='110' width='22' height='110' fill='%234dd4b8'/><rect x='240' y='80' width='22' height='140' fill='%234dd4b8'/><rect x='275' y='50' width='22' height='170' fill='%23a0ffaa'/><rect x='310' y='30' width='22' height='190' fill='%23a0ffaa'/><rect x='345' y='70' width='22' height='150' fill='%23a0ffaa'/><rect x='380' y='110' width='22' height='110' fill='%234dd4b8'/></svg>");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  min-height: 300px;
 }
 
 .data-overlay {
@@ -511,12 +501,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   left: 40px;
   text-align: left;
   z-index: 1;
-}
-
-.chart {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .info-grid {
@@ -594,17 +578,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     grid-template-columns: 1fr;
     gap: 40px 10px;
   }
-
   .info-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
   .records-container {
     flex-direction: column;
-  }
-  .chart {
-    transform: scale(0.5);
-    transform-origin: bottom right;
   }
   .crypto-card {
     width: 100%;
