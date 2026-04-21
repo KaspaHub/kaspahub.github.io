@@ -140,6 +140,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "KasOS",
+	"description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
+	"link": "https://github.com/deokman420/KasOS",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasos.webp",
+	"features": ["reviewed", "javascript"]
+},
+{
 	"name": "Travala.com",
 	"description": "World’s leading Web3 travel company. Travala.com is a pioneering crypto-native online travel agency that enables users to book millions of hotels, flights, tours, and activities worldwide using Kaspa.",
 	"link": "https://www.travala.com",
