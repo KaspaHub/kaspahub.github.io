@@ -228,7 +228,7 @@ const items = [
 	"description": "Popular hardware wallet with EAL6+ certified chip, audited by Kudelski Security and Riscure, offering multi-chain asset management with an open-source app.",
 	"link": "https://tangem.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/tangemwallet.webp",
-	"features": ["reviewed", "openSource", "multiChain", "selfCustodial", "krc20", "hardware", "mobile"]
+	"features": ["reviewed", "multiChain", "selfCustodial", "krc20", "hardware", "mobile"]
 },
 {
 	"name": "OneKey",
@@ -458,20 +458,14 @@ const items = [
 
 const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
-const filterCheckboxes = document.querySelectorAll('section input[type="checkbox"][data-feature]');
 const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
-
 const itemsPerPage = 42;
 let currentIndex = 0;
-
 let filteredItems = [...items];
 
-const featureTags = {
-	reviewed: { label: '', class: 'reviewed' },
-	verified: { label: '', class: 'verified' },
-};
+const filterCheckboxes = document.querySelectorAll('input[type="checkbox"][data-feature]');
 
 function renderItems(reset = false) {
 	if (reset) {
@@ -480,24 +474,20 @@ function renderItems(reset = false) {
 	}
 
 	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	const htmlParts = [];
+
 	slice.forEach(item => {
-	const card = document.createElement('a');
-	card.classList.add('filter-card', 'theme-1');
-	card.href = item.link;
-	card.target = '_blank';
+		let badgeHtml = '';
+		if (item.features.includes('verified')) {
+			badgeHtml = '<span class="feature-tag verified"></span>';
+		} else if (item.features.includes('reviewed')) {
+			badgeHtml = '<span class="feature-tag reviewed"></span>';
+		}
 
-	const featuresHtml = item.features
-	.filter(key => featureTags[key])
-	.map(key => {
-	const { label, class: extraClass = '' } = featureTags[key];
-	return `<span class="feature-tag ${extraClass}">${label}</span>`;
-	})
-	.join('');
-
-	card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
-
-	itemGrid.appendChild(card);
+		htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
 	});
+
+	itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
 
 	currentIndex += slice.length;
 	counter.textContent = `(${filteredItems.length} of ${items.length})`;

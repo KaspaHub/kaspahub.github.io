@@ -777,21 +777,15 @@ const items = [
 
 const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
-const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
 const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
-
 const itemsPerPage = 42;
 let currentIndex = 0;
-
-let lastCheckedRadio = null;
 let filteredItems = [...items];
 
-const featureTags = {
-	reviewed: { label: '', class: 'reviewed' },
-	verified: { label: '', class: 'verified' },
-};
+const filterRadios = document.querySelectorAll('input[type="radio"][data-feature]');
+let lastCheckedRadio = null;
 
 function renderItems(reset = false) {
 	if (reset) {
@@ -799,31 +793,21 @@ function renderItems(reset = false) {
 		currentIndex = 0;
 	}
 
-	const getFeatureTag = (key) => {
-		if (!featureTags[key]) return '';
-		const { label, class: extraClass = '' } = featureTags[key];
-		return `<span class="feature-tag ${extraClass}">${label}</span>`;
-	};
-
 	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	const htmlParts = [];
+
 	slice.forEach(item => {
-		const card = document.createElement('a');
-		card.classList.add('filter-card', 'theme-1');
-		card.href = item.link;
-		card.target = '_blank';
+		let badgeHtml = '';
+		if (item.features.includes('verified')) {
+			badgeHtml = '<span class="feature-tag verified"></span>';
+		} else if (item.features.includes('reviewed')) {
+			badgeHtml = '<span class="feature-tag reviewed"></span>';
+		}
 
-		const badgeKey = item.features.includes('verified') ? 'verified' : item.features.includes('reviewed') ? 'reviewed' : null;
-		const badgeHtml = badgeKey ? getFeatureTag(badgeKey) : '';
-
-		const featuresHtml = item.features
-			.filter(key => featureTags[key] && key !== 'verified' && key !== 'reviewed')
-			.map(key => getFeatureTag(key))
-			.join('');
-
-		card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
-
-		itemGrid.appendChild(card);
+		htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
 	});
+
+	itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
 
 	currentIndex += slice.length;
 	counter.textContent = `(${filteredItems.length} of ${items.length})`;

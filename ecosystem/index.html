@@ -236,23 +236,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <script type="text/javascript">
 'use strict';
 
-let items = [];
-let filteredItems = [];
-let currentIndex = 0;
-const itemsPerPage = 48;
-
 const itemGrid = document.getElementById('itemGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
-const categoryPills = document.querySelectorAll('.category-pill');
 const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 const counter = document.getElementById('counter');
-const layer2Toggle = document.getElementById('layer2Toggle');
+const itemsPerPage = 48;
+let currentIndex = 0;
+let items = [];
+let filteredItems = [];
 
-const featureTags = {
-    reviewed: { label: '', class: 'reviewed' },
-    verified: { label: '', class: 'verified' }
-};
+const categoryPills = document.querySelectorAll('.category-pill');
+const layer2Toggle = document.getElementById('layer2Toggle');
 
 function renderItems(reset = false) {
     if (reset) {
@@ -261,24 +256,21 @@ function renderItems(reset = false) {
     }
 
     const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < slice.length; i++) {
-        const item = slice[i];
-        const card = document.createElement('a');
-        card.className = 'filter-card theme-1';
-        card.href = item.link;
-        card.target = '_blank';
+    const htmlParts = [];
 
-        let featuresHtml = '';
-        for (let j = 0; j < item.features.length; j++) {
-            const f = item.features[j];
-            if (featureTags[f]) featuresHtml += `<span class="feature-tag ${featureTags[f].class}">${featureTags[f].label}</span>`;
+    slice.forEach(item => {
+        let badgeHtml = '';
+        if (item.features.includes('verified')) {
+            badgeHtml = '<span class="feature-tag verified"></span>';
+        } else if (item.features.includes('reviewed')) {
+            badgeHtml = '<span class="feature-tag reviewed"></span>';
         }
 
-        card.innerHTML = `<div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${featuresHtml}</h3><p class="filter-description">${item.description}</p>`;
-        fragment.appendChild(card);
-    }
-    itemGrid.appendChild(fragment);
+        htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
+    });
+
+    itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
+
     currentIndex += slice.length;
     counter.textContent = `(${filteredItems.length} of ${items.length})`;
     loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
