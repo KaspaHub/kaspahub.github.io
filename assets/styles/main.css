@@ -1492,26 +1492,25 @@ dialog.theme-1::backdrop {
 	#advertisement {
 		grid-row: 3;
 	}
-	#container-r {
-		scroll-snap-type: y mandatory;
+	#container-feed, #container-snaps {
 		overflow-y: scroll;
 		scroll-padding-top: 61px;
 		padding-top: 61px;
 		height: 100vh; 
 	}
+	#container-snaps {
+		scroll-snap-type: y mandatory;
+	}
 	.articleVid {
 		min-width: 100%;
 		max-width: 100%;
 	}
-	
 	.main-content-area {
 		flex-direction: column;
 	}
-	
 	.sidebar {
 		width: 100%;
 	}
-	
 	#light, #dark {
 		background-image: none;
 	}
