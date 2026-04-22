@@ -47,33 +47,33 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	{
 		"@type": "ListItem",
 		"position": 1,
-        "name": "Kaspa Hub",
-        "url": "https://kaspahub.org"
-    },
-    {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Kaspa.org",
-        "url": "https://www.kaspa.org"
-    },
-    {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Kaspa.com",
-        "url": "https://www.kaspa.com"
-    },
-    {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "KASmedia",
-        "url": "https://www.kasmedia.com"
-    },
-    {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "Kasia",
-        "url": "https://kasia.fyi"
-    }
+		"name": "Kaspa Hub",
+		"url": "https://kaspahub.org"
+	},
+	{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Kaspa.org",
+		"url": "https://www.kaspa.org"
+	},
+	{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "Kaspa.com",
+		"url": "https://www.kaspa.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "KASmedia",
+		"url": "https://www.kasmedia.com"
+	},
+	{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "Kasia",
+		"url": "https://kasia.fyi"
+	}
 ]
 }
 </script>
@@ -86,54 +86,54 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <main id="container-2">
 
 <div style="text-align: center; margin-bottom: 70px;">
-    <h1 style="font-size: 3em; filter: brightness(0.7);">Ecosystem</h1>
-    <p style="font-weight: bold;">Explore the growing ecosystem of projects and initiatives built on Kaspa.</p>
+	<h1 style="font-size: 3em; filter: brightness(0.7);">Ecosystem</h1>
+	<p style="font-weight: bold;">Explore the growing ecosystem of projects and initiatives built on Kaspa.</p>
 </div>
 
 <div class="main-content-area">
 
 <section class="filter-list-main">
-
-    <input type="search" id="searchInput" placeholder="Search..."/>
-
-    <div class="category-pills">
-        <button class="category-pill active" data-feature="all">All</button>
-        <button class="category-pill" data-feature="analytics">Analytics</button>
-        <button class="category-pill" data-feature="blockExplorer">Block Explorers</button>
-        <button class="category-pill" data-feature="bridge">Bridges</button>
-        <button class="category-pill" data-feature="cryptoCard">Crypto Cards</button>
-        <button class="category-pill" data-feature="cex">Centralized Exchanges</button>
-        <button class="category-pill" data-feature="dex">Decentralized Exchanges</button>
-        <button class="category-pill" data-feature="gaming">Gaming</button>
-        <button class="category-pill" data-feature="swap">Instant Swaps</button>
-        <button class="category-pill" data-feature="launchpad">Launchpads</button>
-        <button class="category-pill" data-feature="blogs">Media</button>
-        <button class="category-pill" data-feature="marketplace">Marketplaces</button>
-        <button class="category-pill" data-feature="mining">Mining</button>
-        <button class="category-pill" data-feature="solutions">Payment Solutions</button>
-        <!-- <button class="category-pill" data-feature="rwa">RWA</button> -->
-        <button class="category-pill" data-feature="social">Social</button>
-        <button class="category-pill" data-feature="utilities">Utilities</button>
-        <button class="category-pill" data-feature="wallet">Wallets</button>
-    </div>
-
-    <div class="searchControls">
-
-        <input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
-
-        <div style="display: inline-flex;">
-            <p id="counter"></p>
-            <select id="sortSelect" aria-label="Sort Menu">
-                <option value="default">Default</option>
-                <option value="az">A - Z</option>
-                <option value="za">Z - A</option>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
-
+	
+	<input type="search" id="searchInput" placeholder="Search..."/>
+	
+	<div class="category-pills">
+		<button class="category-pill active" data-feature="all">All</button>
+		<button class="category-pill" data-feature="analytics">Analytics</button>
+		<button class="category-pill" data-feature="blockExplorer">Block Explorers</button>
+		<button class="category-pill" data-feature="bridge">Bridges</button>
+		<button class="category-pill" data-feature="cryptoCard">Crypto Cards</button>
+		<button class="category-pill" data-feature="cex">Centralized Exchanges</button>
+		<button class="category-pill" data-feature="dex">Decentralized Exchanges</button>
+		<button class="category-pill" data-feature="gaming">Gaming</button>
+		<button class="category-pill" data-feature="swap">Instant Swaps</button>
+		<button class="category-pill" data-feature="launchpad">Launchpads</button>
+		<button class="category-pill" data-feature="blogs">Media</button>
+		<button class="category-pill" data-feature="marketplace">Marketplaces</button>
+		<button class="category-pill" data-feature="mining">Mining</button>
+		<button class="category-pill" data-feature="solutions">Payment Solutions</button>
+		<!-- <button class="category-pill" data-feature="rwa">RWA</button> -->
+		<button class="category-pill" data-feature="social">Social</button>
+		<button class="category-pill" data-feature="utilities">Utilities</button>
+		<button class="category-pill" data-feature="wallet">Wallets</button>
+	</div>
+	
+	<div class="searchControls">
+	
+		<input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
+		
+		<div style="display: inline-flex;">
+			<p id="counter"></p>
+			<select id="sortSelect" aria-label="Sort Menu">
+				<option value="default">Default</option>
+				<option value="az">A - Z</option>
+				<option value="za">Z - A</option>
+			</select>
+		</div>
+	
+	</div>
+	
+	<div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
+	
 
 </section>
 
@@ -178,59 +178,59 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <style>
 .main-content-area {
-    min-height: 1300px;
+	min-height: 1300px;
 }
 
 .category-selector {
-    margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 .category-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
 }
 .category-pill {
-    padding: 0.35rem 0.9rem;
-    background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
-    border-radius: 10px;
-    border: 1px solid rgba(80, 255, 200, 0.2);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #003326;
-    cursor: pointer;
-    transition: all 0.1s;
+	padding: 0.35rem 0.9rem;
+	background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
+	border-radius: 10px;
+	border: 1px solid rgba(80, 255, 200, 0.2);
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #003326;
+	cursor: pointer;
+	transition: all 0.1s;
 }
 .category-pill.active {
-    color: white;
-    background: linear-gradient(135deg, #49EACB, #0bbf7a7d);
+	color: white;
+	background: linear-gradient(135deg, #49EACB, #0bbf7a7d);
 }
 .category-pill:hover {
-    filter: brightness(1.1);
+	filter: brightness(1.1);
 }
 #searchInput {
-    margin-bottom: 20px;
-    width: 100%;
-    height: 50px;
-    border-radius: 25px;
-    padding: 0 50px 0 20px;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	padding: 0 50px 0 20px;
+	font-size: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 @media (max-aspect-ratio: 1/1) {
-    .category-pills {
-        justify-content: space-between;
-        gap: 0.3rem;
-    }
-    .category-pill {
-        padding: 0.15rem 0.3rem;
-        border: 1px solid rgba(80, 255, 200, 0.2);
-        font-size: 0.85rem;
-        font-weight: 700;
-    }
+	.category-pills {
+		justify-content: space-between;
+		gap: 0.3rem;
+	}
+	.category-pill {
+		padding: 0.15rem 0.3rem;
+		border: 1px solid rgba(80, 255, 200, 0.2);
+		font-size: 0.85rem;
+		font-weight: 700;
+	}
 }
 </style>
 <script type="text/javascript">
@@ -250,62 +250,62 @@ const categoryPills = document.querySelectorAll('.category-pill');
 const layer2Toggle = document.getElementById('layer2Toggle');
 
 function renderItems(reset = false) {
-    if (reset) {
-        itemGrid.innerHTML = '';
-        currentIndex = 0;
-    }
-
-    const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
-    const htmlParts = [];
-
-    slice.forEach(item => {
-        let badgeHtml = '';
-        if (item.features.includes('verified')) {
-            badgeHtml = '<span class="feature-tag verified"></span>';
-        } else if (item.features.includes('reviewed')) {
-            badgeHtml = '<span class="feature-tag reviewed"></span>';
-        }
-
-        htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
-    });
-
-    itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
-
-    currentIndex += slice.length;
-    counter.textContent = `(${filteredItems.length} of ${items.length})`;
-    loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+	if (reset) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+	
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	const htmlParts = [];
+	
+	slice.forEach(item => {
+		let badgeHtml = '';
+		if (item.features.includes('verified')) {
+			badgeHtml = '<span class="feature-tag verified"></span>';
+		} else if (item.features.includes('reviewed')) {
+			badgeHtml = '<span class="feature-tag reviewed"></span>';
+		}
+	
+		htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';" loading="lazy"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
+	});
+	
+	itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
+	
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
 }
 
 function filterItems() {
-    const selectedFeature = document.querySelector('.category-pill.active')?.dataset.feature || 'all';
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    const includeLayer2 = layer2Toggle.checked;
-    filteredItems = [];
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (selectedFeature !== 'all' && !item.features.includes(selectedFeature)) continue;
-        if (!includeLayer2 && item.features.includes('layer2')) continue;
-        if (searchTerm && !item.name.toLowerCase().includes(searchTerm) && !item.description.toLowerCase().includes(searchTerm)) continue;
-        filteredItems.push(item);
-    }
-    const sortMode = sortSelect.value;
-    if (sortMode === 'az') filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
-    else if (sortMode === 'za') filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
-
-    if (!filteredItems.length) {
-        itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
-        counter.textContent = `(0 of ${items.length})`;
-        loadMoreBtn.style.display = 'none';
-        return;
-    }
-    renderItems(true);
+	const selectedFeature = document.querySelector('.category-pill.active')?.dataset.feature || 'all';
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const includeLayer2 = layer2Toggle.checked;
+	filteredItems = [];
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		if (selectedFeature !== 'all' && !item.features.includes(selectedFeature)) continue;
+		if (!includeLayer2 && item.features.includes('layer2')) continue;
+		if (searchTerm && !item.name.toLowerCase().includes(searchTerm) && !item.description.toLowerCase().includes(searchTerm)) continue;
+		filteredItems.push(item);
+	}
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	else if (sortMode === 'za') filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	
+	if (!filteredItems.length) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		counter.textContent = `(0 of ${items.length})`;
+		loadMoreBtn.style.display = 'none';
+		return;
+	}
+	renderItems(true);
 }
 
 categoryPills.forEach(pill => pill.addEventListener('click', () => {
-    const isActive = pill.classList.contains('active');
-    categoryPills.forEach(p => p.classList.remove('active'));
-    if (!isActive) pill.classList.add('active');
-    filterItems();
+	const isActive = pill.classList.contains('active');
+	categoryPills.forEach(p => p.classList.remove('active'));
+	if (!isActive) pill.classList.add('active');
+	filterItems();
 }));
 
 searchInput.addEventListener('input', filterItems);
@@ -314,13 +314,13 @@ layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
 fetch('/assets/data/ecosystem.json')
-    .then(res => res.json())
-    .then(data => {
-        items = data;
-        filteredItems = items;
-        renderItems(true);
-    })
-    .catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
+	.then(res => res.json())
+	.then(data => {
+		items = data;
+		filteredItems = items;
+		renderItems(true);
+	})
+	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
 </script>
 
 </body>
