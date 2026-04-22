@@ -164,5 +164,22 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </footer>
 
+<style type="text/css">
+
+@media (max-aspect-ratio: 1/1) {
+
+	footer {
+		display: none;
+	}
+
+	body {
+		min-height: 100vh;
+		max-height: 100vh;
+	}
+
+}
+
+</style>
+
 </body>
 </html>

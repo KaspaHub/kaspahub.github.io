@@ -1526,9 +1526,9 @@ dialog.theme-1::backdrop {
 	.snaps {
 		min-height: calc(100vh - 68px);
 		max-height: calc(100vh - 68px);
-/*		scroll-snap-align: start;
+		scroll-snap-align: start;
 		scroll-snap-stop: always;
-		margin-bottom: 61px;*/
+		margin-bottom: 61px;
 	}
 	main, body, html {
 		scrollbar-width: none;
