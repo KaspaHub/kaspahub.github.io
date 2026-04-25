@@ -212,6 +212,8 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
                 const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
                 const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
 
+                t.ticker = t.ticker.toLowerCase();
+
                 return `
                     <tr>
                         <td>${t.rank}</td>
