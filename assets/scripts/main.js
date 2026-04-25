@@ -148,18 +148,18 @@ async function getExchangeRate(userCurrency = CURRENCY) {
   return fallbackRate;
 }
 
+const currencySymbols = {
+  AED: "د.إ",
+  CNY: "¥",
+  EUR: "€",
+  GBP: "£",
+  RUB: "₽",
+  USD: "$",
+  ZAR: "R",
+};
+
 async function formatPrice(value = KASVALUE, toCurrency = "USD", amount = 1, decimals = 3) {
   if (!isFinite(value) || !isFinite(amount)) return;
-
-  const currencySymbols = {
-    AED: "د.إ",
-    CNY: "¥",
-    EUR: "€",
-    GBP: "£",
-    RUB: "₽",
-    USD: "$",
-    ZAR: "R",
-  };
 
   const totalValue = value * amount;
   const converted = totalValue * USDRATE;
@@ -174,12 +174,26 @@ async function formatPrice(value = KASVALUE, toCurrency = "USD", amount = 1, dec
   return symbol + formatted;
 }
 
+async function formatShortPrice(value = KASVALUE, toCurrency = "USD", amount = 1) {
+  if (!isFinite(value) || !isFinite(amount)) return;
+
+  const totalValue = value * amount;
+  const converted = totalValue * USDRATE;
+
+  const symbol = currencySymbols[toCurrency] || toCurrency;
+
+  if (converted >= 1000000000000) return symbol + (converted / 1000000000000).toFixed(2) + 'T';
+  if (converted >= 1000000000) return symbol + (converted / 1000000000).toFixed(2) + 'B';
+  if (converted >= 1000000) return symbol + (converted / 1000000).toFixed(2) + 'M';
+  if (converted >= 1000) return symbol + (converted / 1000).toFixed(1) + 'K';
+  
+  return symbol + Number(converted.toFixed(2)).toLocaleString("en-US");
+}
+
 async function setPriceTag() {
   KASPRICE = await formatPrice(KASVALUE, CURRENCY);
   document.querySelector("#priceTag").textContent = KASPRICE;
 }
-
-
 
 // function initServiceWorker() {
 //     if (!('serviceWorker' in navigator)) {

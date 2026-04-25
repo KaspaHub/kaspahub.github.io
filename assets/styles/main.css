@@ -619,7 +619,7 @@ blockquote::before {
 	content: "\275D";
 }
 code {
-	font-family: Consolas,"courier new";
+	/*font-family: Consolas,"courier new";*/
 	background-color: rgba(192,192,192, 0.3);
 	padding-right: 10px;
 	padding-left: 10px;
@@ -998,10 +998,6 @@ table {
 }
 table pre {
 	max-width: 330px;
-}
-
-tr td {
-	text-align: center;
 }
 
 tr td:first-child, tr th:first-child {

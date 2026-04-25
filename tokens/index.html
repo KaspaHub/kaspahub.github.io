@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa KRC20 Tokens Dashboard - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa KRC20 Tokens Dashboard - Kaspa Hub" />
+<meta property="og:title" content="Kaspa KRC20 Tokens Dashboard - Kaspa Hub" />
+
+<meta name="description" content="Live leaderboard for Kaspa KRC20 tokens by market cap with real-time prices, volume, and performance data." />
+<meta name="twitter:description" content="Explore top Kaspa KRC20 tokens with live market data. Track market capitalization, prices, trading volume, and price changes across the Kaspa ecosystem." />
+<meta property="og:description" content="Discover Kaspa KRC20 tokens sorted by market cap. Real-time price, volume, and market data for tokens on the Kaspa blockchain - powered by KaspaCom API." />
+
+<link rel="canonical" href="https://kaspahub.org/tokens/" />
+<meta name="twitter:url" content="https://kaspahub.org/tokens/" />
+<meta property="og:url" content="https://kaspahub.org/tokens/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/assets/manifest.json" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+<script defer src="/assets/scripts/explorer.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+<div class="intro" style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div style="display: flex; align-items: center;">
+    	<div><h1>Tokens (beta)</h1>
+    	<p>Top 50 Kaspa KRC20 Tokens by Market Capitalization</p></div>
+    </div>
+    <div class="searchRow">
+      <div class="input" title="Address">
+        <input id="q" placeholder="KAS" />
+      </div>
+      <button class="btn" id="go">Search</button>
+    </div>
+</div>
+
+<section class="theme-1">
+<div class="tableWrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-column="rank">#</th>
+                <th data-column="name">Name</th>
+                <th data-column="price">Price</th>
+                <th data-column="marketCap">Market Cap</th>
+                <th data-column="totalMinted">Total Minted</th>
+                <th data-column="volume">Volume (24h)</th>
+                <th data-column="change">Change (24h)</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+</div>
+</section>
+
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style>
+.searchRow .input {
+  display:flex;gap:8px;align-items:center;
+  border:1px solid var(--search-border);
+  background:var(--search-background);
+  padding:10px 12px;
+  border-radius:12px;
+  min-width:250px;
+}
+
+.searchRow input {
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:inherit;
+  font-size:14px;
+}
+.positive { color: #2ee59d; font-weight: 500; }
+.negative { color: #ff6b6b; font-weight: 500; }
+
+.logo {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+th {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    opacity: 0.3;
+    font-size: 0.9em;
+}
+
+th.sorted-asc::after  { content: '↑'; opacity: 1; }
+th.sorted-desc::after { content: '↓'; opacity: 1; }
+
+</style>
+
+<script type="module">
+    let tokenData = [];
+    let sortColumn = 'rank';
+    let sortDirection = 1;
+
+    function getSortValue(item, column) {
+        switch (column) {
+            case 'rank':         return Number(item.rank) ?? 0;
+            case 'name':         return (item.ticker ?? '').toLowerCase();
+            case 'price':        return Number(item.price) ?? 0;
+            case 'marketCap':    return Number(item.marketCap) ?? 0;
+            case 'totalMinted':  return Number(item.totalMinted) ?? 0;
+            case 'volume':       return Number(item.volumeUsd) ?? 0;
+            case 'change':       return Number(item.changePrice) ?? 0;
+            default:             return 0;
+        }
+    }
+
+    function getSortedData() {
+        return [...tokenData].sort((a, b) => {
+            let valA = getSortValue(a, sortColumn);
+            let valB = getSortValue(b, sortColumn);
+
+            if (valA === valB) return 0;
+            if (valA == null) return sortDirection;
+            if (valB == null) return -sortDirection;
+
+            if (typeof valA === 'string') {
+                return valA.localeCompare(String(valB)) * sortDirection;
+            }
+
+            return (valA - valB) * sortDirection;
+        });
+    }
+
+    function formatSupply(supply) {
+        if (!supply) return '—';
+        return supply.toLocaleString('en-US');
+    }
+
+    async function renderTokens(data) {
+        const html = await Promise.all(
+            data.map(async (t) => {
+                const change = t.changePrice || 0;
+                const positive = change >= 0;
+
+                const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
+                const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
+                const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
+
+                return `
+                    <tr>
+                        <td>${t.rank}</td>
+                        <td>
+                            <div class="name-cell">
+                                <img class="logo" src="/assets/logos/krc20/${t.ticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
+                                <a class="explorerTx" href="/krc20/?q=${t.ticker}">${t.ticker}</a>
+                            </div>
+                        </td>
+                        <td>${priceFormatted}</td>
+                        <td>${marketCapFormatted}</td>
+                        <td>${formatSupply(t.totalMinted)} ${t.ticker}</td>
+                        <td>${volumeFormatted}</td>
+                        <td class="${change > 0 ? 'positive' : change < 0 ? 'negative' : ''}">
+                            ${positive ? '+' : ''}${change.toFixed(2)}%
+                        </td>
+                    </tr>
+                `;
+            })
+        );
+
+        document.getElementById('table-body').innerHTML = html.join('');
+    }
+
+    async function updateTable() {
+        const sorted = getSortedData();
+        await renderTokens(sorted);
+    }
+
+    function initSorting() {
+        const headers = document.querySelectorAll('thead th');
+        headers.forEach(th => {
+            th.addEventListener('click', () => {
+                const column = th.dataset.column;
+                if (!column) return;
+
+                if (sortColumn === column) {
+                    sortDirection *= -1;
+                } else {
+                    sortColumn = column;
+                    sortDirection = 1;
+                }
+
+                headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+                th.classList.add(sortDirection === 1 ? 'sorted-asc' : 'sorted-desc');
+
+                updateTable();
+            });
+        });
+    }
+
+    async function loadTokens() {
+        try {
+            const res = await fetch('https://api.kaspa.com/api/market-data');
+            tokenData = await res.json();
+
+            sortColumn = 'rank';
+            sortDirection = 1;
+
+            const headers = document.querySelectorAll('thead th');
+            headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+            document.querySelector('[data-column="rank"]').classList.add('sorted-asc');
+
+            await updateTable();
+
+        } catch (err) {
+            document.getElementById('table-body').innerHTML =
+                '<tr><td colspan="7">Failed to load data</td></tr>';
+        }
+    }
+
+    initSorting();
+    loadTokens();
+
+    const qInput = document.getElementById('q');
+    const goBtn = document.getElementById('go');
+
+    function handleTokenSearch() {
+        let query = qInput.value.trim().toLowerCase();
+
+        if (validators.invalidFormet(query)) {
+            addToast('', 'Invalid search query.');
+            return;
+        }
+
+        if (validators.isKrc20Token(query)) {
+            window.location.href = '/krc20/?q=' + query;
+        } else {
+            addToast('', 'Invalid search query.');
+        }
+    }
+
+    goBtn.addEventListener('click', handleTokenSearch);
+    qInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleTokenSearch();
+    });
+</script>
+
+</body>
+</html>

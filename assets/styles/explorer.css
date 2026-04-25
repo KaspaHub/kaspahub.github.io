@@ -269,9 +269,7 @@ div > details {
   max-width: 100%;
   position: relative;
 }
-tbody {
-  font-family: Consolas;
-}
+
 table {
   font-size: 14px;
   width: max-content;
@@ -289,6 +287,7 @@ th {
   font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
+  text-align: left;
 }
 
 tr:hover td { background: rgba(255,255,255,.03);}
