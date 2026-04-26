@@ -64,7 +64,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <tr>
                 <th data-column="rank">#</th>
                 <th data-column="name">Name</th>
-                <th></th>
                 <th data-column="price">Price</th>
                 <th data-column="marketCap">Market Cap</th>
                 <th data-column="totalMinted">Total Minted</th>
@@ -189,22 +188,6 @@ th::after {
 
 th.sorted-asc::after  { content: '↑'; opacity: 1; }
 th.sorted-desc::after { content: '↓'; opacity: 1; }
-:root {
-  --green: #22e39a;
-  --green-dark: #0bbf7a;
-  --panel: rgba(10, 60, 45, 0.85);
-  --border: rgba(80, 255, 200, 0.2);
-}
-.tradeBtn {
-    padding: 4px 7px;
-    background: linear-gradient(135deg, var(--green), var(--green-dark));
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: black !important;
-    text-decoration: none !important;
-    font-weight: inherit !important;
-}
 
 </style>
 
@@ -268,7 +251,6 @@ async function renderTokens(data) {
                             <a class="explorerTx" href="/krc20/?q=${lticker}">${t.ticker}</a>
                         </div>
                     </td>
-                    <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${t.ticker}">Trade</a></td>
                     <td>${priceFormatted}</td>
                     <td>${marketCapFormatted}</td>
                     <td>${formatSupply(t.totalMinted)} ${t.ticker}</td>

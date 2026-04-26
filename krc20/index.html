@@ -94,9 +94,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   </div>
   <div class="tabs" role="tablist" aria-label="Token tabs">
     <button class="tab active" data-tab="tabAbout">About</button>
-    <button class="tab" data-tab="tabHolders">Top Holders</button>
+    <button class="tab" data-tab="tabHolders">Holders</button>
     <button class="tab" data-tab="tabTransfers">Transfers</button>
-    <button class="tab" data-tab="tabMarkets" style="display: none;">Markets</button>
+    <button class="tab" data-tab="tabPairs">Pairs</button>
   </div>
   <div id="tabAbout" class="tabPanel active" aria-label="About panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
@@ -165,19 +165,19 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       </div>
     </div>
   </div>
-  <div id="tabMarkets" class="tabPanel" aria-label="Markets panel">
+  <div id="tabPairs" class="tabPanel" aria-label="Markets panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Markets</h3>
+      <h3>All pairs</h3>
       <div class="tableWrap">
         <table>
           <thead>
             <tr>
-              <th>Provider</th>
+              <th>Exchange</th>
               <th>Price</th>
               <th>Volume 24h</th>
             </tr>
           </thead>
-          <tbody id="marketRows">
+          <tbody id="pairRows">
             <tr><td colspan="3" class="muted">-</td></tr>
           </tbody>
         </table>
@@ -253,7 +253,7 @@ const holderNote = document.getElementById("holderNote");
 
 const infoDescription = document.getElementById("infoDescription");
 
-const marketRows = document.getElementById("marketRows");
+const pairRows = document.getElementById("pairRows");
 
 const txLoading = document.getElementById("txLoading");
 const txRows = document.getElementById("txRows");
@@ -649,7 +649,7 @@ async function loadTransfers({ next=null, prev=null } = {}){
 
 function renderMarkets(){
   if(!tokenMarket){
-    marketRows.innerHTML = `<tr><td colspan="3" class="muted">No markets listed.</td></tr>`;
+    pairRows.innerHTML = `<tr><td colspan="3" class="muted">No markets listed.</td></tr>`;
     return;
   }
   const mcapVal = parseFloatSafe(tokenMarket.marketCap);
@@ -664,9 +664,9 @@ function renderMarkets(){
   }else if(tokenMarket.price != null){
     priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
   }
-  marketRows.innerHTML = `
+  pairRows.innerHTML = `
   <tr>
-    <td>kaspa.com</td>
+    <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${T}">kaspa.com</a></td>
     <td>${priceFmt}</td>
     <td>${volFmt}</td>
   </tr>
