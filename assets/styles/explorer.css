@@ -298,6 +298,15 @@ tr:hover td { background: rgba(255,255,255,.03);}
   margin-top: 12px;
 }
 
+.tableLogo {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
 /*balv*/
 
 h1 { margin: 0 0 6px;font-weight: 700;}

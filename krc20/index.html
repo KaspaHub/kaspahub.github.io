@@ -173,6 +173,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>Exchange</th>
+              <th>Pairs</th>
               <th>Price</th>
               <th>Volume 24h</th>
             </tr>
@@ -666,7 +667,13 @@ function renderMarkets(){
   }
   pairRows.innerHTML = `
   <tr>
-    <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${T}">kaspa.com</a></td>
+    <td>
+      <div class="name-cell">
+        <img class="tableLogo" src="/assets/logos/kaspacom.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
+        <span>kaspa.com</span>
+      </div>
+    </td>
+    <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${T}">${T}/KAS</a></td>
     <td>${priceFmt}</td>
     <td>${volFmt}</td>
   </tr>

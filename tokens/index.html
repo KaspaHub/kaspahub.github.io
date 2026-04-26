@@ -163,15 +163,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .positive { color: #2ee59d; font-weight: 500; }
 .negative { color: #ff6b6b; font-weight: 500; }
 
-.logo {
-    width: 22px;
-    height: 22px;
-    border-radius: 4px;
-    vertical-align: middle;
-    margin-right: 8px;
-    border-radius: 50%;
-}
-
 th {
     cursor: pointer;
     user-select: none;
@@ -247,7 +238,7 @@ async function renderTokens(data) {
                     <td>${t.marketCapRank}</td>
                     <td>
                         <div class="name-cell">
-                            <img class="logo" src="/assets/logos/krc20/${lticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
+                            <img class="tableLogo" src="/assets/logos/krc20/${lticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
                             <a class="explorerTx" href="/krc20/?q=${lticker}">${t.ticker}</a>
                         </div>
                     </td>
