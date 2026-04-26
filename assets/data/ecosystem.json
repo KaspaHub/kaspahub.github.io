@@ -431,14 +431,14 @@
 	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
 	"link": "https://krchange.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/krchange.webp",
-	"features": ["layer2", "dex"]
+	"features": ["dex"]
 },
 {
 	"name": "Aporia Exchange",
 	"description": "The first order book (CLOB) DEX on Kaspa, MEV-resistant with cross-chain liquidity, atomic composability, and fully on-chain features. Building initially on Igra Labs L2 for smart contracts (transitioning to native vProgs later).",
 	"link": "https://aporia.exchange",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/aporiaexchange.webp",
-	"features": ["layer2", "dex"]
+	"features": ["dex"]
 },
 {
 	"name": "Spectre Market",
