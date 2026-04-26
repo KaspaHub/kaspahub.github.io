@@ -215,7 +215,7 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 
     function getSortValue(item, column) {
         switch (column) {
-            case 'rank':         return Number(item.rank) ?? 0;
+            case 'rank':         return Number(item.marketCapRank) ?? 0;
             case 'name':         return (item.ticker ?? '').toLowerCase();
             case 'price':        return Number(item.price) ?? 0;
             case 'marketCap':    return Number(item.marketCap) ?? 0;
@@ -314,20 +314,31 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
     async function loadTokens() {
         try {
             const res = await fetch('https://api.kaspa.com/api/market-data');
-            
             tokenData = await res.json();
 
-            const byMarketCap = [...tokenData].sort((a, b) => (b.marketCap ?? 0) - (a.marketCap ?? 0));
+            const initialSorted = [...tokenData].sort((a, b) => {
+                const volA = Number(a.volumeUsd ?? 0);
+                const volB = Number(b.volumeUsd ?? 0);
+                const groupA = volA >= 0.1 ? 0 : 1;
+                const groupB = volB >= 0.1 ? 0 : 1;
+                if (groupA !== groupB) return groupA - groupB;
+                const mcA = Number(a.marketCap ?? 0);
+                const mcB = Number(b.marketCap ?? 0);
+                return mcB - mcA;
+            });
 
-            byMarketCap.forEach((item, index) => {
+            initialSorted.forEach((item, index) => {
                 item.marketCapRank = index + 1;
             });
 
-            sortColumn = 'marketCap';
-            sortDirection = -1;
+            sortColumn = 'rank';
+            sortDirection = 1;
 
             const headers = document.querySelectorAll('thead th');
             headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+
+            const rankHeader = Array.from(headers).find(h => h.dataset.column === 'rank');
+            if (rankHeader) rankHeader.classList.add('sorted-asc');
 
             await updateTable();
 
