@@ -209,170 +209,170 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 </style>
 
 <script type="module">
-    let tokenData = [];
-    let sortColumn = 'rank';
-    let sortDirection = 1;
+let tokenData = [];
+let sortColumn = 'rank';
+let sortDirection = 1;
 
-    function getSortValue(item, column) {
-        switch (column) {
-            case 'rank':         return Number(item.marketCapRank) ?? 0;
-            case 'name':         return (item.ticker ?? '').toLowerCase();
-            case 'price':        return Number(item.price) ?? 0;
-            case 'marketCap':    return Number(item.marketCap) ?? 0;
-            case 'totalMinted':  return Number(item.totalMinted) ?? 0;
-            case 'volume':       return Number(item.volumeUsd) ?? 0;
-            case 'change':       return Number(item.changePrice) ?? 0;
-            default:             return 0;
-        }
+function getSortValue(item, column) {
+    switch (column) {
+        case 'rank':         return Number(item.marketCapRank) ?? 0;
+        case 'name':         return (item.ticker ?? '').toLowerCase();
+        case 'price':        return Number(item.price) ?? 0;
+        case 'marketCap':    return Number(item.marketCap) ?? 0;
+        case 'totalMinted':  return Number(item.totalMinted) ?? 0;
+        case 'volume':       return Number(item.volumeUsd) ?? 0;
+        case 'change':       return Number(item.changePrice) ?? 0;
+        default:             return 0;
     }
+}
 
-    function getSortedData() {
-        return [...tokenData].sort((a, b) => {
-            let valA = getSortValue(a, sortColumn);
-            let valB = getSortValue(b, sortColumn);
+function getSortedData() {
+    return [...tokenData].sort((a, b) => {
+        let valA = getSortValue(a, sortColumn);
+        let valB = getSortValue(b, sortColumn);
 
-            if (valA === valB) return 0;
-            if (valA == null) return sortDirection;
-            if (valB == null) return -sortDirection;
+        if (valA === valB) return 0;
+        if (valA == null) return sortDirection;
+        if (valB == null) return -sortDirection;
 
-            if (typeof valA === 'string') {
-                return valA.localeCompare(String(valB)) * sortDirection;
+        if (typeof valA === 'string') {
+            return valA.localeCompare(String(valB)) * sortDirection;
+        }
+
+        return (valA - valB) * sortDirection;
+    });
+}
+
+function formatSupply(supply) {
+    if (!supply) return '—';
+    return supply.toLocaleString('en-US');
+}
+
+async function renderTokens(data) {
+    const html = await Promise.all(
+        data.map(async (t) => {
+            const change = t.changePrice || 0;
+            const positive = change >= 0;
+
+            const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
+            const marketCapFormatted = (await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE)) ?? '—';
+            const volumeFormatted = (await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE)) ?? '—';
+            const lticker = t.ticker.toLowerCase();
+
+            return `
+                <tr>
+                    <td>${t.marketCapRank}</td>
+                    <td>
+                        <div class="name-cell">
+                            <img class="logo" src="/assets/logos/krc20/${lticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
+                            <a class="explorerTx" href="/krc20/?q=${lticker}">${t.ticker}</a>
+                        </div>
+                    </td>
+                    <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${t.ticker}">Trade</a></td>
+                    <td>${priceFormatted}</td>
+                    <td>${marketCapFormatted}</td>
+                    <td>${formatSupply(t.totalMinted)} ${t.ticker}</td>
+                    <td>${volumeFormatted}</td>
+                    <td class="${change > 0 ? 'positive' : change < 0 ? 'negative' : ''}">
+                        ${positive ? '+' : ''}${change.toFixed(2)}%
+                    </td>
+                </tr>
+            `;
+        })
+    );
+
+    document.getElementById('table-body').innerHTML = html.join('');
+}
+
+async function updateTable() {
+    const sorted = getSortedData();
+    await renderTokens(sorted);
+}
+
+function initSorting() {
+    const headers = document.querySelectorAll('thead th');
+    headers.forEach(th => {
+        th.addEventListener('click', () => {
+            const column = th.dataset.column;
+            if (!column) return;
+
+            if (sortColumn === column) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = column;
+                sortDirection = 1;
             }
 
-            return (valA - valB) * sortDirection;
-        });
-    }
-
-    function formatSupply(supply) {
-        if (!supply) return '—';
-        return supply.toLocaleString('en-US');
-    }
-
-    async function renderTokens(data) {
-        const html = await Promise.all(
-            data.map(async (t) => {
-                const change = t.changePrice || 0;
-                const positive = change >= 0;
-
-                const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
-                const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
-                const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
-                const lticker = t.ticker.toLowerCase();
-
-                return `
-                    <tr>
-                        <td>${t.marketCapRank}</td>
-                        <td>
-                            <div class="name-cell">
-                                <img class="logo" src="/assets/logos/krc20/${lticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
-                                <a class="explorerTx" href="/krc20/?q=${lticker}">${t.ticker}</a>
-                            </div>
-                        </td>
-                        <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${t.ticker}">Trade</a></td>
-                        <td>${priceFormatted}</td>
-                        <td>${marketCapFormatted}</td>
-                        <td>${formatSupply(t.totalMinted)} ${t.ticker}</td>
-                        <td>${volumeFormatted}</td>
-                        <td class="${change > 0 ? 'positive' : change < 0 ? 'negative' : ''}">
-                            ${positive ? '+' : ''}${change.toFixed(2)}%
-                        </td>
-                    </tr>
-                `;
-            })
-        );
-
-        document.getElementById('table-body').innerHTML = html.join('');
-    }
-
-    async function updateTable() {
-        const sorted = getSortedData();
-        await renderTokens(sorted);
-    }
-
-    function initSorting() {
-        const headers = document.querySelectorAll('thead th');
-        headers.forEach(th => {
-            th.addEventListener('click', () => {
-                const column = th.dataset.column;
-                if (!column) return;
-
-                if (sortColumn === column) {
-                    sortDirection *= -1;
-                } else {
-                    sortColumn = column;
-                    sortDirection = 1;
-                }
-
-                headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
-                th.classList.add(sortDirection === 1 ? 'sorted-asc' : 'sorted-desc');
-
-                updateTable();
-            });
-        });
-    }
-
-    async function loadTokens() {
-        try {
-            const res = await fetch('https://api.kaspa.com/api/market-data');
-            tokenData = await res.json();
-
-            const initialSorted = [...tokenData].sort((a, b) => {
-                const volA = Number(a.volumeUsd ?? 0);
-                const volB = Number(b.volumeUsd ?? 0);
-                const groupA = volA >= 0.1 ? 0 : 1;
-                const groupB = volB >= 0.1 ? 0 : 1;
-                if (groupA !== groupB) return groupA - groupB;
-                const mcA = Number(a.marketCap ?? 0);
-                const mcB = Number(b.marketCap ?? 0);
-                return mcB - mcA;
-            });
-
-            initialSorted.forEach((item, index) => {
-                item.marketCapRank = index + 1;
-            });
-
-            sortColumn = 'rank';
-            sortDirection = 1;
-
-            const headers = document.querySelectorAll('thead th');
             headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+            th.classList.add(sortDirection === 1 ? 'sorted-asc' : 'sorted-desc');
 
-            const rankHeader = Array.from(headers).find(h => h.dataset.column === 'rank');
-            if (rankHeader) rankHeader.classList.add('sorted-asc');
-
-            await updateTable();
-
-        } catch (err) {
-            document.getElementById('table-body').innerHTML =
-                '<tr><td colspan="7">Failed to load data</td></tr>';
-        }
-    }
-
-    initSorting();
-    loadTokens();
-
-    const qInput = document.getElementById('q');
-    const goBtn = document.getElementById('go');
-
-    function handleTokenSearch() {
-        let query = qInput.value.trim().toLowerCase();
-
-        if (validators.invalidFormet(query)) {
-            addToast('', 'Invalid search query.');
-            return;
-        }
-
-        if (validators.isKrc20Token(query)) {
-            window.location.href = '/krc20/?q=' + query;
-        } else {
-            addToast('', 'Invalid search query.');
-        }
-    }
-
-    goBtn.addEventListener('click', handleTokenSearch);
-    qInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleTokenSearch();
+            updateTable();
+        });
     });
+}
+
+async function loadTokens() {
+    try {
+        const res = await fetch('https://api.kaspa.com/api/market-data');
+        tokenData = await res.json();
+
+        const initialSorted = [...tokenData].sort((a, b) => {
+            const volA = Number(a.volumeUsd ?? 0);
+            const volB = Number(b.volumeUsd ?? 0);
+            const groupA = volA >= 0.1 ? 0 : 1;
+            const groupB = volB >= 0.1 ? 0 : 1;
+            if (groupA !== groupB) return groupA - groupB;
+            const mcA = Number(a.marketCap ?? 0);
+            const mcB = Number(b.marketCap ?? 0);
+            return mcB - mcA;
+        });
+
+        initialSorted.forEach((item, index) => {
+            item.marketCapRank = index + 1;
+        });
+
+        sortColumn = 'rank';
+        sortDirection = 1;
+
+        const headers = document.querySelectorAll('thead th');
+        headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+
+        const rankHeader = Array.from(headers).find(h => h.dataset.column === 'rank');
+        if (rankHeader) rankHeader.classList.add('sorted-asc');
+
+        await updateTable();
+
+    } catch (err) {
+        document.getElementById('table-body').innerHTML =
+            '<tr><td colspan="7">Failed to load data</td></tr>';
+    }
+}
+
+initSorting();
+loadTokens();
+
+const qInput = document.getElementById('q');
+const goBtn = document.getElementById('go');
+
+function handleTokenSearch() {
+    let query = qInput.value.trim().toLowerCase();
+
+    if (validators.invalidFormet(query)) {
+        addToast('', 'Invalid search query.');
+        return;
+    }
+
+    if (validators.isKrc20Token(query)) {
+        window.location.href = '/krc20/?q=' + query;
+    } else {
+        addToast('', 'Invalid search query.');
+    }
+}
+
+goBtn.addEventListener('click', handleTokenSearch);
+qInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleTokenSearch();
+});
 </script>
 
 </body>
