@@ -252,18 +252,9 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
                 const change = t.changePrice || 0;
                 const positive = change >= 0;
 
-                const priceFormatted = (t.price != null && !isNaN(Number(t.price)))
-                    ? await formatPrice(KASVALUE, CURRENCY, Number(t.price), 8)
-                    : '—';
-
-                const marketCapFormatted = (t.marketCap != null && !isNaN(Number(t.marketCap)))
-                    ? await formatShortPrice(KASVALUE, CURRENCY, Number(t.marketCap) / KASVALUE)
-                    : '—';
-
-                const volumeFormatted = (t.volumeUsd != null && !isNaN(Number(t.volumeUsd)))
-                    ? await formatShortPrice(KASVALUE, CURRENCY, Number(t.volumeUsd) / KASVALUE)
-                    : '—';
-
+                const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
+                const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
+                const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
                 const lticker = t.ticker.toLowerCase();
 
                 return `
@@ -320,87 +311,21 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 
     async function loadTokens() {
         try {
-            const marketRes = await fetch('https://api.kaspa.com/api/market-data');
-            let marketData = await marketRes.json();
-
-            const mpRes = await fetch('https://storage.googleapis.com/kspr-api-v1/marketplace/marketplace.json');
-            const marketplace = await mpRes.json();
-
-            const tokenMap = new Map();
-
-            const marketTokens = marketData.filter(t => t.ticker && t.ticker !== 'KAS');
-            for (const t of marketTokens) {
-                tokenMap.set(t.ticker, { ...t });
-            }
-
-            for (const [ticker, mpData] of Object.entries(marketplace)) {
-                if (ticker === 'KAS' || !ticker) continue;
-
-                if (!tokenMap.has(ticker)) {
-                    const newToken = {
-                        ticker: ticker,
-                        price: mpData.floor_price !== undefined ? mpData.floor_price : null,
-                        marketCap: null,
-                        totalMinted: null,
-                        volumeUsd: null,
-                        changePrice: typeof mpData.change_24h === 'number' ? mpData.change_24h * 100 : 0,
-                    };
-                    tokenMap.set(ticker, newToken);
-                }
-            }
-
-            let combinedData = Array.from(tokenMap.values());
-
-            function hasNoMissingData(item) {
-                return (
-                    item.price != null && !isNaN(parseFloat(item.price)) &&
-                    item.marketCap != null && !isNaN(parseFloat(item.marketCap)) &&
-                    item.totalMinted != null && !isNaN(parseFloat(item.totalMinted)) &&
-                    item.volumeUsd != null && !isNaN(parseFloat(item.volumeUsd))
-                );
-            }
-
-            function getCategory(item) {
-                if (hasNoMissingData(item) && parseFloat(item.volumeUsd) > 2) {
-                    return 1;
-                } else if (item.marketCap != null && !isNaN(parseFloat(item.marketCap))) {
-                    return 2;
-                } else {
-                    return 3;
-                }
-            }
-
-            const cat1 = combinedData
-                .filter(item => getCategory(item) === 1)
-                .sort((a, b) => parseFloat(b.marketCap) - parseFloat(a.marketCap));
-
-            const cat2 = combinedData
-                .filter(item => getCategory(item) === 2)
-                .sort((a, b) => parseFloat(b.marketCap) - parseFloat(a.marketCap));
-
-            const cat3 = combinedData
-                .filter(item => getCategory(item) === 3)
-                .sort((a, b) => (a.ticker ?? '').toLowerCase().localeCompare((b.ticker ?? '').toLowerCase()));
-
-            tokenData = [...cat1, ...cat2, ...cat3];
-            tokenData.forEach((item, index) => {
-                item.rank = index + 1;
-            });
+            const res = await fetch('https://api.kaspa.com/api/market-data');
+            tokenData = await res.json();
 
             sortColumn = 'rank';
             sortDirection = 1;
 
             const headers = document.querySelectorAll('thead th');
             headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
-            const rankHeader = document.querySelector('[data-column="rank"]');
-            if (rankHeader) rankHeader.classList.add('sorted-asc');
+            document.querySelector('[data-column="rank"]').classList.add('sorted-asc');
 
             await updateTable();
 
         } catch (err) {
-            console.error('Failed to load token data:', err);
             document.getElementById('table-body').innerHTML =
-                '<tr><td colspan="8">Failed to load data</td></tr>';
+                '<tr><td colspan="7">Failed to load data</td></tr>';
         }
     }
 
