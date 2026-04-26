@@ -44,14 +44,14 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-2">
-<div class="intro" style="display: flex; flex-direction: row; justify-content: space-between;">
+<div class="intro">
     <div style="display: flex; align-items: center;">
     	<div><h1>Tokens (beta)</h1>
     	<p>Top 50 Kaspa KRC20 Tokens by Market Capitalization</p></div>
     </div>
     <div class="searchRow">
       <div class="input" title="Address">
-        <input id="q" placeholder="KAS" />
+        <input id="q" placeholder="Ticker" />
       </div>
       <button class="btn" id="go">Search</button>
     </div>
@@ -64,6 +64,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <tr>
                 <th data-column="rank">#</th>
                 <th data-column="name">Name</th>
+                <th></th>
                 <th data-column="price">Price</th>
                 <th data-column="marketCap">Market Cap</th>
                 <th data-column="totalMinted">Total Minted</th>
@@ -114,23 +115,50 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </footer>
 
 <style>
-.searchRow .input {
-  display:flex;gap:8px;align-items:center;
-  border:1px solid var(--search-border);
-  background:var(--search-background);
-  padding:10px 12px;
-  border-radius:12px;
-  min-width:250px;
+
+.searchRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--search-border);
+  background: var(--search-background);
+  padding: 10px 12px;
+  border-radius: 12px;
+  min-width: 250px;
 }
 
 .searchRow input {
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:inherit;
-  font-size:14px;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
 }
+
+.intro {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .intro {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .searchRow {
+        justify-content: end;
+    }
+}
+
 .positive { color: #2ee59d; font-weight: 500; }
 .negative { color: #ff6b6b; font-weight: 500; }
 
@@ -159,6 +187,22 @@ th::after {
 
 th.sorted-asc::after  { content: '↑'; opacity: 1; }
 th.sorted-desc::after { content: '↓'; opacity: 1; }
+:root {
+  --green: #22e39a;
+  --green-dark: #0bbf7a;
+  --panel: rgba(10, 60, 45, 0.85);
+  --border: rgba(80, 255, 200, 0.2);
+}
+.tradeBtn {
+    padding: 4px 7px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: black !important;
+    text-decoration: none !important;
+    font-weight: inherit !important;
+}
 
 </style>
 
@@ -211,7 +255,6 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
                 const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
                 const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
                 const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
-
                 const lticker = t.ticker.toLowerCase();
 
                 return `
@@ -223,6 +266,7 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
                                 <a class="explorerTx" href="/krc20/?q=${lticker}">${t.ticker}</a>
                             </div>
                         </td>
+                        <td><a class="tradeBtn" href="https://kaspa.com/tokens/marketplace/token/${t.ticker}">Trade</a></td>
                         <td>${priceFormatted}</td>
                         <td>${marketCapFormatted}</td>
                         <td>${formatSupply(t.totalMinted)} ${t.ticker}</td>

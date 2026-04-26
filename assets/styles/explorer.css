@@ -137,11 +137,6 @@
   margin: 0;
 }
 /* Search + Buttons */
-.searchRow {
-  display:flex;gap:10px;
-  align-items:center;flex-wrap:wrap;
-}
-
 html#light {
   --search-border:#c0cedd;
   --search-background:#f7f8f9;
@@ -280,7 +275,6 @@ table {
 th, td {
   padding: 10px;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  vertical-align: top;
 }
 
 th {
