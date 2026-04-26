@@ -261,7 +261,7 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 
                 return `
                     <tr>
-                        <td>${t.rank}</td>
+                        <td>${t.marketCapRank}</td>
                         <td>
                             <div class="name-cell">
                                 <img class="logo" src="/assets/logos/krc20/${lticker}.webp" onerror="this.onerror=null; this.src='/assets/logos/logo.webp'">
@@ -314,14 +314,20 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
     async function loadTokens() {
         try {
             const res = await fetch('https://api.kaspa.com/api/market-data');
+            
             tokenData = await res.json();
 
-            sortColumn = 'rank';
-            sortDirection = 1;
+            const byMarketCap = [...tokenData].sort((a, b) => (b.marketCap ?? 0) - (a.marketCap ?? 0));
+
+            byMarketCap.forEach((item, index) => {
+                item.marketCapRank = index + 1;
+            });
+
+            sortColumn = 'marketCap';
+            sortDirection = -1;
 
             const headers = document.querySelectorAll('thead th');
             headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
-            document.querySelector('[data-column="rank"]').classList.add('sorted-asc');
 
             await updateTable();
 
