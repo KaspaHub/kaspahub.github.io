@@ -179,7 +179,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             </tr>
           </thead>
           <tbody id="pairRows">
-            <tr><td colspan="3" class="muted">-</td></tr>
+            <tr><td colspan="4" class="muted">-</td></tr>
           </tbody>
         </table>
       </div>
@@ -293,57 +293,6 @@ function withSeparators(numStr){
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatUsd(x){
-  if(x == null || !isFinite(x)) return "-";
-  return new Intl.NumberFormat(undefined, {
-    style:"currency", currency:"USD", maximumFractionDigits: 10
-  }).format(x);
-}
-
-function formatUsd0(x){
-  if(x == null || !isFinite(x)) return "-";
-  return new Intl.NumberFormat(undefined, {
-    style:"currency", currency:"USD", maximumFractionDigits: 0
-  }).format(x);
-}
-
-function formatCompact(x){
-  if(x == null || !isFinite(x)) return "-";
-  return new Intl.NumberFormat(undefined, { notation:"compact", maximumFractionDigits: 3 }).format(x);
-}
-
-function parseFloatSafe(v){
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
-}
-
-function setUrlTick(t){
-  const u = new URL(window.location.href);
-  u.searchParams.set("q", t);
-  history.replaceState({}, "", u.toString());
-}
-
-async function copyToClipboard(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    return true;
-  }catch{
-    try{
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      return true;
-    }catch{
-      return false;
-    }
-  }
-}
-
 function tokenToNumber(rawStr, dec){
   if(rawStr == null) return null;
   const d = Number(dec || 0);
@@ -403,6 +352,12 @@ function formatTokenAmount2(rawStr, dec){
 function pow10Big(n){
   if(n <= 0) return 1n;
   return 10n ** BigInt(n);
+}
+
+function setUrlTick(t){
+  const u = new URL(window.location.href);
+  u.searchParams.set("q", t);
+  history.replaceState({}, "", u.toString());
 }
 
 async function fetchKasplexToken(t){
@@ -634,6 +589,13 @@ function setActiveTab(tabId){
   document.querySelectorAll(".tabPanel").forEach(p => p.classList.toggle("active", p.id === tabId));
 }
 
+const tabButtons = document.querySelectorAll('.tabs .tab');
+tabButtons.forEach(tab => {
+  tab.addEventListener('click', () => {
+    setActiveTab(tab.dataset.tab);
+  });
+});
+
 async function loadTransfers({ next=null, prev=null } = {}){
   txLoading.classList.remove("hidden");
   try{
@@ -648,23 +610,15 @@ async function loadTransfers({ next=null, prev=null } = {}){
   }
 }
 
-function renderMarkets(){
+async function renderMarkets(){
   if(!tokenMarket){
-    pairRows.innerHTML = `<tr><td colspan="3" class="muted">No markets listed.</td></tr>`;
+    pairRows.innerHTML = `<tr><td colspan="4" class="muted">No markets listed.</td></tr>`;
     return;
   }
-  const mcapVal = parseFloatSafe(tokenMarket.marketCap);
-  const vol = parseFloatSafe(tokenMarket.volumeUsd);
-  const volFmt = vol == null ? "-" : formatCompact(vol);
-  let priceFmt = "-";
-  let circBig = 0n;
-  try{ circBig = BigInt(tokenCircRaw); }catch{}
-  if(circBig > 0n && mcapVal != null){
-    const compUsd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
-    priceFmt = formatUsd(compUsd);
-  }else if(tokenMarket.price != null){
-    priceFmt = formatUsd(parseFloatSafe(tokenMarket.price));
-  }
+  const priceVal = Number(tokenMarket.price ?? 0);
+  const priceFmt = Number.isFinite(priceVal) ? await formatPrice(KASVALUE, CURRENCY, priceVal, 8) : "-";
+  const volVal = Number(tokenMarket.volumeUsd ?? 0);
+  const volFmt = Number.isFinite(volVal) ? await formatShortPrice(KASVALUE, CURRENCY, volVal / KASVALUE) : "-";
   pairRows.innerHTML = `
   <tr>
     <td>
@@ -698,14 +652,17 @@ async function runSearch(query){
   explorerPic.removeAttribute("src");
 
   try{
-    tokenInfo = await fetchKasplexToken(t);
+    const [fetchedTokenInfo, fetchedMeta, fetchedBurned, fetchedMarket] = await Promise.all([
+      fetchKasplexToken(t),
+      fetchDirectoryMeta(t).catch(() => null),
+      fetchBurnedAmountByAddress(t).catch(() => "0"),
+      fetchMarketData().catch(() => null)
+    ]);
 
-    tokenMeta = await fetchDirectoryMeta(t).catch(() => null);
-
-    tokenBurnedRaw = await fetchBurnedAmountByAddress(t).catch(() => "0");
-
-    const marketData = await fetchMarketData().catch(() => null);
-    tokenMarket = marketData ? marketData.find(r => r.ticker === T) : null;
+    tokenInfo = fetchedTokenInfo;
+    tokenMeta = fetchedMeta;
+    tokenBurnedRaw = fetchedBurned;
+    tokenMarket = fetchedMarket ? fetchedMarket.find(r => r.ticker === T) : null;
 
     renderHeader();
     renderSummary();
@@ -716,35 +673,24 @@ async function runSearch(query){
     await loadTransfers({ next:null, prev:null });
 
     if(tokenMarket){
-      const mcapVal = parseFloatSafe(tokenMarket.marketCap);
-      const vol = parseFloatSafe(tokenMarket.volumeUsd);
-      const ch = parseFloatSafe(tokenMarket.changeMarketCap);
-      let circBig = 0n;
-      try{ circBig = BigInt(tokenCircRaw); }catch{}
-      let usd = null;
-      if(mcapVal != null && circBig > 0n){
-        usd = mcapVal / Number(circBig) * Math.pow(10, tokenDec);
-      }else{
-        usd = parseFloatSafe(tokenMarket.price);
-      }
-      priceUsd.textContent = formatUsd(usd);
+      const priceVal = Number(tokenMarket.price ?? 0);
+      priceUsd.textContent = Number.isFinite(priceVal) ? await formatPrice(KASVALUE, CURRENCY, priceVal, 8) : "-";
+
+      const chRaw = tokenMarket.changeMarketCap;
+      const ch = Number.isFinite(Number(chRaw)) ? Number(chRaw) : null;
       priceChg.textContent = ch == null ? "-" : `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
       priceChg.style.color = (ch == null) ? "rgba(255,255,255,.70)" : (ch >= 0 ? "#2ee59d" : "#ff6b6b");
-      priceVol.textContent = vol == null ? "-" : formatCompact(vol);
-      if(mcapVal != null){
-        mcap.textContent = formatUsd0(mcapVal);
-      }else{
-        if(circBig > 0n && usd != null){
-          mcap.textContent = formatUsd0(Number(circBig) * usd / Math.pow(10, tokenDec));
-        }else{
-          mcap.textContent = "-";
-        }
-      }
+
+      const volVal = Number(tokenMarket.volumeUsd ?? 0);
+      priceVol.textContent = Number.isFinite(volVal) ? await formatShortPrice(KASVALUE, CURRENCY, volVal / KASVALUE) : "-";
+
+      const mcapVal = Number(tokenMarket.marketCap ?? 0);
+      mcap.textContent = Number.isFinite(mcapVal) ? await formatShortPrice(KASVALUE, CURRENCY, mcapVal / KASVALUE) : "-";
     }else{
       renderPriceMissing();
     }
 
-    renderMarkets();
+    await renderMarkets();
 
     const hasLinks = !!(tokenMeta?.website || tokenMeta?.x || tokenMeta?.telegram);
 
@@ -796,18 +742,6 @@ if (hasLinks) {
     BUSY = false;
   }
 }
-
-document.addEventListener("click", async (e) => {
-  const t = e.target;
-  if(t && t.classList && t.classList.contains("tab")){
-    setActiveTab(t.dataset.tab);
-    return;
-  }
-  if(t && t.dataset && t.dataset.copy){
-    const ok = await copyToClipboard(t.dataset.copy);
-    addToast(ok ? "Copied" : "Copy failed", ok ? "Copied to clipboard." : "Your browser blocked clipboard access.");
-  }
-});
 
 prevTx.addEventListener("click", () => {
   if (txOffset > 0 && txPrev) {
