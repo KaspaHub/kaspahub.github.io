@@ -179,21 +179,21 @@
 	"description": "The world’s first decentralized, open-source point-of-sale solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	"link": "https://github.com/Kasway-Tech/pos",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasway.webp",
-	"features": ["reviewed", "dart", "development", "solutions"]
+	"features": ["reviewed", "dart", "development", "payments"]
 },
 {
 	"name": "OnChain POS",
 	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
 	"link": "https://onchainpos.live",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onchainpos.webp",
-	"features": ["reviewed", "development", "solutions"]
+	"features": ["reviewed", "development", "payments"]
 },
 {
 	"name": "Kaspay POS",
 	"description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
 	"link": "https://kaspay.one",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspay.webp",
-	"features": ["development", "solutions"]
+	"features": ["development", "payments"]
 },
 {
 	"name": "Kaskad",
@@ -231,6 +231,20 @@
 	"features": []
 },
 {
+	"name": "Proof of Prints",
+	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
+	"link": "https://proofofprints.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/proofofprints.webp",
+	"features": ["marketplace", "mining"]
+},
+{
+    "name": "KasSigner",
+    "description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
+    "link": "https://kassigner.org",
+    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kassigner.webp",
+    "features": ["utilities"]
+},
+{
 	"name": "Arkiv File Storage",
 	"description": "A decentralized P2P file storage system built on the Kaspa BlockDAG, enabling encrypted, permanent file uploads to transaction payloads with free downloads and low miner fees.",
 	"link": "https://arkiv.fyi",
@@ -242,7 +256,7 @@
 	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
 	"link": "https://kas.coffee",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascoffee.webp",
-	"features": ["reviewed", "solutions"]
+	"features": ["reviewed", "payments"]
 },
 {
 	"name": "TTT",
@@ -294,13 +308,6 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
-	"name": "Proof of Prints",
-	"description": "A 3D printing business dedicated to the crypto and tech space, specializing in custom models and prints for the Kaspa ecosystem.",
-	"link": "https://proofofprints.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/proofofprints.webp",
-	"features": ["marketplace"]
-},
-{
 	"name": "Kascoin Shop",
 	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
 	"link": "https://kascoin.shop",
@@ -350,11 +357,11 @@
 	"features": ["reviewed", "security", "utilities"]
 },
 {
-	"name": "Kasia Book",
-	"description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
-	"link": "https://kasiabook.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp",
-	"features": ["reviewed", "utilities"]
+    "name": "KasProof",
+    "description": "Trustless proof-of-existence platform on Kaspa. Permanently timestamp any file on the BlockDAG using client-side SHA-256 hashing with no accounts or uploads required.",
+    "link": "https://kasproof.com",
+    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasranks.webp",
+    "features": ["utilities"]
 },
 {
 	"name": "KasStamp",
@@ -623,46 +630,39 @@
 	"features": ["reviewed"]
 },
 {
-	"name": "Kaspa Address Labels",
-	"description": "A tool to suggest labels for Kaspa wallet addresses, which, upon approval, are published in the Kaspa API and Explorer to identify key addresses in the ecosystem.",
-	"link": "https://labels.kaspa.ws",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed", "utilities"]
-},
-{
 	"name": "Kaspero Pay",
 	"description": "Payment processing for any website. A no-code solution to add a 'Pay with Kaspa' button to your website in minutes. Embed one line of code for direct, non-custodial payments to your wallet.",
 	"link": "https://kaspa-store.com/merchant",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasperopay.webp",
-	"features": ["reviewed", "development", "solutions"]
+	"features": ["reviewed", "development", "payments"]
 },
 {
 	"name": "Kaspa Payments",
 	"description": "A WordPress plugin that integrates Kaspa cryptocurrency payments into WooCommerce stores.",
 	"link": "https://kaspawoo.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-2.webp",
-	"features": ["reviewed", "development", "solutions"]
+	"features": ["reviewed", "development", "payments"]
 },
 {
 	"name": "NOWPayments",
 	"description": "NOW Payments is a crypto payment gateway supporting Kaspa, ideal for e-commerce and gaming. It offers API integration for online payments and supports donations for non-profits.",
 	"link": "https://nowpayments.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nowpayments.webp",
-	"features": ["reviewed", "solutions"]
+	"features": ["reviewed", "payments"]
 },
 {
 	"name": "CoinPal",
 	"description": "Coin Pal is a secure cryptocurrency payment platform supporting Kaspa, bridging traditional finance and the evolving Web3 world. It offers seamless integration for e-commerce platforms, enabling merchants to accept KAS with low-fee, secure payments and multi-currency conversion options.",
 	"link": "https://www.coinpal.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinpal.webp",
-	"features": ["solutions"]
+	"features": ["payments"]
 },
 {
 	"name": "Cryptocurrency Checkout",
 	"description": "CryptocurrencyCheckout is a Free to Use, Non-Custodial & Decentralized Payment Gateway providing plugins that make accepting multiple cryptocurrencies for your products and services as easy as entering your wallet addresses.",
 	"link": "https://cryptocurrencycheckout.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cryptocurrencycheckout.webp",
-	"features": ["solutions"]
+	"features": ["payments"]
 },
 {
 	"name": "NOWNodes",
@@ -676,7 +676,7 @@
 	"description": "A simple, non-custodial, open source app (web + mobile) that lets you create and share payment requests for cryptocurrencies.",
 	"link": "https://www.bitrequest.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitrequest.webp",
-	"features": ["development", "solutions"]
+	"features": ["development", "payments"]
 },
 {
 	"name": "ChainVsDag",
@@ -796,6 +796,20 @@
 	"link": "https://kasbay.org",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasbay.webp",
 	"features": ["reviewed"]
+},
+{
+	"name": "Kasia Book",
+	"description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
+	"link": "https://kasiabook.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
+	"name": "Kaspa Address Labels",
+	"description": "A tool to suggest labels for Kaspa wallet addresses, which, upon approval, are published in the Kaspa API and Explorer to identify key addresses in the ecosystem.",
+	"link": "https://labels.kaspa.ws",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "Coineo",
@@ -1215,7 +1229,7 @@
 	"description": "User-friendly Kaspa web wallet with a banking interface. Checking and savings accounts. Send Kaspa to an email address. oAuth-style logins & payments.",
 	"link": "https://kasla.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasla.webp",
-	"features": ["reviewed", "development", "solutions", "wallet"]
+	"features": ["reviewed", "development", "payments", "wallet"]
 },
 {
 	"name": "Kasperia",
@@ -1362,168 +1376,189 @@
 	"description": "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
 	"link": "https://www.kraken.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kraken.webp",
-	"features": ["reviewed", "cex", "cryptoCard"]
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "Uphold",
 	"description": "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
 	"link": "https://uphold.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/uphold.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
 },
 {
 	"name": "Topper",
 	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
 	"link": "https://www.topperpay.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/topper.webp",
-	"features": ["reviewed", "cex", "swap", "solutions"]
+	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Bybit",
 	"description": "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
 	"link": "https://www.bybit.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bybit.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "HTX",
-	"description": "HTX is a Seychelles-based trading platform founded in 2013 (formerly known as Huobi), offering spot trading, futures, and a wide range of crypto services.",
-	"link": "https://www.htx.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/htx.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "Bitget",
-	"description": "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
-	"link": "https://www.bitget.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitget.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "Poloniex",
-	"description": "Poloniex is a Seychelles-based trading platform established in 2014, offering crypto spot and futures trading.",
-	"link": "https://www.poloniex.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/poloniex.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "BingX",
-	"description": "BingX is a Singapore-based trading platform founded in 2018, offering crypto and copy trading services.",
-	"link": "https://bingx.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bingx.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "CoinEx",
 	"description": "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
 	"link": "https://www.coinex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinex.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "CoinW",
-	"description": "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
-	"link": "https://www.coinw.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinw.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "Neverless",
-	"description": "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
-	"link": "https://neverless.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/neverless.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "WhiteBIT",
-	"description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
-	"link": "https://whitebit.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/whitebit.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "MEXC",
-	"description": "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
-	"link": "https://www.mexc.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mexc.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "KuCoin",
-	"description": "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
-	"link": "https://www.kucoin.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kucoin.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "BTCC",
-	"description": "BTCC is a UK-based trading platform established in 2011, offering crypto futures and spot trading services.",
-	"link": "https://www.btcc.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/btcc.webp",
-	"features": ["cex"]
-},
-{
-	"name": "XT",
-	"description": "XT.com is a Seychelles-based trading platform founded in 2018, providing diverse crypto trading services.",
-	"link": "https://www.xt.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/xt.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "AscendEX",
 	"description": "AscendEX is a Singapore-based trading platform founded in 2018, offering crypto spot and futures trading.",
 	"link": "https://ascendex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ascendex.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "CoinW",
+	"description": "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
+	"link": "https://www.coinw.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinw.webp",
+	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "HTX",
+	"description": "HTX is a Seychelles-based trading platform founded in 2013 (formerly known as Huobi), offering spot trading, futures, and a wide range of crypto services.",
+	"link": "https://www.htx.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/htx.webp",
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "Bitget",
+	"description": "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
+	"link": "https://www.bitget.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitget.webp",
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading"]
+},
+{
+	"name": "Poloniex",
+	"description": "Poloniex is a Seychelles-based trading platform established in 2014, offering crypto spot and futures trading.",
+	"link": "https://www.poloniex.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/poloniex.webp",
+	"features": ["reviewed", "cex", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "BingX",
+	"description": "BingX is a Singapore-based trading platform founded in 2018, offering crypto and copy trading services.",
+	"link": "https://bingx.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bingx.webp",
+	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "Neverless",
+	"description": "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
+	"link": "https://neverless.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/neverless.webp",
+	"features": ["reviewed", "cex", "googleApplePay"]
+},
+{
+	"name": "WhiteBIT",
+	"description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
+	"link": "https://whitebit.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/whitebit.webp",
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "KRChange",
+	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
+	"link": "https://krchange.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/krchange.webp",
+	"features": ["cex", "dex", "withdrawals"]
+},
+{
+	"name": "MEXC",
+	"description": "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
+	"link": "https://www.mexc.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mexc.webp",
+	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "KuCoin",
+	"description": "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
+	"link": "https://www.kucoin.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kucoin.webp",
+	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "BTCC",
+	"description": "BTCC is a UK-based trading platform established in 2011, offering crypto futures and spot trading services.",
+	"link": "https://www.btcc.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/btcc.webp",
+	"features": ["cex", "noKyc", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "XT",
+	"description": "XT.com is a Seychelles-based trading platform founded in 2018, providing diverse crypto trading services.",
+	"link": "https://www.xt.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/xt.webp",
+	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "BestChange",
 	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
 	"link": "https://www.bestchange.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bestchange.webp",
-	"features": ["cex"]
+	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
+},
+{
+	"name": "Swapzone",
+	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
+	"link": "https://swapzone.io",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapzone.webp",
+	"features": ["reviewed", "cex", "swap", "withdrawals"]
+},
+{
+	"name": "Ask & Bid",
+	"description": "Ask&Bid is a privacy-focused Tier-1 exchange aggregator launched in 2026, offering no-KYC anonymous swaps backed by a Dispute Guarantee Fund to protect users' capital.",
+	"link": "https://askand.bid",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/askand.bid.webp",
+	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "CEX.IO",
 	"description": "CEX.IO is a UK-based trading platform founded in 2013, providing crypto and fiat trading services.",
 	"link": "https://www.cex.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/cexio.webp",
-	"features": ["cex"]
+	"features": ["cex", "googleApplePay", "cryptoCard"]
 },
 {
 	"name": "CoinSpot",
 	"description": "CoinSpot is an Australian exchange platform established in 2013, offering crypto trading and NFT marketplace.",
 	"link": "https://www.coinspot.com.au",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinspot.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard"]
 },
 {
 	"name": "Ju.com",
 	"description": "JuCom is a Singapore-based trading platform established in 2013, offering crypto trading and Web3 services.",
 	"link": "https://www.ju.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/ju.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading", "cryptoCard"]
 },
 {
 	"name": "Gate",
 	"description": "Gate.io is a Seychelles-based trading platform founded in 2013, offering crypto and NFT services.",
 	"link": "https://www.gate.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/gate.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "Bitpanda",
 	"description": "Bitpanda is an Austrian exchange platform founded in 2014, offering crypto, stocks, and ETFs.",
 	"link": "https://www.bitpanda.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitpanda.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard", "googleApplePay"]
 },
 {
 	"name": "Simplex",
 	"description": "Simplex is an Israel-based crypto payment gateway established in 2014, allowing users to buy and sell crypto instantly with credit card, bank transfer, and more.",
 	"link": "https://www.simplex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/simplex.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "cryptoCard", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Coinone",
@@ -1537,14 +1572,14 @@
 	"description": "Bit2Me is a Spain-based trading platform founded in 2014, offering crypto trading, wallet, fiat on-ramp, and loans.",
 	"link": "https://pro.bit2me.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bit2me.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard"]
 },
 {
 	"name": "Changelly",
 	"description": "Changelly is a Czech Republic-based crypto swap platform established in 2015, offering instant exchanges and fiat on-ramp services.",
 	"link": "https://changelly.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changelly.webp",
-	"features": ["reviewed", "swap", "cex", "solutions"]
+	"features": ["reviewed", "cex", "swap", "noKyc", "withdrawals", "payments"]
 },
 {
 	"name": "Paxful",
@@ -1572,21 +1607,21 @@
 	"description": "ChangeNOW is a Seychelles-based crypto swap platform established in 2017, offering non-custodial exchanges without registration.",
 	"link": "https://changenow.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changenow.webp",
-	"features": ["reviewed", "swap", "cex", "solutions"]
+	"features": ["reviewed", "cex", "swap", "noKyc", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "ChangeHero",
 	"description": "ChangeHero is an Estonia-based instant crypto swap platform founded in 2017, offering quick, account-free exchanges.",
 	"link": "https://changehero.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/changehero.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "DigiFinex",
 	"description": "DigiFinex is a Seychelles-based trading platform established in 2017, providing crypto spot and margin trading.",
 	"link": "https://www.digifinex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/digifinex.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "SwissBorg",
@@ -1628,28 +1663,28 @@
 	"description": "Guardarian is an Estonia-based exchange platform founded in 2017, offering fiat-to-crypto services with user-friendly interface.",
 	"link": "https://guardarian.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/guardarian.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "swap", "googleApplePay", "payments"]
 },
 {
 	"name": "SwapSpace",
 	"description": "SwapSpace is a Marshall Islands-based crypto exchange aggregator initiated in 2017, known for non-custodial swaps without KYC.",
 	"link": "https://swapspace.co",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapspace.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Digital Surge",
 	"description": "Digital Surge is an Australia-based exchange platform founded in 2017, noted for its beginner-friendly trading experience with fiat support.",
 	"link": "https://digitalsurge.com.au",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/digitalsurge.webp",
-	"features": ["cex", "solutions"]
+	"features": ["cex", "payments"]
 },
 {
 	"name": "SimpleSwap",
 	"description": "SimpleSwap is a Cayman Islands-based crypto swap platform founded in 2018, providing instant exchanges without KYC requirements.",
 	"link": "https://simpleswap.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/simpleswap.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "LCX",
@@ -1670,56 +1705,56 @@
 	"description": "BTSE is a Seychelles-based trading platform established in 2018, providing crypto and fiat trading services.",
 	"link": "https://www.btse.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/btse.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "StealthEX",
 	"description": "StealthEX is a Cayman Islands-based swap platform launched in 2018, offering private, non-custodial swaps with fast transactions and no registration.",
 	"link": "https://stealthex.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/stealthex.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "Nexo",
 	"description": "Nexo is a Switzerland-based exchange platform founded in 2018, offering crypto lending, borrowing, earning, swapping, and trading services.",
 	"link": "https://nexo.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nexo.webp",
-	"features": ["cex", "solutions"]
+	"features": ["cex", "cryptoCard", "googleApplePay"]
 },
 {
 	"name": "CoinDCX",
 	"description": "CoinDCX is an India-based trading platform established in 2018, excelling in futures trading with robust fiat support.",
 	"link": "https://coindcx.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coindcx.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "Swyftx",
 	"description": "Swyftx is an Australia-based exchange platform founded in 2018, recognized for its user-friendly interface and fiat integration.",
 	"link": "https://swyftx.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swyftx.webp",
-	"features": ["cex", "solutions"]
+	"features": ["cex", "payments"]
 },
 {
 	"name": "Kriptomat",
 	"description": "Kriptomat is an Estonia-based exchange platform established in 2018, licensed under strict regulations with fiat-to-crypto services.",
 	"link": "https://kriptomat.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kriptomat.webp",
-	"features": ["cex", "solutions"]
+	"features": ["cex", "payments"]
 },
 {
 	"name": "Godex",
 	"description": "Godex is a Seychelles-based crypto swap platform founded in 2018, offering anonymous exchanges without registration.",
 	"link": "https://godex.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/godex.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "Bitrue",
 	"description": "Bitrue is a Singapore-based trading platform founded in 2018, offering crypto spot, margin, futures, staking.",
 	"link": "https://www.bitrue.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitrue.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "NovaDAX",
@@ -1747,56 +1782,49 @@
 	"description": "Exolix is an Estonia-based crypto swap platform founded in 2018, offering instant exchanges with fixed rates.",
 	"link": "https://exolix.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/exolix.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "Quickex",
 	"description": "Quickex is a Seychelles-based instant crypto swap platform founded in 2018, offering fast swaps without registration.",
 	"link": "https://quickex.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/quickex.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "Biconomy",
 	"description": "Biconomy is a Canada-based trading platform founded in 2019, offering crypto trading and DeFi solutions.",
 	"link": "https://www.biconomy.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/biconomy.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "futuresTrading"]
 },
 {
 	"name": "Phemex",
 	"description": "Phemex is a Singapore-based trading platform founded in 2019, offering crypto spot and derivatives trading.",
 	"link": "https://phemex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/phemex.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "cex", "futuresTrading"]
 },
 {
 	"name": "Pionex",
 	"description": "Pionex is a Singapore-based trading platform founded in 2019, offering crypto spot, futures & 16 free trading bots.",
 	"link": "https://www.pionex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/pionex.webp",
-	"features": ["reviewed", "cex"]
-},
-{
-	"name": "Swapzone",
-	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
-	"link": "https://swapzone.io",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapzone.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "CoinRabbit",
 	"description": "CoinRabbit is a Estonia-based cryptocurrency swap platform founded in 2020, offering loans, a wallet, and exchange services with no credit checks.",
 	"link": "https://coinrabbit.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinrabbit.webp",
-	"features": ["cex"]
+	"features": ["cex", "noKyc"]
 },
 {
 	"name": "RocketX",
 	"description": "RocketX is a Netherlands-based crypto swap and bridge platform founded in 2020, aggregating top DEXs and CEXs for seamless cross-chain swaps.",
 	"link": "https://www.rocketx.exchange",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/rocketx.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "Coinstore",
@@ -1810,49 +1838,49 @@
 	"description": "BYDFi is a Singapore-based trading platform launched in 2020, offering spot, futures, copy trading & fiat.",
 	"link": "https://www.bydfi.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bydfi.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "Swapuz",
 	"description": "Swapuz is a Ukraine-based non-custodial crypto swap platform founded in 2020, offering anonymous exchanges with no KYC requirements.",
 	"link": "https://swapuz.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapuz.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "swap", "noKyc", "withdrawals"]
 },
 {
 	"name": "Swapswop",
 	"description": "Swapswop is an Estonia-based crypto swap platform established in 2020, emphasizing privacy with instant crypto swaps and no KYC.",
 	"link": "https://swapswop.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapswop.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "Exbitron",
 	"description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
 	"link": "https://app.exbitron.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/exbitron.webp",
-	"features": ["cex"]
+	"features": ["cex", "noKyc"]
 },
 {
 	"name": "OrangeX",
 	"description": "OrangeX is a Czech Republic-based crypto trading platform launched in 2021, offering spot, futures, and copy trading services.",
 	"link": "https://www.orangex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/orangex.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "LetsExchange",
 	"description": "LetsExchange is a Seychelles-based swap platform launched in 2021, offering fast, easy swaps with flexible rates, and transparent fees.",
 	"link": "https://letsexchange.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/letsexchange.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "KCEX",
 	"description": "KCEX is a Seychelles-based trading platform founded in 2021, offering crypto spot and futures trading.",
 	"link": "https://www.kcex.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kcex.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "HiBT",
@@ -1880,14 +1908,14 @@
 	"description": "HoudiniSwap is a Saint Vincent-based privacy-focused crypto swap platform founded in 2022, offering anonymous cross-chain swaps without KYC.",
 	"link": "https://houdiniswap.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/houdiniswap.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "Onramp Money",
 	"description": "OnrampMoney is an India-based fiat-to-crypto payment gateway launched in 2022, enabling seamless fiat-to-crypto conversions.",
 	"link": "https://onramp.money",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/onrampmoney.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "googleApplePay", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "BITmarkets",
@@ -1901,21 +1929,21 @@
 	"description": "Nanswap is a Netherlands-based swap platform launched in 2022, specializing in fast, private crypto swaps with no account required.",
 	"link": "https://nanswap.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nanswap.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "FinchPay",
 	"description": "FinchPay is a Lithuania-based swap platform founded in 2022, offering OTC services, and is EU regulated.",
 	"link": "https://finchpay.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/finchpay.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "swap", "googleApplePay", "withdrawals"]
 },
 {
 	"name": "Swapter",
 	"description": "Swapter is a Ukraine-based crypto swap platform founded in 2022, offering exchanges for a variety of cryptocurrencies without KYC.",
 	"link": "https://swapter.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapter.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "swap", "noKyc", "withdrawals"]
 },
 {
 	"name": "SuperEx",
@@ -1929,63 +1957,49 @@
 	"description": "Exchang.io, formerly Swapika, is a UK-based swap platform launched in 2022, prioritizing fast and anonymous crypto exchanges without KYC.",
 	"link": "https://exchang.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/exchang.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "CoinoSwap",
 	"description": "CoinoSwap is a US-based swap platform founded in 2022, offering best rates across exchanges with simple, no-account swaps.",
 	"link": "https://www.coinoswap.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/coinoswap.webp",
-	"features": ["swap", "cex", "solutions"]
+	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
 },
 {
 	"name": "Trocador",
 	"description": "Trocador is a privacy-focused cryptocurrency swap aggregator launched in 2022, offering anonymous swaps, prepaid cards, and gift cards without KYC.",
 	"link": "https://trocador.app",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/trocador.webp",
-	"features": ["swap", "cex"]
+	"features": ["cex", "swap", "noKyc", "withdrawals"]
 },
 {
 	"name": "GoExme",
 	"description": "GoExme is a cryptocurrency swap platform launched in 2022, offering crypto exchanges without registration or KYC.",
 	"link": "https://goexme.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/goexme.webp",
-	"features": ["swap", "cex"]
-},
-{
-	"name": "GroveX",
-	"description": "GroveX is an Australia-based cryptocurrency exchange founded in 2023, offering spot, margin, and futures trading with low fees.",
-	"link": "https://www.grovex.io",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/grovex.webp",
-	"features": ["cex"]
+	"features": ["cex", "swap", "noKyc", "withdrawals"]
 },
 {
 	"name": "NonKYC",
 	"description": "NonKYC.io is a Seychelles-based trading platform founded in 2023, offering crypto trading without KYC requirements.",
 	"link": "https://nonkyc.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/nonkyc.webp",
-	"features": ["cex"]
+	"features": ["cex", "noKyc"]
 },
 {
 	"name": "UEX.US",
 	"description": "UEX.US is a United States-based exchange platform founded in 2024, offering fiat on-ramp, savings accounts, and crypto-backed loans.",
 	"link": "https://uex.us",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/uex.us.webp",
-	"features": ["cex"]
+	"features": ["cex", "withdrawals"]
 },
 {
 	"name": "BigONE",
 	"description": "BigONE is a Seychelles-based trading platform founded in 2017, providing crypto trading and investment services.",
 	"link": "https://www.bigone.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bigone.webp",
-	"features": ["cex"]
-},
-{
-	"name": "WEEX",
-	"description": "Weex is a Singapore-based trading platform founded in 2018, offering crypto spot and derivatives trading.",
-	"link": "https://www.weex.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/weex.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "Exmo",
@@ -1999,20 +2013,34 @@
 	"description": "LBank is a Hong Kong-based trading platform established in 2015, offering crypto trading and token listing services.",
 	"link": "https://www.lbank.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/lbank.webp",
-	"features": ["cex"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "BitMart",
 	"description": "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
 	"link": "https://www.bitmart.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/bitmart.webp",
-	"features": ["cex"]
+	"features": ["cex", "noKyc", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "Tapbit",
 	"description": "Tapbit is a US-based trading platform founded in 2019, offering crypto spot and futures trading services.",
 	"link": "https://www.tapbit.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/tapbit.webp",
+	"features": ["cex", "noKyc"]
+},
+{
+	"name": "WEEX",
+	"description": "Weex is a Singapore-based trading platform founded in 2018, offering crypto spot and derivatives trading.",
+	"link": "https://www.weex.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/weex.webp",
+	"features": ["cex", "futuresTrading"]
+},
+{
+	"name": "GroveX",
+	"description": "GroveX is an Australia-based cryptocurrency exchange founded in 2023, offering spot, margin, and futures trading with low fees.",
+	"link": "https://www.grovex.io",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/grovex.webp",
 	"features": ["cex"]
 },
 {
@@ -2020,6 +2048,6 @@
 	"description": "Wirex, based in the United Kingdom, launched 2016 and offers crypto trading, a multi-currency debit card, and wallet services.",
 	"link": "https://wirexapp.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/wirex.webp",
-	"features": ["cex"]
+	"features": ["cex", "cryptoCard"]
 }
 ]
