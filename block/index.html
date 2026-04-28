@@ -36,7 +36,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
-<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qr-code-styling.min.js"></script>
 <script defer src="/assets/scripts/explorer.js"></script>
 
 </head>
@@ -505,7 +505,7 @@ function renderDetails(header, verboseData, extra) {
   const minerAddress = extra?.minerAddress;
   const minerInfoVal = extra?.minerInfo;
   if (minerAddress) {
-    html += `<tr><td>minerAddress</td><td><a href="${minerAddress}">${minerAddress}</a></td></tr>`;
+    html += `<tr><td>minerAddress</td><td><a href="/address/?q=${minerAddress}">${minerAddress}</a></td></tr>`;
   }
   if (minerInfoVal) {
     html += `<tr><td>minerInfo</td><td>${escHtml(minerInfoVal)}</td></tr>`;

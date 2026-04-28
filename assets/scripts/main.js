@@ -323,15 +323,25 @@ function copyToClipboard(textToCopy) {
   });
 }
 
-function generateQRCode(canvas, text, size, padding = 5) {
-  new QRious({
-    element: canvas,
-    value: text,
-    size: size,
-    foreground: 'black',
-    background: 'white',
-    padding: padding
+function generateQRCode(container, text, size, padding = 3) {
+  container.innerHTML = "";
+
+const qr = new QRCodeStyling({
+    type: "canvas",
+    width: size,
+    height: size,
+    data: text,
+    margin: padding,
+    dotsOptions: {
+      color: "#000",
+      type: "square"
+    },
+    backgroundOptions: {
+      color: "#fff"
+    }
   });
+
+  qr.append(container);
 }
 
 function showDialog(message) {
@@ -386,19 +396,18 @@ function showWalletPopup(wallet) {
 <dialog id="dialog" class="theme-1" data-popup>
 <div class="w-container">
 <div class="w-header">
-<span>Kaspa wallet</span>
+<span>Address QR Code</span>
 <span class="w-close" data-close></span>
 </div>
-<canvas id="qrcode-crypto" class="qrcode-crypto"></canvas>
-<p class="w-message">Scan or copy address</p>
+<div id="qrContainer" class="qrContainer"></div>
 <pre class="w-data">${escHtml(wallet)}</pre>
-<button class="button" data-copy>Copy</button>
+<button class="button" style="width: 100%;" data-copy>Copy</button>
 </div></dialog>
   `;
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  const qrContainer = document.getElementById('qrcode-crypto');
+  const qrContainer = document.getElementById('qrContainer');
   const dialog = document.getElementById('dialog');
   const closeBtn = dialog.querySelector('[data-close]');
   const copyButton = dialog.querySelector('[data-copy]');
@@ -435,7 +444,7 @@ function showWalletPopup(wallet) {
     }, 1500);
   });
 
-  generateQRCode(qrContainer, wallet, 200);
+  generateQRCode(qrContainer, wallet, 310);
 
   if (TESTING === true) {
     enableDialogDrag();

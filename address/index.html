@@ -36,7 +36,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
-<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qrious.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qr-code-styling.min.js"></script>
 <script defer src="/assets/scripts/explorer.js"></script>
 
 </head>
@@ -867,7 +867,7 @@ function renderTokens(tokens) {
     const tokenUrl = `/krc20/?q=${token.tick}`;
     return `
       <tr>
-        <td><a class="explorerTx" href="${tokenUrl}">${tick}</a></td>
+        <td><a href="${tokenUrl}">${tick}</a></td>
         <td>${balance}</td>
         <td>${locked}</td>
         <td>${dec}</td>

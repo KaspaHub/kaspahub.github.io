@@ -275,9 +275,9 @@ function linkAddress(address, short = true) {
   }
 
   if (short) {
-    return `<a class="explorerLink" href="/address/?q=${address}">${shortenMiddle(address)}</a>`;
+    return `<a href="/address/?q=${address}">${shortenMiddle(address)}</a>`;
   } else {
-    return `<a class="explorerLink" href="/address/?q=${address}">${address}</a>`;
+    return `<a href="/address/?q=${address}">${address}</a>`;
   }
 
 }
@@ -290,9 +290,9 @@ function linkTx(transaction, short = true) {
   }
 
   if (short) {
-    return `<a class="explorerTx" href="/transaction/?q=${transaction}">${shortenEnd(transaction)}</a>`;
+    return `<a href="/transaction/?q=${transaction}">${shortenEnd(transaction)}</a>`;
   } else {
-    return `<a class="explorerTx" href="/transaction/?q=${transaction}">${transaction}</a>`;
+    return `<a href="/transaction/?q=${transaction}">${transaction}</a>`;
   }
 }
 
@@ -304,9 +304,9 @@ function linkBlock(hash, short = true) {
   }
 
   if (short) {
-    return `<a class="explorerTx" href="/block/?q=${hash}">${shortenEnd(hash)}</a>`;
+    return `<a href="/block/?q=${hash}">${shortenEnd(hash)}</a>`;
   } else {
-    return `<a class="explorerTx" href="/block/?q=${hash}">${hash}</a>`;
+    return `<a href="/block/?q=${hash}">${hash}</a>`;
   }
 }
 

@@ -580,7 +580,6 @@ pre {
 	font-family: math;
 	background-color: rgba(45,55,60, 0.9);
 	color: #CED7E5;
-	font-size: 0.8rem;
 	border-radius: 6px;
 	padding: 10px;
 	position: relative;
@@ -785,7 +784,7 @@ code {
 	filter: brightness(1.03);
 }
 
-.qrcode-crypto {
+.qrContainer {
 	display: block;
 	margin: 0 auto;
 	min-width: 100px;
@@ -796,6 +795,13 @@ code {
 	border-radius: 15px;
 	background-color: white;
 	background-image: linear-gradient(to top right, #70C7BA, transparent, #ddd6fe);
+}
+.qrContainer canvas {
+	border-radius: 10px;
+	min-width: 100px;
+	min-height: 100px;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 input[type="radio"]:hover, input[type="checkbox"]:hover {
@@ -1067,10 +1073,6 @@ dialog {
 
 .w-message {
 	user-select: none;
-}
-
-.w-data {
-	font-size: 14px;
 }
 
 .w-footer {
