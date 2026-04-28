@@ -1451,7 +1451,6 @@ dialog.theme-1::backdrop {
 select {
 	padding: 0 6px;
 	appearance: auto;
-	-webkit-appearance: menulist-button;
 	-moz-appearance: auto;
 }
 table {
