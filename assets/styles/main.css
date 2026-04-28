@@ -1452,6 +1452,9 @@ select {
 	-webkit-appearance: menulist-button;
 	-moz-appearance: auto;
 }
+table {
+	-webkit-text-size-adjust: 100%;
+}
 @media (max-aspect-ratio: 1/1) {
 	.mobile-only {
 		display: initial !important;
