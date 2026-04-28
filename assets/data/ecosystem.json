@@ -217,13 +217,6 @@
 	"features": ["cryptoCard"]
 },
 {
-	"name": "Overpass Finance",
-	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
-	"link": "https://stroem.finance",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/overpass.webp",
-	"features": []
-},
-{
 	"name": "KASCompute",
 	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
 	"link": "https://kascompute.org",
