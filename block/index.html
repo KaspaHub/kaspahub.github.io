@@ -32,7 +32,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-<script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/main.js?v=1"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
@@ -62,7 +62,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="explorerHdr">
     <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">Kaspa Block</h1>
+      <h2 id="hdrLine">Block</h2>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
@@ -75,7 +75,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
-      <h2>Summary</h2>
+      <h3>Summary</h3>
       <div class="rows">
         <div class="row">
           <div class="k">Transactions</div>
@@ -97,7 +97,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
 
     <div class="theme-1">
-      <h2>Overview</h2>
+      <h3>Overview</h3>
       <div class="rows">
         <div class="row">
           <div class="k">Bits</div>
@@ -127,7 +127,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabTransactions" class="tabPanel active" aria-label="Transactions panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Transfers</h3>
+      <h4>Transfers</h4>
       <div class="tableWrap">
         <table>
           <thead>
@@ -152,7 +152,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabRelated" class="tabPanel" aria-label="Related Blocks panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Related Blocks</h3>
+      <h4>Related Blocks</h4>
       <div class="tableWrap">
         <table>
           <tbody id="relatedContent">
@@ -168,7 +168,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabDetails" class="tabPanel" aria-label="Details panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Block information</h3>
+      <h4>Block information</h4>
       <div class="tableWrap">
         <table>
           <tbody id="detailsRows">

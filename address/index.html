@@ -32,7 +32,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-<script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/main.js?v=1"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
@@ -62,7 +62,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="explorerHdr">
     <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">Kaspa Address</h1>
+      <h2 id="hdrLine">Address</h2>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
@@ -76,13 +76,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
-      <h2>Balance</h2>
+      <h3>Balance</h3>
       <div class="big" id="balanceUsd">-</div>
       <div class="muted" id="balanceKas">-</div>
     </div>
 
     <div class="theme-1">
-      <h2>Overview</h2>
+      <h3>Overview</h3>
       <div class="rows">
         <div class="row">
           <div class="k">Name</div>
@@ -109,12 +109,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <select id="transferType" style="padding: 8px; font-size: 16px;">
+      <select id="transferType" class="ddArrow" style="padding: 8px 0; font-size: 0.9rem; font-weight: bold;">
         <option value="all">Activity</option>
         <option value="received">Received</option>
         <option value="sent">Sent</option>
       </select>
-      <h3 id="transfersTitle"></h3>
+      <h4 id="transfersTitle"></h4>
       <div id="transfersLoading" class="muted loading hidden">
         <span class="spinner"></span>
         <span>Loading…</span>
@@ -147,7 +147,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>KRC20 Tokens</h3>
+      <h4>KRC20 Tokens</h4>
       <div id="tokenLoading" class="muted loading hidden">
         <span class="spinner"></span>
         <span>Loading…</span>
@@ -174,7 +174,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>KNS Domains</h3>
+      <h4>KNS Domains</h4>
       <div id="domainLoading" class="muted loading hidden">
         <span class="spinner"></span>
         <span>Loading…</span>
@@ -201,7 +201,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabUTXOs" class="tabPanel" aria-label="UTXOs panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>UTXOs</h3>
+      <h4>UTXOs</h4>
       <div id="utxoLoading" class="muted loading hidden">
         <span class="spinner"></span>
         <span>Loading…</span>

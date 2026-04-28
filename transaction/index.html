@@ -32,7 +32,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-<script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/main.js?v=1"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
@@ -62,7 +62,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="explorerHdr">
     <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">Kaspa Transaction</h1>
+      <h2 id="hdrLine">Transaction</h2>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
@@ -74,7 +74,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <section id="explorerData" style="opacity: 0;">
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1">
-      <h2>Summary</h2>
+      <h3>Summary</h3>
       <div class="rows">
         <div class="row">
           <div class="k">Amount transferred</div>
@@ -96,7 +96,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
 
     <div class="theme-1">
-      <h2>Overview</h2>
+      <h3>Overview</h3>
       <div class="rows">
         <div class="row">
           <div class="k">Mass</div>
@@ -127,7 +127,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Transfers</h3>
+      <h4>Transfers</h4>
       <div class="tableWrap">
         <table>
           <thead>
@@ -149,7 +149,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabIO" class="tabPanel" aria-label="Inputs & Outputs panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Inputs & Outputs</h3>
+      <h4>Inputs & Outputs</h4>
       <div id="ioRows">
         <div class="muted">-</div>
       </div>
@@ -158,7 +158,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabDetails" class="tabPanel" aria-label="Details panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Transaction information</h3>
+      <h4>Transaction information</h4>
       <div class="tableWrap">
         <table>
           <tbody id="detailsRows">
@@ -174,7 +174,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabPayload" class="tabPanel" aria-label="Payload panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Payload</h3>
+      <h4>Payload</h4>
       <div id="payloadContent">-</div>
     </div>
   </div>
@@ -544,7 +544,7 @@ function renderPayload(payload) {
     const bytes = payload.match(/.{1,2}/g).map(hex => parseInt(hex, 16));
     const text = new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
     if (text.trim()) {
-      payloadContent.innerHTML += `<h3>UTF-8</h3><pre>${escHtml(text)}</pre>`;
+      payloadContent.innerHTML += `<h4>UTF-8</h4><pre>${escHtml(text)}</pre>`;
     }
   } catch {}
 }

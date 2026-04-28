@@ -1,22 +1,51 @@
+h1 {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+p.hint {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+h2 {
+  font-size: 1rem;
+}
+h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+h4, h5 {
+  font-size: 0.9rem;
+}
+h3:first-child {
+  margin: 0 0 10px;
+}
 #explorerHead {
   border-bottom:1px solid rgba(255,255,255,.1);
-  display:flex;flex-wrap:wrap;gap:12px;
-  align-items:center;justify-content:space-between;
-  padding-bottom:14px;margin-bottom:14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:14px;
+  margin-bottom:14px;
 }
 #explorerIntro {
   transition: opacity 0.5s ease;
   user-select: none;
 }
 #explorerHdr {
-  display:flex;gap:10px;align-items:center;
+  display:flex;
+  gap:10px;
+  align-items:center;
   min-width:260px;
 }
-#explorerHdr h1 {
-  margin:0;font-size:16px;
+#explorerHdr h2 {
+  margin: 0;
+  font-size: 1rem;
 }
 #explorerHdr .sub {
-  margin:2px 0 0;font-size:12px;
+  margin:2px 0 0;
+  font-size:12px;
 }
 #explorerPic {
   min-width:34px;
@@ -173,16 +202,7 @@ html#dark {
 
 .grid-2 { grid-template-rows:repeat(2,1fr);}
 
-h2, h3 {
-  font-size: 14px;
-  text-transform: uppercase;
-}
-h4, h5 {
-  font-size: 15px;
-}
-h2:first-child {
-  margin: 0 0 10px;
-}
+
 div > details {
   margin-block-start: 0.7em;
   margin-block-end: 0.7em;
@@ -266,7 +286,7 @@ div > details {
 }
 
 table {
-  font-size: 14px;
+  font-size: 0.877rem;
   width: max-content;
   margin: 0 auto;
   min-width: 100%;
@@ -279,7 +299,6 @@ th, td {
 
 th {
   font-weight: 800;
-  font-size: 12px;
   text-transform: uppercase;
   text-align: left;
 }
@@ -308,9 +327,6 @@ tr:hover td { background: rgba(255,255,255,.03);}
 }
 
 /*balv*/
-
-h1 { margin: 0 0 6px;font-weight: 700;}
-p.hint { margin: 0 0 16px;font-size: 0.95rem;}
 
 #results { margin-top: 18px;}
 .row { display: grid;grid-template-columns: 170px 1fr; align-items: center; gap: 10px;}

@@ -214,9 +214,7 @@ summary {
 	user-select: none;
 }
 
-select {
-	padding: 0 6px
-}
+
 
 .left {text-align: left;}
 .right {text-align: right;}
@@ -1448,7 +1446,12 @@ dialog.theme-1::backdrop {
 		margin: 30px 20%;
 	}
 }
-
+select {
+	padding: 0 6px;
+	appearance: auto;
+	-webkit-appearance: menulist-button;
+	-moz-appearance: auto;
+}
 @media (max-aspect-ratio: 1/1) {
 	.mobile-only {
 		display: initial !important;

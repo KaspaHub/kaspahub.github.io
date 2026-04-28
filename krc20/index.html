@@ -32,7 +32,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-<script defer src="/assets/scripts/main.js"></script>
+<script defer src="/assets/scripts/main.js?v=1"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
@@ -62,7 +62,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   <div id="explorerHdr">
     <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
     <div id="explorerInfo">
-      <h1 id="hdrLine">Token</h1>
+      <h2 id="hdrLine">Token</h2>
       <div class="sub" id="hdrSub">-</div>
     </div>
   </div>
@@ -74,7 +74,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div class="grid-1" aria-label="Summary">
     <div class="theme-1 third">
-      <h2>Market</h2>
+      <h3>Market</h3>
       <div class="big" id="priceUsd">-</div>
       <div class="rows">
         <div class="row"><div class="k">24h change</div><div class="v" id="priceChg">-</div></div>
@@ -83,7 +83,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       </div>
     </div>
     <div class="theme-1 half">
-      <h2>Stats</h2>
+      <h3>Stats</h3>
       <div class="rows">
         <div class="row"><div class="k">Holders</div><div class="v" id="holders">-</div></div>
         <div class="row"><div class="k">Transfers</div><div class="v" id="transfers">-</div></div>
@@ -93,7 +93,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
   </div>
   <div class="tabs" role="tablist" aria-label="Token tabs">
-    <button class="tab active" data-tab="tabAbout">About</button>
+    <button class="tab active" data-tab="tabAbout">Overview</button>
     <button class="tab" data-tab="tabHolders">Holders</button>
     <button class="tab" data-tab="tabTransfers">Transfers</button>
     <button class="tab" data-tab="tabPairs">Pairs</button>
@@ -114,7 +114,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   </div>
   <div id="tabHolders" class="tabPanel" aria-label="Holders panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Top Holders</h3>
+      <h4>Top Holders</h4>
       <div class="tableWrap">
         <table>
           <thead>
@@ -140,7 +140,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   </div>
   <div id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>Transfers</h3>
+      <h4>Transfers</h4>
       <div id="txLoading" class="muted loading"><span class="spinner"></span><span>Loading…</span></div>
       <div class="tableWrap">
         <table>
@@ -167,7 +167,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
   </div>
   <div id="tabPairs" class="tabPanel" aria-label="Markets panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h3>All pairs</h3>
+      <h4>All pairs</h4>
       <div class="tableWrap">
         <table>
           <thead>
