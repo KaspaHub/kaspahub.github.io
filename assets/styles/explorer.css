@@ -289,10 +289,10 @@ table {
   width: max-content;
   margin: 0 auto;
   min-width: 100%;
+  font-size: 0.877rem;
 }
 
 th, td {
-  font-size: 0.877rem;
   padding: 10px;
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
