@@ -229,8 +229,17 @@ async function renderTokens(data) {
             const positive = change >= 0;
 
             const priceFormatted = await formatPrice(KASVALUE, CURRENCY, t.price, 8);
-            const marketCapFormatted = (await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE)) ?? '—';
-            const volumeFormatted = (await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE)) ?? '—';
+
+            const marketCapFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.marketCap / KASVALUE);
+            if (marketCapFormatted == null) {
+                throw new Error(`Failed to format market cap for token: ${t.ticker}`);
+            }
+
+            const volumeFormatted = await formatShortPrice(KASVALUE, CURRENCY, t.volumeUsd / KASVALUE);
+            if (volumeFormatted == null) {
+                throw new Error(`Failed to format volume for token: ${t.ticker}`);
+            }
+
             const lticker = t.ticker.toLowerCase();
 
             return `
@@ -284,7 +293,7 @@ function initSorting() {
     });
 }
 
-async function loadTokens() {
+async function loadTokens(attempt = 0) {
     try {
         const res = await fetch('https://api.kaspa.com/api/market-data');
         tokenData = await res.json();
@@ -316,8 +325,12 @@ async function loadTokens() {
         await updateTable();
 
     } catch (err) {
-        document.getElementById('table-body').innerHTML =
-            '<tr><td colspan="7">Failed to load data</td></tr>';
+        let delay = 0;
+        if (attempt > 0) {
+            delay = 1000 * Math.pow(2, attempt - 1);
+        }
+        document.getElementById('table-body').innerHTML = `<tr><td colspan="7">Loading data... (retry ${attempt + 1})</td></tr>`;
+        setTimeout(() => loadTokens(attempt + 1), delay);
     }
 }
 
