@@ -842,7 +842,7 @@ input[type=checkbox]:checked + label:before {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: 75% auto;
-	background-position: center 3px;
+	background-position: center 0.15rem;
 	transform: scale(1.05);
 }
 
