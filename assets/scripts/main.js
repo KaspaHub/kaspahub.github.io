@@ -33,40 +33,38 @@ let KASPRICE = "$0.035";
 let USDRATE = 1;
 
 let KASVALUE = getCache?.("kaspa_price_usd") ?? null;
+let kasPricePromise = null;
 
 async function getKaspaValue() {
+  if (KASVALUE !== null) return KASVALUE;
 
-  if (!KASVALUE) {
-    try {
-      const res = await fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd"
-      );
+  if (!kasPricePromise) {
+    kasPricePromise = (async () => {
+      try {
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=kaspa&vs_currencies=usd");
+        const data = await res.json();
+        KASVALUE = data?.kaspa?.usd;
 
-      const data = await res.json();
-
-      KASVALUE = data?.kaspa?.usd;
-
-      if (res.ok && Number.isFinite(KASVALUE)) {
-        setCache("kaspa_price_usd", KASVALUE);
-        console.log("%c[API] %s", "color: #9980FF;", KASVALUE);
-      } else {
-        console.log("API failure or invalid price, using fallback");
-        KASVALUE = 0.034;
+        if (res.ok && Number.isFinite(KASVALUE)) {
+          setCache("kaspa_price_usd", KASVALUE);
+          console.log("%c[API] %s", "color: #9980FF;", KASVALUE);
+        } else {
+          KASVALUE = 0.034;
+        }
+      } catch (err) {
+        console.log("Kaspa price fetch failed, using fallback:", err.message || err);
+        KASVALUE = 0.033;
       }
-    } catch (err) {
-      console.log("Kaspa price fetch failed, using fallback:", err.message || err);
-      KASVALUE = 0.033;
-    }
-  } else {
-  
+      kasPricePromise = null;
+      return KASVALUE;
+    })();
   }
-
-  return KASVALUE;
+  return kasPricePromise;
 }
 
 function getCache(key) {
 
-  const CACHE_TIME = 5 * 60 * 1000;
+  const CACHE_TIME = 7 * 60 * 1000;
 
   const cached = localStorage.getItem(key);
   if (!cached) return null;

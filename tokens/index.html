@@ -298,6 +298,8 @@ async function loadTokens(attempt = 0) {
         const res = await fetch('https://api.kaspa.com/api/market-data');
         tokenData = await res.json();
 
+        await kasPricePromise;
+
         const initialSorted = [...tokenData].sort((a, b) => {
             const volA = Number(a.volumeUsd ?? 0);
             const volB = Number(b.volumeUsd ?? 0);

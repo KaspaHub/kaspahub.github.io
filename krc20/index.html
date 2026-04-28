@@ -772,13 +772,12 @@ nextHolder.addEventListener("click", () => {
 
 if (QUERY) {
   (async () => {
-    // await preloadNames();
     document.getElementById('explorerData').style.opacity = 'initial';
     document.getElementById('explorerHead').style.opacity = 'initial';
+    await kasPricePromise;
     runSearch(sanitizeSearch(QUERY));
   })();
 } else {
-  preloadNames();
   document.getElementById('explorerIntro').style.opacity = 'initial';
 }
 

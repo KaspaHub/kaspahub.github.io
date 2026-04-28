@@ -593,10 +593,10 @@ if (QUERY) {
   (async () => {
     document.getElementById('explorerData').style.opacity = 'initial';
     document.getElementById('explorerHead').style.opacity = 'initial';
+    await kasPricePromise;
     runSearch(sanitizeSearch(QUERY));
   })();
 } else {
-  preloadNames();
   document.getElementById('explorerIntro').style.opacity = 'initial';
 }
 

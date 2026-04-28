@@ -1179,6 +1179,7 @@ if (QUERY) {
     await preloadNames();
     document.getElementById('explorerData').style.opacity = 'initial';
     document.getElementById('explorerHead').style.opacity = 'initial';
+    await kasPricePromise;
     runSearch(sanitizeSearch(QUERY));
   })();
 } else {
