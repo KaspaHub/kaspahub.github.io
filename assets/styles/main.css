@@ -57,7 +57,6 @@ main {
 nav {
 	min-height: 50px;
 	max-height: 50px;
-	padding: 2px;
 	line-height: 49px;
 	font-size: 25px;
 	display: flex;
@@ -228,14 +227,16 @@ summary {
 .right {text-align: right;}
 
 .navTag, #priceTag {
-	margin: 0 10px;
+	margin: 10px;
 	color: inherit !important;
 	font-weight: 800;
 	font-size: 18px;
+	line-height: 30px;
 	min-width: 40px;
 }
 .navTag, #priceTag, #themeCheck, #menuCheck {
 	opacity: 0.8;
+
 }
 
 #login {
