@@ -132,8 +132,7 @@ async function explorerSearch(query, source = '[unknown] ') {
             method: 'GET',
             headers: {
               'Accept': 'application/json',
-            },
-            signal: AbortSignal.timeout(10000),
+            }
           });
 
           if (!response.ok) {
