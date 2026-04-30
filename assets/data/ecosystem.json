@@ -1043,13 +1043,6 @@
 	"features": ["mining"]
 },
 {
-	"name": "Kaspa Hub Explorer",
-	"description": "A Kaspa blockDAG Explorer providing real-time insight into transactions, wallets, tokens, and domains on the decentralized ledger for easy network monitoring.",
-	"link": "https://kaspahub.org/explorer/",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
-	"features": ["verified", "blockExplorer"]
-},
-{
 	"name": "Kaspa.Stream",
 	"description": "Advanced Kaspa Block Explorer providing real-time block and transaction details, top addresses, miner insights, network metrics, node statistics and more.",
 	"link": "https://kaspa.stream",
@@ -1075,6 +1068,13 @@
 	"description": "An open-source, community-developed, multi-indexer block explorer for Kaspa, designed to be best-in-class, with support for L1 data, KRC20 tokens, KRC721 NFTs, and KNS domains.",
 	"link": "https://kaspaexplorer.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa-explorer.webp",
+	"features": ["reviewed", "blockExplorer"]
+},
+{
+	"name": "Kascan",
+	"description": "A super lightweight, fully open-source Kaspa BlockDAG explorer for searching transactions, blocks, and addresses. Features live TPS, BPS, hashrate, top miners, rich list, and real-time network stats.",
+	"link": "https://kascan.io",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kascan.webp",
 	"features": ["reviewed", "blockExplorer"]
 },
 {
@@ -1125,6 +1125,13 @@
 	"link": "https://github.com/KaspaPulse/KaspaGateway",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kg.webp",
 	"features": ["blockExplorer"]
+},
+{
+	"name": "Kaspa Hub Explorer",
+	"description": "A Kaspa blockDAG Explorer providing real-time insight into transactions, wallets, tokens, and domains on the decentralized ledger for easy network monitoring.",
+	"link": "https://kaspahub.org/explorer/",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspahub.webp",
+	"features": ["verified", "blockExplorer"]
 },
 {
 	"name": "Ledger",
