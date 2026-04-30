@@ -290,7 +290,7 @@ function setUrlTxId(txid) {
 
 function renderHeader(txid) {
   hdrSub.textContent = txid;
-  document.title = txid;
+  document.title = `Tx ${txid}`;
 }
 
 function computeTotals(inputs, outputs) {
@@ -419,7 +419,7 @@ function renderTransfers(json, totals) {
           const rem = (amt * totals.totalTransferred) % totalInput;
           let final = prop;
           if (rem * 2n >= totalInput) final += 1n;
-          fromContent += linkAddress(addr) + ' - <span>' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+          fromContent += linkAddress(addr) + ` - <span>${formatKas(final)}</span><br>`;
         });
         fromContent += '</div></details>';
 
@@ -438,7 +438,7 @@ function renderTransfers(json, totals) {
             const rem = (amt * totals.totalTransferred) % totalExternal;
             let final = prop;
             if (rem * 2n >= totalExternal) final += 1n;
-            toContent += linkAddress(addr) + ' - <span>' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+            toContent += linkAddress(addr) + ` + <span>${formatKas(final)}</span><br>`;
           });
           toContent += '</div></details>';
         }
@@ -465,7 +465,7 @@ function renderTransfers(json, totals) {
               const rem = (amt * transferredAmt) % totalRecv;
               let final = prop;
               if (rem * 2n >= totalRecv) final += 1n;
-              return `${linkAddress(addr)} - <span>${(Number(final) / 1e8).toFixed(8)} KAS</span><br>`;
+              return `${linkAddress(addr)} - <span>${formatKas(final)}</span><br>`;
             }).join('');
 
             if (receivers.length === 1) {
