@@ -255,20 +255,6 @@ function withSeparators(numStr) {
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatKas(somis, fixed = false) {
-  if (somis == null) return "-";
-  const n = BigInt(somis);
-  const kas = n / 100000000n;
-  const rem = n % 100000000n;
-  const dec = rem.toString().padStart(8, '0');
-  const intStr = kas.toString();
-  if (fixed) {
-    return intStr + '.' + dec + " KAS";
-  }
-  const s = intStr.replace(/^0+(?=\d)/, "");
-  return withSeparators(s) + '.' + dec + " KAS";
-}
-
 async function fetchBlock(blockHash) {
   const url = `https://api.kaspa.org/blocks/${blockHash}?includeTransactions=true`;
   const res = await fetch(url);
@@ -318,7 +304,7 @@ function renderAddrsCell(addrs, title, color = "inherit", map = null) {
   if (map && addrs.length > 1) {
     content = addrs.map(addr => {
       const rawAmt = map.get(addr) || 0n;
-      return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(rawAmt, true)}</span>`;
+      return `${linkAddress(addr)} - <span style="color:${color}">${formatKas(rawAmt)}</span>`;
     }).join('<br>');
   } else {
     content = addrs.map(addr => linkAddress(addr)).join('<br>');
@@ -391,13 +377,13 @@ async function renderTransactions(txs) {
       if (isCoinbase) {
         fromCell = '<span class="muted">Block reward</span>';
         toCell = renderAddrsCell(toAddrs, "Multiple recipients", 'inherit', outMap);
-        amountHtml = `<span>${formatKas(totalOut, true)}</span>`;
+        amountHtml = `<span>${formatKas(totalOut)}</span>`;
       } else {
         let fromContent = fromAddrs.map(id => linkTx(id)).join('<br>');
         fromCell = fromAddrs.length > 1 ? `<details><summary class="expandable-row muted">Multiple sources (${fromAddrs.length})</summary><div class="receiver-list">${fromContent}</div></details>` : (fromAddrs[0] ? linkTx(fromAddrs[0]) : '-');
 
         toCell = renderAddrsCell(toAddrs, "Multiple recipients", 'inherit', outMap);
-        amountHtml = `<span>${formatKas(totalOut, true)}</span>`;
+        amountHtml = `<span>${formatKas(totalOut)}</span>`;
       }
 
       let status = '<span class="accepted">Accepted</span>';

@@ -1505,18 +1505,18 @@
 	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
 },
 {
-	"name": "Ask & Bid",
-	"description": "Ask&Bid is a privacy-focused Tier-1 exchange aggregator launched in 2026, offering no-KYC anonymous swaps backed by a Dispute Guarantee Fund to protect users' capital.",
-	"link": "https://askand.bid",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/askand.bid.webp",
-	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
-},
-{
 	"name": "Swapzone",
 	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
 	"link": "https://swapzone.io",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/swapzone.webp",
 	"features": ["reviewed", "cex", "swap", "withdrawals"]
+},
+{
+	"name": "Ask & Bid",
+	"description": "Ask&Bid is a privacy-focused Tier-1 exchange aggregator launched in 2026, offering no-KYC anonymous swaps backed by a Dispute Guarantee Fund to protect users' capital.",
+	"link": "https://askand.bid",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/askand.bid.webp",
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "CEX.IO",

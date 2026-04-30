@@ -429,14 +429,6 @@ function withSeparators(numStr) {
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatKas(amountSomes) {
-  if (amountSomes == null) return "-";
-  const n = Number(amountSomes) / 1e8;
-  const fixed = n.toFixed(8);
-  const [int, dec] = fixed.split('.');
-  return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
-}
-
 async function fetchBalance(addr) {
   const res = await fetch(`https://api.kaspa.org/addresses/${addr}/balance`);
   if (res.status === 404) return 0;
@@ -630,13 +622,6 @@ function getFromTo(tx, addr, net) {
   return { from: fromStr, to: toStr, fromItems, toItems };
 }
 
-function formatAmount(net) {
-  const n = Number(net) / 1e8;
-  const sign = n > 0 ? "+" : "";
-  const color = n > 0 ? "color:#2ee59d" : (n < 0 ? "color:#ff6b6b" : "");
-  return `<span style="${color}">${sign}${n.toFixed(8)} KAS</span>`;
-}
-
 function formatTokenAmount(amount, dec) {
   if (!amount) return "0";
   const n = BigInt(amount);
@@ -658,7 +643,7 @@ function renderAll(pageTxs, addr) {
     const hash = String(tx.transaction_id || "-");
     const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
     const net = getNetChange(tx, addr);
-    const amt = formatAmount(net);
+    const amt = formatKas(net, 2, true);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
@@ -669,7 +654,6 @@ function renderAll(pageTxs, addr) {
     let isMultiple = false;
     let items = [];
     let summaryText = "";
-    let itemColor = net > 0n ? "#2ee59d" : "#ff6b6b";
 
     if (net > 0n) {
       if (from === "Multiple") {
@@ -710,9 +694,8 @@ function renderAll(pageTxs, addr) {
         const remainder = (item.amt * netAbs) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(item.addr);
-        return `${linkAddress(item.addr)} - <span style="color:${itemColor}">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       counterpartyHtml = `
         <details>
@@ -747,7 +730,7 @@ function renderReceived(pageTxs, addr) {
     const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
     const net = getNetChange(tx, addr);
     const { from, fromItems } = getFromTo(tx, addr, net);
-    const amt = formatAmount(net);
+    const amt = formatKas(net, 2, true);
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
     const statusText = isAccepted ? "Accepted" : "Not accepted";
@@ -764,9 +747,8 @@ function renderReceived(pageTxs, addr) {
         const remainder = (item.amt * net) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(item.addr);
-        return `${linkAddress(item.addr)} - <span style="color:#2ee59d">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       senderHtml = `
         <details>
@@ -805,7 +787,7 @@ function renderSent(pageTxs, addr) {
     const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
     const net = getNetChange(tx, addr);
     const { to, toItems } = getFromTo(tx, addr, net);
-    const amt = formatAmount(net);
+    const amt = formatKas(net, 2, true);
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
     const statusText = isAccepted ? "Accepted" : "Not accepted";
@@ -823,9 +805,8 @@ function renderSent(pageTxs, addr) {
         const remainder = (item.amt * netAbs) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const itemAmt = (Number(finalSomes) / 1e8).toFixed(8);
         const short = shortenMiddle(toItems[0].addr);
-        return `${linkAddress(item.addr)} - <span style="color:#ff6b6b">${itemAmt} KAS</span><br>`;
+        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       receiverHtml = `
         <details>

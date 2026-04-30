@@ -256,17 +256,6 @@ function withSeparators(numStr) {
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatKas(somis, fixed = false) {
-  if (somis == null) return "-";
-  const n = Number(somis) / 1e8;
-  if (fixed) {
-    return n.toFixed(8) + " KAS";
-  }
-  const fixedStr = n.toFixed(8);
-  const [int, dec] = fixedStr.split('.');
-  return withSeparators(int) + '.' + (dec || '00000000') + " KAS";
-}
-
 async function fetchTransaction(txid) {
   const url = `https://api.kaspa.org/transactions/${txid}?resolve_previous_outpoints=full`;
   const res = await fetch(url);
@@ -345,8 +334,8 @@ async function renderSummary(json, totals, inputs, outputs) {
   const transferredFiat = await formatPrice(KASVALUE, CURRENCY, transferredKas);
   const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas);
 
-  totalSent.innerHTML = `${formatKas(totals.totalTransferred, true)} <span class="muted">(${transferredFiat})</span>`;
-  fee.innerHTML = `${formatKas(totals.fee, true)} <span class="muted">(${feeFiat})</span>`;
+  totalSent.innerHTML = `${formatKas(totals.totalTransferred, 3)} <span class="muted">(${transferredFiat})</span>`;
+  fee.innerHTML = `${formatKas(totals.fee)} <span class="muted">(${feeFiat})</span>`;
   ioCount.textContent = `${(inputs || []).length} / ${outputs.length}`;
   status.textContent = json.is_accepted ? "Accepted" : "Not accepted";
 
@@ -369,7 +358,7 @@ function renderTransfers(json, totals) {
           <tr>
             <td class="muted">Block reward</td>
             <td>${linkAddress(addr)}</td>
-            <td><span>${formatKas(BigInt(amt), true)}</span></td>
+            <td><span>${formatKas(BigInt(amt))}</span></td>
           </tr>
         `;
       });
@@ -413,7 +402,7 @@ function renderTransfers(json, totals) {
         <tr>
           <td>${linkAddress(inputKeys[0])}</td>
           <td>${linkAddress(outputKeys[0])} <span class="muted">(self)</span></td>
-          <td><span style="color:${totals.fee ? '#ff6b6b' : 'inherit'}">${formatKas(totals.fee, true)}</span> <span class="muted">(fee)</span></td>
+          <td><span style="color:${totals.fee ? '#ff6b6b' : 'inherit'}">${formatKas(totals.fee)}</span> <span class="muted">(fee)</span></td>
         </tr>
       `;
     } else {
@@ -430,7 +419,7 @@ function renderTransfers(json, totals) {
           const rem = (amt * totals.totalTransferred) % totalInput;
           let final = prop;
           if (rem * 2n >= totalInput) final += 1n;
-          fromContent += linkAddress(addr) + ' - <span style="color:#ff6b6b">' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
+          fromContent += linkAddress(addr) + ' - <span>' + (Number(final) / 1e8).toFixed(8) + ' KAS</span><br>';
         });
         fromContent += '</div></details>';
 
@@ -454,7 +443,7 @@ function renderTransfers(json, totals) {
           toContent += '</div></details>';
         }
 
-        html += '<tr><td>' + fromContent + '</td><td>' + toContent + '</td><td><span>' + formatKas(totals.totalTransferred, true) + '</span></td></tr>';
+        html += '<tr><td>' + fromContent + '</td><td>' + toContent + '</td><td><span>' + formatKas(totals.totalTransferred) + '</span></td></tr>';
       } else {
         inputMap.forEach((inAmt, fromAddr) => {
           const changeAmt = outputMap.get(fromAddr) || 0n;
@@ -485,11 +474,11 @@ function renderTransfers(json, totals) {
               toCellContent = '<details><summary class="expandable-row muted">Multiple addresses (' + receivers.length + ')</summary><div class="receiver-list">' + receiverItems + '</div></details>';
             }
 
-            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span>' + formatKas(transferredAmt, true) + '</span></td></tr>';
+            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + toCellContent + '</td><td><span>' + formatKas(transferredAmt) + '</span></td></tr>';
           }
 
           if (changeAmt > 0n) {
-            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + linkAddress(fromAddr) + ' <span class="muted">(change)</span></td><td><span>' + formatKas(changeAmt, true) + '</span></td></tr>';
+            html += '<tr><td>' + linkAddress(fromAddr) + '</td><td>' + linkAddress(fromAddr) + ' <span class="muted">(change)</span></td><td><span>' + formatKas(changeAmt) + '</span></td></tr>';
           }
         });
       }

@@ -469,10 +469,10 @@ function renderSummary(){
     }catch{ return "-"; }
   };
 
-  preminted.innerHTML = `${formatTokenAmount(premintedRaw, tokenDec)}${pctOfMax(premintedRaw) === "-" ? "" : ` (${pctOfMax(premintedRaw)})`}`;
-  burned.innerHTML = `${formatTokenAmount(burnedRaw, tokenDec)}${pctOfMax(burnedRaw) === "-" ? "" : ` (${pctOfMax(burnedRaw)})`}`;
-  circ.innerHTML = `${formatTokenAmount2(circRaw, tokenDec)}${pctOfMax(circRaw) === "-" ? "" : ` (${pctOfMax(circRaw)})`}`;
-  max.innerHTML = `${formatTokenAmount(maxRaw, tokenDec)}${maxBig > 0n ? " (100.00%)" : "-"}`;
+  preminted.innerHTML = `${pctOfMax(premintedRaw) === "-" ? "" : `<span class="muted">(${pctOfMax(premintedRaw)})</span> `}${formatTokenAmount(premintedRaw, tokenDec)}`;
+  burned.innerHTML = `${pctOfMax(burnedRaw) === "-" ? "" : `<span class="muted">(${pctOfMax(burnedRaw)})</span> `}${formatTokenAmount(burnedRaw, tokenDec)}`;
+  circ.innerHTML = `${pctOfMax(circRaw) === "-" ? "" : `<span class="muted">(${pctOfMax(circRaw)})</span> `}${formatTokenAmount2(circRaw, tokenDec)}`;
+  max.innerHTML = `${maxBig > 0n ? `<span class="muted">(100.00%)</span> ` : ""}${maxBig > 0n ? formatTokenAmount(maxRaw, tokenDec) : "-"}`;
 
   holders.textContent = tokenInfo?.holderTotal != null ? withSeparators(tokenInfo.holderTotal) : "-";
   transfers.textContent = tokenInfo?.transferTotal != null ? withSeparators(tokenInfo.transferTotal) : "-";
