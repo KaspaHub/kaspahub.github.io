@@ -1463,13 +1463,6 @@
 	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
-	"name": "KRChange",
-	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
-	"link": "https://krchange.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/krchange.webp",
-	"features": ["cex", "dex", "withdrawals"]
-},
-{
 	"name": "MEXC",
 	"description": "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
 	"link": "https://www.mexc.com",
