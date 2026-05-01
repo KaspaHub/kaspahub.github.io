@@ -109,11 +109,6 @@ time {
 	font-size: 0.9em;
 }
 
-
-:root {
-
-}
-
 html#light {
 	--background-color: #F7F8F9;
 	--border-color: #c0cedd;
@@ -570,7 +565,7 @@ img {
 	box-sizing: border-box;
 	word-wrap: break-word;
 	max-width: 800px;
-	max-height: 800px;
+	max-height: 1200px;
 	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 20px;
@@ -702,6 +697,7 @@ code {
 	font-size: 1rem;
 	cursor: pointer;
 	color: inherit;
+	width: fit-content;
 }
 
 /* theme switcher v */
@@ -1136,6 +1132,7 @@ dialog {
 .loading {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 10px;
 	font-size: 1.5em;
 }
@@ -1237,9 +1234,10 @@ dialog {
 	max-width: 420px;
 	padding: 10px 12px;
 	border-radius: 12px;
-	border: 1px solid #000000;
-	background: #FFFFDE;
-	color: #040404;
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	background-color: rgba(255, 255, 255, 0.15);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.17);
 }
 
 .toast .m {
