@@ -32,7 +32,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-<script defer src="/assets/scripts/main.js?v=1"></script>
+<script defer src="/assets/scripts/main.js"></script>
 
 <link rel="manifest" href="/explorer/manifest.json" />
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
@@ -643,7 +643,7 @@ function renderAll(pageTxs, addr) {
     const hash = String(tx.transaction_id || "-");
     const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
     const net = getNetChange(tx, addr);
-    const amt = formatKas(net, 2, true);
+    const amt = formatKas(net, 1, true);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;

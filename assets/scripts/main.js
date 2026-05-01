@@ -205,7 +205,7 @@ function formatKas(net, type = 1, wrap = false) {
     else if (absN >= 1e9) result = (n / 1e9).toFixed(2) + 'B';
     else if (absN >= 1e6) result = (n / 1e6).toFixed(2) + 'M';
     else if (absN >= 1e3) result = (n / 1e3).toFixed(1) + 'K';
-    else result = Number(n.toFixed(2)).toLocaleString("en-US");
+    else result = n;
 
   } else if (type === 3) {
     const absN = Math.abs(n);
