@@ -105,6 +105,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+    "name": "KBeam",
+    "description": "Decentralized messaging and authentication app on Kaspa. Fully encrypted with no phone number or personal data required. Includes Auth Gateway for passwordless wallet login on websites.",
+    "link": "https://kbeam.app",
+    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kbeam.webp",
+    "features": ["social"]
+},
+{
 	"name": "KaChat",
 	"description": "Private, decentralized messaging application powered by the Kaspa network using the Kasia protocol.",
 	"link": "https://linktr.ee/KaChat_",
