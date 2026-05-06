@@ -258,7 +258,7 @@ let enabledChains = {};
 
 chains.forEach(c => enabledChains[c.name] = false);
 
-const defaults = ["Kaspa (KAS)", "Solana (SOL)", "Internet Computer (ICP)", "DigiByte (DGB)", "Sei (SEI)", "BNB Chain (BNB)", "Polygon (POL)", "XRP (XRP)", "Ethereum (ETH)", "Cardano (ADA)", "Litecoin (LTC)", "Bitcoin (BTC)"];
+const defaults = ["Kaspa (KAS)", "Solana (SOL)", "Toncoin (TON)", "Internet Computer (ICP)", "DigiByte (DGB)", "BNB Chain (BNB)", "Polygon (POL)", "XRP (XRP)", "Ethereum (ETH)", "Cardano (ADA)", "Litecoin (LTC)", "Bitcoin (BTC)"];
 defaults.forEach(name => enabledChains[name] = true);
 
 const chainList = document.getElementById("chain-list");
