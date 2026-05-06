@@ -188,8 +188,8 @@ async function formatShortPrice(value = KASVALUE, toCurrency = "USD", amount = 1
   return symbol + Number(converted.toFixed(2)).toLocaleString("en-US");
 }
 
-function formatKas(net, type = 1, wrap = false) {
-  const n = Number(net) / 1e8;
+function formatNumber(net, type = 1) {
+  const n = net;
   let result;
 
   if (type === 1) {
@@ -227,21 +227,7 @@ function formatKas(net, type = 1, wrap = false) {
     result = String(n);
   }
 
-  if (wrap) {
-
-    let sign = "";
-    let color = "";
-
-      sign = n > 0 ? "+" : "";
-      color = n > 0
-        ? ' style="color:#2ee59d"'
-        : (n < 0 ? ' style="color:#ff6b6b"' : "");
-
-    return `<span${color}>${sign}${result} KAS</span>`;
-
-  } else {
-    return `${result} KAS`;
-  }
+    return result;
 
 }
 

@@ -230,10 +230,10 @@ async function updatePage(kaspaValue) {
   void priceBox.offsetWidth;
   priceBox.classList.add("updated");
 
-  marketCapBox.textContent = await formatPrice(kaspaValue, CURRENCY, CIRCSUPPLY, 0);
-  fdvBox.textContent = await formatPrice(kaspaValue, CURRENCY, MAXSUPPLY, 0);
-  circBox.textContent = `ʞ ${CIRCSUPPLY.toLocaleString()}`;
-  maxBox.textContent = `ʞ ${MAXSUPPLY.toLocaleString()}`;
+  marketCapBox.textContent = await formatShortPrice(kaspaValue, CURRENCY, CIRCSUPPLY, 0);
+  fdvBox.textContent = await formatShortPrice(kaspaValue, CURRENCY, MAXSUPPLY, 0);
+  circBox.textContent = `ꓘ${formatNumber(CIRCSUPPLY, 2)}`;
+  maxBox.textContent = `ꓘ${formatNumber(MAXSUPPLY, 2)}`;
 
   let twitterMeta = document.querySelector('meta[name="twitter:title"]');
   if (!twitterMeta) {

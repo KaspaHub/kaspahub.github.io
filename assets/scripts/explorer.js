@@ -92,6 +92,63 @@ function sanitizeSearch(query) {
   return query;
 }
 
+function formatKas(net, type = 1, wrap = false) {
+  const n = Number(net) / 1e8;
+  let result;
+
+  if (type === 1) {
+    result = n.toLocaleString("en-US", {
+      minimumFractionDigits: 8,
+      maximumFractionDigits: 8
+    });
+
+  } else if (type === 2) {
+    const absN = Math.abs(n);
+
+    if (absN >= 1e12) result = (n / 1e12).toFixed(2) + 'T';
+    else if (absN >= 1e9) result = (n / 1e9).toFixed(2) + 'B';
+    else if (absN >= 1e6) result = (n / 1e6).toFixed(2) + 'M';
+    else if (absN >= 1e3) result = (n / 1e3).toFixed(1) + 'K';
+    else result = n;
+
+  } else if (type === 3) {
+    const absN = Math.abs(n);
+    let decimals;
+
+    if (absN >= 1_000_000) decimals = 2;
+    else if (absN >= 10_000) decimals = 4;
+    else if (absN >= 1_000) decimals = 5;
+    else if (absN >= 100) decimals = 6;
+    else if (absN >= 10) decimals = 7;
+    else decimals = 8;
+
+    result = n.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+
+  } else {
+    result = String(n);
+  }
+
+  if (wrap) {
+
+    let sign = "";
+    let color = "";
+
+      sign = n > 0 ? "+" : "";
+      color = n > 0
+        ? ' style="color:#2ee59d"'
+        : (n < 0 ? ' style="color:#ff6b6b"' : "");
+
+    return `<span${color}>${sign}${result} KAS</span>`;
+
+  } else {
+    return `${result} KAS`;
+  }
+
+}
+
 async function explorerSearch(query, source = '[unknown] ') {
 
   // searchQuerySubmit.disabled = true;
