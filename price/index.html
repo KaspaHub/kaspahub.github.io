@@ -125,6 +125,21 @@ const circBox = document.getElementById("circBox");
 const maxBox = document.getElementById("maxBox");
 const msg = document.getElementById('msg');
 
+function getCirculatingSupply() {
+  fetch("https://api.kaspa.org/info/coinsupply/circulating")
+    .then(res => res.json())
+    .then(data => {
+      if (typeof data === "number" && !isNaN(data)) {
+        CIRCSUPPLY = data;
+        console.log("%c[getCirculatingSupply API] %s", "color: #9980FF;", CIRCSUPPLY);
+      }
+    })
+    .catch(err => {
+      console.warn("Using fallback circulating supply:", err);
+    });
+}
+getCirculatingSupply();
+
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("load-chart-btn");
   const chartContainer = document.getElementById("chartContainer");
@@ -179,21 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-function getCirculatingSupply() {
-  fetch("https://api.kaspa.org/info/coinsupply/circulating")
-    .then(res => res.json())
-    .then(data => {
-      if (typeof data === "number" && !isNaN(data)) {
-        CIRCSUPPLY = data;
-        console.log("%c[getCirculatingSupply API] %s", "color: #9980FF;", CIRCSUPPLY);
-      }
-    })
-    .catch(err => {
-      console.warn("Using fallback circulating supply:", err);
-    });
-}
 
 function getPrice(kaspaValue) {
   fetch("https://api.kaspa.org/info/price")

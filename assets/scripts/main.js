@@ -27,7 +27,7 @@ const exchangeRates = {
 };
 
 const MAXSUPPLY = 28704026601;
-let CIRCSUPPLY = 27287908721;
+let CIRCSUPPLY = 27416713166;
 
 let KASPRICE = "$0.035";
 let USDRATE = 1;
