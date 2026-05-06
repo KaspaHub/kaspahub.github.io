@@ -21,6 +21,34 @@
 	"features": ["reviewed", "blogs"]
 },
 {
+	"name": "Kaspa Kii",
+	"description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
+	"link": "https://kaspa-kii.org",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kii.webp",
+	"features": ["reviewed", "videos"]
+},
+{
+	"name": "Kaspa Eco Foundation",
+	"description": "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
+	"link": "https://www.kaspafoundation.org",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kef.webp",
+	"features": ["reviewed", "videos"]
+},
+{
+	"name": "Kasplex",
+	"description": "First EVM-compatible programmable Layer 2 on Kaspa L1, enabling KRC20 tokens, KRC721 NFTs, and smart contracts with open-source indexer and APIs for scalable dApps.",
+	"link": "https://kasplex.org",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasplex.webp",
+	"features": ["reviewed", "layer2"]
+},
+{
+	"name": "Igra Labs",
+	"description": "An EVM-compatible programmable Layer 2 on Kaspa L1, enabling smart contracts with atomic composability and interoperability across VMs like Solana VM and WASM for scalable DeFi dApps.",
+	"link": "https://igralabs.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/igralabs.webp",
+	"features": ["reviewed", "layer2"]
+},
+{
 	"name": "KasMap",
 	"description": "A community-driven platform for Kaspa, enabling users to find merchants, connect with local communities, join events, compete on leaderboards, try Kaspa apps, and promote real-world $KAS adoption.",
 	"link": "https://kasmap.org",
@@ -63,32 +91,11 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "Kaspa Kii",
-	"description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
-	"link": "https://kaspa-kii.org",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kii.webp",
-	"features": ["reviewed", "videos"]
-},
-{
-	"name": "Kaspa Eco Foundation",
-	"description": "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
-	"link": "https://www.kaspafoundation.org",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kef.webp",
-	"features": ["reviewed", "videos"]
-},
-{
-	"name": "Kasplex",
-	"description": "First EVM-compatible programmable Layer 2 on Kaspa L1, enabling KRC20 tokens, KRC721 NFTs, and smart contracts with open-source indexer and APIs for scalable dApps.",
-	"link": "https://kasplex.org",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasplex.webp",
-	"features": ["reviewed", "layer2"]
-},
-{
-	"name": "Igra Labs",
-	"description": "An EVM-compatible programmable Layer 2 on Kaspa L1, enabling smart contracts with atomic composability and interoperability across VMs like Solana VM and WASM for scalable DeFi dApps.",
-	"link": "https://igralabs.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/igralabs.webp",
-	"features": ["reviewed", "layer2"]
+	"name": "Kaspa NFT Hub",
+	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, statistics (volume, floor, minted), and receive real-time Telegram alerts.",
+	"link": "https://kasnfthub.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasnfthub.webp",
+	"features": ["reviewed", "analytics"]
 },
 {
 	"name": "KNS",
@@ -105,11 +112,11 @@
 	"features": ["reviewed", "social"]
 },
 {
-    "name": "KBeam",
-    "description": "Decentralized messaging and authentication app on Kaspa. Fully encrypted with no phone number or personal data required. Includes Auth Gateway for passwordless wallet login on websites.",
-    "link": "https://kbeam.app",
-    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kbeam.webp",
-    "features": ["social"]
+	"name": "KBeam",
+	"description": "Decentralized messaging and authentication app on Kaspa. Fully encrypted with no phone number or personal data required. Includes Auth Gateway for passwordless wallet login on websites.",
+	"link": "https://kbeam.app",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kbeam.webp",
+	"features": ["social"]
 },
 {
 	"name": "KaChat",
@@ -238,11 +245,11 @@
 	"features": ["marketplace", "mining"]
 },
 {
-    "name": "KasSigner",
-    "description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
-    "link": "https://kassigner.org",
-    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kassigner.webp",
-    "features": ["utilities"]
+	"name": "KasSigner",
+	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
+	"link": "https://kassigner.org",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kassigner.webp",
+	"features": ["utilities"]
 },
 {
 	"name": "Arkiv File Storage",
@@ -357,11 +364,11 @@
 	"features": ["reviewed", "security", "utilities"]
 },
 {
-    "name": "KasProof",
-    "description": "Trustless proof-of-existence platform on Kaspa. Permanently timestamp any file on the BlockDAG using client-side SHA-256 hashing with no accounts or uploads required.",
-    "link": "https://kasproof.com",
-    "logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasranks.webp",
-    "features": ["utilities"]
+	"name": "KasProof",
+	"description": "Trustless proof-of-existence platform on Kaspa. Permanently timestamp any file on the BlockDAG using client-side SHA-256 hashing with no accounts or uploads required.",
+	"link": "https://kasproof.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasranks.webp",
+	"features": ["utilities"]
 },
 {
 	"name": "KasStamp",
