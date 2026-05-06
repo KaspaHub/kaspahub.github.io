@@ -168,13 +168,6 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
-	"name": "TheCryptoSky",
-	"description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
-	"link": "https://thecryptosky.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/thecryptosky.webp",
-	"features": ["jobs", "marketplace"]
-},
-{
 	"name": "KasMart",
 	"description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
 	"link": "https://kasmart.org",
@@ -518,11 +511,18 @@
 	"features": ["reviewed", "blogs"]
 },
 {
+	"name": "Kaspalytics",
+	"description": "A platform providing on-chain analysis of the Kaspa network, featuring real-time data on hashrate, difficulty, transactions, supply, and addresses, with tools like HODL waves and UTXO analytics.",
+	"link": "https://www.kaspalytics.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+	"features": ["reviewed", "analytics", "visualizer"]
+},
+{
 	"name": "Kaspa Daily",
 	"description": "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
 	"link": "https://kaspadaily.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspadaily.webp",
-	"features": ["reviewed", "blogs"]
+	"features": ["reviewed", "analytics", "blogs"]
 },
 {
 	"name": "Kasbun",
@@ -639,7 +639,7 @@
 {
 	"name": "Kaspero Pay",
 	"description": "Payment processing for any website. A no-code solution to add a 'Pay with Kaspa' button to your website in minutes. Embed one line of code for direct, non-custodial payments to your wallet.",
-	"link": "https://kaspa-store.com/merchant",
+	"link": "https://kasperopay.com",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasperopay.webp",
 	"features": ["reviewed", "development", "payments"]
 },
@@ -1069,13 +1069,6 @@
 	"link": "https://explorer.kaspa.org",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspaexplorer.webp",
 	"features": ["reviewed", "blockExplorer"]
-},
-{
-	"name": "Kaspalytics",
-	"description": "A platform providing on-chain analysis of the Kaspa network, featuring real-time data on hashrate, difficulty, transactions, supply, and addresses, with tools like HODL waves and UTXO analytics.",
-	"link": "https://www.kaspalytics.com",
-	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
-	"features": ["reviewed", "blockExplorer", "visualizer"]
 },
 {
 	"name": "Kaspa Explorer",
