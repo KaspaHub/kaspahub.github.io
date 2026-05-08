@@ -922,6 +922,18 @@ button, select, textarea, input, div[contenteditable="true"] {
 	font-family: inherit;
 }
 
+input[type="range"] {
+	-webkit-appearance: auto;
+	appearance: auto;
+	background: revert;
+	border: revert;
+	box-shadow: revert;
+	outline: revert;
+	width: auto;
+	padding: 0;
+	min-height: auto;
+}
+
 option {
 	color: black;
 }
