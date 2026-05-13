@@ -238,6 +238,13 @@
 	"features": ["marketplace", "mining"]
 },
 {
+	"name": "MyKAI",
+	"description": "One-click installer to run a full Kaspa node. Makes running a node accessible for non-technical users with background operation, auto-start, and live network counter.",
+	"link": "https://mykai.dev",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/mykai.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
@@ -775,6 +782,13 @@
 	"link": "https://kaspacalc.net",
 	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
 	"features": ["reviewed", "calculator", "utilities"]
+},
+{
+	"name": "Kaspa Explained",
+	"description": "Independent plain-English educational resource and research guide for Kaspa. Provides clear explanations of real-time Proof of Work, blockDAG, GHOSTDAG, current live network status (Crescendo 10 BPS), and more.",
+	"link": "https://kaspaexplained.com",
+	"logo": "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp",
+	"features": ["reviewed", "blogs"]
 },
 {
 	"name": "Kaspa News",

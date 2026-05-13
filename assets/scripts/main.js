@@ -358,6 +358,21 @@ function share() {
   }
 }
 
+function shareText(title, text) {
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: text
+    }).catch(console.error);
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      addToast("Copied!", "Copied to clipboard");
+    }).catch(() => {
+      showDialog("Sharing not supported in this browser.");
+    });
+  }
+}
+
 function copyToClipboard(textToCopy) {
   if (!textToCopy) return;
   navigator.clipboard.writeText(textToCopy)
