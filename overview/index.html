@@ -178,13 +178,35 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="info-value">Instant</div>
   </div>
 
+</div>
 
+<div class="logo-section">
+  <div style="text-align:center; margin:60px 0 60px;">
+    <h2 style="font-size:3em;">Kaspa Official Logo</h2>
+    <p>Primary Color #70C7BA, (RGB 111, 199, 186 CMYK 54, 0, 33, 0 PANTONE 570 C)</p>
+  </div>
+  <div class="logos-grid">
+    <div class="logo-card theme-1">
+      <img src="/assets/logos/kaspa/kaspa-icon.png" alt="Kaspa Symbol Icon Logo media kit" class="logo-preview">
+      <div class="download-row">
+        <a href="/assets/logos/kaspa/kaspa-icon.png" download class="dl-btn">PNG</a>
+        <a href="/assets/logos/kaspa/kaspa-icon.svg" download class="dl-btn">SVG</a>
+      </div>
+    </div>
+    <div class="logo-card theme-1">
+      <img src="/assets/logos/kaspa/kaspa-logo.png" alt="Kaspa Logo Branding media kit" class="logo-preview">
+      <div class="download-row">
+        <a href="/assets/logos/kaspa/kaspa-logo.png" download class="dl-btn">PNG</a>
+        <a href="/assets/logos/kaspa/kaspa-logo.svg" download class="dl-btn">SVG</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
 
 <div style="text-align:center; margin:60px 0;">
-  <h1 style="font-size:3em;">Kaspa Ecosystem Overview</h1>
+  <h2 style="font-size:3em;">Kaspa Ecosystem Overview</h2>
 </div>
 
 <div class="ecosystem">
@@ -591,7 +613,30 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 }
 
+.logo-section {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
 
+.logo-preview {
+  max-width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+.download-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
 </style>
 
 </body>

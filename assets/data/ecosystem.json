@@ -242,7 +242,7 @@
 	"description": "One-click installer to run a full Kaspa node. Makes running a node accessible for non-technical users with background operation, auto-start, and live network counter.",
 	"link": "https://mykai.dev",
 	"logo": "https://kaspahub.org/assets/logos/mykai.webp",
-	"features": ["reviewed", "utilities"]
+	"features": ["verified", "utilities"]
 },
 {
 	"name": "KasSigner",
@@ -578,7 +578,7 @@
 	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
 	"link": "https://mykai.app",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "ai"]
+	"features": ["verified", "ai"]
 },
 {
 	"name": "KIGS",
