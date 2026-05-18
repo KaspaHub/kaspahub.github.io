@@ -182,6 +182,13 @@
 	"features": ["reviewed", "jobs"]
 },
 {
+	"name": "SilverScript Studio",
+	"description": "Browser-based IDE for writing, compiling, and deploying SilverScript smart contracts on Kaspa.",
+	"link": "https://silverscriptstudio.com",
+	"logo": "https://kaspahub.org/assets/logos/silverscriptstudio.webp",
+	"features": ["reviewed", "development"]
+},
+{
 	"name": "Kasway",
 	"description": "The world’s first decentralized, open-source point-of-sale solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	"link": "https://github.com/Kasway-Tech/pos",
@@ -1111,6 +1118,13 @@
 	"link": "https://kassandra.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kassandra.webp",
 	"features": ["reviewed", "blockExplorer"]
+},
+{
+	"name": "Kaspa Radar",
+	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
+	"link": "https://kasparadar.com/",
+	"logo": "https://kaspahub.org/assets/logos/kasperolabs.webp",
+	"features": ["reviewed", "visualizer", "blockExplorer"]
 },
 {
 	"name": "Kasplex Explorer",
