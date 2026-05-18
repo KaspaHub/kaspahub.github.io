@@ -245,6 +245,13 @@
 	"features": ["verified", "utilities"]
 },
 {
+	"name": "Kaspa Notary",
+	"description": "Document notarization on the Kaspa network. Upload PDFs, sign with any Kaspa wallet (single or two-party agreements), and seal immutable proofs with timestamps, hashes, and addresses on the BlockDAG.",
+	"link": "https://kaspanotary.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
