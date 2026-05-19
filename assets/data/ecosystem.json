@@ -98,6 +98,13 @@
 	"features": ["verified", "analytics"]
 },
 {
+	"name": "Kaspa Memes",
+	"description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
+	"link": "https://kaspamemes.io",
+	"logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
+	"features": ["analytics"]
+},
+{
 	"name": "KNS",
 	"description": "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
