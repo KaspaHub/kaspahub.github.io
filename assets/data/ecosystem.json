@@ -238,6 +238,20 @@
 	"features": ["cryptoCard"]
 },
 {
+	"name": "Kaspa Links",
+	"description": "Non-custodial Kaspa payment links — share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
+	"link": "https://kaspalinks.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspalinks.webp",
+	"features": ["reviewed", "payments"]
+},
+{
+	"name": "kas.coffee",
+	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	"link": "https://kas.coffee",
+	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
+	"features": ["reviewed", "payments"]
+},
+{
 	"name": "KASCompute",
 	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
 	"link": "https://kascompute.org",
@@ -278,13 +292,6 @@
 	"link": "https://arkiv.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed"]
-},
-{
-	"name": "kas.coffee",
-	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
-	"link": "https://kas.coffee",
-	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
-	"features": ["reviewed", "payments"]
 },
 {
 	"name": "TTT",
