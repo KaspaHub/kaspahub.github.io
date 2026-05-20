@@ -280,6 +280,13 @@
 	"features": ["reviewed", "utilities"]
 },
 {
+	"name": "Kaspa Radar",
+	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
+	"link": "https://kasparadar.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+	"features": ["reviewed", "visualizer", "analytics"]
+},
+{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
@@ -861,160 +868,6 @@
 	"features": ["reviewed", "utilities"]
 },
 {
-	"name": "Coineo",
-	"description": "Multi-chain crypto portfolio tracker with advanced analytics, real-time insights, unified dashboard for all wallets, performance charts, and historical holdings visualization. Supports Kaspa, Kasplex, and soon Igra.",
-	"link": "https://coineo.app",
-	"logo": "https://kaspahub.org/assets/logos/coineo.webp",
-	"features": ["analytics"]
-},
-{
-	"name": "TradingView",
-	"description": "A price-tracking and charting platform offering real-time cryptocurrency data, and interactive charts with technical indicators.",
-	"link": "https://www.tradingview.com",
-	"logo": "https://kaspahub.org/assets/logos/tradingview.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinMarketCap",
-	"description": "A platform providing cryptocurrency prices, charts, market capitalizations, tools for technical analysis, derivatives data, and exchange information, acquired by Binance.",
-	"link": "https://coinmarketcap.com/currencies/kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/coinmarketcap.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinGecko",
-	"description": "A cryptocurrency data aggregator providing real-time prices, market analytics, customizable charts for performance comparison, and portfolio tracking tools.",
-	"link": "https://www.coingecko.com/en/coins/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/coingecko.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinStats",
-	"description": "An all-in-one price-tracking platform for cryptocurrency portfolio management, tracking wallets and exchanges, DeFi protocols, with analytics tools and calculators.",
-	"link": "https://coinstats.app/coins/kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/coinstats.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "Live Coin Watch",
-	"description": "A price-tracking platform offering real-time cryptocurrency prices, charts, portfolio tracking, and overviews of market trends including top assets and liquidity monitoring.",
-	"link": "https://www.livecoinwatch.com/price/Kaspa-KAS",
-	"logo": "https://kaspahub.org/assets/logos/livecoinwatch.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinCodex",
-	"description": "A platform delivering live cryptocurrency prices, charts, market data, options for customizing watchlists, and analysis of historical performance across exchanges and sectors.",
-	"link": "https://coincodex.com/crypto/kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/coincodex.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinCarp",
-	"description": "A platform offering comprehensive cryptocurrency data including prices, charts, market trends, trading volumes across exchanges, and an events calendar for market-related activities.",
-	"link": "https://www.coincarp.com/currencies/kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/coincarp.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CryptoRank",
-	"description": "A cryptocurrency data aggregator offering price-tracking, market capitalization rankings, global market analytics, blockchain metrics, fundraising insights, vesting schedules, and API for real-time and historical data.",
-	"link": "https://cryptorank.io/price/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/cryptorank.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinPaprika",
-	"description": "A cryptocurrency market research aggregator providing data from numerous markets, including prices, charts, market capitalizations, and detailed coin information via API.",
-	"link": "https://coinpaprika.com/coin/kas-kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/coinpaprika.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinGlass",
-	"description": "A market data platform tracking derivatives, options, spot markets, order flow, liquidity, with tools like liquidation heatmaps and indicators.",
-	"link": "https://www.coinglass.com/currencies/KAS",
-	"logo": "https://kaspahub.org/assets/logos/coinglass.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "DropsTab",
-	"description": "A cryptocurrency platform providing real-time prices, charts, market cap data, top gainers, new activities, global metrics like volume and dominance, and customizable sorting tools.",
-	"link": "https://dropstab.com/coins/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/dropstab.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "Messari",
-	"description": "A cryptocurrency data platform providing live prices, charts, market data, analytics, and market overviews with metrics like cap, volume, and dominance.",
-	"link": "https://messari.io/project/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/messari.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "TokenInsight",
-	"description": "A cryptocurrency data platform offering real-time prices, ratings, market cap rankings, charts, trading volumes for spot and derivatives, dominance metrics, and global open interest data.",
-	"link": "https://tokeninsight.com/en/coins/kaspa/overview",
-	"logo": "https://kaspahub.org/assets/logos/tokeninsight.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "Delta",
-	"description": "A cryptocurrency investment price-tracking platform that connects assets from wallets and exchanges for unified monitoring, real-time prices, custom notifications, and performance analytics tools, acquired by eToro.",
-	"link": "https://delta.app/en/crypto/kaspa/",
-	"logo": "https://kaspahub.org/assets/logos/delta.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinRanking",
-	"description": "A cryptocurrency data platform providing real-time prices, market caps, percentage changes, global market data, top gainers/losers, exchange volumes, and market trend charts.",
-	"link": "https://coinranking.com/coin/V8GxkwWow+kaspa-kas",
-	"logo": "https://kaspahub.org/assets/logos/coinranking.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinCheckup",
-	"description": "A cryptocurrency data platform providing live prices, charts, market cap rankings, real-time data across exchanges, global metrics, and tracking with customizable time periods.",
-	"link": "https://coincheckup.com/coins/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/coincheckup.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "The Coin Detective",
-	"description": "A cryptocurrency data platform providing market cap, price, volume data, price change indicators across time frames, trend graphs, and customizable filters for market analytics.",
-	"link": "https://thecoindetective.com/coin/Kaspa/11710",
-	"logo": "https://kaspahub.org/assets/logos/thecoindetective.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinLore",
-	"description": "A price-tracking platform offering live prices, market capitalization rankings, trading volume, real-time updates, percentage changes, market overviews, top gainers and losers.",
-	"link": "https://www.coinlore.com/coin/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/coinlore.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CoinCap",
-	"description": "A platform providing real-time prices, market capitalizations, trading volumes, 24-hour changes, exchange volumes, dominance index, and API for data access.",
-	"link": "https://coincap.io/assets/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/coincap.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "CryptoCompare",
-	"description": "A platform providing real-time prices, trading volumes, market cap rankings, interactive charts, live data updates, and exchange reviews, acquired by CoinDesk.",
-	"link": "https://www.cryptocompare.com/coins/kas/overview",
-	"logo": "https://kaspahub.org/assets/logos/cryptocompare.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "P.Cash",
-	"description": "A cryptocurrency platform focused on analytics, prices, changes, volumes, market caps in customizable tables, high-volume tracking, and a non-custodial multi-wallet app with privacy features.",
-	"link": "https://p.cash/en/coins/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/pcash.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
 	"name": "Kaspa Pool",
 	"description": "A Kaspa mining pool offering PPLNS and SOLO payout systems with a low fee, designed for efficient and reliable mining rewards.",
 	"link": "https://kaspa-pool.org",
@@ -1132,13 +985,6 @@
 	"link": "https://kassandra.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kassandra.webp",
 	"features": ["reviewed", "blockExplorer"]
-},
-{
-	"name": "Kaspa Radar",
-	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
-	"link": "https://kasparadar.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "visualizer", "blockExplorer"]
 },
 {
 	"name": "Kasplex Explorer",
@@ -1426,6 +1272,160 @@
 	"link": "https://coinrabbit.io/wallet/",
 	"logo": "https://kaspahub.org/assets/logos/coinrabbit.webp",
 	"features": ["wallet"]
+},
+{
+	"name": "Coineo",
+	"description": "Multi-chain crypto portfolio tracker with advanced analytics, real-time insights, unified dashboard for all wallets, performance charts, and historical holdings visualization. Supports Kaspa, Kasplex, and soon Igra.",
+	"link": "https://coineo.app",
+	"logo": "https://kaspahub.org/assets/logos/coineo.webp",
+	"features": ["analytics"]
+},
+{
+	"name": "TradingView",
+	"description": "A price-tracking and charting platform offering real-time cryptocurrency data, and interactive charts with technical indicators.",
+	"link": "https://www.tradingview.com",
+	"logo": "https://kaspahub.org/assets/logos/tradingview.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinMarketCap",
+	"description": "A platform providing cryptocurrency prices, charts, market capitalizations, tools for technical analysis, derivatives data, and exchange information, acquired by Binance.",
+	"link": "https://coinmarketcap.com/currencies/kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/coinmarketcap.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinGecko",
+	"description": "A cryptocurrency data aggregator providing real-time prices, market analytics, customizable charts for performance comparison, and portfolio tracking tools.",
+	"link": "https://www.coingecko.com/en/coins/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/coingecko.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinStats",
+	"description": "An all-in-one price-tracking platform for cryptocurrency portfolio management, tracking wallets and exchanges, DeFi protocols, with analytics tools and calculators.",
+	"link": "https://coinstats.app/coins/kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/coinstats.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Live Coin Watch",
+	"description": "A price-tracking platform offering real-time cryptocurrency prices, charts, portfolio tracking, and overviews of market trends including top assets and liquidity monitoring.",
+	"link": "https://www.livecoinwatch.com/price/Kaspa-KAS",
+	"logo": "https://kaspahub.org/assets/logos/livecoinwatch.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinCodex",
+	"description": "A platform delivering live cryptocurrency prices, charts, market data, options for customizing watchlists, and analysis of historical performance across exchanges and sectors.",
+	"link": "https://coincodex.com/crypto/kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/coincodex.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinCarp",
+	"description": "A platform offering comprehensive cryptocurrency data including prices, charts, market trends, trading volumes across exchanges, and an events calendar for market-related activities.",
+	"link": "https://www.coincarp.com/currencies/kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/coincarp.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CryptoRank",
+	"description": "A cryptocurrency data aggregator offering price-tracking, market capitalization rankings, global market analytics, blockchain metrics, fundraising insights, vesting schedules, and API for real-time and historical data.",
+	"link": "https://cryptorank.io/price/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/cryptorank.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinPaprika",
+	"description": "A cryptocurrency market research aggregator providing data from numerous markets, including prices, charts, market capitalizations, and detailed coin information via API.",
+	"link": "https://coinpaprika.com/coin/kas-kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/coinpaprika.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinGlass",
+	"description": "A market data platform tracking derivatives, options, spot markets, order flow, liquidity, with tools like liquidation heatmaps and indicators.",
+	"link": "https://www.coinglass.com/currencies/KAS",
+	"logo": "https://kaspahub.org/assets/logos/coinglass.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "DropsTab",
+	"description": "A cryptocurrency platform providing real-time prices, charts, market cap data, top gainers, new activities, global metrics like volume and dominance, and customizable sorting tools.",
+	"link": "https://dropstab.com/coins/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/dropstab.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Messari",
+	"description": "A cryptocurrency data platform providing live prices, charts, market data, analytics, and market overviews with metrics like cap, volume, and dominance.",
+	"link": "https://messari.io/project/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/messari.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "TokenInsight",
+	"description": "A cryptocurrency data platform offering real-time prices, ratings, market cap rankings, charts, trading volumes for spot and derivatives, dominance metrics, and global open interest data.",
+	"link": "https://tokeninsight.com/en/coins/kaspa/overview",
+	"logo": "https://kaspahub.org/assets/logos/tokeninsight.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Delta",
+	"description": "A cryptocurrency investment price-tracking platform that connects assets from wallets and exchanges for unified monitoring, real-time prices, custom notifications, and performance analytics tools, acquired by eToro.",
+	"link": "https://delta.app/en/crypto/kaspa/",
+	"logo": "https://kaspahub.org/assets/logos/delta.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinRanking",
+	"description": "A cryptocurrency data platform providing real-time prices, market caps, percentage changes, global market data, top gainers/losers, exchange volumes, and market trend charts.",
+	"link": "https://coinranking.com/coin/V8GxkwWow+kaspa-kas",
+	"logo": "https://kaspahub.org/assets/logos/coinranking.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinCheckup",
+	"description": "A cryptocurrency data platform providing live prices, charts, market cap rankings, real-time data across exchanges, global metrics, and tracking with customizable time periods.",
+	"link": "https://coincheckup.com/coins/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/coincheckup.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "The Coin Detective",
+	"description": "A cryptocurrency data platform providing market cap, price, volume data, price change indicators across time frames, trend graphs, and customizable filters for market analytics.",
+	"link": "https://thecoindetective.com/coin/Kaspa/11710",
+	"logo": "https://kaspahub.org/assets/logos/thecoindetective.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinLore",
+	"description": "A price-tracking platform offering live prices, market capitalization rankings, trading volume, real-time updates, percentage changes, market overviews, top gainers and losers.",
+	"link": "https://www.coinlore.com/coin/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/coinlore.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CoinCap",
+	"description": "A platform providing real-time prices, market capitalizations, trading volumes, 24-hour changes, exchange volumes, dominance index, and API for data access.",
+	"link": "https://coincap.io/assets/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/coincap.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "CryptoCompare",
+	"description": "A platform providing real-time prices, trading volumes, market cap rankings, interactive charts, live data updates, and exchange reviews, acquired by CoinDesk.",
+	"link": "https://www.cryptocompare.com/coins/kas/overview",
+	"logo": "https://kaspahub.org/assets/logos/cryptocompare.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "P.Cash",
+	"description": "A cryptocurrency platform focused on analytics, prices, changes, volumes, market caps in customizable tables, high-volume tracking, and a non-custodial multi-wallet app with privacy features.",
+	"link": "https://p.cash/en/coins/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/pcash.webp",
+	"features": ["reviewed", "analytics"]
 },
 {
 	"name": "Kraken",
