@@ -742,13 +742,6 @@
 	"features": ["reviewed", "development", "visualizer"]
 },
 {
-	"name": "KRCBOT",
-	"description": "KRCBOT features a Kaspa TPS visualizer comparing it to leading blockchains, with links and status for resources, API docs, and Kaspa ecosystem collaboration.",
-	"link": "https://krcbot.com",
-	"logo": "https://kaspahub.org/assets/logos/krcbot.webp",
-	"features": ["reviewed", "development", "visualizer"]
-},
-{
 	"name": "PPKAS",
 	"description": "A KRC-20 token on Kaspa, combining a meme token with the first play-to-earn (P2E) app in Telegram, allowing users to play mobile games, collect NFTs, and earn tokens while learning about the Kaspa ecosystem.",
 	"link": "https://ppkas.space",

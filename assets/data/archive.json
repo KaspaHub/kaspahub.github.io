@@ -28,6 +28,13 @@
   "features": ["reviewed", "solutions"]
 },
 {
+  "name": "KRCBOT",
+  "description": "KRCBOT features a Kaspa TPS visualizer comparing it to leading blockchains, with links and status for resources, API docs, and Kaspa ecosystem collaboration.",
+  "link": "https://krcbot.com",
+  "logo": "https://kaspahub.org/assets/logos/krcbot.webp",
+  "features": ["reviewed", "development", "visualizer"]
+},
+{
   "name": "Kaspa DAO",
   "description": "The first decentralized autonomous organization on the Kaspa network, funding innovation and supporting projects that advance decentralization, transparency, and community empowerment.",
   "link": "https://kaspadao.org",
