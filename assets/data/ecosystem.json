@@ -417,7 +417,7 @@
 	"description": "A platform for creating private, expiring tip pages with QR codes to share Kaspa addresses for requesting tips, donations, invoices, and more via SMS, email, or social media.",
 	"link": "https://www.kaspatips.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-white.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "payments"]
 },
 {
 	"name": "Zealous Swap",
