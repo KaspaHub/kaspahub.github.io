@@ -239,7 +239,7 @@
 },
 {
 	"name": "Kaspa Links",
-	"description": "Non-custodial Kaspa payment links — share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
+	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
 	"link": "https://kaspalinks.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspalinks.webp",
 	"features": ["reviewed", "payments"]
@@ -250,6 +250,13 @@
 	"link": "https://kas.coffee",
 	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
 	"features": ["reviewed", "payments"]
+},
+{
+	"name": "KasTip",
+	"description": "Browser extension that adds a tip button on every X profile. Send KAS directly to creators - non-custodial, peer-to-peer, no fees.",
+	"link": "https://kastip.app",
+	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
+	"features": ["payments"]
 },
 {
 	"name": "KASCompute",
