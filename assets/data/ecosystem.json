@@ -602,6 +602,13 @@
 	"features": ["reviewed", "education"]
 },
 {
+	"name": "Lyceum Protocol",
+	"description": "The premier Learn-to-Earn platform and education layer for crypto. Enables projects to deploy white-label academies with interactive courses, quizzes, token rewards on Kasplex L2, on-chain SBT diplomas, and NFT staking.",
+	"link": "https://lyceumprotocol.com",
+	"logo": "https://kaspahub.org/assets/logos/lyceumprotocol.webp",
+	"features": ["reviewed", "layer2", "education"]
+},
+{
 	"name": "BMT University",
 	"description": "A learn-to-earn educational platform offering in-depth courses on Kaspa technology and cryptocurrency topics, with interactive quizzes, progress tracking, certificates, and token rewards for completion.",
 	"link": "https://bmtuniversity.com",
