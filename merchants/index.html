@@ -41,11 +41,8 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
-<main id="container-2">
-<div class="intro">
-	<h1>Merchants</h1>
-	<p>Spend your Kaspa around the world.</p>
-</div>
+<main id="container-f">
+<div style="min-height: 50px; max-height: 50px;"></div>
 
 <iframe
   src="https://kasmap.org/embed/merchants?key=kaspahub-map-345gh-hui88-p43uz-l1f8x&search=true"
@@ -55,54 +52,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </main>
 
-<footer>
-
-<div id="information">
-<div class="social-icons">
-<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://tiptr.ee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
-<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
-</div>
-<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
-</div>
-
-<div id="advertisement">
-<!-- BEGIN AADS AD UNIT 2432158 -->
-
-<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
-                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
-        </div>
-
-<!-- END AADS AD UNIT 2432158 -->
-</div>
-
-<div id="resources">
-<ul class="section-list">
-<li><a href="https://tiptr.ee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
-<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
-</ul>
-</div>
-
-</footer>
-
 <style>
 #iframeCtn {
-     height: 700px; 
-     width: 100%; 
-     border-radius: 20px; 
-     margin-bottom: 150px; 
-     border: 1px solid var(--border-color);
+
+     flex: 1;
+     border: 0;
 }
 
-@media (max-aspect-ratio: 1/1) {
-    #iframeCtn {
-        height: 500px;
-    }
-}
 </style>
 
 </body>
