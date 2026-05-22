@@ -91,6 +91,20 @@
 	"features": ["reviewed", "analytics"]
 },
 {
+    "name": "Kassword",
+    "description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
+    "link": "https://kassword.com",
+    "logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+    "features": ["reviewed", "security", "utilities"]
+}
+{
+    "name": "Genesis Zero",
+    "description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
+    "link": "https://kasgenesiszero.com",
+    "logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+    "features": ["reviewed", "marketplace"]
+},
+{
 	"name": "Kaspa NFT Hub",
 	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, statistics (volume, floor, minted), and receive real-time Telegram alerts.",
 	"link": "https://kasnfthub.com",
@@ -221,7 +235,7 @@
 	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
 	"link": "https://www.kaskad.app",
 	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "layer2"]
 },
 {
 	"name": "FrostCard",
@@ -278,27 +292,6 @@
 	"link": "https://mykai.dev",
 	"logo": "https://kaspahub.org/assets/logos/mykai.webp",
 	"features": ["verified", "utilities"]
-},
-{
-	"name": "Kaspa Notary",
-	"description": "Document notarization on the Kaspa network. Upload PDFs, sign with any Kaspa wallet (single or two-party agreements), and seal immutable proofs with timestamps, hashes, and addresses on the BlockDAG.",
-	"link": "https://kaspanotary.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "Kaspa Radar",
-	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
-	"link": "https://kasparadar.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "visualizer", "analytics"]
-},
-{
-	"name": "KasSigner",
-	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
-	"link": "https://kassigner.org",
-	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
-	"features": ["utilities"]
 },
 {
 	"name": "Arkiv File Storage",
@@ -406,6 +399,27 @@
 	"features": ["reviewed", "security", "utilities"]
 },
 {
+	"name": "Kaspa Notary",
+	"description": "Document notarization on the Kaspa network. Upload PDFs, sign with any Kaspa wallet (single or two-party agreements), and seal immutable proofs with timestamps, hashes, and addresses on the BlockDAG.",
+	"link": "https://kaspanotary.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
+	"name": "Kaspa Radar",
+	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
+	"link": "https://kasparadar.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+	"features": ["reviewed", "visualizer", "analytics"]
+},
+{
+	"name": "KasSigner",
+	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
+	"link": "https://kassigner.org",
+	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
 	"name": "Kaspa Security Center",
 	"description": "A community initiative for reporting and investigating security incidents on Kaspa, with public reports, status tracking, and efforts to trace funds and alert exchanges and authorities.",
 	"link": "https://kaspasecuritycenter.com",
@@ -417,7 +431,7 @@
 	"description": "Trustless proof-of-existence platform on Kaspa. Permanently timestamp any file on the BlockDAG using client-side SHA-256 hashing with no accounts or uploads required.",
 	"link": "https://kasproof.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["utilities"]
+	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "KasStamp",
@@ -441,7 +455,7 @@
 	"features": ["reviewed", "payments"]
 },
 {
-	"name": "KaspaTips",
+	"name": "Kaspa Observer",
 	"description": "Read-only tracker for public Kaspa addresses. Track any Kaspa address in real time, organize them like a portfolio, and explore on-chain activity with a fast, privacy-first experience.",
 	"link": "https://www.kasobs.app",
 	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
@@ -627,7 +641,7 @@
 	"description": "A learn-to-earn educational platform offering in-depth courses on Kaspa technology and cryptocurrency topics, with interactive quizzes, progress tracking, certificates, and token rewards for completion.",
 	"link": "https://bmtuniversity.com",
 	"logo": "https://kaspahub.org/assets/logos/bmtuniversity.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "layer2"]
 },
 {
 	"name": "MyKai",
