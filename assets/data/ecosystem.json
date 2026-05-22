@@ -91,18 +91,18 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-    "name": "Kassword",
-    "description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
-    "link": "https://kassword.com",
-    "logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-    "features": ["reviewed", "security", "utilities"]
-}
+	"name": "Kassword",
+	"description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
+	"link": "https://kassword.com",
+	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+	"features": ["reviewed", "utilities"]
+},
 {
-    "name": "Genesis Zero",
-    "description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
-    "link": "https://kasgenesiszero.com",
-    "logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-    "features": ["reviewed", "marketplace"]
+	"name": "Genesis Zero",
+	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
+	"link": "https://kasgenesiszero.com",
+	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+	"features": ["reviewed", "marketplace"]
 },
 {
 	"name": "Kaspa NFT Hub",
