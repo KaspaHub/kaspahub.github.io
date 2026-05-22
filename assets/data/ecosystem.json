@@ -273,6 +273,13 @@
 	"features": []
 },
 {
+	"name": "Genesis Zero",
+	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
+	"link": "https://kasgenesiszero.com",
+	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
 	"name": "Proof of Prints",
 	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
 	"link": "https://proofofprints.com",
@@ -392,6 +399,13 @@
 	"features": ["reviewed", "security", "utilities"]
 },
 {
+	"name": "Kaspa Security Center",
+	"description": "A community initiative for reporting and investigating security incidents on Kaspa, with public reports, status tracking, and efforts to trace funds and alert exchanges and authorities.",
+	"link": "https://kaspasecuritycenter.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspasecuritycenter.webp",
+	"features": ["reviewed", "security", "utilities"]
+},
+{
 	"name": "Kaspa Notary",
 	"description": "Document notarization on the Kaspa network. Upload PDFs, sign with any Kaspa wallet (single or two-party agreements), and seal immutable proofs with timestamps, hashes, and addresses on the BlockDAG.",
 	"link": "https://kaspanotary.com",
@@ -411,20 +425,6 @@
 	"link": "https://kassword.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
 	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "Genesis Zero",
-	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
-	"link": "https://kasgenesiszero.com",
-	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "Kaspa Security Center",
-	"description": "A community initiative for reporting and investigating security incidents on Kaspa, with public reports, status tracking, and efforts to trace funds and alert exchanges and authorities.",
-	"link": "https://kaspasecuritycenter.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspasecuritycenter.webp",
-	"features": ["reviewed", "security", "utilities"]
 },
 {
 	"name": "KasProof",
