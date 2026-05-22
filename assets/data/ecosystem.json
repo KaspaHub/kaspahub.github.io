@@ -334,7 +334,7 @@
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
 	"features": []
-}
+},
 {
 	"name": "KasPlay",
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
@@ -798,11 +798,11 @@
 	"features": ["reviewed", "analytics", "visualizer", "calculator", "utilities"]
 },
 {
-    "name": "RK-Stratum",
-    "description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
-    "link": "https://rkstratum.rustykaspa.org",
-    "logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-    "features": ["mining", "utilities"]
+	"name": "RK-Stratum",
+	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
+	"link": "https://rkstratum.rustykaspa.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["mining", "utilities"]
 },
 {
 	"name": "Mining Now",
