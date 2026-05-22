@@ -1481,7 +1481,7 @@
 	"description": "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
 	"link": "https://uphold.com",
 	"logo": "https://kaspahub.org/assets/logos/uphold.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
+	"features": ["reviewed", "cex", "googleApplePay", "withdrawals"]
 },
 {
 	"name": "Topper",
@@ -1495,7 +1495,7 @@
 	"description": "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
 	"link": "https://www.bybit.com",
 	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "CoinEx",
@@ -1509,14 +1509,14 @@
 	"description": "AscendEX is a Singapore-based trading platform founded in 2018, offering crypto spot and futures trading.",
 	"link": "https://ascendex.com",
 	"logo": "https://kaspahub.org/assets/logos/ascendex.webp",
-	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "CoinW",
 	"description": "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
 	"link": "https://www.coinw.com",
 	"logo": "https://kaspahub.org/assets/logos/coinw.webp",
-	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading"]
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading"]
 },
 {
 	"name": "HTX",
@@ -1530,7 +1530,7 @@
 	"description": "Bitget is a Seychelles-based trading platform established in 2018, featuring crypto and copy trading.",
 	"link": "https://www.bitget.com",
 	"logo": "https://kaspahub.org/assets/logos/bitget.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading"]
+	"features": ["reviewed", "cex", "googleApplePay", "futuresTrading"]
 },
 {
 	"name": "Poloniex",
@@ -1544,7 +1544,7 @@
 	"description": "BingX is a Singapore-based trading platform founded in 2018, offering crypto and copy trading services.",
 	"link": "https://bingx.com",
 	"logo": "https://kaspahub.org/assets/logos/bingx.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
+	"features": ["reviewed", "cex", "futuresTrading"]
 },
 {
 	"name": "Neverless",
@@ -1558,21 +1558,21 @@
 	"description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
 	"link": "https://whitebit.com",
 	"logo": "https://kaspahub.org/assets/logos/whitebit.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "MEXC",
 	"description": "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
 	"link": "https://www.mexc.com",
 	"logo": "https://kaspahub.org/assets/logos/mexc.webp",
-	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading"]
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading"]
 },
 {
 	"name": "KuCoin",
 	"description": "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
 	"link": "https://www.kucoin.com",
 	"logo": "https://kaspahub.org/assets/logos/kucoin.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
+	"features": ["reviewed", "cex", "futuresTrading"]
 },
 {
 	"name": "BTCC",
@@ -1586,7 +1586,7 @@
 	"description": "XT.com is a Seychelles-based trading platform founded in 2018, providing diverse crypto trading services.",
 	"link": "https://www.xt.com",
 	"logo": "https://kaspahub.org/assets/logos/xt.webp",
-	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "BestChange",
@@ -1614,42 +1614,42 @@
 	"description": "CEX.IO is a UK-based trading platform founded in 2013, providing crypto and fiat trading services.",
 	"link": "https://www.cex.io",
 	"logo": "https://kaspahub.org/assets/logos/cexio.webp",
-	"features": ["cex", "googleApplePay", "cryptoCard"]
+	"features": ["cex", "googleApplePay"]
 },
 {
 	"name": "CoinSpot",
 	"description": "CoinSpot is an Australian exchange platform established in 2013, offering crypto trading and NFT marketplace.",
 	"link": "https://www.coinspot.com.au",
 	"logo": "https://kaspahub.org/assets/logos/coinspot.webp",
-	"features": ["cex", "cryptoCard"]
+	"features": ["cex"]
 },
 {
 	"name": "Ju.com",
 	"description": "JuCom is a Singapore-based trading platform established in 2013, offering crypto trading and Web3 services.",
 	"link": "https://www.ju.com",
 	"logo": "https://kaspahub.org/assets/logos/ju.webp",
-	"features": ["cex", "futuresTrading", "cryptoCard"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "Gate",
 	"description": "Gate.io is a Seychelles-based trading platform founded in 2013, offering crypto and NFT services.",
 	"link": "https://www.gate.io",
 	"logo": "https://kaspahub.org/assets/logos/gate.webp",
-	"features": ["cex", "cryptoCard", "futuresTrading"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "Bitpanda",
 	"description": "Bitpanda is an Austrian exchange platform founded in 2014, offering crypto, stocks, and ETFs.",
 	"link": "https://www.bitpanda.com",
 	"logo": "https://kaspahub.org/assets/logos/bitpanda.webp",
-	"features": ["cex", "cryptoCard", "googleApplePay"]
+	"features": ["cex", "googleApplePay"]
 },
 {
 	"name": "Simplex",
 	"description": "Simplex is an Israel-based crypto payment gateway established in 2014, allowing users to buy and sell crypto instantly with credit card, bank transfer, and more.",
 	"link": "https://www.simplex.com",
 	"logo": "https://kaspahub.org/assets/logos/simplex.webp",
-	"features": ["cex", "cryptoCard", "swap", "googleApplePay", "withdrawals", "payments"]
+	"features": ["cex", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Coinone",
@@ -1663,7 +1663,7 @@
 	"description": "Bit2Me is a Spain-based trading platform founded in 2014, offering crypto trading, wallet, fiat on-ramp, and loans.",
 	"link": "https://pro.bit2me.com",
 	"logo": "https://kaspahub.org/assets/logos/bit2me.webp",
-	"features": ["cex", "cryptoCard"]
+	"features": ["cex"]
 },
 {
 	"name": "Changelly",
@@ -1712,7 +1712,7 @@
 	"description": "DigiFinex is a Seychelles-based trading platform established in 2017, providing crypto spot and margin trading.",
 	"link": "https://www.digifinex.com",
 	"logo": "https://kaspahub.org/assets/logos/digifinex.webp",
-	"features": ["cex", "cryptoCard", "futuresTrading"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "SwissBorg",
@@ -1796,7 +1796,7 @@
 	"description": "BTSE is a Seychelles-based trading platform established in 2018, providing crypto and fiat trading services.",
 	"link": "https://www.btse.com",
 	"logo": "https://kaspahub.org/assets/logos/btse.webp",
-	"features": ["cex", "cryptoCard", "futuresTrading"]
+	"features": ["cex", "futuresTrading"]
 },
 {
 	"name": "StealthEX",
@@ -1810,7 +1810,7 @@
 	"description": "Nexo is a Switzerland-based exchange platform founded in 2018, offering crypto lending, borrowing, earning, swapping, and trading services.",
 	"link": "https://nexo.com",
 	"logo": "https://kaspahub.org/assets/logos/nexo.webp",
-	"features": ["cex", "cryptoCard", "googleApplePay"]
+	"features": ["cex", "googleApplePay"]
 },
 {
 	"name": "CoinDCX",
@@ -1901,7 +1901,7 @@
 	"description": "Pionex is a Singapore-based trading platform founded in 2019, offering crypto spot, futures & 16 free trading bots.",
 	"link": "https://www.pionex.com",
 	"logo": "https://kaspahub.org/assets/logos/pionex.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
+	"features": ["reviewed", "cex", "futuresTrading"]
 },
 {
 	"name": "CoinRabbit",
@@ -2111,7 +2111,7 @@
 	"description": "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
 	"link": "https://www.bitmart.com",
 	"logo": "https://kaspahub.org/assets/logos/bitmart.webp",
-	"features": ["cex", "noKyc", "cryptoCard", "futuresTrading"]
+	"features": ["cex", "noKyc", "futuresTrading"]
 },
 {
 	"name": "Tapbit",
@@ -2139,6 +2139,6 @@
 	"description": "Wirex, based in the United Kingdom, launched 2016 and offers crypto trading, a multi-currency debit card, and wallet services.",
 	"link": "https://wirexapp.com",
 	"logo": "https://kaspahub.org/assets/logos/wirex.webp",
-	"features": ["cex", "cryptoCard"]
+	"features": ["cex"]
 }
 ]
