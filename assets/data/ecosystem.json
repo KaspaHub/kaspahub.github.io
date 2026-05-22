@@ -91,20 +91,6 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "Kassword",
-	"description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
-	"link": "https://kassword.com",
-	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "Genesis Zero",
-	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
-	"link": "https://kasgenesiszero.com",
-	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
 	"name": "Kaspa NFT Hub",
 	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, statistics (volume, floor, minted), and receive real-time Telegram alerts.",
 	"link": "https://kasnfthub.com",
@@ -116,7 +102,7 @@
 	"description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
 	"link": "https://kaspamemes.io",
 	"logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
-	"features": ["analytics"]
+	"features": ["reviewed", "analytics"]
 },
 {
 	"name": "KNS",
@@ -250,6 +236,13 @@
 	"link": "https://kyocard.app",
 	"logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
 	"features": ["cryptoCard"]
+},
+{
+	"name": "KasSigner",
+	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
+	"link": "https://kassigner.org",
+	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
+	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "Kaspa Links",
@@ -413,11 +406,18 @@
 	"features": ["reviewed", "visualizer", "analytics"]
 },
 {
-	"name": "KasSigner",
-	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
-	"link": "https://kassigner.org",
-	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
+	"name": "Kassword",
+	"description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
+	"link": "https://kassword.com",
+	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
 	"features": ["reviewed", "utilities"]
+},
+{
+	"name": "Genesis Zero",
+	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
+	"link": "https://kasgenesiszero.com",
+	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
+	"features": ["reviewed", "marketplace"]
 },
 {
 	"name": "Kaspa Security Center",
