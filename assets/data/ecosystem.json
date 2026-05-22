@@ -256,7 +256,14 @@
 	"description": "Browser extension that adds a tip button on every X profile. Send KAS directly to creators - non-custodial, peer-to-peer, no fees.",
 	"link": "https://kastip.app",
 	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
-	"features": ["payments"]
+	"features": ["reviewed", "payments"]
+},
+{
+	"name": "KasFlow",
+	"description": "Open-source payment toolkit that makes accepting and sending Kaspa payments as easy as scanning a QR code. No seed phrases, no complicated wallet files.",
+	"link": "https://kas-flow.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
+	"features": ["reviewed", "payments"]
 },
 {
 	"name": "KASCompute",
@@ -321,6 +328,13 @@
 	"logo": "https://kaspahub.org/assets/logos/fluxkmail.webp",
 	"features": []
 },
+{
+	"name": "KasMail",
+	"description": "Decentralized email service for Kaspa using wallet addresses as identities. Send emails with on-chain proof, reward random top miners (1 KAS per message).",
+	"link": "https://www.kasmail.org",
+	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
+	"features": []
+}
 {
 	"name": "KasPlay",
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
@@ -432,6 +446,13 @@
 	"link": "https://www.kaspatips.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-white.webp",
 	"features": ["reviewed", "payments"]
+},
+{
+	"name": "KaspaTips",
+	"description": "Read-only tracker for public Kaspa addresses. Track any Kaspa address in real time, organize them like a portfolio, and explore on-chain activity with a fast, privacy-first experience.",
+	"link": "https://www.kasobs.app",
+	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
+	"features": ["reviewed", "analytics"]
 },
 {
 	"name": "Zealous Swap",
@@ -903,6 +924,13 @@
 	"features": ["reviewed", "mining"]
 },
 {
+	"name": "K1Pool",
+	"description": "An altcoin pool for GPU/ASIC miners with PPLNS/SOLO modes for Kaspa. Includes auto-switching ports for profitability and Nicehash compatibility.",
+	"link": "https://k1pool.com/pool/kaspa",
+	"logo": "https://kaspahub.org/assets/logos/k1pool.webp",
+	"features": ["reviewed", "mining"]
+},
+{
 	"name": "F2Pool",
 	"description": "A leading mining pool supporting Kaspa with FPPS, PPS, PPLNS payouts. Features merged mining capabilities, global servers, and user-friendly interface.",
 	"link": "https://www.f2pool.com",
@@ -935,13 +963,6 @@
 	"description": "A large mining pool founded in 2017, supporting Kaspa with PPS, FPPS, PPLNS options. Offers advanced features for collective mining and optimized rewards.",
 	"link": "https://www.poolin.com",
 	"logo": "https://kaspahub.org/assets/logos/poolin.webp",
-	"features": ["mining"]
-},
-{
-	"name": "K1Pool",
-	"description": "An altcoin pool for GPU/ASIC miners with PPLNS/SOLO modes for Kaspa. Includes auto-switching ports for profitability and Nicehash compatibility.",
-	"link": "https://k1pool.com/pool/kaspa",
-	"logo": "https://kaspahub.org/assets/logos/k1pool.webp",
 	"features": ["mining"]
 },
 {
