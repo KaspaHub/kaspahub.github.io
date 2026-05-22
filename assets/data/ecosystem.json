@@ -281,7 +281,7 @@
 },
 {
 	"name": "Genesis Zero",
-	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links—permanent on-chain data.",
+	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links-permanent on-chain data.",
 	"link": "https://kasgenesiszero.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
 	"features": ["reviewed", "marketplace"]
@@ -485,7 +485,7 @@
 {
 	"name": "KrokoSwap",
 	"description": "Decentralized exchange on Kasplex where users can swap tokens instantly with Uniswap V2 and V3 support, concentrated liquidity pools, smart routing, and seamless native KAS handling.",
-	"link": "https://krokoswap.io/",
+	"link": "https://krokoswap.io",
 	"logo": "https://kaspahub.org/assets/logos/krokoswap.webp",
 	"features": ["layer2", "dex"]
 },
@@ -509,6 +509,13 @@
 	"link": "https://moonbound.gg",
 	"logo": "https://kaspahub.org/assets/logos/moonbound.webp",
 	"features": ["reviewed", "layer2", "launchpad"]
+},
+{
+    "name": "Zenith",
+    "description": "Fair-launch token launchpad on Kaspa L2 (Igra Network). Create memecoins instantly with bonding curves - no pre-sales, no admin keys, no creator allocation.",
+    "link": "https://zenithlaunch.xyz",
+    "logo": "https://kaspahub.org/assets/logos/zenithlaunch.webp",
+    "features": ["layer2", "launchpad"]
 },
 {
 	"name": "SeaSwap",
@@ -823,7 +830,7 @@
 	"description": "An interactive visualization tool displaying accurate Kaspa network hashrate data, providing real-time insights and historical measurements since genesis.",
 	"link": "https://hashrate.kaspa.ws",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "mining", "analytics", "utilities"]
+	"features": ["reviewed", "analytics"]
 },
 {
 	"name": "Kaspa Insights",
@@ -880,6 +887,13 @@
 	"link": "https://kaspacalc.net",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed", "calculator", "utilities"]
+},
+{
+	"name": "Depth Tool",
+	"description": "Real-time orderbook depth and price impact comparison tool for Kaspa ecosystem tokens. Compare liquidity across centralized exchanges and DEXes like ZealousSwap on Igra and Kasplex L2s.",
+	"link": "https://depthtool.com",
+	"logo": "https://kaspahub.org/assets/logos/depthtool.webp",
+	"features": ["reviewed", "analytics", "utilities"]
 },
 {
 	"name": "Mineable Money",
@@ -968,7 +982,7 @@
 {
 	"name": "HumPool",
 	"description": "A cryptocurrency mining pool supporting Kaspa, offering automatic settlements twice daily with a minimum payout threshold, low fees, real-time income monitoring, and high-security features.",
-	"link": "https://www.humpool.com/",
+	"link": "https://www.humpool.com",
 	"logo": "https://kaspahub.org/assets/logos/humpool.webp",
 	"features": ["mining"]
 },
@@ -989,7 +1003,7 @@
 {
 	"name": "HeroMiners",
 	"description": "A multi-location Kaspa mining pool with PPS+, PROP, and SOLO payouts. Features per-rig stats, TLS encryption, email alerts, configurable payouts, and support for ASICs like IceRiver and Bitmain KS3.",
-	"link": "https://kaspa.herominers.com/",
+	"link": "https://kaspa.herominers.com",
 	"logo": "https://kaspahub.org/assets/logos/herominers.webp",
 	"features": ["mining"]
 },
