@@ -837,7 +837,7 @@
 	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
 	"link": "https://rkstratum.rustykaspa.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["mining", "utilities"]
+	"features": ["mining"]
 },
 {
 	"name": "Mining Now",

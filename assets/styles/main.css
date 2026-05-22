@@ -481,12 +481,6 @@ hr {
 	align-items: center;
 
 	font-size: 0.9rem;
-
-/*	white-space: nowrap;
-	border-radius: 20px;
-	padding: 5px 10px;
-	background-color: #a0e3d1e6;
-	color: #004c41;*/
 }
 
 .reviewed, .verified {
@@ -495,7 +489,6 @@ hr {
 }
 
 .reviewed::before, .verified::before {
-	margin-right: 5px;
 	height: 1em;
 	width: 1em;
 }
