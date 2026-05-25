@@ -658,24 +658,10 @@
 	"features": ["reviewed", "education"]
 },
 {
-	"name": "PoW University",
-	"description": "Interactive educational platform comparing the top 12 Proof of Work networks across 12 pillars including security budget, decentralization, fair launch, and more, with clickable protocols for detailed learning.",
-	"link": "https://protocol-university.web.app",
-	"logo": "https://kaspahub.org/assets/logos/mining.webp",
-	"features": ["reviewed", "education"]
-},
-{
 	"name": "Kaspa Genesis Proof",
 	"description": "Interactive cryptographic proof demonstrating Kaspa launched with zero premine, where users can click verify to watch the math, fingerprints, and chain integrity checks in real time.",
 	"link": "https://pow-protocol-university.web.app/kaspa-genesis-v3",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "education"]
-},
-{
-	"name": "UTXO & Covenants",
-	"description": "Explains how UTXOs work and how covenants enable programmable spending rules in Kaspa.",
-	"link": "https://utxo-covenants.vercel.app",
-	"logo": "https://kaspahub.org/assets/logos/vercel.webp",
 	"features": ["reviewed", "education"]
 },
 {
@@ -977,13 +963,6 @@
 	"description": "A GPU mining pool with PPLNS and SOLO modes for Kaspa. Features global servers for low latency, auto difficulty adjustment, and no transaction fees on payouts.",
 	"link": "https://woolypooly.com/en/coin/kas",
 	"logo": "https://kaspahub.org/assets/logos/woolypooly.webp",
-	"features": ["mining"]
-},
-{
-	"name": "HumPool",
-	"description": "A cryptocurrency mining pool supporting Kaspa, offering automatic settlements twice daily with a minimum payout threshold, low fees, real-time income monitoring, and high-security features.",
-	"link": "https://www.humpool.com",
-	"logo": "https://kaspahub.org/assets/logos/humpool.webp",
 	"features": ["mining"]
 },
 {

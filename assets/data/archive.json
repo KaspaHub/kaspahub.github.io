@@ -68,6 +68,13 @@
   "link": "https://github.com/kloakprotocol/kloak_node",
   "features": ["reviewed", "python"]
 },
+{
+  "name": "HumPool",
+  "description": "A cryptocurrency mining pool supporting Kaspa, offering automatic settlements twice daily with a minimum payout threshold, low fees, real-time income monitoring, and high-security features.",
+  "link": "https://www.humpool.com",
+  "logo": "https://kaspahub.org/assets/logos/humpool.webp",
+  "features": ["mining"]
+},
 ]
 //planned
 // {
