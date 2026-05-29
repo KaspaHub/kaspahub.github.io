@@ -294,11 +294,11 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
-	"name": "Proof of Prints",
+	"name": "OverBuild Labs",
 	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
 	"link": "https://proofofprints.com",
 	"logo": "https://kaspahub.org/assets/logos/proofofprints.webp",
-	"features": ["marketplace", "mining"]
+	"features": ["reviewed", "marketplace", "mining"]
 },
 {
 	"name": "MyKAI",
