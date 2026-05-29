@@ -560,13 +560,6 @@
 	"features": ["reviewed", "layer2", "marketplace", "jobs"]
 },
 {
-	"name": "Fervent Finance",
-	"description": "The first lending and borrowing platform in the Kaspa ecosystem, built by Zealous Swap, offering capital-efficient, non-custodial DeFi with insured deposits and audited contracts.",
-	"link": "https://www.fervent.finance",
-	"logo": "https://kaspahub.org/assets/logos/fervent.finance.webp",
-	"features": ["reviewed", "layer2"]
-},
-{
 	"name": "Kurve",
 	"description": "A two-way KAS-EVM bridge for seamless $KAS transfers between Kaspa Layer 1 and Kasplex Layer 2, enabling DeFi and smart contract interactions with fast, low-fee transactions.",
 	"link": "https://kasbridge-evm.kaspafoundation.org",
