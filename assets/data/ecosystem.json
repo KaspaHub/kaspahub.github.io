@@ -112,7 +112,7 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "KNS",
+	"name": "Kaspa Name Service",
 	"description": "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/kns.webp",
@@ -147,11 +147,11 @@
 	"features": ["reviewed", "social"]
 },
 {
-    "name": "Kasthletics",
-    "description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
-    "link": "https://www.kasthletics.com",
-    "logo": "https://kaspahub.org/assets/logos/kasthletics.webp",
-    "features": []
+	"name": "Kasthletics",
+	"description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
+	"link": "https://www.kasthletics.com",
+	"logo": "https://kaspahub.org/assets/logos/kasthletics.webp",
+	"features": []
 },
 {
 	"name": "Vivoor",
@@ -518,11 +518,11 @@
 	"features": ["reviewed", "layer2", "launchpad"]
 },
 {
-    "name": "Zenith",
-    "description": "Fair-launch token launchpad on Kaspa L2 (Igra Network). Create memecoins instantly with bonding curves - no pre-sales, no admin keys, no creator allocation.",
-    "link": "https://zenithlaunch.xyz",
-    "logo": "https://kaspahub.org/assets/logos/zenithlaunch.webp",
-    "features": ["layer2", "launchpad"]
+	"name": "Zenith",
+	"description": "Fair-launch token launchpad on Kaspa L2 (Igra Network). Create memecoins instantly with bonding curves - no pre-sales, no admin keys, no creator allocation.",
+	"link": "https://zenithlaunch.xyz",
+	"logo": "https://kaspahub.org/assets/logos/zenithlaunch.webp",
+	"features": ["layer2", "launchpad"]
 },
 {
 	"name": "SeaSwap",
@@ -530,6 +530,13 @@
 	"link": "https://seaswap.xyz",
 	"logo": "https://kaspahub.org/assets/logos/seaswap.webp",
 	"features": ["reviewed", "layer2", "dex"]
+},
+{
+	"name": "Igra Name Service",
+	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
+	"link": "https://insdomains.org",
+	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
+	"features": ["layer2", "marketplace"]
 },
 {
 	"name": "KRChange",
