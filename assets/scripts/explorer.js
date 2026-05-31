@@ -372,15 +372,14 @@ function shortenMiddle(str, head = 6, tail = 6) {
   if (s.length < 10) return s;
 
   if (s.startsWith("kaspa:")) {
+    const label = LABELS.find(item => item?.address === s);
+    if (label?.name) return label.name;
 
     if (typeof window === "undefined" || window.innerWidth > window.innerHeight) {
-
       return s.slice(0, head + 6) + "..." + s.slice(-tail);
-
     } else {
       return s.slice(6, head + 6) + "..." + s.slice(-tail);
     }
-
   }
 
 }
