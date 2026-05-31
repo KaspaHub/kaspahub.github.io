@@ -952,6 +952,13 @@
 	"features": ["reviewed", "mining"]
 },
 {
+	"name": "WhalePool",
+	"description": "A cryptocurrency mining pool offering low fees, frequent promotions including zero-fee periods, and global servers for efficient mining.",
+	"link": "https://www.whalepool.com/coin/KAS",
+	"logo": "https://kaspahub.org/assets/logos/whalepool.webp",
+	"features": ["mining"]
+},
+{
 	"name": "F2Pool",
 	"description": "A leading mining pool supporting Kaspa with FPPS, PPS, PPLNS payouts. Features merged mining capabilities, global servers, and user-friendly interface.",
 	"link": "https://www.f2pool.com",
