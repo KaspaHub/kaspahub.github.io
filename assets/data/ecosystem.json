@@ -296,8 +296,8 @@
 {
 	"name": "OverBuild Labs",
 	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
-	"link": "https://proofofprints.com",
-	"logo": "https://kaspahub.org/assets/logos/proofofprints.webp",
+	"link": "https://overbuildlabs.com",
+	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
 	"features": ["reviewed", "marketplace", "mining"]
 },
 {
@@ -1566,13 +1566,6 @@
 	"link": "https://neverless.com",
 	"logo": "https://kaspahub.org/assets/logos/neverless.webp",
 	"features": ["reviewed", "cex", "googleApplePay"]
-},
-{
-	"name": "WhiteBIT",
-	"description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
-	"link": "https://whitebit.com",
-	"logo": "https://kaspahub.org/assets/logos/whitebit.webp",
-	"features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "MEXC",

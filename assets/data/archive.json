@@ -1,5 +1,12 @@
 [
 {
+  "name": "WhiteBIT",
+  "description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
+  "link": "https://whitebit.com",
+  "logo": "https://kaspahub.org/assets/logos/whitebit.webp",
+  "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
   "name": "Fervent Finance",
   "description": "The first lending and borrowing platform in the Kaspa ecosystem, built by Zealous Swap, offering capital-efficient, non-custodial DeFi with insured deposits and audited contracts.",
   "link": "https://www.fervent.finance",
