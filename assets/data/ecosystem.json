@@ -686,13 +686,6 @@
 	"features": ["verified", "ai"]
 },
 {
-	"name": "Kaspa News",
-	"description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
-	"link": "https://kaspa.news",
-	"logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
-	"features": ["reviewed"]
-},
-{
 	"name": "KIGS",
 	"description": "An interactive learning platform focused on Kaspa, offering engaging modules on network, wallets, transactions, UTXOs, and BlockDAG, designed for beginners with links to deeper resources.",
 	"link": "https://kigs.pages.dev",

@@ -89,6 +89,13 @@
   "logo": "https://kaspahub.org/assets/logos/humpool.webp",
   "features": ["mining"]
 },
+{
+  "name": "Kaspa News",
+  "description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
+  "link": "https://kaspa.news",
+  "logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
+  "features": []
+},
 ]
 //planned
 // {
