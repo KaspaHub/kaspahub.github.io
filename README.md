@@ -19,9 +19,9 @@ Want to help improve the website or report an issue? Open a GitHub issue or make
 Send feedback and help us improve.
 * [mail@kaspahub.org](mailto:mail@kaspahub.org)
 
-## Contact Us
+## Contact
 Feel free to reach out if you have any questions on X.
-* [https://x.com/KaspaHub](https://x.com/KaspaHub)
+* [https://x.com/KaspaHub](https://x.com/Classicxbt)
 
 ## License
 Kaspa Hub is licensed under the MIT License with a **custom clause**. See the LICENSE file for details.

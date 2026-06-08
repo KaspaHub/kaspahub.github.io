@@ -175,6 +175,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "KOmarkets",
+	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
+	"link": "https://www.komarkets.io",
+	"logo": "https://kaspahub.org/assets/logos/komarkets.webp",
+	"features": ["dapp"]
+},
+{
 	"name": "KasOS",
 	"description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
 	"link": "https://github.com/deokman420/KasOS",
@@ -1951,6 +1958,13 @@
 	"link": "https://swapswop.io",
 	"logo": "https://kaspahub.org/assets/logos/swapswop.webp",
 	"features": ["cex", "noKyc", "swap", "withdrawals"]
+},
+{
+	"name": "CoinTR",
+	"description": "CoinTR is a Turkey-based trading platform founded in 2021, offering spot crypto trading with TRY pairs and fiat services.",
+	"link": "https://www.cointr.com",
+	"logo": "https://kaspahub.org/assets/logos/cointr.webp",
+	"features": ["cex"]
 },
 {
 	"name": "Exbitron",
