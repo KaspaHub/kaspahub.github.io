@@ -96,6 +96,13 @@
   "logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
   "features": []
 },
+{
+  "name": "Kaspay POS",
+  "description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
+  "link": "https://kaspay.one",
+  "logo": "https://kaspahub.org/assets/logos/kaspay.webp",
+  "features": ["development", "payments"]
+},
 ]
 //planned
 // {

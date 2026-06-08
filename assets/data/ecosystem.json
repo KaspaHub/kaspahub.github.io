@@ -182,13 +182,6 @@
 	"features": ["dapp"]
 },
 {
-	"name": "KasOS",
-	"description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
-	"link": "https://github.com/deokman420/KasOS",
-	"logo": "https://kaspahub.org/assets/logos/kasos.webp",
-	"features": ["reviewed", "javascript"]
-},
-{
 	"name": "Travala.com",
 	"description": "World’s leading Web3 travel company. Travala.com is a pioneering crypto-native online travel agency that enables users to book millions of hotels, flights, tours, and activities worldwide using Kaspa.",
 	"link": "https://www.travala.com",
@@ -229,13 +222,6 @@
 	"link": "https://onchainpos.live",
 	"logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
 	"features": ["reviewed", "development", "payments"]
-},
-{
-	"name": "Kaspay POS",
-	"description": "Non-custodial point-of-sale system for accepting cryptocurrency payments directly to your wallet. Zero platform fees, one-time purchase, offline mode, and support for multiple fiat currencies.",
-	"link": "https://kaspay.one",
-	"logo": "https://kaspahub.org/assets/logos/kaspay.webp",
-	"features": ["development", "payments"]
 },
 {
 	"name": "Kaskad",
@@ -481,6 +467,13 @@
 	"link": "https://www.kasobs.app",
 	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
 	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "KasOS",
+	"description": "Web3-enabled desktop operating system that runs entirely in your browser. Features a modern desktop interface, Kaspa integration via built-in wallet, file explorer, app store, and tools for building custom dApps.",
+	"link": "https://github.com/deokman420/KasOS",
+	"logo": "https://kaspahub.org/assets/logos/kasos.webp",
+	"features": ["reviewed", "javascript"]
 },
 {
 	"name": "Zealous Swap",
