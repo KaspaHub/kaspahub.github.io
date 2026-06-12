@@ -180,7 +180,7 @@
 	"link": "https://tn10.deassets.io",
 	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
 	"features": ["launchpad", "dex"]
-}
+},
 {
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
