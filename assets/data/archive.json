@@ -7,6 +7,13 @@
   "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
+  "name": "SeedBuster",
+  "description": "Community-powered scam defense platform for the crypto community. It tracks, reports, and helps take down malicious phishing sites targeting Kaspa and other cryptos through automated detection and evidence collection.",
+  "link": "https://seedbuster.xyz",
+  "logo": "https://kaspahub.org/assets/logos/seedbuster.webp",
+  "features": ["reviewed", "security", "utilities"]
+},
+{
   "name": "Fervent Finance",
   "description": "The first lending and borrowing platform in the Kaspa ecosystem, built by Zealous Swap, offering capital-efficient, non-custodial DeFi with insured deposits and audited contracts.",
   "link": "https://www.fervent.finance",
@@ -19,6 +26,20 @@
   "link": "https://stroem.finance",
   "logo": "https://kaspahub.org/assets/logos/stroem.webp",
   "features": []
+},
+{
+  "name": "Kaspa Radar",
+  "description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
+  "link": "https://kasparadar.com",
+  "logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+  "features": ["reviewed", "visualizer", "analytics"]
+},
+{
+  "name": "DEX.cc Wallet",
+  "description": "A non-custodial wallet by DEX.cc Lab, offering multi-account management, built-in bridge, integration with AMM swaps, and more.",
+  "link": "https://dex.cc/app",
+  "logo": "https://kaspahub.org/assets/logos/dexcc.webp",
+  "features": ["selfCustodial", "multiChain", "mobile"]
 },
 {
   "name": "K Notes",

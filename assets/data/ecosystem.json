@@ -175,11 +175,32 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "De Assets",
+	"description":  "L1-native KCC20 covenant token platform on Kaspa testnet. Deploy, mint, and trade native tokens with a fully on-chain orderbook enforced by Kaspa consensus.",
+	"link": "https://tn10.deassets.io",
+	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
+	"features": ["launchpad", "dex"]
+}
+{
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
 	"logo": "https://kaspahub.org/assets/logos/komarkets.webp",
-	"features": ["dapp"]
+	"features": ["dapp", "gambling"]
+},
+{
+	"name": "K100bet",
+	"description": "Prediction market platform built on the Kaspa blockchain. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
+	"link": "https://k100bet.com",
+	"logo": "https://kaspahub.org/assets/logos/k100bet.webp",
+	"features": ["dapp", "gambling"]
+},
+{
+	"name": "Bet a Buddy",
+	"description": "Peer-to-peer wagering app on Kaspa. Create bets with friends on sports, UFC, or any event. Both parties have to agree on the outcome. Loser pays winner directly.",
+	"link": "https://betabuddy.netlify.app",
+	"logo": "https://kaspahub.org/assets/logos/betabuddy.webp",
+	"features": ["dapp", "gambling"]
 },
 {
 	"name": "Travala.com",
@@ -399,13 +420,6 @@
 	"features": ["reviewed"]
 },
 {
-	"name": "SeedBuster",
-	"description": "Community-powered scam defense platform for the crypto community. It tracks, reports, and helps take down malicious phishing sites targeting Kaspa and other cryptos through automated detection and evidence collection.",
-	"link": "https://seedbuster.xyz",
-	"logo": "https://kaspahub.org/assets/logos/seedbuster.webp",
-	"features": ["reviewed", "security", "utilities"]
-},
-{
 	"name": "Kaspa Security Center",
 	"description": "A community initiative for reporting and investigating security incidents on Kaspa, with public reports, status tracking, and efforts to trace funds and alert exchanges and authorities.",
 	"link": "https://kaspasecuritycenter.com",
@@ -418,13 +432,6 @@
 	"link": "https://kaspanotary.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
 	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "Kaspa Radar",
-	"description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
-	"link": "https://kasparadar.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "visualizer", "analytics"]
 },
 {
 	"name": "Kassword",
@@ -1222,13 +1229,6 @@
 	"description": "Offline air-gapped cold storage solution for Kaspa, supporting secure wallet creation, transaction management, and message signing with mnemonic phrase security.",
 	"link": "https://kaskold.com",
 	"logo": "https://kaspahub.org/assets/logos/kaskold.webp",
-	"features": ["wallet"]
-},
-{
-	"name": "DEX.cc Wallet",
-	"description": "A non-custodial wallet by DEX.cc Lab, offering multi-account management, built-in bridge, integration with AMM swaps, and more.",
-	"link": "https://dex.cc/app",
-	"logo": "https://kaspahub.org/assets/logos/dexcc.webp",
 	"features": ["wallet"]
 },
 {
