@@ -332,7 +332,7 @@ async function renderSummary(json, totals, inputs, outputs) {
   const transferredKas = Number(totals.totalTransferred) / 1e8;
   const feeKas = Number(totals.fee) / 1e8;
   const transferredFiat = await formatPrice(KASVALUE, CURRENCY, transferredKas);
-  const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas);
+  const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas, 4);
 
   totalSent.innerHTML = `${formatKas(totals.totalTransferred, 3)} <span class="muted">(${transferredFiat})</span>`;
   fee.innerHTML = `${formatKas(totals.fee)} <span class="muted">(${feeFiat})</span>`;
