@@ -21,6 +21,13 @@
   "features": ["reviewed", "layer2"]
 },
 {
+  "name": "Zenith",
+  "description": "Fair-launch token launchpad on Kaspa L2 (Igra Network). Create memecoins instantly with bonding curves - no pre-sales, no admin keys, no creator allocation.",
+  "link": "https://zenithlaunch.xyz",
+  "logo": "https://kaspahub.org/assets/logos/zenithlaunch.webp",
+  "features": ["layer2", "launchpad"]
+},
+{
   "name": "Stroem Finance",
   "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
   "link": "https://stroem.finance",

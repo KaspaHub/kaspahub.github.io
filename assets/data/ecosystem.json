@@ -176,7 +176,7 @@
 },
 {
 	"name": "De Assets",
-	"description":  "L1-native KCC20 covenant token platform on Kaspa testnet. Deploy, mint, and trade native tokens with a fully on-chain orderbook enforced by Kaspa consensus.",
+	"description": "L1-native KCC20 covenant token platform on Kaspa testnet. Deploy, mint, and trade native tokens with a fully on-chain orderbook enforced by Kaspa consensus.",
 	"link": "https://tn10.deassets.io",
 	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
 	"features": ["launchpad", "dex"]
@@ -522,20 +522,13 @@
 	"description": "A decentralized exchange and launchpad on Kaspa's Kasplex L2, enabling zero-fee token deployment, V3 AMM liquidity with perpetual creator fees, and in-channel Telegram trading for seamless DeFi access.",
 	"link": "https://app.kspr.exchange",
 	"logo": "https://kaspahub.org/assets/logos/kspr.webp",
-	"features": ["reviewed", "layer2", "dex", "launchpad"]
+	"features": ["layer2", "dex", "launchpad"]
 },
 {
 	"name": "Moonbound",
 	"description": "A platform for launching, trading, and earning on the Kaspa network, providing tools for creators to build sustainable DeFi and tokenization projects.",
 	"link": "https://moonbound.gg",
 	"logo": "https://kaspahub.org/assets/logos/moonbound.webp",
-	"features": ["reviewed", "layer2", "launchpad"]
-},
-{
-	"name": "Zenith",
-	"description": "Fair-launch token launchpad on Kaspa L2 (Igra Network). Create memecoins instantly with bonding curves - no pre-sales, no admin keys, no creator allocation.",
-	"link": "https://zenithlaunch.xyz",
-	"logo": "https://kaspahub.org/assets/logos/zenithlaunch.webp",
 	"features": ["layer2", "launchpad"]
 },
 {
@@ -1033,6 +1026,13 @@
 	"description": "A super lightweight, fully open-source Kaspa BlockDAG explorer for searching transactions, blocks, and addresses. Features live TPS, BPS, hashrate, top miners, rich list, and real-time network stats.",
 	"link": "https://kascan.io",
 	"logo": "https://kaspahub.org/assets/logos/kascan.webp",
+	"features": ["reviewed", "blockExplorer"]
+},
+{
+	"name": "Sealver.stream",
+	"description": "Kaspa block explorer with covenant support and KCC20 token launcher. Browse tokens, holders, transfers, and covenant states.",
+	"link": "https://sealver.stream",
+	"logo": "https://kaspahub.org/assets/logos/sealver.webp",
 	"features": ["reviewed", "blockExplorer"]
 },
 {
