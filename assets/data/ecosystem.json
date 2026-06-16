@@ -179,7 +179,7 @@
 	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
 	"link": "https://tttz.xyz",
 	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
-	"features": ["reviewed", "social"]
+	"features": ["social"]
 },
 {
 	"name": "De Assets",
@@ -340,7 +340,7 @@
 	"description": "A decentralized, wallet-based email application for the Kaspa ecosystem, using wallet addresses as identities for passwordless, secure communication. Open-source, integrating with TTT for app notifications and KAS transfers.",
 	"link": "https://fluxkmail.base44.app",
 	"logo": "https://kaspahub.org/assets/logos/fluxkmail.webp",
-	"features": ["reviewed"]
+	"features": []
 },
 {
 	"name": "KasMail",
@@ -481,6 +481,13 @@
 	"link": "https://www.kasobs.app",
 	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
 	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Token Depot",
+	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
+	"link": "https://www.token-depot.co",
+	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
+	"features": []
 },
 {
 	"name": "KasOS",
