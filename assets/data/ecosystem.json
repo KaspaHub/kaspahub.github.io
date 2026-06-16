@@ -175,6 +175,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "TTT",
+	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
+	"link": "https://tttz.xyz",
+	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
+	"features": ["reviewed", "social"]
+},
+{
 	"name": "De Assets",
 	"description": "L1-native KCC20 covenant token platform on Kaspa testnet. Deploy, mint, and trade native tokens with a fully on-chain orderbook enforced by Kaspa consensus.",
 	"link": "https://tn10.deassets.io",
@@ -329,18 +336,11 @@
 	"features": ["reviewed"]
 },
 {
-	"name": "TTT",
-	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
-	"link": "https://tttz.xyz",
-	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
-	"features": ["social"]
-},
-{
 	"name": "Flux Kmail",
 	"description": "A decentralized, wallet-based email application for the Kaspa ecosystem, using wallet addresses as identities for passwordless, secure communication. Open-source, integrating with TTT for app notifications and KAS transfers.",
 	"link": "https://fluxkmail.base44.app",
 	"logo": "https://kaspahub.org/assets/logos/fluxkmail.webp",
-	"features": []
+	"features": ["reviewed"]
 },
 {
 	"name": "KasMail",
