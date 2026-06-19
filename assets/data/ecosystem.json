@@ -273,13 +273,6 @@
 	"features": ["cryptoCard"]
 },
 {
-	"name": "KYO",
-	"description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
-	"link": "https://kyocard.app",
-	"logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
-	"features": ["cryptoCard"]
-},
-{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",

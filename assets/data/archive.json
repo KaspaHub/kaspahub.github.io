@@ -7,6 +7,13 @@
   "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
+  "name": "KYO",
+  "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
+  "link": "https://kyocard.app",
+  "logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
+  "features": ["cryptoCard"]
+},
+{
   "name": "SeedBuster",
   "description": "Community-powered scam defense platform for the crypto community. It tracks, reports, and helps take down malicious phishing sites targeting Kaspa and other cryptos through automated detection and evidence collection.",
   "link": "https://seedbuster.xyz",
