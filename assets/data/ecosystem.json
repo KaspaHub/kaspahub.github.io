@@ -259,6 +259,13 @@
 	"features": ["reviewed", "layer2"]
 },
 {
+	"name": "Stroem Finance",
+	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
+	"link": "https://stroem.finance",
+	"logo": "https://kaspahub.org/assets/logos/stroem.webp",
+	"features": []
+},
+{
 	"name": "FrostCard",
 	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
 	"link": "https://frostcard.io",
@@ -481,13 +488,6 @@
 	"link": "https://www.kasobs.app",
 	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
 	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "Token Depot",
-	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
-	"link": "https://www.token-depot.co",
-	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
-	"features": []
 },
 {
 	"name": "KasOS",

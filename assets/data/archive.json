@@ -28,13 +28,6 @@
   "features": ["layer2", "launchpad"]
 },
 {
-  "name": "Stroem Finance",
-  "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
-  "link": "https://stroem.finance",
-  "logo": "https://kaspahub.org/assets/logos/stroem.webp",
-  "features": []
-},
-{
   "name": "Kaspa Radar",
   "description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
   "link": "https://kasparadar.com",
@@ -130,6 +123,13 @@
   "link": "https://kaspay.one",
   "logo": "https://kaspahub.org/assets/logos/kaspay.webp",
   "features": ["development", "payments"]
+},
+{
+  "name": "Token Depot",
+  "description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
+  "link": "https://www.token-depot.co",
+  "logo": "https://kaspahub.org/assets/logos/token-depot.webp",
+  "features": []
 },
 ]
 //planned
