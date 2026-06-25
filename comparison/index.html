@@ -209,7 +209,7 @@ const chains = [
   { name: "Somnia (SOMI)", time: 0.10, color: "#49EACB" },
   { name: "Nano (XNO)", time: 0.35, color: "#209CE9" },
   { name: "Solana (SOL)", time: 0.40, color: "#9845FD" },
-  { name: "Toncoin (TON)", time: 0.41, color: "#0088CC" },
+  { name: "Gram (GRAM)", time: 0.41, color: "#30A1F5" },
   { name: "BNB Chain (BNB)", time: 0.45, color: "#F0B90B" },
   { name: "Internet Computer (ICP)", time: 0.48, color: "#FF087D" },
   { name: "Sei (SEI)", time: 0.52, color: "#9E1F19" },
@@ -225,7 +225,6 @@ const chains = [
   { name: "Keeta (KTA)", time: 2.25, color: "#2C2A2B" },
   { name: "Algorand (ALGO)", time: 2.77, color: "#17CAC6" },
   { name: "XRP (XRP)", time: 4.0, color: "#006AFE" },
-  { name: "XELIS (XEL)", time: 5.0, color: "#02FFCF" },
   { name: "Quai Network (QUAI)", time: 5.0, color: "#C42507" },
   { name: "MultiversX (EGLD)", time: 6.0, color: "#23F7DD" },
   { name: "Alephium (ALPH)", time: 8.0, color: "#FF3637" },
@@ -258,7 +257,7 @@ let enabledChains = {};
 
 chains.forEach(c => enabledChains[c.name] = false);
 
-const defaults = ["Kaspa (KAS)", "Solana (SOL)", "Toncoin (TON)", "Internet Computer (ICP)", "DigiByte (DGB)", "BNB Chain (BNB)", "Polygon (POL)", "XRP (XRP)", "Ethereum (ETH)", "Cardano (ADA)", "Litecoin (LTC)", "Bitcoin (BTC)"];
+const defaults = ["Kaspa (KAS)", "Solana (SOL)", "Gram (GRAM)", "Internet Computer (ICP)", "XRP (XRP)", "Ethereum (ETH)", "Cardano (ADA)", "Litecoin (LTC)", "Bitcoin Cash (BCH)", "Bitcoin (BTC)"];
 defaults.forEach(name => enabledChains[name] = true);
 
 const chainList = document.getElementById("chain-list");
