@@ -315,11 +315,11 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
-	"name": "OverBuild Labs",
-	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
-	"link": "https://overbuildlabs.com",
-	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
-	"features": ["reviewed", "marketplace", "mining"]
+	"name": "Arkiv File Storage",
+	"description": "A decentralized P2P file storage system built on the Kaspa BlockDAG, enabling encrypted, permanent file uploads to transaction payloads with free downloads and low miner fees.",
+	"link": "https://arkiv.fyi",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["reviewed"]
 },
 {
 	"name": "MyKAI",
@@ -329,11 +329,25 @@
 	"features": ["verified", "utilities"]
 },
 {
-	"name": "Arkiv File Storage",
-	"description": "A decentralized P2P file storage system built on the Kaspa BlockDAG, enabling encrypted, permanent file uploads to transaction payloads with free downloads and low miner fees.",
-	"link": "https://arkiv.fyi",
+	"name": "OverBuild Labs",
+	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
+	"link": "https://overbuildlabs.com",
+	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
+	"features": ["reviewed", "marketplace", "mining"]
+},
+{
+	"name": "RK-Stratum",
+	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
+	"link": "https://rkstratum.rustykaspa.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "mining"]
+},
+{
+	"name": "Kat Pool",
+	"description": "An open-source Kaspa mining pool offering transparency, scalability, and dual rewards with $NACHO, featuring real-time analytics and PPLNS payouts.",
+	"link": "https://katpool.xyz",
+	"logo": "https://kaspahub.org/assets/logos/katpool.webp",
+	"features": ["reviewed", "mining"]
 },
 {
 	"name": "Flux Kmail",
@@ -347,6 +361,13 @@
 	"description": "Decentralized email service for Kaspa using wallet addresses as identities. Send emails with on-chain proof, reward random top miners (1 KAS per message).",
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
+	"features": []
+},
+{
+	"name": "DagLock",
+	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
+	"link": "https://daglock.com",
+	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
 	"features": []
 },
 {
@@ -833,13 +854,6 @@
 	"features": ["reviewed", "analytics", "visualizer", "calculator", "utilities"]
 },
 {
-	"name": "RK-Stratum",
-	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
-	"link": "https://rkstratum.rustykaspa.org",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "mining"]
-},
-{
 	"name": "Mining Now",
 	"description": "A cryptocurrency mining platform offering real-time data, profitability calculators, market trends, and efficient hardware solutions, with support for Kaspa.",
 	"link": "https://miningnow.com/coins/kaspa/",
@@ -921,13 +935,6 @@
 	"description": "A Kaspa mining pool offering PPLNS and SOLO payout systems with a low fee, designed for efficient and reliable mining rewards.",
 	"link": "https://kaspa-pool.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspapool.webp",
-	"features": ["reviewed", "mining"]
-},
-{
-	"name": "Kat Pool",
-	"description": "An open-source Kaspa mining pool offering transparency, scalability, and dual rewards with $NACHO, featuring real-time analytics and PPLNS payouts.",
-	"link": "https://katpool.xyz",
-	"logo": "https://kaspahub.org/assets/logos/katpool.webp",
 	"features": ["reviewed", "mining"]
 },
 {
