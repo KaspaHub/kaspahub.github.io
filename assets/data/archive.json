@@ -7,6 +7,27 @@
   "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
+  "name": "Ghost Wallet",
+  "description": "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
+  "link": "https://www.ghostwallet.org",
+  "logo": "https://kaspahub.org/assets/logos/ghostwallet.webp",
+  "features": ["openSource", "selfCustodial", "krc20", "browserExtension"]
+},
+{
+  "name": "KSPR Bot",
+  "description": "Telegram-based wallet for Kaspa, offering seamless KRC20 token management and self-custodial storage, ideal for users seeking convenience and integration with messaging platform.",
+  "link": "https://kspr-bot.xyz",
+  "logo": "https://kaspahub.org/assets/logos/kspr.webp",
+  "features": ["selfCustodial", "krc20", "krc721"]
+},
+{
+  "name": "Kaspian",
+  "description": "Simple and lightweight Chrome extension wallet for Kaspa, offering seamless self-custodial storage and management of coins.",
+  "link": "https://chromewebstore.google.com/detail/kaspian/cidcgacclonccobcbihholdncmehnlpl",
+  "logo": "https://kaspahub.org/assets/logos/kaspian.webp",
+  "features": ["openSource", "selfCustodial", "browserExtension"]
+},
+{
   "name": "KYO",
   "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
   "link": "https://kyocard.app",
