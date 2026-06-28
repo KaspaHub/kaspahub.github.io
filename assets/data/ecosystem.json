@@ -1043,6 +1043,13 @@
 	"features": ["reviewed", "blockExplorer"]
 },
 {
+	"name": "Kaspatrol ",
+	"description": "Real-time Kaspa BlockDAG explorer providing live blocks, transactions, addresses, network statistics, hashrate monitoring, and an immersive 360° DAG visualization streamed directly from a full node.",
+	"link": "https://www.kaspatrol.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspatrol.webp",
+	"features": ["reviewed", "blockExplorer"]
+},
+{
 	"name": "Kassandra",
 	"description": "A modern Kaspa block explorer offering real-time network stats, wallet and transaction monitoring, market data, and whale watcher for top addresses.",
 	"link": "https://kassandra.fyi",
