@@ -154,6 +154,13 @@
 	"features": []
 },
 {
+	"name": "KRON",
+	"description": "Native Kaspa L1 launchpad and DEX offering bonding curve launches and permanently locked AMM trading.",
+	"link": "https://kron.technology/",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["launchpad", "dex"]
+},
+{
 	"name": "Vivoor",
 	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
 	"link": "https://vivoor.xyz",
