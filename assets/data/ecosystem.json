@@ -119,6 +119,69 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
+	"name": "Rock The Kaspa",
+	"description": "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
+	"link": "https://www.rockthekaspa.com",
+	"logo": "https://kaspahub.org/assets/logos/rockthekaspa.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
+	"name": "Kascoin Shop",
+	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
+	"link": "https://kascoin.shop",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "KaspaShirts",
+	"description": "High-quality, durable Kaspa-themed T-shirts, polos, and hoodies for men and women, available in sizes S-5XL, featuring a wide range of designs from trendy to minimalistic.",
+	"link": "https://kaspashirts.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspashirts.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "KaspaBuy",
+	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
+	"link": "https://kaspabuy.shop",
+	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "SLOWLIKEBTC",
+	"description": "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
+	"link": "https://slowlikebtc.printify.me",
+	"logo": "https://kaspahub.org/assets/logos/slowmerch.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "Pool Party Nodes",
+	"description": "Crypto clothing shop offering Kaspa-themed apparel and merchandise including tees, hoodies, sweatshirts, and stickers featuring green branding and GHOSTDAG-inspired designs.",
+	"link": "https://poolpartynodes.com/kaspa-merch/",
+	"logo": "https://kaspahub.org/assets/logos/poolpartynodes.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "OverBuild Labs",
+	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
+	"link": "https://overbuildlabs.com",
+	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
+	"features": ["reviewed", "marketplace", "mining"]
+},
+{
+	"name": "RK-Stratum",
+	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
+	"link": "https://rkstratum.rustykaspa.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["reviewed", "mining"]
+},
+{
+	"name": "Kat Pool",
+	"description": "An open-source Kaspa mining pool offering transparency, scalability, and dual rewards with $NACHO, featuring real-time analytics and PPLNS payouts.",
+	"link": "https://katpool.xyz",
+	"logo": "https://kaspahub.org/assets/logos/katpool.webp",
+	"features": ["reviewed", "mining"]
+},
+{
 	"name": "Kasia",
 	"description": "A peer-to-peer, encrypted messaging protocol and application built on Kaspa, fully open-source and decentralized.",
 	"link": "https://kasia.fyi",
@@ -161,10 +224,52 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "KasMart",
+	"description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
+	"link": "https://kasmart.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspa-2.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "KaspaJobs",
+	"description": "The first job board for Kaspa-based payments. Browse jobs, post work, find talent, and get paid in KAS.",
+	"link": "https://kaspajobs.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
+	"features": ["reviewed", "jobs"]
+},
+{
+	"name": "Stroem Finance",
+	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
+	"link": "https://stroem.finance",
+	"logo": "https://kaspahub.org/assets/logos/stroem.webp",
+	"features": []
+},
+{
+	"name": "FrostCard",
+	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
+	"link": "https://frostcard.io",
+	"logo": "https://kaspahub.org/assets/logos/frostcard.webp",
+	"features": ["cryptoCard"]
+},
+{
+	"name": "KASCompute",
+	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
+	"link": "https://kascompute.org",
+	"logo": "https://kaspahub.org/assets/logos/kascompute.webp",
+	"features": []
+},
+{
 	"name": "Kasthletics",
 	"description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
 	"link": "https://www.kasthletics.com",
 	"logo": "https://kaspahub.org/assets/logos/kasthletics.webp",
+	"features": []
+},
+{
+	"name": "DagLock",
+	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
+	"link": "https://daglock.com",
+	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
 	"features": []
 },
 {
@@ -203,6 +308,13 @@
 	"features": ["dapp", "gambling"]
 },
 {
+	"name": "Kaskad",
+	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
+	"link": "https://www.kaskad.app",
+	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
+	"features": ["reviewed", "layer2"]
+},
+{
 	"name": "Vivoor",
 	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
 	"link": "https://vivoor.xyz",
@@ -215,20 +327,6 @@
 	"link": "https://www.travala.com",
 	"logo": "https://kaspahub.org/assets/logos/travala.webp",
 	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "KasMart",
-	"description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
-	"link": "https://kasmart.org",
-	"logo": "https://kaspahub.org/assets/logos/kaspa-2.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "KaspaJobs",
-	"description": "The first job board for Kaspa-based payments. Browse jobs, post work, find talent, and get paid in KAS.",
-	"link": "https://kaspajobs.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "jobs"]
 },
 {
 	"name": "SilverScript Studio",
@@ -252,60 +350,11 @@
 	"features": ["reviewed", "development", "payments"]
 },
 {
-	"name": "Kaskad",
-	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
-	"link": "https://www.kaskad.app",
-	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
-	"features": ["reviewed", "layer2"]
-},
-{
-	"name": "Stroem Finance",
-	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
-	"link": "https://stroem.finance",
-	"logo": "https://kaspahub.org/assets/logos/stroem.webp",
-	"features": []
-},
-{
-	"name": "FrostCard",
-	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
-	"link": "https://frostcard.io",
-	"logo": "https://kaspahub.org/assets/logos/frostcard.webp",
-	"features": ["cryptoCard"]
-},
-{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
 	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
 	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "Kaspa Links",
-	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
-	"link": "https://kaspalinks.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspalinks.webp",
-	"features": ["reviewed", "payments"]
-},
-{
-	"name": "kas.coffee",
-	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
-	"link": "https://kas.coffee",
-	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
-	"features": ["reviewed", "payments"]
-},
-{
-	"name": "KasTip",
-	"description": "Browser extension that adds a tip button on every X profile. Send KAS directly to creators - non-custodial, peer-to-peer, no fees.",
-	"link": "https://kastip.app",
-	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
-	"features": ["reviewed", "payments"]
-},
-{
-	"name": "KASCompute",
-	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
-	"link": "https://kascompute.org",
-	"logo": "https://kaspahub.org/assets/logos/kascompute.webp",
-	"features": []
 },
 {
 	"name": "Genesis Zero",
@@ -329,25 +378,25 @@
 	"features": ["verified", "utilities"]
 },
 {
-	"name": "OverBuild Labs",
-	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
-	"link": "https://overbuildlabs.com",
-	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
-	"features": ["reviewed", "marketplace", "mining"]
+	"name": "Kaspa Links",
+	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
+	"link": "https://kaspalinks.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspalinks.webp",
+	"features": ["reviewed", "payments"]
 },
 {
-	"name": "RK-Stratum",
-	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
-	"link": "https://rkstratum.rustykaspa.org",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "mining"]
+	"name": "kas.coffee",
+	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	"link": "https://kas.coffee",
+	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
+	"features": ["reviewed", "payments"]
 },
 {
-	"name": "Kat Pool",
-	"description": "An open-source Kaspa mining pool offering transparency, scalability, and dual rewards with $NACHO, featuring real-time analytics and PPLNS payouts.",
-	"link": "https://katpool.xyz",
-	"logo": "https://kaspahub.org/assets/logos/katpool.webp",
-	"features": ["reviewed", "mining"]
+	"name": "KasTip",
+	"description": "Browser extension that adds a tip button on every X profile. Send KAS directly to creators - non-custodial, peer-to-peer, no fees.",
+	"link": "https://kastip.app",
+	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
+	"features": ["reviewed", "payments"]
 },
 {
 	"name": "TTT",
@@ -368,13 +417,6 @@
 	"description": "Decentralized email service for Kaspa using wallet addresses as identities. Send emails with on-chain proof, reward random top miners (1 KAS per message).",
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
-	"features": []
-},
-{
-	"name": "DagLock",
-	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
-	"link": "https://daglock.com",
-	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
 	"features": []
 },
 {
@@ -411,41 +453,6 @@
 	"link": "https://tx-missile-command.com",
 	"logo": "https://kaspahub.org/assets/logos/tx-missile-command.webp",
 	"features": ["reviewed", "gaming"]
-},
-{
-	"name": "Rock The Kaspa",
-	"description": "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
-	"link": "https://www.rockthekaspa.com",
-	"logo": "https://kaspahub.org/assets/logos/rockthekaspa.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "Kascoin Shop",
-	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
-	"link": "https://kascoin.shop",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "KaspaShirts",
-	"description": "High-quality, durable Kaspa-themed T-shirts, polos, and hoodies for men and women, available in sizes S-5XL, featuring a wide range of designs from trendy to minimalistic.",
-	"link": "https://kaspashirts.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspashirts.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "KaspaBuy",
-	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
-	"link": "https://kaspabuy.shop",
-	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "SLOWLIKEBTC",
-	"description": "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
-	"link": "https://slowlikebtc.printify.me",
-	"logo": "https://kaspahub.org/assets/logos/slowmerch.webp",
-	"features": ["marketplace"]
 },
 {
 	"name": "The Business Directory",
