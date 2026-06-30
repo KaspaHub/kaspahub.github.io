@@ -126,6 +126,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "Kaspeak",
+	"description": "A decentralized messenger on the Kaspa network with end-to-end encrypted private messages, groups, channels, and a dedicated SDK for building decentralized applications.",
+	"link": "https://kaspeak.net",
+	"logo": "https://kaspahub.org/assets/logos/kaspeak.webp",
+	"features": ["reviewed", "social"]
+},
+{
 	"name": "KBeam",
 	"description": "Decentralized messaging and authentication app on Kaspa. Fully encrypted with no phone number or personal data required. Includes Auth Gateway for passwordless wallet login on websites.",
 	"link": "https://kbeam.app",
@@ -147,6 +154,13 @@
 	"features": ["reviewed", "social"]
 },
 {
+	"name": "KasShi",
+	"description": "A video platform powered by $KAS micropayments that lets creators earn Kaspa through tipping, channel subscriptions, engagement, and paid videos.",
+	"link": "https://kasshi.io",
+	"logo": "https://kaspahub.org/assets/logos/kasshi.webp",
+	"features": ["reviewed", "social"]
+},
+{
 	"name": "Kasthletics",
 	"description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
 	"link": "https://www.kasthletics.com",
@@ -155,42 +169,14 @@
 },
 {
 	"name": "KRON",
-	"description": "Native Kaspa L1 launchpad and DEX offering bonding curve launches and permanently locked AMM trading.",
-	"link": "https://kron.technology/",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
+	"link": "https://kron.technology",
+	"logo": "https://kaspahub.org/assets/logos/kron.webp",
 	"features": ["launchpad", "dex"]
 },
 {
-	"name": "Vivoor",
-	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
-	"link": "https://vivoor.xyz",
-	"logo": "https://kaspahub.org/assets/logos/vivoor.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "KasShi",
-	"description": "A video platform powered by $KAS micropayments that lets creators earn Kaspa through tipping, channel subscriptions, engagement, and paid videos.",
-	"link": "https://kasshi.io",
-	"logo": "https://kaspahub.org/assets/logos/kasshi.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "Kaspeak",
-	"description": "A decentralized messenger on the Kaspa network with end-to-end encrypted private messages, groups, channels, and a dedicated SDK for building decentralized applications.",
-	"link": "https://kaspeak.net",
-	"logo": "https://kaspahub.org/assets/logos/kaspeak.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "TTT",
-	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
-	"link": "https://tttz.xyz",
-	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
-	"features": ["social"]
-},
-{
 	"name": "De Assets",
-	"description": "L1-native KCC20 covenant token platform on Kaspa testnet. Deploy, mint, and trade native tokens with a fully on-chain orderbook enforced by Kaspa consensus.",
+	"description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
 	"link": "https://tn10.deassets.io",
 	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
 	"features": ["launchpad", "dex"]
@@ -215,6 +201,13 @@
 	"link": "https://betabuddy.netlify.app",
 	"logo": "https://kaspahub.org/assets/logos/betabuddy.webp",
 	"features": ["dapp", "gambling"]
+},
+{
+	"name": "Vivoor",
+	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
+	"link": "https://vivoor.xyz",
+	"logo": "https://kaspahub.org/assets/logos/vivoor.webp",
+	"features": ["reviewed", "social"]
 },
 {
 	"name": "Travala.com",
@@ -355,6 +348,13 @@
 	"link": "https://katpool.xyz",
 	"logo": "https://kaspahub.org/assets/logos/katpool.webp",
 	"features": ["reviewed", "mining"]
+},
+{
+	"name": "TTT",
+	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
+	"link": "https://tttz.xyz",
+	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
+	"features": ["social"]
 },
 {
 	"name": "Flux Kmail",
