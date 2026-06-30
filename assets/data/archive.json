@@ -28,6 +28,13 @@
   "features": ["openSource", "selfCustodial", "browserExtension"]
 },
 {
+  "name": "KSPR DEX",
+  "description": "A decentralized exchange and launchpad on Kaspa's Kasplex L2, enabling zero-fee token deployment, V3 AMM liquidity with perpetual creator fees, and in-channel Telegram trading for seamless DeFi access.",
+  "link": "https://app.kspr.exchange",
+  "logo": "https://kaspahub.org/assets/logos/kspr.webp",
+  "features": ["layer2", "dex", "launchpad"]
+},
+{
   "name": "KYO",
   "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
   "link": "https://kyocard.app",
