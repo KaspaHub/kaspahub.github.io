@@ -329,6 +329,20 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
+	"name": "NanoGPT",
+	"description": "Pay-per-prompt AI service. Access powerful text and image generation models anonymously. No subscription needed, no account required. Pay only for what you use, with support for crypto and card payments.",
+	"link": "https://nano-gpt.com",
+	"logo": "https://kaspahub.org/assets/logos/nano-gpt.webp",
+	"features": ["reviewed"]
+},
+{
+	"name": "Crypto Corner Shop",
+	"description": "A privacy-focused crypto marketplace for buying and selling physical goods, digital items, NFTs, and services. Features walletless checkout, low fees, non-custodial escrow and stablecoin pricing.",
+	"link": "https://cryptocornershop.com",
+	"logo": "https://kaspahub.org/assets/logos/cryptocornershop.webp",
+	"features": ["marketplace"]
+},
+{
 	"name": "SilverScript Studio",
 	"description": "Browser-based IDE for writing, compiling, and deploying SilverScript smart contracts on Kaspa.",
 	"link": "https://silverscriptstudio.com",
@@ -761,13 +775,6 @@
 	"link": "https://kaspadrome.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspadrome.webp",
 	"features": ["reviewed", "visualizer"]
-},
-{
-	"name": "NanoGPT",
-	"description": "Pay-per-prompt AI service. Access powerful text and image generation models anonymously. No subscription needed, no account required. Pay only for what you use, with support for crypto and card payments.",
-	"link": "https://nano-gpt.com",
-	"logo": "https://kaspahub.org/assets/logos/nano-gpt.webp",
-	"features": ["reviewed"]
 },
 {
 	"name": "Kaspero Pay",
