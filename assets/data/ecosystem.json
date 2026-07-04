@@ -1050,6 +1050,13 @@
 	"features": ["reviewed", "blockExplorer"]
 },
 {
+	"name": "kascov",
+	"description": "Covenant and smart coin explorer for Kaspa. Tracks coin events with full history preservation, script decoder for post-Toccata opcodes including ZK verification, and SilverScript contract recognition.",
+	"link": "https://kascov-explorer.web.app",
+	"logo": "https://kaspahub.org/assets/logos/kascov.webp",
+	"features": ["reviewed", "blockExplorer"]
+},
+{
 	"name": "Kascan",
 	"description": "A super lightweight, fully open-source Kaspa BlockDAG explorer for searching transactions, blocks, and addresses. Features live TPS, BPS, hashrate, top miners, rich list, and real-time network stats.",
 	"link": "https://kascan.io",
@@ -1687,13 +1694,6 @@
 	"features": ["cex"]
 },
 {
-	"name": "Changelly",
-	"description": "Changelly is a Czech Republic-based crypto swap platform established in 2015, offering instant exchanges and fiat on-ramp services.",
-	"link": "https://changelly.com",
-	"logo": "https://kaspahub.org/assets/logos/changelly.webp",
-	"features": ["reviewed", "cex", "swap", "noKyc", "withdrawals", "payments"]
-},
-{
 	"name": "Paxful",
 	"description": "Paxful is a US-based peer-to-peer crypto marketplace established in 2015, supporting multiple payment methods.",
 	"link": "https://paxful.com",
@@ -2119,6 +2119,13 @@
 	"link": "https://uex.us",
 	"logo": "https://kaspahub.org/assets/logos/uex.us.webp",
 	"features": ["cex", "withdrawals"]
+},
+{
+	"name": "Changelly",
+	"description": "Changelly is a Czech Republic-based crypto swap platform established in 2015, offering instant exchanges and fiat on-ramp services.",
+	"link": "https://changelly.com",
+	"logo": "https://kaspahub.org/assets/logos/changelly.webp",
+	"features": ["cex", "swap", "noKyc", "withdrawals", "payments"]
 },
 {
 	"name": "BigONE",
