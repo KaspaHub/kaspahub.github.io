@@ -71,14 +71,14 @@
 },
 {
 	"name": "Kaspa Wiki",
-	"description": "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockchain, its protocol, and ecosystem.",
+	"description": "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockDAG, its protocol, and ecosystem.",
 	"link": "https://wiki.kaspa.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspawiki.webp",
 	"features": ["reviewed", "education"]
 },
 {
 	"name": "Kaspa Q&A",
-	"description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockchain, technology, and ecosystem.",
+	"description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockDAG, technology, and ecosystem.",
 	"link": "https://qa.kas.pa",
 	"logo": "https://kaspahub.org/assets/logos/qa.kas.pa.webp",
 	"features": ["reviewed", "social", "education"]
@@ -309,7 +309,7 @@
 },
 {
 	"name": "K100bet",
-	"description": "Prediction market platform built on the Kaspa blockchain. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
+	"description": "Prediction market platform built on the Kaspa blockDAG. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
 	"link": "https://k100bet.com",
 	"logo": "https://kaspahub.org/assets/logos/k100bet.webp",
 	"features": ["dapp", "gambling"]
@@ -855,7 +855,7 @@
 },
 {
 	"name": "KaspaTaxi",
-	"description": "A decentralized ride-booking service on the Kaspa blockchain, enabling users to pay with Kaspa for instant payments, low transaction fees, and trustless peer-to-peer transactions between riders and drivers.",
+	"description": "A decentralized ride-booking service on the Kaspa blockDAG, enabling users to pay with Kaspa for instant payments, low transaction fees, and trustless peer-to-peer transactions between riders and drivers.",
 	"link": "https://kaspataxi.kasperience.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspataxi.webp",
 	"features": ["jobs"]
