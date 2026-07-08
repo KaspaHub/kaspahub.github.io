@@ -273,6 +273,13 @@
 	"features": []
 },
 {
+	"name": "Stag Hunt",
+	"description": "Kaspa-native crowdfunded hunts platform. Post hunts, back with KAS in on-chain escrow, claim tasks, and let referees verify for payout.",
+	"link": "https://staghunt.app",
+	"logo": "https://kaspahub.org/assets/logos/staghunt.app.webp",
+	"features": []
+},
+{
 	"name": "DagLock",
 	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
 	"link": "https://daglock.com",
