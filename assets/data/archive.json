@@ -28,18 +28,18 @@
   "features": ["openSource", "selfCustodial", "browserExtension"]
 },
 {
+  "name": "Ask & Bid",
+  "description": "Ask&Bid is a privacy-focused Tier-1 exchange aggregator launched in 2026, offering no-KYC anonymous swaps backed by a Dispute Guarantee Fund to protect users' capital.",
+  "link": "https://askand.bid",
+  "logo": "https://kaspahub.org/assets/logos/askand.bid.webp",
+  "features": ["cex", "noKyc", "swap", "withdrawals"]
+},
+{
   "name": "KSPR DEX",
   "description": "A decentralized exchange and launchpad on Kaspa's Kasplex L2, enabling zero-fee token deployment, V3 AMM liquidity with perpetual creator fees, and in-channel Telegram trading for seamless DeFi access.",
   "link": "https://app.kspr.exchange",
   "logo": "https://kaspahub.org/assets/logos/kspr.webp",
   "features": ["layer2", "dex", "launchpad"]
-},
-{
-  "name": "KYO",
-  "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
-  "link": "https://kyocard.app",
-  "logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
-  "features": ["cryptoCard"]
 },
 {
   "name": "SeedBuster",
