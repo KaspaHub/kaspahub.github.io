@@ -476,6 +476,13 @@
 	"features": ["reviewed", "gaming"]
 },
 {
+	"name": "Kaspa Price Runner",
+	"description": "Browser game where you run across the real Kaspa daily price chart. Jump crashes, grab coins, and reach the moon.",
+	"link": "https://kaspa-price-runner.pages.dev",
+	"logo": "https://kaspahub.org/assets/logos/kaspa-price-runner.webp",
+	"features": ["reviewed", "gaming"]
+},
+{
 	"name": "SLOW World",
 	"description": "Kaspa-universe Mario-style WASM platformer. Play as $SLOW the Bitcoin Turtle and other champions in browser-based levels.",
 	"link": "https://slowlikebtc.com/game",
