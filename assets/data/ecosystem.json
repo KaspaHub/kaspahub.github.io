@@ -119,6 +119,13 @@
 	"features": ["reviewed", "analytics"]
 },
 {
+	"name": "kashub.fyi",
+	"description": "All-in-one Kaspa Token Hub offering token markets, live stats, and portfolio tracking for KRC20, KRC721, KNS, L2 and more.",
+	"link": "https://kashub.fyi",
+	"logo": "https://kaspahub.org/assets/logos/kashub.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
 	"name": "Kaspa Name Service",
 	"description": "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
@@ -299,6 +306,13 @@
 	"link": "https://kron.technology",
 	"logo": "https://kaspahub.org/assets/logos/kron.webp",
 	"features": ["launchpad", "dex"]
+},
+{
+	"name": "KaspaRocket",
+	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
+	"link": "https://kasparocket.fun",
+	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
+	"features": ["launchpad"]
 },
 {
 	"name": "De Assets",
@@ -2126,6 +2140,13 @@
 	"link": "https://uex.us",
 	"logo": "https://kaspahub.org/assets/logos/uex.us.webp",
 	"features": ["cex", "withdrawals"]
+},
+{
+	"name": "StereoSwap",
+	"description": "StereoSwap is a Hungary-based privacy-focused crypto swap platform founded in 2024, offering instant NO-KYC exchanges.",
+	"link": "https://stereoswap.app",
+	"logo": "https://kaspahub.org/assets/logos/stereoswap.webp",
+	"features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
 	"name": "Changelly",
