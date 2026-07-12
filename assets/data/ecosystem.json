@@ -119,7 +119,7 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "kashub.fyi",
+	"name": "Kaspa Token Hub",
 	"description": "All-in-one Kaspa Token Hub offering token markets, live stats, and portfolio tracking for KRC20, KRC721, KNS, L2 and more.",
 	"link": "https://kashub.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kashub.webp",
