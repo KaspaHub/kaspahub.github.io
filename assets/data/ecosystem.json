@@ -1246,6 +1246,13 @@
 	"features": ["reviewed", "wallet"]
 },
 {
+	"name": "Kache",
+	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
+	"link": "https://kachewallet.com",
+	"logo": "https://kaspahub.org/assets/logos/kachwallet.webp",
+	"features": ["wallet"]
+},
+{
 	"name": "Coin Wallet",
 	"description": "Simple and lightweight cross-platform, multi-chain, self-custodial wallet with built-in swaps, and Mecto for geo-location based address sharing.",
 	"link": "https://coin.space",
