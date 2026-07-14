@@ -14,6 +14,20 @@
   "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
+  "name": "Sealver.stream",
+  "description": "Kaspa block explorer with covenant support and KCC20 token launcher. Browse tokens, holders, transfers, and covenant states.",
+  "link": "https://sealver.stream",
+  "logo": "https://kaspahub.org/assets/logos/sealver.webp",
+  "features": ["reviewed", "blockExplorer"]
+},
+{
+  "name": "Kaspa Gateway",
+  "description": "A desktop application for exploring Kaspa transactions, featuring a high-performance DuckDB backend, multi-language support, and data export capabilities.",
+  "link": "https://github.com/KaspaPulse/KaspaGateway",
+  "logo": "https://kaspahub.org/assets/logos/kg.webp",
+  "features": ["blockExplorer"]
+},
+{
   "name": "Ghost Wallet",
   "description": "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
   "link": "https://www.ghostwallet.org",

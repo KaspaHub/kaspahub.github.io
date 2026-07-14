@@ -112,17 +112,17 @@
 	"features": ["verified", "analytics"]
 },
 {
-	"name": "Kaspa Memes",
-	"description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
-	"link": "https://kaspamemes.io",
-	"logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
 	"name": "Kaspa Token Hub",
 	"description": "All-in-one Kaspa Token Hub offering token markets, live stats, and portfolio tracking for KRC20, KRC721, KNS, L2 and more.",
 	"link": "https://kashub.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kashub.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Kaspa Memes",
+	"description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
+	"link": "https://kaspamemes.io",
+	"logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
 	"features": ["reviewed", "analytics"]
 },
 {
@@ -1099,13 +1099,6 @@
 	"features": ["reviewed", "blockExplorer"]
 },
 {
-	"name": "Sealver.stream",
-	"description": "Kaspa block explorer with covenant support and KCC20 token launcher. Browse tokens, holders, transfers, and covenant states.",
-	"link": "https://sealver.stream",
-	"logo": "https://kaspahub.org/assets/logos/sealver.webp",
-	"features": ["reviewed", "blockExplorer"]
-},
-{
 	"name": "Kaspatrol ",
 	"description": "Real-time Kaspa BlockDAG explorer providing live blocks, transactions, addresses, network statistics, hashrate monitoring, and an immersive 360° DAG visualization streamed directly from a full node.",
 	"link": "https://www.kaspatrol.com",
@@ -1159,13 +1152,6 @@
 	"description": "KaspaDash is an app for exploring KRC-20 tokens on Kaspa, featuring a token directory and a dashboard for portfolio management and transaction tracking using the Kasware wallet.",
 	"link": "https://krc-20.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["blockExplorer"]
-},
-{
-	"name": "Kaspa Gateway",
-	"description": "A desktop application for exploring Kaspa transactions, featuring a high-performance DuckDB backend, multi-language support, and data export capabilities.",
-	"link": "https://github.com/KaspaPulse/KaspaGateway",
-	"logo": "https://kaspahub.org/assets/logos/kg.webp",
 	"features": ["blockExplorer"]
 },
 {
