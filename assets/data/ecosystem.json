@@ -140,6 +140,13 @@
 	"features": ["reviewed", "marketplace"]
 },
 {
+	"name": "KaspaBuy",
+	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
+	"link": "https://kaspabuy.shop",
+	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
+	"features": ["marketplace"]
+},
+{
 	"name": "Kascoin Shop",
 	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
 	"link": "https://kascoin.shop",
@@ -875,13 +882,6 @@
 	"features": ["reviewed", "development", "visualizer"]
 },
 {
-	"name": "PPKAS",
-	"description": "A KRC-20 token on Kaspa, combining a meme token with the first play-to-earn (P2E) app in Telegram, allowing users to play mobile games, collect NFTs, and earn tokens while learning about the Kaspa ecosystem.",
-	"link": "https://ppkas.space",
-	"logo": "https://kaspahub.org/assets/logos/ppkas.webp",
-	"features": ["meme", "gaming"]
-},
-{
 	"name": "KaspaTaxi",
 	"description": "A decentralized ride-booking service on the Kaspa blockDAG, enabling users to pay with Kaspa for instant payments, low transaction fees, and trustless peer-to-peer transactions between riders and drivers.",
 	"link": "https://kaspataxi.kasperience.xyz",
@@ -1246,6 +1246,13 @@
 	"features": ["reviewed", "wallet"]
 },
 {
+	"name": "Kasanova",
+	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
+	"link": "https://kasanova.app",
+	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
+	"features": ["wallet"]
+},
+{
 	"name": "Kache",
 	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
 	"link": "https://kachewallet.com",
@@ -1271,13 +1278,6 @@
 	"description": "Lightweight, open-source Kaspa browser extension wallet (a fork of Kasware) with full Kasplex L2 support, KRC-20 token management, and seamless Web3 interactions.",
 	"link": "https://kasperia-doc.github.io",
 	"logo": "https://kaspahub.org/assets/logos/kasperia.webp",
-	"features": ["wallet"]
-},
-{
-	"name": "Kasanova",
-	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
-	"link": "https://kasanova.app",
-	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
 	"features": ["wallet"]
 },
 {

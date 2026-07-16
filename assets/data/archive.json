@@ -1,12 +1,5 @@
 [
 {
-  "name": "KaspaBuy",
-  "description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
-  "link": "https://kaspabuy.shop",
-  "logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
-  "features": ["marketplace"]
-},
-{
   "name": "WhiteBIT",
   "description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
   "link": "https://whitebit.com",
@@ -19,6 +12,13 @@
   "link": "https://sealver.stream",
   "logo": "https://kaspahub.org/assets/logos/sealver.webp",
   "features": ["reviewed", "blockExplorer"]
+},
+{
+  "name": "PPKAS",
+  "description": "A KRC-20 token on Kaspa, combining a meme token with the first play-to-earn (P2E) app in Telegram, allowing users to play mobile games, collect NFTs, and earn tokens while learning about the Kaspa ecosystem.",
+  "link": "https://ppkas.space",
+  "logo": "https://kaspahub.org/assets/logos/ppkas.webp",
+  "features": ["meme", "gaming"]
 },
 {
   "name": "Kaspa Gateway",
