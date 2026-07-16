@@ -119,60 +119,11 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "Kaspa Memes",
-	"description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
-	"link": "https://kaspamemes.io",
-	"logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
 	"name": "Kaspa Name Service",
 	"description": "Decentralized name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/kns.webp",
 	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "Rock The Kaspa",
-	"description": "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
-	"link": "https://www.rockthekaspa.com",
-	"logo": "https://kaspahub.org/assets/logos/rockthekaspa.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "KaspaBuy",
-	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
-	"link": "https://kaspabuy.shop",
-	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "Kascoin Shop",
-	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
-	"link": "https://kascoin.shop",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "KaspaShirts",
-	"description": "High-quality, durable Kaspa-themed T-shirts, polos, and hoodies for men and women, available in sizes S-5XL, featuring a wide range of designs from trendy to minimalistic.",
-	"link": "https://kaspashirts.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspashirts.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "SLOWLIKEBTC",
-	"description": "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
-	"link": "https://slowlikebtc.printify.me",
-	"logo": "https://kaspahub.org/assets/logos/slowmerch.webp",
-	"features": ["marketplace"]
-},
-{
-	"name": "Pool Party Nodes",
-	"description": "Crypto clothing shop offering Kaspa-themed apparel and merchandise including tees, hoodies, sweatshirts, and stickers featuring green branding and GHOSTDAG-inspired designs.",
-	"link": "https://poolpartynodes.com/kaspa-merch/",
-	"logo": "https://kaspahub.org/assets/logos/poolpartynodes.webp",
-	"features": ["marketplace"]
 },
 {
 	"name": "OverBuild Labs",
@@ -273,6 +224,34 @@
 	"features": ["cryptoCard"]
 },
 {
+	"name": "Zealous Swap",
+	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
+	"link": "https://www.zealousswap.com",
+	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
+	"features": ["reviewed", "layer2", "dex"]
+},
+{
+	"name": "KRON",
+	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
+	"link": "https://kron.technology",
+	"logo": "https://kaspahub.org/assets/logos/kron.webp",
+	"features": ["launchpad", "dex"]
+},
+{
+	"name": "KaspaRocket",
+	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
+	"link": "https://kasparocket.fun",
+	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
+	"features": ["launchpad"]
+},
+{
+	"name": "De Assets",
+	"description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
+	"link": "https://tn10.deassets.io",
+	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
+	"features": ["launchpad", "dex"]
+},
+{
 	"name": "KASCompute",
 	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
 	"link": "https://kascompute.org",
@@ -299,27 +278,6 @@
 	"link": "https://daglock.com",
 	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
 	"features": []
-},
-{
-	"name": "KRON",
-	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
-	"link": "https://kron.technology",
-	"logo": "https://kaspahub.org/assets/logos/kron.webp",
-	"features": ["launchpad", "dex"]
-},
-{
-	"name": "KaspaRocket",
-	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
-	"link": "https://kasparocket.fun",
-	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
-	"features": ["launchpad"]
-},
-{
-	"name": "De Assets",
-	"description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
-	"link": "https://tn10.deassets.io",
-	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
-	"features": ["launchpad", "dex"]
 },
 {
 	"name": "Kaspa Safe",
@@ -588,11 +546,46 @@
 	"features": ["reviewed", "javascript"]
 },
 {
-	"name": "Zealous Swap",
-	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
-	"link": "https://www.zealousswap.com",
-	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
-	"features": ["reviewed", "layer2", "dex"]
+	"name": "Rock The Kaspa",
+	"description": "A merchandise shop selling Kaspa-themed clothing, supporting community marketing funds and promoting Kaspa adoption through apparel.",
+	"link": "https://www.rockthekaspa.com",
+	"logo": "https://kaspahub.org/assets/logos/rockthekaspa.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
+	"name": "KaspaBuy",
+	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
+	"link": "https://kaspabuy.shop",
+	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "Kascoin Shop",
+	"description": "Hand-poured, unique collectible Kaspa coins in silver, copper/tin alloy, bronze, and more. Limited numbered editions, double-sided designs, and custom patina options. Accepts only $KAS payments",
+	"link": "https://kascoin.shop",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "KaspaShirts",
+	"description": "High-quality, durable Kaspa-themed T-shirts, polos, and hoodies for men and women, available in sizes S-5XL, featuring a wide range of designs from trendy to minimalistic.",
+	"link": "https://kaspashirts.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspashirts.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "SLOWLIKEBTC",
+	"description": "Print-on-demand store with Bitcoin $SLOW & Kaspa-themed clothing, accessories, & decor, inspired by Kaspa founder’s pet turtle, promoting community & crypto awareness.",
+	"link": "https://slowlikebtc.printify.me",
+	"logo": "https://kaspahub.org/assets/logos/slowmerch.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "Pool Party Nodes",
+	"description": "Crypto clothing shop offering Kaspa-themed apparel and merchandise including tees, hoodies, sweatshirts, and stickers featuring green branding and GHOSTDAG-inspired designs.",
+	"link": "https://poolpartynodes.com/kaspa-merch/",
+	"logo": "https://kaspahub.org/assets/logos/poolpartynodes.webp",
+	"features": ["marketplace"]
 },
 {
 	"name": "Kaspa Finance",

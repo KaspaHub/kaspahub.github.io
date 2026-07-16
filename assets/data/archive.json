@@ -7,6 +7,13 @@
   "features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
+  "name": "Kaspa Memes",
+  "description": "A neutral hub for researching, tracking, and discussing KRC-20 tokens. Focused on transparency, data, and trust.",
+  "link": "https://kaspamemes.io",
+  "logo": "https://kaspahub.org/assets/logos/kaspamemes.webp",
+  "features": ["reviewed", "analytics"]
+},
+{
   "name": "Sealver.stream",
   "description": "Kaspa block explorer with covenant support and KCC20 token launcher. Browse tokens, holders, transfers, and covenant states.",
   "link": "https://sealver.stream",
