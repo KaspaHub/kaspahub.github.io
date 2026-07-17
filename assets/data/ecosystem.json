@@ -228,7 +228,7 @@
 	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
 	"link": "https://www.zealousswap.com",
 	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
-	"features": ["reviewed", "layer2", "dex"]
+	"features": ["reviewed", "dex"]
 },
 {
 	"name": "KRON",
