@@ -252,17 +252,10 @@
 	"features": ["launchpad", "dex"]
 },
 {
-	"name": "KASCompute",
-	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
-	"link": "https://kascompute.org",
-	"logo": "https://kaspahub.org/assets/logos/kascompute.webp",
-	"features": []
-},
-{
-	"name": "Kasthletics",
-	"description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
-	"link": "https://www.kasthletics.com",
-	"logo": "https://kaspahub.org/assets/logos/kasthletics.webp",
+	"name": "KaspaForge",
+	"description": "A non-custodial workspace for Kaspa featuring a covenant-based Safe with delayed withdrawals and an independent alarm key, plus Escrow, Marketplace, wallet, encrypted sync, and recovery tools.",
+	"link": "https://kaspaforge.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspaforge.webp",
 	"features": []
 },
 {
@@ -277,13 +270,6 @@
 	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
 	"link": "https://daglock.com",
 	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
-	"features": []
-},
-{
-	"name": "Kaspa Safe",
-	"description": "Non-custodial anti-theft KAS vault using covenants. Withdrawals are delayed and can be instantly cancelled with a second alarm key if theft is detected.",
-	"link": "https://safe.officeforge.co",
-	"logo": "https://kaspahub.org/assets/logos/safe.officeforge.webp",
 	"features": []
 },
 {
@@ -306,6 +292,20 @@
 	"link": "https://betabuddy.netlify.app",
 	"logo": "https://kaspahub.org/assets/logos/betabuddy.webp",
 	"features": ["dapp", "gambling"]
+},
+{
+	"name": "KASCompute",
+	"description": "A decentralized compute infrastructure built on Kaspa, enabling nodes to execute deterministic jobs and submit cryptographic proofs of computation for verifiable, trust-minimized work.",
+	"link": "https://kascompute.org",
+	"logo": "https://kaspahub.org/assets/logos/kascompute.webp",
+	"features": []
+},
+{
+	"name": "Kasthletics",
+	"description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
+	"link": "https://www.kasthletics.com",
+	"logo": "https://kaspahub.org/assets/logos/kasthletics.webp",
+	"features": []
 },
 {
 	"name": "Kaskad",
