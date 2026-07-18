@@ -77,13 +77,6 @@
 	"features": ["reviewed", "education"]
 },
 {
-	"name": "Kaspa Q&A",
-	"description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockDAG, technology, and ecosystem.",
-	"link": "https://qa.kas.pa",
-	"logo": "https://kaspahub.org/assets/logos/qa.kas.pa.webp",
-	"features": ["reviewed", "social", "education"]
-},
-{
 	"name": "Kaspa Social",
 	"description": "A community-driven social media platform for the Kaspa ecosystem, enabling users to share news, articles, X and YouTube content, and engage in forums with minimal moderation and personalized dashboards.",
 	"link": "https://kaspa.social",
@@ -726,13 +719,6 @@
 	"link": "https://kaspadaily.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadaily.webp",
 	"features": ["reviewed", "analytics", "education", "education"]
-},
-{
-	"name": "Kasbun",
-	"description": "Kasbun is a blog platform focused on the Kaspa cryptocurrency, offering news, insights, and updates through articles and a newsletter to engage and inform the community.",
-	"link": "https://www.kasbun.com",
-	"logo": "https://kaspahub.org/assets/logos/kasbun.webp",
-	"features": ["reviewed", "education", "education"]
 },
 {
 	"name": "Kaspa Explained",
