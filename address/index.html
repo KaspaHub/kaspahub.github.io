@@ -767,8 +767,8 @@ function renderReceived(pageTxs, addr) {
     return `
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
-        <td>${age}</td>
         <td>${senderHtml}</td>
+        <td>${age}</td>
         <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
@@ -825,8 +825,8 @@ function renderSent(pageTxs, addr) {
     return `
       <tr>
         <td>${linkTx(hash, shortHash)}</td>
-        <td>${age}</td>
         <td>${receiverHtml}</td>
+        <td>${age}</td>
         <td><span class="${statusClass}">${statusText}</span></td>
         <td>${amt}</td>
       </tr>
