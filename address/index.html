@@ -643,7 +643,7 @@ function renderAll(pageTxs, addr) {
     const hash = String(tx.transaction_id || "-");
     const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
     const net = getNetChange(tx, addr);
-    const amt = formatKas(net, 1, true);
+    const amt = formatKas(net, 3, true);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
     const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
