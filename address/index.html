@@ -661,7 +661,6 @@ function renderAll(pageTxs, addr) {
         items = fromItems;
         summaryText = `Multiple addresses (${fromItems.length})`;
       } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
-        const shortFrom = shortenMiddle(from);
         counterpartyHtml = linkAddress(from);
       } else {
         const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
@@ -694,7 +693,6 @@ function renderAll(pageTxs, addr) {
         const remainder = (item.amt * netAbs) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const short = shortenMiddle(item.addr);
         return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       counterpartyHtml = `
@@ -747,7 +745,6 @@ function renderReceived(pageTxs, addr) {
         const remainder = (item.amt * net) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const short = shortenMiddle(item.addr);
         return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       senderHtml = `
@@ -757,7 +754,6 @@ function renderReceived(pageTxs, addr) {
         </details>
       `;
     } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
-      const shortFrom = shortenMiddle(from);
       senderHtml = linkAddress(from);
     } else {
       const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
@@ -805,7 +801,6 @@ function renderSent(pageTxs, addr) {
         const remainder = (item.amt * netAbs) % totalContrib;
         let finalSomes = propSomes;
         if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        const short = shortenMiddle(toItems[0].addr);
         return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
       }).join('');
       receiverHtml = `
@@ -815,7 +810,6 @@ function renderSent(pageTxs, addr) {
         </details>
       `;
     } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
-      const shortTo = shortenMiddle(to);
       receiverHtml = linkAddress(to);
     } else {
       const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
