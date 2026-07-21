@@ -602,13 +602,6 @@
 	"features": ["layer2", "launchpad"]
 },
 {
-	"name": "Moonbound",
-	"description": "A platform for launching, trading, and earning on the Kaspa network, providing tools for creators to build sustainable DeFi and tokenization projects.",
-	"link": "https://moonbound.gg",
-	"logo": "https://kaspahub.org/assets/logos/moonbound.webp",
-	"features": ["layer2", "launchpad"]
-},
-{
 	"name": "SeaSwap",
 	"description": "A DEX aggregator for the Kaspa ecosystem, built on Igra Labs and Kasplex, enabling seamless trade routing and optimized DeFi trading experiences.",
 	"link": "https://seaswap.xyz",

@@ -21,6 +21,13 @@
   "features": ["reviewed", "education", "education"]
 },
 {
+  "name": "Moonbound",
+  "description": "A platform for launching, trading, and earning on the Kaspa network, providing tools for creators to build sustainable DeFi and tokenization projects.",
+  "link": "https://moonbound.gg",
+  "logo": "https://kaspahub.org/assets/logos/moonbound.webp",
+  "features": ["layer2", "launchpad"]
+},
+{
   "name": "Kaspa Q&A",
   "description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockDAG, technology, and ecosystem.",
   "link": "https://qa.kas.pa",
