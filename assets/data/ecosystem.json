@@ -70,6 +70,13 @@
 	"features": ["reviewed", "social", "education"]
 },
 {
+	"name": "Kaspa Q&A",
+	"description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockDAG, technology, and ecosystem.",
+	"link": "https://qa.kas.pa",
+	"logo": "https://kaspahub.org/assets/logos/qa.kas.pa.webp",
+	"features": ["reviewed", "social", "education"]
+},
+{
 	"name": "Kaspa Wiki",
 	"description": "A wiki page for Kaspa, providing comprehensive documentation and information on the Kaspa blockDAG, its protocol, and ecosystem.",
 	"link": "https://wiki.kaspa.org",

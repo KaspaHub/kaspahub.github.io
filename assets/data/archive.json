@@ -28,13 +28,6 @@
   "features": ["layer2", "launchpad"]
 },
 {
-  "name": "Kaspa Q&A",
-  "description": "A community-driven Q&A platform for Kaspa, built on the open-source QPixel engine by Codidact, fostering knowledge sharing about Kaspa’s blockDAG, technology, and ecosystem.",
-  "link": "https://qa.kas.pa",
-  "logo": "https://kaspahub.org/assets/logos/qa.kas.pa.webp",
-  "features": ["reviewed", "social", "education"]
-},
-{
   "name": "Sealver.stream",
   "description": "Kaspa block explorer with covenant support and KCC20 token launcher. Browse tokens, holders, transfers, and covenant states.",
   "link": "https://sealver.stream",
