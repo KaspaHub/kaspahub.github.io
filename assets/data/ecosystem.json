@@ -315,6 +315,13 @@
 	"features": []
 },
 {
+	"name": "KasFinder",
+	"description": "A real-world treasure hunt on Kaspa where users place hidden $KAS drops marked by physical weatherproof markers with unique codes.",
+	"link": "https://kasfinder.com/info.html",
+	"logo": "https://kaspahub.org/assets/logos/kasfinder.webp",
+	"features": []
+},
+{
 	"name": "Kaskad",
 	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
 	"link": "https://www.kaskad.app",
