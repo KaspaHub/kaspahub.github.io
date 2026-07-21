@@ -203,6 +203,13 @@
 	"features": ["reviewed", "jobs"]
 },
 {
+	"name": "Kaspa x402",
+	"description": "Pay-per-call marketplace for AI agents and services settled directly on Kaspa L1 using x402 and Toccata covenants.",
+	"link": "https://www.kaspa-402.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspa-402.webp",
+	"features": ["marketplace"]
+},
+{
 	"name": "Stroem Finance",
 	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
 	"link": "https://stroem.finance",
