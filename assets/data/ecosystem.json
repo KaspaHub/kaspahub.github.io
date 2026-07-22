@@ -406,6 +406,13 @@
 	"features": ["verified", "utilities"]
 },
 {
+	"name": "KAI",
+	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
+	"link": "https://mykai.app",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["verified", "ai"]
+},
+{
 	"name": "Kaspa Links",
 	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
 	"link": "https://kaspalinks.com",
@@ -763,13 +770,6 @@
 	"features": ["reviewed", "education"]
 },
 {
-	"name": "MyKai",
-	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
-	"link": "https://mykai.app",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["verified", "ai"]
-},
-{
 	"name": "KIGS",
 	"description": "An interactive learning platform focused on Kaspa, offering engaging modules on network, wallets, transactions, UTXOs, and BlockDAG, designed for beginners with links to deeper resources.",
 	"link": "https://kigs.pages.dev",
@@ -964,13 +964,6 @@
 	"link": "https://kasbay.org",
 	"logo": "https://kaspahub.org/assets/logos/kasbay.webp",
 	"features": ["reviewed"]
-},
-{
-	"name": "Kasia Book",
-	"description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
-	"link": "https://kasiabook.com",
-	"logo": "https://kaspahub.org/assets/logos/kasia.webp",
-	"features": ["reviewed", "utilities"]
 },
 {
 	"name": "Kaspa Address Labels",

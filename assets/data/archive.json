@@ -21,6 +21,13 @@
   "features": ["reviewed", "education", "education"]
 },
 {
+  "name": "Kasia Book",
+  "description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
+  "link": "https://kasiabook.com",
+  "logo": "https://kaspahub.org/assets/logos/kasia.webp",
+  "features": ["reviewed", "utilities"]
+},
+{
   "name": "Moonbound",
   "description": "A platform for launching, trading, and earning on the Kaspa network, providing tools for creators to build sustainable DeFi and tokenization projects.",
   "link": "https://moonbound.gg",
