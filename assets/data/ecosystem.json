@@ -322,41 +322,6 @@
 	"features": []
 },
 {
-	"name": "Kaskad",
-	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
-	"link": "https://www.kaskad.app",
-	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
-	"features": ["reviewed", "layer2"]
-},
-{
-	"name": "Vivoor",
-	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
-	"link": "https://vivoor.xyz",
-	"logo": "https://kaspahub.org/assets/logos/vivoor.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "Travala.com",
-	"description": "World’s leading Web3 travel company. Travala.com is a pioneering crypto-native online travel agency that enables users to book millions of hotels, flights, tours, and activities worldwide using Kaspa.",
-	"link": "https://www.travala.com",
-	"logo": "https://kaspahub.org/assets/logos/travala.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "NanoGPT",
-	"description": "Pay-per-prompt AI service. Access powerful text and image generation models anonymously. No subscription needed, no account required. Pay only for what you use, with support for crypto and card payments.",
-	"link": "https://nano-gpt.com",
-	"logo": "https://kaspahub.org/assets/logos/nano-gpt.webp",
-	"features": ["reviewed"]
-},
-{
-	"name": "Crypto Corner Shop",
-	"description": "A privacy-focused crypto marketplace for buying and selling physical goods, digital items, NFTs, and services. Features walletless checkout, low fees, non-custodial escrow and stablecoin pricing.",
-	"link": "https://cryptocornershop.com",
-	"logo": "https://kaspahub.org/assets/logos/cryptocornershop.webp",
-	"features": ["marketplace"]
-},
-{
 	"name": "SilverScript Studio",
 	"description": "Browser-based IDE for writing, compiling, and deploying SilverScript smart contracts on Kaspa.",
 	"link": "https://silverscriptstudio.com",
@@ -453,6 +418,13 @@
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
 	"features": []
+},
+{
+	"name": "Vivoor",
+	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
+	"link": "https://vivoor.xyz",
+	"logo": "https://kaspahub.org/assets/logos/vivoor.webp",
+	"features": ["reviewed", "social"]
 },
 {
 	"name": "KasPlay",
@@ -607,6 +579,34 @@
 	"link": "https://poolpartynodes.com/kaspa-merch/",
 	"logo": "https://kaspahub.org/assets/logos/poolpartynodes.webp",
 	"features": ["marketplace"]
+},
+{
+	"name": "Travala.com",
+	"description": "World’s leading Web3 travel company. Travala.com is a pioneering crypto-native online travel agency that enables users to book millions of hotels, flights, tours, and activities worldwide using Kaspa.",
+	"link": "https://www.travala.com",
+	"logo": "https://kaspahub.org/assets/logos/travala.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
+	"name": "NanoGPT",
+	"description": "Pay-per-prompt AI service. Access powerful text and image generation models anonymously. No subscription needed, no account required. Pay only for what you use, with support for crypto and card payments.",
+	"link": "https://nano-gpt.com",
+	"logo": "https://kaspahub.org/assets/logos/nano-gpt.webp",
+	"features": ["reviewed"]
+},
+{
+	"name": "Crypto Corner Shop",
+	"description": "A privacy-focused crypto marketplace for buying and selling physical goods, digital items, NFTs, and services. Features walletless checkout, low fees, non-custodial escrow and stablecoin pricing.",
+	"link": "https://cryptocornershop.com",
+	"logo": "https://kaspahub.org/assets/logos/cryptocornershop.webp",
+	"features": ["marketplace"]
+},
+{
+	"name": "Kaskad",
+	"description": "A decentralized lending and borrowing platform on Kaspa, enabling users to borrow stablecoins like USDT or USDC using $KAS as collateral, with real-time oracle pricing and flexible loan management.",
+	"link": "https://www.kaskad.app",
+	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
+	"features": ["reviewed", "layer2"]
 },
 {
 	"name": "Kaspa Finance",
