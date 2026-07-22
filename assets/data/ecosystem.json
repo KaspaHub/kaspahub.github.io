@@ -147,6 +147,20 @@
 	"features": ["reviewed", "mining"]
 },
 {
+	"name": "MyKAI",
+	"description": "One-click installer to run a full Kaspa node. Makes running a node accessible for non-technical users with background operation, auto-start, and live network counter.",
+	"link": "https://mykai.dev",
+	"logo": "https://kaspahub.org/assets/logos/mykai.webp",
+	"features": ["verified", "utilities"]
+},
+{
+	"name": "KAI",
+	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
+	"link": "https://mykai.app",
+	"logo": "https://kaspahub.org/assets/logos/kai.webp",
+	"features": ["verified", "ai"]
+},
+{
 	"name": "Kasia",
 	"description": "A peer-to-peer, encrypted messaging protocol and application built on Kaspa, fully open-source and decentralized.",
 	"link": "https://kasia.fyi",
@@ -362,20 +376,6 @@
 	"link": "https://arkiv.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed"]
-},
-{
-	"name": "MyKAI",
-	"description": "One-click installer to run a full Kaspa node. Makes running a node accessible for non-technical users with background operation, auto-start, and live network counter.",
-	"link": "https://mykai.dev",
-	"logo": "https://kaspahub.org/assets/logos/mykai.webp",
-	"features": ["verified", "utilities"]
-},
-{
-	"name": "KAI",
-	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
-	"link": "https://mykai.app",
-	"logo": "https://kaspahub.org/assets/logos/kai.webp",
-	"features": ["verified", "ai"]
 },
 {
 	"name": "Kaspa Links",
