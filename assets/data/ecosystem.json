@@ -350,13 +350,6 @@
 	"features": ["reviewed", "dart", "development", "payments"]
 },
 {
-	"name": "OnChain POS",
-	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
-	"link": "https://onchainpos.live",
-	"logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
-	"features": ["reviewed", "development", "payments"]
-},
-{
 	"name": "KasSigner",
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
@@ -826,7 +819,7 @@
 	"features": ["reviewed", "development", "payments"]
 },
 {
-	"name": "Kaspa Payments",
+	"name": "KaspaWoo",
 	"description": "A WordPress plugin that integrates Kaspa cryptocurrency payments into WooCommerce stores.",
 	"link": "https://kaspawoo.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-2.webp",

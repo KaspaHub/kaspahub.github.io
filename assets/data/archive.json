@@ -21,6 +21,13 @@
   "features": ["reviewed", "education", "education"]
 },
 {
+  "name": "OnChain POS",
+  "description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
+  "link": "https://onchainpos.live",
+  "logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
+  "features": ["reviewed", "development", "payments"]
+},
+{
   "name": "Kasia Book",
   "description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
   "link": "https://kasiabook.com",
