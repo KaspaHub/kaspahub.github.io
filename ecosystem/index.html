@@ -389,7 +389,7 @@ function handleCategoryFromURL() {
 
 	if (!category) return;
 
-	const pill = categoryPills.find(p => 
+	const pill = Array.from(categoryPills).find(p => 
 		p.dataset.feature.toLowerCase() === category.toLowerCase()
 	);
 
