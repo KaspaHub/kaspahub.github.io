@@ -378,8 +378,8 @@ fetch('/assets/data/ecosystem.json')
 	.then(data => {
 		items = data;
 		filteredItems = items;
+		applyCategoryFromURL();
 		renderItems(true);
-		setTimeout(applyCategoryFromURL, 10);
 	})
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
 
