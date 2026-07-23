@@ -330,7 +330,7 @@ sortSelect.addEventListener('change', filterItems);
 layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
-fetch('/assets/data/archived.json')
+fetch('/assets/data/archive.json')
 	.then(res => res.json())
 	.then(data => {
 		items = data;
