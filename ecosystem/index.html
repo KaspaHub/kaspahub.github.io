@@ -381,6 +381,32 @@ fetch('/assets/data/ecosystem.json')
 		renderItems(true);
 	})
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
+
+
+function handleCategoryFromURL() {
+	const params = new URLSearchParams(location.search);
+	const category = params.get('category');
+
+	if (!category) return;
+
+	const pill = categoryPills.find(p => 
+		p.dataset.feature.toLowerCase() === category.toLowerCase()
+	);
+
+	if (pill) {
+		const currentActive = document.querySelector('.category-pill.active');
+		if (currentActive) currentActive.classList.remove('active');
+
+		pill.classList.add('active');
+
+		if (categoryDropdown) categoryDropdown.value = pill.dataset.feature;
+
+		filterItems();
+	}
+}
+
+document.addEventListener('DOMContentLoaded', handleCategoryFromURL);
+window.addEventListener('popstate', handleCategoryFromURL);
 </script>
 
 </body>
