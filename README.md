@@ -15,18 +15,18 @@ Have a project to share? We’d love to feature it on Kaspa Hub! You can submit 
 Want to help improve the website or report an issue? Open a GitHub issue or make a PR to suggest improvements, report bugs, or contribute ideas.
 * [https://github.com/KaspaHub/kaspahub.github.io/issues](https://github.com/KaspaHub/kaspahub.github.io/issues)
 
-## Feedback
-Send feedback and help us improve.
-* [mail@kaspahub.org](mailto:mail@kaspahub.org)
-
 ## Contact
 Feel free to reach out if you have any questions on X.
-* [https://x.com/KaspaHub](https://x.com/Classicxbt)
-
-## License
-Kaspa Hub is licensed under the MIT License with a **custom clause**. See the LICENSE file for details.
-* [LICENSE](LICENSE)
+* [https://x.com/Classicxbt](https://x.com/Classicxbt)
 
 ## Donations
 Support Kaspa Hub development with a donation:
 * [https://tiptr.ee/KaspaHub](https://tiptr.ee/KaspaHub)
+
+## Feedback
+Send feedback and help us improve.
+* [mail@kaspahub.org](mailto:mail@kaspahub.org)
+
+## License
+Kaspa Hub is licensed under the MIT License with a **custom clause**. See the LICENSE file for details.
+* [LICENSE](LICENSE)
