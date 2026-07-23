@@ -540,10 +540,10 @@
 },
 {
 	"name": "KaspaBuy",
-	"description": "An e-commerce platform for Kaspa-themed physical merchandise, supporting Kaspa payments to promote real-world adoption.",
+	"description": "KaspaBuy is an online marketplace where customers can purchase products using KAS, helping bring Kaspa payments into real-world commerce.",
 	"link": "https://kaspabuy.shop",
 	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
-	"features": ["marketplace"]
+	"features": ["payments", "marketplace"]
 },
 {
 	"name": "Kascoin Shop",
