@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa Archive - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Archive - Kaspa Hub" />
+<meta property="og:title" content="Kaspa Archive - Kaspa Hub" />
+
+<meta name="description" content="List of archived projects on Kaspa Hub." />
+<meta name="twitter:description" content="List of dead Kaspa projects." />
+<meta property="og:description" content="List of discontinued Kaspa projects/ services." />
+
+<link rel="canonical" href="https://kaspahub.org/ecosystem/archive/" />
+<meta name="twitter:url" content="https://kaspahub.org/ecosystem/archive/" />
+<meta property="og:url" content="https://kaspahub.org/ecosystem/archive/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/assets/manifest.json" />
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+
+<div style="text-align: center; margin-bottom: 70px;">
+	<h1 style="font-size: 3em; filter: brightness(0.7);">Archive</h1>
+</div>
+
+<div class="main-content-area">
+
+<section class="filter-list-main">
+	
+	<input type="search" id="searchInput" placeholder="Search..."/>
+	
+	<div class="category-selector">
+		<div class="category-pills">
+			<button class="category-pill active" data-feature="all">All</button>
+			<button class="category-pill" data-feature="analytics">Analytics</button>
+			<button class="category-pill" data-feature="blockExplorer">Block Explorers</button>
+			<button class="category-pill" data-feature="bridge">Bridges</button>
+			<button class="category-pill" data-feature="cryptoCard">Crypto Cards</button>
+			<button class="category-pill" data-feature="cex">Centralized Exchanges</button>
+			<button class="category-pill" data-feature="dex">Decentralized Exchanges</button>
+			<button class="category-pill" data-feature="education">Education</button>
+			<button class="category-pill" data-feature="gambling">Gambling</button>
+			<button class="category-pill" data-feature="gaming">Gaming</button>
+			<button class="category-pill" data-feature="swap">Instant Swaps</button>
+			<button class="category-pill" data-feature="launchpad">Launchpads</button>
+			<button class="category-pill" data-feature="marketplace">Marketplaces</button>
+			<button class="category-pill" data-feature="mining">Mining</button>
+			<button class="category-pill" data-feature="payments">Payment Solutions</button>
+			<!-- <button class="category-pill" data-feature="rwa">RWA</button> -->
+			<button class="category-pill" data-feature="social">Social</button>
+			<button class="category-pill" data-feature="utilities">Utilities</button>
+			<button class="category-pill" data-feature="wallet">Wallets</button>
+		</div>
+
+		<select id="categoryDropdown" class="category-dropdown mobile-only">
+			<option value="all" selected>All</option>
+			<option value="analytics">Analytics</option>
+			<option value="blockExplorer">Block Explorers</option>
+			<option value="bridge">Bridges</option>
+			<option value="cryptoCard">Crypto Cards</option>
+			<option value="cex">Centralized Exchanges</option>
+			<option value="dex">Decentralized Exchanges</option>
+			<option value="education">Education</option>
+			<option value="gambling">Gambling</option>
+			<option value="gaming">Gaming</option>
+			<option value="swap">Instant Swaps</option>
+			<option value="launchpad">Launchpads</option>
+			<option value="marketplace">Marketplaces</option>
+			<option value="mining">Mining</option>
+			<option value="payments">Payment Solutions</option>
+			<!-- <option value="rwa">RWA</option> -->
+			<option value="social">Social</option>
+			<option value="utilities">Utilities</option>
+			<option value="wallet">Wallets</option>
+		</select>
+	</div>
+	
+	<div class="searchControls">
+	
+		<input type="checkbox" id="layer2Toggle" data-feature="layer2Toggle" checked><label style="font-size: 0.85rem;" for="layer2Toggle">Include Layer 2</label>
+		
+		<div style="display: inline-flex;">
+			<p id="counter"></p>
+			<select id="sortSelect" aria-label="Sort Menu">
+				<option value="default">Default</option>
+				<option value="az">A - Z</option>
+				<option value="za">Z - A</option>
+			</select>
+		</div>
+	
+	</div>
+	
+	<div class="filter-grid" id="itemGrid"><div class="fade-in" id="loading"><span class="spinner"></span><span>Loading...</span></div></div>
+	
+
+</section>
+
+</div>
+</main>
+
+<button class="theme-1" id="loadMoreBtn">Load More</button>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style>
+.main-content-area {
+	min-height: 1300px;
+}
+.category-selector {
+	margin-bottom: 1.5rem;
+}
+.category-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
+}
+.category-pill {
+	padding: 0.35rem 0.9rem;
+	background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
+	border-radius: 10px;
+	border: 1px solid rgba(80, 255, 200, 0.2);
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #003326;
+	cursor: pointer;
+	transition: all 0.1s;
+}
+.category-pill.active {
+	color: white;
+	background: linear-gradient(135deg, #49EACB, #0bbf7a7d);
+}
+.category-pill:hover {
+	filter: brightness(1.1);
+}
+#searchInput {
+	margin-bottom: 20px;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	padding: 0 50px 0 20px;
+	font-size: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.category-dropdown {
+	display: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: 1px solid rgba(80, 255, 200, 0.2);
+	border-radius: 10px;
+	color: #003326; 
+	width: 100%;
+	height: 50px;
+	padding: 0 16px;
+	font-weight: 700;
+	transition: all 0.1s;
+	background-color: #22e39a;
+	background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 20px;
+}
+
+@media (max-aspect-ratio: 1/1) {
+	.category-pills {
+		justify-content: space-between;
+		gap: 0.3rem;
+		display: none;
+	}
+	.category-pill {
+		padding: 0.15rem 0.3rem;
+		border: 1px solid rgba(80, 255, 200, 0.2);
+		font-size: 0.85rem;
+	}
+	.category-dropdown { 
+		display: block; 
+	}
+}
+
+</style>
+<script type="text/javascript">
+'use strict';
+
+
+const categoryDropdown = document.getElementById('categoryDropdown');
+
+categoryDropdown.addEventListener('change', () => {
+	const value = categoryDropdown.value;
+	const pill = Array.from(categoryPills).find(p => p.dataset.feature === value);
+	if (pill) {
+		pill.click();
+	}
+});
+
+
+const itemGrid = document.getElementById('itemGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+const counter = document.getElementById('counter');
+const itemsPerPage = 48;
+let currentIndex = 0;
+let items = [];
+let filteredItems = [];
+
+const categoryPills = document.querySelectorAll('.category-pill');
+const layer2Toggle = document.getElementById('layer2Toggle');
+
+function renderItems(reset = false) {
+	if (reset) {
+		itemGrid.innerHTML = '';
+		currentIndex = 0;
+	}
+	
+	const slice = filteredItems.slice(currentIndex, currentIndex + itemsPerPage);
+	const htmlParts = [];
+	
+	slice.forEach(item => {
+		let badgeHtml = '';
+		if (item.features.includes('verified')) {
+			badgeHtml = '<span class="feature-tag verified"></span>';
+		} else if (item.features.includes('reviewed')) {
+			badgeHtml = '<span class="feature-tag reviewed"></span>';
+		}
+	
+		htmlParts.push(`<a href="${item.link}" target="_blank" class="filter-card theme-1"><div class="item-header"><div class="filter-logo"><img src="${item.logo}" alt="${item.name} Logo" onerror="this.onerror=null;this.src='https://kaspahub.org/assets/logos/logo.webp';"></div><div class="item-top-actions"></div></div><h3>${item.name} ${badgeHtml}</h3><p class="filter-description">${item.description}</p></a>`);
+	});
+	
+	itemGrid.insertAdjacentHTML('beforeend', htmlParts.join(''));
+	
+	currentIndex += slice.length;
+	counter.textContent = `(${filteredItems.length} of ${items.length})`;
+	loadMoreBtn.style.display = currentIndex < filteredItems.length ? 'block' : 'none';
+}
+
+function filterItems() {
+	const selectedFeature = document.querySelector('.category-pill.active')?.dataset.feature || 'all';
+	const searchTerm = searchInput.value.trim().toLowerCase();
+	const includeLayer2 = layer2Toggle.checked;
+	filteredItems = [];
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		if (selectedFeature !== 'all' && !item.features.includes(selectedFeature)) continue;
+		if (!includeLayer2 && item.features.includes('layer2')) continue;
+		if (searchTerm && !item.name.toLowerCase().includes(searchTerm) && !item.description.toLowerCase().includes(searchTerm)) continue;
+		filteredItems.push(item);
+	}
+	const sortMode = sortSelect.value;
+	if (sortMode === 'az') filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	else if (sortMode === 'za') filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	
+	if (!filteredItems.length) {
+		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
+		counter.textContent = `(0 of ${items.length})`;
+		loadMoreBtn.style.display = 'none';
+		return;
+	}
+	renderItems(true);
+}
+
+categoryPills.forEach(pill => pill.addEventListener('click', () => {
+	const isActive = pill.classList.contains('active');
+	categoryPills.forEach(p => p.classList.remove('active'));
+	if (!isActive) pill.classList.add('active');
+	filterItems();
+}));
+
+searchInput.addEventListener('input', filterItems);
+sortSelect.addEventListener('change', filterItems);
+layer2Toggle.addEventListener('change', filterItems);
+loadMoreBtn.addEventListener('click', () => renderItems());
+
+fetch('/assets/data/archived.json')
+	.then(res => res.json())
+	.then(data => {
+		items = data;
+		filteredItems = items;
+		applyCategoryFromURL();
+		renderItems(true);
+	})
+	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
+
+
+function applyCategoryFromURL() {
+	const category = new URLSearchParams(location.search).get('category');
+	if (!category) return;
+
+	const pill = Array.from(categoryPills).find(p => 
+		p.dataset.feature.toLowerCase() === category.toLowerCase()
+	);
+
+	if (pill) {
+		document.querySelector('.category-pill.active')?.classList.remove('active');
+		pill.classList.add('active');
+		if (categoryDropdown) categoryDropdown.value = pill.dataset.feature;
+		filterItems();
+	}
+}
+</script>
+
+</body>
+</html>

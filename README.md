@@ -3,7 +3,7 @@
 <img src="https://kaspahub.org/assets/logo.webp" alt="Kaspa Hub Logo" title="Kaspa Hub Logo" width="80"/>
 
 # Kaspa Hub
-An open-source, community-driven platform that brings together resources, initiatives, tools, and connections for anyone interested in the Kaspa network.
+An open-source, community-driven platform that brings together resources, initiatives, tools, and connections for anyone interested in the Kaspa cryptocurrency.
 
 </div>
 
