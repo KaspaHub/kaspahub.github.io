@@ -101,7 +101,7 @@
   "name": "Kasia Book",
   "description": "A directory of verified Kasia Messaging users on Kaspa. It lists X (Twitter) handles linked to Kaspa wallet addresses (or KNS names) for secure, scam-resistant discovery and messaging.",
   "link": "https://kasiabook.com",
-  "logo": "https://kaspahub.org/assets/logos/archive/kasia.webp",
+  "logo": "https://kaspahub.org/assets/logos/kasia.webp",
   "features": ["utilities"]
 },
 {
@@ -150,7 +150,7 @@
   "name": "Kaspa Radar",
   "description": "On-chain forensics tool for Kaspa. Trace addresses and visualize complete transaction graphs with interactive network views, wallet scores, flows, volume, and classifications.",
   "link": "https://kasparadar.com",
-  "logo": "https://kaspahub.org/assets/logos/archive/kaspero.webp",
+  "logo": "https://kaspahub.org/assets/logos/kaspero.webp",
   "features": ["visualizer", "analytics"]
 },
 {
@@ -164,7 +164,7 @@
   "name": "K Notes",
   "description": "Community-focused independent review platform for Kaspa ecosystem projects, publishing transparent, criteria-based evaluations to highlight risks, quality, intent, and transparency without endorsements, promotions, or price forecasts.",
   "link": "https://knotes.online",
-  "logo": "https://kaspahub.org/assets/logos/knotes.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/knotes.webp",
   "features": ["security"]
 },
 {
@@ -192,6 +192,7 @@
   "name": "Kloak Node",
   "description": "Non-custodial payjoin coordinator for the Kloak Payment Protocol on Kaspa. Provides a privacy-enhanced fungibility layer by coordinating collaborative transactions that obscure payment links through shared inputs and randomized outputs.",
   "link": "https://github.com/kloakprotocol/kloak_node",
+  "logo": "https://kaspahub.org/assets/logos/github.webp",
   "features": ["python"]
 },
 {
@@ -206,13 +207,6 @@
   "description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
   "link": "https://kaspa.news",
   "logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
-  "features": []
-},
-{
-  "name": "Token Depot",
-  "description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
-  "link": "https://www.token-depot.co",
-  "logo": "https://kaspahub.org/assets/logos/archive/token-depot.webp",
   "features": []
 },
 {

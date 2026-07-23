@@ -406,6 +406,13 @@
 	"features": []
 },
 {
+	"name": "Token Depot",
+	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
+	"link": "https://www.token-depot.co",
+	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
+	"features": []
+},
+{
 	"name": "Vivoor",
 	"description": "Kaspa-powered streaming platform, enabling creators to stream live, earn tips, and share clips using Livepeer’s decentralized video infrastructure.",
 	"link": "https://vivoor.xyz",
