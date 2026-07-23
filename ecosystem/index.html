@@ -379,14 +379,13 @@ fetch('/assets/data/ecosystem.json')
 		items = data;
 		filteredItems = items;
 		renderItems(true);
+		setTimeout(applyCategoryFromURL, 10);
 	})
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
 
 
-function handleCategoryFromURL() {
-	const params = new URLSearchParams(location.search);
-	const category = params.get('category');
-
+function applyCategoryFromURL() {
+	const category = new URLSearchParams(location.search).get('category');
 	if (!category) return;
 
 	const pill = Array.from(categoryPills).find(p => 
@@ -394,19 +393,12 @@ function handleCategoryFromURL() {
 	);
 
 	if (pill) {
-		const currentActive = document.querySelector('.category-pill.active');
-		if (currentActive) currentActive.classList.remove('active');
-
+		document.querySelector('.category-pill.active')?.classList.remove('active');
 		pill.classList.add('active');
-
 		if (categoryDropdown) categoryDropdown.value = pill.dataset.feature;
-
 		filterItems();
 	}
 }
-
-document.addEventListener('DOMContentLoaded', handleCategoryFromURL);
-window.addEventListener('popstate', handleCategoryFromURL);
 </script>
 
 </body>
