@@ -540,7 +540,7 @@
 },
 {
 	"name": "KaspaBuy",
-	"description": "KaspaBuy is an online marketplace where customers can purchase products using KAS, helping bring Kaspa payments into real-world commerce.",
+	"description": "Online marketplace where customers can purchase products using KAS, helping bring Kaspa payments into real-world commerce.",
 	"link": "https://kaspabuy.shop",
 	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
 	"features": ["payments", "marketplace"]
