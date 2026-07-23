@@ -373,13 +373,12 @@ sortSelect.addEventListener('change', filterItems);
 layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
-applyCategoryFromURL();
-
 fetch('/assets/data/ecosystem.json')
 	.then(res => res.json())
 	.then(data => {
 		items = data;
 		filteredItems = items;
+		applyCategoryFromURL();
 		renderItems(true);
 	})
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
