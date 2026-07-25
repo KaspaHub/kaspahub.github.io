@@ -35,6 +35,13 @@
   "features": ["selfCustodial", "krc20", "krc721"]
 },
 {
+  "name": "Kache",
+  "description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
+  "link": "https://kachewallet.com",
+  "logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
+  "features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
+},
+{
   "name": "Ghost Wallet",
   "description": "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
   "link": "https://www.ghostwallet.org",
@@ -200,6 +207,13 @@
   "description": "A cryptocurrency mining pool supporting Kaspa, offering automatic settlements twice daily with a minimum payout threshold, low fees, real-time income monitoring, and high-security features.",
   "link": "https://www.humpool.com",
   "logo": "https://kaspahub.org/assets/logos/archive/humpool.webp",
+  "features": ["mining"]
+},
+{
+  "name": "Poolin",
+  "description": "A large mining pool founded in 2017, supporting Kaspa with PPS, FPPS, PPLNS options. Offers advanced features for collective mining and optimized rewards.",
+  "link": "https://www.poolin.com",
+  "logo": "https://kaspahub.org/assets/logos/poolin.webp",
   "features": ["mining"]
 },
 {

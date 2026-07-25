@@ -1015,13 +1015,6 @@
 	"features": ["mining"]
 },
 {
-	"name": "Poolin",
-	"description": "A large mining pool founded in 2017, supporting Kaspa with PPS, FPPS, PPLNS options. Offers advanced features for collective mining and optimized rewards.",
-	"link": "https://www.poolin.com",
-	"logo": "https://kaspahub.org/assets/logos/poolin.webp",
-	"features": ["mining"]
-},
-{
 	"name": "ViaBTC",
 	"description": "An all-in-one pool with PPS+, PPLNS, SOLO options for Kaspa mining. Provides hourly payouts, smart mining features, and additional financial services like loans.",
 	"link": "https://www.viabtc.com",
@@ -1229,13 +1222,6 @@
 	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
 	"link": "https://kasanova.app",
 	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
-	"features": ["wallet"]
-},
-{
-	"name": "Kache",
-	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
-	"link": "https://kachewallet.com",
-	"logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
 	"features": ["wallet"]
 },
 {
