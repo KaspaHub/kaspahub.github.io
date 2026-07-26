@@ -105,6 +105,13 @@
 	"features": ["reviewed", "analytics"]
 },
 {
+	"name": "KCC20.info",
+	"description": "Live KCC20 token indexer and covenant explorer for Kaspa. Tracks tokens, holders, balances, and real-time activity with a public API.",
+	"link": "https://kcc20.info",
+	"logo": "https://kaspahub.org/assets/logos/kcc20.info.webp",
+	"features": ["reviewed", "analytics"]
+},
+{
 	"name": "Kaspa NFT Hub",
 	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, statistics (volume, floor, minted), and receive real-time Telegram alerts.",
 	"link": "https://kasnfthub.com",
