@@ -2135,13 +2135,6 @@
 	"features": ["cex", "futuresTrading"]
 },
 {
-	"name": "BitMart",
-	"description": "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
-	"link": "https://www.bitmart.com",
-	"logo": "https://kaspahub.org/assets/logos/bitmart.webp",
-	"features": ["cex", "noKyc", "futuresTrading"]
-},
-{
 	"name": "Tapbit",
 	"description": "Tapbit is a US-based trading platform founded in 2019, offering crypto spot and futures trading services.",
 	"link": "https://www.tapbit.com",

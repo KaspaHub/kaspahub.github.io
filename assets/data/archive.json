@@ -404,5 +404,12 @@
   "link": "https://whitebit.com",
   "logo": "https://kaspahub.org/assets/logos/archive/whitebit.webp",
   "features": ["cex", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+  "name": "BitMart",
+  "description": "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
+  "link": "https://www.bitmart.com",
+  "logo": "https://kaspahub.org/assets/logos/bitmart.webp",
+  "features": ["cex", "noKyc", "cryptoCard", "futuresTrading"]
 }
 ]
