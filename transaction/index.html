@@ -308,34 +308,17 @@ function computeTotals(inputs, outputs) {
   }
   const fee = totalIn ? totalIn - totalOut : 0n;
 
-  let totalTransferred = 0n;
-  const inputAddrs = new Set();
-  if (Array.isArray(inputs)) {
-    inputs.forEach(inp => {
-      const addr = inp.previous_outpoint_address;
-      if (addr) inputAddrs.add(addr);
-    });
-  }
-  if (Array.isArray(outputs)) {
-    outputs.forEach(out => {
-      const addr = out.script_public_key_address;
-      if (addr && !inputAddrs.has(addr)) {
-        totalTransferred += BigInt(out.amount || 0);
-      }
-    });
-  }
-
-  return { totalIn, totalOut, fee, totalTransferred };
+  return { totalIn, totalOut, fee, totalTransferred: totalOut };
 }
 
 async function renderSummary(json, totals, inputs, outputs) {
   const transferredKas = Number(totals.totalTransferred) / 1e8;
   const feeKas = Number(totals.fee) / 1e8;
-  const transferredFiat = await formatPrice(KASVALUE, CURRENCY, transferredKas);
-  const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas, 4);
+  const transferredFiat = await formatPrice(KASVALUE, CURRENCY, transferredKas, 2);
+  const feeFiat = await formatPrice(KASVALUE, CURRENCY, feeKas, 6);
 
-  totalSent.innerHTML = `${formatKas(totals.totalTransferred, 3)} <span class="muted">(${transferredFiat})</span>`;
-  fee.innerHTML = `${formatKas(totals.fee)} <span class="muted">(${feeFiat})</span>`;
+  totalSent.innerHTML = `${transferredFiat} <span class="muted" style="font-size: 0.9em;">(${formatKas(totals.totalTransferred, 2)})</span>`;
+  fee.innerHTML = `${feeFiat} <span class="muted" style="font-size: 0.9em;">(${formatKas(totals.fee, 2)})</span>`;
   ioCount.textContent = `${(inputs || []).length} / ${outputs.length}`;
   status.textContent = json.is_accepted ? "Accepted" : "Not accepted";
 
@@ -380,6 +363,7 @@ function renderTransfers(json, totals) {
   const forContent = `<span>${formatKas(totals.totalTransferred)}</span>`;
 
   html = `<tr><td>${fromContent}</td><td>${toContent}</td><td>${forContent}</td></tr>`;
+  html += `<tr><td colspan="2" class="muted" style="text-align: right;">Fees</td><td><span>${formatKas(totals.fee)}</span></td></tr>`;
   transferRows.innerHTML = html;
 }
 
