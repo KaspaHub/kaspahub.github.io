@@ -330,13 +330,27 @@ async function renderSummary(json, totals, inputs, outputs) {
 
 function renderTransfers(json, totals) {
   let html = '';
-  const inputs = json.inputs || [];
-  const outputs = json.outputs || [];
+  const inputs = Array.isArray(json.inputs) ? [...json.inputs] : [];
+  const outputs = Array.isArray(json.outputs) ? [...json.outputs] : [];
 
   if (inputs.length === 0 && outputs.length === 0) {
     transferRows.innerHTML = '<tr><td colspan="3" class="muted">No transfers to display</td></tr>';
     return;
   }
+
+  const getAmount = (val) => BigInt(val ?? 0);
+
+  inputs.sort((a, b) => {
+    const amtA = getAmount(a.previous_outpoint_amount ?? a.previous_outpoint_resolved?.amount);
+    const amtB = getAmount(b.previous_outpoint_amount ?? b.previous_outpoint_resolved?.amount);
+    return amtB > amtA ? 1 : amtB < amtA ? -1 : 0;
+  });
+
+  outputs.sort((a, b) => {
+    const amtA = getAmount(a.amount);
+    const amtB = getAmount(b.amount);
+    return amtB > amtA ? 1 : amtB < amtA ? -1 : 0;
+  });
 
   let fromContent = '';
   if (inputs.length === 0) {
