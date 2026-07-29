@@ -124,6 +124,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 			<label for="selfCustodial">Self-Custodial</label>
 		</div>
 		<div class="filter-group">
+			<input type="checkbox" id="kcc20" data-feature="kcc20">
+			<label for="kcc20">KCC-20 Tokens</label>
+		</div>
+		<div class="filter-group">
 			<input type="checkbox" id="krc20" data-feature="krc20">
 			<label for="krc20">KRC-20 Tokens</label>
 		</div>
@@ -134,10 +138,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 		<div class="filter-group">
 			<input type="checkbox" id="knsDomains" data-feature="knsDomains">
 			<label for="knsDomains">KNS Domains</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="layer2" data-feature="layer2">
-			<label for="layer2">Layer 2</label>
 		</div>
 		<div class="filter-group">
 			<input type="checkbox" id="multiChain" data-feature="multiChain">
@@ -256,7 +256,7 @@ const items = [
 	"description": "The first open-source, non-custodial browser extension wallet for Kaspa - secure, private, and supports KRC20, KRC721, and KNS domains.",
 	"link": "https://www.kasware.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaswarewallet.webp",
-	"features": ["reviewed", "openSource", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "mobile", "browserExtension"]
+	"features": ["reviewed", "openSource", "selfCustodial", "kcc20", "krc20", "krc721", "knsDomains", "layer2", "mobile", "browserExtension"]
 },
 {
 	"name": "OKX Wallet",
