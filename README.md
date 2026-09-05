@@ -21,7 +21,7 @@ Feel free to reach out if you have any questions on X.
 
 ## Donations
 Support Kaspa Hub development with a donation:
-* [https://tiptr.ee/?key=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt](https://tiptr.ee/KaspaHub)
+* [https://tiptr.ee/KaspaHub](https://tiptr.ee/?key=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt)
 
 ## Feedback
 Send feedback and help us improve.
