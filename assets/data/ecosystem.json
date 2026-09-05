@@ -134,7 +134,7 @@
 },
 {
 	"name": "Kaspa NFT Hub",
-	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, statistics (volume, floor, minted), and receive real-time Telegram alerts.",
+	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, and statistics.",
 	"link": "https://kasnfthub.com",
 	"logo": "https://kaspahub.org/assets/logos/kasnfthub.webp",
 	"features": ["verified", "analytics"]

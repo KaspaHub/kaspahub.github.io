@@ -31,7 +31,6 @@ html {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	scrollbar-gutter: stable;
-	zoom: 90%;
 }
 
 body, html {
