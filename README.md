@@ -17,11 +17,11 @@ Want to help improve the website or report an issue? Open a GitHub issue or make
 
 ## Contact
 Feel free to reach out if you have any questions on X.
-* [https://x.com/Classicxbt](https://x.com/Classicxbt)
+* [https://x.com/KaspaHub](https://x.com/KaspaHub)
 
 ## Donations
 Support Kaspa Hub development with a donation:
-* [https://tiptr.ee/KaspaHub](https://tiptr.ee/KaspaHub)
+* [https://tiptr.ee/?key=npub1jddxyapm56tvku2rexremlc7qz5cht2vplpcjdfhs23jtd7tykcs53rlmt](https://tiptr.ee/KaspaHub)
 
 ## Feedback
 Send feedback and help us improve.
