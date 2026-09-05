@@ -381,7 +381,7 @@
 	"name": "OnChain POS",
 	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
 	"link": "https://onchainpos.live",
-	"logo": "https://kaspahub.org/assets/logos/archive/onchainpos.webp",
+	"logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
 	"features": ["development", "payments"]
 },
 {
