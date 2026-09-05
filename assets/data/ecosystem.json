@@ -379,7 +379,7 @@
 },
 {
 	"name": "OnChain POS",
-	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification and built-in management tools.",
+	"description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification.",
 	"link": "https://onchainpos.live",
 	"logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
 	"features": ["development", "payments"]
@@ -393,7 +393,7 @@
 },
 {
 	"name": "Genesis Zero",
-	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG. No IPFS, no external links-permanent on-chain data.",
+	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG.",
 	"link": "https://kasgenesiszero.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
 	"features": ["reviewed", "marketplace"]
