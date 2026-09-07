@@ -399,6 +399,13 @@
   "features": ["cex", "noKyc", "swap", "withdrawals"]
 },
 {
+  "name": "Exmo",
+  "description": "Exmo is based in Poland and was founded in 2014. It offers a user-friendly platform for trading cryptocurrencies with fiat currencies.",
+  "link": "https://exmo.com",
+  "logo": "https://kaspahub.org/assets/logos/exmo.webp",
+  "features": ["cex"]
+},
+{
   "name": "WhiteBIT",
   "description": "WhiteBIT is a Lithuania-based trading platform founded in 2018, EU regulated with high trading volume, focusing on security, liquidity and speed.",
   "link": "https://whitebit.com",
