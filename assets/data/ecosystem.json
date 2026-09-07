@@ -301,10 +301,10 @@
 	"features": ["launchpad"]
 },
 {
-	"name": "De Assets",
-	"description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
-	"link": "https://tn10.deassets.io",
-	"logo": "https://kaspahub.org/assets/logos/deassets.webp",
+	"name": "KForge",
+	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
+	"link": "https://testnet.kforge.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
 	"features": ["launchpad", "dex"]
 },
 {

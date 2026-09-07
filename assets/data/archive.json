@@ -28,6 +28,13 @@
   "features": ["development", "payments"]
 },
 {
+  "name": "De Assets",
+  "description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
+  "link": "https://tn10.deassets.io",
+  "logo": "https://kaspahub.org/assets/logos/deassets.webp",
+  "features": ["launchpad", "dex"]
+},
+{
   "name": "KSPR Bot",
   "description": "Telegram-based wallet for Kaspa, offering seamless KRC20 token management and self-custodial storage, ideal for users seeking convenience and integration with messaging platform.",
   "link": "https://kspr-bot.xyz",
