@@ -14,6 +14,13 @@
   "features": ["blockExplorer"]
 },
 {
+  "name": "SLOW World",
+  "description": "Kaspa-universe Mario-style WASM platformer. Play as $SLOW the Bitcoin Turtle and other champions in browser-based levels.",
+  "link": "https://slowlikebtc.com/game",
+  "logo": "https://kaspahub.org/assets/logos/slowlikebtc.webp",
+  "features": ["reviewed", "gaming"]
+},
+{
   "name": "Verum",
   "description": "A decentralized social network on the Kaspa, enabling direct creator support through KAS transactions for actions like following, commenting, and liking, with a fully open-source protocol and frontend.",
   "link": "https://verumonkas.com",

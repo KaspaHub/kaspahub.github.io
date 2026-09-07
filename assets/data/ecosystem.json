@@ -476,13 +476,6 @@
 	"features": ["reviewed", "gaming"]
 },
 {
-	"name": "SLOW World",
-	"description": "Kaspa-universe Mario-style WASM platformer. Play as $SLOW the Bitcoin Turtle and other champions in browser-based levels.",
-	"link": "https://slowlikebtc.com/game",
-	"logo": "https://kaspahub.org/assets/logos/slowlikebtc.webp",
-	"features": ["reviewed", "gaming"]
-},
-{
 	"name": "Kaspas Flight",
 	"description": "Pixel-art Flappy Bird-style game powered by Kaspa where high scores are saved on the BlockDAG, users compete on the leaderboard, and set profiles.",
 	"link": "https://kaspas-flight.web.app",
