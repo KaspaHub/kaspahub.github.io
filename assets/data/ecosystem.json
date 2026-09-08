@@ -392,6 +392,13 @@
 	"features": ["reviewed", "utilities"]
 },
 {
+	"name": "KASDISTRO",
+	"description": "A utility platform for mass KAS distributions on the Kaspa network, allowing projects, creators, communities, and teams to send rewards to multiple wallet addresses in one transaction flow.",
+	"link": "https://kasdistro.com",
+	"logo": "https://kaspahub.org/assets/logos/kasdistro.webp",
+	"features": ["utilities"]
+},
+{
 	"name": "Genesis Zero",
 	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG.",
 	"link": "https://kasgenesiszero.com",
