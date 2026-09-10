@@ -1624,13 +1624,6 @@
 	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
-	"name": "CoinW",
-	"description": "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
-	"link": "https://www.coinw.com",
-	"logo": "https://kaspahub.org/assets/logos/coinw.webp",
-	"features": ["reviewed", "cex", "noKyc", "futuresTrading"]
-},
-{
 	"name": "HTX",
 	"description": "HTX is a Seychelles-based trading platform founded in 2013 (formerly known as Huobi), offering spot trading, futures, and a wide range of crypto services.",
 	"link": "https://www.htx.com",
@@ -1797,6 +1790,13 @@
 	"link": "https://changehero.io",
 	"logo": "https://kaspahub.org/assets/logos/changehero.webp",
 	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
+},
+{
+	"name": "CoinW",
+	"description": "CoinW is a Singapore-based trading platform established in 2017, offering spot and futures crypto trading.",
+	"link": "https://www.coinw.com",
+	"logo": "https://kaspahub.org/assets/logos/coinw.webp",
+	"features": ["reviewed", "cex", "noKyc", "futuresTrading"]
 },
 {
 	"name": "DigiFinex",
