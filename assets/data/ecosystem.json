@@ -308,17 +308,24 @@
 	"features": ["launchpad", "dex"]
 },
 {
-	"name": "KaspaForge",
-	"description": "A non-custodial workspace for Kaspa featuring a covenant-based Safe with delayed withdrawals and an independent alarm key, plus Escrow, Marketplace, wallet, encrypted sync, and recovery tools.",
-	"link": "https://kaspaforge.org",
-	"logo": "https://kaspahub.org/assets/logos/kaspaforge.webp",
-	"features": []
-},
-{
 	"name": "Stag Hunt",
 	"description": "Kaspa-native crowdfunded hunts platform. Post hunts, back with KAS in on-chain escrow, claim tasks, and let referees verify for payout.",
 	"link": "https://staghunt.app",
 	"logo": "https://kaspahub.org/assets/logos/staghunt.app.webp",
+	"features": []
+},
+{
+	"name": "Kaskly",
+	"description": "Non-custodial creator toolkit on Kaspa for paid messages and prize drops. Attach KAS to a message - recipients claim by replying, or funds refund automatically via on-chain covenants.",
+	"link": "https://www.kaskly.app",
+	"logo": "https://kaspahub.org/assets/logos/kaskly.webp",
+	"features": []
+},
+{
+	"name": "KaspaForge",
+	"description": "A non-custodial workspace for Kaspa featuring a covenant-based Safe with delayed withdrawals and an independent alarm key, plus Escrow, Marketplace, wallet, encrypted sync, and recovery tools.",
+	"link": "https://kaspaforge.org",
+	"logo": "https://kaspahub.org/assets/logos/kaspaforge.webp",
 	"features": []
 },
 {
