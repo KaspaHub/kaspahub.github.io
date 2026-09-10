@@ -115,6 +115,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 	<h2>Features</h2>
 	<div class="filter-category">
+		<div class="filter-group"><input type="checkbox" id="mica" data-feature="mica"><label for="mica">MICA</label></div>
 		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
 		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
 		<div class="filter-group"><input type="checkbox" id="googleApplePay" data-feature="googleApplePay"><label for="googleApplePay">Google & Apple Pay</label></div>
@@ -177,28 +178,56 @@ const items = [
 	"description": "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
 	"link": "https://www.kraken.com",
 	"logo": "https://kaspahub.org/assets/logos/kraken.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "Uphold",
 	"description": "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
 	"link": "https://uphold.com",
 	"logo": "https://kaspahub.org/assets/logos/uphold.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
 },
 {
 	"name": "Topper",
 	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
 	"link": "https://www.topperpay.com",
 	"logo": "https://kaspahub.org/assets/logos/topper.webp",
-	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
+	"features": ["reviewed", "mica", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
+},
+{
+	"name": "Bitpanda",
+	"description": "Bitpanda is an Austrian exchange platform founded in 2014, offering crypto, stocks, and ETFs.",
+	"link": "https://www.bitpanda.com",
+	"logo": "https://kaspahub.org/assets/logos/bitpanda.webp",
+	"features": ["cex", "mica", "cryptoCard", "googleApplePay"]
 },
 {
 	"name": "Bybit",
 	"description": "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
 	"link": "https://www.bybit.com",
 	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "KuCoin",
+	"description": "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
+	"link": "https://www.kucoin.com",
+	"logo": "https://kaspahub.org/assets/logos/kucoin.webp",
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "Gate",
+	"description": "Gate.io is a Seychelles-based trading platform founded in 2013, offering crypto and NFT services.",
+	"link": "https://www.gate.io",
+	"logo": "https://kaspahub.org/assets/logos/gate.webp",
+	"features": ["cex", "mica", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "Neverless",
+	"description": "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
+	"link": "https://neverless.com",
+	"logo": "https://kaspahub.org/assets/logos/neverless.webp",
+	"features": ["reviewed", "mica", "cex", "googleApplePay"]
 },
 {
 	"name": "CoinEx",
@@ -243,25 +272,11 @@ const items = [
 	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
 },
 {
-	"name": "Neverless",
-	"description": "Neverless is a UK-based crypto exchange platform founded in 2022, offering commission-free trading, automated investment, and EU-regulated security.",
-	"link": "https://neverless.com",
-	"logo": "https://kaspahub.org/assets/logos/neverless.webp",
-	"features": ["reviewed", "cex", "googleApplePay"]
-},
-{
 	"name": "MEXC",
 	"description": "MEXC is a Seychelles-based trading platform founded in 2018, offering zero-fee spot trading, Launchpad for new projects, and simple interface.",
 	"link": "https://www.mexc.com",
 	"logo": "https://kaspahub.org/assets/logos/mexc.webp",
 	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading"]
-},
-{
-	"name": "KuCoin",
-	"description": "KuCoin is a Seychelles-based trading platform founded in 2017, providing diverse crypto services.",
-	"link": "https://www.kucoin.com",
-	"logo": "https://kaspahub.org/assets/logos/kucoin.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "futuresTrading"]
 },
 {
 	"name": "BTCC",
@@ -276,20 +291,6 @@ const items = [
 	"link": "https://www.xt.com",
 	"logo": "https://kaspahub.org/assets/logos/xt.webp",
 	"features": ["reviewed", "cex", "noKyc", "cryptoCard", "futuresTrading", "withdrawals"]
-},
-{
-	"name": "BestChange",
-	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
-	"link": "https://www.bestchange.com",
-	"logo": "https://kaspahub.org/assets/logos/bestchange.webp",
-	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
-},
-{
-	"name": "Swapzone",
-	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
-	"link": "https://swapzone.io",
-	"logo": "https://kaspahub.org/assets/logos/swapzone.webp",
-	"features": ["reviewed", "cex", "swap", "withdrawals"]
 },
 {
 	"name": "CEX.IO",
@@ -313,25 +314,18 @@ const items = [
 	"features": ["cex", "futuresTrading", "cryptoCard"]
 },
 {
-	"name": "Gate",
-	"description": "Gate.io is a Seychelles-based trading platform founded in 2013, offering crypto and NFT services.",
-	"link": "https://www.gate.io",
-	"logo": "https://kaspahub.org/assets/logos/gate.webp",
-	"features": ["cex", "cryptoCard", "futuresTrading"]
-},
-{
-	"name": "Bitpanda",
-	"description": "Bitpanda is an Austrian exchange platform founded in 2014, offering crypto, stocks, and ETFs.",
-	"link": "https://www.bitpanda.com",
-	"logo": "https://kaspahub.org/assets/logos/bitpanda.webp",
-	"features": ["cex", "cryptoCard", "googleApplePay"]
+	"name": "Bit2Me",
+	"description": "Bit2Me is a Spain-based trading platform founded in 2014, offering crypto trading, wallet, fiat on-ramp, and loans.",
+	"link": "https://pro.bit2me.com",
+	"logo": "https://kaspahub.org/assets/logos/bit2me.webp",
+	"features": ["cex", "mica", "cryptoCard"]
 },
 {
 	"name": "Simplex",
 	"description": "Simplex is an Israel-based crypto payment gateway established in 2014, allowing users to buy and sell crypto instantly with credit card, bank transfer, and more.",
 	"link": "https://www.simplex.com",
 	"logo": "https://kaspahub.org/assets/logos/simplex.webp",
-	"features": ["cex", "cryptoCard", "swap", "googleApplePay", "withdrawals", "payments"]
+	"features": ["cex", "mica", "cryptoCard", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Coinone",
@@ -339,13 +333,6 @@ const items = [
 	"link": "https://coinone.co.kr",
 	"logo": "https://kaspahub.org/assets/logos/coinone.webp",
 	"features": ["cex"]
-},
-{
-	"name": "Bit2Me",
-	"description": "Bit2Me is a Spain-based trading platform founded in 2014, offering crypto trading, wallet, fiat on-ramp, and loans.",
-	"link": "https://pro.bit2me.com",
-	"logo": "https://kaspahub.org/assets/logos/bit2me.webp",
-	"features": ["cex", "cryptoCard"]
 },
 {
 	"name": "Paxful",
@@ -376,6 +363,13 @@ const items = [
 	"features": ["cex"]
 },
 {
+	"name": "SwissBorg",
+	"description": "SwissBorg is a Switzerland-based meta-exchange platform founded in 2017, offering crypto trading, earning yields, bundles, and access to pre-sales.",
+	"link": "https://swissborg.com",
+	"logo": "https://kaspahub.org/assets/logos/swissborg.webp",
+	"features": ["reviewed", "mica", "cex"]
+},
+{
 	"name": "ChangeNOW",
 	"description": "ChangeNOW is a Seychelles-based crypto swap platform established in 2017, offering non-custodial exchanges without registration.",
 	"link": "https://changenow.io",
@@ -395,13 +389,6 @@ const items = [
 	"link": "https://www.digifinex.com",
 	"logo": "https://kaspahub.org/assets/logos/digifinex.webp",
 	"features": ["cex", "cryptoCard", "futuresTrading"]
-},
-{
-	"name": "SwissBorg",
-	"description": "SwissBorg is a Switzerland-based meta-exchange platform founded in 2017, offering crypto trading, earning yields, bundles, and access to pre-sales.",
-	"link": "https://swissborg.com",
-	"logo": "https://kaspahub.org/assets/logos/swissborg.webp",
-	"features": ["reviewed", "cex"]
 },
 {
 	"name": "Coinstash",
@@ -429,7 +416,7 @@ const items = [
 	"description": "Coinmerce is a Netherlands-based trading platform founded in 2017, focused on simplicity with seamless fiat on-ramp services.",
 	"link": "https://coinmerce.io",
 	"logo": "https://kaspahub.org/assets/logos/coinmerce.webp",
-	"features": ["reviewed", "cex"]
+	"features": ["reviewed", "mica", "cex"]
 },
 {
 	"name": "Guardarian",
@@ -453,6 +440,13 @@ const items = [
 	"features": ["cex", "payments"]
 },
 {
+	"name": "Bitvavo",
+	"description": "Bitvavo is a Netherlands-based trading platform established in 2018, offering crypto trading and staking.",
+	"link": "https://www.bitvavo.com",
+	"logo": "https://kaspahub.org/assets/logos/bitvavo.webp",
+	"features": ["cex", "mica"]
+},
+{
 	"name": "SimpleSwap",
 	"description": "SimpleSwap is a Cayman Islands-based crypto swap platform founded in 2018, providing instant exchanges without KYC requirements.",
 	"link": "https://simpleswap.io",
@@ -464,13 +458,6 @@ const items = [
 	"description": "LCX is a Liechtenstein-based trading platform established in 2018, offering crypto trading and tokenization services.",
 	"link": "https://www.lcx.com",
 	"logo": "https://kaspahub.org/assets/logos/lcx.webp",
-	"features": ["cex"]
-},
-{
-	"name": "Bitvavo",
-	"description": "Bitvavo is a Netherlands-based trading platform established in 2018, offering crypto trading and staking.",
-	"link": "https://www.bitvavo.com",
-	"logo": "https://kaspahub.org/assets/logos/bitvavo.webp",
 	"features": ["cex"]
 },
 {
@@ -513,7 +500,7 @@ const items = [
 	"description": "Kriptomat is an Estonia-based exchange platform established in 2018, licensed under strict regulations with fiat-to-crypto services.",
 	"link": "https://kriptomat.io",
 	"logo": "https://kaspahub.org/assets/logos/kriptomat.webp",
-	"features": ["cex", "payments"]
+	"features": ["cex", "mica", "payments"]
 },
 {
 	"name": "Godex",
@@ -541,7 +528,7 @@ const items = [
 	"description": "Young Platform is an Italy-based exchange platform founded in 2018, known for its user-friendly interface and ease of use.",
 	"link": "https://youngplatform.com",
 	"logo": "https://kaspahub.org/assets/logos/youngplatform.webp",
-	"features": ["cex"]
+	"features": ["cex", "mica"]
 },
 {
 	"name": "Reku",
@@ -563,6 +550,13 @@ const items = [
 	"link": "https://quickex.io",
 	"logo": "https://kaspahub.org/assets/logos/quickex.webp",
 	"features": ["cex", "noKyc", "swap", "withdrawals", "payments"]
+},
+{
+	"name": "Swapzone",
+	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
+	"link": "https://swapzone.io",
+	"logo": "https://kaspahub.org/assets/logos/swapzone.webp",
+	"features": ["reviewed", "cex", "swap", "withdrawals"]
 },
 {
 	"name": "Biconomy",
@@ -635,13 +629,6 @@ const items = [
 	"features": ["cex"]
 },
 {
-	"name": "Exbitron",
-	"description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
-	"link": "https://app.exbitron.com",
-	"logo": "https://kaspahub.org/assets/logos/exbitron.webp",
-	"features": ["cex", "noKyc"]
-},
-{
 	"name": "OrangeX",
 	"description": "OrangeX is a Czech Republic-based crypto trading platform launched in 2021, offering spot, futures, and copy trading services.",
 	"link": "https://www.orangex.com",
@@ -667,13 +654,6 @@ const items = [
 	"description": "HiBT is a Canada-based trading platform founded in 2021, offering crypto spot, futures, options & wealth products.",
 	"link": "https://hibt.com",
 	"logo": "https://kaspahub.org/assets/logos/hibt.webp",
-	"features": ["cex"]
-},
-{
-	"name": "Zedxion",
-	"description": "Zedxion is a United Kingdom-based trading platform established in 2021, offering spot, futures, margin, P2P, and loan services.",
-	"link": "https://www.zedxion.io",
-	"logo": "https://kaspahub.org/assets/logos/zedxion.webp",
 	"features": ["cex"]
 },
 {

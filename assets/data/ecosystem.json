@@ -756,6 +756,20 @@
 	"features": ["bridge"]
 },
 {
+	"name": "BestChange",
+	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
+	"link": "https://www.bestchange.com",
+	"logo": "https://kaspahub.org/assets/logos/bestchange.webp",
+	"features": ["reviewed", "analytics", "utilities"]
+},
+{
+	"name": "Depth Tool",
+	"description": "Real-time orderbook depth and price impact comparison tool for Kaspa ecosystem tokens. Compare liquidity across centralized exchanges and DEXes like ZealousSwap on Igra and Kasplex L2s.",
+	"link": "https://depthtool.com",
+	"logo": "https://kaspahub.org/assets/logos/depthtool.webp",
+	"features": ["reviewed", "analytics", "utilities"]
+},
+{
 	"name": "hashd.ag",
 	"description": "Personal website of Yonatan Sompolinsky featuring writings on coordination markets, blockchain philosophy, and Kaspa-related ideas.",
 	"link": "https://hashd.ag",
@@ -1006,13 +1020,6 @@
 	"link": "https://kaspacalc.net",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed", "calculator", "utilities"]
-},
-{
-	"name": "Depth Tool",
-	"description": "Real-time orderbook depth and price impact comparison tool for Kaspa ecosystem tokens. Compare liquidity across centralized exchanges and DEXes like ZealousSwap on Igra and Kasplex L2s.",
-	"link": "https://depthtool.com",
-	"logo": "https://kaspahub.org/assets/logos/depthtool.webp",
-	"features": ["reviewed", "analytics", "utilities"]
 },
 {
 	"name": "Mineable Money",
@@ -1687,13 +1694,6 @@
 	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
-	"name": "BestChange",
-	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
-	"link": "https://www.bestchange.com",
-	"logo": "https://kaspahub.org/assets/logos/bestchange.webp",
-	"features": ["reviewed", "cex", "noKyc", "swap", "withdrawals"]
-},
-{
 	"name": "Swapzone",
 	"description": "Swapzone is a Georgia-based crypto exchange aggregator launched in 2019, specializing in instant swaps without requiring KYC.",
 	"link": "https://swapzone.io",
@@ -2044,13 +2044,6 @@
 	"features": ["cex"]
 },
 {
-	"name": "Exbitron",
-	"description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
-	"link": "https://app.exbitron.com",
-	"logo": "https://kaspahub.org/assets/logos/exbitron.webp",
-	"features": ["cex", "noKyc"]
-},
-{
 	"name": "OrangeX",
 	"description": "OrangeX is a Czech Republic-based crypto trading platform launched in 2021, offering spot, futures, and copy trading services.",
 	"link": "https://www.orangex.com",
@@ -2076,13 +2069,6 @@
 	"description": "HiBT is a Canada-based trading platform founded in 2021, offering crypto spot, futures, options & wealth products.",
 	"link": "https://hibt.com",
 	"logo": "https://kaspahub.org/assets/logos/hibt.webp",
-	"features": ["cex"]
-},
-{
-	"name": "Zedxion",
-	"description": "Zedxion is a United Kingdom-based trading platform established in 2021, offering spot, futures, margin, P2P, and loan services.",
-	"link": "https://www.zedxion.io",
-	"logo": "https://kaspahub.org/assets/logos/zedxion.webp",
 	"features": ["cex"]
 },
 {

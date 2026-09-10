@@ -399,6 +399,20 @@
   "features": []
 },
 {
+  "name": "Exbitron",
+  "description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
+  "link": "https://app.exbitron.com",
+  "logo": "https://kaspahub.org/assets/logos/exbitron.webp",
+  "features": ["cex", "noKyc"]
+},
+{
+  "name": "Zedxion",
+  "description": "Zedxion is a United Kingdom-based trading platform established in 2021, offering spot, futures, margin, P2P, and loan services.",
+  "link": "https://www.zedxion.io",
+  "logo": "https://kaspahub.org/assets/logos/zedxion.webp",
+  "features": ["cex"]
+},
+{
   "name": "Ask & Bid",
   "description": "Ask&Bid is a privacy-focused Tier-1 exchange aggregator launched in 2026, offering no-KYC anonymous swaps backed by a Dispute Guarantee Fund to protect users' capital.",
   "link": "https://askand.bid",
