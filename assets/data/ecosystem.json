@@ -336,6 +336,13 @@
 	"features": []
 },
 {
+	"name": "Koracle",
+	"description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
+	"link": "https://koracle.xyz",
+	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
+	"features": []
+},
+{
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
@@ -798,6 +805,20 @@
 	"features": ["reviewed", "education", "calculator", "utilities", "education"]
 },
 {
+	"name": "Kaspa Speed",
+	"description": "An interactive community site that visualizes and compares Kaspa network speed against other blockchains with live dashboards, payment simulations, and block production races.",
+	"link": "https://kaspaspeed.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspaspeed.webp",
+	"features": ["reviewed", "education", "visualizer"]
+},
+{
+	"name": "LearnKaspa",
+	"description": "Open-source educational platform explaining Kaspa in plain language across beginner, crypto-native, and developer levels, covering blockDAG, origins, speed, tokenomics, and the network’s long-term design.",
+	"link": "https://learnkaspa.com",
+	"logo": "https://kaspahub.org/assets/logos/learnkaspa.webp",
+	"features": ["reviewed", "education"] 
+},
+{
 	"name": "Kaspa FAQ",
 	"description": "Kaspa FAQ provides detailed answers on Kaspa cryptocurrency, covering wallet setup, exchanges, tokens, NFTs, and the ecosystem, designed for both beginners and seasoned crypto enthusiasts.",
 	"link": "https://www.kaspafaq.com",
@@ -936,13 +957,6 @@
 	"link": "https://hashrate.kaspa.ws",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed", "analytics"]
-},
-{
-	"name": "Kaspa Insights",
-	"description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
-	"link": "https://www.kaspainsights.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspainsights.webp",
-	"features": ["reviewed", "analytics", "visualizer", "calculator", "utilities"]
 },
 {
 	"name": "Mining Now",
