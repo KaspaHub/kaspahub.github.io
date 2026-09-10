@@ -336,11 +336,18 @@
 	"features": []
 },
 {
+	"name": "Warda Protocol",
+	"description": "Open protocol for cryptographic spending limits and delegated grants for autonomous AI agents on Kaspa L1. Limits are compiled into covenant scripts so consensus rejects out-of-bound spends.",
+	"link": "https://www.wardaprotocol.com",
+	"logo": "https://kaspahub.org/assets/logos/wardaprotocol.webp",
+	"features": ["development"]
+},
+{
 	"name": "Koracle",
 	"description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
 	"link": "https://koracle.xyz",
 	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
-	"features": []
+	"features": ["development"]
 },
 {
 	"name": "KOmarkets",
