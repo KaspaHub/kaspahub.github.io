@@ -2231,5 +2231,13 @@
 	"link": "https://wirexapp.com",
 	"logo": "https://kaspahub.org/assets/logos/wirex.webp",
 	"features": ["cex"]
-}
+},
+	{
+		    "name": "Kasino",
+		    "description": "Fan-made arcade for the Kaspa community: 9 mini-games (roulette, blackjack, slots, crash, mines, plinko, dice, wheel of fortune, price prediction) using virtual chips, no real money involved. Includes a Live Lobby with real-time chat, a global leaderboard, a daily streak bonus, and a shared jackpot, plus a Kaspa Live page with price/network stats and project news.",
+		    "link": "https://claude.ai/code/artifact/a42eeace-edcb-4e11-b57e-a1fc677e598d",
+		    "logo": "https://kaspahub.org/assets/logos/kasino.webp",
+		    "features": ["gaming", "social"]
+	}
+	
 ]
