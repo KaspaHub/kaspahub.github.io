@@ -140,6 +140,13 @@
 	"features": ["verified", "analytics"]
 },
 {
+    "name": "dot.k",
+    "description": "Decentralized name service on Kaspa L1 for consensus-unique .k names with trustless ownership proofs.",
+    "link": "https://dotk.name",
+    "logo": "https://kaspahub.org/assets/logos/dotk.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
 	"name": "Kaspa Name Service",
 	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
 	"link": "https://kaspaname.com",
