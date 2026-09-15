@@ -56,12 +56,12 @@
   "features": ["selfCustodial", "krc20", "krc721"]
 },
 {
-  "name": "Kache",
-  "description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
-  "link": "https://kachewallet.com",
-  "logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
-  "features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
-},
+  "name": "CoinEx Wallet",
+  "description": "Multi-chain non-custodial wallet with DeFi integration for secure storage and trading. Formerly known as ViaWallet.",
+  "link": "https://wallet.coinex.com",
+  "logo": "https://kaspahub.org/assets/logos/archive/coinexwallet.webp",
+  "features": ["multiChain", "selfCustodial", "mobile"]
+}
 {
   "name": "Ghost Wallet",
   "description": "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
@@ -432,6 +432,13 @@
   "link": "https://whitebit.com",
   "logo": "https://kaspahub.org/assets/logos/archive/whitebit.webp",
   "features": ["cex", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+  "name": "CoinEx",
+  "description": "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
+  "link": "https://www.coinex.com",
+  "logo": "https://kaspahub.org/assets/logos/archive/coinex.webp",
+  "features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
   "name": "BitMart",

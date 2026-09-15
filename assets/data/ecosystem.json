@@ -1309,6 +1309,13 @@
 	"features": ["reviewed", "wallet"]
 },
 {
+	"name": "Kaspanet",
+	"description": "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
+	"link": "https://wallet.kaspanet.io",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["wallet"]
+},
+{
 	"name": "Kasanova",
 	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
 	"link": "https://kasanova.app",
@@ -1344,11 +1351,11 @@
 	"features": ["wallet"]
 },
 {
-	"name": "Kaspanet",
-	"description": "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
-	"link": "https://wallet.kaspanet.io",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["wallet"]
+  "name": "Kache",
+  "description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
+  "link": "https://kachewallet.com",
+  "logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
+  "features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
 },
 {
 	"name": "Kaspa Kold",
@@ -1383,13 +1390,6 @@
 	"description": "Modern self-custodial multi-chain mobile wallet with built-in AI assistant, seamless crypto swaps, sub-accounts, and full WalletConnect support.",
 	"link": "https://www.unitywallet.com",
 	"logo": "https://kaspahub.org/assets/logos/unitywallet.webp",
-	"features": ["wallet"]
-},
-{
-	"name": "CoinEx Wallet",
-	"description": "Multi-chain non-custodial wallet with DeFi integration for secure storage and trading. Formerly known as ViaWallet.",
-	"link": "https://wallet.coinex.com",
-	"logo": "https://kaspahub.org/assets/logos/coinexwallet.webp",
 	"features": ["wallet"]
 },
 {
@@ -1622,13 +1622,6 @@
 	"link": "https://www.bybit.com",
 	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
 	"features": ["reviewed", "cex", "googleApplePay", "futuresTrading", "withdrawals"]
-},
-{
-	"name": "CoinEx",
-	"description": "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
-	"link": "https://www.coinex.com",
-	"logo": "https://kaspahub.org/assets/logos/coinex.webp",
-	"features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "HTX",
