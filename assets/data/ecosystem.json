@@ -141,7 +141,7 @@
 },
 {
     "name": "dot.k",
-    "description": "Decentralized name service on Kaspa L1 for consensus-unique .k names with trustless ownership proofs.",
+    "description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
     "link": "https://dotk.name",
     "logo": "https://kaspahub.org/assets/logos/dotk.webp",
 	"features": ["reviewed", "marketplace"]
