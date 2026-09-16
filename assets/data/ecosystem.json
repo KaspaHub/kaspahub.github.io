@@ -39,14 +39,14 @@
 	"description": "An EVM-compatible based rollup on Kaspa that uses L1 as a decentralized sequencer, enabling MEV-resistant smart contracts, DeFi, and cross-VM interoperability.",
 	"link": "https://igralabs.com",
 	"logo": "https://kaspahub.org/assets/logos/igralabs.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "layer2"]
 },
 {
 	"name": "Kasplex",
 	"description": "A based-rollup zkEVM Layer 2 on Kaspa that uses L1 for sequencing and data availability, providing the KRC-20 token standard, ZK-proven EVM smart contracts, and $KAS as gas.",
 	"link": "https://kasplex.org",
 	"logo": "https://kaspahub.org/assets/logos/kasplex.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed", "layer2"]
 },
 {
 	"name": "KasMap",
@@ -1222,238 +1222,238 @@
 	"description": "Command-line wallet for users who prefer managing keys and transactions directly from the terminal. Supports both native Rust and WASM web interfaces.",
 	"link": "https://github.com/kaspanet/rusty-kaspa/tree/master/wallet",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "desktop"]
 },
 {
 	"name": "Ledger",
 	"description": "Industry-leading cold wallet for multi-chain asset management on desktop & mobile. Secure, self-custodial hardware wallet audited by Friedman LLP & Kudelski IoT.",
 	"link": "https://www.ledger.com",
 	"logo": "https://kaspahub.org/assets/logos/ledgerwallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "multiChain", "selfCustodial", "hardware", "desktop", "mobile"]
 },
 {
 	"name": "Tangem",
 	"description": "Popular hardware wallet with EAL6+ certified chip, audited by Kudelski Security and Riscure, offering multi-chain asset management with an open-source app.",
 	"link": "https://tangem.com",
 	"logo": "https://kaspahub.org/assets/logos/tangemwallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "multiChain", "selfCustodial", "krc20", "hardware", "mobile"]
 },
 {
 	"name": "OneKey",
 	"description": "Secure hardware & software DeFi wallet, backed by Coinbase & Binance, audited by SlowMist, with multi-chain support across devices.",
 	"link": "https://onekey.so",
 	"logo": "https://kaspahub.org/assets/logos/onekeywallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "multiChain", "selfCustodial", "krc20", "hardware", "desktop", "mobile", "browserExtension"]
 },
 {
 	"name": "Kaspium",
 	"description": "Lightweight and fast mobile wallet for Kaspa, supporting 12/24-word seed phrases, ideal for daily users making payments.",
 	"link": "https://kaspium.io",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-bg.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "mobile"]
 },
 {
 	"name": "Kasware",
 	"description": "The first open-source non-custodial DeFi wallet for Kaspa with Kasplex, Igra, and covenant support.",
 	"link": "https://www.kasware.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaswarewallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "kcc20", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
 },
 {
 	"name": "OKX Wallet",
 	"description": "User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains.",
 	"link": "https://web3.okx.com",
 	"logo": "https://kaspahub.org/assets/logos/okxwallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "selfCustodial", "multiChain", "mobile", "browserExtension"]
 },
 {
 	"name": "HASHWallet",
 	"description": "Award-winning NFC contactless cold wallet smart card featuring unlimited seed phrases and private keys on a single device, EAL6+ security, and no firmware updates.",
 	"link": "https://www.gethashwallet.com",
 	"logo": "https://kaspahub.org/assets/logos/hashwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
 },
 {
 	"name": "ELLIPAL",
 	"description": "Air-gapped cold storage hardware wallet with EAL5+ secure element and anti-tamper self-destruct protection. Supports Kaspa and Kasplex L2.",
 	"link": "https://www.ellipal.com",
 	"logo": "https://kaspahub.org/assets/logos/ellipal.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
 },
 {
 	"name": "Kastle",
 	"description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
 	"link": "https://kastle.cc",
 	"logo": "https://kaspahub.org/assets/logos/kastlewallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
 },
 {
 	"name": "Kurncy",
 	"description": "Lightweight and user-friendly Kaspa wallet for iOS & Android with optional custody, supporting KRC20, KRC721, KNS, and seamless integration with the ecosystem.",
 	"link": "https://www.kurncy.com",
 	"logo": "https://kaspahub.org/assets/logos/kurncywallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile"]
 },
 {
 	"name": "KasKeeper",
 	"description": "Web3 wallet for Kaspa with KRC20 token support, backed by KEF, designed for secure self-custodial storage and daily transactions.",
 	"link": "https://kaskeeper.vercel.app",
 	"logo": "https://kaspahub.org/assets/logos/kaskeeperwallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "mobile", "browserExtension"]
 },
 {
 	"name": "Kaspacom Wallet",
 	"description": "An open-source KaspaCom web wallet, formerly known as Kaspiano, fully integrated with both Layer 1 and Layer 2 of the Kaspa network.",
 	"link": "https://wallet.kaspa.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspacom.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "krc20", "krc721", "knsDomains", "openSource", "selfCustodial", "web"]
 },
 {
 	"name": "Kaspa NG",
 	"description": "KNG is a Kaspa wallet with advanced features, including tools for full-node runners and developers, with a strong focus on security.",
 	"link": "https://kaspa-ng.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspang.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "desktop", "web"]
 },
 {
 	"name": "Kaspanet",
 	"description": "Open-source web wallet for Kaspa, designed for ease of use and accessibility.",
 	"link": "https://wallet.kaspanet.io",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "openSource", "selfCustodial", "web"]
 },
 {
 	"name": "Kasanova",
 	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
 	"link": "https://kasanova.app",
 	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "selfCustodial", "krc20", "knsDomains", "mobile"]
 },
 {
 	"name": "Kaspire",
 	"description": "Open-source self-custody Kaspa wallet for Android and browser extension. Supports all L1/L2 assets, WalletConnect v2, BIP39 passphrases, and Argon2id.",
 	"link": "https://kaspire.kaslab.space",
 	"logo": "https://kaspahub.org/assets/logos/kaspire.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"]
 },
 {
 	"name": "Coin Wallet",
 	"description": "Simple and lightweight cross-platform, multi-chain, self-custodial wallet with built-in swaps, and Mecto for geo-location based address sharing.",
 	"link": "https://coin.space",
 	"logo": "https://kaspahub.org/assets/logos/coin.space.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "openSource", "multiChain", "selfCustodial", "mobile", "desktop", "web"]
 },
 {
 	"name": "Kasla",
 	"description": "User-friendly Kaspa web wallet with a banking interface. Checking and savings accounts. Send Kaspa to an email address. oAuth-style logins & payments.",
 	"link": "https://kasla.io",
 	"logo": "https://kaspahub.org/assets/logos/kasla.webp",
-	"features": ["reviewed", "development", "payments", "wallet"]
+	"features": ["reviewed", "wallet", "selfCustodial", "web"]
 },
 {
 	"name": "Kasperia",
 	"description": "Lightweight, open-source Kaspa browser extension wallet (a fork of Kasware) with full Kasplex L2 support, KRC-20 token management, and seamless Web3 interactions.",
 	"link": "https://kasperia-doc.github.io",
 	"logo": "https://kaspahub.org/assets/logos/kasperia.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "openSource", "selfCustodial", "krc20", "browserExtension"]
 },
 {
 	"name": "Enclave",
 	"description": "Self-custodial Kaspa and Igra wallet with SureSign transaction review, coin control, vaults, escrow, and built-in swap and earn.",
 	"link": "https://enclavefi.app",
 	"logo": "https://kaspahub.org/assets/logos/enclavefi.webp",
-	"features": ["reviewed", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
 },
 {
 	"name": "Kache",
 	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
 	"link": "https://kachewallet.com",
 	"logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
 },
 {
 	"name": "Kaspa Kold",
 	"description": "Offline air-gapped cold storage solution for Kaspa, supporting secure wallet creation, transaction management, and message signing with mnemonic phrase security.",
 	"link": "https://kaskold.com",
 	"logo": "https://kaspahub.org/assets/logos/kaskold.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "openSource", "selfCustodial", "web"]
 },
 {
 	"name": "Atomik Wallet",
 	"description": "A cross-platform wallet from Kasway designed for easy and secure payments on the Kaspa network, focused on simplicity for all users. <b>Work in progress.</b>",
 	"link": "https://github.com/Atomik-Global/atomik-wallet",
 	"logo": "https://kaspahub.org/assets/logos/atomikwallet.webp",
-	"features": ["reviewed", "wallet"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "mobile"]
 },
 {
 	"name": "SafePal",
 	"description": "Secure wallet with hot and cold storage for multi-chain assets, ideal for daily users with built-in swapping.",
 	"link": "https://www.safepal.com",
 	"logo": "https://kaspahub.org/assets/logos/safepalwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile", "browserExtension"]
 },
 {
 	"name": "Goldshell",
 	"description": "Cold wallet with air-gapped security, supporting multiple cryptocurrencies, featuring fingerprint unlock and companion app for real-time monitoring.",
 	"link": "https://www.goldshell.com/product/goldshell-wallet/",
 	"logo": "https://kaspahub.org/assets/logos/goldshellwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
 },
 {
 	"name": "Unity Wallet",
 	"description": "Modern self-custodial multi-chain mobile wallet with built-in AI assistant, seamless crypto swaps, sub-accounts, and full WalletConnect support.",
 	"link": "https://www.unitywallet.com",
 	"logo": "https://kaspahub.org/assets/logos/unitywallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "mobile"]
 },
 {
 	"name": "NOW Wallet",
 	"description": "Cross-platform non-custodial wallet with multi-chain support, staking, NFTs, dApps, and fiat-to-crypto swap feature.",
 	"link": "https://walletnow.app",
 	"logo": "https://kaspahub.org/assets/logos/nowwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "mobile", "desktop"]
 },
 {
 	"name": "Cool Wallet",
 	"description": "Secure wallet with both cold and hot wallet functionality, supporting multi-chain assets and built-in token swapping.",
 	"link": "https://www.coolwallet.io",
 	"logo": "https://kaspahub.org/assets/logos/coolwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
 },
 {
 	"name": "Guarda",
 	"description": "Multiplatform non-custodial wallet with features for managing, buying, exchanging, and staking a wide range of cryptocurrencies.",
 	"link": "https://guarda.com",
 	"logo": "https://kaspahub.org/assets/logos/guardawallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "desktop", "mobile", "web"]
 },
 {
 	"name": "Zelcore",
 	"description": "Non-custodial multi-chain wallet for mobile and desktop, supporting assets across a wide range of blockchains.",
 	"link": "https://zelcore.io",
 	"logo": "https://kaspahub.org/assets/logos/zelcorewallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "desktop", "mobile", "browserExtension"]
 },
 {
 	"name": "Plus Wallet",
 	"description": "Lightweight multi-chain wallet with built-in swap feature, available on mobile and web for easy use.",
 	"link": "https://pluswallet.app",
 	"logo": "https://kaspahub.org/assets/logos/pluswallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "mobile"]
 },
 {
 	"name": "Math Wallet",
 	"description": "Versatile multi-chain wallet with support for hundreds of blockchains, featuring hardware integration and cross-platform access.",
 	"link": "https://mathwallet.org",
 	"logo": "https://kaspahub.org/assets/logos/mathwallet.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile", "browserExtension", "web"]
 },
 {
 	"name": "CoinRabbit",
 	"description": "Custodial multi-currency wallet offering storage, swapping, lending, and borrowing crypto in one platform, focusing on user convenience.",
 	"link": "https://coinrabbit.io/wallet/",
 	"logo": "https://kaspahub.org/assets/logos/coinrabbit.webp",
-	"features": ["wallet"]
+	"features": ["wallet", "multiChain", "web"]
 },
 {
 	"name": "Coineo",
