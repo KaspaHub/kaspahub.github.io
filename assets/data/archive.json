@@ -61,7 +61,7 @@
   "link": "https://wallet.coinex.com",
   "logo": "https://kaspahub.org/assets/logos/archive/coinexwallet.webp",
   "features": ["multiChain", "selfCustodial", "mobile"]
-}
+},
 {
   "name": "Ghost Wallet",
   "description": "Simple and lightweight Chrome extension wallet for Kaspa and KRC20 tokens. Backed by Crypto Galaxy. Supports minting, sending, and receiving tokens.",
