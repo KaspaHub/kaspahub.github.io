@@ -746,21 +746,21 @@
 	"description": "A two-way KAS-EVM bridge for seamless $KAS transfers between Kaspa Layer 1 and Kasplex Layer 2, enabling DeFi and smart contract interactions with fast, low-fee transactions.",
 	"link": "https://kasbridge-evm.kaspafoundation.org",
 	"logo": "https://kaspahub.org/assets/logos/kurve.webp",
-	"features": ["reviewed", "layer2", "bridge"]
+	"features": ["reviewed", "bridge"]
 },
 {
 	"name": "KAT Bridge",
 	"description": "A two-way bridge for Kaspa tokens, enabling seamless KRC-20 to ERC-20 transfers between Kaspa L1 and Kasplex L2, with FROST threshold signatures for security and support for project onboarding.",
 	"link": "https://katbridge.com",
 	"logo": "https://kaspahub.org/assets/logos/katbridge.webp",
-	"features": ["reviewed", "layer2", "bridge"]
+	"features": ["reviewed", "bridge"]
 },
 {
 	"name": "Kaspa Bridge",
 	"description": "A multi-chain two-way EVM bridge connecting Igra & Kasplex on Kaspa to BNB Chain and 30–40 additional EVM networks.",
 	"link": "https://kaspabridge.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspabridge.webp",
-	"features": ["reviewed", "layer2", "bridge"]
+	"features": ["reviewed", "bridge"]
 },
 {
 	"name": "Dymension Kaspa Bridge",
