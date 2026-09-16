@@ -123,7 +123,7 @@
 	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
 	"link": "https://www.kaspakaha.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
-	"features": ["reviewed", "dex", "analytics"]
+	"features": ["dex", "analytics"]
 },
 {
 	"name": "Aporia Exchange",
