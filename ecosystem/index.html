@@ -374,13 +374,12 @@ layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
 fetch('/assets/data/ecosystem.json')
-	.then(res => res.json())
-	.then(data => {
-		items = data;
-		filteredItems = items;
-		applyCategoryFromURL();
-		renderItems(true);
-	})
+    .then(res => res.json())
+    .then(data => {
+        items = data;
+        applyCategoryFromURL();
+        filterItems();
+    })
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
 
 
@@ -396,7 +395,6 @@ function applyCategoryFromURL() {
 		document.querySelector('.category-pill.active')?.classList.remove('active');
 		pill.classList.add('active');
 		if (categoryDropdown) categoryDropdown.value = pill.dataset.feature;
-		filterItems();
 	}
 }
 </script>
