@@ -35,18 +35,18 @@
 	"features": ["reviewed", "videos"]
 },
 {
-	"name": "Kasplex",
-	"description": "First EVM-compatible programmable Layer 2 on Kaspa L1, enabling KRC20 tokens, KRC721 NFTs, and smart contracts with open-source indexer and APIs for scalable dApps.",
-	"link": "https://kasplex.org",
-	"logo": "https://kaspahub.org/assets/logos/kasplex.webp",
-	"features": ["reviewed", "layer2"]
-},
-{
 	"name": "Igra Labs",
-	"description": "An EVM-compatible programmable Layer 2 on Kaspa L1, enabling smart contracts with atomic composability and interoperability across VMs like Solana VM and WASM for scalable DeFi dApps.",
+	"description": "An EVM-compatible based rollup on Kaspa that uses L1 as a decentralized sequencer, enabling MEV-resistant smart contracts, DeFi, and cross-VM interoperability.",
 	"link": "https://igralabs.com",
 	"logo": "https://kaspahub.org/assets/logos/igralabs.webp",
-	"features": ["reviewed", "layer2"]
+	"features": ["reviewed"]
+},
+{
+	"name": "Kasplex",
+	"description": "A based-rollup zkEVM Layer 2 on Kaspa that uses L1 for sequencing and data availability, providing the KRC-20 token standard, ZK-proven EVM smart contracts, and $KAS as gas.",
+	"link": "https://kasplex.org",
+	"logo": "https://kaspahub.org/assets/logos/kasplex.webp",
+	"features": ["reviewed"]
 },
 {
 	"name": "KasMap",
