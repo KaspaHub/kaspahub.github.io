@@ -91,6 +91,83 @@
 	"features": ["reviewed", "social", "education"]
 },
 {
+	"name": "Zealous Swap",
+	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
+	"link": "https://www.zealousswap.com",
+	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
+	"features": ["reviewed", "dex"]
+},
+{
+	"name": "KRON",
+	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
+	"link": "https://kron.technology",
+	"logo": "https://kaspahub.org/assets/logos/kron.webp",
+	"features": ["launchpad", "dex"]
+},
+{
+	"name": "KaspaRocket",
+	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
+	"link": "https://kasparocket.fun",
+	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
+	"features": ["launchpad"]
+},
+{
+	"name": "KForge",
+	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
+	"link": "https://testnet.kforge.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
+	"features": ["launchpad", "dex"]
+},
+{
+	"name": "KaspaKaha",
+	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
+	"link": "https://www.kaspakaha.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
+	"features": ["reviewed", "dex", "analytics"]
+},
+{
+	"name": "Aporia Exchange",
+	"description": "The first order book (CLOB) DEX on Kaspa, MEV-resistant with cross-chain liquidity, atomic composability, and fully on-chain features. Building initially on Igra Labs L2 for smart contracts (transitioning to native vProgs later).",
+	"link": "https://aporia.exchange",
+	"logo": "https://kaspahub.org/assets/logos/aporiaexchange.webp",
+	"features": ["dex", "layer2"]
+},
+{
+	"name": "Kaspa Finance",
+	"description": "A DEX and DeFi platform on Kaspa's Kasplex zkEVM, offering fast swaps, liquidity, farms, lending, AI-driven DeFai tools, and a Token Creator Tool for KRC20 and other tokens.",
+	"link": "https://kaspafinance.io",
+	"logo": "https://kaspahub.org/assets/logos/kaspafinance.webp",
+	"features": ["reviewed", "layer2", "dex"]
+},
+{
+	"name": "KrokoSwap",
+	"description": "Decentralized exchange on Kasplex where users can swap tokens instantly with Uniswap V2 and V3 support, concentrated liquidity pools, smart routing, and seamless native KAS handling.",
+	"link": "https://krokoswap.io",
+	"logo": "https://kaspahub.org/assets/logos/krokoswap.webp",
+	"features": ["layer2", "dex"]
+},
+{
+	"name": "KasFun",
+	"description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
+	"link": "https://kas.fun",
+	"logo": "https://kaspahub.org/assets/logos/kasfun.webp",
+	"features": ["layer2", "launchpad"]
+},
+{
+	"name": "Igra Name Service",
+	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
+	"link": "https://insdomains.org",
+	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
+	"features": ["layer2", "marketplace"]
+},
+{
+	"name": "KRChange",
+	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
+	"link": "https://krchange.com",
+	"logo": "https://kaspahub.org/assets/logos/krchange.webp",
+	"features": ["dex"]
+},
+{
 	"name": "Kaspalytics",
 	"description": "A platform providing on-chain analysis of the Kaspa network, featuring real-time data on hashrate, difficulty, transactions, supply, and addresses, with tools like HODL waves and UTXO analytics.",
 	"link": "https://www.kaspalytics.com",
@@ -126,13 +203,6 @@
 	"features": ["reviewed", "analytics"]
 },
 {
-	"name": "KaspaKaha",
-	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
-	"link": "https://www.kaspakaha.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
-	"features": ["reviewed", "analytics"]
-},
-{
 	"name": "Kaspa NFT Hub",
 	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, and statistics.",
 	"link": "https://kasnfthub.com",
@@ -140,10 +210,10 @@
 	"features": ["verified", "analytics"]
 },
 {
-    "name": "dot.k",
-    "description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
-    "link": "https://dotk.name",
-    "logo": "https://kaspahub.org/assets/logos/dotk.webp",
+	"name": "dot.k",
+	"description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
+	"link": "https://dotk.name",
+	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
 	"features": ["reviewed", "marketplace"]
 },
 {
@@ -287,34 +357,6 @@
 	"features": ["cryptoCard"]
 },
 {
-	"name": "Zealous Swap",
-	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
-	"link": "https://www.zealousswap.com",
-	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
-	"features": ["reviewed", "dex"]
-},
-{
-	"name": "KRON",
-	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
-	"link": "https://kron.technology",
-	"logo": "https://kaspahub.org/assets/logos/kron.webp",
-	"features": ["launchpad", "dex"]
-},
-{
-	"name": "KaspaRocket",
-	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
-	"link": "https://kasparocket.fun",
-	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
-	"features": ["launchpad"]
-},
-{
-	"name": "KForge",
-	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
-	"link": "https://testnet.kforge.xyz",
-	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
-	"features": ["launchpad", "dex"]
-},
-{
 	"name": "Stag Hunt",
 	"description": "Kaspa-native crowdfunded hunts platform. Post hunts, back with KAS in on-chain escrow, claim tasks, and let referees verify for payout.",
 	"link": "https://staghunt.app",
@@ -355,6 +397,13 @@
 	"link": "https://koracle.xyz",
 	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
 	"features": ["development"]
+},
+{
+	"name": "DAGmate",
+	"description": "P2P wagered chess on Kaspa L1 with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
+	"link": "https://dagmate.org",
+	"logo": "https://kaspahub.org/assets/logos/dagmate.webp",
+	"features": ["dapp", "gaming", "gambling"]
 },
 {
 	"name": "KOmarkets",
@@ -677,48 +726,6 @@
 	"link": "https://www.kaskad.app",
 	"logo": "https://kaspahub.org/assets/logos/kaskad.webp",
 	"features": ["reviewed", "layer2"]
-},
-{
-	"name": "Aporia Exchange",
-	"description": "The first order book (CLOB) DEX on Kaspa, MEV-resistant with cross-chain liquidity, atomic composability, and fully on-chain features. Building initially on Igra Labs L2 for smart contracts (transitioning to native vProgs later).",
-	"link": "https://aporia.exchange",
-	"logo": "https://kaspahub.org/assets/logos/aporiaexchange.webp",
-	"features": ["dex"]
-},
-{
-	"name": "Kaspa Finance",
-	"description": "A DEX and DeFi platform on Kaspa's Kasplex zkEVM, offering fast swaps, liquidity, farms, lending, AI-driven DeFai tools, and a Token Creator Tool for KRC20 and other tokens.",
-	"link": "https://kaspafinance.io",
-	"logo": "https://kaspahub.org/assets/logos/kaspafinance.webp",
-	"features": ["reviewed", "layer2", "dex"]
-},
-{
-	"name": "KrokoSwap",
-	"description": "Decentralized exchange on Kasplex where users can swap tokens instantly with Uniswap V2 and V3 support, concentrated liquidity pools, smart routing, and seamless native KAS handling.",
-	"link": "https://krokoswap.io",
-	"logo": "https://kaspahub.org/assets/logos/krokoswap.webp",
-	"features": ["layer2", "dex"]
-},
-{
-	"name": "KasFun",
-	"description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
-	"link": "https://kas.fun",
-	"logo": "https://kaspahub.org/assets/logos/kasfun.webp",
-	"features": ["layer2", "launchpad"]
-},
-{
-	"name": "Igra Name Service",
-	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
-	"link": "https://insdomains.org",
-	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
-	"features": ["layer2", "marketplace"]
-},
-{
-	"name": "KRChange",
-	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
-	"link": "https://krchange.com",
-	"logo": "https://kaspahub.org/assets/logos/krchange.webp",
-	"features": ["dex"]
 },
 {
 	"name": "Spectre Market",
@@ -1351,11 +1358,18 @@
 	"features": ["wallet"]
 },
 {
-  "name": "Kache",
-  "description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
-  "link": "https://kachewallet.com",
-  "logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
-  "features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
+	"name": "Enclave",
+	"description": "Self-custodial Kaspa and Igra wallet with SureSign transaction review, coin control, vaults, escrow, and built-in swap and earn.",
+	"link": "https://enclavefi.app",
+	"logo": "https://kaspahub.org/assets/logos/enclavefi.webp",
+	"features": ["reviewed", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
+},
+{
+	"name": "Kache",
+	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
+	"link": "https://kachewallet.com",
+	"logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "layer2", "browserExtension"]
 },
 {
 	"name": "Kaspa Kold",
