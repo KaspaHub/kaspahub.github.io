@@ -174,7 +174,47 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabKNS" class="tabPanel" aria-label="KNS Domains panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h4>KNS Domains</h4>
+      <h4>.k Domains</h4>
+      <div id="dotkLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Covenant ID</th>
+            </tr>
+          </thead>
+          <tbody id="dotkRows">
+            <tr>
+              <td colspan="2" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>.kaspa Domains</h4>
+      <div id="kaspaLoading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Transaction ID</th>
+            </tr>
+          </thead>
+          <tbody id="kaspaRows">
+            <tr>
+              <td colspan="2" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>.kas Domains</h4>
       <div id="domainLoading" class="muted loading hidden">
         <span class="spinner"></span>
         <span>Loading…</span>
@@ -183,15 +223,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <table>
           <thead>
             <tr>
-              <th>TxID</th>
-              <th>Mint date</th>
-              <th>Status</th>
-              <th>Domain</th>
+              <th>Name</th>
+              <th>Transaction ID</th>
             </tr>
           </thead>
           <tbody id="domainRows">
             <tr>
-              <td colspan="4" class="muted">-</td>
+              <td colspan="2" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -291,6 +329,12 @@ const cursorTransfers = document.getElementById("cursorTransfers");
 const tokenLoading = document.getElementById("tokenLoading");
 const tokenRows = document.getElementById("tokenRows");
 
+const dotkLoading = document.getElementById("dotkLoading");
+const dotkRows = document.getElementById("dotkRows");
+
+const kaspaLoading = document.getElementById("kaspaLoading");
+const kaspaRows = document.getElementById("kaspaRows");
+
 const domainLoading = document.getElementById("domainLoading");
 const domainRows = document.getElementById("domainRows");
 
@@ -305,6 +349,8 @@ const explorerPic = document.getElementById("explorerPic");
 
 let currentAddr = "";
 let tokens = null;
+let dotkDomains = null;
+let kaspaDomains = null;
 let domains = null;
 let utxos = null;
 let utxosPage = 0;
@@ -403,6 +449,12 @@ tabs.forEach(tab => {
         loadTokens();
       }
     } else if (tab.dataset.tab === 'tabKNS') {
+      if (currentAddr && dotkDomains === null) {
+        loadDotkDomains();
+      }
+      if (currentAddr && kaspaDomains === null) {
+        loadKaspaDomains();
+      }
       if (currentAddr && domains === null) {
         loadDomains();
       }
@@ -478,6 +530,70 @@ async function fetchAllTokens(addr) {
     if (!isNew && newResult.length > 0) break;
   } while (start);
   return all;
+}
+
+async function fetchDotkDomains(addr) {
+  const url = `https://api.dotk.name/v1/addresses/${encodeURIComponent(addr)}`;
+  const res = await fetch(url);
+  if (res.status === 404) return { names: [], registryCovenantId: "" };
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  if (json && json.code) {
+    if (json.code === "not_found") return { names: [], registryCovenantId: "" };
+    throw new Error(json.error || json.code);
+  }
+  return json || { names: [], registryCovenantId: "" };
+}
+
+function kaspaAddressToOwnerHex(addr) {
+  const raw = String(addr || "");
+  const colon = raw.indexOf(":");
+  const payload = colon >= 0 ? raw.slice(colon + 1) : raw;
+  const charset = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+  const values = [];
+  for (const ch of payload) {
+    const v = charset.indexOf(ch);
+    if (v < 0) return "";
+    values.push(v);
+  }
+  if (values.length < 9) return "";
+  const data = values.slice(0, -8);
+  let acc = 0;
+  let bits = 0;
+  const bytes = [];
+  for (const value of data) {
+    acc = (acc << 5) | value;
+    bits += 5;
+    while (bits >= 8) {
+      bits -= 8;
+      bytes.push((acc >> bits) & 255);
+    }
+  }
+  if (bits >= 5 || ((acc << (8 - bits)) & 255)) return "";
+  if (bytes.length < 33) return "";
+  const version = bytes[0];
+  if (version === 0 && bytes.length >= 33) {
+    return bytes.slice(1, 33).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  if (version === 1 && bytes.length >= 34) {
+    return bytes.slice(2, 34).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  return "";
+}
+
+async function fetchKaspaDomains(addr) {
+  const owner = kaspaAddressToOwnerHex(addr);
+  if (!owner) return [];
+  const url = `https://kaspaname.com/v1/addresses/${encodeURIComponent(owner)}/names`;
+  const res = await fetch(url);
+  if (res.status === 404) return [];
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  if (json && json.error) {
+    if (json.error === "not_found" || String(json.error).startsWith("no ")) return [];
+    throw new Error(json.error);
+  }
+  return Array.isArray(json?.names) ? json.names : [];
 }
 
 async function fetchAllDomains(addr) {
@@ -851,24 +967,64 @@ function renderTokens(tokens) {
   }).join("");
 }
 
+function renderDotkDomains(data) {
+  const names = Array.isArray(data?.names) ? data.names : [];
+  if (!names.length) {
+    dotkRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
+    return;
+  }
+
+  const covenantId = String(data.registryCovenantId || "");
+  const shortCovenantId = shortenEnd(covenantId);
+  const covenantHtml = covenantId
+    ? `<a href="https://covenants.kaspa.com/covenants/${escHtml(covenantId)}">${escHtml(shortCovenantId)}</a>`
+    : "-";
+
+  dotkRows.innerHTML = names.map(name => {
+    const domain = String(name || "").trim();
+    const display = domain ? `${domain}.k` : "-";
+    return `
+      <tr>
+        <td>${escHtml(display)}</td>
+        <td>${covenantHtml}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function renderKaspaDomains(list) {
+  if (!list.length) {
+    kaspaRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
+    return;
+  }
+
+  kaspaRows.innerHTML = list.map(d => {
+    const display = String(d.display || (d.name ? `${d.name}.kaspa` : "") || "").trim() || "-";
+    const txId = String(d.outpoint?.transactionId || d.activate?.txid || "");
+    const shortTxId = shortenEnd(txId);
+    return `
+      <tr>
+        <td>${escHtml(display)}</td>
+        <td>${txId ? linkTx(txId, shortTxId) : "-"}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
 function renderDomains(domains) {
   if (!domains.length) {
-    domainRows.innerHTML = `<tr><td colspan="4" class="muted">No domains found.</td></tr>`;
+    domainRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
     return;
   }
 
   domainRows.innerHTML = domains.map(d => {
     const name = d.asset || "-";
-    const mintDate = d.creationBlockTime ? formatDate(new Date(d.creationBlockTime)) : "-";
-    const status = d.status || "-";
     const txId = d.transactionId || "-";
     const shortTxId = shortenEnd(txId);
     return `
       <tr>
-        <td>${linkTx(txId, shortTxId)}</td>
-        <td>${mintDate}</td>
-        <td>${status}</td>
         <td>${name}</td>
+        <td>${linkTx(txId, shortTxId)}</td>
       </tr>
     `;
   }).join("");
@@ -980,6 +1136,32 @@ async function loadTokens() {
   }
 }
 
+async function loadDotkDomains() {
+  if (!currentAddr) return;
+  dotkLoading.classList.remove("hidden");
+  try {
+    dotkDomains = await fetchDotkDomains(currentAddr);
+    renderDotkDomains(dotkDomains);
+  } catch {
+    dotkRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
+  } finally {
+    dotkLoading.classList.add("hidden");
+  }
+}
+
+async function loadKaspaDomains() {
+  if (!currentAddr) return;
+  kaspaLoading.classList.remove("hidden");
+  try {
+    kaspaDomains = await fetchKaspaDomains(currentAddr);
+    renderKaspaDomains(kaspaDomains);
+  } catch {
+    kaspaRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
+  } finally {
+    kaspaLoading.classList.add("hidden");
+  }
+}
+
 async function loadDomains() {
   if (!currentAddr) return;
   domainLoading.classList.remove("hidden");
@@ -987,7 +1169,7 @@ async function loadDomains() {
     domains = await fetchAllDomains(currentAddr);
     renderDomains(domains);
   } catch {
-    domainRows.innerHTML = `<tr><td colspan="4" class="muted">Failed to load domains.</td></tr>`;
+    domainRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
   } finally {
     domainLoading.classList.add("hidden");
   }
@@ -1047,6 +1229,8 @@ async function runSearch(inputAddr) {
   sentHasMore = true;
   sentPage = 0;
   tokens = null;
+  dotkDomains = null;
+  kaspaDomains = null;
   domains = null;
   utxos = null;
   utxosPage = 0;
