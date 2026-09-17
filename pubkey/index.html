@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa Owner Hex to Wallet Address Converter Tool - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Owner Hex and Wallet Address Converter - Kaspa Hub" />
+<meta property="og:title" content="Kaspa Owner Hex ↔️ Wallet Address Converter - Kaspa Hub" />
+
+<meta name="description" content="Convert a Kaspa name owner identifier (32-byte hex) to a kaspa: wallet address, or decode an address back to its owner payload. Get your x-only pubkey (64 hex)." />
+<meta name="twitter:description" content="Convert Kaspa name owner identifiers to wallet addresses and back. Client-side, no server." />
+<meta property="og:description" content="Paste a name-owner hex or a kaspa: address and convert between them. Supports Schnorr, ECDSA, and ScriptHash payloads." />
+
+<link rel="canonical" href="https://kaspahub.org/pubkey/" />
+<meta name="twitter:url" content="https://kaspahub.org/pubkey/" />
+<meta property="og:url" content="https://kaspahub.org/pubkey/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/assets/manifest.json" />
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f7;
+      --card: #fff;
+      --text: #111;
+      --muted: #666;
+      --line: #ddd;
+      --accent: #49eacb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f0f;
+        --card: #1a1a1a;
+        --text: #f2f2f2;
+        --muted: #9a9a9a;
+        --line: #333;
+      }
+    }
+
+    .skip {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+    }
+    .skip:focus {
+      left: 16px;
+      top: 16px;
+      z-index: 10;
+      background: var(--card);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    main {
+      max-width: 720px;
+      margin: 40px auto;
+    }
+
+    h1 { margin: 0 0 8px; font-size: 1.4rem; }
+    h2 { margin: 28px 0 8px; font-size: 1.05rem; }
+    p { color: var(--muted); margin: 0 0 20px; }
+
+    label { display: block; font-weight: 600; margin: 14px 0 6px; }
+    input, select, button, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
+    }
+    input, select, textarea {
+      padding: 10px 12px;
+
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    button {
+      margin-top: 16px;
+      padding: 12px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 560px) {
+      .row { grid-template-columns: 1fr; }
+    }
+    .out {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      word-break: break-all;
+      font-family: ui-monospace, monospace;
+      white-space: pre-wrap;
+    }
+    .err { color:#ff6b6b; }
+
+  </style>
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+    <div class="theme-1" id="converter">
+      <header>
+        <h1>Convert Kaspa name owner  wallet address</h1>
+        <p>
+          Paste a 32-byte owner identifier,
+          or paste a wallet address to decode it back to the owner payload.
+          For a normal key owner use version 0 (PubKey). Conversion runs in your browser.
+        </p>
+        <p>
+          Kaspa names APIs often return an <strong>owner</strong> field as raw hex rather than a
+          <code>kaspa:</code> address. This tool encodes that payload with the selected address
+          version and network prefix using the Kaspa bech32 checksum, or decodes an address back
+          to hex, version, prefix, and payload length.
+        </p>
+      </header>
+
+  <form id="convert-form" action="#" method="get">
+    <label for="input">Owner hex or wallet address</label>
+    <textarea
+      id="input"
+      name="input"
+      rows="4"
+      autocomplete="off"
+      spellcheck="false"
+      autocapitalize="off"
+      placeholder="kaspa:qpyfkp... or 489b075..."
+        ></textarea>    <div class="row">
+      <div>
+        <label for="version">Address version</label>
+        <select id="version" name="version">
+          <option value="0" selected>0 — PubKey (Schnorr)</option>
+          <option value="1">1 — PubKeyECDSA</option>
+          <option value="8">8 — ScriptHash</option>
+        </select>
+      </div>
+      <div>
+        <label for="prefix">Network prefix</label>
+        <select id="prefix" name="prefix">
+          <option value="kaspa" selected>kaspa (mainnet)</option>
+          <option value="kaspatest">kaspatest</option>
+          <option value="kaspadev">kaspadev</option>
+          <option value="kaspasim">kaspasim</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="go" type="submit">Convert</button>
+  </form>
+
+  <div
+    id="result"
+    class="out"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >kaspa:qpyfkp...</div>
+
+</div>
+  </main>
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+  <noscript>
+    <p>This converter needs JavaScript to encode and decode Kaspa addresses.</p>
+  </noscript>
+  <script>
+    const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+    const CHARSET_MAP = Object.fromEntries([...CHARSET].map((ch, i) => [ch, i]));
+    const KNOWN_PREFIXES = ["kaspa", "kaspatest", "kaspadev", "kaspasim"];
+    const VERSION_LEN = { 0: 32, 1: 33, 8: 32 };
+    const VERSION_LABEL = { 0: "PubKey (Schnorr)", 1: "PubKeyECDSA", 8: "ScriptHash" };
+
+function polymod(values) {
+  let c = 1n;
+  const gens = [0x98f2bc8e61n, 0x79b76d99e2n, 0xf33e5fb3c4n, 0xae2eabe2a8n, 0x1e4f43e470n];
+  for (const d of values) {
+    const c0 = c >> 35n;
+    c = ((c & 0x07ffffffffn) << 5n) ^ BigInt(d);
+    for (let i = 0; i < 5; i++) {
+      if ((c0 >> BigInt(i)) & 1n) c ^= gens[i];
+    }
+  }
+  return c ^ 1n;
+}
+
+function convertBits(data, from, to, pad) {
+  let acc = 0;
+  let bits = 0;
+  const maxv = (1 << to) - 1;
+  const maxAcc = (1 << (from + to - 1)) - 1;
+  const out = [];
+  for (const value of data) {
+    if (value < 0 || value >> from) throw new Error("Invalid value in bit conversion");
+    acc = ((acc << from) | value) & maxAcc;
+    bits += from;
+    while (bits >= to) {
+      bits -= to;
+      out.push((acc >> bits) & maxv);
+    }
+  }
+  if (pad) {
+    if (bits > 0) out.push((acc << (to - bits)) & maxv);
+  } else if (bits >= from || ((acc << (to - bits)) & maxv)) {
+    throw new Error("Invalid padding in address payload");
+  }
+  return out;
+}
+
+function encodeAddress(payloadBytes, version, prefix) {
+  const five = convertBits([version, ...payloadBytes], 8, 5, true);
+  const prefixVals = [...prefix].map(ch => ch.charCodeAt(0) & 31);
+  const checksumInput = [...prefixVals, 0, ...five, 0, 0, 0, 0, 0, 0, 0, 0];
+  const mod = polymod(checksumInput);
+  const checksumBytes = [];
+  for (let i = 0; i < 5; i++) {
+    checksumBytes.push(Number((mod >> BigInt(8 * (4 - i))) & 255n));
+  }
+  const checksum = convertBits(checksumBytes, 8, 5, true);
+  return prefix + ":" + [...five, ...checksum].map(i => CHARSET[i]).join("");
+}
+
+function decodeAddress(raw) {
+  const text = String(raw || "").trim();
+  const colon = text.lastIndexOf(":");
+  if (colon < 1) throw new Error("Address must look like prefix:payload");
+  const prefix = text.slice(0, colon).toLowerCase();
+  const dataPart = text.slice(colon + 1).toLowerCase();
+  if (!KNOWN_PREFIXES.includes(prefix)) throw new Error("Unknown network prefix");
+  if (!dataPart.length) throw new Error("Missing address payload");
+  const values = [];
+  for (const ch of dataPart) {
+    if (!(ch in CHARSET_MAP)) throw new Error("Invalid address character: " + ch);
+    values.push(CHARSET_MAP[ch]);
+  }
+  if (values.length < 9) throw new Error("Address too short");
+  const prefixVals = [...prefix].map(ch => ch.charCodeAt(0) & 31);
+  if (polymod([...prefixVals, 0, ...values]) !== 0n) throw new Error("Invalid address checksum");
+  const payload5 = values.slice(0, -8);
+  const eight = convertBits(payload5, 5, 8, false);
+  if (!eight.length) throw new Error("Empty address payload");
+  const version = eight[0];
+  const payload = eight.slice(1);
+  const expected = VERSION_LEN[version];
+  if (expected == null) throw new Error("Unknown address version: " + version);
+  if (payload.length !== expected) {
+    throw new Error("Unexpected payload length for version " + version);
+  }
+  return { prefix, version, payload };
+}
+
+function parseHex(raw) {
+  const hex = String(raw || "").trim().replace(/^0x/i, "").replace(/\s+/g, "");
+  if (!/^[0-9a-fA-F]+$/.test(hex) || hex.length % 2) throw new Error("Invalid hex");
+  const bytes = [];
+  for (let i = 0; i < hex.length; i += 2) bytes.push(parseInt(hex.slice(i, i + 2), 16));
+  return bytes;
+}
+
+function toHex(bytes) {
+  return bytes.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function looksLikeAddress(raw) {
+  return String(raw || "").trim().includes(":");
+}
+
+function convert() {
+  const result = document.getElementById("result");
+  const versionEl = document.getElementById("version");
+  const prefixEl = document.getElementById("prefix");
+  try {
+    const raw = document.getElementById("input").value;
+    if (looksLikeAddress(raw)) {
+      const decoded = decodeAddress(raw);
+      versionEl.value = String(decoded.version);
+      prefixEl.value = decoded.prefix;
+      result.classList.remove("err");
+      result.textContent =
+        "Owner identifier (hex):\n" + toHex(decoded.payload) +
+        "\n\nVersion: " + decoded.version + " — " + (VERSION_LABEL[decoded.version] || "unknown") +
+        "\nPrefix: " + decoded.prefix +
+        "\nPayload bytes: " + decoded.payload.length;
+    } else {
+      const payload = parseHex(raw);
+      const version = Number(versionEl.value);
+      const prefix = prefixEl.value;
+      const expected = VERSION_LEN[version];
+      if (payload.length !== expected) {
+        throw new Error((VERSION_LABEL[version] || "Payload") + " must be " + expected + " bytes");
+      }
+      const addr = encodeAddress(payload, version, prefix);
+      result.classList.remove("err");
+      result.textContent = addr;
+    }
+  } catch (err) {
+    result.classList.add("err");
+    result.textContent = err.message || String(err);
+  }
+}
+
+document.getElementById("convert-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  convert();
+});  
+</script>
+
+</body>
+</html>
