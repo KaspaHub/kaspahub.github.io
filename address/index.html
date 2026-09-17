@@ -147,28 +147,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <h4>KCC20 Tokens</h4>
-      <div id="kcc20Loading" class="muted loading hidden">
-        <span class="spinner"></span>
-        <span>Loading…</span>
-      </div>
-      <div class="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Balance</th>
-              <th>Cells</th>
-              <th>Decimals</th>
-            </tr>
-          </thead>
-          <tbody id="kcc20Rows">
-            <tr>
-              <td colspan="4" class="muted">-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
       <h4>KRC20 Tokens</h4>
       <div id="tokenLoading" class="muted loading hidden">
         <span class="spinner"></span>
@@ -348,9 +326,6 @@ const prevTransfers = document.getElementById("prevTransfers");
 const nextTransfers = document.getElementById("nextTransfers");
 const cursorTransfers = document.getElementById("cursorTransfers");
 
-const kcc20Loading = document.getElementById("kcc20Loading");
-const kcc20Rows = document.getElementById("kcc20Rows");
-
 const tokenLoading = document.getElementById("tokenLoading");
 const tokenRows = document.getElementById("tokenRows");
 
@@ -373,7 +348,6 @@ const transferType = document.getElementById("transferType");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentAddr = "";
-let kcc20Tokens = null;
 let tokens = null;
 let dotkDomains = null;
 let kaspaDomains = null;
@@ -471,9 +445,6 @@ tabs.forEach(tab => {
         loadType(selected);
       }
     } else if (tab.dataset.tab === 'tabKRC20') {
-      if (currentAddr && kcc20Tokens === null) {
-        loadKcc20Tokens();
-      }
       if (currentAddr && tokens === null) {
         loadTokens();
       }
@@ -559,50 +530,6 @@ async function fetchAllTokens(addr) {
     if (!isNew && newResult.length > 0) break;
   } while (start);
   return all;
-}
-
-async function fetchKcc20Token(tokenId) {
-  const res = await fetch(`https://kcc20.info/v1/tokens/${encodeURIComponent(tokenId)}`);
-  if (!res.ok) return null;
-  return await res.json();
-}
-
-async function fetchAllKcc20Tokens(addr) {
-  let all = [];
-  let after = '';
-  const seen = new Set();
-  do {
-    const param = after ? `?after_token=${encodeURIComponent(after)}&limit=100` : '?limit=100';
-    const url = `https://kcc20.info/v1/owners/${encodeURIComponent(addr)}/balances${param}`;
-    const res = await fetch(url);
-    if (res.status === 404) return [];
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    const balances = Array.isArray(json.balances) ? json.balances : [];
-    let isNew = false;
-    for (const b of balances) {
-      const id = b.token_id;
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      all.push(b);
-      isNew = true;
-    }
-    after = json.next_cursor || '';
-    if (!isNew && balances.length > 0) break;
-  } while (after);
-
-  const enriched = await Promise.all(all.map(async (b) => {
-    const meta = await fetchKcc20Token(b.token_id);
-    return {
-      token_id: b.token_id,
-      balance: b.balance,
-      cells: b.cells ?? 0,
-      ticker: meta?.ticker || meta?.claimed_name || meta?.name || shortenEnd(b.token_id),
-      decimals: meta?.decimals ?? 0,
-      name: meta?.name || meta?.claimed_name || ""
-    };
-  }));
-  return enriched;
 }
 
 async function fetchDotkDomains(addr) {
@@ -1017,29 +944,6 @@ function renderSent(pageTxs, addr) {
   }).join("");
 }
 
-function renderKcc20Tokens(list) {
-  if (!list.length) {
-    kcc20Rows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
-    return;
-  }
-
-  kcc20Rows.innerHTML = list.map(token => {
-    const tick = escHtml(token.ticker || "-");
-    const balance = formatTokenAmount(token.balance, token.decimals);
-    const cells = token.cells ?? 0;
-    const dec = token.decimals ?? 0;
-    const tokenUrl = `https://kcc20.info/?token=${token.token_id}`;
-    return `
-      <tr>
-        <td><a href="${tokenUrl}" target="_blank" rel="noopener">${tick}</a></td>
-        <td>${balance}</td>
-        <td>${cells}</td>
-        <td>${dec}</td>
-      </tr>
-    `;
-  }).join("");
-}
-
 function renderTokens(tokens) {
   if (!tokens.length) {
     tokenRows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
@@ -1212,26 +1116,6 @@ function renderPage(type) {
   cursorTransfers.textContent = txsArray.length > 0 ? `Page ${page + 1}` : "";
 }
 
-async function loadKcc20Tokens() {
-  if (!currentAddr) return;
-  kcc20Loading.classList.remove("hidden");
-  try {
-    kcc20Tokens = await fetchAllKcc20Tokens(currentAddr);
-    kcc20Tokens.sort((a, b) => {
-      const diff = BigInt(b.balance || 0) - BigInt(a.balance || 0);
-      if (diff > 0n) return 1;
-      if (diff < 0n) return -1;
-      return 0;
-    });
-    renderKcc20Tokens(kcc20Tokens);
-  } catch {
-    kcc20Rows.innerHTML =
-      `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
-  } finally {
-    kcc20Loading.classList.add("hidden");
-  }
-}
-
 async function loadTokens() {
   if (!currentAddr) return;
   tokenLoading.classList.remove("hidden");
@@ -1344,7 +1228,6 @@ async function runSearch(inputAddr) {
   sentOffset = 0;
   sentHasMore = true;
   sentPage = 0;
-  kcc20Tokens = null;
   tokens = null;
   dotkDomains = null;
   kaspaDomains = null;
