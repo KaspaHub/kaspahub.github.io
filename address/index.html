@@ -837,17 +837,8 @@ function renderAll(pageTxs, addr) {
     }
 
     if (isMultiple) {
-      let totalContrib = 0n;
-      for (const item of items) {
-        totalContrib += item.amt;
-      }
-      const netAbs = net > 0n ? net : -net;
       const itemHtml = items.map(item => {
-        const propSomes = (item.amt * netAbs) / totalContrib;
-        const remainder = (item.amt * netAbs) % totalContrib;
-        let finalSomes = propSomes;
-        if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
+        return `${linkAddress(item.addr)}<br>`;
       }).join('');
       counterpartyHtml = `
         <details>
@@ -890,16 +881,8 @@ function renderReceived(pageTxs, addr) {
 
     let senderHtml;
     if (from === "Multiple") {
-      let totalContrib = 0n;
-      for (const item of fromItems) {
-        totalContrib += item.amt;
-      }
       const itemHtml = fromItems.map(item => {
-        const propSomes = (item.amt * net) / totalContrib;
-        const remainder = (item.amt * net) % totalContrib;
-        let finalSomes = propSomes;
-        if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
+        return `${linkAddress(item.addr)}<br>`;
       }).join('');
       senderHtml = `
         <details>
@@ -945,17 +928,8 @@ function renderSent(pageTxs, addr) {
 
     let receiverHtml;
     if (to === "Multiple") {
-      let totalContrib = 0n;
-      for (const item of toItems) {
-        totalContrib += item.amt;
-      }
-      const netAbs = -net;
       const itemHtml = toItems.map(item => {
-        const propSomes = (item.amt * netAbs) / totalContrib;
-        const remainder = (item.amt * netAbs) % totalContrib;
-        let finalSomes = propSomes;
-        if (remainder * 2n >= totalContrib) finalSomes += 1n;
-        return `${linkAddress(item.addr)} - ${formatKas(finalSomes, 2, false)}<br>`;
+        return `${linkAddress(item.addr)}<br>`;
       }).join('');
       receiverHtml = `
         <details>
