@@ -490,6 +490,13 @@
 	"features": ["reviewed"]
 },
 {
+	"name": "Kaspa Browser",
+	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
+	"link": "https://kaspabrowser.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
+	"features": ["reviewed"]
+},
+{
 	"name": "Kaspa Links",
 	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
 	"link": "https://kaspalinks.com",
@@ -880,6 +887,13 @@
 	"link": "https://kaspaflow.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspaflow.webp",
 	"features": ["reviewed", "education", "videos", "education"]
+},
+{
+	"name": "Kaspa Br",
+	"description": "Brazilian community website dedicated to Kaspa, covering technology, ecosystem, and community information about the world’s fastest decentralized cryptocurrency network.",
+	"link": "https://www.kaspabr.com.br",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"features": ["reviewed", "education"]
 },
 {
 	"name": "BuyKas",

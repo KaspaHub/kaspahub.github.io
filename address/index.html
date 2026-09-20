@@ -145,8 +145,30 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
     </div>
   </div>
 
-  <div id="tabKRC20" class="tabPanel" aria-label="KRC20 Tokens panel">
+  <div id="tabKRC20" class="tabPanel" aria-label="Tokens panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h4>KCC20 Tokens</h4>
+      <div id="kcc20Loading" class="muted loading hidden">
+        <span class="spinner"></span>
+        <span>Loading…</span>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Balance</th>
+              <th>Cells</th>
+              <th>Decimals</th>
+            </tr>
+          </thead>
+          <tbody id="kcc20Rows">
+            <tr>
+              <td colspan="4" class="muted">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <h4>KRC20 Tokens</h4>
       <div id="tokenLoading" class="muted loading hidden">
         <span class="spinner"></span>
@@ -326,6 +348,9 @@ const prevTransfers = document.getElementById("prevTransfers");
 const nextTransfers = document.getElementById("nextTransfers");
 const cursorTransfers = document.getElementById("cursorTransfers");
 
+const kcc20Loading = document.getElementById("kcc20Loading");
+const kcc20Rows = document.getElementById("kcc20Rows");
+
 const tokenLoading = document.getElementById("tokenLoading");
 const tokenRows = document.getElementById("tokenRows");
 
@@ -348,6 +373,7 @@ const transferType = document.getElementById("transferType");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentAddr = "";
+let kcc20Tokens = null;
 let tokens = null;
 let dotkDomains = null;
 let kaspaDomains = null;
@@ -374,7 +400,7 @@ let sentPage = 0;
 
 const configs = {
   all: {
-    th: "Peer",
+    th: "Counterparty",
     render: renderAll
   },
   received: {
@@ -445,6 +471,9 @@ tabs.forEach(tab => {
         loadType(selected);
       }
     } else if (tab.dataset.tab === 'tabKRC20') {
+      if (currentAddr && kcc20Tokens === null) {
+        loadKcc20Tokens();
+      }
       if (currentAddr && tokens === null) {
         loadTokens();
       }
@@ -504,6 +533,15 @@ async function fetchTransactions(addr, offset, limit) {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const json = await res.json();
   return Array.isArray(json) ? json : [];
+}
+
+async function fetchKcc20Tokens(addr) {
+  const url = `https://kascov.io/data/mainnet/addr/${encodeURIComponent(addr)}`;
+  const res = await fetch(url);
+  if (res.status === 404) return [];
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const json = await res.json();
+  return Array.isArray(json?.token_holdings) ? json.token_holdings : [];
 }
 
 async function fetchAllTokens(addr) {
@@ -944,6 +982,32 @@ function renderSent(pageTxs, addr) {
   }).join("");
 }
 
+function renderKcc20Tokens(list) {
+  if (!list.length) {
+    kcc20Rows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
+    return;
+  }
+
+  kcc20Rows.innerHTML = list.map(token => {
+    const tokenId = String(token.token_id || "");
+    const label = token.listed_ticker || token.listed_name || token.name || (tokenId ? shortenEnd(tokenId) : "-");
+    const tick = escHtml(label);
+    const balance = formatTokenAmount(token.balance, token.listed_decimals);
+    const cells = withSeparators(token.cells ?? 0);
+    const dec = token.listed_decimals ?? 0;
+    const tokenUrl = tokenId ? `https://kascov.io/#/mainnet/c/${encodeURIComponent(tokenId)}` : "";
+    const nameHtml = tokenUrl ? `<a href="${tokenUrl}" target="_blank" rel="noopener noreferrer">${tick}</a>` : tick;
+    return `
+      <tr>
+        <td>${nameHtml}</td>
+        <td>${balance}</td>
+        <td>${cells}</td>
+        <td>${dec}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
 function renderTokens(tokens) {
   if (!tokens.length) {
     tokenRows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
@@ -1116,6 +1180,26 @@ function renderPage(type) {
   cursorTransfers.textContent = txsArray.length > 0 ? `Page ${page + 1}` : "";
 }
 
+async function loadKcc20Tokens() {
+  if (!currentAddr) return;
+  kcc20Loading.classList.remove("hidden");
+  try {
+    kcc20Tokens = await fetchKcc20Tokens(currentAddr);
+    kcc20Tokens.sort((a, b) => {
+      const diff = BigInt(b.balance || 0) - BigInt(a.balance || 0);
+      if (diff > 0n) return 1;
+      if (diff < 0n) return -1;
+      return 0;
+    });
+    renderKcc20Tokens(kcc20Tokens);
+  } catch {
+    kcc20Rows.innerHTML =
+      `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
+  } finally {
+    kcc20Loading.classList.add("hidden");
+  }
+}
+
 async function loadTokens() {
   if (!currentAddr) return;
   tokenLoading.classList.remove("hidden");
@@ -1228,6 +1312,7 @@ async function runSearch(inputAddr) {
   sentOffset = 0;
   sentHasMore = true;
   sentPage = 0;
+  kcc20Tokens = null;
   tokens = null;
   dotkDomains = null;
   kaspaDomains = null;
