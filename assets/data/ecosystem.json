@@ -399,13 +399,6 @@
 	"features": ["development"]
 },
 {
-	"name": "DAGmate",
-	"description": "P2P wagered chess on Kaspa L1 with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
-	"link": "https://dagmate.org",
-	"logo": "https://kaspahub.org/assets/logos/dagmate.webp",
-	"features": ["dapp", "gaming", "gambling"]
-},
-{
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
@@ -424,6 +417,13 @@
 	"description": "Peer-to-peer wagering app on Kaspa. Create bets with friends on sports, UFC, or any event. Both parties have to agree on the outcome. Loser pays winner directly.",
 	"link": "https://betabuddy.netlify.app",
 	"logo": "https://kaspahub.org/assets/logos/betabuddy.webp",
+	"features": ["dapp", "gambling"]
+},
+{
+	"name": "KasOdds",
+	"description": "Non-custodial 1v1 even-or-odd betting game on Kaspa L1. Two players pick secret numbers; the sum's parity decides the winner who takes the pot via trustless on-chain covenant escrow with automatic refunds.",
+	"link": "https://kasodds.com",
+	"logo": "https://kaspahub.org/assets/logos/kasodds.webp",
 	"features": ["dapp", "gambling"]
 },
 {
@@ -557,6 +557,20 @@
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
 	"link": "https://kasplay.fun",
 	"logo": "https://kaspahub.org/assets/logos/kasplay.webp",
+	"features": ["reviewed", "gaming"]
+},
+{
+	"name": "DAGmate",
+	"description": "P2P wagered chess on Kaspa L1 with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
+	"link": "https://dagmate.org",
+	"logo": "https://kaspahub.org/assets/logos/dagmate.webp",
+	"features": ["dapp", "gaming"]
+},
+{
+	"name": "SLOW World",
+	"description": "Kaspa-universe Mario-style WASM platformer. Play as $SLOW the Bitcoin Turtle and other champions in browser-based levels.",
+	"link": "https://slowlikebtc.com/game",
+	"logo": "https://kaspahub.org/assets/logos/slowlikebtc.webp",
 	"features": ["reviewed", "gaming"]
 },
 {
