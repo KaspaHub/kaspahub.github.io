@@ -504,8 +504,6 @@ function eventTime(ev) {
 
 function otherTradeParty(trade) {
   if (!trade) return "";
-  if (trade.counterparty && !isSameWallet(trade.counterparty)) return trade.counterparty;
-  if (trade.counterparty_address && !isSameWallet(trade.counterparty_address)) return trade.counterparty_address;
   if (trade.market_covenant_id) return `covenant:${trade.market_covenant_id}`;
   return "";
 }
@@ -698,11 +696,11 @@ function ownerKey(owner) {
 function ownerToKaspa(owner) {
   const raw = String(owner || "");
   if (raw.startsWith("kaspa:")) return raw;
+  if (raw.startsWith("covenant:") || raw.startsWith("script:")) return "";
   const hex = ownerKey(raw);
   if (!/^[0-9a-f]{64}$/.test(hex) && !/^[0-9a-f]{66}$/.test(hex)) return "";
   let version = 0;
-  if (raw.startsWith("script:")) version = 8;
-  else if (hex.length === 66) version = 1;
+  if (hex.length === 66) version = 1;
   return encodeKaspaAddress(hex, version);
 }
 
@@ -715,6 +713,7 @@ function isCurrentOwner(owner) {
 function isSameWallet(ownerOrAddr) {
   const raw = String(ownerOrAddr || "").toLowerCase();
   if (!raw || !currentAddr) return false;
+  if (raw.startsWith("covenant:") || raw.startsWith("script:")) return false;
   if (raw === currentAddr) return true;
   if (isCurrentOwner(raw)) return true;
   const encoded = ownerToKaspa(raw);
@@ -1084,7 +1083,10 @@ function renderTokenActivity(pageTxs) {
     const addrs = [...new Set(uniqueOwners.map(ownerToKaspa).filter(addr => addr && !isSameWallet(addr)))];
 
     let counterpartyHtml;
-    if (addrs.length > 1) {
+    if (trade) {
+      const market = otherTradeParty(trade);
+      counterpartyHtml = market ? linkOwner(market) : `<span class="muted">-</span>`;
+    } else if (addrs.length > 1) {
       counterpartyHtml = multiPartyHtml(addrs.map(addr => `${linkAddress(addr)}<br>`).join(""), addrs.length);
     } else if (addrs.length === 1) {
       counterpartyHtml = linkAddress(addrs[0]);
