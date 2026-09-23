@@ -109,6 +109,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <select id="transferAsset" class="ddArrow" style="padding: 8px 5px 8px 0; font-size: 0.9rem; font-weight: bold;">
+        <option value="kaspa">Kaspa</option>
+        <option value="tokens">Tokens</option>
+      </select>
       <select id="transferType" class="ddArrow" style="padding: 8px 0; font-size: 0.9rem; font-weight: bold;">
         <option value="all">Activity</option>
         <option value="received">Received</option>
@@ -126,13 +130,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
               <th>TxID</th>
               <th id="counterpartyTh">Counterparty</th>
               <th>Timestamp</th>
-              <th>Status</th>
+              <th id="statusTh">Status</th>
               <th>Amount</th>
             </tr>
           </thead>
           <tbody id="transfersRows">
             <tr>
-              <td colspan="4" class="muted">-</td>
+              <td colspan="5" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -333,42 +337,34 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <script type="module">
 
 const hdrSub = document.getElementById("hdrSub");
-
 const balanceKas = document.getElementById("balanceKas");
 const balanceUsd = document.getElementById("balanceUsd");
-
 const nameEL = document.getElementById("name");
 const txCount = document.getElementById("txCount");
 const lastTransaction = document.getElementById("lastTransaction");
-
 const transfersLoading = document.getElementById("transfersLoading");
 const transfersRows = document.getElementById("transfersRows");
 const counterpartyTh = document.getElementById("counterpartyTh");
+const statusTh = document.getElementById("statusTh");
 const prevTransfers = document.getElementById("prevTransfers");
 const nextTransfers = document.getElementById("nextTransfers");
 const cursorTransfers = document.getElementById("cursorTransfers");
-
 const kcc20Loading = document.getElementById("kcc20Loading");
 const kcc20Rows = document.getElementById("kcc20Rows");
-
 const tokenLoading = document.getElementById("tokenLoading");
 const tokenRows = document.getElementById("tokenRows");
-
 const dotkLoading = document.getElementById("dotkLoading");
 const dotkRows = document.getElementById("dotkRows");
-
 const kaspaLoading = document.getElementById("kaspaLoading");
 const kaspaRows = document.getElementById("kaspaRows");
-
 const domainLoading = document.getElementById("domainLoading");
 const domainRows = document.getElementById("domainRows");
-
 const utxoLoading = document.getElementById("utxoLoading");
 const utxoRows = document.getElementById("utxoRows");
 const prevUtxos = document.getElementById("prevUtxos");
 const nextUtxos = document.getElementById("nextUtxos");
 const cursorUtxos = document.getElementById("cursorUtxos");
-
+const transferAsset = document.getElementById("transferAsset");
 const transferType = document.getElementById("transferType");
 const explorerPic = document.getElementById("explorerPic");
 
@@ -382,77 +378,29 @@ let utxos = null;
 let utxosPage = 0;
 
 const txLimit = 40;
+const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+const DAA_TIME_ANCHOR = { daa: 547346157, ms: 1790154983107 };
+const emptyTxState = () => ({ txs: [], offset: 0, hasMore: true, page: 0 });
+const txState = { all: emptyTxState(), received: emptyTxState(), sent: emptyTxState() };
 
-let allTxs = [];
-let allOffset = 0;
-let allHasMore = true;
-let allPage = 0;
+let tokenEvents = [];
+let tokenSeen = new Set();
+let tokenCursor = null;
+let tokenHasMore = true;
+let tokenPage = 0;
+let tokenTradeMap = {};
+let tokenNameMap = {};
 
-let receivedTxs = [];
-let receivedOffset = 0;
-let receivedHasMore = true;
-let receivedPage = 0;
-
-let sentTxs = [];
-let sentOffset = 0;
-let sentHasMore = true;
-let sentPage = 0;
+const emptyMsgs = {
+  all: "No transactions found.",
+  received: "No received transactions found.",
+  sent: "No sent transactions found."
+};
 
 const configs = {
-  all: {
-    th: "Counterparty",
-    render: renderAll
-  },
-  received: {
-    th: "Sender",
-    render: renderReceived
-  },
-  sent: {
-    th: "Receiver",
-    render: renderSent
-  }
-};
-
-const getTxs = (type) => {
-  if (type === 'all') return allTxs;
-  if (type === 'received') return receivedTxs;
-  if (type === 'sent') return sentTxs;
-};
-
-const getOffset = (type) => {
-  if (type === 'all') return allOffset;
-  if (type === 'received') return receivedOffset;
-  if (type === 'sent') return sentOffset;
-};
-
-const setOffset = (type, value) => {
-  if (type === 'all') allOffset = value;
-  if (type === 'received') receivedOffset = value;
-  if (type === 'sent') sentOffset = value;
-};
-
-const getHasMore = (type) => {
-  if (type === 'all') return allHasMore;
-  if (type === 'received') return receivedHasMore;
-  if (type === 'sent') return sentHasMore;
-};
-
-const setHasMore = (type, value) => {
-  if (type === 'all') allHasMore = value;
-  if (type === 'received') receivedHasMore = value;
-  if (type === 'sent') sentHasMore = value;
-};
-
-const getPage = (type) => {
-  if (type === 'all') return allPage;
-  if (type === 'received') return receivedPage;
-  if (type === 'sent') return sentPage;
-};
-
-const setPage = (type, value) => {
-  if (type === 'all') allPage = value;
-  if (type === 'received') receivedPage = value;
-  if (type === 'sent') sentPage = value;
+  all: { th: "Counterparty", withAgeMs: true },
+  received: { th: "Sender", withAgeMs: false },
+  sent: { th: "Receiver", withAgeMs: false }
 };
 
 const tabs = document.querySelectorAll('.tabs .tab');
@@ -466,43 +414,30 @@ tabs.forEach(tab => {
     document.getElementById(tab.dataset.tab).classList.add('active');
 
     if (tab.dataset.tab === 'tabTransfers') {
-      const selected = transferType.value;
-      if (getTxs(selected).length === 0) {
-        loadType(selected);
-      }
+      showTransfers();
     } else if (tab.dataset.tab === 'tabKRC20') {
-      if (currentAddr && kcc20Tokens === null) {
-        loadKcc20Tokens();
-      }
-      if (currentAddr && tokens === null) {
-        loadTokens();
-      }
+      if (currentAddr && kcc20Tokens === null) loadKcc20Tokens();
+      else if (kcc20Tokens !== null) renderKcc20Tokens(kcc20Tokens);
+      if (currentAddr && tokens === null) loadTokens();
+      else if (tokens !== null) renderTokens(tokens);
     } else if (tab.dataset.tab === 'tabKNS') {
-      if (currentAddr && dotkDomains === null) {
-        loadDotkDomains();
-      }
-      if (currentAddr && kaspaDomains === null) {
-        loadKaspaDomains();
-      }
-      if (currentAddr && domains === null) {
-        loadDomains();
-      }
+      if (currentAddr && dotkDomains === null) loadDotkDomains();
+      if (currentAddr && kaspaDomains === null) loadKaspaDomains();
+      if (currentAddr && domains === null) loadDomains();
     } else if (tab.dataset.tab === 'tabUTXOs') {
-      if (currentAddr && utxos === null) {
-        loadUTXOs();
-      }
+      if (currentAddr && utxos === null) loadUTXOs();
     }
   });
 });
 
+transferAsset.addEventListener('change', () => {
+  tokenPage = 0;
+  showTransfers();
+});
+
 transferType.addEventListener('change', () => {
-  const value = transferType.value;
-  counterpartyTh.textContent = configs[value].th;
-  if (getTxs(value).length === 0) {
-    loadType(value);
-  } else {
-    renderPage(value);
-  }
+  if (transferAsset.value === "tokens") tokenPage = 0;
+  showTransfers();
 });
 
 function withSeparators(numStr) {
@@ -510,38 +445,135 @@ function withSeparators(numStr) {
   return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-async function fetchBalance(addr) {
-  const res = await fetch(`https://api.kaspa.org/addresses/${addr}/balance`);
-  if (res.status === 404) return 0;
+async function fetchJson(url, { notFound = null, ok404 = true } = {}) {
+  const res = await fetch(url);
+  if (res.status === 404 && ok404) return notFound;
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  return res.json();
+}
+
+async function fetchBalance(addr) {
+  const json = await fetchJson(`https://api.kaspa.org/addresses/${addr}/balance`, { notFound: { balance: 0 } });
   return json?.balance ?? 0;
 }
 
 async function fetchTxCount(addr) {
-  const res = await fetch(`https://api.kaspa.org/addresses/${addr}/transactions-count`);
-  if (res.status === 404) return 0;
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://api.kaspa.org/addresses/${addr}/transactions-count`, { notFound: { total: 0 } });
   return json?.total ?? 0;
 }
 
 async function fetchTransactions(addr, offset, limit) {
-  const url = `https://api.kaspa.org/addresses/${addr}/full-transactions?offset=${offset}&limit=${limit}&resolve_previous_outpoints=light`;
-  const res = await fetch(url);
-  if (res.status === 404) return [];
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://api.kaspa.org/addresses/${addr}/full-transactions?offset=${offset}&limit=${limit}&resolve_previous_outpoints=light`, { notFound: [] });
   return Array.isArray(json) ? json : [];
 }
 
 async function fetchKcc20Tokens(addr) {
-  const url = `https://kascov.io/data/mainnet/addr/${encodeURIComponent(addr)}`;
-  const res = await fetch(url);
-  if (res.status === 404) return [];
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://kascov.io/data/mainnet/addr/${encodeURIComponent(addr)}`, { notFound: {} });
   return Array.isArray(json?.token_holdings) ? json.token_holdings : [];
+}
+
+async function fetchKcc20Activity(addr, cursor) {
+  const owner = kaspaAddressToOwnerHex(addr);
+  if (!owner) return { events: [], next: null };
+  let url = `https://kascov.io/data/mainnet/transfers?limit=${txLimit}&owner=${encodeURIComponent("presence:" + owner)}`;
+  if (cursor && cursor.daa != null && cursor.token && cursor.seq != null) {
+    url += `&before_daa=${cursor.daa}&before_token=${cursor.token}&before_seq=${cursor.seq}`;
+  }
+  const json = await fetchJson(url, { notFound: {} });
+  const events = Array.isArray(json?.transfers) ? json.transfers : [];
+  const next = (json?.next_before_daa != null && json?.next_before_token && json?.next_before_seq != null)
+    ? { daa: json.next_before_daa, token: json.next_before_token, seq: json.next_before_seq }
+    : null;
+  return { events, next };
+}
+
+async function fetchKcc20Trades(addr) {
+  const json = await fetchJson(`https://kascov.io/data/mainnet/addr/${encodeURIComponent(addr)}/trades.json?limit=200`, { notFound: {} });
+  return Array.isArray(json?.trades) ? json.trades : [];
+}
+
+function eventTime(ev) {
+  const trade = tokenTradeMap[ev.txid];
+  if (trade && trade.accepting_time_ms) return Number(trade.accepting_time_ms);
+  if (ev.accepting_time_ms) return Number(ev.accepting_time_ms);
+  if (ev.accepting_daa != null) {
+    return DAA_TIME_ANCHOR.ms + (Number(ev.accepting_daa) - DAA_TIME_ANCHOR.daa) * 100;
+  }
+  return null;
+}
+
+function otherTradeParty(trade) {
+  if (!trade) return "";
+  if (trade.counterparty && !isSameWallet(trade.counterparty)) return trade.counterparty;
+  if (trade.counterparty_address && !isSameWallet(trade.counterparty_address)) return trade.counterparty_address;
+  if (trade.market_covenant_id) return `covenant:${trade.market_covenant_id}`;
+  return "";
+}
+
+function tradeToEvent(trade) {
+  const selfOwner = `presence:${kaspaAddressToOwnerHex(currentAddr)}`;
+  const other = otherTradeParty(trade);
+  const incoming = String(trade.side || "").toLowerCase() !== "sell";
+  return {
+    txid: trade.txid,
+    token_id: trade.token_id,
+    token_name: trade.token_name,
+    kind: "trade",
+    side: trade.side,
+    base_amount: trade.base_amount,
+    quote_sompi: trade.quote_sompi,
+    accepting_daa: trade.accepting_daa,
+    accepting_time_ms: trade.accepting_time_ms,
+    market_activity: { side: trade.side, base_amount: trade.base_amount, quote_sompi: trade.quote_sompi },
+    attribution: {
+      movements: [{
+        amount: trade.base_amount,
+        owner_from: incoming ? other : selfOwner,
+        owner_to: incoming ? selfOwner : other
+      }]
+    }
+  };
+}
+
+function mergeTradeIntoEvent(ev, trade) {
+  if (!trade) return ev;
+  if (trade.token_name) ev.token_name = trade.token_name;
+  if (trade.accepting_time_ms) ev.accepting_time_ms = trade.accepting_time_ms;
+  if (ev.base_amount == null) ev.base_amount = trade.base_amount;
+  if (ev.quote_sompi == null) ev.quote_sompi = trade.quote_sompi;
+  if (!ev.market_activity) ev.market_activity = {};
+  if (!ev.market_activity.side && trade.side) ev.market_activity.side = trade.side;
+  if (ev.market_activity.base_amount == null) ev.market_activity.base_amount = trade.base_amount;
+  if (ev.market_activity.quote_sompi == null) ev.market_activity.quote_sompi = trade.quote_sompi;
+  const other = otherTradeParty(trade);
+  if (other) {
+    if (!ev.attribution) ev.attribution = {};
+    if (!Array.isArray(ev.attribution.movements) || !ev.attribution.movements.length) {
+      const selfOwner = `presence:${kaspaAddressToOwnerHex(currentAddr)}`;
+      const incoming = String(trade.side || "").toLowerCase() !== "sell";
+      ev.attribution.movements = [{
+        amount: trade.base_amount,
+        owner_from: incoming ? other : selfOwner,
+        owner_to: incoming ? selfOwner : other
+      }];
+    }
+  }
+  return ev;
+}
+
+function pushTokenEvent(ev) {
+  if (!ev || !ev.txid || tokenSeen.has(ev.txid + ":" + (ev.token_id || ""))) return;
+  tokenSeen.add(ev.txid + ":" + (ev.token_id || ""));
+  tokenEvents.push(mergeTradeIntoEvent(ev, tokenTradeMap[ev.txid]));
+}
+
+function rememberTrades(trades) {
+  for (const trade of trades || []) {
+    if (!trade || !trade.txid) continue;
+    tokenTradeMap[trade.txid] = trade;
+    if (trade.token_id && trade.token_name) tokenNameMap[trade.token_id] = trade.token_name;
+    pushTokenEvent(tradeToEvent(trade));
+  }
 }
 
 async function fetchAllTokens(addr) {
@@ -550,10 +582,7 @@ async function fetchAllTokens(addr) {
   const seen = new Set();
   do {
     const param = start ? `?start=${start}` : '';
-    const url = `https://api.kasplex.org/v1/krc20/address/${addr}/tokenlist${param}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
+    const json = await fetchJson(`https://api.kasplex.org/v1/krc20/address/${addr}/tokenlist${param}`, { ok404: false });
     if (json.message !== 'successful') throw new Error(json.message || 'Failed');
     const newResult = json.result || [];
     let isNew = false;
@@ -571,11 +600,7 @@ async function fetchAllTokens(addr) {
 }
 
 async function fetchDotkDomains(addr) {
-  const url = `https://api.dotk.name/v1/addresses/${encodeURIComponent(addr)}`;
-  const res = await fetch(url);
-  if (res.status === 404) return { names: [], registryCovenantId: "" };
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://api.dotk.name/v1/addresses/${encodeURIComponent(addr)}`, { notFound: { names: [], registryCovenantId: "" } });
   if (json && json.code) {
     if (json.code === "not_found") return { names: [], registryCovenantId: "" };
     throw new Error(json.error || json.code);
@@ -587,10 +612,9 @@ function kaspaAddressToOwnerHex(addr) {
   const raw = String(addr || "");
   const colon = raw.indexOf(":");
   const payload = colon >= 0 ? raw.slice(colon + 1) : raw;
-  const charset = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
   const values = [];
   for (const ch of payload) {
-    const v = charset.indexOf(ch);
+    const v = CHARSET.indexOf(ch);
     if (v < 0) return "";
     values.push(v);
   }
@@ -619,14 +643,88 @@ function kaspaAddressToOwnerHex(addr) {
   return "";
 }
 
+function kaspaPolymod(values) {
+  let c = 1n;
+  const gens = [0x98f2bc8e61n, 0x79b76d99e2n, 0xf33e5fb3c4n, 0xae2eabe2a8n, 0x1e4f43e470n];
+  for (const d of values) {
+    const c0 = c >> 35n;
+    c = ((c & 0x07ffffffffn) << 5n) ^ BigInt(d);
+    for (let i = 0; i < 5; i++) {
+      if ((c0 >> BigInt(i)) & 1n) c ^= gens[i];
+    }
+  }
+  return c ^ 1n;
+}
+
+function convertBits(data, from, to, pad) {
+  let acc = 0;
+  let bits = 0;
+  const maxv = (1 << to) - 1;
+  const maxAcc = (1 << (from + to - 1)) - 1;
+  const out = [];
+  for (const value of data) {
+    acc = ((acc << from) | value) & maxAcc;
+    bits += from;
+    while (bits >= to) {
+      bits -= to;
+      out.push((acc >> bits) & maxv);
+    }
+  }
+  if (pad && bits > 0) out.push((acc << (to - bits)) & maxv);
+  return out;
+}
+
+function encodeKaspaAddress(hex, version = 0) {
+  const h = String(hex || "").toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(h) && !/^[0-9a-f]{66}$/.test(h)) return "";
+  const payload = [];
+  for (let i = 0; i < h.length; i += 2) payload.push(parseInt(h.slice(i, i + 2), 16));
+  const five = convertBits([version, ...payload], 8, 5, true);
+  const prefix = "kaspa";
+  const prefixVals = [...prefix].map(ch => ch.charCodeAt(0) & 31);
+  const mod = kaspaPolymod([...prefixVals, 0, ...five, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const checksumBytes = [];
+  for (let i = 0; i < 5; i++) checksumBytes.push(Number((mod >> BigInt(8 * (4 - i))) & 255n));
+  const checksum = convertBits(checksumBytes, 8, 5, true);
+  return prefix + ":" + [...five, ...checksum].map(i => CHARSET[i]).join("");
+}
+
+function ownerKey(owner) {
+  const raw = String(owner || "").toLowerCase();
+  const idx = raw.lastIndexOf(":");
+  return idx >= 0 ? raw.slice(idx + 1) : raw;
+}
+
+function ownerToKaspa(owner) {
+  const raw = String(owner || "");
+  if (raw.startsWith("kaspa:")) return raw;
+  const hex = ownerKey(raw);
+  if (!/^[0-9a-f]{64}$/.test(hex) && !/^[0-9a-f]{66}$/.test(hex)) return "";
+  let version = 0;
+  if (raw.startsWith("script:")) version = 8;
+  else if (hex.length === 66) version = 1;
+  return encodeKaspaAddress(hex, version);
+}
+
+function isCurrentOwner(owner) {
+  const hex = kaspaAddressToOwnerHex(currentAddr);
+  const key = ownerKey(owner);
+  return Boolean(hex && key && hex === key);
+}
+
+function isSameWallet(ownerOrAddr) {
+  const raw = String(ownerOrAddr || "").toLowerCase();
+  if (!raw || !currentAddr) return false;
+  if (raw === currentAddr) return true;
+  if (isCurrentOwner(raw)) return true;
+  const encoded = ownerToKaspa(raw);
+  return Boolean(encoded && encoded.toLowerCase() === currentAddr);
+}
+
 async function fetchKaspaDomains(addr) {
   const owner = kaspaAddressToOwnerHex(addr);
   if (!owner) return [];
-  const url = `https://kaspaname.com/v1/addresses/${encodeURIComponent(owner)}/names`;
-  const res = await fetch(url);
-  if (res.status === 404) return [];
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://kaspaname.com/v1/addresses/${encodeURIComponent(owner)}/names`, { notFound: [] });
   if (json && json.error) {
     if (json.error === "not_found" || String(json.error).startsWith("no ")) return [];
     throw new Error(json.error);
@@ -639,13 +737,9 @@ async function fetchAllDomains(addr) {
   let page = 1;
   const pageSize = 40;
   while (true) {
-    const url = `https://api.knsdomains.org/mainnet/api/v1/assets/?owner=${addr}&page=${page}&pageSize=${pageSize}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
+    const json = await fetchJson(`https://api.knsdomains.org/mainnet/api/v1/assets/?owner=${addr}&page=${page}&pageSize=${pageSize}`, { ok404: false });
     if (!json.success) throw new Error(json.message || 'Failed');
-    const assets = json.data.assets || [];
-    all.push(...assets.filter(a => a.isDomain));
+    all.push(...(json.data.assets || []).filter(a => a.isDomain));
     const pagination = json.data.pagination || {};
     if (page >= pagination.totalPages) break;
     page++;
@@ -654,11 +748,7 @@ async function fetchAllDomains(addr) {
 }
 
 async function fetchUTXOs(addr) {
-  const url = `https://api.kaspa.org/addresses/${addr}/utxos`;
-  const res = await fetch(url);
-  if (res.status === 404) return [];
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
+  const json = await fetchJson(`https://api.kaspa.org/addresses/${addr}/utxos`, { notFound: [] });
   return Array.isArray(json) ? json : [];
 }
 
@@ -672,31 +762,10 @@ function renderHeader(addr) {
   hdrSub.textContent = addr;
 }
 
-async function renderSummary(addr, balanceSomes, txCountVal, txs) {
-  const label = fetchAddressLabel(addr);
-  nameEL.textContent = label || "-";
-  document.title = label || addr;
-
-  balanceKas.textContent = formatKas(balanceSomes);
-  balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8);
-  txCount.textContent = withSeparators(txCountVal);
-
-  const times = txs
-    .map(t => Number(t.block_time))
-    .filter(Number.isFinite)
-    .sort((a, b) => a - b);
-
-  lastTransaction.textContent = times.length ? formatDate(times[times.length - 1]) : "-";
-}
-
 function getTransactionType(tx) {
-  if (!tx.inputs || tx.inputs.length === 0) {
-    return "coinbase";
-  }
+  if (!tx.inputs || tx.inputs.length === 0) return "coinbase";
   const firstInput = tx.inputs[0];
-  if (tx.inputs.length === 1 && (!firstInput || !firstInput.previous_outpoint_address)) {
-    return "coinbase";
-  }
+  if (tx.inputs.length === 1 && (!firstInput || !firstInput.previous_outpoint_address)) return "coinbase";
   return "transfer";
 }
 
@@ -704,41 +773,30 @@ function getNetChange(tx, addr) {
   let net = 0n;
   if (Array.isArray(tx.outputs)) {
     for (const out of tx.outputs) {
-      if (out.script_public_key_address === addr) {
-        net += BigInt(out.amount || 0);
-      }
+      if (out.script_public_key_address === addr) net += BigInt(out.amount || 0);
     }
   }
   if (Array.isArray(tx.inputs)) {
     for (const inp of tx.inputs) {
-      const amt = inp.previous_outpoint_amount || 0;
-      if (inp.previous_outpoint_address === addr) {
-        net -= BigInt(amt);
-      }
+      if (inp.previous_outpoint_address === addr) net -= BigInt(inp.previous_outpoint_amount || 0);
     }
   }
   return net;
 }
 
 function getFromTo(tx, addr, net) {
-  let fromMap = new Map();
+  const fromMap = new Map();
   if (Array.isArray(tx.inputs)) {
     tx.inputs.forEach(inp => {
       const inpAddr = inp.previous_outpoint_address;
-      const amt = BigInt(inp.previous_outpoint_amount || 0);
-      if (inpAddr) {
-        fromMap.set(inpAddr, (fromMap.get(inpAddr) || 0n) + amt);
-      }
+      if (inpAddr) fromMap.set(inpAddr, (fromMap.get(inpAddr) || 0n) + BigInt(inp.previous_outpoint_amount || 0));
     });
   }
-  let toMap = new Map();
+  const toMap = new Map();
   if (Array.isArray(tx.outputs)) {
     tx.outputs.forEach(out => {
       const outAddr = out.script_public_key_address;
-      const amt = BigInt(out.amount || 0);
-      if (outAddr) {
-        toMap.set(outAddr, (toMap.get(outAddr) || 0n) + amt);
-      }
+      if (outAddr) toMap.set(outAddr, (toMap.get(outAddr) || 0n) + BigInt(out.amount || 0));
     });
   }
   const type = getTransactionType(tx);
@@ -746,29 +804,17 @@ function getFromTo(tx, addr, net) {
   let toItems = [];
   let fromStr, toStr;
   if (net > 0n) {
-    fromMap.forEach((amt, a) => {
-      if (a !== addr) fromItems.push({addr: a, amt});
-    });
-    if (fromItems.length > 1) {
-      fromStr = "Multiple";
-    } else if (fromItems.length === 1) {
-      fromStr = fromItems[0].addr;
-    } else {
-      fromStr = type === "coinbase" ? "Block reward" : (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : addr;
-    }
+    fromMap.forEach((amt, a) => { if (a !== addr) fromItems.push({addr: a, amt}); });
+    if (fromItems.length > 1) fromStr = "Multiple";
+    else if (fromItems.length === 1) fromStr = fromItems[0].addr;
+    else fromStr = type === "coinbase" ? "Block reward" : (tx.inputs && tx.inputs.length > 0) ? "Unresolved inputs" : addr;
     toStr = addr;
   } else if (net < 0n) {
     fromStr = addr;
-    toMap.forEach((amt, a) => {
-      if (a !== addr) toItems.push({addr: a, amt});
-    });
-    if (toItems.length > 1) {
-      toStr = "Multiple";
-    } else if (toItems.length === 1) {
-      toStr = toItems[0].addr;
-    } else {
-      toStr = addr;
-    }
+    toMap.forEach((amt, a) => { if (a !== addr) toItems.push({addr: a, amt}); });
+    if (toItems.length > 1) toStr = "Multiple";
+    else if (toItems.length === 1) toStr = toItems[0].addr;
+    else toStr = addr;
   } else {
     fromStr = addr;
     toStr = addr;
@@ -777,7 +823,7 @@ function getFromTo(tx, addr, net) {
 }
 
 function formatTokenAmount(amount, dec) {
-  if (!amount) return "0";
+  if (amount === undefined || amount === null || amount === "") return "0";
   const n = BigInt(amount);
   const decimals = Number(dec) || 0;
   const div = 10n ** BigInt(decimals);
@@ -787,196 +833,316 @@ function formatTokenAmount(amount, dec) {
   return withSeparators(int.toString()) + frac;
 }
 
-function renderAll(pageTxs, addr) {
+function formatTokenSigned(amount, dec, incoming) {
+  const formatted = formatTokenAmount(amount, dec);
+  const sign = incoming ? "+" : "-";
+  const color = incoming ? ' style="color:#2ee59d"' : ' style="color:#ff6b6b"';
+  return `<span${color}>${sign}${formatted}</span>`;
+}
+
+function applyTransferHeaders() {
+  counterpartyTh.textContent = configs[transferType.value].th;
+  statusTh.textContent = transferAsset.value === "tokens" ? "Type" : "Status";
+}
+
+function transferMovements(ev) {
+  const attributed = ev?.attribution?.movements;
+  if (Array.isArray(attributed) && attributed.length) return attributed;
+  return (Array.isArray(ev?.deltas) ? ev.deltas : [])
+    .filter(d => d.owner_from || d.owner_to)
+    .map(d => ({ amount: d.amount, owner_from: d.owner_from, owner_to: d.owner_to }));
+}
+
+function movementOwners(ev) {
+  return transferMovements(ev).flatMap(m => [m.owner_from, m.owner_to]);
+}
+
+function externalAddresses(ev) {
+  const addrs = [];
+  for (const owner of movementOwners(ev)) {
+    const addr = ownerToKaspa(owner);
+    if (addr && !isSameWallet(addr)) addrs.push(addr.toLowerCase());
+  }
+  return [...new Set(addrs)];
+}
+
+function hasExternalMovement(ev) {
+  return externalAddresses(ev).length > 0;
+}
+
+function transferDirection(ev) {
+  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+  if (side === "buy") return "received";
+  if (side === "sell") return "sent";
+  const moves = transferMovements(ev);
+  const incoming = moves.some(m => isCurrentOwner(m.owner_to) && !isCurrentOwner(m.owner_from));
+  const outgoing = moves.some(m => isCurrentOwner(m.owner_from) && !isCurrentOwner(m.owner_to));
+  if (incoming && outgoing) return "both";
+  if (incoming) return "received";
+  if (outgoing) return "sent";
+  if (moves.some(m => isCurrentOwner(m.owner_to))) return "received";
+  if (moves.some(m => isCurrentOwner(m.owner_from))) return "sent";
+  return "all";
+}
+
+function isCellOnly(ev) {
+  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+  if (side === "buy" || side === "sell") return false;
+  if (hasExternalMovement(ev)) return false;
+  const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
+  return kind === "split" || kind === "merge";
+}
+
+function tokenStatusLabel(ev) {
+  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+  if (side === "buy") return "Buy";
+  if (side === "sell") return "Sell";
+  const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
+  if (hasExternalMovement(ev)) return "Transfer";
+  if (kind === "split" || kind === "merge") return kind.charAt(0).toUpperCase() + kind.slice(1);
+  return "Transfer";
+}
+
+function filterTokenEvents(type) {
+  if (type === "received") {
+    return tokenEvents.filter(ev => {
+      if (isCellOnly(ev)) return false;
+      const dir = transferDirection(ev);
+      return dir === "received" || dir === "both" || dir === "all";
+    });
+  }
+  if (type === "sent") {
+    return tokenEvents.filter(ev => {
+      if (isCellOnly(ev)) return false;
+      const dir = transferDirection(ev);
+      return dir === "sent" || dir === "both";
+    });
+  }
+  return tokenEvents;
+}
+
+function tokenHolding(tokenId) {
+  return (Array.isArray(kcc20Tokens) ? kcc20Tokens : []).find(t => t.token_id === tokenId) || {};
+}
+
+function tokenEventAmount(ev, focused) {
+  const trade = tokenTradeMap[ev.txid];
+  if (trade && trade.base_amount != null && trade.base_amount !== "") return trade.base_amount;
+  if (ev.base_amount != null && ev.base_amount !== "") return ev.base_amount;
+  if (ev.market_activity && ev.market_activity.base_amount != null && ev.market_activity.base_amount !== "") {
+    return ev.market_activity.base_amount;
+  }
+  if (focused && focused.length) {
+    let total = 0n;
+    for (const move of focused) {
+      if (move.amount != null && move.amount !== "") total += BigInt(move.amount);
+    }
+    return total.toString();
+  }
+  return "0";
+}
+
+function tokenEventQuote(ev) {
+  const trade = tokenTradeMap[ev.txid];
+  if (trade && trade.quote_sompi != null) return trade.quote_sompi;
+  if (ev.quote_sompi != null) return ev.quote_sompi;
+  if (ev.market_activity && ev.market_activity.quote_sompi != null) return ev.market_activity.quote_sompi;
+  return null;
+}
+
+function linkOwner(owner) {
+  const raw = String(owner || "");
+  if (!raw || isSameWallet(raw)) return `<span class="muted">-</span>`;
+  const addr = ownerToKaspa(raw);
+  if (addr && !isSameWallet(addr)) return linkAddress(addr);
+  if (raw.startsWith("covenant:")) {
+    const id = raw.slice(9);
+    return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer">${escHtml(shortenEnd(id))}</a>`;
+  }
+  return `<span class="muted">${escHtml(shortenEnd(ownerKey(raw) || raw))}</span>`;
+}
+
+function collectOwners(ev) {
+  const owners = [];
+  const add = (value) => { if (value && !isSameWallet(value)) owners.push(value); };
+  add(otherTradeParty(tokenTradeMap[ev.txid]));
+  add(ev.attribution?.owner_from);
+  add(ev.attribution?.owner_to);
+  for (const move of transferMovements(ev)) {
+    add(move.owner_from);
+    add(move.owner_to);
+  }
+  for (const delta of ev.deltas || []) {
+    add(delta.owner_from);
+    add(delta.owner_to);
+  }
+  return owners;
+}
+
+function tokenNameHtml(ev) {
+  const tokenId = String(ev.token_id || "");
+  const holding = tokenHolding(tokenId);
+  const trade = tokenTradeMap[ev.txid];
+  const label =
+    holding.listed_ticker ||
+    holding.listed_name ||
+    ev.token_name ||
+    trade?.token_name ||
+    tokenNameMap[tokenId] ||
+    (tokenId ? shortenEnd(tokenId) : "token");
+  if (!tokenId) return escHtml(label);
+  return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(tokenId)}" target="_blank" rel="noopener noreferrer">${escHtml(label)}</a>`;
+}
+
+function multiPartyHtml(items, labelCount) {
+  return `
+        <details>
+          <summary class="expandable-row muted">Multiple addresses (${labelCount})</summary>
+          <div class="receiver-list">${items}</div>
+        </details>
+      `;
+}
+
+function partyHtml(value, items, addr) {
+  if (value === "Multiple") {
+    return multiPartyHtml(items.map(item => `${linkAddress(item.addr)}<br>`).join(''), items.length);
+  }
+  if (typeof value === 'string' && value.startsWith('kaspa:') && value !== addr) return linkAddress(value);
+  const shortVal = typeof value === "string" ? (shortenMiddle(value) ?? value) : "-";
+  return `<span class="muted">${escHtml(shortVal)}</span>`;
+}
+
+function renderKaspaTxs(pageTxs, addr, type) {
   if (!pageTxs.length) {
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No transactions found.</td></tr>`;
+    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">${emptyMsgs[type]}</td></tr>`;
     return;
   }
-
+  const withAgeMs = configs[type].withAgeMs;
   transfersRows.innerHTML = pageTxs.map(tx => {
     const hash = String(tx.transaction_id || "-");
-    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
+    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), withAgeMs || undefined) : "-";
     const net = getNetChange(tx, addr);
     const amt = formatKas(net, 2, true);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
-    const shortHash = shortenEnd(hash);
     const isAccepted = tx.is_accepted ?? true;
-    const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusClass = isAccepted ? "accepted" : "notAccepted";
-
     let counterpartyHtml;
-    let isMultiple = false;
-    let items = [];
-    let summaryText = "";
-
-    if (net > 0n) {
-      if (from === "Multiple") {
-        isMultiple = true;
-        items = fromItems;
-        summaryText = `Multiple addresses (${fromItems.length})`;
-      } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
-        counterpartyHtml = linkAddress(from);
-      } else {
-        const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
-        counterpartyHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
-      }
-    } else if (net < 0n) {
-      if (to === "Multiple") {
-        isMultiple = true;
-        items = toItems;
-        summaryText = `Multiple addresses (${toItems.length})`;
-      } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
-        const shortTo = shortenMiddle(to);
-        counterpartyHtml = linkAddress(to);
-      } else {
-        const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
-        counterpartyHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
-      }
+    if (type === "received" || (type === "all" && net > 0n)) {
+      counterpartyHtml = partyHtml(from, fromItems, addr);
+    } else if (type === "sent" || (type === "all" && net < 0n)) {
+      counterpartyHtml = partyHtml(to, toItems, addr);
     } else {
       counterpartyHtml = `<span class="muted">Self</span>`;
     }
+    return `
+      <tr>
+        <td>${linkTx(hash, shortenEnd(hash))}</td>
+        <td>${counterpartyHtml}</td>
+        <td>${age}</td>
+        <td><span class="${isAccepted ? "accepted" : "notAccepted"}">${isAccepted ? "Accepted" : "Not accepted"}</span></td>
+        <td>${amt}</td>
+      </tr>
+    `;
+  }).join("");
+}
 
-    if (isMultiple) {
-      const itemHtml = items.map(item => {
-        return `${linkAddress(item.addr)}<br>`;
-      }).join('');
-      counterpartyHtml = `
-        <details>
-          <summary class="expandable-row muted">${summaryText}</summary>
-          <div class="receiver-list">${itemHtml}</div>
-        </details>
-      `;
-    } else if (!counterpartyHtml) {
+function renderTokenActivity(pageTxs) {
+  if (!pageTxs.length) {
+    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No token activity found.</td></tr>`;
+    return;
+  }
+
+  transfersRows.innerHTML = pageTxs.map(ev => {
+    const trade = tokenTradeMap[ev.txid];
+    if (trade) mergeTradeIntoEvent(ev, trade);
+
+    const hash = String(ev.txid || "-");
+    const ts = eventTime(ev);
+    const age = ts ? formatDate(new Date(Number(ts)), true) : "-";
+    const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+    const cellOnly = isCellOnly(ev);
+    const statusText = tokenStatusLabel(ev);
+    const dir = transferDirection(ev);
+    const isIncoming = side === "buy" ? true : side === "sell" ? false : dir !== "sent";
+    const statusClass = cellOnly ? "muted" : (isIncoming ? "accepted" : "notAccepted");
+
+    const moves = transferMovements(ev);
+    const incomingMoves = moves.filter(m => isCurrentOwner(m.owner_to) && !isCurrentOwner(m.owner_from));
+    const outgoingMoves = moves.filter(m => isCurrentOwner(m.owner_from) && !isCurrentOwner(m.owner_to));
+    const focused = isIncoming
+      ? (incomingMoves.length ? incomingMoves : moves)
+      : (outgoingMoves.length ? outgoingMoves : moves);
+
+    const counterparties = [];
+    const addCounterparty = (owner) => {
+      if (!owner || isSameWallet(owner)) return;
+      counterparties.push(owner);
+    };
+    for (const m of focused) addCounterparty(isIncoming ? m.owner_from : m.owner_to);
+    for (const owner of collectOwners(ev)) addCounterparty(owner);
+
+    const uniqueOwners = [...new Set(counterparties)];
+    const addrs = [...new Set(uniqueOwners.map(ownerToKaspa).filter(addr => addr && !isSameWallet(addr)))];
+
+    let counterpartyHtml;
+    if (addrs.length > 1) {
+      counterpartyHtml = multiPartyHtml(addrs.map(addr => `${linkAddress(addr)}<br>`).join(""), addrs.length);
+    } else if (addrs.length === 1) {
+      counterpartyHtml = linkAddress(addrs[0]);
+    } else if (uniqueOwners.length === 1) {
+      counterpartyHtml = linkOwner(uniqueOwners[0]);
+    } else if (uniqueOwners.length > 1) {
+      counterpartyHtml = multiPartyHtml(uniqueOwners.map(owner => `${linkOwner(owner)}<br>`).join(""), uniqueOwners.length);
+    } else if (cellOnly && currentAddr) {
+      counterpartyHtml = `<span class="muted">${escHtml(shortenMiddle(currentAddr) ?? currentAddr)}</span>`;
+    } else {
       counterpartyHtml = `<span class="muted">-</span>`;
     }
 
+    const tokenId = String(ev.token_id || "");
+    const holding = tokenHolding(tokenId);
+    const decimals = ev.listed_decimals ?? ev.decimals ?? holding.listed_decimals ?? holding.decimals ?? 0;
+    const rawAmount = tokenEventAmount(ev, focused);
+    const quoteSompi = tokenEventQuote(ev);
+    const tokenAmt = cellOnly
+      ? formatTokenAmount(rawAmount, decimals)
+      : formatTokenSigned(rawAmount, decimals, isIncoming);
+    const kasLine = !cellOnly && quoteSompi != null
+      ? `<div class="muted">${isIncoming ? "-" : "+"}${formatKas(quoteSompi, 2)}</div>`
+      : "";
+
     return `
       <tr>
-        <td>${linkTx(hash, shortHash)}</td>
+        <td>${linkTx(hash, shortenEnd(hash))}</td>
         <td>${counterpartyHtml}</td>
         <td>${age}</td>
-        <td><span class="${statusClass}">${statusText}</span></td>
-        <td>${amt}</td>
+        <td><span class="${statusClass}">${escHtml(statusText)}</span></td>
+        <td>${tokenAmt} ${tokenNameHtml(ev)}${kasLine}</td>
       </tr>
     `;
   }).join("");
 }
 
-function renderReceived(pageTxs, addr) {
-  if (!pageTxs.length) {
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No received transactions found.</td></tr>`;
-    return;
-  }
-
-  transfersRows.innerHTML = pageTxs.map(tx => {
-    const hash = String(tx.transaction_id || "-");
-    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
-    const net = getNetChange(tx, addr);
-    const { from, fromItems } = getFromTo(tx, addr, net);
-    const amt = formatKas(net, 2, true);
-    const shortHash = shortenEnd(hash);
-    const isAccepted = tx.is_accepted ?? true;
-    const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusClass = isAccepted ? "accepted" : "notAccepted";
-
-    let senderHtml;
-    if (from === "Multiple") {
-      const itemHtml = fromItems.map(item => {
-        return `${linkAddress(item.addr)}<br>`;
-      }).join('');
-      senderHtml = `
-        <details>
-          <summary class="expandable-row muted">Multiple addresses (${fromItems.length})</summary>
-          <div class="receiver-list">${itemHtml}</div>
-        </details>
-      `;
-    } else if (typeof from === 'string' && from.startsWith('kaspa:') && from !== addr) {
-      senderHtml = linkAddress(from);
-    } else {
-      const shortFrom = typeof from === "string" ? (shortenMiddle(from) ?? from) : "-";
-      senderHtml = `<span class="muted">${escHtml(shortFrom)}</span>`;
-    }
-
-    return `
-      <tr>
-        <td>${linkTx(hash, shortHash)}</td>
-        <td>${senderHtml}</td>
-        <td>${age}</td>
-        <td><span class="${statusClass}">${statusText}</span></td>
-        <td>${amt}</td>
-      </tr>
-    `;
-  }).join("");
-}
-
-function renderSent(pageTxs, addr) {
-  if (!pageTxs.length) {
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No sent transactions found.</td></tr>`;
-    return;
-  }
-
-  transfersRows.innerHTML = pageTxs.map(tx => {
-    const hash = String(tx.transaction_id || "-");
-    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time))) : "-";
-    const net = getNetChange(tx, addr);
-    const { to, toItems } = getFromTo(tx, addr, net);
-    const amt = formatKas(net, 2, true);
-    const shortHash = shortenEnd(hash);
-    const isAccepted = tx.is_accepted ?? true;
-    const statusText = isAccepted ? "Accepted" : "Not accepted";
-    const statusClass = isAccepted ? "accepted" : "notAccepted";
-
-    let receiverHtml;
-    if (to === "Multiple") {
-      const itemHtml = toItems.map(item => {
-        return `${linkAddress(item.addr)}<br>`;
-      }).join('');
-      receiverHtml = `
-        <details>
-          <summary class="expandable-row muted">Multiple addresses (${toItems.length})</summary>
-          <div class="receiver-list">${itemHtml}</div>
-        </details>
-      `;
-    } else if (typeof to === 'string' && to.startsWith('kaspa:') && to !== addr) {
-      receiverHtml = linkAddress(to);
-    } else {
-      const shortTo = typeof to === "string" ? (shortenMiddle(to) ?? to) : "-";
-      receiverHtml = `<span class="muted">${escHtml(shortTo)}</span>`;
-    }
-
-    return `
-      <tr>
-        <td>${linkTx(hash, shortHash)}</td>
-        <td>${receiverHtml}</td>
-        <td>${age}</td>
-        <td><span class="${statusClass}">${statusText}</span></td>
-        <td>${amt}</td>
-      </tr>
-    `;
-  }).join("");
+function emptyRow(cols, text) {
+  return `<tr><td colspan="${cols}" class="muted">${text}</td></tr>`;
 }
 
 function renderKcc20Tokens(list) {
   if (!list.length) {
-    kcc20Rows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
+    kcc20Rows.innerHTML = emptyRow(4, "No tokens found.");
     return;
   }
-
   kcc20Rows.innerHTML = list.map(token => {
     const tokenId = String(token.token_id || "");
     const label = token.listed_ticker || token.listed_name || token.name || (tokenId ? shortenEnd(tokenId) : "-");
     const tick = escHtml(label);
-    const balance = formatTokenAmount(token.balance, token.listed_decimals);
-    const cells = withSeparators(token.cells ?? 0);
-    const dec = token.listed_decimals ?? 0;
     const tokenUrl = tokenId ? `https://kascov.io/#/mainnet/c/${encodeURIComponent(tokenId)}` : "";
     const nameHtml = tokenUrl ? `<a href="${tokenUrl}" target="_blank" rel="noopener noreferrer">${tick}</a>` : tick;
     return `
       <tr>
         <td>${nameHtml}</td>
-        <td>${balance}</td>
-        <td>${cells}</td>
-        <td>${dec}</td>
+        <td>${formatTokenAmount(token.balance, token.listed_decimals)}</td>
+        <td>${withSeparators(token.cells ?? 0)}</td>
+        <td>${token.listed_decimals ?? 0}</td>
       </tr>
     `;
   }).join("");
@@ -984,22 +1150,17 @@ function renderKcc20Tokens(list) {
 
 function renderTokens(tokens) {
   if (!tokens.length) {
-    tokenRows.innerHTML = `<tr><td colspan="4" class="muted">No tokens found.</td></tr>`;
+    tokenRows.innerHTML = emptyRow(4, "No tokens found.");
     return;
   }
-
   tokenRows.innerHTML = tokens.map(token => {
     const tick = escHtml(token.tick || "-");
-    const balance = formatTokenAmount(token.balance, token.dec);
-    const locked = formatTokenAmount(token.locked, token.dec);
-    const dec = token.dec || 0;
-    const tokenUrl = `/krc20/?q=${token.tick}`;
     return `
       <tr>
-        <td><a href="${tokenUrl}">${tick}</a></td>
-        <td>${balance}</td>
-        <td>${locked}</td>
-        <td>${dec}</td>
+        <td><a href="/krc20/?q=${token.tick}">${tick}</a></td>
+        <td>${formatTokenAmount(token.balance, token.dec)}</td>
+        <td>${formatTokenAmount(token.locked, token.dec)}</td>
+        <td>${token.dec || 0}</td>
       </tr>
     `;
   }).join("");
@@ -1008,22 +1169,18 @@ function renderTokens(tokens) {
 function renderDotkDomains(data) {
   const names = Array.isArray(data?.names) ? data.names : [];
   if (!names.length) {
-    dotkRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
+    dotkRows.innerHTML = emptyRow(2, "No domains found.");
     return;
   }
-
   const covenantId = String(data.registryCovenantId || "");
-  const shortCovenantId = shortenEnd(covenantId);
   const covenantHtml = covenantId
-    ? `<a href="https://covenants.kaspa.com/covenants/${escHtml(covenantId)}">${escHtml(shortCovenantId)}</a>`
+    ? `<a href="https://covenants.kaspa.com/covenants/${escHtml(covenantId)}">${escHtml(shortenEnd(covenantId))}</a>`
     : "-";
-
   dotkRows.innerHTML = names.map(name => {
     const domain = String(name || "").trim();
-    const display = domain ? `${domain}.k` : "-";
     return `
       <tr>
-        <td>${escHtml(display)}</td>
+        <td>${escHtml(domain ? `${domain}.k` : "-")}</td>
         <td>${covenantHtml}</td>
       </tr>
     `;
@@ -1032,18 +1189,16 @@ function renderDotkDomains(data) {
 
 function renderKaspaDomains(list) {
   if (!list.length) {
-    kaspaRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
+    kaspaRows.innerHTML = emptyRow(2, "No domains found.");
     return;
   }
-
   kaspaRows.innerHTML = list.map(d => {
     const display = String(d.display || (d.name ? `${d.name}.kaspa` : "") || "").trim() || "-";
     const txId = String(d.outpoint?.transactionId || d.activate?.txid || "");
-    const shortTxId = shortenEnd(txId);
     return `
       <tr>
         <td>${escHtml(display)}</td>
-        <td>${txId ? linkTx(txId, shortTxId) : "-"}</td>
+        <td>${txId ? linkTx(txId, shortenEnd(txId)) : "-"}</td>
       </tr>
     `;
   }).join("");
@@ -1051,18 +1206,15 @@ function renderKaspaDomains(list) {
 
 function renderDomains(domains) {
   if (!domains.length) {
-    domainRows.innerHTML = `<tr><td colspan="2" class="muted">No domains found.</td></tr>`;
+    domainRows.innerHTML = emptyRow(2, "No domains found.");
     return;
   }
-
   domainRows.innerHTML = domains.map(d => {
-    const name = d.asset || "-";
     const txId = d.transactionId || "-";
-    const shortTxId = shortenEnd(txId);
     return `
       <tr>
-        <td>${name}</td>
-        <td>${linkTx(txId, shortTxId)}</td>
+        <td>${d.asset || "-"}</td>
+        <td>${linkTx(txId, shortenEnd(txId))}</td>
       </tr>
     `;
   }).join("");
@@ -1070,24 +1222,18 @@ function renderDomains(domains) {
 
 function renderUTXOs(pageUtxos) {
   if (!pageUtxos.length) {
-    utxoRows.innerHTML = `<tr><td colspan="5" class="muted">No UTXOs found.</td></tr>`;
+    utxoRows.innerHTML = emptyRow(5, "No UTXOs found.");
     return;
   }
-
   utxoRows.innerHTML = pageUtxos.map(utxo => {
     const txId = utxo.outpoint.transactionId || "-";
-    const index = utxo.outpoint.index ?? "-";
-    const amount = formatKas(utxo.utxoEntry.amount);
-    const daaScore = utxo.utxoEntry.blockDaaScore || "-";
-    const isCoinbase = utxo.utxoEntry.isCoinbase ? "Yes" : "No";
-    const shortTxId = shortenEnd(txId);
     return `
       <tr>
-        <td>${linkTx(txId, shortTxId)}</td>
-        <td>${index}</td>
-        <td>${daaScore}</td>
-        <td>${isCoinbase}</td>
-        <td>${amount}</td>
+        <td>${linkTx(txId, shortenEnd(txId))}</td>
+        <td>${utxo.outpoint.index ?? "-"}</td>
+        <td>${utxo.utxoEntry.blockDaaScore || "-"}</td>
+        <td>${utxo.utxoEntry.isCoinbase ? "Yes" : "No"}</td>
+        <td>${formatKas(utxo.utxoEntry.amount)}</td>
       </tr>
     `;
   }).join("");
@@ -1095,168 +1241,220 @@ function renderUTXOs(pageUtxos) {
 
 function renderUtxoPage() {
   const start = utxosPage * 40;
-  const pageUtxos = (utxos || []).slice(start, start + 40);
-  renderUTXOs(pageUtxos);
+  renderUTXOs((utxos || []).slice(start, start + 40));
   prevUtxos.disabled = utxosPage === 0;
   nextUtxos.disabled = !utxos || utxos.length <= start + 40;
   cursorUtxos.textContent = utxos && utxos.length > 0 ? `Page ${utxosPage + 1}` : "";
 }
 
 async function loadBatch(type) {
-  const txsArray = getTxs(type);
-  const page = getPage(type);
-  while (txsArray.length < (page + 1) * 40 && getHasMore(type)) {
-    const offset = getOffset(type);
-    const txsFull = await fetchTransactions(currentAddr, offset, txLimit + 1);
-    setHasMore(type, txsFull.length > txLimit);
+  const state = txState[type];
+  while (state.txs.length < (state.page + 1) * 40 && state.hasMore) {
+    const txsFull = await fetchTransactions(currentAddr, state.offset, txLimit + 1);
+    state.hasMore = txsFull.length > txLimit;
     let txs = txsFull;
     if (type !== 'all') {
-      const filterFn = type === 'received' ? (tx) => getNetChange(tx, currentAddr) > 0n : (tx) => getNetChange(tx, currentAddr) < 0n;
+      const filterFn = type === 'received'
+        ? (tx) => getNetChange(tx, currentAddr) > 0n
+        : (tx) => getNetChange(tx, currentAddr) < 0n;
       txs = txsFull.filter(filterFn);
-      setHasMore(type, true);
-      if (txsFull.length <= txLimit) setHasMore(type, false);
+      state.hasMore = txsFull.length > txLimit;
     } else {
-      txs = getHasMore(type) ? txsFull.slice(0, txLimit) : txsFull;
+      txs = state.hasMore ? txsFull.slice(0, txLimit) : txsFull;
     }
-    txsArray.push(...txs);
-    setOffset(type, offset + txsFull.length);
+    state.txs.push(...txs);
+    state.offset += txsFull.length;
   }
+}
+
+function failTransfers(msg) {
+  transfersRows.innerHTML = emptyRow(5, msg);
+  prevTransfers.disabled = true;
+  nextTransfers.disabled = true;
+  cursorTransfers.textContent = "";
 }
 
 async function loadType(type) {
   transfersLoading.classList.remove("hidden");
-  const txsArray = getTxs(type);
-  txsArray.length = 0;
-  setOffset(type, 0);
-  setHasMore(type, true);
-  setPage(type, 0);
+  Object.assign(txState[type], emptyTxState());
   try {
     await loadBatch(type);
     renderPage(type);
   } catch {
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load transactions.</td></tr>`;
-    prevTransfers.disabled = true;
-    nextTransfers.disabled = true;
-    cursorTransfers.textContent = "";
+    failTransfers("Failed to load transactions.");
   } finally {
     transfersLoading.classList.add("hidden");
   }
 }
 
 function renderPage(type) {
-  const page = getPage(type);
-  const start = page * 40;
-  const txsArray = getTxs(type);
-  const pageTxs = txsArray.slice(start, start + 40);
-  configs[type].render(pageTxs, currentAddr);
-  prevTransfers.disabled = page === 0;
-  nextTransfers.disabled = txsArray.length <= start + 40 && !getHasMore(type);
-  cursorTransfers.textContent = txsArray.length > 0 ? `Page ${page + 1}` : "";
+  const state = txState[type];
+  const start = state.page * 40;
+  renderKaspaTxs(state.txs.slice(start, start + 40), currentAddr, type);
+  prevTransfers.disabled = state.page === 0;
+  nextTransfers.disabled = state.txs.length <= start + 40 && !state.hasMore;
+  cursorTransfers.textContent = state.txs.length > 0 ? `Page ${state.page + 1}` : "";
+}
+
+function renderTokenPage(type) {
+  tokenEvents.sort((a, b) => Number(b.accepting_daa || 0) - Number(a.accepting_daa || 0));
+  const filtered = filterTokenEvents(type);
+  const start = tokenPage * 40;
+  renderTokenActivity(filtered.slice(start, start + 40));
+  prevTransfers.disabled = tokenPage === 0;
+  nextTransfers.disabled = filtered.length <= start + 40 && !tokenHasMore;
+  cursorTransfers.textContent = filtered.length > 0 ? `Page ${tokenPage + 1}` : "";
+}
+
+async function loadTokenBatch() {
+  const { events, next } = await fetchKcc20Activity(currentAddr, tokenCursor);
+  for (const ev of events) pushTokenEvent(ev);
+  tokenCursor = next;
+  tokenHasMore = Boolean(next) && events.length > 0;
+}
+
+async function ensureTokenPage(type) {
+  if (filterTokenEvents(type).length < (tokenPage + 1) * 40 && tokenHasMore) {
+    transfersLoading.classList.remove("hidden");
+    try {
+      await loadTokenBatch();
+    } catch {
+      failTransfers("Failed to load token activity.");
+      transfersLoading.classList.add("hidden");
+      return;
+    }
+    transfersLoading.classList.add("hidden");
+  }
+  renderTokenPage(type);
+}
+
+async function loadTokenType(type) {
+  transfersLoading.classList.remove("hidden");
+  tokenEvents = [];
+  tokenSeen = new Set();
+  tokenCursor = null;
+  tokenHasMore = true;
+  tokenPage = 0;
+  tokenTradeMap = {};
+  tokenNameMap = {};
+  try {
+    const first = await fetchKcc20Activity(currentAddr, null);
+    for (const ev of first.events) pushTokenEvent(ev);
+    tokenCursor = first.next;
+    tokenHasMore = Boolean(first.next) && first.events.length > 0;
+    renderTokenPage(type);
+
+    try {
+      rememberTrades(await fetchKcc20Trades(currentAddr));
+      renderTokenPage(type);
+    } catch {}
+
+    try {
+      kcc20Tokens = await fetchKcc20Tokens(currentAddr);
+      renderTokenPage(type);
+    } catch {}
+    if (document.querySelector('.tabs .tab.active')?.dataset.tab === "tabKRC20") {
+      renderKcc20Tokens(kcc20Tokens);
+    }
+  } catch {
+    failTransfers("Failed to load token activity.");
+  } finally {
+    transfersLoading.classList.add("hidden");
+  }
+}
+
+function showTransfers() {
+  applyTransferHeaders();
+  const type = transferType.value;
+  if (transferAsset.value === "tokens") {
+    if (tokenEvents.length === 0) loadTokenType(type);
+    else ensureTokenPage(type);
+    return;
+  }
+  if (txState[type].txs.length === 0) loadType(type);
+  else renderPage(type);
+}
+
+function sortByBalance(list, key = "balance") {
+  list.sort((a, b) => {
+    const diff = BigInt(b[key] || 0) - BigInt(a[key] || 0);
+    if (diff > 0n) return 1;
+    if (diff < 0n) return -1;
+    return 0;
+  });
+}
+
+async function loadWith(loadingEl, rowsEl, cols, failText, loader, renderer) {
+  if (!currentAddr) return;
+  loadingEl.classList.remove("hidden");
+  try {
+    renderer(await loader());
+  } catch {
+    rowsEl.innerHTML = emptyRow(cols, failText);
+  } finally {
+    loadingEl.classList.add("hidden");
+  }
 }
 
 async function loadKcc20Tokens() {
-  if (!currentAddr) return;
-  kcc20Loading.classList.remove("hidden");
-  try {
+  await loadWith(kcc20Loading, kcc20Rows, 4, "Failed to load tokens.", async () => {
     kcc20Tokens = await fetchKcc20Tokens(currentAddr);
-    kcc20Tokens.sort((a, b) => {
-      const diff = BigInt(b.balance || 0) - BigInt(a.balance || 0);
-      if (diff > 0n) return 1;
-      if (diff < 0n) return -1;
-      return 0;
-    });
-    renderKcc20Tokens(kcc20Tokens);
-  } catch {
-    kcc20Rows.innerHTML =
-      `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
-  } finally {
-    kcc20Loading.classList.add("hidden");
-  }
+    sortByBalance(kcc20Tokens);
+    return kcc20Tokens;
+  }, renderKcc20Tokens);
 }
 
 async function loadTokens() {
-  if (!currentAddr) return;
-  tokenLoading.classList.remove("hidden");
-  try {
+  await loadWith(tokenLoading, tokenRows, 4, "Failed to load tokens.", async () => {
     tokens = await fetchAllTokens(currentAddr);
-    tokens.sort((a, b) => {
-      const diff = BigInt(b.balance) - BigInt(a.balance);
-      if (diff > 0n) return 1;
-      if (diff < 0n) return -1;
-      return 0;
-    });
-    renderTokens(tokens);
-  } catch {
-    tokenRows.innerHTML =
-      `<tr><td colspan="4" class="muted">Failed to load tokens.</td></tr>`;
-  } finally {
-    tokenLoading.classList.add("hidden");
-  }
+    sortByBalance(tokens);
+    return tokens;
+  }, renderTokens);
 }
 
 async function loadDotkDomains() {
-  if (!currentAddr) return;
-  dotkLoading.classList.remove("hidden");
-  try {
+  await loadWith(dotkLoading, dotkRows, 2, "Failed to load domains.", async () => {
     dotkDomains = await fetchDotkDomains(currentAddr);
-    renderDotkDomains(dotkDomains);
-  } catch {
-    dotkRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
-  } finally {
-    dotkLoading.classList.add("hidden");
-  }
+    return dotkDomains;
+  }, renderDotkDomains);
 }
 
 async function loadKaspaDomains() {
-  if (!currentAddr) return;
-  kaspaLoading.classList.remove("hidden");
-  try {
+  await loadWith(kaspaLoading, kaspaRows, 2, "Failed to load domains.", async () => {
     kaspaDomains = await fetchKaspaDomains(currentAddr);
-    renderKaspaDomains(kaspaDomains);
-  } catch {
-    kaspaRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
-  } finally {
-    kaspaLoading.classList.add("hidden");
-  }
+    return kaspaDomains;
+  }, renderKaspaDomains);
 }
 
 async function loadDomains() {
-  if (!currentAddr) return;
-  domainLoading.classList.remove("hidden");
-  try {
+  await loadWith(domainLoading, domainRows, 2, "Failed to load domains.", async () => {
     domains = await fetchAllDomains(currentAddr);
-    renderDomains(domains);
-  } catch {
-    domainRows.innerHTML = `<tr><td colspan="2" class="muted">Failed to load domains.</td></tr>`;
-  } finally {
-    domainLoading.classList.add("hidden");
-  }
+    return domains;
+  }, renderDomains);
 }
 
 async function loadUTXOs() {
-  if (!currentAddr) return;
-  utxoLoading.classList.remove("hidden");
-  try {
+  await loadWith(utxoLoading, utxoRows, 5, "Failed to load UTXOs.", async () => {
     utxos = await fetchUTXOs(currentAddr);
     utxosPage = 0;
-    renderUtxoPage();
-  } catch {
-    utxoRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load UTXOs.</td></tr>`;
-  } finally {
-    utxoLoading.classList.add("hidden");
-  }
+    return utxos;
+  }, () => renderUtxoPage());
 }
 
-
 function determineWallet(address) {
+  explorerPic.src = address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn"
+    ? "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp"
+    : "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
+}
 
-  if (address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn") {
-    explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp";
-  } 
-  else {
-    explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
-  }
-
+function resetTokenState() {
+  tokenEvents = [];
+  tokenSeen = new Set();
+  tokenCursor = null;
+  tokenHasMore = true;
+  tokenPage = 0;
+  tokenTradeMap = {};
+  tokenNameMap = {};
 }
 
 async function runSearch(inputAddr) {
@@ -1274,18 +1472,10 @@ async function runSearch(inputAddr) {
   currentAddr = addr;
   setUrlAddr(addr);
 
-  allTxs = [];
-  allOffset = 0;
-  allHasMore = true;
-  allPage = 0;
-  receivedTxs = [];
-  receivedOffset = 0;
-  receivedHasMore = true;
-  receivedPage = 0;
-  sentTxs = [];
-  sentOffset = 0;
-  sentHasMore = true;
-  sentPage = 0;
+  txState.all = emptyTxState();
+  txState.received = emptyTxState();
+  txState.sent = emptyTxState();
+  resetTokenState();
   kcc20Tokens = null;
   tokens = null;
   dotkDomains = null;
@@ -1303,63 +1493,65 @@ async function runSearch(inputAddr) {
       const balanceSomes = await fetchBalance(addr);
       balanceKas.textContent = formatKas(balanceSomes);
       balanceUsd.textContent = await formatPrice(KASVALUE, CURRENCY, balanceSomes / 1e8, 2);
-    } catch (err) {
+    } catch {
       balanceKas.textContent = "-";
       balanceUsd.textContent = "-";
     }
   })();
   setTimeout(async () => {
     try {
-      const txCountVal = await fetchTxCount(addr);
-      txCount.textContent = withSeparators(txCountVal);
-    } catch (err) {
+      txCount.textContent = withSeparators(await fetchTxCount(addr));
+    } catch {
       txCount.textContent = "-";
     }
   }, 50);
   setTimeout(async () => {
     try {
-      const txs = await fetchTransactions(addr, 0, txLimit);
-      const times = txs
+      const times = (await fetchTransactions(addr, 0, txLimit))
         .map(t => Number(t.block_time))
         .filter(Number.isFinite)
         .sort((a, b) => a - b);
       lastTransaction.textContent = times.length ? formatDate(times[times.length - 1]) : "-";
-    } catch (err) {
+    } catch {
       lastTransaction.textContent = "-";
     }
   }, 200);
-  setTimeout(() => {
-    determineWallet(addr);
-  }, 100);
+  setTimeout(() => determineWallet(addr), 100);
 
   BUSY = false;
-
-  const activeTab = document.querySelector('.tabs .tab.active');
-  if (activeTab) {
-    activeTab.click();
-  }
+  document.querySelector('.tabs .tab.active')?.click();
 }
 
 prevTransfers.addEventListener("click", () => {
-  const type = transferType.value;
-  const page = getPage(type);
-  if (page > 0) {
-    setPage(type, page - 1);
-    renderPage(type);
+  if (transferAsset.value === "tokens") {
+    if (tokenPage > 0) {
+      tokenPage -= 1;
+      renderTokenPage(transferType.value);
+    }
+    return;
+  }
+  const state = txState[transferType.value];
+  if (state.page > 0) {
+    state.page -= 1;
+    renderPage(transferType.value);
   }
 });
 
 nextTransfers.addEventListener("click", async () => {
+  if (transferAsset.value === "tokens") {
+    tokenPage += 1;
+    await ensureTokenPage(transferType.value);
+    return;
+  }
   const type = transferType.value;
-  setPage(type, getPage(type) + 1);
-  const txsArray = getTxs(type);
-  const page = getPage(type);
-  if (txsArray.length < (page + 1) * 40 && getHasMore(type)) {
+  const state = txState[type];
+  state.page += 1;
+  if (state.txs.length < (state.page + 1) * 40 && state.hasMore) {
     transfersLoading.classList.remove("hidden");
     try {
       await loadBatch(type);
     } catch {
-      transfersRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load more transactions.</td></tr>`;
+      transfersRows.innerHTML = emptyRow(5, "Failed to load more transactions.");
     } finally {
       transfersLoading.classList.add("hidden");
     }
@@ -1382,15 +1574,8 @@ nextUtxos.addEventListener("click", () => {
   }
 });
 
-document.getElementById('showWalletBtn')
-.addEventListener('click', function () {
-    showWalletPopup(currentAddr);
-});
-
-document.getElementById('copyWalletBtn')
-.addEventListener('click', function () {
-    copyToClipboard(currentAddr);
-});
+document.getElementById('showWalletBtn').addEventListener('click', () => showWalletPopup(currentAddr));
+document.getElementById('copyWalletBtn').addEventListener('click', () => copyToClipboard(currentAddr));
 
 if (QUERY) {
   (async () => {
