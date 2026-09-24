@@ -863,7 +863,7 @@ function kaspaStatusLabel(tx, addr, net) {
   if (!isTxAccepted(tx)) return "Not accepted";
   if (isTxCoinbase(tx)) return "Coinbase";
   const external = kaspaExternalAddresses(tx, addr);
-  if (!external.length) return "Change";
+  if (!external.length) return "Self";
   if (net > 0n) return "Received";
   if (net < 0n) return "Sent";
   return "Change";
@@ -1418,7 +1418,11 @@ function renderKaspaTxs(pageTxs, addr) {
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
     const statusText = kaspaStatusLabel(tx, addr, net);
     const isAccepted = isTxAccepted(tx);
-    const statusClass = !isAccepted ? "notAccepted" : (net < 0n ? "notAccepted" : "accepted");
+const statusClass = !isAccepted
+  ? "notAccepted"
+  : (statusText === "Self"
+      ? "muted"
+      : (net < 0n ? "notAccepted" : "accepted"));
     let counterpartyHtml;
     if (net > 0n) {
       counterpartyHtml = partyHtml(from, fromItems, addr);
