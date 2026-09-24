@@ -1047,6 +1047,9 @@ function openFilterDialog(title, fieldsHtml, onApply) {
     close();
     applyFiltersAndRefresh();
   });
+  if (TESTING === true) {
+    enableDialogDrag();
+  }
 }
 
 function applyFiltersAndRefresh() {

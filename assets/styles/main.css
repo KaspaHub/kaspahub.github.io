@@ -1045,11 +1045,12 @@ dialog {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	background-color: rgba(255, 255, 255, 0.15);
-	padding: 17px;
+	padding: 0 !important;
 }
 
 .w-container {
 	justify-items: stretch;
+	padding: 17px;
 /*align-items: flex-start;*/
 }
 

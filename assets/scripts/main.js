@@ -511,32 +511,37 @@ function showWalletPopup(wallet) {
 
 function enableDialogDrag() {
   if (window.innerWidth > window.innerHeight) {
-    const d = document.getElementById('dialog');
-    const h = d.querySelector('.w-header');
+    ['dialog', 'filterDialog'].forEach(id => {
+      const d = document.getElementById(id);
+      if (!d) return;
 
-    h.onmousedown = e => {
-      const rect = d.getBoundingClientRect();
-      const ox = e.clientX - rect.left;
-      const oy = e.clientY - rect.top;
+      const h = d.querySelector('.w-header');
+      if (!h) return;
 
-      d.style.position = 'absolute';
-      d.style.left = rect.left + 'px';
-      d.style.top = rect.top + 'px';
-      d.style.margin = 0;
+      h.onmousedown = e => {
+        const rect = d.getBoundingClientRect();
+        const ox = e.clientX - rect.left;
+        const oy = e.clientY - rect.top;
 
-      const move = e => {
-        d.style.left = e.clientX - ox + 'px';
-        d.style.top = e.clientY - oy + 'px';
+        d.style.position = 'absolute';
+        d.style.left = rect.left + 'px';
+        d.style.top = rect.top + 'px';
+        d.style.margin = 0;
+
+        const move = e => {
+          d.style.left = e.clientX - ox + 'px';
+          d.style.top = e.clientY - oy + 'px';
+        };
+
+        const up = () => {
+          document.removeEventListener('mousemove', move);
+          document.removeEventListener('mouseup', up);
+        };
+
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', up);
       };
-
-      const up = () => {
-        document.removeEventListener('mousemove', move);
-        document.removeEventListener('mouseup', up);
-      };
-
-      document.addEventListener('mousemove', move);
-      document.addEventListener('mouseup', up);
-    };
+    });
   }
 }
 
