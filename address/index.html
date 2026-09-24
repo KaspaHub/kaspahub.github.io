@@ -38,7 +38,22 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qr-code-styling.min.js"></script>
 <script defer src="/assets/scripts/explorer.js"></script>
-
+<style>
+th.filterTh { cursor: pointer; user-select: none; }
+th.filterTh.activeFilter { color: #70C7BA; }
+.w-fields { display: grid; gap: 10px; margin: 12px 0; }
+.w-fields label { font-size: 13px; display: grid; gap: 6px; }
+.w-fields input, .w-fields select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--search-border, rgba(255,255,255,.12));
+  background: var(--search-background, rgba(255,255,255,.04));
+  color: inherit;
+}
+.w-actions { display: flex; gap: 8px; }
+.w-actions .btn { flex: 1; }
+</style>
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -113,11 +128,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <option value="kaspa">Kaspa</option>
         <option value="tokens">Tokens</option>
       </select>
-      <select id="transferType" class="ddArrow" style="padding: 8px 0; font-size: 0.9rem; font-weight: bold;">
-        <option value="all">Activity</option>
-        <option value="received">Received</option>
-        <option value="sent">Sent</option>
-      </select>
       <h4 id="transfersTitle"></h4>
       <div id="transfersLoading" class="muted loading hidden">
         <span class="spinner"></span>
@@ -128,10 +138,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>TxID</th>
-              <th id="counterpartyTh">Counterparty</th>
-              <th>Timestamp</th>
-              <th id="statusTh">Status</th>
-              <th>Amount</th>
+              <th id="counterpartyTh" class="filterTh">Counterparty</th>
+              <th id="timestampTh" class="filterTh">Timestamp</th>
+              <th id="statusTh" class="filterTh">Type</th>
+              <th id="amountTh" class="filterTh">Amount</th>
             </tr>
           </thead>
           <tbody id="transfersRows">
@@ -312,14 +322,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 </div>
 
 <div id="advertisement">
-<!-- BEGIN AADS AD UNIT 2432158 -->
-
 <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
           <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
                             style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
         </div>
-
-<!-- END AADS AD UNIT 2432158 -->
 </div>
 
 <div id="resources">
@@ -345,7 +351,9 @@ const lastTransaction = document.getElementById("lastTransaction");
 const transfersLoading = document.getElementById("transfersLoading");
 const transfersRows = document.getElementById("transfersRows");
 const counterpartyTh = document.getElementById("counterpartyTh");
+const timestampTh = document.getElementById("timestampTh");
 const statusTh = document.getElementById("statusTh");
+const amountTh = document.getElementById("amountTh");
 const prevTransfers = document.getElementById("prevTransfers");
 const nextTransfers = document.getElementById("nextTransfers");
 const cursorTransfers = document.getElementById("cursorTransfers");
@@ -365,7 +373,6 @@ const prevUtxos = document.getElementById("prevUtxos");
 const nextUtxos = document.getElementById("nextUtxos");
 const cursorUtxos = document.getElementById("cursorUtxos");
 const transferAsset = document.getElementById("transferAsset");
-const transferType = document.getElementById("transferType");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentAddr = "";
@@ -381,7 +388,7 @@ const txLimit = 40;
 const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
 const DAA_TIME_ANCHOR = { daa: 547346157, ms: 1790154983107 };
 const emptyTxState = () => ({ txs: [], offset: 0, hasMore: true, page: 0 });
-const txState = { all: emptyTxState(), received: emptyTxState(), sent: emptyTxState() };
+let txState = emptyTxState();
 
 let tokenEvents = [];
 let tokenSeen = new Set();
@@ -391,17 +398,31 @@ let tokenPage = 0;
 let tokenTradeMap = {};
 let tokenNameMap = {};
 
-const emptyMsgs = {
-  all: "No transactions found.",
-  received: "No received transactions found.",
-  sent: "No sent transactions found."
-};
+const defaultFilters = () => ({
+  wallet: "",
+  fromMs: null,
+  toMs: null,
+  kind: "all",
+  minAmount: null,
+  maxAmount: null
+});
+let txFilters = defaultFilters();
 
-const configs = {
-  all: { th: "Counterparty", withAgeMs: true },
-  received: { th: "Sender", withAgeMs: false },
-  sent: { th: "Receiver", withAgeMs: false }
-};
+const kaspaKinds = [
+  { value: "all", label: "All" },
+  { value: "sent", label: "Sent" },
+  { value: "received", label: "Received" },
+  { value: "coinbase", label: "Coinbase" },
+  { value: "not_accepted", label: "Not accepted" }
+];
+
+const tokenKinds = [
+  { value: "all", label: "All" },
+  { value: "sent", label: "Sent" },
+  { value: "received", label: "Received" },
+  { value: "buy", label: "Buy" },
+  { value: "sell", label: "Sell" }
+];
 
 const tabs = document.querySelectorAll('.tabs .tab');
 const tabPanels = document.querySelectorAll('.tabPanel');
@@ -432,11 +453,7 @@ tabs.forEach(tab => {
 
 transferAsset.addEventListener('change', () => {
   tokenPage = 0;
-  showTransfers();
-});
-
-transferType.addEventListener('change', () => {
-  if (transferAsset.value === "tokens") tokenPage = 0;
+  txFilters.kind = "all";
   showTransfers();
 });
 
@@ -543,6 +560,8 @@ function mergeTradeIntoEvent(ev, trade) {
   if (!ev.market_activity.side && trade.side) ev.market_activity.side = trade.side;
   if (ev.market_activity.base_amount == null) ev.market_activity.base_amount = trade.base_amount;
   if (ev.market_activity.quote_sompi == null) ev.market_activity.quote_sompi = trade.quote_sompi;
+  if (trade.side) ev.side = trade.side;
+  if (ev.kind === "split" || ev.kind === "merge" || ev.kind === "transfer") ev.kind = "trade";
   const other = otherTradeParty(trade);
   if (other) {
     if (!ev.attribution) ev.attribution = {};
@@ -559,10 +578,15 @@ function mergeTradeIntoEvent(ev, trade) {
   return ev;
 }
 
+function enrichTokenEvent(ev) {
+  if (!ev) return ev;
+  return mergeTradeIntoEvent(ev, tokenTradeMap[ev.txid]);
+}
+
 function pushTokenEvent(ev) {
   if (!ev || !ev.txid || tokenSeen.has(ev.txid + ":" + (ev.token_id || ""))) return;
   tokenSeen.add(ev.txid + ":" + (ev.token_id || ""));
-  tokenEvents.push(mergeTradeIntoEvent(ev, tokenTradeMap[ev.txid]));
+  tokenEvents.push(enrichTokenEvent(ev));
 }
 
 function rememberTrades(trades) {
@@ -572,6 +596,7 @@ function rememberTrades(trades) {
     if (trade.token_id && trade.token_name) tokenNameMap[trade.token_id] = trade.token_name;
     pushTokenEvent(tradeToEvent(trade));
   }
+  tokenEvents = tokenEvents.map(enrichTokenEvent);
 }
 
 async function fetchAllTokens(addr) {
@@ -704,10 +729,26 @@ function ownerToKaspa(owner) {
   return encodeKaspaAddress(hex, version);
 }
 
+function ownerHex(value) {
+  const raw = String(value || "").trim().toLowerCase();
+  if (!raw || raw.startsWith("covenant:") || raw.startsWith("script:")) return "";
+  if (raw.startsWith("kaspa:")) return kaspaAddressToOwnerHex(raw);
+  const encoded = ownerToKaspa(raw);
+  if (encoded) return kaspaAddressToOwnerHex(encoded);
+  const key = ownerKey(raw);
+  if (/^[0-9a-f]{64}$/.test(key) || /^[0-9a-f]{66}$/.test(key)) return key;
+  return "";
+}
+
 function isCurrentOwner(owner) {
   const hex = kaspaAddressToOwnerHex(currentAddr);
-  const key = ownerKey(owner);
+  const key = ownerHex(owner) || ownerKey(owner);
   return Boolean(hex && key && hex === key);
+}
+
+function isContractOwner(owner) {
+  const raw = String(owner || "").toLowerCase();
+  return raw.startsWith("covenant:") || raw.startsWith("script:");
 }
 
 function isSameWallet(ownerOrAddr) {
@@ -718,6 +759,24 @@ function isSameWallet(ownerOrAddr) {
   if (isCurrentOwner(raw)) return true;
   const encoded = ownerToKaspa(raw);
   return Boolean(encoded && encoded.toLowerCase() === currentAddr);
+}
+
+function matchesWalletFilter(ownerOrAddr, wallet) {
+  const needle = String(wallet || "").trim().toLowerCase();
+  if (!needle) return true;
+  const raw = String(ownerOrAddr || "").toLowerCase();
+  if (!raw) return false;
+  if (raw === needle) return true;
+  if (raw.includes(needle)) return true;
+  const encoded = ownerToKaspa(raw);
+  if (encoded && encoded.toLowerCase() === needle) return true;
+  const needleEncoded = ownerToKaspa(needle);
+  if (needleEncoded && raw === needleEncoded.toLowerCase()) return true;
+  if (encoded && needleEncoded && encoded.toLowerCase() === needleEncoded.toLowerCase()) return true;
+  const rawHex = ownerHex(raw);
+  const needleHex = ownerHex(needle);
+  if (rawHex && needleHex && rawHex === needleHex) return true;
+  return false;
 }
 
 async function fetchKaspaDomains(addr) {
@@ -768,6 +827,23 @@ function getTransactionType(tx) {
   return "transfer";
 }
 
+function isTxAccepted(tx) {
+  if (tx.is_accepted === false || tx.isAccepted === false) return false;
+  if (tx.is_accepted === true || tx.isAccepted === true) return true;
+  if (tx.accepting_block_hash || tx.acceptingBlockHash) return true;
+  return true;
+}
+
+function isTxCoinbase(tx) {
+  if (getTransactionType(tx) === "coinbase") return true;
+  const sub = String(tx.subnetwork_id || tx.subnetworkId || "").toLowerCase();
+  return sub === "0100000000000000000000000000000000000000";
+}
+
+function currentKind() {
+  return String(txFilters.kind || "all").toLowerCase();
+}
+
 function getNetChange(tx, addr) {
   let net = 0n;
   if (Array.isArray(tx.outputs)) {
@@ -781,6 +857,20 @@ function getNetChange(tx, addr) {
     }
   }
   return net;
+}
+
+function kaspaStatusLabel(tx, addr, net) {
+  if (!isTxAccepted(tx)) return "Not accepted";
+  if (isTxCoinbase(tx)) return "Coinbase";
+  const external = kaspaExternalAddresses(tx, addr);
+  if (!external.length) return "Change";
+  if (net > 0n) return "Received";
+  if (net < 0n) return "Sent";
+  return "Change";
+}
+
+function kaspaKindValue(tx, addr, net) {
+  return String(kaspaStatusLabel(tx, addr, net) || "").toLowerCase().replace(/\s+/g, "_");
 }
 
 function getFromTo(tx, addr, net) {
@@ -840,8 +930,240 @@ function formatTokenSigned(amount, dec, incoming) {
 }
 
 function applyTransferHeaders() {
-  counterpartyTh.textContent = configs[transferType.value].th;
-  statusTh.textContent = transferAsset.value === "tokens" ? "Type" : "Status";
+  counterpartyTh.textContent = "Counterparty";
+  statusTh.textContent = "Type";
+  markActiveFilters();
+}
+
+function markActiveFilters() {
+  counterpartyTh.classList.toggle("activeFilter", Boolean(txFilters.wallet));
+  timestampTh.classList.toggle("activeFilter", txFilters.fromMs != null || txFilters.toMs != null);
+  statusTh.classList.toggle("activeFilter", currentKind() !== "all");
+  amountTh.classList.toggle("activeFilter", txFilters.minAmount != null || txFilters.maxAmount != null);
+}
+
+function toLocalInputValue(ms) {
+  if (ms == null) return "";
+  const d = new Date(ms);
+  if (!isFinite(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function parseLocalInput(value) {
+  if (!value) return null;
+  const ms = new Date(value).getTime();
+  return Number.isFinite(ms) ? ms : null;
+}
+
+function parseAmountInput(value) {
+  const s = String(value ?? "").trim();
+  if (!s) return null;
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  return s.replace(/^0+(?=\d)/, "");
+}
+
+function humanToRaw(human, decimals) {
+  if (human == null || human === "") return null;
+  const s = String(human).trim();
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  const [ints, frac = ""] = s.split(".");
+  const dec = Math.max(0, Number(decimals) || 0);
+  const fracPadded = (frac + "0".repeat(dec)).slice(0, dec);
+  const raw = `${ints || "0"}${fracPadded}`.replace(/^0+(?=\d)/, "") || "0";
+  try {
+    return BigInt(raw);
+  } catch {
+    return null;
+  }
+}
+
+function rawAmountAbs(value) {
+  try {
+    const n = BigInt(value ?? 0);
+    return n < 0n ? -n : n;
+  } catch {
+    return 0n;
+  }
+}
+
+function matchesRawAmount(rawValue, decimals) {
+  if (txFilters.minAmount == null && txFilters.maxAmount == null) return true;
+  const raw = rawAmountAbs(rawValue);
+  if (txFilters.minAmount != null) {
+    const minRaw = humanToRaw(txFilters.minAmount, decimals);
+    if (minRaw == null || raw < minRaw) return false;
+  }
+  if (txFilters.maxAmount != null) {
+    const maxRaw = humanToRaw(txFilters.maxAmount, decimals);
+    if (maxRaw == null || raw > maxRaw) return false;
+  }
+  return true;
+}
+
+function closeFilterDialog() {
+  const dialog = document.getElementById("filterDialog");
+  if (dialog) {
+    dialog.close();
+    dialog.remove();
+  }
+}
+
+function openFilterDialog(title, fieldsHtml, onApply) {
+  closeFilterDialog();
+  const html = `
+<dialog id="filterDialog" class="theme-1" data-popup>
+  <div class="w-container">
+    <div class="w-header">
+      <span>${escHtml(title)}</span>
+      <span class="w-close" data-close></span>
+    </div>
+    <div class="w-fields">${fieldsHtml}</div>
+    <div class="w-actions">
+      <button class="btn" type="button" data-clear>Clear</button>
+      <button class="btn" type="button" data-apply>Apply</button>
+    </div>
+  </div>
+</dialog>`;
+  document.body.insertAdjacentHTML("beforeend", html);
+  const dialog = document.getElementById("filterDialog");
+  dialog.showModal();
+  const close = () => closeFilterDialog();
+  dialog.querySelector("[data-close]").addEventListener("click", close);
+  dialog.addEventListener("click", (e) => {
+    if (!e.target.closest(".w-container")) close();
+  });
+  dialog.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    close();
+  });
+  dialog.querySelector("[data-apply]").addEventListener("click", () => {
+    onApply(dialog, false);
+    close();
+    applyFiltersAndRefresh();
+  });
+  dialog.querySelector("[data-clear]").addEventListener("click", () => {
+    onApply(dialog, true);
+    close();
+    applyFiltersAndRefresh();
+  });
+}
+
+function applyFiltersAndRefresh() {
+  if (transferAsset.value === "tokens") tokenPage = 0;
+  else txState.page = 0;
+  showTransfers();
+}
+
+function openWalletFilter() {
+  openFilterDialog("Filter by wallet", `
+    <label>Wallet
+      <input id="filterWallet" type="text" placeholder="kaspa:..." value="${escHtml(txFilters.wallet || "")}">
+    </label>
+  `, (dialog, clear) => {
+    txFilters.wallet = clear ? "" : String(dialog.querySelector("#filterWallet").value || "").trim().toLowerCase();
+  });
+}
+
+function openTimestampFilter() {
+  openFilterDialog("Filter by timestamp", `
+    <label>From
+      <input id="filterFrom" type="datetime-local" value="${toLocalInputValue(txFilters.fromMs)}">
+    </label>
+    <label>To
+      <input id="filterTo" type="datetime-local" value="${toLocalInputValue(txFilters.toMs)}">
+    </label>
+  `, (dialog, clear) => {
+    if (clear) {
+      txFilters.fromMs = null;
+      txFilters.toMs = null;
+      return;
+    }
+    txFilters.fromMs = parseLocalInput(dialog.querySelector("#filterFrom").value);
+    txFilters.toMs = parseLocalInput(dialog.querySelector("#filterTo").value);
+  });
+}
+
+function openTypeFilter() {
+  const kinds = transferAsset.value === "tokens" ? tokenKinds : kaspaKinds;
+  const selected = currentKind();
+  const options = kinds.map(k => `<option value="${k.value}"${selected === k.value ? " selected" : ""}>${k.label}</option>`).join("");
+  openFilterDialog("Filter by type", `
+    <label>Type
+      <select id="filterKind">${options}</select>
+    </label>
+  `, (dialog, clear) => {
+    txFilters.kind = clear ? "all" : String(dialog.querySelector("#filterKind")?.value || "all").toLowerCase();
+  });
+}
+
+function openAmountFilter() {
+  openFilterDialog("Filter by amount", `
+    <label>Min
+      <input id="filterMin" type="number" step="any" min="0" value="${txFilters.minAmount ?? ""}">
+    </label>
+    <label>Max
+      <input id="filterMax" type="number" step="any" min="0" value="${txFilters.maxAmount ?? ""}">
+    </label>
+  `, (dialog, clear) => {
+    if (clear) {
+      txFilters.minAmount = null;
+      txFilters.maxAmount = null;
+      return;
+    }
+    txFilters.minAmount = parseAmountInput(dialog.querySelector("#filterMin").value);
+    txFilters.maxAmount = parseAmountInput(dialog.querySelector("#filterMax").value);
+  });
+}
+
+counterpartyTh.addEventListener("click", openWalletFilter);
+timestampTh.addEventListener("click", openTimestampFilter);
+statusTh.addEventListener("click", openTypeFilter);
+amountTh.addEventListener("click", openAmountFilter);
+
+function matchesTime(ms) {
+  if (ms == null) return !(txFilters.fromMs != null || txFilters.toMs != null);
+  if (txFilters.fromMs != null && ms < txFilters.fromMs) return false;
+  if (txFilters.toMs != null && ms > txFilters.toMs) return false;
+  return true;
+}
+
+function kaspaExternalAddresses(tx, addr) {
+  const found = [];
+  const seen = new Set();
+  const add = (value) => {
+    const raw = String(value || "").trim();
+    if (!raw) return;
+    const key = raw.toLowerCase();
+    if (seen.has(key)) return;
+    if (key === "multiple" || key === "block reward" || key === "unresolved inputs" || key === "self") return;
+    if (isSameWallet(raw) || key === String(addr || "").toLowerCase()) return;
+    seen.add(key);
+    found.push(raw);
+  };
+  if (Array.isArray(tx.inputs)) {
+    for (const inp of tx.inputs) add(inp.previous_outpoint_address);
+  }
+  if (Array.isArray(tx.outputs)) {
+    for (const out of tx.outputs) add(out.script_public_key_address);
+  }
+  return found;
+}
+
+function kaspaTxMatchesFilters(tx, addr) {
+  const net = getNetChange(tx, addr);
+  if (txFilters.wallet) {
+    const external = kaspaExternalAddresses(tx, addr);
+    if (external.length) {
+      if (!external.some(p => matchesWalletFilter(p, txFilters.wallet))) return false;
+    } else if (!matchesWalletFilter(addr, txFilters.wallet)) {
+      return false;
+    }
+  }
+  if (!matchesTime(tx.block_time ? Number(tx.block_time) : null)) return false;
+  const kind = currentKind();
+  if (kind && kind !== "all" && kaspaKindValue(tx, addr, net) !== kind) return false;
+  return matchesRawAmount(net, 8);
 }
 
 function transferMovements(ev) {
@@ -865,12 +1187,19 @@ function externalAddresses(ev) {
   return [...new Set(addrs)];
 }
 
+function hasContractCounterparty(ev) {
+  const market = otherTradeParty(eventTrade(ev));
+  if (isContractOwner(market)) return true;
+  return movementOwners(ev).some(isContractOwner);
+}
+
 function hasExternalMovement(ev) {
-  return externalAddresses(ev).length > 0;
+  if (externalAddresses(ev).length > 0) return true;
+  return movementOwners(ev).some(owner => owner && !isSameWallet(owner) && !isCurrentOwner(owner));
 }
 
 function transferDirection(ev) {
-  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+  const side = eventSide(ev);
   if (side === "buy") return "received";
   if (side === "sell") return "sent";
   const moves = transferMovements(ev);
@@ -884,40 +1213,104 @@ function transferDirection(ev) {
   return "all";
 }
 
+function eventTrade(ev) {
+  return tokenTradeMap[ev?.txid] || null;
+}
+
+function eventSide(ev) {
+  ev = enrichTokenEvent(ev);
+  const trade = eventTrade(ev);
+  const explicit = String(ev.market_activity?.side || ev.side || trade?.side || "").toLowerCase();
+  if (explicit === "buy" || explicit === "sell") return explicit;
+  const moves = transferMovements(ev);
+  const fromContract = moves.some(m => isCurrentOwner(m.owner_to) && isContractOwner(m.owner_from));
+  const toContract = moves.some(m => isCurrentOwner(m.owner_from) && isContractOwner(m.owner_to));
+  if (toContract && !fromContract) return "sell";
+  if (fromContract && !toContract) return "buy";
+  return explicit;
+}
+
+function isMarketTrade(ev) {
+  ev = enrichTokenEvent(ev);
+  const side = eventSide(ev);
+  if (side === "buy" || side === "sell") return true;
+  const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
+  if (kind === "trade" || kind === "buy" || kind === "sell") return true;
+  if (eventTrade(ev)) return true;
+  if (ev.quote_sompi != null && ev.quote_sompi !== "") return true;
+  if (ev.market_activity?.quote_sompi != null && ev.market_activity.quote_sompi !== "") return true;
+  if (hasContractCounterparty(ev)) return true;
+  return false;
+}
+
 function isCellOnly(ev) {
-  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
-  if (side === "buy" || side === "sell") return false;
+  ev = enrichTokenEvent(ev);
+  if (isMarketTrade(ev)) return false;
+  if (hasContractCounterparty(ev)) return false;
   if (hasExternalMovement(ev)) return false;
   const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
   return kind === "split" || kind === "merge";
 }
 
-function tokenStatusLabel(ev) {
-  const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
-  if (side === "buy") return "Buy";
-  if (side === "sell") return "Sell";
-  const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
-  if (hasExternalMovement(ev)) return "Transfer";
-  if (kind === "split" || kind === "merge") return kind.charAt(0).toUpperCase() + kind.slice(1);
-  return "Transfer";
+function tokenDirectionLabel(ev) {
+  return transferDirection(ev) === "sent" ? "Sent" : "Received";
 }
 
-function filterTokenEvents(type) {
-  if (type === "received") {
-    return tokenEvents.filter(ev => {
-      if (isCellOnly(ev)) return false;
-      const dir = transferDirection(ev);
-      return dir === "received" || dir === "both" || dir === "all";
-    });
+function tokenStatusLabel(ev) {
+  ev = enrichTokenEvent(ev);
+  if (isMarketTrade(ev)) {
+    const side = eventSide(ev);
+    if (side === "sell") return "Sell";
+    if (side === "buy") return "Buy";
+    return transferDirection(ev) === "sent" ? "Sell" : "Buy";
   }
-  if (type === "sent") {
-    return tokenEvents.filter(ev => {
-      if (isCellOnly(ev)) return false;
-      const dir = transferDirection(ev);
-      return dir === "sent" || dir === "both";
-    });
+  if (hasExternalMovement(ev)) return tokenDirectionLabel(ev);
+  const kind = String(ev.kind || ev.event_kind || "").toLowerCase();
+  if (kind === "split" || kind === "merge") return kind.charAt(0).toUpperCase() + kind.slice(1);
+  return tokenDirectionLabel(ev);
+}
+
+function tokenKindValue(ev) {
+  return String(tokenStatusLabel(ev) || "").toLowerCase();
+}
+
+function tokenFilterAmount(ev) {
+  ev = enrichTokenEvent(ev);
+  const side = eventSide(ev);
+  const dir = transferDirection(ev);
+  const isIncoming = side === "buy" ? true : side === "sell" ? false : dir !== "sent";
+  const moves = transferMovements(ev);
+  const incomingMoves = moves.filter(m => isCurrentOwner(m.owner_to) && !isCurrentOwner(m.owner_from));
+  const outgoingMoves = moves.filter(m => isCurrentOwner(m.owner_from) && !isCurrentOwner(m.owner_to));
+  const focused = isIncoming
+    ? (incomingMoves.length ? incomingMoves : moves)
+    : (outgoingMoves.length ? outgoingMoves : moves);
+  return tokenEventAmount(ev, focused);
+}
+
+function tokenEventMatchesFilters(ev) {
+  ev = enrichTokenEvent(ev);
+  if (txFilters.wallet) {
+    const owners = collectOwners(ev);
+    const addrs = externalAddresses(ev);
+    const external = [...owners, ...addrs, otherTradeParty(eventTrade(ev))].filter(v => v && !isSameWallet(v));
+    if (external.length) {
+      if (!external.some(v => matchesWalletFilter(v, txFilters.wallet))) return false;
+    } else if (!matchesWalletFilter(currentAddr, txFilters.wallet)) {
+      return false;
+    }
   }
-  return tokenEvents;
+  if (!matchesTime(eventTime(ev))) return false;
+  const kind = currentKind();
+  if (kind && kind !== "all" && tokenKindValue(ev) !== kind) return false;
+  const tokenId = String(ev.token_id || "");
+  const holding = tokenHolding(tokenId);
+  const decimals = ev.listed_decimals ?? ev.decimals ?? holding.listed_decimals ?? holding.decimals ?? 0;
+  return matchesRawAmount(tokenFilterAmount(ev), decimals);
+}
+
+function filterTokenEvents() {
+  return tokenEvents.map(enrichTokenEvent).filter(tokenEventMatchesFilters);
 }
 
 function tokenHolding(tokenId) {
@@ -925,7 +1318,8 @@ function tokenHolding(tokenId) {
 }
 
 function tokenEventAmount(ev, focused) {
-  const trade = tokenTradeMap[ev.txid];
+  ev = enrichTokenEvent(ev);
+  const trade = eventTrade(ev);
   if (trade && trade.base_amount != null && trade.base_amount !== "") return trade.base_amount;
   if (ev.base_amount != null && ev.base_amount !== "") return ev.base_amount;
   if (ev.market_activity && ev.market_activity.base_amount != null && ev.market_activity.base_amount !== "") {
@@ -942,7 +1336,7 @@ function tokenEventAmount(ev, focused) {
 }
 
 function tokenEventQuote(ev) {
-  const trade = tokenTradeMap[ev.txid];
+  const trade = eventTrade(ev);
   if (trade && trade.quote_sompi != null) return trade.quote_sompi;
   if (ev.quote_sompi != null) return ev.quote_sompi;
   if (ev.market_activity && ev.market_activity.quote_sompi != null) return ev.market_activity.quote_sompi;
@@ -964,7 +1358,7 @@ function linkOwner(owner) {
 function collectOwners(ev) {
   const owners = [];
   const add = (value) => { if (value && !isSameWallet(value)) owners.push(value); };
-  add(otherTradeParty(tokenTradeMap[ev.txid]));
+  add(otherTradeParty(eventTrade(ev)));
   add(ev.attribution?.owner_from);
   add(ev.attribution?.owner_to);
   for (const move of transferMovements(ev)) {
@@ -981,7 +1375,7 @@ function collectOwners(ev) {
 function tokenNameHtml(ev) {
   const tokenId = String(ev.token_id || "");
   const holding = tokenHolding(tokenId);
-  const trade = tokenTradeMap[ev.txid];
+  const trade = eventTrade(ev);
   const label =
     holding.listed_ticker ||
     holding.listed_name ||
@@ -1011,23 +1405,24 @@ function partyHtml(value, items, addr) {
   return `<span class="muted">${escHtml(shortVal)}</span>`;
 }
 
-function renderKaspaTxs(pageTxs, addr, type) {
+function renderKaspaTxs(pageTxs, addr) {
   if (!pageTxs.length) {
-    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">${emptyMsgs[type]}</td></tr>`;
+    transfersRows.innerHTML = `<tr><td colspan="5" class="muted">No transactions found.</td></tr>`;
     return;
   }
-  const withAgeMs = configs[type].withAgeMs;
   transfersRows.innerHTML = pageTxs.map(tx => {
     const hash = String(tx.transaction_id || "-");
-    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), withAgeMs || undefined) : "-";
+    const age = tx.block_time ? formatDate(new Date(Number(tx.block_time)), true) : "-";
     const net = getNetChange(tx, addr);
     const amt = formatKas(net, 2, true);
     const { from, to, fromItems, toItems } = getFromTo(tx, addr, net);
-    const isAccepted = tx.is_accepted ?? true;
+    const statusText = kaspaStatusLabel(tx, addr, net);
+    const isAccepted = isTxAccepted(tx);
+    const statusClass = !isAccepted ? "notAccepted" : (net < 0n ? "notAccepted" : "accepted");
     let counterpartyHtml;
-    if (type === "received" || (type === "all" && net > 0n)) {
+    if (net > 0n) {
       counterpartyHtml = partyHtml(from, fromItems, addr);
-    } else if (type === "sent" || (type === "all" && net < 0n)) {
+    } else if (net < 0n) {
       counterpartyHtml = partyHtml(to, toItems, addr);
     } else {
       counterpartyHtml = `<span class="muted">Self</span>`;
@@ -1037,7 +1432,7 @@ function renderKaspaTxs(pageTxs, addr, type) {
         <td>${linkTx(hash, shortenEnd(hash))}</td>
         <td>${counterpartyHtml}</td>
         <td>${age}</td>
-        <td><span class="${isAccepted ? "accepted" : "notAccepted"}">${isAccepted ? "Accepted" : "Not accepted"}</span></td>
+        <td><span class="${statusClass}">${escHtml(statusText)}</span></td>
         <td>${amt}</td>
       </tr>
     `;
@@ -1051,13 +1446,12 @@ function renderTokenActivity(pageTxs) {
   }
 
   transfersRows.innerHTML = pageTxs.map(ev => {
-    const trade = tokenTradeMap[ev.txid];
-    if (trade) mergeTradeIntoEvent(ev, trade);
+    ev = enrichTokenEvent(ev);
 
     const hash = String(ev.txid || "-");
     const ts = eventTime(ev);
     const age = ts ? formatDate(new Date(Number(ts)), true) : "-";
-    const side = String(ev.market_activity?.side || ev.side || "").toLowerCase();
+    const side = eventSide(ev);
     const cellOnly = isCellOnly(ev);
     const statusText = tokenStatusLabel(ev);
     const dir = transferDirection(ev);
@@ -1083,8 +1477,8 @@ function renderTokenActivity(pageTxs) {
     const addrs = [...new Set(uniqueOwners.map(ownerToKaspa).filter(addr => addr && !isSameWallet(addr)))];
 
     let counterpartyHtml;
-    if (trade) {
-      const market = otherTradeParty(trade);
+    if (eventTrade(ev) || hasContractCounterparty(ev)) {
+      const market = otherTradeParty(eventTrade(ev)) || uniqueOwners.find(isContractOwner);
       counterpartyHtml = market ? linkOwner(market) : `<span class="muted">-</span>`;
     } else if (addrs.length > 1) {
       counterpartyHtml = multiPartyHtml(addrs.map(addr => `${linkAddress(addr)}<br>`).join(""), addrs.length);
@@ -1249,24 +1643,13 @@ function renderUtxoPage() {
   cursorUtxos.textContent = utxos && utxos.length > 0 ? `Page ${utxosPage + 1}` : "";
 }
 
-async function loadBatch(type) {
-  const state = txState[type];
-  while (state.txs.length < (state.page + 1) * 40 && state.hasMore) {
-    const txsFull = await fetchTransactions(currentAddr, state.offset, txLimit + 1);
-    state.hasMore = txsFull.length > txLimit;
-    let txs = txsFull;
-    if (type !== 'all') {
-      const filterFn = type === 'received'
-        ? (tx) => getNetChange(tx, currentAddr) > 0n
-        : (tx) => getNetChange(tx, currentAddr) < 0n;
-      txs = txsFull.filter(filterFn);
-      state.hasMore = txsFull.length > txLimit;
-    } else {
-      txs = state.hasMore ? txsFull.slice(0, txLimit) : txsFull;
-    }
-    state.txs.push(...txs);
-    state.offset += txsFull.length;
-  }
+async function loadBatch() {
+  if (!txState.hasMore) return;
+  const txsFull = await fetchTransactions(currentAddr, txState.offset, txLimit + 1);
+  txState.hasMore = txsFull.length > txLimit;
+  const txs = txState.hasMore ? txsFull.slice(0, txLimit) : txsFull;
+  txState.txs.push(...txs);
+  txState.offset += txs.length;
 }
 
 function failTransfers(msg) {
@@ -1276,12 +1659,28 @@ function failTransfers(msg) {
   cursorTransfers.textContent = "";
 }
 
-async function loadType(type) {
-  transfersLoading.classList.remove("hidden");
-  Object.assign(txState[type], emptyTxState());
+async function loadType() {
+  Object.assign(txState, emptyTxState());
   try {
-    await loadBatch(type);
-    renderPage(type);
+    await ensureKaspaFilteredPage();
+  } catch {
+    failTransfers("Failed to load transactions.");
+  }
+}
+
+function filteredKaspaTxs() {
+  return txState.txs.filter(tx => kaspaTxMatchesFilters(tx, currentAddr));
+}
+
+async function ensureKaspaFilteredPage() {
+  transfersLoading.classList.remove("hidden");
+  try {
+    while (filteredKaspaTxs().length < (txState.page + 1) * 40 && txState.hasMore) {
+      const before = txState.txs.length;
+      await loadBatch();
+      if (txState.txs.length === before) break;
+    }
+    renderPage();
   } catch {
     failTransfers("Failed to load transactions.");
   } finally {
@@ -1289,18 +1688,18 @@ async function loadType(type) {
   }
 }
 
-function renderPage(type) {
-  const state = txState[type];
-  const start = state.page * 40;
-  renderKaspaTxs(state.txs.slice(start, start + 40), currentAddr, type);
-  prevTransfers.disabled = state.page === 0;
-  nextTransfers.disabled = state.txs.length <= start + 40 && !state.hasMore;
-  cursorTransfers.textContent = state.txs.length > 0 ? `Page ${state.page + 1}` : "";
+function renderPage() {
+  const filtered = filteredKaspaTxs();
+  const start = txState.page * 40;
+  renderKaspaTxs(filtered.slice(start, start + 40), currentAddr);
+  prevTransfers.disabled = txState.page === 0;
+  nextTransfers.disabled = filtered.length <= start + 40 && !txState.hasMore;
+  cursorTransfers.textContent = filtered.length > 0 ? `Page ${txState.page + 1}` : "";
 }
 
-function renderTokenPage(type) {
+function renderTokenPage() {
   tokenEvents.sort((a, b) => Number(b.accepting_daa || 0) - Number(a.accepting_daa || 0));
-  const filtered = filterTokenEvents(type);
+  const filtered = filterTokenEvents();
   const start = tokenPage * 40;
   renderTokenActivity(filtered.slice(start, start + 40));
   prevTransfers.disabled = tokenPage === 0;
@@ -1315,22 +1714,23 @@ async function loadTokenBatch() {
   tokenHasMore = Boolean(next) && events.length > 0;
 }
 
-async function ensureTokenPage(type) {
-  if (filterTokenEvents(type).length < (tokenPage + 1) * 40 && tokenHasMore) {
-    transfersLoading.classList.remove("hidden");
-    try {
+async function ensureTokenPage() {
+  transfersLoading.classList.remove("hidden");
+  try {
+    while (filterTokenEvents().length < (tokenPage + 1) * 40 && tokenHasMore) {
+      const before = tokenEvents.length;
       await loadTokenBatch();
-    } catch {
-      failTransfers("Failed to load token activity.");
-      transfersLoading.classList.add("hidden");
-      return;
+      if (tokenEvents.length === before) break;
     }
+    renderTokenPage();
+  } catch {
+    failTransfers("Failed to load token activity.");
+  } finally {
     transfersLoading.classList.add("hidden");
   }
-  renderTokenPage(type);
 }
 
-async function loadTokenType(type) {
+async function loadTokenType() {
   transfersLoading.classList.remove("hidden");
   tokenEvents = [];
   tokenSeen = new Set();
@@ -1344,17 +1744,16 @@ async function loadTokenType(type) {
     for (const ev of first.events) pushTokenEvent(ev);
     tokenCursor = first.next;
     tokenHasMore = Boolean(first.next) && first.events.length > 0;
-    renderTokenPage(type);
 
     try {
       rememberTrades(await fetchKcc20Trades(currentAddr));
-      renderTokenPage(type);
     } catch {}
 
     try {
       kcc20Tokens = await fetchKcc20Tokens(currentAddr);
-      renderTokenPage(type);
     } catch {}
+
+    await ensureTokenPage();
     if (document.querySelector('.tabs .tab.active')?.dataset.tab === "tabKRC20") {
       renderKcc20Tokens(kcc20Tokens);
     }
@@ -1367,14 +1766,13 @@ async function loadTokenType(type) {
 
 function showTransfers() {
   applyTransferHeaders();
-  const type = transferType.value;
   if (transferAsset.value === "tokens") {
-    if (tokenEvents.length === 0) loadTokenType(type);
-    else ensureTokenPage(type);
+    if (tokenEvents.length === 0) loadTokenType();
+    else ensureTokenPage();
     return;
   }
-  if (txState[type].txs.length === 0) loadType(type);
-  else renderPage(type);
+  if (txState.txs.length === 0) loadType();
+  else ensureKaspaFilteredPage();
 }
 
 function sortByBalance(list, key = "balance") {
@@ -1474,10 +1872,9 @@ async function runSearch(inputAddr) {
   currentAddr = addr;
   setUrlAddr(addr);
 
-  txState.all = emptyTxState();
-  txState.received = emptyTxState();
-  txState.sent = emptyTxState();
+  txState = emptyTxState();
   resetTokenState();
+  txFilters = defaultFilters();
   kcc20Tokens = null;
   tokens = null;
   dotkDomains = null;
@@ -1528,37 +1925,24 @@ prevTransfers.addEventListener("click", () => {
   if (transferAsset.value === "tokens") {
     if (tokenPage > 0) {
       tokenPage -= 1;
-      renderTokenPage(transferType.value);
+      renderTokenPage();
     }
     return;
   }
-  const state = txState[transferType.value];
-  if (state.page > 0) {
-    state.page -= 1;
-    renderPage(transferType.value);
+  if (txState.page > 0) {
+    txState.page -= 1;
+    renderPage();
   }
 });
 
 nextTransfers.addEventListener("click", async () => {
   if (transferAsset.value === "tokens") {
     tokenPage += 1;
-    await ensureTokenPage(transferType.value);
+    await ensureTokenPage();
     return;
   }
-  const type = transferType.value;
-  const state = txState[type];
-  state.page += 1;
-  if (state.txs.length < (state.page + 1) * 40 && state.hasMore) {
-    transfersLoading.classList.remove("hidden");
-    try {
-      await loadBatch(type);
-    } catch {
-      transfersRows.innerHTML = emptyRow(5, "Failed to load more transactions.");
-    } finally {
-      transfersLoading.classList.add("hidden");
-    }
-  }
-  renderPage(type);
+  txState.page += 1;
+  await ensureKaspaFilteredPage();
 });
 
 prevUtxos.addEventListener("click", () => {
