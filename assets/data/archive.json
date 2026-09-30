@@ -14,6 +14,20 @@
   "features": ["blockExplorer"]
 },
 {
+  "name": "TheCryptoSky",
+  "description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
+  "link": "https://thecryptosky.com",
+  "logo": "https://kaspahub.org/assets/logos/thecryptosky.webp",
+  "features": ["jobs", "marketplace"]
+},
+{
+  "name": "KYO",
+  "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
+  "link": "https://kyocard.app",
+  "logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
+  "features": ["cryptoCard"]
+},
+{
   "name": "Kaspa Insights",
   "description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
   "link": "https://www.kaspainsights.com",

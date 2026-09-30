@@ -294,13 +294,6 @@
 	"features": ["reviewed", "social"]
 },
 {
-	"name": "TheCryptoSky",
-	"description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
-	"link": "https://thecryptosky.com",
-	"logo": "https://kaspahub.org/assets/logos/thecryptosky.webp",
-	"features": ["jobs", "marketplace"]
-},
-{
 	"name": "KasMart",
 	"description": "A decentralized marketplace on Kaspa where users can buy and sell physical items, services, NFTs, and gigs using $KAS cryptocurrency.",
 	"link": "https://kasmart.org",
@@ -333,13 +326,6 @@
 	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
 	"link": "https://frostcard.io",
 	"logo": "https://kaspahub.org/assets/logos/frostcard.webp",
-	"features": ["cryptoCard"]
-},
-{
-	"name": "KYO",
-	"description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
-	"link": "https://kyocard.app",
-	"logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
 	"features": ["cryptoCard"]
 },
 {
