@@ -150,6 +150,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 			<p id="counter"></p>
 			<select id="sortSelect" aria-label="Sort Menu">
 				<option value="default">Default</option>
+				<option value="newest">Newest</option>
 				<option value="az">A - Z</option>
 				<option value="za">Z - A</option>
 			</select>
@@ -281,6 +282,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 }
 
 </style>
+<script type="text/javascript" src="/assets/scripts/ecosystem-filters.js"></script>
 <script type="text/javascript">
 'use strict';
 
@@ -348,9 +350,7 @@ function filterItems() {
 		if (searchTerm && !item.name.toLowerCase().includes(searchTerm) && !item.description.toLowerCase().includes(searchTerm)) continue;
 		filteredItems.push(item);
 	}
-	const sortMode = sortSelect.value;
-	if (sortMode === 'az') filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
-	else if (sortMode === 'za') filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	sortItems(filteredItems, sortSelect.value);
 	
 	if (!filteredItems.length) {
 		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
