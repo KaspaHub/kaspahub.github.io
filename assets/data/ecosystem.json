@@ -25,14 +25,16 @@
 	"description": "Foundation using Kaspa’s fast DAG-based tech to boost innovation in industry and enterprise, growing a strong ecosystem through events, outreach, and education.",
 	"link": "https://kaspa-kii.org",
 	"logo": "https://kaspahub.org/assets/logos/kii.webp",
-	"features": ["reviewed", "videos"]
+	"features": ["reviewed", "videos"],
+	"added": "2026-03-18"
 },
 {
 	"name": "Kaspa Eco Foundation",
 	"description": "Supports Kaspa’s ecosystem growth via grants, events, and community initiatives, publishing monthly reports and news to foster a strong, thriving network.",
 	"link": "https://www.kaspafoundation.org",
 	"logo": "https://kaspahub.org/assets/logos/kef.webp",
-	"features": ["reviewed", "videos"]
+	"features": ["reviewed", "videos"],
+	"added": "2026-03-18"
 },
 {
 	"name": "Igra Labs",
@@ -67,7 +69,8 @@
 	"description": "A workshop for Kaspa ecosystem coordination. A place to discuss and forge standards, protocols, tooling, wallets, applications, and the shared infrastructure being built on top of Kaspa.",
 	"link": "https://kas-smiths.org",
 	"logo": "https://kaspahub.org/assets/logos/kas-smiths.webp",
-	"features": ["reviewed", "social", "education"]
+	"features": ["reviewed", "social", "education"],
+	"added": "2026-07-03"
 },
 {
 	"name": "Kaspa Q&A",
@@ -102,28 +105,32 @@
 	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
 	"link": "https://kron.technology",
 	"logo": "https://kaspahub.org/assets/logos/kron.webp",
-	"features": ["launchpad", "dex"]
+	"features": ["launchpad", "dex"],
+	"added": "2026-06-30"
 },
 {
 	"name": "KaspaRocket",
 	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
 	"link": "https://kasparocket.fun",
 	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
-	"features": ["launchpad"]
+	"features": ["launchpad"],
+	"added": "2026-07-12"
 },
 {
 	"name": "KForge",
 	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
 	"link": "https://testnet.kforge.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
-	"features": ["launchpad", "dex"]
+	"features": ["launchpad", "dex"],
+	"added": "2026-09-07"
 },
 {
 	"name": "KaspaKaha",
 	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
 	"link": "https://www.kaspakaha.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
-	"features": ["dex", "analytics"]
+	"features": ["dex", "analytics"],
+	"added": "2026-07-27"
 },
 {
 	"name": "Aporia Exchange",
@@ -144,21 +151,24 @@
 	"description": "Decentralized exchange on Kasplex where users can swap tokens instantly with Uniswap V2 and V3 support, concentrated liquidity pools, smart routing, and seamless native KAS handling.",
 	"link": "https://krokoswap.io",
 	"logo": "https://kaspahub.org/assets/logos/krokoswap.webp",
-	"features": ["layer2", "dex"]
+	"features": ["layer2", "dex"],
+	"added": "2026-04-15"
 },
 {
 	"name": "KasFun",
 	"description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
 	"link": "https://kas.fun",
 	"logo": "https://kaspahub.org/assets/logos/kasfun.webp",
-	"features": ["layer2", "launchpad"]
+	"features": ["layer2", "launchpad"],
+	"added": "2026-04-15"
 },
 {
 	"name": "Igra Name Service",
 	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
 	"link": "https://insdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
-	"features": ["layer2", "marketplace"]
+	"features": ["layer2", "marketplace"],
+	"added": "2026-05-30"
 },
 {
 	"name": "KRChange",
@@ -186,28 +196,32 @@
 	"description": "All-in-one Kaspa Token Hub offering token markets, live stats, and portfolio tracking for KRC20, KRC721, KNS, L2 and more.",
 	"link": "https://kashub.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kashub.webp",
-	"features": ["reviewed", "analytics"]
+	"features": ["reviewed", "analytics"],
+	"added": "2026-07-12"
 },
 {
 	"name": "Kaspa NFT Hub",
 	"description": "Data, discovery and alerts hub for Kaspa NFTs (KRC-721). Explore collections, view wallets, check live listings, rarity rankings, and statistics.",
 	"link": "https://kasnfthub.com",
 	"logo": "https://kaspahub.org/assets/logos/kasnfthub.webp",
-	"features": ["verified", "analytics"]
+	"features": ["verified", "analytics"],
+	"added": "2026-05-06"
 },
 {
 	"name": "dot.k",
 	"description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
 	"link": "https://dotk.name",
 	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
-	"features": ["reviewed", "marketplace"]
+	"features": ["reviewed", "marketplace"],
+	"added": "2026-09-15"
 },
 {
 	"name": "Kaspa Name Service",
 	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
 	"link": "https://kaspaname.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspaname.webp",
-	"features": ["marketplace"]
+	"features": ["marketplace"],
+	"added": "2026-05-30"
 },
 {
 	"name": "KNS",
@@ -221,14 +235,16 @@
 	"description": "A 3D printing and mining solutions business focused on the crypto space, specializing in Kaspa-themed collectibles, custom 3D models, solo mining pools, and mining hardware/software.",
 	"link": "https://overbuildlabs.com",
 	"logo": "https://kaspahub.org/assets/logos/overbuildlabs.webp",
-	"features": ["reviewed", "marketplace", "mining"]
+	"features": ["reviewed", "marketplace", "mining"],
+	"added": "2026-05-29"
 },
 {
 	"name": "RK-Stratum",
 	"description": "Real-time decentralization solo mining platform and PNN (Peer-to-Node Network) for Kaspa. Enables fee-less solo mining by connecting miners directly to personal or community-hosted bridges/nodes.",
 	"link": "https://rkstratum.rustykaspa.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "mining"]
+	"features": ["reviewed", "mining"],
+	"added": "2026-05-21"
 },
 {
 	"name": "Kat Pool",
@@ -242,14 +258,16 @@
 	"description": "One-click installer to run a full Kaspa node. Makes running a node accessible for non-technical users with background operation, auto-start, and live network counter.",
 	"link": "https://mykai.dev",
 	"logo": "https://kaspahub.org/assets/logos/mykai.webp",
-	"features": ["verified", "utilities"]
+	"features": ["verified", "utilities"],
+	"added": "2026-05-14"
 },
 {
 	"name": "KAI",
 	"description": "A beginner-friendly AI tool for Kaspa users, offering clear guidance on wallets, mining, tools, and crypto basics, drawing from trusted and verified resources.",
 	"link": "https://mykai.app",
 	"logo": "https://kaspahub.org/assets/logos/kai.webp",
-	"features": ["verified", "ai"]
+	"features": ["verified", "ai"],
+	"added": "2026-07-22"
 },
 {
 	"name": "Kasia",
@@ -270,7 +288,8 @@
 	"description": "Decentralized messaging and authentication app on Kaspa. Fully encrypted with no phone number or personal data required. Includes Auth Gateway for passwordless wallet login on websites.",
 	"link": "https://kbeam.app",
 	"logo": "https://kaspahub.org/assets/logos/kbeam.webp",
-	"features": ["social"]
+	"features": ["social"],
+	"added": "2026-05-05"
 },
 {
 	"name": "KaChat",
@@ -312,7 +331,8 @@
 	"description": "Pay-per-call marketplace for AI agents and services settled directly on Kaspa L1 using x402 and Toccata covenants.",
 	"link": "https://www.kaspa-402.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-402.webp",
-	"features": ["marketplace"]
+	"features": ["marketplace"],
+	"added": "2026-07-21"
 },
 {
 	"name": "Stroem Finance",
@@ -326,84 +346,96 @@
 	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
 	"link": "https://frostcard.io",
 	"logo": "https://kaspahub.org/assets/logos/frostcard.webp",
-	"features": ["cryptoCard"]
+	"features": ["cryptoCard"],
+	"added": "2026-04-15"
 },
 {
 	"name": "Stag Hunt",
 	"description": "Kaspa-native crowdfunded hunts platform. Post hunts, back with KAS in on-chain escrow, claim tasks, and let referees verify for payout.",
 	"link": "https://staghunt.app",
 	"logo": "https://kaspahub.org/assets/logos/staghunt.app.webp",
-	"features": []
+	"features": [],
+	"added": "2026-07-08"
 },
 {
 	"name": "Kaskly",
 	"description": "Non-custodial creator toolkit on Kaspa for paid messages and prize drops. Attach KAS to a message - recipients claim by replying, or funds refund automatically via on-chain covenants.",
 	"link": "https://www.kaskly.app",
 	"logo": "https://kaspahub.org/assets/logos/kaskly.webp",
-	"features": []
+	"features": [],
+	"added": "2026-09-10"
 },
 {
 	"name": "KaspaForge",
 	"description": "A non-custodial workspace for Kaspa featuring a covenant-based Safe with delayed withdrawals and an independent alarm key, plus Escrow, Marketplace, wallet, encrypted sync, and recovery tools.",
 	"link": "https://kaspaforge.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspaforge.webp",
-	"features": []
+	"features": [],
+	"added": "2026-07-18"
 },
 {
 	"name": "DagLock",
 	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
 	"link": "https://daglock.com",
 	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
-	"features": []
+	"features": [],
+	"added": "2026-06-27"
 },
 {
 	"name": "Warda Protocol",
 	"description": "Open protocol for cryptographic spending limits and delegated grants for autonomous AI agents on Kaspa L1. Limits are compiled into covenant scripts so consensus rejects out-of-bound spends.",
 	"link": "https://www.wardaprotocol.com",
 	"logo": "https://kaspahub.org/assets/logos/wardaprotocol.webp",
-	"features": ["development"]
+	"features": ["development"],
+	"added": "2026-09-10"
 },
 {
 	"name": "Koracle",
 	"description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
 	"link": "https://koracle.xyz",
 	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
-	"features": ["development"]
+	"features": ["development"],
+	"added": "2026-09-10"
 },
 {
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
 	"logo": "https://kaspahub.org/assets/logos/komarkets.webp",
-	"features": ["dapp", "gambling"]
+	"features": ["dapp", "gambling"],
+	"added": "2026-06-08"
 },
 {
 	"name": "K100bet",
 	"description": "Prediction market platform built on the Kaspa blockDAG. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
 	"link": "https://k100bet.com",
 	"logo": "https://kaspahub.org/assets/logos/k100bet.webp",
-	"features": ["dapp", "gambling"]
+	"features": ["dapp", "gambling"],
+	"added": "2026-06-12"
 },
 {
 	"name": "Bet a Buddy",
 	"description": "Peer-to-peer wagering app on Kaspa. Create bets with friends on sports, UFC, or any event. Both parties have to agree on the outcome. Loser pays winner directly.",
 	"link": "https://betabuddy.netlify.app",
 	"logo": "https://kaspahub.org/assets/logos/betabuddy.webp",
-	"features": ["dapp", "gambling"]
+	"features": ["dapp", "gambling"],
+	"added": "2026-06-12"
 },
 {
 	"name": "KasOdds",
 	"description": "Non-custodial 1v1 even-or-odd betting game on Kaspa L1. Two players pick secret numbers; the sum's parity decides the winner who takes the pot via trustless on-chain covenant escrow with automatic refunds.",
 	"link": "https://kasodds.com",
 	"logo": "https://kaspahub.org/assets/logos/kasodds.webp",
-	"features": ["reviewed", "dapp", "gambling"]
+	"features": ["reviewed", "dapp", "gambling"],
+	"added": "2026-09-23"
 },
 {
 	"name": "Kaskama",
 	"description": "A Kaspa subscription platform where creators sell access to photos and videos, set their own price, and get paid directly by fans.",
 	"link": "https://kaskama.com",
 	"logo": "https://kaspahub.org/assets/logos/kaskama.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed"],
+	"added": "2026-09-30"
 },
 {
 	"name": "KASCompute",
@@ -417,14 +449,16 @@
 	"description": "A real-world treasure hunt on Kaspa where users place hidden $KAS drops marked by physical weatherproof markers with unique codes.",
 	"link": "https://kasfinder.com/info.html",
 	"logo": "https://kaspahub.org/assets/logos/kasfinder.webp",
-	"features": []
+	"features": [],
+	"added": "2026-07-21"
 },
 {
 	"name": "SilverScript Studio",
 	"description": "Browser-based IDE for writing, compiling, and deploying SilverScript smart contracts on Kaspa.",
 	"link": "https://silverscriptstudio.com",
 	"logo": "https://kaspahub.org/assets/logos/silverscriptstudio.webp",
-	"features": ["reviewed", "development"]
+	"features": ["reviewed", "development"],
+	"added": "2026-05-18"
 },
 {
 	"name": "Kasway",
@@ -445,21 +479,24 @@
 	"description": "Open-source air-gapped offline signer for Kaspa. Enables secure transaction signing via QR codes.",
 	"link": "https://kassigner.org",
 	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
-	"features": ["reviewed", "utilities"]
+	"features": ["reviewed", "utilities"],
+	"added": "2026-04-28"
 },
 {
 	"name": "KASDISTRO",
 	"description": "A utility platform for mass KAS distributions on the Kaspa network, allowing projects, creators, communities, and teams to send rewards to multiple wallet addresses in one transaction flow.",
 	"link": "https://kasdistro.com",
 	"logo": "https://kaspahub.org/assets/logos/kasdistro.webp",
-	"features": ["utilities"]
+	"features": ["utilities"],
+	"added": "2026-09-08"
 },
 {
 	"name": "Genesis Zero",
 	"description": "The first NFT protocol native to Kaspa. Enables deploying, minting, and trading NFTs with real image pixels, video, and audio inscribed directly into the Kaspa BlockDAG.",
 	"link": "https://kasgenesiszero.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "marketplace"]
+	"features": ["reviewed", "marketplace"],
+	"added": "2026-05-22"
 },
 {
 	"name": "Arkiv File Storage",
@@ -473,14 +510,16 @@
 	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
 	"link": "https://kaspabrowser.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
-	"features": ["reviewed"]
+	"features": ["reviewed"],
+	"added": "2026-09-20"
 },
 {
 	"name": "Kaspa Links",
 	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
 	"link": "https://kaspalinks.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspalinks.webp",
-	"features": ["reviewed", "payments"]
+	"features": ["reviewed", "payments"],
+	"added": "2026-05-20"
 },
 {
 	"name": "kas.coffee",
@@ -494,7 +533,8 @@
 	"description": "Browser extension that adds a tip button on every X profile. Send KAS directly to creators - non-custodial, peer-to-peer, no fees.",
 	"link": "https://kastip.app",
 	"logo": "https://kaspahub.org/assets/logos/kastip.webp",
-	"features": ["reviewed", "payments"]
+	"features": ["reviewed", "payments"],
+	"added": "2026-05-20"
 },
 {
 	"name": "TTT",
@@ -515,7 +555,8 @@
 	"description": "Decentralized email service for Kaspa using wallet addresses as identities. Send emails with on-chain proof, reward random top miners (1 KAS per message).",
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
-	"features": []
+	"features": [],
+	"added": "2026-05-22"
 },
 {
 	"name": "Vivoor",
@@ -536,28 +577,32 @@
 	"description": "P2P wagered chess on Kaspa L1 with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
 	"link": "https://dagmate.org",
 	"logo": "https://kaspahub.org/assets/logos/dagmate.webp",
-	"features": ["dapp", "gaming"]
+	"features": ["dapp", "gaming"],
+	"added": "2026-09-16"
 },
 {
 	"name": "SLOW World",
 	"description": "Kaspa-universe Mario-style WASM platformer. Play as $SLOW the Bitcoin Turtle and other champions in browser-based levels.",
 	"link": "https://slowlikebtc.com/game",
 	"logo": "https://kaspahub.org/assets/logos/slowlikebtc.webp",
-	"features": ["reviewed", "gaming"]
+	"features": ["reviewed", "gaming"],
+	"added": "2026-06-14"
 },
 {
 	"name": "Kaspa Price Runner",
 	"description": "Browser game where you run across the real Kaspa daily price chart. Jump crashes, grab coins, and reach the moon.",
 	"link": "https://kaspa-price-runner.pages.dev",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-price-runner.webp",
-	"features": ["reviewed", "gaming"]
+	"features": ["reviewed", "gaming"],
+	"added": "2026-07-12"
 },
 {
 	"name": "Kaspas Flight",
 	"description": "Pixel-art Flappy Bird-style game powered by Kaspa where high scores are saved on the BlockDAG, users compete on the leaderboard, and set profiles.",
 	"link": "https://kaspas-flight.web.app",
 	"logo": "https://kaspahub.org/assets/logos/kaspasflight.webp",
-	"features": ["reviewed", "gaming"]
+	"features": ["reviewed", "gaming"],
+	"added": "2026-04-15"
 },
 {
 	"name": "KasPixel",
@@ -578,7 +623,8 @@
 	"description": "A playable meme coin on Kaspa. Tap the coin, build a pixel-art city one Peep-grade at a time, click, upgrade, automate, and buy $PEEPS - a coin you can actually play.",
 	"link": "https://pixel-peeps.com",
 	"logo": "https://kaspahub.org/assets/logos/pixel-peeps.webp",
-	"features": ["gaming"]
+	"features": ["gaming"],
+	"added": "2026-08-22"
 },
 {
 	"name": "The Business Directory",
@@ -599,21 +645,24 @@
 	"description": "Document notarization on the Kaspa network. Upload PDFs, sign with any Kaspa wallet (single or two-party agreements), and seal immutable proofs with timestamps, hashes, and addresses on the BlockDAG.",
 	"link": "https://kaspanotary.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspero.webp",
-	"features": ["reviewed", "utilities"]
+	"features": ["reviewed", "utilities"],
+	"added": "2026-05-18"
 },
 {
 	"name": "Kassword",
 	"description": "Client-side encrypted password and media vault running entirely in the browser. Uses AES-256-GCM with 2-factor encryption (master password + wallet key), backed up as permanent transaction payloads on the Kaspa BlockDAG.",
 	"link": "https://kassword.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "utilities"]
+	"features": ["reviewed", "utilities"],
+	"added": "2026-05-22"
 },
 {
 	"name": "KasProof",
 	"description": "Trustless proof-of-existence platform on Kaspa. Permanently timestamp any file on the BlockDAG using client-side SHA-256 hashing with no accounts or uploads required.",
 	"link": "https://kasproof.com",
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
-	"features": ["reviewed", "utilities"]
+	"features": ["reviewed", "utilities"],
+	"added": "2026-04-28"
 },
 {
 	"name": "KasStamp",
@@ -641,7 +690,8 @@
 	"description": "Read-only tracker for public Kaspa addresses. Track any Kaspa address in real time, organize them like a portfolio, and explore on-chain activity with a fast, privacy-first experience.",
 	"link": "https://www.kasobs.app",
 	"logo": "https://kaspahub.org/assets/logos/kasobs.webp",
-	"features": ["reviewed", "analytics"]
+	"features": ["reviewed", "analytics"],
+	"added": "2026-05-22"
 },
 {
 	"name": "KasOS",
@@ -690,7 +740,8 @@
 	"description": "Crypto clothing shop offering Kaspa-themed apparel and merchandise including tees, hoodies, sweatshirts, and stickers featuring green branding and GHOSTDAG-inspired designs.",
 	"link": "https://poolpartynodes.com/kaspa-merch/",
 	"logo": "https://kaspahub.org/assets/logos/poolpartynodes.webp",
-	"features": ["marketplace"]
+	"features": ["marketplace"],
+	"added": "2026-06-30"
 },
 {
 	"name": "Travala.com",
@@ -711,7 +762,8 @@
 	"description": "A privacy-focused crypto marketplace for buying and selling physical goods, digital items, NFTs, and services. Features walletless checkout, low fees, non-custodial escrow and stablecoin pricing.",
 	"link": "https://cryptocornershop.com",
 	"logo": "https://kaspahub.org/assets/logos/cryptocornershop.webp",
-	"features": ["marketplace"]
+	"features": ["marketplace"],
+	"added": "2026-07-02"
 },
 {
 	"name": "Kaskad",
@@ -774,14 +826,16 @@
 	"description": "Real-time orderbook depth and price impact comparison tool for Kaspa ecosystem tokens. Compare liquidity across centralized exchanges and DEXes like ZealousSwap on Igra and Kasplex L2s.",
 	"link": "https://depthtool.com",
 	"logo": "https://kaspahub.org/assets/logos/depthtool.webp",
-	"features": ["reviewed", "analytics", "utilities"]
+	"features": ["reviewed", "analytics", "utilities"],
+	"added": "2026-05-22"
 },
 {
 	"name": "hashd.ag",
 	"description": "Personal website of Yonatan Sompolinsky featuring writings on coordination markets, blockchain philosophy, and Kaspa-related ideas.",
 	"link": "https://hashd.ag",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "education"]
+	"features": ["reviewed", "education"],
+	"added": "2026-04-07"
 },
 {
 	"name": "KaspArchive",
@@ -802,7 +856,8 @@
 	"description": "The premier Learn-to-Earn platform and education layer for crypto. Enables projects to deploy white-label academies with interactive courses, quizzes, token rewards on Kasplex L2, on-chain SBT diplomas, and NFT staking.",
 	"link": "https://lyceumprotocol.com",
 	"logo": "https://kaspahub.org/assets/logos/lyceumprotocol.webp",
-	"features": ["reviewed", "layer2", "education"]
+	"features": ["reviewed", "layer2", "education"],
+	"added": "2026-05-22"
 },
 {
 	"name": "BMT University",
@@ -823,7 +878,8 @@
 	"description": "Independent plain-English educational resource and research guide for Kaspa. Provides clear explanations of real-time Proof of Work, blockDAG, GHOSTDAG, current live network status (Crescendo 10 BPS), and more.",
 	"link": "https://kaspaexplained.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "education"]
+	"features": ["reviewed", "education"],
+	"added": "2026-05-14"
 },
 {
 	"name": "KaspHub",
@@ -837,14 +893,16 @@
 	"description": "An interactive community site that visualizes and compares Kaspa network speed against other blockchains with live dashboards, payment simulations, and block production races.",
 	"link": "https://kaspaspeed.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspaspeed.webp",
-	"features": ["reviewed", "education", "visualizer"]
+	"features": ["reviewed", "education", "visualizer"],
+	"added": "2026-09-10"
 },
 {
 	"name": "LearnKaspa",
 	"description": "Open-source educational platform explaining Kaspa in plain language across beginner, crypto-native, and developer levels, covering blockDAG, origins, speed, tokenomics, and the network’s long-term design.",
 	"link": "https://learnkaspa.com",
 	"logo": "https://kaspahub.org/assets/logos/learnkaspa.webp",
-	"features": ["reviewed", "education"] 
+	"features": ["reviewed", "education"],
+	"added": "2026-09-10" 
 },
 {
 	"name": "Kaspa FAQ",
@@ -858,7 +916,8 @@
 	"description": "Interactive cryptographic proof demonstrating Kaspa launched with zero premine, where users can click verify to watch the math, fingerprints, and chain integrity checks in real time.",
 	"link": "https://pow-protocol-university.web.app/kaspa-genesis-v3",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "education"]
+	"features": ["reviewed", "education"],
+	"added": "2026-04-15"
 },
 {
 	"name": "KIGS",
@@ -879,7 +938,8 @@
 	"description": "Brazilian community website dedicated to Kaspa, covering technology, ecosystem, and community information about the world’s fastest decentralized cryptocurrency network.",
 	"link": "https://www.kaspabr.com.br",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "education"]
+	"features": ["reviewed", "education"],
+	"added": "2026-09-20"
 },
 {
 	"name": "BuyKas",
@@ -914,7 +974,8 @@
 	"description": "Real-time visualization of Kaspa's BlockDAG and transaction flow where users can boost network throughput to thousands of TPS by sending KAS to the fuel wallet and watch live high-performance activity.",
 	"link": "https://kaspadrome.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspadrome.webp",
-	"features": ["reviewed", "visualizer"]
+	"features": ["reviewed", "visualizer"],
+	"added": "2026-04-15"
 },
 {
 	"name": "Kaspero Pay",
@@ -928,7 +989,8 @@
 	"description": "A WordPress plugin that integrates Kaspa cryptocurrency payments into WooCommerce stores.",
 	"link": "https://kaspawoo.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-2.webp",
-	"features": ["reviewed", "development", "payments"]
+	"features": ["reviewed", "development", "payments"],
+	"added": "2026-07-22"
 },
 {
 	"name": "NOWPayments",
@@ -991,7 +1053,8 @@
 	"description": "An interactive visualization tool displaying accurate Kaspa network hashrate data, providing real-time insights and historical measurements since genesis.",
 	"link": "https://hashrate.kaspa.ws",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "analytics"]
+	"features": ["reviewed", "analytics"],
+	"added": "2026-04-20"
 },
 {
 	"name": "Mining Now",
@@ -1005,7 +1068,8 @@
 	"description": "A real-time mining pool statistics aggregator for Proof-of-Work cryptocurrencies, providing live hashrate distribution, pool fees, miner counts and more",
 	"link": "https://miningpoolstats.stream/kaspa",
 	"logo": "https://kaspahub.org/assets/logos/miningpoolstats.webp",
-	"features": ["reviewed", "mining", "analytics", "utilities"]
+	"features": ["reviewed", "mining", "analytics", "utilities"],
+	"added": "2026-04-20"
 },
 {
 	"name": "Kaspa vs. Bitcoin Miner Revenue Calculator",
@@ -1089,7 +1153,8 @@
 	"description": "A cryptocurrency mining pool offering low fees, frequent promotions including zero-fee periods, and global servers for efficient mining.",
 	"link": "https://www.whalepool.com/coin/KAS",
 	"logo": "https://kaspahub.org/assets/logos/whalepool.webp",
-	"features": ["mining"]
+	"features": ["mining"],
+	"added": "2026-05-31"
 },
 {
 	"name": "F2Pool",
@@ -1145,14 +1210,16 @@
 	"description": "Covenant and smart coin explorer for Kaspa. Tracks coin events with full history preservation, script decoder for post-Toccata opcodes including ZK verification, and SilverScript contract recognition.",
 	"link": "https://kascov.io",
 	"logo": "https://kaspahub.org/assets/logos/kascov.webp",
-	"features": ["reviewed", "blockExplorer"]
+	"features": ["reviewed", "blockExplorer"],
+	"added": "2026-07-04"
 },
 {
 	"name": "KCC20.info",
 	"description": "Live KCC20 token indexer and covenant explorer for Kaspa. Tracks tokens, holders, balances, and real-time activity with a public API.",
 	"link": "https://kcc20.info",
 	"logo": "https://kaspahub.org/assets/logos/kcc20.info.webp",
-	"features": ["reviewed", "blockExplorer"]
+	"features": ["reviewed", "blockExplorer"],
+	"added": "2026-07-26"
 },
 {
 	"name": "Kaspa Explorer",
@@ -1166,14 +1233,16 @@
 	"description": "A super lightweight, fully open-source Kaspa BlockDAG explorer for searching transactions, blocks, and addresses. Features live TPS, BPS, hashrate, top miners, rich list, and real-time network stats.",
 	"link": "https://kascan.io",
 	"logo": "https://kaspahub.org/assets/logos/kascan.webp",
-	"features": ["reviewed", "blockExplorer"]
+	"features": ["reviewed", "blockExplorer"],
+	"added": "2026-04-30"
 },
 {
 	"name": "Kaspatrol ",
 	"description": "Real-time Kaspa BlockDAG explorer providing live blocks, transactions, addresses, network statistics, hashrate monitoring, and an immersive 360° DAG visualization streamed directly from a full node.",
 	"link": "https://www.kaspatrol.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspatrol.webp",
-	"features": ["reviewed", "blockExplorer"]
+	"features": ["reviewed", "blockExplorer"],
+	"added": "2026-06-28"
 },
 {
 	"name": "Kassandra",
@@ -1194,7 +1263,8 @@
 	"description": "An open-source block explorer for Igra Layer 2 on Kaspa, by Blockscout, enabling searches for transactions, smart contract verification, address analysis, and network activity tracking.",
 	"link": "https://explorer.igralabs.com",
 	"logo": "https://kaspahub.org/assets/logos/igralabs.webp",
-	"features": ["reviewed", "layer2", "blockExplorer"]
+	"features": ["reviewed", "layer2", "blockExplorer"],
+	"added": "2026-05-30"
 },
 {
 	"name": "DagScan",
@@ -1236,7 +1306,8 @@
 	"description": "Command-line wallet for users who prefer managing keys and transactions directly from the terminal. Supports both native Rust and WASM web interfaces.",
 	"link": "https://github.com/kaspanet/rusty-kaspa/tree/master/wallet",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "desktop"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "desktop"],
+	"added": "2026-07-18"
 },
 {
 	"name": "Ledger",
@@ -1285,14 +1356,16 @@
 	"description": "Award-winning NFC contactless cold wallet smart card featuring unlimited seed phrases and private keys on a single device, EAL6+ security, and no firmware updates.",
 	"link": "https://www.gethashwallet.com",
 	"logo": "https://kaspahub.org/assets/logos/hashwallet.webp",
-	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"],
+	"added": "2026-09-05"
 },
 {
 	"name": "ELLIPAL",
 	"description": "Air-gapped cold storage hardware wallet with EAL5+ secure element and anti-tamper self-destruct protection. Supports Kaspa and Kasplex L2.",
 	"link": "https://www.ellipal.com",
 	"logo": "https://kaspahub.org/assets/logos/ellipal.webp",
-	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"]
+	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"],
+	"added": "2026-03-20"
 },
 {
 	"name": "Kastle",
@@ -1348,7 +1421,8 @@
 	"description": "Open-source self-custody Kaspa wallet for Android and browser extension. Supports all L1/L2 assets, WalletConnect v2, BIP39 passphrases, and Argon2id.",
 	"link": "https://kaspire.kaslab.space",
 	"logo": "https://kaspahub.org/assets/logos/kaspire.webp",
-	"features": ["wallet", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"]
+	"features": ["wallet", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"],
+	"added": "2026-08-29"
 },
 {
 	"name": "Coin Wallet",
@@ -1362,7 +1436,8 @@
 	"description": "User-friendly Kaspa web wallet with a banking interface. Checking and savings accounts. Send Kaspa to an email address. oAuth-style logins & payments.",
 	"link": "https://kasla.io",
 	"logo": "https://kaspahub.org/assets/logos/kasla.webp",
-	"features": ["reviewed", "wallet", "selfCustodial", "web"]
+	"features": ["reviewed", "wallet", "selfCustodial", "web"],
+	"added": "2026-03-12"
 },
 {
 	"name": "Kasperia",
@@ -1376,14 +1451,16 @@
 	"description": "Self-custodial Kaspa and Igra wallet with SureSign transaction review, coin control, vaults, escrow, and built-in swap and earn.",
 	"link": "https://enclavefi.app",
 	"logo": "https://kaspahub.org/assets/logos/enclavefi.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"],
+	"added": "2026-09-16"
 },
 {
 	"name": "Kache",
 	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
 	"link": "https://kachewallet.com",
 	"logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"],
+	"added": "2026-07-14"
 },
 {
 	"name": "Kaspa Kold",
@@ -1474,7 +1551,8 @@
 	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
 	"link": "https://www.token-depot.co",
 	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
-	"features": ["wallet"]
+	"features": ["wallet"],
+	"added": "2026-06-16"
 },
 {
 	"name": "Coineo",
@@ -2034,7 +2112,8 @@
 	"description": "Ourbit is a British Virgin Islands-based trading platform founded in 2020, offering spot trading for crypto, tokenized stocks, ETFs, and commodities.",
 	"link": "https://www.ourbit.com",
 	"logo": "https://kaspahub.org/assets/logos/ourbit.webp",
-	"features": ["cex", "futuresTrading"]
+	"features": ["cex", "futuresTrading"],
+	"added": "2026-09-16"
 },
 {
 	"name": "CoinRabbit",
@@ -2083,14 +2162,16 @@
 	"description": "Bridgers is a non-custodial cross-chain swap aggregator launched in 2021, offering instant token swaps without registration.",
 	"link": "https://app.bridgers.xyz",
 	"logo": "https://kaspahub.org/assets/logos/bridgers.webp",
-	"features": ["cex", "noKyc", "swap", "withdrawals"] 
+	"features": ["cex", "noKyc", "swap", "withdrawals"],
+	"added": "2026-09-16" 
 },
 {
 	"name": "CoinTR",
 	"description": "CoinTR is a Turkey-based trading platform founded in 2021, offering spot crypto trading with TRY pairs and fiat services.",
 	"link": "https://www.cointr.com",
 	"logo": "https://kaspahub.org/assets/logos/cointr.webp",
-	"features": ["cex"]
+	"features": ["cex"],
+	"added": "2026-06-08"
 },
 {
 	"name": "OrangeX",
@@ -2146,7 +2227,8 @@
 	"description": "Xgram.io is a Costa Rica-based non-custodial instant crypto swap platform launched in 2022, offering a DEX-like experience with no mandatory registration.",
 	"link": "https://xgram.io",
 	"logo": "https://kaspahub.org/assets/logos/xgram.webp",
-	"features": ["cex", "swap", "noKyc", "withdrawals"]
+	"features": ["cex", "swap", "noKyc", "withdrawals"],
+	"added": "2026-05-28"
 },
 {
 	"name": "BITmarkets",
@@ -2223,7 +2305,8 @@
 	"description": "SolCex is a United Arab Emirates-based trading platform launched in 2024, offering crypto trading with a focus on the Solana ecosystem.",
 	"link": "https://www.solcex.cc",
 	"logo": "https://kaspahub.org/assets/logos/solcex.webp",
-	"features": ["cex"]
+	"features": ["cex"],
+	"added": "2026-08-14"
 },
 {
 	"name": "UEX.US",
@@ -2237,7 +2320,8 @@
 	"description": "StereoSwap is a Hungary-based privacy-focused crypto swap platform founded in 2024, offering instant NO-KYC exchanges.",
 	"link": "https://stereoswap.app",
 	"logo": "https://kaspahub.org/assets/logos/stereoswap.webp",
-	"features": ["cex", "noKyc", "swap", "withdrawals"]
+	"features": ["cex", "noKyc", "swap", "withdrawals"],
+	"added": "2026-07-12"
 },
 {
 	"name": "BigONE",
