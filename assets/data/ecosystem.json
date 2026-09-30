@@ -410,14 +410,14 @@
 	"description": "Non-custodial 1v1 even-or-odd betting game on Kaspa L1. Two players pick secret numbers; the sum's parity decides the winner who takes the pot via trustless on-chain covenant escrow with automatic refunds.",
 	"link": "https://kasodds.com",
 	"logo": "https://kaspahub.org/assets/logos/kasodds.webp",
-	"features": ["dapp", "gambling"]
+	"features": ["reviewed", "dapp", "gambling"]
 },
 {
 	"name": "Kaskama",
 	"description": "A Kaspa subscription platform where creators sell access to photos and videos, set their own price, and get paid directly by fans.",
 	"link": "https://kaskama.com",
 	"logo": "https://kaspahub.org/assets/logos/kaskama.webp",
-	"features": []
+	"features": ["reviewed"]
 },
 {
 	"name": "KASCompute",
@@ -529,13 +529,6 @@
 	"description": "Decentralized email service for Kaspa using wallet addresses as identities. Send emails with on-chain proof, reward random top miners (1 KAS per message).",
 	"link": "https://www.kasmail.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmail.webp",
-	"features": []
-},
-{
-	"name": "Token Depot",
-	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
-	"link": "https://www.token-depot.co",
-	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
 	"features": []
 },
 {
@@ -1489,6 +1482,13 @@
 	"link": "https://coinrabbit.io/wallet/",
 	"logo": "https://kaspahub.org/assets/logos/coinrabbit.webp",
 	"features": ["wallet", "multiChain", "web"]
+},
+{
+	"name": "Token Depot",
+	"description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
+	"link": "https://www.token-depot.co",
+	"logo": "https://kaspahub.org/assets/logos/token-depot.webp",
+	"features": ["wallet"]
 },
 {
 	"name": "Coineo",
