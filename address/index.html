@@ -38,22 +38,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qr-code-styling.min.js"></script>
 <script defer src="/assets/scripts/explorer.js"></script>
-<style>
-th.filterTh { cursor: pointer; user-select: none; }
-th.filterTh.activeFilter { color: #70C7BA; }
-.w-fields { display: grid; gap: 10px; margin: 12px 0; }
-.w-fields label { font-size: 13px; display: grid; gap: 6px; }
-.w-fields input, .w-fields select {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--search-border, rgba(255,255,255,.12));
-  background: var(--search-background, rgba(255,255,255,.04));
-  color: inherit;
-}
-.w-actions { display: flex; gap: 8px; }
-.w-actions .btn { flex: 1; }
-</style>
+
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -124,10 +109,10 @@ th.filterTh.activeFilter { color: #70C7BA; }
 
   <div id="tabTransfers" class="tabPanel active" aria-label="Transfers panel">
     <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
-      <select id="transferAsset" class="ddArrow" style="padding: 8px 5px 8px 0; font-size: 0.9rem; font-weight: bold;">
-        <option value="kaspa">Kaspa</option>
-        <option value="tokens">Tokens</option>
-      </select>
+      <div id="transferAssetTabs" class="asset-tabs" role="tablist" aria-label="Transfer asset">
+        <button type="button" class="asset-tab active" data-asset="kaspa" role="tab" aria-selected="true">Kaspa</button>
+        <button type="button" class="asset-tab" data-asset="tokens" role="tab" aria-selected="false">Tokens</button>
+      </div>
       <h4 id="transfersTitle"></h4>
       <div id="transfersLoading" class="muted loading hidden">
         <span class="spinner"></span>
@@ -372,7 +357,6 @@ const utxoRows = document.getElementById("utxoRows");
 const prevUtxos = document.getElementById("prevUtxos");
 const nextUtxos = document.getElementById("nextUtxos");
 const cursorUtxos = document.getElementById("cursorUtxos");
-const transferAsset = document.getElementById("transferAsset");
 const explorerPic = document.getElementById("explorerPic");
 
 let currentAddr = "";
@@ -403,10 +387,12 @@ const defaultFilters = () => ({
   fromMs: null,
   toMs: null,
   kind: "all",
+  asset: "",
   minAmount: null,
   maxAmount: null
 });
 let txFilters = defaultFilters();
+let transferAssetValue = "kaspa";
 
 const kaspaKinds = [
   { value: "all", label: "All" },
@@ -451,10 +437,26 @@ tabs.forEach(tab => {
   });
 });
 
-transferAsset.addEventListener('change', () => {
-  tokenPage = 0;
-  txFilters.kind = "all";
-  showTransfers();
+function setTransferAsset(value) {
+  transferAssetValue = value === "tokens" ? "tokens" : "kaspa";
+  document.querySelectorAll("#transferAssetTabs .asset-tab").forEach(btn => {
+    const on = btn.dataset.asset === transferAssetValue;
+    btn.classList.toggle("active", on);
+    btn.setAttribute("aria-selected", on ? "true" : "false");
+  });
+}
+
+document.querySelectorAll("#transferAssetTabs .asset-tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.asset === transferAssetValue) return;
+    setTransferAsset(btn.dataset.asset);
+    tokenPage = 0;
+    txFilters.kind = "all";
+    txFilters.asset = "";
+    txFilters.minAmount = null;
+    txFilters.maxAmount = null;
+    showTransfers();
+  });
 });
 
 function withSeparators(numStr) {
@@ -939,7 +941,7 @@ function markActiveFilters() {
   counterpartyTh.classList.toggle("activeFilter", Boolean(txFilters.wallet));
   timestampTh.classList.toggle("activeFilter", txFilters.fromMs != null || txFilters.toMs != null);
   statusTh.classList.toggle("activeFilter", currentKind() !== "all");
-  amountTh.classList.toggle("activeFilter", txFilters.minAmount != null || txFilters.maxAmount != null);
+  amountTh.classList.toggle("activeFilter", Boolean(txFilters.asset) || txFilters.minAmount != null || txFilters.maxAmount != null);
 }
 
 function toLocalInputValue(ms) {
@@ -1053,7 +1055,7 @@ function openFilterDialog(title, fieldsHtml, onApply) {
 }
 
 function applyFiltersAndRefresh() {
-  if (transferAsset.value === "tokens") tokenPage = 0;
+  if (transferAssetValue === "tokens") tokenPage = 0;
   else txState.page = 0;
   showTransfers();
 }
@@ -1088,7 +1090,7 @@ function openTimestampFilter() {
 }
 
 function openTypeFilter() {
-  const kinds = transferAsset.value === "tokens" ? tokenKinds : kaspaKinds;
+  const kinds = transferAssetValue === "tokens" ? tokenKinds : kaspaKinds;
   const selected = currentKind();
   const options = kinds.map(k => `<option value="${k.value}"${selected === k.value ? " selected" : ""}>${k.label}</option>`).join("");
   openFilterDialog("Filter by type", `
@@ -1100,8 +1102,37 @@ function openTypeFilter() {
   });
 }
 
+function collectAmountAssets() {
+  const map = new Map();
+  const add = (value, label) => {
+    const key = String(value || "").trim().toLowerCase();
+    const text = String(label || value || "").trim();
+    if (!key || !text || map.has(key)) return;
+    map.set(key, text);
+  };
+  add("kas", "KAS");
+  if (transferAssetValue === "tokens") {
+    for (const token of Array.isArray(kcc20Tokens) ? kcc20Tokens : []) {
+      const label = token.listed_ticker || token.listed_name || token.name || "";
+      add(label, label);
+    }
+    for (const ev of tokenEvents) add(eventAssetLabel(ev), eventAssetLabel(ev));
+    const current = String(txFilters.asset || "").trim().toLowerCase();
+    if (current && current !== "kas" && current !== "kaspa" && !map.has(current)) add(current, txFilters.asset);
+  }
+  return map;
+}
+
 function openAmountFilter() {
+  const selected = String(txFilters.asset || "").trim().toLowerCase();
+  const options = [`<option value=""${selected ? "" : " selected"}>All</option>`];
+  collectAmountAssets().forEach((label, value) => {
+    options.push(`<option value="${escHtml(value)}"${selected === value ? " selected" : ""}>${escHtml(label)}</option>`);
+  });
   openFilterDialog("Filter by amount", `
+    <label>Asset
+      <select id="filterAsset">${options.join("")}</select>
+    </label>
     <label>Min
       <input id="filterMin" type="number" step="any" min="0" value="${txFilters.minAmount ?? ""}">
     </label>
@@ -1110,10 +1141,12 @@ function openAmountFilter() {
     </label>
   `, (dialog, clear) => {
     if (clear) {
+      txFilters.asset = "";
       txFilters.minAmount = null;
       txFilters.maxAmount = null;
       return;
     }
+    txFilters.asset = String(dialog.querySelector("#filterAsset")?.value || "").trim().toLowerCase();
     txFilters.minAmount = parseAmountInput(dialog.querySelector("#filterMin").value);
     txFilters.maxAmount = parseAmountInput(dialog.querySelector("#filterMax").value);
   });
@@ -1166,6 +1199,8 @@ function kaspaTxMatchesFilters(tx, addr) {
   if (!matchesTime(tx.block_time ? Number(tx.block_time) : null)) return false;
   const kind = currentKind();
   if (kind && kind !== "all" && kaspaKindValue(tx, addr, net) !== kind) return false;
+  const asset = String(txFilters.asset || "").trim().toLowerCase();
+  if (asset && asset !== "kas" && asset !== "kaspa") return false;
   return matchesRawAmount(net, 8);
 }
 
@@ -1291,6 +1326,20 @@ function tokenFilterAmount(ev) {
   return tokenEventAmount(ev, focused);
 }
 
+function eventAssetLabel(ev) {
+  const tokenId = String(ev?.token_id || "");
+  const holding = tokenHolding(tokenId);
+  const trade = eventTrade(ev);
+  return String(
+    holding.listed_ticker ||
+    holding.listed_name ||
+    ev?.token_name ||
+    trade?.token_name ||
+    tokenNameMap[tokenId] ||
+    ""
+  ).trim();
+}
+
 function tokenEventMatchesFilters(ev) {
   ev = enrichTokenEvent(ev);
   if (txFilters.wallet) {
@@ -1306,6 +1355,17 @@ function tokenEventMatchesFilters(ev) {
   if (!matchesTime(eventTime(ev))) return false;
   const kind = currentKind();
   if (kind && kind !== "all" && tokenKindValue(ev) !== kind) return false;
+  const asset = String(txFilters.asset || "").trim().toLowerCase();
+  if (asset === "kas" || asset === "kaspa") {
+    const quote = tokenEventQuote(ev);
+    if (quote == null || quote === "") return false;
+    return matchesRawAmount(quote, 8);
+  }
+  if (asset) {
+    const label = eventAssetLabel(ev).toLowerCase();
+    const tokenId = String(ev.token_id || "").toLowerCase();
+    if (label !== asset && tokenId !== asset) return false;
+  }
   const tokenId = String(ev.token_id || "");
   const holding = tokenHolding(tokenId);
   const decimals = ev.listed_decimals ?? ev.decimals ?? holding.listed_decimals ?? holding.decimals ?? 0;
@@ -1773,7 +1833,7 @@ async function loadTokenType() {
 
 function showTransfers() {
   applyTransferHeaders();
-  if (transferAsset.value === "tokens") {
+  if (transferAssetValue === "tokens") {
     if (tokenEvents.length === 0) loadTokenType();
     else ensureTokenPage();
     return;
@@ -1929,7 +1989,7 @@ async function runSearch(inputAddr) {
 }
 
 prevTransfers.addEventListener("click", () => {
-  if (transferAsset.value === "tokens") {
+  if (transferAssetValue === "tokens") {
     if (tokenPage > 0) {
       tokenPage -= 1;
       renderTokenPage();
@@ -1943,7 +2003,7 @@ prevTransfers.addEventListener("click", () => {
 });
 
 nextTransfers.addEventListener("click", async () => {
-  if (transferAsset.value === "tokens") {
+  if (transferAssetValue === "tokens") {
     tokenPage += 1;
     await ensureTokenPage();
     return;

@@ -457,3 +457,52 @@ tr:hover td { background: rgba(255,255,255,.03);}
     grid-template-rows: none;
   }
 }
+
+/* v filters */
+th.filterTh { cursor: pointer; user-select: none; }
+th.filterTh.activeFilter { color: #70C7BA; }
+.w-fields { display: grid; gap: 10px; margin: 12px 0; }
+.w-fields label { font-size: 13px; display: grid; gap: 6px; }
+.w-fields input, .w-fields select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--search-border, rgba(255,255,255,.12));
+  background: var(--search-background, rgba(255,255,255,.04));
+  color: inherit;
+}
+.w-actions { display: flex; gap: 8px; }
+.w-actions .btn { flex: 1; }
+.asset-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background-color: var(--background-color);
+  padding: 4px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+.asset-tab {
+  padding: 0.35rem 0.9rem;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 0.9rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.asset-tab:hover {
+  background-color: rgba(0,0,0,0.08);
+}
+.asset-tab.active {
+  background-color: rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+#dark .asset-tab:hover {
+  background-color: rgba(255,255,255,0.12);
+}
+#dark .asset-tab.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}

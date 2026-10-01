@@ -134,11 +134,12 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
             <tr>
               <th style="text-align: center;">From</th>
               <th style="text-align: center;">To</th>
+              <th style="text-align: center;">Asset</th>
             </tr>
           </thead>
           <tbody id="transferRows">
             <tr>
-              <td colspan="2" class="muted">-</td>
+              <td colspan="3" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -220,6 +221,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 const BLOCK_BASE = "/block/?q=";
 const TRANSACTION_BASE = "/transaction/?q=";
 const WALLET_BASE = "/address/?q=";
+const KASCOV_DATA = "https://kascov.io/data/mainnet";
+const KASCOV_COIN = "https://kascov.io/#/mainnet/c/";
+const BECH32_CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
 
 const hdrSub = document.getElementById("hdrSub");
 const totalSent = document.getElementById("totalSent");
@@ -327,13 +331,299 @@ async function renderSummary(json, totals, inputs, outputs) {
   acceptingBlockTime.textContent = formatDate(json.accepting_block_time, true);
 }
 
-function renderTransfers(json, totals) {
-  let html = '';
+function kaspaPolymod(values) {
+  let c = 1n;
+  const gens = [0x98f2bc8e61n, 0x79b76d99e2n, 0xf33e5fb3c4n, 0xae2eabe2a8n, 0x1e4f43e470n];
+  for (const d of values) {
+    const c0 = c >> 35n;
+    c = ((c & 0x07ffffffffn) << 5n) ^ BigInt(d);
+    for (let i = 0; i < 5; i++) {
+      if ((c0 >> BigInt(i)) & 1n) c ^= gens[i];
+    }
+  }
+  return c ^ 1n;
+}
+
+function convertBits(data, from, to, pad) {
+  let acc = 0;
+  let bits = 0;
+  const maxv = (1 << to) - 1;
+  const maxAcc = (1 << (from + to - 1)) - 1;
+  const out = [];
+  for (const value of data) {
+    acc = ((acc << from) | value) & maxAcc;
+    bits += from;
+    while (bits >= to) {
+      bits -= to;
+      out.push((acc >> bits) & maxv);
+    }
+  }
+  if (pad && bits > 0) out.push((acc << (to - bits)) & maxv);
+  return out;
+}
+
+function encodeKaspaAddress(hex, version = 0) {
+  const h = String(hex || "").toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(h) && !/^[0-9a-f]{66}$/.test(h)) return "";
+  const payload = [];
+  for (let i = 0; i < h.length; i += 2) payload.push(parseInt(h.slice(i, i + 2), 16));
+  const five = convertBits([version, ...payload], 8, 5, true);
+  const prefix = "kaspa";
+  const prefixVals = [...prefix].map(ch => ch.charCodeAt(0) & 31);
+  const mod = kaspaPolymod([...prefixVals, 0, ...five, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const checksumBytes = [];
+  for (let i = 0; i < 5; i++) checksumBytes.push(Number((mod >> BigInt(8 * (4 - i))) & 255n));
+  const checksum = convertBits(checksumBytes, 8, 5, true);
+  return prefix + ":" + [...five, ...checksum].map(i => BECH32_CHARSET[i]).join("");
+}
+
+function shortId(value) {
+  if (typeof shortenEnd === "function") return shortenEnd(value);
+  const s = String(value || "");
+  return s.length > 12 ? `${s.slice(0, 6)}…${s.slice(-4)}` : s;
+}
+
+function ownerKey(owner) {
+  const raw = String(owner || "").toLowerCase();
+  const idx = raw.lastIndexOf(":");
+  return idx >= 0 ? raw.slice(idx + 1) : raw;
+}
+
+function linkOwner(owner) {
+  const raw = String(owner || "");
+  if (!raw) return `<span class="muted">-</span>`;
+  if (raw.startsWith("kaspa:")) return linkAddress(raw);
+  if (raw.startsWith("covenant:")) {
+    const id = raw.slice(9);
+    return `<a href="${KASCOV_COIN}${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer">${escHtml(shortId(id))}</a>`;
+  }
+  const hex = ownerKey(raw);
+  if (/^[0-9a-f]{64}$/.test(hex) || /^[0-9a-f]{66}$/.test(hex)) {
+    const addr = encodeKaspaAddress(hex, hex.length === 66 ? 1 : 0);
+    if (addr) return linkAddress(addr);
+  }
+  return `<span class="muted">${escHtml(shortId(raw))}</span>`;
+}
+
+function formatKasAmount(amt) {
+  return String(formatKas(BigInt(amt))).replace(/\s*KAS\s*$/i, "");
+}
+
+function formatTokenAmount(amount, dec) {
+  if (amount === undefined || amount === null || amount === "") return "0";
+  const n = BigInt(amount);
+  const decimals = Number(dec) || 0;
+  if (decimals <= 0) return withSeparators(n.toString());
+  const neg = n < 0n;
+  const v = neg ? -n : n;
+  const div = 10n ** BigInt(decimals);
+  const intPart = v / div;
+  let frac = (v % div).toString().padStart(decimals, "0").replace(/0+$/, "");
+  if (frac) frac = "." + frac;
+  return (neg ? "-" : "") + withSeparators(intPart.toString()) + frac;
+}
+
+function assetHtml(meta) {
+  const label = escHtml(meta.name || "KCC20");
+  if (!meta.id) return label;
+  return `<a href="${KASCOV_COIN}${encodeURIComponent(meta.id)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+}
+
+function signedAmount(owner, amount, dec, sign) {
+  const color = sign === "-" ? "#ff6b6b" : "#2ee59d";
+  return `${linkOwner(owner)} <span style="color:${color}">${sign}${formatTokenAmount(amount, dec)}</span>`;
+}
+
+function sumAmounts(rows) {
+  return rows.reduce((s, row) => s + BigInt(row.amount || 0), 0n);
+}
+
+async function fetchKcc20Tx(txid) {
+  const res = await fetch(`${KASCOV_DATA}/tx/${txid}.json`);
+  if (!res.ok) return null;
+  return await res.json();
+}
+
+async function fetchTokenMeta(tokenId, fallbackName) {
+  const [tokenRes, listRes] = await Promise.all([
+    fetch(`${KASCOV_DATA}/token/${tokenId}`).catch(() => null),
+    fetch(`${KASCOV_DATA}/tokens.json?q=${encodeURIComponent(tokenId)}&limit=5`).catch(() => null)
+  ]);
+  const tokenJson = tokenRes && tokenRes.ok ? await tokenRes.json() : {};
+  const listJson = listRes && listRes.ok ? await listRes.json() : {};
+  const token = tokenJson.token || {};
+  const listed = (Array.isArray(listJson.tokens) ? listJson.tokens : []).find(t => t.covenant_id === tokenId) || {};
+  return {
+    id: tokenId,
+    name: listed.listed_ticker || listed.listed_name || token.name || listed.name || fallbackName || shortId(tokenId),
+    decimals: listed.listed_decimals ?? listed.decimals ?? token.decimals ?? token.dec ?? 0
+  };
+}
+
+async function fetchTokenEventsForTx(tokenId, txid, seq) {
+  const urls = [];
+  if (seq != null && Number.isFinite(Number(seq))) {
+    urls.push(`${KASCOV_DATA}/token/${tokenId}/events?limit=20&order=asc&after_seq=${Math.max(0, Number(seq) - 1)}`);
+  }
+  urls.push(`${KASCOV_DATA}/token/${tokenId}/events?limit=100&order=desc`);
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const json = await res.json();
+      const events = (Array.isArray(json.events) ? json.events : []).filter(e => String(e.txid || "") === txid);
+      if (events.length) return events;
+    } catch {}
+  }
+  return [];
+}
+
+function tokenMovementRow(meta, fromHtml, toHtml) {
+  return `<tr><td>${fromHtml}</td><td style="text-align: left;">${toHtml}</td><td>${assetHtml(meta)}</td></tr>`;
+}
+
+function walletParties(json) {
+  const found = [];
+  const seen = new Set();
+  for (const inp of json?.inputs || []) {
+    const addr = inp.previous_outpoint_address || inp.previous_outpoint_resolved?.script_public_key_address || "";
+    if (!addr.startsWith("kaspa:q") || seen.has(addr)) continue;
+    seen.add(addr);
+    found.push(addr);
+  }
+  return found;
+}
+
+function tradeRow(meta, trade, events, wallets) {
+  if (!trade || !trade.market_covenant_id || trade.base_amount == null) return "";
+  const side = String(trade.side || "").toLowerCase();
+  if (side !== "buy" && side !== "sell") return "";
+  const market = `covenant:${trade.market_covenant_id}`;
+  const presence = [...new Set((events || []).flatMap(e => [e.owner_from, e.owner_to]).filter(owner => owner && !String(owner).startsWith("covenant:") && !String(owner).startsWith("script:")))];
+  const users = presence.length ? presence : wallets;
+  const amt = trade.base_amount;
+  const userHtml = users.length
+    ? users.map(owner => signedAmount(owner, amt, meta.decimals, side === "sell" ? "-" : "+")).join("<br>")
+    : `<span class="muted">-</span>`;
+  const marketHtml = signedAmount(market, amt, meta.decimals, side === "sell" ? "+" : "-");
+  return side === "sell"
+    ? tokenMovementRow(meta, userHtml, marketHtml)
+    : tokenMovementRow(meta, marketHtml, userHtml);
+}
+
+function reshapeRow(events, meta, trade, wallets) {
+  const traded = tradeRow(meta, trade, events, wallets);
+  if (traded) return traded;
+  const kind = String(events[0]?.token_kind || "");
+  if (!events.every(e => String(e.token_kind || "") === kind)) return "";
+  const fromOwners = [...new Set(events.map(e => e.owner_from).filter(Boolean))];
+  const toOwners = [...new Set(events.map(e => e.owner_to).filter(Boolean))];
+  const sameParty = fromOwners.length === 1 && toOwners.length === 1 && fromOwners[0] === toOwners[0];
+  if (kind === "split" && sameParty) {
+    return tokenMovementRow(
+      meta,
+      signedAmount(fromOwners[0], sumAmounts(events), meta.decimals, "-"),
+      events.map(e => signedAmount(e.owner_to, e.amount, meta.decimals, "+")).join("<br>")
+    );
+  }
+  if (kind === "merge") {
+    const fromOwnersResolved = fromOwners.length ? fromOwners : wallets;
+    const from = fromOwnersResolved.length
+      ? fromOwnersResolved.map(owner => signedAmount(owner, sumAmounts(events), meta.decimals, "-")).join("<br>")
+      : `<span class="muted">-</span>`;
+    const to = toOwners.length === 1
+      ? signedAmount(toOwners[0], sumAmounts(events), meta.decimals, "+")
+      : events.filter(e => e.owner_to).map(e => signedAmount(e.owner_to, e.amount, meta.decimals, "+")).join("<br>") || `<span class="muted">-</span>`;
+    return tokenMovementRow(meta, from, to);
+  }
+  return "";
+}
+
+function rowsFromEvents(events, meta, trade, wallets) {
+  const shaped = reshapeRow(events, meta, trade, wallets);
+  if (shaped) return shaped;
+  const moves = events.filter(ev => ev.owner_from !== ev.owner_to || ev.token_kind === "mint" || ev.token_kind === "burn");
+  const source = moves.length ? moves : events;
+  return source.map(ev => {
+    const amt = formatTokenAmount(ev.amount, meta.decimals);
+    const kind = String(ev.token_kind || "");
+    if (kind === "mint" || !ev.owner_from) {
+      return tokenMovementRow(meta, `<span class="muted">Mint</span>`, `${linkOwner(ev.owner_to)} <span style="color:#2ee59d">+${amt}</span>`);
+    }
+    if (kind === "burn" || !ev.owner_to) {
+      return tokenMovementRow(meta, `${linkOwner(ev.owner_from)} <span style="color:#ff6b6b">-${amt}</span>`, `<span class="muted">Burn</span>`);
+    }
+    return tokenMovementRow(
+      meta,
+      `${linkOwner(ev.owner_from)} <span style="color:#ff6b6b">-${amt}</span>`,
+      `${linkOwner(ev.owner_to)} <span style="color:#2ee59d">+${amt}</span>`
+    );
+  }).join("");
+}
+
+function rowsFromActions(actions, meta, trade, wallets) {
+  const traded = tradeRow(meta, trade, [], wallets);
+  if (traded) return traded;
+  const kind = String(actions[0]?.token_kind || "");
+  if (actions.length && actions.every(a => a.token_kind === kind) && (kind === "split" || kind === "merge")) {
+    const total = formatTokenAmount(sumAmounts(actions), meta.decimals);
+    const pieces = actions.map(a => formatTokenAmount(a.amount, meta.decimals)).join("<br>+");
+    const party = wallets.length
+      ? wallets.map(owner => signedAmount(owner, sumAmounts(actions), meta.decimals, kind === "split" ? "-" : "+")).join("<br>")
+      : `<span class="muted">-</span>`;
+    if (kind === "split") return tokenMovementRow(meta, party, `<span style="color:#2ee59d">+${pieces}</span>`);
+    return tokenMovementRow(meta, party, `<span style="color:#2ee59d">+${total}</span>`);
+  }
+  return actions.map(action => {
+    const amt = formatTokenAmount(action.amount, meta.decimals);
+    const actionKind = String(action.token_kind || "transfer");
+    if (actionKind === "mint") {
+      return tokenMovementRow(meta, `<span class="muted">Mint</span>`, `<span style="color:#2ee59d">+${amt}</span>`);
+    }
+    if (actionKind === "burn") {
+      return tokenMovementRow(meta, `<span style="color:#ff6b6b">-${amt}</span>`, `<span class="muted">Burn</span>`);
+    }
+    return tokenMovementRow(meta, `<span style="color:#ff6b6b">-${amt}</span>`, `<span style="color:#2ee59d">+${amt}</span>`);
+  }).join("");
+}
+
+async function renderKcc20Transfers(txid, json) {
+  const cov = await fetchKcc20Tx(txid);
+  if (!cov) return "";
+  const actions = Array.isArray(cov.token_actions) ? cov.token_actions : [];
+  const events = Array.isArray(cov.events) ? cov.events : [];
+  const wallets = walletParties(json);
+  const tokenIds = [...new Set([
+    ...actions.map(a => a.token_id),
+    ...events.map(e => e.covenant_id),
+    cov.trade && cov.trade.token_id
+  ].filter(Boolean))];
+  if (!tokenIds.length) return "";
+
+  const rows = await Promise.all(tokenIds.map(async (tokenId) => {
+    const tokenActions = actions.filter(a => a.token_id === tokenId);
+    const seq = (events.find(e => e.covenant_id === tokenId) || {}).seq;
+    const meta = await fetchTokenMeta(tokenId, tokenActions[0]?.name || cov.trade?.token_name);
+    const trade = cov.trade && cov.trade.token_id === tokenId ? cov.trade : null;
+    const tokenEvents = await fetchTokenEventsForTx(tokenId, txid, seq);
+    if (tokenEvents.length) return rowsFromEvents(tokenEvents, meta, trade, wallets);
+    if (tokenActions.length) return rowsFromActions(tokenActions, meta, trade, wallets);
+    if (trade) return rowsFromActions([{ amount: trade.base_amount, token_kind: "transfer" }], meta, trade, wallets);
+    return "";
+  }));
+  return rows.join("");
+}
+
+async function renderTransfers(json, totals) {
   const inputs = Array.isArray(json.inputs) ? [...json.inputs] : [];
   const outputs = Array.isArray(json.outputs) ? [...json.outputs] : [];
+  let tokenHtml = "";
+  try {
+    tokenHtml = await renderKcc20Transfers(json.transaction_id || currentTxId, json);
+  } catch {}
 
-  if (inputs.length === 0 && outputs.length === 0) {
-    transferRows.innerHTML = '<tr><td colspan="2" class="muted">No transfers to display</td></tr>';
+  if (inputs.length === 0 && outputs.length === 0 && !tokenHtml) {
+    transferRows.innerHTML = '<tr><td colspan="3" class="muted">No transfers to display</td></tr>';
     return;
   }
 
@@ -358,7 +648,7 @@ function renderTransfers(json, totals) {
     fromContent = inputs.map(inp => {
       const addr = inp.previous_outpoint_address || inp.previous_outpoint_resolved?.script_public_key_address || "-";
       const amt = inp.previous_outpoint_amount ?? inp.previous_outpoint_resolved?.amount ?? 0;
-      return `${linkAddress(addr)} <span style="color:#ff6b6b">-${formatKas(BigInt(amt))}</span>`;
+      return `${linkAddress(addr)} <span style="color:#ff6b6b">-${formatKasAmount(amt)}</span>`;
     }).join('<br>');
   }
 
@@ -369,12 +659,14 @@ function renderTransfers(json, totals) {
     toContent = outputs.map(out => {
       const addr = out.script_public_key_address || "-";
       const amt = out.amount ?? 0;
-      return `${linkAddress(addr)} <span style="color:#2ee59d">+${formatKas(BigInt(amt))}</span>`;
+      return `${linkAddress(addr)} <span style="color:#2ee59d">+${formatKasAmount(amt)}</span>`;
     }).join('<br>');
   }
 
-  html = `<tr><td>${fromContent}</td><td style="text-align: left;">${toContent}</td></tr>`;
-  transferRows.innerHTML = html;
+  const kasRow = (inputs.length || outputs.length)
+    ? `<tr><td>${fromContent}</td><td style="text-align: left;">${toContent}</td><td>KAS</td></tr>`
+    : "";
+  transferRows.innerHTML = tokenHtml + kasRow || '<tr><td colspan="3" class="muted">No transfers to display</td></tr>';
 }
 
 function renderIORows(inputs, outputs, txid) {
@@ -442,13 +734,13 @@ function determineTx(payload, outputs) {
   if (!plOk) {
     if (utf8.startsWith("ciph_msg:1:")) {
       explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kasia.webp";
-    } 
+    }
     else if (
       Array.isArray(outputs) &&
       outputs.some(o => o.script_public_key_address === "kaspa:qyp4nvaq3pdq7609z09fvdgwtc9c7rg07fuw5zgeee7xpr085de59eseqfcmynn")
     ) {
       explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kns.webp";
-    } 
+    }
     else {
       explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/kaspa.webp";
     }
@@ -493,7 +785,7 @@ async function runSearch(inputTxId) {
 
   renderHeader(txid);
   await renderSummary(json, totals, json.inputs, json.outputs);
-  renderTransfers(json, totals);
+  await renderTransfers(json, totals);
   renderIORows(json.inputs, json.outputs, txid);
   renderDetails(json);
   renderPayload(json.payload);
@@ -511,7 +803,7 @@ function resetUI() {
   blueScore.textContent = "-";
   blockTime.textContent = "-";
   acceptingBlockTime.textContent = "-";
-  transferRows.innerHTML = `<tr><td colspan="2" class="muted">-</td></tr>`;
+  transferRows.innerHTML = `<tr><td colspan="3" class="muted">-</td></tr>`;
   ioRows.innerHTML = `<div class="muted">-</div>`;
   detailsRows.innerHTML = `<tr><td class="k">-</td><td class="v">-</td></tr>`;
   payloadContent.textContent = "-";
