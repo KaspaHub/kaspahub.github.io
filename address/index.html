@@ -369,6 +369,7 @@ let utxos = null;
 let utxosPage = 0;
 
 const txLimit = 30;
+const fetchLimit = 150;
 const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
 const DAA_TIME_ANCHOR = { daa: 547346157, ms: 1790154983107 };
 const emptyTxState = () => ({ txs: [], offset: 0, hasMore: true, page: 0 });
@@ -491,10 +492,10 @@ async function fetchKcc20Tokens(addr) {
   return Array.isArray(json?.token_holdings) ? json.token_holdings : [];
 }
 
-async function fetchKcc20Activity(addr, cursor) {
+async function fetchKcc20Activity(addr, cursor, limit = fetchLimit) {
   const owner = kaspaAddressToOwnerHex(addr);
   if (!owner) return { events: [], next: null };
-  let url = `https://kascov.io/data/mainnet/transfers?limit=${txLimit}&owner=${encodeURIComponent("presence:" + owner)}`;
+  let url = `https://kascov.io/data/mainnet/transfers?limit=${limit}&owner=${encodeURIComponent("presence:" + owner)}`;
   if (cursor && cursor.daa != null && cursor.token && cursor.seq != null) {
     url += `&before_daa=${cursor.daa}&before_token=${cursor.token}&before_seq=${cursor.seq}`;
   }
@@ -1712,9 +1713,9 @@ function renderUtxoPage() {
 
 async function loadBatch() {
   if (!txState.hasMore) return;
-  const txsFull = await fetchTransactions(currentAddr, txState.offset, txLimit + 1);
-  txState.hasMore = txsFull.length > txLimit;
-  const txs = txState.hasMore ? txsFull.slice(0, txLimit) : txsFull;
+  const txsFull = await fetchTransactions(currentAddr, txState.offset, fetchLimit + 1);
+  txState.hasMore = txsFull.length > fetchLimit;
+  const txs = txState.hasMore ? txsFull.slice(0, fetchLimit) : txsFull;
   txState.txs.push(...txs);
   txState.offset += txs.length;
 }
