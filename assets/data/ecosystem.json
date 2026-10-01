@@ -333,7 +333,7 @@
 	"description": "Kaspa-native crowdfunded hunts platform. Post hunts, back with KAS in on-chain escrow, claim tasks, and let referees verify for payout.",
 	"link": "https://staghunt.app",
 	"logo": "https://kaspahub.org/assets/logos/staghunt.app.webp",
-	"features": []
+	"features": ["reviewed"]
 },
 {
 	"name": "Kaskly",
@@ -529,6 +529,13 @@
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
 	"link": "https://kasplay.fun",
 	"logo": "https://kaspahub.org/assets/logos/kasplay.webp",
+	"features": ["reviewed", "gaming"]
+},
+{
+	"name": "Kaspa Arcade",
+	"description": "Arcade platform with pinball tables, retro games, and head-to-head P2P play settled via Kaspa transactions and covenants.",
+	"link": "https://www.kaspaarcade.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspaarcade.webp",
 	"features": ["reviewed", "gaming"]
 },
 {

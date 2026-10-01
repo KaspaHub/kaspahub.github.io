@@ -596,7 +596,6 @@ function populateMenu() {
     { name: "News", icon: "📰", href: "/news/" },
     { name: "Explorer", icon: "🔍", href: "/explorer/" },
     { name: "Overview", icon: "📊", href: "/overview/" },
-    { name: "Projects", icon: "💼", href: "/projects/" },
     { name: "Comparison", icon: "⚡", href: "/comparison/" },
     { name: "Donations", icon: "❤️", href: "/address/?q=kaspa:qrsy0adfkulwcxklc6f29qudwdd5k2967rxfe02zlcpg3lrtnexc6dzn8qdgx" }
   ];
