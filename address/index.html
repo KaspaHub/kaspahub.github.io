@@ -795,7 +795,7 @@ async function fetchKaspaDomains(addr) {
 async function fetchAllDomains(addr) {
   let all = [];
   let page = 1;
-  const pageSize = 40;
+  const pageSize = 30;
   while (true) {
     const json = await fetchJson(`https://api.knsdomains.org/mainnet/api/v1/assets/?owner=${addr}&page=${page}&pageSize=${pageSize}`, { ok404: false });
     if (!json.success) throw new Error(json.message || 'Failed');
@@ -1742,7 +1742,7 @@ function filteredKaspaTxs() {
 async function ensureKaspaFilteredPage() {
   transfersLoading.classList.remove("hidden");
   try {
-    while (filteredKaspaTxs().length < (txState.page + 1) * 40 && txState.hasMore) {
+    while (filteredKaspaTxs().length < (txState.page + 1) * txLimit && txState.hasMore) {
       const before = txState.txs.length;
       await loadBatch();
       if (txState.txs.length === before) break;
@@ -1757,20 +1757,20 @@ async function ensureKaspaFilteredPage() {
 
 function renderPage() {
   const filtered = filteredKaspaTxs();
-  const start = txState.page * 40;
-  renderKaspaTxs(filtered.slice(start, start + 40), currentAddr);
+  const start = txState.page * txLimit;
+  renderKaspaTxs(filtered.slice(start, start + txLimit), currentAddr);
   prevTransfers.disabled = txState.page === 0;
-  nextTransfers.disabled = filtered.length <= start + 40 && !txState.hasMore;
+  nextTransfers.disabled = filtered.length <= start + txLimit && !txState.hasMore;
   cursorTransfers.textContent = filtered.length > 0 ? `Page ${txState.page + 1}` : "";
 }
 
 function renderTokenPage() {
   tokenEvents.sort((a, b) => Number(b.accepting_daa || 0) - Number(a.accepting_daa || 0));
   const filtered = filterTokenEvents();
-  const start = tokenPage * 40;
-  renderTokenActivity(filtered.slice(start, start + 40));
+  const start = tokenPage * txLimit;
+  renderTokenActivity(filtered.slice(start, start + txLimit));
   prevTransfers.disabled = tokenPage === 0;
-  nextTransfers.disabled = filtered.length <= start + 40 && !tokenHasMore;
+  nextTransfers.disabled = filtered.length <= start + txLimit && !tokenHasMore;
   cursorTransfers.textContent = filtered.length > 0 ? `Page ${tokenPage + 1}` : "";
 }
 
@@ -1784,7 +1784,7 @@ async function loadTokenBatch() {
 async function ensureTokenPage() {
   transfersLoading.classList.remove("hidden");
   try {
-    while (filterTokenEvents().length < (tokenPage + 1) * 40 && tokenHasMore) {
+    while (filterTokenEvents().length < (tokenPage + 1) * txLimit && tokenHasMore) {
       const before = tokenEvents.length;
       await loadTokenBatch();
       if (tokenEvents.length === before) break;
