@@ -438,6 +438,15 @@ function sumAmounts(rows) {
   return rows.reduce((s, row) => s + BigInt(row.amount || 0), 0n);
 }
 
+function sumByKey(items, keyFn) {
+  const map = new Map();
+  for (const item of items) {
+    const key = keyFn(item);
+    map.set(key, (map.get(key) || 0n) + BigInt(item.amount || 0));
+  }
+  return [...map.entries()].sort((a, b) => (b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0));
+}
+
 async function fetchKcc20Tx(txid) {
   const res = await fetch(`${KASCOV_DATA}/tx/${txid}.json`);
   if (!res.ok) return null;
@@ -523,17 +532,15 @@ function reshapeRow(events, meta, trade, wallets) {
     return tokenMovementRow(
       meta,
       signedAmount(fromOwners[0], sumAmounts(events), meta.decimals, "-"),
-      events.map(e => signedAmount(e.owner_to, e.amount, meta.decimals, "+")).join("<br>")
+      sumByKey(events, e => e.owner_to || "").map(([owner, amt]) => signedAmount(owner, amt, meta.decimals, "+")).join("<br>")
     );
   }
   if (kind === "merge") {
     const fromOwnersResolved = fromOwners.length ? fromOwners : wallets;
     const from = fromOwnersResolved.length
-      ? fromOwnersResolved.map(owner => signedAmount(owner, sumAmounts(events), meta.decimals, "-")).join("<br>")
+      ? sumByKey(fromOwnersResolved.map(owner => ({ owner, amount: sumAmounts(events) })), e => e.owner).map(([owner, amt]) => signedAmount(owner, amt, meta.decimals, "-")).join("<br>")
       : `<span class="muted">-</span>`;
-    const to = toOwners.length === 1
-      ? signedAmount(toOwners[0], sumAmounts(events), meta.decimals, "+")
-      : events.filter(e => e.owner_to).map(e => signedAmount(e.owner_to, e.amount, meta.decimals, "+")).join("<br>") || `<span class="muted">-</span>`;
+    const to = sumByKey(events.filter(e => e.owner_to), e => e.owner_to).map(([owner, amt]) => signedAmount(owner, amt, meta.decimals, "+")).join("<br>") || `<span class="muted">-</span>`;
     return tokenMovementRow(meta, from, to);
   }
   return "";
@@ -544,19 +551,28 @@ function rowsFromEvents(events, meta, trade, wallets) {
   if (shaped) return shaped;
   const moves = events.filter(ev => ev.owner_from !== ev.owner_to || ev.token_kind === "mint" || ev.token_kind === "burn");
   const source = moves.length ? moves : events;
-  return source.map(ev => {
-    const amt = formatTokenAmount(ev.amount, meta.decimals);
+  const grouped = new Map();
+  for (const ev of source) {
     const kind = String(ev.token_kind || "");
-    if (kind === "mint" || !ev.owner_from) {
-      return tokenMovementRow(meta, `<span class="muted">Mint</span>`, `${linkOwner(ev.owner_to)} <span style="color:#2ee59d">+${amt}</span>`);
+    const from = kind === "mint" || !ev.owner_from ? "" : String(ev.owner_from);
+    const to = kind === "burn" || !ev.owner_to ? "" : String(ev.owner_to);
+    const key = `${kind}\0${from}\0${to}`;
+    const prev = grouped.get(key) || { kind, from, to, amount: 0n };
+    prev.amount += BigInt(ev.amount || 0);
+    grouped.set(key, prev);
+  }
+  return [...grouped.values()].sort((a, b) => (b.amount > a.amount ? 1 : b.amount < a.amount ? -1 : 0)).map(ev => {
+    const amt = formatTokenAmount(ev.amount, meta.decimals);
+    if (ev.kind === "mint" || !ev.from) {
+      return tokenMovementRow(meta, `<span class="muted">Mint</span>`, `${linkOwner(ev.to)} <span style="color:#2ee59d">+${amt}</span>`);
     }
-    if (kind === "burn" || !ev.owner_to) {
-      return tokenMovementRow(meta, `${linkOwner(ev.owner_from)} <span style="color:#ff6b6b">-${amt}</span>`, `<span class="muted">Burn</span>`);
+    if (ev.kind === "burn" || !ev.to) {
+      return tokenMovementRow(meta, `${linkOwner(ev.from)} <span style="color:#ff6b6b">-${amt}</span>`, `<span class="muted">Burn</span>`);
     }
     return tokenMovementRow(
       meta,
-      `${linkOwner(ev.owner_from)} <span style="color:#ff6b6b">-${amt}</span>`,
-      `${linkOwner(ev.owner_to)} <span style="color:#2ee59d">+${amt}</span>`
+      `${linkOwner(ev.from)} <span style="color:#ff6b6b">-${amt}</span>`,
+      `${linkOwner(ev.to)} <span style="color:#2ee59d">+${amt}</span>`
     );
   }).join("");
 }
@@ -567,16 +583,21 @@ function rowsFromActions(actions, meta, trade, wallets) {
   const kind = String(actions[0]?.token_kind || "");
   if (actions.length && actions.every(a => a.token_kind === kind) && (kind === "split" || kind === "merge")) {
     const total = formatTokenAmount(sumAmounts(actions), meta.decimals);
-    const pieces = actions.map(a => formatTokenAmount(a.amount, meta.decimals)).join("<br>+");
+    const pieces = sumByKey(actions, () => "").map(([, amt]) => formatTokenAmount(amt, meta.decimals)).join("<br>+");
     const party = wallets.length
       ? wallets.map(owner => signedAmount(owner, sumAmounts(actions), meta.decimals, kind === "split" ? "-" : "+")).join("<br>")
       : `<span class="muted">-</span>`;
     if (kind === "split") return tokenMovementRow(meta, party, `<span style="color:#2ee59d">+${pieces}</span>`);
     return tokenMovementRow(meta, party, `<span style="color:#2ee59d">+${total}</span>`);
   }
-  return actions.map(action => {
-    const amt = formatTokenAmount(action.amount, meta.decimals);
+  const grouped = new Map();
+  for (const action of actions) {
     const actionKind = String(action.token_kind || "transfer");
+    const prev = grouped.get(actionKind) || 0n;
+    grouped.set(actionKind, prev + BigInt(action.amount || 0));
+  }
+  return [...grouped.entries()].map(([actionKind, amount]) => {
+    const amt = formatTokenAmount(amount, meta.decimals);
     if (actionKind === "mint") {
       return tokenMovementRow(meta, `<span class="muted">Mint</span>`, `<span style="color:#2ee59d">+${amt}</span>`);
     }
@@ -627,40 +648,33 @@ async function renderTransfers(json, totals) {
     return;
   }
 
-  const getAmount = (val) => BigInt(val ?? 0);
-
-  inputs.sort((a, b) => {
-    const amtA = getAmount(a.previous_outpoint_amount ?? a.previous_outpoint_resolved?.amount);
-    const amtB = getAmount(b.previous_outpoint_amount ?? b.previous_outpoint_resolved?.amount);
-    return amtB > amtA ? 1 : amtB < amtA ? -1 : 0;
-  });
-
-  outputs.sort((a, b) => {
-    const amtA = getAmount(a.amount);
-    const amtB = getAmount(b.amount);
-    return amtB > amtA ? 1 : amtB < amtA ? -1 : 0;
-  });
+  const fromTotals = new Map();
+  for (const inp of inputs) {
+    const addr = inp.previous_outpoint_address || inp.previous_outpoint_resolved?.script_public_key_address || "-";
+    const amt = BigInt(inp.previous_outpoint_amount ?? inp.previous_outpoint_resolved?.amount ?? 0);
+    fromTotals.set(addr, (fromTotals.get(addr) || 0n) + amt);
+  }
+  const toTotals = new Map();
+  for (const out of outputs) {
+    const addr = out.script_public_key_address || "-";
+    const amt = BigInt(out.amount ?? 0);
+    toTotals.set(addr, (toTotals.get(addr) || 0n) + amt);
+  }
+  const fromSorted = [...fromTotals.entries()].sort((a, b) => (b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0));
+  const toSorted = [...toTotals.entries()].sort((a, b) => (b[1] > a[1] ? 1 : b[1] < a[1] ? -1 : 0));
 
   let fromContent = '';
   if (inputs.length === 0) {
     fromContent = '<span class="muted">Block reward</span>';
   } else {
-    fromContent = inputs.map(inp => {
-      const addr = inp.previous_outpoint_address || inp.previous_outpoint_resolved?.script_public_key_address || "-";
-      const amt = inp.previous_outpoint_amount ?? inp.previous_outpoint_resolved?.amount ?? 0;
-      return `${linkAddress(addr)} <span style="color:#ff6b6b">-${formatKasAmount(amt)}</span>`;
-    }).join('<br>');
+    fromContent = fromSorted.map(([addr, amt]) => `${linkAddress(addr)} <span style="color:#ff6b6b">-${formatKasAmount(amt)}</span>`).join('<br>');
   }
 
   let toContent = '';
   if (outputs.length === 0) {
     toContent = '<span class="muted">Burned</span>';
   } else {
-    toContent = outputs.map(out => {
-      const addr = out.script_public_key_address || "-";
-      const amt = out.amount ?? 0;
-      return `${linkAddress(addr)} <span style="color:#2ee59d">+${formatKasAmount(amt)}</span>`;
-    }).join('<br>');
+    toContent = toSorted.map(([addr, amt]) => `${linkAddress(addr)} <span style="color:#2ee59d">+${formatKasAmount(amt)}</span>`).join('<br>');
   }
 
   const kasRow = (inputs.length || outputs.length)
