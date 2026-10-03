@@ -119,6 +119,13 @@
 	"features": ["launchpad", "dex"]
 },
 {
+	"name": "Kaspafun",
+	"description": "Non-custodial launchpad for tokens on Kaspa L1, Kasplex L2, and Robinhood Chain, supporting native curves, KRC-20s, and EVM launches approved through your wallet.",
+	"link": "https://kaspafun.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kaspafun.webp",
+	"features": ["launchpad"]
+},
+{
 	"name": "KaspaKaha",
 	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
 	"link": "https://www.kaspakaha.com",
