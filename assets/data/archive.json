@@ -28,6 +28,13 @@
   "features": ["cryptoCard"]
 },
 {
+  "name": "Exchang.io",
+  "description": "Exchang.io, formerly Swapika, is a UK-based swap platform launched in 2022, prioritizing fast and anonymous crypto exchanges without KYC.",
+  "link": "https://exchang.io",
+  "logo": "https://kaspahub.org/assets/logos/exchang.webp",
+  "features": ["cex", "noKyc", "swap", "withdrawals"]
+},
+{
   "name": "Kaspa Insights",
   "description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
   "link": "https://www.kaspainsights.com",
