@@ -39,7 +39,7 @@
   "description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
   "link": "https://www.kaspainsights.com",
   "logo": "https://kaspahub.org/assets/logos/kaspainsights.webp",
-  "features": ["reviewed", "analytics", "visualizer", "calculator", "utilities"]
+  "features": ["analytics", "visualizer", "calculator", "utilities"]
 },
 {
   "name": "Verum",
@@ -438,7 +438,7 @@
   "description": "CoinEx is a Hong Kong-based trading platform launched in 2017, providing crypto spot and futures trading.",
   "link": "https://www.coinex.com",
   "logo": "https://kaspahub.org/assets/logos/archive/coinex.webp",
-  "features": ["reviewed", "cex", "noKyc", "futuresTrading", "withdrawals"]
+  "features": ["cex", "noKyc", "futuresTrading", "withdrawals"]
 },
 {
   "name": "BitMart",
