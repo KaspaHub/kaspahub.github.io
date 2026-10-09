@@ -231,13 +231,6 @@
   "features": ["mining"]
 },
 {
-  "name": "Kaspa News",
-  "description": "A comprehensive real-time dashboard aggregating the latest Kaspa news, trending YouTube videos, top tweets, GitHub development activity, Discord updates, and AI-generated sentiment reports all in one place.",
-  "link": "https://kaspa.news",
-  "logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
-  "features": []
-},
-{
   "name": "KasMap",
   "description": "KasMap is an interactive tool that provides a visual representation of Kaspa network nodes on a global map, allowing users to see the geographical distribution of the network.",
   "link": "https://kasmap.xyz",
