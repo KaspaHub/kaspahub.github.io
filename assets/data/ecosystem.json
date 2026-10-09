@@ -343,6 +343,13 @@
 	"features": ["reviewed"]
 },
 {
+	"name": "KASDISTRO",
+	"description": "A utility platform for mass KAS distributions on the Kaspa network, allowing projects, creators, communities, and teams to send rewards to multiple wallet addresses in one transaction flow.",
+	"link": "https://kasdistro.com",
+	"logo": "https://kaspahub.org/assets/logos/kasdistro.webp",
+	"features": ["reviewed", "utilities"]
+},
+{
 	"name": "Kaskly",
 	"description": "Non-custodial creator toolkit on Kaspa for paid messages and prize drops. Attach KAS to a message - recipients claim by replying, or funds refund automatically via on-chain covenants.",
 	"link": "https://www.kaskly.app",
@@ -453,13 +460,6 @@
 	"link": "https://kassigner.org",
 	"logo": "https://kaspahub.org/assets/logos/kassigner.webp",
 	"features": ["reviewed", "utilities"]
-},
-{
-	"name": "KASDISTRO",
-	"description": "A utility platform for mass KAS distributions on the Kaspa network, allowing projects, creators, communities, and teams to send rewards to multiple wallet addresses in one transaction flow.",
-	"link": "https://kasdistro.com",
-	"logo": "https://kaspahub.org/assets/logos/kasdistro.webp",
-	"features": ["utilities"]
 },
 {
 	"name": "Genesis Zero",
