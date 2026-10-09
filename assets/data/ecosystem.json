@@ -385,6 +385,13 @@
 	"features": ["development"]
 },
 {
+	"name": "Gembl.Fun",
+	"description": "A crypto casino centered on Kaspa, built so the casino can power further ecosystem growth through events, marketing, and tools.",
+	"link": "https://gembl.fun",
+	"logo": "https://kaspahub.org/assets/logos/gembl.webp",
+	"features": ["gambling"]
+},
+{
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
