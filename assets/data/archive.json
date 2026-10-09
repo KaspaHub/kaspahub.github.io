@@ -28,11 +28,11 @@
   "features": ["cryptoCard"]
 },
 {
-  "name": "Exchang.io",
-  "description": "Exchang.io, formerly Swapika, is a UK-based swap platform launched in 2022, prioritizing fast and anonymous crypto exchanges without KYC.",
-  "link": "https://exchang.io",
-  "logo": "https://kaspahub.org/assets/logos/archive/exchang.webp",
-  "features": ["cex", "noKyc", "swap", "withdrawals"]
+  "name": "Flux Kmail",
+  "description": "A decentralized, wallet-based email application for the Kaspa ecosystem, using wallet addresses as identities for passwordless, secure communication. Open-source, integrating with TTT for app notifications and KAS transfers.",
+  "link": "https://fluxkmail.base44.app",
+  "logo": "https://kaspahub.org/assets/logos/fluxkmail.webp",
+  "features": []
 },
 {
   "name": "Kaspa Insights",
@@ -59,7 +59,7 @@
   "name": "De Assets",
   "description": "A native KCC20 covenant token platform on Kaspa Layer 1, enabling the deployment, minting, and trading of native tokens through a fully on-chain orderbook enforced by Kaspa consensus.",
   "link": "https://tn10.deassets.io",
-  "logo": "https://kaspahub.org/assets/logos/deassets.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/deassets.webp",
   "features": ["launchpad", "dex"]
 },
 {
@@ -82,13 +82,6 @@
   "link": "https://www.ghostwallet.org",
   "logo": "https://kaspahub.org/assets/logos/archive/ghostwallet.webp",
   "features": ["openSource", "selfCustodial", "krc20", "browserExtension"]
-},
-{
-  "name": "KasPortal",
-  "description": "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
-  "link": "https://kasportal.com",
-  "logo": "https://kaspahub.org/assets/logos/archive/kasportal.webp",
-  "features": ["cex"]
 },
 {
   "name": "KasCasino",
@@ -234,7 +227,7 @@
   "name": "Poolin",
   "description": "A large mining pool founded in 2017, supporting Kaspa with PPS, FPPS, PPLNS options. Offers advanced features for collective mining and optimized rewards.",
   "link": "https://www.poolin.com",
-  "logo": "https://kaspahub.org/assets/logos/poolin.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/poolin.webp",
   "features": ["mining"]
 },
 {
@@ -343,13 +336,6 @@
   "features": ["visualizer"]
 },
 {
-  "name": "Kaspaspeed",
-  "description": "Kaspaspeed visualizes block speeds of blockchain networks, comparing Kaspa’s high block rate (10 BPS) with Bitcoin, Solana, and others. It highlights Kaspa’s blockDAG performance for PoW vs. PoS research.",
-  "link": "https://kaspaspeed.com",
-  "logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-  "features": ["visualizer"]
-},
-{
   "name": "KSPR DEX",
   "description": "A decentralized exchange and launchpad on Kaspa's Kasplex L2, enabling zero-fee token deployment, V3 AMM liquidity with perpetual creator fees, and in-channel Telegram trading for seamless DeFi access.",
   "link": "https://app.kspr.exchange",
@@ -406,6 +392,20 @@
   "features": []
 },
 {
+  "name": "KasPortal",
+  "description": "A cross-chain swap platform, enabling token exchanges across multiple blockchains with digital payment integrations for fiat-to-crypto conversions and non-custodial, fast transactions.",
+  "link": "https://kasportal.com",
+  "logo": "https://kaspahub.org/assets/logos/archive/kasportal.webp",
+  "features": ["cex"]
+},
+{
+  "name": "Exchang.io",
+  "description": "Exchang.io, formerly Swapika, is a UK-based swap platform launched in 2022, prioritizing fast and anonymous crypto exchanges without KYC.",
+  "link": "https://exchang.io",
+  "logo": "https://kaspahub.org/assets/logos/archive/exchang.webp",
+  "features": ["cex", "noKyc", "swap", "withdrawals"]
+},
+{
   "name": "Exbitron",
   "description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
   "link": "https://app.exbitron.com",
@@ -430,7 +430,7 @@
   "name": "Exmo",
   "description": "Exmo is based in Poland and was founded in 2014. It offers a user-friendly platform for trading cryptocurrencies with fiat currencies.",
   "link": "https://exmo.com",
-  "logo": "https://kaspahub.org/assets/logos/exmo.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/exmo.webp",
   "features": ["cex"]
 },
 {
@@ -451,7 +451,7 @@
   "name": "BitMart",
   "description": "BitMart is a Cayman Islands-based exchange platform established in 2017, offering crypto trading and staking services.",
   "link": "https://www.bitmart.com",
-  "logo": "https://kaspahub.org/assets/logos/bitmart.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/bitmart.webp",
   "features": ["cex", "noKyc", "cryptoCard", "futuresTrading"]
 }
 ]

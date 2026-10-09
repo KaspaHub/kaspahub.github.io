@@ -259,6 +259,20 @@
 	"features": ["verified", "ai"]
 },
 {
+	"name": "KaChat",
+	"description": "Encrypted, peer-to-peer chat and KAS payments on Kaspa. No accounts, no phone numbers: your wallet is your identity.",
+	"link": "https://home.kachat.app",
+	"logo": "https://kaspahub.org/assets/logos/kachat.webp",
+	"features": ["reviewed", "social"]
+},
+{
+	"name": "K",
+	"description": "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
+	"link": "https://k-social.network",
+	"logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
+	"features": ["reviewed", "social"]
+},
+{
 	"name": "Kasia",
 	"description": "A peer-to-peer, encrypted messaging protocol and application built on Kaspa, fully open-source and decentralized.",
 	"link": "https://kasia.fyi",
@@ -278,20 +292,6 @@
 	"link": "https://kbeam.app",
 	"logo": "https://kaspahub.org/assets/logos/kbeam.webp",
 	"features": ["social"]
-},
-{
-	"name": "KaChat",
-	"description": "Private, decentralized messaging application powered by the Kaspa network using the Kasia protocol.",
-	"link": "https://linktr.ee/KaChat_",
-	"logo": "https://kaspahub.org/assets/logos/kachat.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "K",
-	"description": "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
-	"link": "https://k-social.network",
-	"logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
-	"features": ["reviewed", "social"]
 },
 {
 	"name": "KasShi",
@@ -508,14 +508,7 @@
 	"description": "The Kaspa Super-App (Tap-To-Tip). All-in-one platform for social networking, instant tipping, DeFi, AI tools, gaming, marketplace, and more - powered by Kaspa for fast, low-fee transactions.",
 	"link": "https://tttz.xyz",
 	"logo": "https://kaspahub.org/assets/logos/ttt.webp",
-	"features": ["social"]
-},
-{
-	"name": "Flux Kmail",
-	"description": "A decentralized, wallet-based email application for the Kaspa ecosystem, using wallet addresses as identities for passwordless, secure communication. Open-source, integrating with TTT for app notifications and KAS transfers.",
-	"link": "https://fluxkmail.base44.app",
-	"logo": "https://kaspahub.org/assets/logos/fluxkmail.webp",
-	"features": []
+	"features": ["reviewed", "social"]
 },
 {
 	"name": "KasMail",
@@ -866,6 +859,13 @@
 	"link": "https://learnkaspa.com",
 	"logo": "https://kaspahub.org/assets/logos/learnkaspa.webp",
 	"features": ["reviewed", "education"] 
+},
+{
+	"name": "Kaspa News",
+	"description": "A news site publishing the latest Kaspa updates and research articles on protocol development, covenants, wallets, tokens, and ecosystem tools, with short explainers and videos.",
+	"link": "https://kaspa.news",
+	"logo": "https://kaspahub.org/assets/logos/kaspa.news.webp",
+	"features": ["reviewed", "education"]
 },
 {
 	"name": "Kaspa FAQ",
