@@ -343,7 +343,7 @@
 	"features": ["reviewed"]
 },
 {
-	"name": "KASDISTRO",
+	"name": "KasDistro",
 	"description": "A utility platform for mass KAS distributions on the Kaspa network, allowing projects, creators, communities, and teams to send rewards to multiple wallet addresses in one transaction flow.",
 	"link": "https://kasdistro.com",
 	"logo": "https://kaspahub.org/assets/logos/kasdistro.webp",
