@@ -385,6 +385,13 @@
 	"features": ["development"]
 },
 {
+	"name": "Kaspa Browser",
+	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
+	"link": "https://kaspabrowser.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
+	"features": ["reviewed"]
+},
+{
 	"name": "Gembl.Fun",
 	"description": "A crypto casino centered on Kaspa, built so the casino can power further ecosystem growth through events, marketing, and tools.",
 	"link": "https://gembl.fun",
@@ -480,13 +487,6 @@
 	"description": "A decentralized P2P file storage system built on the Kaspa BlockDAG, enabling encrypted, permanent file uploads to transaction payloads with free downloads and low miner fees.",
 	"link": "https://arkiv.fyi",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
-	"features": ["reviewed"]
-},
-{
-	"name": "Kaspa Browser",
-	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
-	"link": "https://kaspabrowser.xyz",
-	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
 	"features": ["reviewed"]
 },
 {
@@ -1174,6 +1174,13 @@
 	"link": "https://kascov.io",
 	"logo": "https://kaspahub.org/assets/logos/kascov.webp",
 	"features": ["reviewed", "blockExplorer"]
+},
+{
+	"name": "Kasvio",
+	"description": "Covenant explorer for Kaspa that discovers and tracks KCC20 tokens and smart coins on mainnet, helping projects gain visibility in the growing covenant-based ecosystem.",
+	"link": "https://kasvio.network",
+	"logo": "https://kaspahub.org/assets/logos/kasvio.webp",
+	"features": ["reviewed", "blockExplorer", "visualizer"]
 },
 {
 	"name": "KCC20.info",
