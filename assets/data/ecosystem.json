@@ -112,6 +112,13 @@
 	"features": ["launchpad"]
 },
 {
+	"name": "Kasseal",
+	"description": "Native Kaspa L1 token launchpad using KCC-20 covenants. Launch tokens with sealed supply, trade on a fair bonding curve, and graduate to a locked liquidity pool.",
+	"link": "https://app.kasseal.com",
+	"logo": "https://kaspahub.org/assets/logos/kasseal.webp",
+	"features": ["launchpad"]
+},
+{
 	"name": "KForge",
 	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
 	"link": "https://testnet.kforge.xyz",
