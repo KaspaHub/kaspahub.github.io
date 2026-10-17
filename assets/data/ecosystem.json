@@ -126,6 +126,13 @@
 	"features": ["launchpad", "dex"]
 },
 {
+	"name": "Braid",
+	"description": "DEX aggregator and exchange for Kaspa that finds the best swap prices across exchanges, shares arbitrage profits with users, and keeps full self-custody.",
+	"link": "https://www.braidswap.com",
+	"logo": "https://kaspahub.org/assets/logos/braidswap.webp",
+	"features": ["dex"]
+},
+{
 	"name": "Kaspafun",
 	"description": "Non-custodial launchpad for tokens on Kaspa L1, Kasplex L2, and Robinhood Chain, supporting native curves, KRC-20s, and EVM launches approved through your wallet.",
 	"link": "https://kaspafun.xyz",
@@ -133,11 +140,11 @@
 	"features": ["launchpad"]
 },
 {
-	"name": "KaspaKaha",
-	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
-	"link": "https://www.kaspakaha.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
-	"features": ["dex", "analytics"]
+	"name": "PumpForge",
+	"description": "Non-custodial launchpad for Solana, Base, BNB Chain, Robinhood Chain and Kaspa, with native Kaspa L1 support via KasForge for bonding-curve token launches and trading.",
+	"link": "https://pumpforge.tech",
+	"logo": "https://kaspahub.org/assets/logos/pumpforge.webp",
+	"features": ["launchpad"]
 },
 {
 	"name": "Aporia Exchange",
@@ -194,6 +201,13 @@
 	"link": "https://kaspa-lens.com",
 	"logo": "https://kaspahub.org/assets/logos/kaslens.webp",
 	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "KaspaKaha",
+	"description": "Kaspa Covenant & DeFi Explorer with real-time on-chain data, TVL, DEX volumes, covenant decoding, MEV tracking and analytics for Kaspa L1 and L2.",
+	"link": "https://www.kaspakaha.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspakaha.webp",
+	"features": ["analytics"]
 },
 {
 	"name": "Kaspa Token Hub",
@@ -266,6 +280,13 @@
 	"features": ["verified", "ai"]
 },
 {
+	"name": "Kasia",
+	"description": "A peer-to-peer, encrypted messaging protocol and application built on Kaspa, fully open-source and decentralized.",
+	"link": "https://kasia.fyi",
+	"logo": "https://kaspahub.org/assets/logos/kasia.webp",
+	"features": ["reviewed", "social"]
+},
+{
 	"name": "KaChat",
 	"description": "Encrypted, peer-to-peer chat and KAS payments on Kaspa. No accounts, no phone numbers: your wallet is your identity.",
 	"link": "https://home.kachat.app",
@@ -277,13 +298,6 @@
 	"description": "A decentralized microblogging platform on Kaspa, leveraging censorship-resistant technology for secure, transparent, and low-cost social interactions with open-source development.",
 	"link": "https://k-social.network",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-black.webp",
-	"features": ["reviewed", "social"]
-},
-{
-	"name": "Kasia",
-	"description": "A peer-to-peer, encrypted messaging protocol and application built on Kaspa, fully open-source and decentralized.",
-	"link": "https://kasia.fyi",
-	"logo": "https://kaspahub.org/assets/logos/kasia.webp",
 	"features": ["reviewed", "social"]
 },
 {
@@ -299,6 +313,13 @@
 	"link": "https://kbeam.app",
 	"logo": "https://kaspahub.org/assets/logos/kbeam.webp",
 	"features": ["social"]
+},
+{
+	"name": "Kaspa Browser",
+	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
+	"link": "https://kaspabrowser.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
+	"features": ["reviewed"]
 },
 {
 	"name": "KasShi",
@@ -390,13 +411,6 @@
 	"link": "https://koracle.xyz",
 	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
 	"features": ["development"]
-},
-{
-	"name": "Kaspa Browser",
-	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
-	"link": "https://kaspabrowser.xyz",
-	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
-	"features": ["reviewed"]
 },
 {
 	"name": "Gembl.Fun",
