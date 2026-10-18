@@ -150,6 +150,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 			<p id="counter"></p>
 			<select id="sortSelect" aria-label="Sort Menu">
 				<option value="default">Default</option>
+				<option value="newest">Newest</option>
 				<option value="az">A - Z</option>
 				<option value="za">Z - A</option>
 			</select>
@@ -349,8 +350,26 @@ function filterItems() {
 		filteredItems.push(item);
 	}
 	const sortMode = sortSelect.value;
-	if (sortMode === 'az') filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
-	else if (sortMode === 'za') filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+
+	// if (sortMode === 'newest') {
+	// 	filteredItems.sort((a, b) => (b.added ?? 0) - (a.added ?? 0));
+	// }
+	
+	if (sortMode === 'newest') {
+		const withAdded = [];
+		const withoutAdded = [];
+		for (const item of filteredItems) {
+			if (item.added != null) withAdded.push(item);
+			else withoutAdded.push(item);
+		}
+		withAdded.sort((a, b) => b.added - a.added);
+		withoutAdded.reverse();
+		filteredItems = withAdded.concat(withoutAdded);
+	} else if (sortMode === 'az') {
+		filteredItems.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+	} else if (sortMode === 'za') {
+		filteredItems.sort((a, b) => b.name.localeCompare(a.name, 'en', { sensitivity: 'base' }));
+	}
 	
 	if (!filteredItems.length) {
 		itemGrid.innerHTML = '<p class="no-items-message">No items match your search and filters.</p>';
@@ -374,12 +393,12 @@ layer2Toggle.addEventListener('change', filterItems);
 loadMoreBtn.addEventListener('click', () => renderItems());
 
 fetch('/assets/data/ecosystem.json')
-    .then(res => res.json())
-    .then(data => {
-        items = data;
-        applyCategoryFromURL();
-        filterItems();
-    })
+	.then(res => res.json())
+	.then(data => {
+		items = data;
+		applyCategoryFromURL();
+		filterItems();
+	})
 	.catch(() => itemGrid.innerHTML = '<p class="no-items-message">Failed to load projects.</p>');
 
 
