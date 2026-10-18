@@ -847,6 +847,13 @@
 	"features": ["reviewed", "education"]
 },
 {
+	"name": "Kaspa Pulse",
+	"description": "A free dashboard that adds up all of Kaspa in one place. Live DeFi TVL across both L2s, network hashrate, block reward, and holder behaviour.",
+	"link": "https://kaspapulse.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspapulse.webp",
+	"features": ["reviewed", "analytics", "education"]
+},
+{
 	"name": "Kaspa Daily",
 	"description": "A media platform providing news, insights, and updates on Kaspa ecosystem, covering Layer-2 developments, market trends, community updates, and partnerships.",
 	"link": "https://kaspadaily.com",
@@ -2084,6 +2091,13 @@
 	"link": "https://www.pionex.com",
 	"logo": "https://kaspahub.org/assets/logos/pionex.webp",
 	"features": ["reviewed", "cex", "futuresTrading"]
+},
+{
+	"name": "Eclipse Exchange",
+	"description": "Eclipse Exchange is a Nigeria-based privacy-focused non-custodial crypto swap platform operating since 2020, offering secure cross-chain swaps with no sign-ups or KYC.",
+	"link": "https://eclipseex.com",
+	"logo": "https://kaspahub.org/assets/logos/eclipseex.webp",
+	"features": ["cex"]
 },
 {
 	"name": "Ourbit",
