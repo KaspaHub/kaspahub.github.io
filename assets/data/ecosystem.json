@@ -404,6 +404,14 @@
 	"added": 1791493200
 },
 {
+	"name": "Dagger",
+	"description": "Telegram bot for fast trading of Kaspa L1 KCC-20 tokens across multiple venues with buy, sell, limit orders, and automation.",
+	"link": "https://daggertrade.com/",
+	"logo": "https://kaspahub.org/assets/logos/daggertrade.webp",
+	"features": ["reviewed", "utilities"],
+	"added": 1792352572
+},
+{
 	"name": "Kaskly",
 	"description": "Non-custodial creator toolkit on Kaspa for paid messages and prize drops. Attach KAS to a message - recipients claim by replying, or funds refund automatically via on-chain covenants.",
 	"link": "https://www.kaskly.app",
