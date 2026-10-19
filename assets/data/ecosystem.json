@@ -678,7 +678,7 @@
 	"description": "A retro-style side-scroller where Kaspa fights Solana. Dodge datacenter outages, shoot projectiles, and prove decentralization wins. Built for fun.",
 	"link": "https://cryptowars.world",
 	"logo": "https://kaspahub.org/assets/logos/cryptowars.webp",
-	"features": ["gaming"],
+	"features": ["reviewed", "gaming"],
 	"added": 1792416948
 },
 {
@@ -1636,6 +1636,13 @@
 	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile", "browserExtension", "web"]
 },
 {
+	"name": "DFNS",
+	"description": "Core banking platform for digital assets with MPC wallet infrastructure and Tier-1 Kaspa support for secure institutional KAS management.",
+	"link": "https://dfns.co",
+	"logo": "https://kaspahub.org/assets/logos/dfns.webp",
+	"features": ["wallet", "multiChain", "web"]
+},
+{
 	"name": "CoinRabbit",
 	"description": "Custodial multi-currency wallet offering storage, swapping, lending, and borrowing crypto in one platform, focusing on user convenience.",
 	"link": "https://coinrabbit.io/wallet/",
@@ -1732,6 +1739,14 @@
 	"link": "https://dropstab.com/coins/kaspa",
 	"logo": "https://kaspahub.org/assets/logos/dropstab.webp",
 	"features": ["reviewed", "analytics"]
+},
+{
+	"name": "Token Terminal",
+	"description": "A full-stack onchain data platform that transforms raw blockchain data into institutional-grade intelligence with standardized financial metrics for blockchains, DeFi protocols, and tokenized assets.",
+	"link": "https://tokenterminal.com",
+	"logo": "https://kaspahub.org/assets/logos/tokenterminal.webp",
+	"features": ["reviewed", "analytics"],
+	"added": 1792433173
 },
 {
 	"name": "Messari",

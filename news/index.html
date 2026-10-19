@@ -203,13 +203,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
                 </a>
             </div>
             <p class="note-content">${processPostContent(post.content)}</p>
-            <p class="muted note-footer">
-                <a href="https://primal.net/e/${noteId}" 
-                   style="color:inherit;text-decoration:none;" 
-                   target="_blank" rel="noopener">
-                    ${dateStr}
-                </a>
-            </p>
+            <p class="muted note-footer">${dateStr}</p>
         `;
         return article;
     }
