@@ -38,7 +38,7 @@
   "name": "Kaspa Insights",
   "description": "A platform offering insights and analytics on the Kaspa cryptocurrency and its ecosystem.",
   "link": "https://www.kaspainsights.com",
-  "logo": "https://kaspahub.org/assets/logos/kaspainsights.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/kaspainsights.webp",
   "features": ["analytics", "visualizer", "calculator", "utilities"]
 },
 {
@@ -402,14 +402,14 @@
   "name": "Exbitron",
   "description": "Exbitron is a Germany-based centralized exchange launched in May 2021, specializing in altcoins and new projects with low fees.",
   "link": "https://app.exbitron.com",
-  "logo": "https://kaspahub.org/assets/logos/exbitron.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/exbitron.webp",
   "features": ["cex", "noKyc"]
 },
 {
   "name": "Zedxion",
   "description": "Zedxion is a United Kingdom-based trading platform established in 2021, offering spot, futures, margin, P2P, and loan services.",
   "link": "https://www.zedxion.io",
-  "logo": "https://kaspahub.org/assets/logos/zedxion.webp",
+  "logo": "https://kaspahub.org/assets/logos/archive/zedxion.webp",
   "features": ["cex"]
 },
 {
@@ -446,5 +446,12 @@
   "link": "https://www.bitmart.com",
   "logo": "https://kaspahub.org/assets/logos/archive/bitmart.webp",
   "features": ["cex", "noKyc", "cryptoCard", "futuresTrading"]
+},
+{
+  "name": "Kriptomat",
+  "description": "Kriptomat is an Estonia-based exchange platform established in 2018, licensed under strict regulations with fiat-to-crypto services.",
+  "link": "https://kriptomat.io",
+  "logo": "https://kaspahub.org/assets/logos/archive/kriptomat.webp",
+  "features": ["cex", "mica", "payments"]
 }
 ]

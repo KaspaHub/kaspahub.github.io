@@ -250,7 +250,7 @@
 	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
 	"link": "https://kaspaname.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspaname.webp",
-	"features": ["marketplace"],
+	"features": ["reviewed", "marketplace"],
 	"added": 1789160400
 },
 {
@@ -258,7 +258,7 @@
 	"description": "Name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/kns.webp",
-	"features": ["marketplace"]
+	"features": ["reviewed", "marketplace"]
 },
 {
 	"name": "OverBuild Labs",
@@ -674,6 +674,14 @@
 	"features": ["reviewed", "gaming"]
 },
 {
+	"name": "Crypto Wars",
+	"description": "A retro-style side-scroller where Kaspa fights Solana. Dodge datacenter outages, shoot projectiles, and prove decentralization wins. Built for fun.",
+	"link": "https://cryptowars.world",
+	"logo": "https://kaspahub.org/assets/logos/cryptowars.webp",
+	"features": ["gaming"],
+	"added": 1792416948
+},
+{
 	"name": "Pixel Peeps",
 	"description": "A playable meme coin on Kaspa. Tap the coin, build a pixel-art city one Peep-grade at a time, click, upgrade, automate, and buy $PEEPS - a coin you can actually play.",
 	"link": "https://pixel-peeps.com",
@@ -902,7 +910,7 @@
 	"name": "KaspArchive",
 	"description": "A resource providing factual information and debunking myths about the Kaspa cryptocurrency, aimed at educating users about its features and capabilities.",
 	"link": "https://kasparchive.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"logo": "https://kaspahub.org/assets/logos/kasparchive.webp",
 	"features": ["reviewed", "education"]
 },
 {
@@ -1019,7 +1027,7 @@
 	"name": "Kaspa Br",
 	"description": "Brazilian community website dedicated to Kaspa, covering technology, ecosystem, and community information about the world’s fastest decentralized cryptocurrency network.",
 	"link": "https://www.kaspabr.com.br",
-	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
+	"logo": "https://kaspahub.org/assets/logos/kaspabr.webp",
 	"features": ["reviewed", "education"],
 	"added": 1789862400
 },
@@ -2110,13 +2118,6 @@
 	"link": "https://swyftx.com",
 	"logo": "https://kaspahub.org/assets/logos/swyftx.webp",
 	"features": ["cex", "payments"]
-},
-{
-	"name": "Kriptomat",
-	"description": "Kriptomat is an Estonia-based exchange platform established in 2018, licensed under strict regulations with fiat-to-crypto services.",
-	"link": "https://kriptomat.io",
-	"logo": "https://kaspahub.org/assets/logos/kriptomat.webp",
-	"features": ["cex", "mica", "payments"]
 },
 {
 	"name": "Godex",
