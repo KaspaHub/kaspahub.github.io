@@ -539,8 +539,8 @@
 },
 {
 	"name": "KasRegister",
-	"description": "A free high-speed point-of-sale terminal that turns any phone or browser into a Kaspa POS for accepting native $KAS payments. Features fast checkout, easy setup, live tracking, and direct-to-wallet QR payments for real-world merchants.",
-	"link": "https://kasregister.vercel.app/",
+	"description": "A free high-speed point-of-sale terminal that turns any phone or browser into a Kaspa POS for accepting native $KAS payments.",
+	"link": "https://kasregister.vercel.app",
 	"logo": "https://kaspahub.org/assets/logos/kasregister.webp",
 	"features": ["reviewed", "development", "payments"],
 	"added": 1792438745
