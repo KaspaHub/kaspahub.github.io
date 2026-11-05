@@ -338,6 +338,12 @@ function linkAddress(address, short = true) {
 
 }
 
+function txEmojiLink(txId) {
+  const id = String(txId || "").trim();
+  if (!id || id === "-") return `<span class="muted">-</span>`;
+  return `<a href="/transaction/?q=${encodeURIComponent(id)}">🔗</a>`;
+}
+
 function linkTx(transaction, short = true) {
   transaction = String(transaction ?? "").trim();
 

@@ -122,7 +122,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
         <table>
           <thead>
             <tr>
-              <th>TxID</th>
+              <th>Tx</th>
               <th id="counterpartyTh" class="filterTh">Counterparty</th>
               <th id="timestampTh" class="filterTh">Timestamp</th>
               <th id="statusTh" class="filterTh">Type</th>
@@ -156,14 +156,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>Token</th>
-              <th>Balance</th>
               <th>Cells</th>
-              <th>Decimals</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody id="kcc20Rows">
             <tr>
-              <td colspan="4" class="muted">-</td>
+              <td colspan="3" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -178,14 +177,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <thead>
             <tr>
               <th>Token</th>
-              <th>Balance</th>
               <th>Locked</th>
-              <th>Decimals</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody id="tokenRows">
             <tr>
-              <td colspan="4" class="muted">-</td>
+              <td colspan="3" class="muted">-</td>
             </tr>
           </tbody>
         </table>
@@ -381,7 +379,8 @@ let tokenCursor = null;
 let tokenHasMore = true;
 let tokenPage = 0;
 let tokenTradeMap = {};
-let tokenNameMap = {};
+let localTickerCache = {};
+let tokenMetaPending = new Set();
 
 const defaultFilters = () => ({
   wallet: "",
@@ -452,10 +451,8 @@ document.querySelectorAll("#transferAssetTabs .asset-tab").forEach(btn => {
     if (btn.dataset.asset === transferAssetValue) return;
     setTransferAsset(btn.dataset.asset);
     tokenPage = 0;
-    txFilters.kind = "all";
-    txFilters.asset = "";
-    txFilters.minAmount = null;
-    txFilters.maxAmount = null;
+    txState.page = 0;
+    txFilters = defaultFilters();
     showTransfers();
   });
 });
@@ -596,10 +593,35 @@ function rememberTrades(trades) {
   for (const trade of trades || []) {
     if (!trade || !trade.txid) continue;
     tokenTradeMap[trade.txid] = trade;
-    if (trade.token_id && trade.token_name) tokenNameMap[trade.token_id] = trade.token_name;
     pushTokenEvent(tradeToEvent(trade));
   }
   tokenEvents = tokenEvents.map(enrichTokenEvent);
+}
+
+function onTokenTickerResolved() {
+  if (transferAssetValue === "tokens" && tokenEvents.length) renderTokenPage();
+  if (Array.isArray(kcc20Tokens) && document.querySelector(".tabs .tab.active")?.dataset.tab === "tabKRC20") {
+    renderKcc20Tokens(kcc20Tokens);
+  }
+}
+
+function ensureLocalTokenTicker(tokenId) {
+  const id = String(tokenId || "").trim();
+  if (!id || localTickerCache[id] || tokenMetaPending.has(id)) return;
+  tokenMetaPending.add(id);
+  const addrAtStart = currentAddr;
+  fetchJson(`/assets/data/tokens/${encodeURIComponent(id)}/${encodeURIComponent(id)}.json`, { notFound: null })
+    .then(json => {
+      if (currentAddr !== addrAtStart) return;
+      const tick = String(json?.ticker || "").trim();
+      if (!tick || localTickerCache[id]) return;
+      localTickerCache[id] = tick;
+      onTokenTickerResolved();
+    })
+    .catch(() => {})
+    .finally(() => {
+      tokenMetaPending.delete(id);
+    });
 }
 
 async function fetchAllTokens(addr) {
@@ -942,7 +964,10 @@ function markActiveFilters() {
   counterpartyTh.classList.toggle("activeFilter", Boolean(txFilters.wallet));
   timestampTh.classList.toggle("activeFilter", txFilters.fromMs != null || txFilters.toMs != null);
   statusTh.classList.toggle("activeFilter", currentKind() !== "all");
-  amountTh.classList.toggle("activeFilter", Boolean(txFilters.asset) || txFilters.minAmount != null || txFilters.maxAmount != null);
+  const amountActive = transferAssetValue === "tokens"
+    ? Boolean(txFilters.asset) || txFilters.minAmount != null || txFilters.maxAmount != null
+    : txFilters.minAmount != null || txFilters.maxAmount != null;
+  amountTh.classList.toggle("activeFilter", amountActive);
 }
 
 function toLocalInputValue(ms) {
@@ -1103,37 +1128,14 @@ function openTypeFilter() {
   });
 }
 
-function collectAmountAssets() {
-  const map = new Map();
-  const add = (value, label) => {
-    const key = String(value || "").trim().toLowerCase();
-    const text = String(label || value || "").trim();
-    if (!key || !text || map.has(key)) return;
-    map.set(key, text);
-  };
-  add("kas", "KAS");
-  if (transferAssetValue === "tokens") {
-    for (const token of Array.isArray(kcc20Tokens) ? kcc20Tokens : []) {
-      const label = token.listed_ticker || token.listed_name || token.name || "";
-      add(label, label);
-    }
-    for (const ev of tokenEvents) add(eventAssetLabel(ev), eventAssetLabel(ev));
-    const current = String(txFilters.asset || "").trim().toLowerCase();
-    if (current && current !== "kas" && current !== "kaspa" && !map.has(current)) add(current, txFilters.asset);
-  }
-  return map;
-}
-
 function openAmountFilter() {
-  const selected = String(txFilters.asset || "").trim().toLowerCase();
-  const options = [`<option value=""${selected ? "" : " selected"}>All</option>`];
-  collectAmountAssets().forEach((label, value) => {
-    options.push(`<option value="${escHtml(value)}"${selected === value ? " selected" : ""}>${escHtml(label)}</option>`);
-  });
-  openFilterDialog("Filter by amount", `
+  const assetField = transferAssetValue === "tokens" ? `
     <label>Asset
-      <select id="filterAsset">${options.join("")}</select>
+      <input id="filterAsset" type="text" placeholder="Covenant ID" value="${escHtml(txFilters.asset || "")}">
     </label>
+  ` : "";
+  openFilterDialog("Filter by amount", `
+    ${assetField}
     <label>Min
       <input id="filterMin" type="number" step="any" min="0" value="${txFilters.minAmount ?? ""}">
     </label>
@@ -1147,7 +1149,11 @@ function openAmountFilter() {
       txFilters.maxAmount = null;
       return;
     }
-    txFilters.asset = String(dialog.querySelector("#filterAsset")?.value || "").trim().toLowerCase();
+    if (transferAssetValue === "tokens") {
+      txFilters.asset = String(dialog.querySelector("#filterAsset")?.value || "").trim().toLowerCase();
+    } else {
+      txFilters.asset = "";
+    }
     txFilters.minAmount = parseAmountInput(dialog.querySelector("#filterMin").value);
     txFilters.maxAmount = parseAmountInput(dialog.querySelector("#filterMax").value);
   });
@@ -1200,8 +1206,6 @@ function kaspaTxMatchesFilters(tx, addr) {
   if (!matchesTime(tx.block_time ? Number(tx.block_time) : null)) return false;
   const kind = currentKind();
   if (kind && kind !== "all" && kaspaKindValue(tx, addr, net) !== kind) return false;
-  const asset = String(txFilters.asset || "").trim().toLowerCase();
-  if (asset && asset !== "kas" && asset !== "kaspa") return false;
   return matchesRawAmount(net, 8);
 }
 
@@ -1327,18 +1331,40 @@ function tokenFilterAmount(ev) {
   return tokenEventAmount(ev, focused);
 }
 
-function eventAssetLabel(ev) {
-  const tokenId = String(ev?.token_id || "");
-  const holding = tokenHolding(tokenId);
-  const trade = eventTrade(ev);
-  return String(
+function resolveTokenTicker(tokenId, source) {
+  const id = String(tokenId || source?.token_id || "");
+  const holding = tokenHolding(id);
+  const src = source || {};
+  const label = String(
+    src.claimed_ticker ||
+    holding.claimed_ticker ||
+    src.listed_ticker ||
     holding.listed_ticker ||
-    holding.listed_name ||
-    ev?.token_name ||
-    trade?.token_name ||
-    tokenNameMap[tokenId] ||
+    localTickerCache[id] ||
     ""
   ).trim();
+  if (label) return label;
+  if (id) ensureLocalTokenTicker(id);
+  return id ? shortenEnd(id) : "";
+}
+
+function resolveTokenDecimals(tokenId, source) {
+  const id = String(tokenId || source?.token_id || "");
+  const holding = tokenHolding(id);
+  const src = source || {};
+  return Number(
+    src.claimed_decimals ??
+    src.listed_decimals ??
+    src.decimals ??
+    holding.claimed_decimals ??
+    holding.listed_decimals ??
+    holding.decimals ??
+    0
+  ) || 0;
+}
+
+function eventAssetLabel(ev) {
+  return resolveTokenTicker(ev?.token_id, ev);
 }
 
 function tokenEventMatchesFilters(ev) {
@@ -1357,19 +1383,11 @@ function tokenEventMatchesFilters(ev) {
   const kind = currentKind();
   if (kind && kind !== "all" && tokenKindValue(ev) !== kind) return false;
   const asset = String(txFilters.asset || "").trim().toLowerCase();
-  if (asset === "kas" || asset === "kaspa") {
-    const quote = tokenEventQuote(ev);
-    if (quote == null || quote === "") return false;
-    return matchesRawAmount(quote, 8);
-  }
   if (asset) {
-    const label = eventAssetLabel(ev).toLowerCase();
     const tokenId = String(ev.token_id || "").toLowerCase();
-    if (label !== asset && tokenId !== asset) return false;
+    if (tokenId !== asset) return false;
   }
-  const tokenId = String(ev.token_id || "");
-  const holding = tokenHolding(tokenId);
-  const decimals = ev.listed_decimals ?? ev.decimals ?? holding.listed_decimals ?? holding.decimals ?? 0;
+  const decimals = resolveTokenDecimals(ev.token_id, ev);
   return matchesRawAmount(tokenFilterAmount(ev), decimals);
 }
 
@@ -1407,16 +1425,53 @@ function tokenEventQuote(ev) {
   return null;
 }
 
+function shortId(value) {
+  if (typeof shortenEnd === "function") return shortenEnd(value);
+  const s = String(value || "");
+  return s.length > 12 ? `${s.slice(0, 6)}…${s.slice(-4)}` : s;
+}
+
 function linkOwner(owner) {
   const raw = String(owner || "");
-  if (!raw || isSameWallet(raw)) return `<span class="muted">-</span>`;
-  const addr = ownerToKaspa(raw);
-  if (addr && !isSameWallet(addr)) return linkAddress(addr);
+  if (!raw) return `<span class="muted">-</span>`;
+
   if (raw.startsWith("covenant:")) {
     const id = raw.slice(9);
-    return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer">${escHtml(shortenEnd(id))}</a>`;
+    return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer" title="covenant:${escHtml(id)}">covenant:${escHtml(shortId(id))}</a>`;
   }
-  return `<span class="muted">${escHtml(shortenEnd(ownerKey(raw) || raw))}</span>`;
+
+  if (raw.startsWith("script:")) {
+    const id = raw.slice(7);
+    return `<span class="muted" title="script:${escHtml(id)}">script:${escHtml(shortId(id))}</span>`;
+  }
+
+  if (raw.startsWith("kaspa:")) {
+    if (isSameWallet(raw)) {
+      return `<span class="muted">${escHtml(shortenMiddle(raw) ?? shortId(raw))}</span>`;
+    }
+    return linkAddress(raw);
+  }
+
+  const addr = ownerToKaspa(raw);
+  if (addr) {
+    if (isSameWallet(addr)) {
+      return `<span class="muted">${escHtml(shortenMiddle(addr) ?? shortId(addr))}</span>`;
+    }
+    return linkAddress(addr);
+  }
+
+  const hex = ownerKey(raw);
+  if (/^[0-9a-f]{64}$/.test(hex) || /^[0-9a-f]{66}$/.test(hex)) {
+    const encoded = encodeKaspaAddress(hex, hex.length === 66 ? 1 : 0);
+    if (encoded) {
+      if (isSameWallet(encoded)) {
+        return `<span class="muted">${escHtml(shortenMiddle(encoded) ?? shortId(encoded))}</span>`;
+      }
+      return linkAddress(encoded);
+    }
+  }
+
+  return `<span class="muted">${escHtml(shortId(ownerKey(raw) || raw))}</span>`;
 }
 
 function collectOwners(ev) {
@@ -1438,17 +1493,9 @@ function collectOwners(ev) {
 
 function tokenNameHtml(ev) {
   const tokenId = String(ev.token_id || "");
-  const holding = tokenHolding(tokenId);
-  const trade = eventTrade(ev);
-  const label =
-    holding.listed_ticker ||
-    holding.listed_name ||
-    ev.token_name ||
-    trade?.token_name ||
-    tokenNameMap[tokenId] ||
-    (tokenId ? shortenEnd(tokenId) : "token");
+  const label = resolveTokenTicker(tokenId, ev) || "token";
   if (!tokenId) return escHtml(label);
-  return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(tokenId)}" target="_blank" rel="noopener noreferrer">${escHtml(label)}</a>`;
+  return `<a href="/token/?q=${encodeURIComponent(tokenId)}">${escHtml(label)}</a>`;
 }
 
 function multiPartyHtml(items, labelCount) {
@@ -1497,7 +1544,7 @@ const statusClass = !isAccepted
     }
     return `
       <tr>
-        <td>${linkTx(hash, shortenEnd(hash))}</td>
+        <td>${txEmojiLink(hash)}</td>
         <td>${counterpartyHtml}</td>
         <td>${age}</td>
         <td><span class="${statusClass}">${escHtml(statusText)}</span></td>
@@ -1562,9 +1609,7 @@ function renderTokenActivity(pageTxs) {
       counterpartyHtml = `<span class="muted">-</span>`;
     }
 
-    const tokenId = String(ev.token_id || "");
-    const holding = tokenHolding(tokenId);
-    const decimals = ev.listed_decimals ?? ev.decimals ?? holding.listed_decimals ?? holding.decimals ?? 0;
+    const decimals = resolveTokenDecimals(ev.token_id, ev);
     const rawAmount = tokenEventAmount(ev, focused);
     const quoteSompi = tokenEventQuote(ev);
     const tokenAmt = cellOnly
@@ -1576,7 +1621,7 @@ function renderTokenActivity(pageTxs) {
 
     return `
       <tr>
-        <td>${linkTx(hash, shortenEnd(hash))}</td>
+        <td>${txEmojiLink(hash)}</td>
         <td>${counterpartyHtml}</td>
         <td>${age}</td>
         <td><span class="${statusClass}">${escHtml(statusText)}</span></td>
@@ -1592,21 +1637,21 @@ function emptyRow(cols, text) {
 
 function renderKcc20Tokens(list) {
   if (!list.length) {
-    kcc20Rows.innerHTML = emptyRow(4, "No tokens found.");
+    kcc20Rows.innerHTML = emptyRow(3, "No tokens found.");
     return;
   }
   kcc20Rows.innerHTML = list.map(token => {
     const tokenId = String(token.token_id || "");
-    const label = token.listed_ticker || token.listed_name || token.name || (tokenId ? shortenEnd(tokenId) : "-");
+    const label = resolveTokenTicker(tokenId, token) || "-";
     const tick = escHtml(label);
-    const tokenUrl = tokenId ? `https://kascov.io/#/mainnet/c/${encodeURIComponent(tokenId)}` : "";
-    const nameHtml = tokenUrl ? `<a href="${tokenUrl}" target="_blank" rel="noopener noreferrer">${tick}</a>` : tick;
+    const tokenUrl = tokenId ? `/token/?q=${encodeURIComponent(tokenId)}` : "";
+    const nameHtml = tokenUrl ? `<a href="${tokenUrl}">${tick}</a>` : tick;
+    const decimals = resolveTokenDecimals(tokenId, token);
     return `
       <tr>
         <td>${nameHtml}</td>
-        <td>${formatTokenAmount(token.balance, token.listed_decimals)}</td>
         <td>${withSeparators(token.cells ?? 0)}</td>
-        <td>${token.listed_decimals ?? 0}</td>
+        <td>${formatTokenAmount(token.balance, decimals)}</td>
       </tr>
     `;
   }).join("");
@@ -1614,7 +1659,7 @@ function renderKcc20Tokens(list) {
 
 function renderTokens(tokens) {
   if (!tokens.length) {
-    tokenRows.innerHTML = emptyRow(4, "No tokens found.");
+    tokenRows.innerHTML = emptyRow(3, "No tokens found.");
     return;
   }
   tokenRows.innerHTML = tokens.map(token => {
@@ -1622,9 +1667,8 @@ function renderTokens(tokens) {
     return `
       <tr>
         <td><a href="/krc20/?q=${token.tick}">${tick}</a></td>
-        <td>${formatTokenAmount(token.balance, token.dec)}</td>
         <td>${formatTokenAmount(token.locked, token.dec)}</td>
-        <td>${token.dec || 0}</td>
+        <td>${formatTokenAmount(token.balance, token.dec)}</td>
       </tr>
     `;
   }).join("");
@@ -1693,7 +1737,7 @@ function renderUTXOs(pageUtxos) {
     const txId = utxo.outpoint.transactionId || "-";
     return `
       <tr>
-        <td>${linkTx(txId, shortenEnd(txId))}</td>
+        <td>${txEmojiLink(txId)}</td>
         <td>${utxo.outpoint.index ?? "-"}</td>
         <td>${utxo.utxoEntry.blockDaaScore || "-"}</td>
         <td>${utxo.utxoEntry.isCoinbase ? "Yes" : "No"}</td>
@@ -1806,7 +1850,8 @@ async function loadTokenType() {
   tokenHasMore = true;
   tokenPage = 0;
   tokenTradeMap = {};
-  tokenNameMap = {};
+  localTickerCache = {};
+  tokenMetaPending = new Set();
   try {
     const first = await fetchKcc20Activity(currentAddr, null);
     for (const ev of first.events) pushTokenEvent(ev);
@@ -1865,7 +1910,7 @@ async function loadWith(loadingEl, rowsEl, cols, failText, loader, renderer) {
 }
 
 async function loadKcc20Tokens() {
-  await loadWith(kcc20Loading, kcc20Rows, 4, "Failed to load tokens.", async () => {
+  await loadWith(kcc20Loading, kcc20Rows, 3, "Failed to load tokens.", async () => {
     kcc20Tokens = await fetchKcc20Tokens(currentAddr);
     sortByBalance(kcc20Tokens);
     return kcc20Tokens;
@@ -1873,7 +1918,7 @@ async function loadKcc20Tokens() {
 }
 
 async function loadTokens() {
-  await loadWith(tokenLoading, tokenRows, 4, "Failed to load tokens.", async () => {
+  await loadWith(tokenLoading, tokenRows, 3, "Failed to load tokens.", async () => {
     tokens = await fetchAllTokens(currentAddr);
     sortByBalance(tokens);
     return tokens;
@@ -1922,7 +1967,8 @@ function resetTokenState() {
   tokenHasMore = true;
   tokenPage = 0;
   tokenTradeMap = {};
-  tokenNameMap = {};
+  localTickerCache = {};
+  tokenMetaPending = new Set();
 }
 
 async function runSearch(inputAddr) {

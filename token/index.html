@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa KCC20 Token Scanner - Kaspa Hub</title>
+<meta property="og:title" content="Kaspa KCC20 Token Screener - Kaspa Hub" />
+<meta name="twitter:title" content="Kaspa KCC20 Token Explorer - Kaspa Hub" />
+
+<meta name="description" content="Explore KCC-20 tokens on Kaspa with real-time stats, transfers, holders, and tokenomics. Look up any Kaspa KCC20 token by covenant ID." />
+<meta property="og:description" content="Discover Kaspa KCC20 tokens with detailed token data including transfers, holders, supply, and tokenomics. Search any KCC20 token on Kaspa instantly." />
+<meta name="twitter:description" content="Search and explore Kaspa KCC20 tokens. View live transfers, holders, supply, and tokenomics for any token on the Kaspa network." />
+
+<link rel="canonical" href="https://kaspahub.org/token/" />
+<meta property="og:url" content="https://kaspahub.org/token/" />
+<meta name="twitter:url" content="https://kaspahub.org/token/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/explorer/manifest.json" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+<script defer src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/scripts/qr-code-styling.min.js"></script>
+<script defer src="/assets/scripts/explorer.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-1">
+
+<section class="intro">
+  <div id="explorerIntro" style="opacity: 0;">
+    <h1>Kaspa KCC20 Explorer</h1>
+    <p class="hint">Search KCC20 tokens by covenant ID.</p>
+  </div>
+  <form id="searchContainer" class="searchBar">
+    <input id="searchQueryInput" type="search" name="searchQueryInput" placeholder="Covenant ID" value="" minlength="0">
+    <button id="searchQuerySubmit" type="submit"><svg fill="none" height="1.1em" width="1.1em" viewBox="0 -2 16 16" xmlns="http://www.w3.org/2000/svg" ><g stroke="currentColor" stroke-width="1.5"><circle cx="6.75" cy="6.75" r="4.25"/><path d="m10.25 10.25 3.5 3.5" stroke-linecap="round"/></g></svg></button>
+  </form>
+  <div id="msg"></div>
+</section>
+
+<section id="explorerHead" style="opacity: 0;">
+  <div id="explorerHdr">
+    <img id="explorerPic" src="https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/logo.webp';">
+    <div id="explorerInfo">
+      <h2 id="hdrLine">Token</h2>
+      <div class="sub" id="hdrSub">-</div>
+    </div>
+  </div>
+  <div id="explorerNav">
+  </div>
+</section>
+
+<section id="explorerData" style="opacity: 0;">
+
+  <div class="grid-1" aria-label="Summary">
+    <div class="theme-1 third">
+      <h3>Market</h3>
+      <div class="big" id="priceUsd">-</div>
+      <div class="rows">
+        <div class="row"><div class="k">24h change</div><div class="v" id="priceChg">-</div></div>
+        <div class="row"><div class="k">24h volume</div><div class="v" id="priceVol">-</div></div>
+        <div class="row"><div class="k">Market cap</div><div class="v" id="mcap">-</div></div>
+      </div>
+    </div>
+    <div class="theme-1 half">
+      <h3>Stats</h3>
+      <div class="rows" id="statsRows">
+        <div class="row"><div class="k">Holders</div><div class="v" id="holders">-</div></div>
+        <div class="row"><div class="k">Layout</div><div class="v" id="layout">-</div></div>
+        <div class="row"><div class="k">Template</div><div class="v" id="template">-</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Token tabs">
+    <button class="tab active" data-tab="tabAbout">Overview</button>
+    <button class="tab" data-tab="tabHolders">Holders</button>
+    <button class="tab" data-tab="tabTransfers">Transfers</button>
+    <button class="tab" data-tab="tabPairs">Pairs</button>
+  </div>
+  <div id="tabAbout" class="tabPanel active" aria-label="About panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <p id="infoDescription"></p>
+      <h4>Tokenomics</h4>
+      <div class="rows">
+        <div class="row"><div class="k">Supply</div><div class="v" id="supply">-</div></div>
+        <div class="row"><div class="k">Burned</div><div class="v" id="burned">-</div></div>
+        <div class="row"><div class="k">Held by wallets</div><div class="v" id="heldWallet">-</div></div>
+        <div class="row"><div class="k">Held by covenants</div><div class="v" id="heldCovenant">-</div></div>
+        <div class="row"><div class="k">Held by scripts</div><div class="v" id="heldScript">-</div></div>
+        <div class="row"><div class="k">Decimals</div><div class="v" id="dec">-</div></div>
+        <div class="row"><div class="k">Covenant ID</div><div class="v" id="covenantId">-</div></div>
+        <div class="row"><div class="k">Phase</div><div class="v" id="marketPhase">-</div></div>
+        <div class="row"><div class="k">Status</div><div class="v" id="status">-</div></div>
+        <div class="row"><div class="k">Unresolved cells</div><div class="v" id="unresolvedCells">-</div></div>
+        <div class="row"><div class="k">Classes</div><div class="v" id="classes">-</div></div>
+        <div class="row"><div class="k">Metadata source</div><div class="v" id="metadataSource">-</div></div>
+      </div>
+    </div>
+  </div>
+  <div id="tabHolders" class="tabPanel" aria-label="Holders panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h4>Top Holders</h4>
+      <div id="holderLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="left">Address</th>
+              <th>Percentage</th>
+              <th>Quantity</th>
+              <th>Cells</th>
+            </tr>
+          </thead>
+          <tbody id="holderRows">
+            <tr><td colspan="5" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="miniBtns">
+        <button class="btn" id="prevHolder" disabled>Prev</button>
+        <button class="btn" id="nextHolder" disabled>Next</button>
+        <span class="muted" style="margin: auto 0;" id="holderCursor"></span>
+      </div>
+    </div>
+  </div>
+  <div id="tabTransfers" class="tabPanel" aria-label="Transfers panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h4>Transfers</h4>
+      <div id="txLoading" class="muted loading hidden"><span class="spinner"></span><span>Loading…</span></div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tx</th>
+              <th id="fromTh" class="filterTh">From</th>
+              <th id="toTh" class="filterTh">To</th>
+              <th id="timestampTh" class="filterTh">Timestamp</th>
+              <th id="typeTh" class="filterTh">Type</th>
+              <th id="amountTh" class="filterTh">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="txRows">
+            <tr><td colspan="6" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="miniBtns">
+        <button class="btn" id="prevTx" disabled>Prev</button>
+        <button class="btn" id="nextTx" disabled>Next</button>
+        <span class="muted" style="margin: auto 0;" id="txCursor"></span>
+      </div>
+    </div>
+  </div>
+  <div id="tabPairs" class="tabPanel" aria-label="Markets panel">
+    <div class="theme-1" style="border-radius: 0px 20px 20px 20px;">
+      <h4>All pairs</h4>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Exchange</th>
+              <th>Pairs</th>
+              <th>Price</th>
+              <th>Volume 24h</th>
+            </tr>
+          </thead>
+          <tbody id="pairRows">
+            <tr><td colspan="4" class="muted">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script type="module">
+
+const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
+const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+const DAA_TIME_ANCHOR = { daa: 547346157, ms: 1790154983107 };
+const HOLDER_LIMIT = 20;
+const TX_LIMIT = 40;
+
+const explorerPic = document.getElementById("explorerPic");
+const hdrSub = document.getElementById("hdrSub");
+const priceUsd = document.getElementById("priceUsd");
+const priceChg = document.getElementById("priceChg");
+const priceVol = document.getElementById("priceVol");
+const mcap = document.getElementById("mcap");
+const marketPhase = document.getElementById("marketPhase");
+const holders = document.getElementById("holders");
+const layout = document.getElementById("layout");
+const template = document.getElementById("template");
+const status = document.getElementById("status");
+const unresolvedCells = document.getElementById("unresolvedCells");
+const classes = document.getElementById("classes");
+const metadataSource = document.getElementById("metadataSource");
+const dec = document.getElementById("dec");
+const supply = document.getElementById("supply");
+const burned = document.getElementById("burned");
+const heldWallet = document.getElementById("heldWallet");
+const heldCovenant = document.getElementById("heldCovenant");
+const heldScript = document.getElementById("heldScript");
+const covenantId = document.getElementById("covenantId");
+const holderRows = document.getElementById("holderRows");
+const holderLoading = document.getElementById("holderLoading");
+const infoDescription = document.getElementById("infoDescription");
+const pairRows = document.getElementById("pairRows");
+const txLoading = document.getElementById("txLoading");
+const txRows = document.getElementById("txRows");
+const prevTx = document.getElementById("prevTx");
+const nextTx = document.getElementById("nextTx");
+const txCursor = document.getElementById("txCursor");
+const prevHolder = document.getElementById("prevHolder");
+const nextHolder = document.getElementById("nextHolder");
+const holderCursor = document.getElementById("holderCursor");
+const explorerNav = document.getElementById("explorerNav");
+const statsRows = document.getElementById("statsRows");
+const fromTh = document.getElementById("fromTh");
+const toTh = document.getElementById("toTh");
+const timestampTh = document.getElementById("timestampTh");
+const typeTh = document.getElementById("typeTh");
+const amountTh = document.getElementById("amountTh");
+
+let tokenInfo = null;
+let tokenMeta = null;
+let tokenDec = 0;
+let tokenSupplyRaw = "0";
+let tokenBurnedRaw = "0";
+let tokenId = "";
+let displayTicker = "";
+let displayName = "";
+let burnOwnerHex = "";
+
+let holderList = [];
+let holderOffset = 0;
+let holdersLoaded = false;
+
+let transfers = [];
+let txCursorState = null;
+let txHasMore = true;
+let txPage = 0;
+let transfersLoaded = false;
+
+const defaultFilters = () => ({
+  fromWallet: "",
+  toWallet: "",
+  fromMs: null,
+  toMs: null,
+  kind: "all",
+  minAmount: null,
+  maxAmount: null
+});
+let txFilters = defaultFilters();
+
+const transferKinds = [
+  { value: "all", label: "All" },
+  { value: "transfer", label: "Transfer" },
+  { value: "trade", label: "Trade" },
+  { value: "buy", label: "Buy" },
+  { value: "sell", label: "Sell" },
+  { value: "split", label: "Split" },
+  { value: "merge", label: "Merge" }
+];
+
+function withSeparators(numStr) {
+  const s = String(numStr ?? "").replace(/^0+(?=\d)/, "");
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function formatTokenAmount(rawStr, decimals) {
+  if (rawStr == null || rawStr === "") return "-";
+  const s = String(rawStr);
+  if (!/^\d+$/.test(s)) return s;
+  const d = Number(decimals || 0);
+  if (d === 0) return withSeparators(s);
+  try {
+    const n = BigInt(s);
+    const div = 10n ** BigInt(d);
+    const int = n / div;
+    let frac = ((n % div).toString()).padStart(d, "0").replace(/0+$/, "");
+    if (frac) frac = "." + frac;
+    return withSeparators(int.toString()) + frac;
+  } catch {
+    return s;
+  }
+}
+
+function setUrlId(id) {
+  const u = new URL(window.location.href);
+  u.searchParams.set("q", id);
+  history.replaceState({}, "", u.toString());
+}
+
+function kaspaAddressToOwnerHex(addr) {
+  const raw = String(addr || "");
+  const colon = raw.indexOf(":");
+  const payload = colon >= 0 ? raw.slice(colon + 1) : raw;
+  const values = [];
+  for (const ch of payload) {
+    const v = CHARSET.indexOf(ch);
+    if (v < 0) return "";
+    values.push(v);
+  }
+  if (values.length < 9) return "";
+  const data = values.slice(0, -8);
+  let acc = 0;
+  let bits = 0;
+  const bytes = [];
+  for (const value of data) {
+    acc = (acc << 5) | value;
+    bits += 5;
+    while (bits >= 8) {
+      bits -= 8;
+      bytes.push((acc >> bits) & 255);
+    }
+  }
+  if (bits >= 5 || ((acc << (8 - bits)) & 255)) return "";
+  if (bytes.length < 33) return "";
+  const version = bytes[0];
+  if (version === 0 && bytes.length >= 33) {
+    return bytes.slice(1, 33).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  if (version === 1 && bytes.length >= 34) {
+    return bytes.slice(2, 34).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  return "";
+}
+
+function kaspaPolymod(values) {
+  let c = 1n;
+  const gens = [0x98f2bc8e61n, 0x79b76d99e2n, 0xf33e5fb3c4n, 0xae2eabe2a8n, 0x1e4f43e470n];
+  for (const d of values) {
+    const c0 = c >> 35n;
+    c = ((c & 0x07ffffffffn) << 5n) ^ BigInt(d);
+    for (let i = 0; i < 5; i++) {
+      if ((c0 >> BigInt(i)) & 1n) c ^= gens[i];
+    }
+  }
+  return c ^ 1n;
+}
+
+function convertBits(data, from, to, pad) {
+  let acc = 0;
+  let bits = 0;
+  const maxv = (1 << to) - 1;
+  const maxAcc = (1 << (from + to - 1)) - 1;
+  const out = [];
+  for (const value of data) {
+    acc = ((acc << from) | value) & maxAcc;
+    bits += from;
+    while (bits >= to) {
+      bits -= to;
+      out.push((acc >> bits) & maxv);
+    }
+  }
+  if (pad && bits > 0) out.push((acc << (to - bits)) & maxv);
+  return out;
+}
+
+function encodeKaspaAddress(hex, version = 0) {
+  const h = String(hex || "").toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(h) && !/^[0-9a-f]{66}$/.test(h)) return "";
+  const payload = [];
+  for (let i = 0; i < h.length; i += 2) payload.push(parseInt(h.slice(i, i + 2), 16));
+  const five = convertBits([version, ...payload], 8, 5, true);
+  const prefix = "kaspa";
+  const prefixVals = [...prefix].map(ch => ch.charCodeAt(0) & 31);
+  const mod = kaspaPolymod([...prefixVals, 0, ...five, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const checksumBytes = [];
+  for (let i = 0; i < 5; i++) checksumBytes.push(Number((mod >> BigInt(8 * (4 - i))) & 255n));
+  const checksum = convertBits(checksumBytes, 8, 5, true);
+  return prefix + ":" + [...five, ...checksum].map(i => CHARSET[i]).join("");
+}
+
+function ownerKey(owner) {
+  const raw = String(owner || "").toLowerCase();
+  const idx = raw.lastIndexOf(":");
+  return idx >= 0 ? raw.slice(idx + 1) : raw;
+}
+
+function shortId(value) {
+  if (typeof shortenEnd === "function") return shortenEnd(value);
+  const s = String(value || "");
+  return s.length > 12 ? `${s.slice(0, 6)}…${s.slice(-4)}` : s;
+}
+
+function ownerToDisplay(owner, ownerAddress) {
+  if (ownerAddress && String(ownerAddress).startsWith("kaspa:")) return String(ownerAddress);
+  const raw = String(owner || "");
+  if (raw.startsWith("kaspa:")) return raw;
+  if (raw.startsWith("covenant:")) return raw;
+  if (raw.startsWith("script:")) return raw;
+  if (raw.startsWith("presence:")) {
+    const hex = ownerKey(raw);
+    const addr = encodeKaspaAddress(hex, hex.length === 66 ? 1 : 0);
+    return addr || raw;
+  }
+  const hex = ownerKey(raw);
+  if (/^[0-9a-f]{64}$/.test(hex) || /^[0-9a-f]{66}$/.test(hex)) {
+    const addr = encodeKaspaAddress(hex, hex.length === 66 ? 1 : 0);
+    return addr || raw;
+  }
+  return raw || "-";
+}
+
+function isUserOwner(owner) {
+  const raw = String(owner || "");
+  if (!raw) return false;
+  if (raw.startsWith("kaspa:")) return true;
+  if (raw.startsWith("covenant:") || raw.startsWith("script:")) return false;
+  const hex = ownerKey(raw);
+  return /^[0-9a-f]{64}$/.test(hex) || /^[0-9a-f]{66}$/.test(hex);
+}
+
+function linkOwner(owner, ownerAddress) {
+  if (ownerAddress && String(ownerAddress).startsWith("kaspa:")) return linkAddress(String(ownerAddress));
+  const raw = String(owner || "");
+  if (!raw) return `<span class="muted">-</span>`;
+
+  if (raw.startsWith("kaspa:")) return linkAddress(raw);
+
+  if (raw.startsWith("covenant:")) {
+    const id = raw.slice(9);
+    return `<a href="https://kascov.io/#/mainnet/c/${encodeURIComponent(id)}" target="_blank" rel="noopener noreferrer" title="covenant:${escHtml(id)}">covenant:${escHtml(shortId(id))}</a>`;
+  }
+
+  if (raw.startsWith("script:")) {
+    const id = raw.slice(7);
+    return `<span class="muted" title="script:${escHtml(id)}">script:${escHtml(shortId(id))}</span>`;
+  }
+
+  const hex = ownerKey(raw);
+  if (/^[0-9a-f]{64}$/.test(hex) || /^[0-9a-f]{66}$/.test(hex)) {
+    const addr = encodeKaspaAddress(hex, hex.length === 66 ? 1 : 0);
+    if (addr) return linkAddress(addr);
+  }
+
+  return `<span class="muted">${escHtml(shortId(raw))}</span>`;
+}
+
+function multiPartyHtml(itemsHtml, labelCount) {
+  return `
+    <details>
+      <summary class="expandable-row muted">Multiple addresses (${labelCount})</summary>
+      <div class="receiver-list">${itemsHtml}</div>
+    </details>
+  `;
+}
+
+function ownersCellHtml(owners) {
+  const list = [...new Set((owners || []).filter(Boolean).map(o => String(o)))];
+  if (!list.length) return `<span class="muted">-</span>`;
+  if (list.length === 1) return linkOwner(list[0]);
+  return multiPartyHtml(list.map(o => `${linkOwner(o)}<br>`).join(""), list.length);
+}
+
+function isBurnHolder(h) {
+  const addr = String(h?.owner_address || "").toLowerCase();
+  if (addr === BURN_ADDR) return true;
+  const owner = String(h?.owner || "").toLowerCase();
+  if (owner === BURN_ADDR) return true;
+  if (burnOwnerHex) {
+    const key = ownerKey(owner);
+    if (key === burnOwnerHex) return true;
+    if (owner === `presence:${burnOwnerHex}`) return true;
+  }
+  return false;
+}
+
+function burnedFromHolders(list) {
+  let total = 0n;
+  for (const h of list || []) {
+    if (!isBurnHolder(h)) continue;
+    try {
+      total += BigInt(h.balance_str ?? h.balance ?? 0);
+    } catch {}
+  }
+  return total.toString();
+}
+
+async function fetchJson(url, { notFound = null, ok404 = true } = {}) {
+  const res = await fetch(url);
+  if (res.status === 404 && ok404) return notFound;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function fetchTokenSummary(id) {
+  const json = await fetchJson("https://kascov.io/data/mainnet/tokens.json", { notFound: null });
+  const list = Array.isArray(json?.tokens) ? json.tokens : [];
+  return list.find(t => String(t.covenant_id || "").toLowerCase() === id) || null;
+}
+
+async function fetchTokenBalances(id) {
+  const json = await fetchJson(`https://kascov.io/data/mainnet/token/${encodeURIComponent(id)}`, { notFound: {} });
+  return Array.isArray(json?.balances) ? json.balances : [];
+}
+
+async function fetchBurnWalletHolding(id) {
+  const json = await fetchJson(`https://kascov.io/data/mainnet/addr/${encodeURIComponent(BURN_ADDR)}`, { notFound: {} });
+  const holdings = Array.isArray(json?.token_holdings) ? json.token_holdings : [];
+  const hit = holdings.find(h => String(h.token_id || "").toLowerCase() === String(id).toLowerCase());
+  if (!hit) return "0";
+  return String(hit.balance_str ?? hit.balance ?? "0");
+}
+
+async function fetchTokenTransfers(id, cursor, limit = TX_LIMIT) {
+  let url = `https://kascov.io/data/mainnet/transfers?limit=${limit}`;
+  if (cursor && cursor.daa != null && cursor.token && cursor.seq != null) {
+    url += `&before_daa=${cursor.daa}&before_token=${encodeURIComponent(cursor.token)}&before_seq=${cursor.seq}`;
+  }
+  const json = await fetchJson(url, { notFound: {} });
+  const all = Array.isArray(json?.transfers) ? json.transfers : [];
+  const filtered = all.filter(t => String(t.token_id || "").toLowerCase() === id);
+  const next = (json?.next_before_daa != null && json?.next_before_token && json?.next_before_seq != null)
+    ? { daa: json.next_before_daa, token: json.next_before_token, seq: json.next_before_seq }
+    : null;
+  return { events: filtered, next, rawCount: all.length };
+}
+
+async function fetchDirectoryMeta(id) {
+  const jsonUrl = `/assets/data/tokens/${encodeURIComponent(id)}/${encodeURIComponent(id)}.json`;
+  try {
+    const r = await fetch(jsonUrl, { cache: "no-store" });
+    if (r.ok) return await r.json();
+  } catch {}
+  return null;
+}
+
+function applyTokenImage() {
+  const fallback = "/assets/logos/logo.webp";
+  const apiImg = tokenInfo?.claimed_image || tokenInfo?.listed_image;
+  const logoUrl = `/assets/data/tokens/${encodeURIComponent(tokenId)}/${encodeURIComponent(tokenId)}.webp`;
+  explorerPic.src = apiImg || fallback;
+  const probe = new Image();
+  probe.onload = () => {
+    explorerPic.src = logoUrl;
+  };
+  probe.src = logoUrl;
+}
+
+function resolveDecimals(info, meta) {
+  if (meta?.decimals != null) return Number(meta.decimals);
+  if (info?.claimed_decimals != null) return Number(info.claimed_decimals);
+  if (info?.listed_decimals != null) return Number(info.listed_decimals);
+  if (info?.decimals != null) return Number(info.decimals);
+  if (info?.display_decimals != null) return Number(info.display_decimals);
+  return 0;
+}
+
+function resolveName(info, meta) {
+  return meta?.name
+    || info?.claimed_name
+    || info?.listed_name
+    || info?.name
+    || tokenId;
+}
+
+function resolveTicker(info, meta) {
+  return meta?.ticker
+    || info?.claimed_ticker
+    || info?.listed_ticker
+    || info?.name
+    || tokenId.slice(0, 8);
+}
+
+function resolveDescription(info, meta) {
+  return meta?.description
+    || info?.description
+    || info?.claimed_description
+    || info?.listed_description
+    || "";
+}
+
+function daaToMs(daa) {
+  if (daa == null) return null;
+  return DAA_TIME_ANCHOR.ms + (Number(daa) - DAA_TIME_ANCHOR.daa) * 100;
+}
+
+function eventTime(ev) {
+  if (ev?.accepting_time_ms) return Number(ev.accepting_time_ms);
+  if (ev?.accepting_daa != null) return daaToMs(ev.accepting_daa);
+  if (ev?.daa != null) return daaToMs(ev.daa);
+  return null;
+}
+
+function pctOf(raw, total) {
+  try {
+    const n = BigInt(raw || 0);
+    const t = BigInt(total || 0);
+    if (t === 0n) return "-";
+    return (Number((n * 10000n) / t) / 100).toFixed(2) + "%";
+  } catch {
+    return "-";
+  }
+}
+
+function formatWithShare(raw, total) {
+  const amt = formatTokenAmount(raw, tokenDec);
+  const p = pctOf(raw, total);
+  if (p === "-") return amt;
+  return `${amt} <span class="muted">(${p} of supply)</span>`;
+}
+
+function renderBurned() {
+  burned.innerHTML = formatWithShare(tokenBurnedRaw, tokenSupplyRaw);
+}
+
+function renderHeader() {
+  displayName = resolveName(tokenInfo, tokenMeta);
+  displayTicker = resolveTicker(tokenInfo, tokenMeta);
+  hdrSub.textContent = `${displayName} (${displayTicker})`;
+  document.title = `${displayTicker} KCC20 - Kaspa Hub`;
+  covenantId.textContent = tokenId;
+}
+
+function formatStatus(info) {
+  const s = String(info?.status || "").toLowerCase();
+  if (s === "verified") {
+    return "Verified by kascov for KCC20 rule compliance, hash-proven state, and conserved supply";
+  }
+  if (s === "unvalidated" || s === "unverified") {
+    const reason = info?.invalid_reason || info?.unvalidated_reason || info?.status_reason || info?.reason;
+    return reason
+      ? `Unvalidated by kascov: ${reason}`
+      : "Unvalidated by kascov (could not fully prove KCC20 compliance)";
+  }
+  return info?.status || "-";
+}
+
+function renderSummary() {
+  tokenDec = resolveDecimals(tokenInfo, tokenMeta);
+  dec.textContent = String(tokenDec);
+
+  tokenSupplyRaw = String(tokenInfo?.supply_str ?? tokenInfo?.supply ?? "0");
+  if (!tokenBurnedRaw || tokenBurnedRaw === "0") {
+    tokenBurnedRaw = String(tokenInfo?.burned_str ?? tokenInfo?.burned ?? "0");
+  }
+  const walletRaw = String(tokenInfo?.held_by_wallet_str ?? tokenInfo?.held_by_wallet ?? "0");
+  const covRaw = String(tokenInfo?.held_by_covenant_str ?? tokenInfo?.held_by_covenant ?? "0");
+  const scriptRaw = String(tokenInfo?.held_by_script_str ?? tokenInfo?.held_by_script ?? "0");
+
+  supply.textContent = formatTokenAmount(tokenSupplyRaw, tokenDec);
+  renderBurned();
+  heldWallet.innerHTML = formatWithShare(walletRaw, tokenSupplyRaw);
+  heldCovenant.innerHTML = formatWithShare(covRaw, tokenSupplyRaw);
+  heldScript.innerHTML = formatWithShare(scriptRaw, tokenSupplyRaw);
+
+  holders.textContent = tokenInfo?.holders != null ? withSeparators(tokenInfo.holders) : "-";
+  layout.textContent = tokenInfo?.layout || "-";
+  template.textContent = tokenInfo?.template || "-";
+
+  marketPhase.textContent = tokenInfo?.market?.phase || "-";
+  status.textContent = formatStatus(tokenInfo);
+  unresolvedCells.textContent = tokenInfo?.unresolved_cells != null ? withSeparators(tokenInfo.unresolved_cells) : "-";
+  classes.textContent = tokenInfo?.classes != null ? withSeparators(tokenInfo.classes) : "-";
+  metadataSource.textContent = tokenInfo?.metadata_source || "-";
+
+  const extra = [];
+  if (tokenInfo?.standard?.kcc != null) {
+    extra.push(["Standard", `KCC-${tokenInfo.standard.kcc}`]);
+  } else {
+    extra.push(["Standard", "-"]);
+  }
+  if (tokenInfo?.last_activity_daa != null) {
+    const ms = daaToMs(tokenInfo.last_activity_daa);
+    extra.push(["Last activity", ms ? formatDate(ms, true) : String(tokenInfo.last_activity_daa)]);
+  }
+
+  const baseKeys = new Set(["Holders", "Layout", "Template"]);
+  statsRows.querySelectorAll(".row").forEach(row => {
+    const k = row.querySelector(".k")?.textContent;
+    if (k && !baseKeys.has(k)) row.remove();
+  });
+  for (const [k, v] of extra) {
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `<div class="k">${escHtml(k)}</div><div class="v">${escHtml(String(v))}</div>`;
+    statsRows.appendChild(row);
+  }
+}
+
+function renderAboutTab() {
+  const desc = resolveDescription(tokenInfo, tokenMeta);
+  infoDescription.innerHTML = desc ? escHtml(desc) : "-";
+}
+
+function renderPriceMissing() {
+  priceUsd.textContent = "-";
+  priceChg.textContent = "-";
+  priceChg.style.color = "";
+  priceVol.textContent = "-";
+  mcap.textContent = "-";
+}
+
+async function renderMarket() {
+  const m = tokenInfo?.market;
+  const pairLabel = `KAS/${displayTicker || "TOKEN"}`;
+  const venue = m?.program?.skeleton || "Market";
+  const marketLink = m?.program?.covenant_id
+    ? `https://kascov.io/#/mainnet/c/${encodeURIComponent(m.program.covenant_id)}`
+    : `https://kascov.io/#/mainnet/token/${encodeURIComponent(tokenId)}`;
+
+  if (!m || m.unpriced_reason) {
+    renderPriceMissing();
+    pairRows.innerHTML = `<tr><td colspan="4" class="muted">${escHtml(m?.unpriced_reason || "No markets listed.")}</td></tr>`;
+    return;
+  }
+
+  let priceKas = null;
+  if (m.spot_num_sompi != null && m.spot_den != null && Number(m.spot_den) !== 0) {
+    priceKas = Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8;
+  }
+  priceUsd.textContent = Number.isFinite(priceKas) ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8) : "-";
+
+  const chBps = Number(m.change_24h_bps);
+  if (Number.isFinite(chBps)) {
+    const ch = chBps / 100;
+    priceChg.textContent = `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
+    priceChg.style.color = ch >= 0 ? "#2ee59d" : "#ff6b6b";
+  } else {
+    priceChg.textContent = "-";
+    priceChg.style.color = "";
+  }
+
+  const volSompi = Number(m.volume_24h_sompi);
+  priceVol.textContent = Number.isFinite(volSompi)
+    ? await formatShortPrice(KASVALUE, CURRENCY, volSompi / 1e8)
+    : "-";
+
+  try {
+    const supplyNum = Number(tokenToHuman(tokenSupplyRaw, tokenDec));
+    if (Number.isFinite(priceKas) && Number.isFinite(supplyNum)) {
+      mcap.textContent = await formatShortPrice(KASVALUE, CURRENCY, priceKas * supplyNum);
+    } else {
+      mcap.textContent = "-";
+    }
+  } catch {
+    mcap.textContent = "-";
+  }
+
+  const priceFmt = Number.isFinite(priceKas) ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8) : "-";
+  const volFmt = Number.isFinite(volSompi) ? await formatShortPrice(KASVALUE, CURRENCY, volSompi / 1e8) : "-";
+
+  pairRows.innerHTML = `
+  <tr>
+    <td>
+      <div class="name-cell">
+        <span>${escHtml(venue)}</span>
+      </div>
+    </td>
+    <td><a class="tradeBtn" href="${escHtml(marketLink)}" target="_blank" rel="noopener noreferrer">${escHtml(pairLabel)}</a></td>
+    <td>${priceFmt}</td>
+    <td>${volFmt}</td>
+  </tr>`;
+}
+
+function tokenToHuman(rawStr, decimals) {
+  try {
+    const n = BigInt(rawStr || 0);
+    const d = Number(decimals || 0);
+    if (d === 0) return Number(n);
+    return Number(n) / Math.pow(10, d);
+  } catch {
+    return NaN;
+  }
+}
+
+function renderHoldersPage() {
+  if (!holderList.length) {
+    holderRows.innerHTML = `<tr><td colspan="5" class="muted">No holder data.</td></tr>`;
+    return;
+  }
+  const start = holderOffset;
+  const end = Math.min(start + HOLDER_LIMIT, holderList.length);
+  const pageList = holderList.slice(start, end);
+  let supplyBig = 0n;
+  try { supplyBig = BigInt(tokenSupplyRaw); } catch {}
+
+  holderRows.innerHTML = pageList.map((h, i) => {
+    const globalI = start + i;
+    const amtRaw = String(h.balance_str ?? h.balance ?? "0");
+    const amtFmt = formatTokenAmount(amtRaw, tokenDec);
+    let share = "-";
+    if (supplyBig > 0n) {
+      try {
+        const amtBig = BigInt(amtRaw);
+        share = (Number((amtBig * 10000n) / supplyBig) / 100).toFixed(2) + "%";
+      } catch {}
+    }
+    return `
+      <tr>
+        <td>${globalI + 1}</td>
+        <td class="left">${linkOwner(h.owner, h.owner_address)}</td>
+        <td>${share}</td>
+        <td>${amtFmt}</td>
+        <td>${withSeparators(h.cells ?? 0)}</td>
+      </tr>`;
+  }).join("");
+}
+
+function setHolderPaging() {
+  const hasPrev = holderOffset > 0;
+  const hasNext = holderOffset + HOLDER_LIMIT < holderList.length;
+  prevHolder.disabled = !hasPrev;
+  nextHolder.disabled = !hasNext;
+  holderCursor.textContent = (hasPrev || hasNext) ? `Page ${Math.floor(holderOffset / HOLDER_LIMIT) + 1}` : "";
+}
+
+async function loadHolders() {
+  if (holdersLoaded) {
+    renderHoldersPage();
+    setHolderPaging();
+    return;
+  }
+  holderLoading.classList.remove("hidden");
+  try {
+    holderList = await fetchTokenBalances(tokenId);
+    holderList.sort((a, b) => {
+      try {
+        const d = BigInt(b.balance_str ?? b.balance ?? 0) - BigInt(a.balance_str ?? a.balance ?? 0);
+        if (d > 0n) return 1;
+        if (d < 0n) return -1;
+      } catch {}
+      return 0;
+    });
+    const fromHolders = burnedFromHolders(holderList);
+    if (fromHolders !== "0") {
+      tokenBurnedRaw = fromHolders;
+      renderBurned();
+    }
+    holderOffset = 0;
+    holdersLoaded = true;
+    renderHoldersPage();
+    setHolderPaging();
+  } catch {
+    holderRows.innerHTML = `<tr><td colspan="5" class="muted">Failed to load holders.</td></tr>`;
+  } finally {
+    holderLoading.classList.add("hidden");
+  }
+}
+
+function transferAmount(ev) {
+  const moves = Array.isArray(ev?.attribution?.movements) ? ev.attribution.movements : [];
+  if (moves.length) {
+    let total = 0n;
+    for (const m of moves) {
+      try { total += BigInt(m.amount || 0); } catch {}
+    }
+    return total.toString();
+  }
+  const deltas = Array.isArray(ev?.deltas) ? ev.deltas : [];
+  if (deltas.length) {
+    let max = 0n;
+    for (const d of deltas) {
+      try {
+        const n = BigInt(d.amount || 0);
+        if (n > max) max = n;
+      } catch {}
+    }
+    return max.toString();
+  }
+  return "0";
+}
+
+function transferMovements(ev) {
+  const attributed = ev?.attribution?.movements;
+  if (Array.isArray(attributed) && attributed.length) return attributed;
+  return (Array.isArray(ev?.deltas) ? ev.deltas : [])
+    .filter(d => d.owner_from || d.owner_to)
+    .map(d => ({ amount: d.amount, owner_from: d.owner_from, owner_to: d.owner_to }));
+}
+
+function transferParties(ev) {
+  const fromSet = [];
+  const toSet = [];
+  const seenFrom = new Set();
+  const seenTo = new Set();
+  const pushFrom = (f) => {
+    if (!f) return;
+    const key = String(f).toLowerCase();
+    if (seenFrom.has(key)) return;
+    seenFrom.add(key);
+    fromSet.push(f);
+  };
+  const pushTo = (t) => {
+    if (!t) return;
+    const key = String(t).toLowerCase();
+    if (seenTo.has(key)) return;
+    seenTo.add(key);
+    toSet.push(t);
+  };
+
+  const moves = transferMovements(ev);
+  for (const m of moves) {
+    pushFrom(m.owner_from);
+    pushTo(m.owner_to);
+  }
+
+  const deltas = Array.isArray(ev?.deltas) ? ev.deltas : [];
+  for (const d of deltas) {
+    pushFrom(d.owner_from);
+    pushTo(d.owner_to);
+  }
+
+  pushFrom(ev?.attribution?.owner_from);
+  pushTo(ev?.attribution?.owner_to);
+
+  if (!fromSet.length) {
+    const allOwners = [];
+    for (const m of moves) {
+      if (m.owner_from) allOwners.push(m.owner_from);
+      if (m.owner_to) allOwners.push(m.owner_to);
+    }
+    for (const d of deltas) {
+      if (d.owner_from) allOwners.push(d.owner_from);
+      if (d.owner_to) allOwners.push(d.owner_to);
+    }
+    if (ev?.attribution?.owner_from) allOwners.push(ev.attribution.owner_from);
+    if (ev?.attribution?.owner_to) allOwners.push(ev.attribution.owner_to);
+
+    const userOwners = [];
+    const seenUser = new Set();
+    for (const owner of allOwners) {
+      if (!isUserOwner(owner)) continue;
+      const key = String(owner).toLowerCase();
+      if (seenUser.has(key)) continue;
+      seenUser.add(key);
+      userOwners.push(owner);
+    }
+
+    for (const u of userOwners) pushFrom(u);
+
+    const kind = String(ev?.kind || "").toLowerCase();
+    const side = String(ev?.market_activity?.side || "").toLowerCase();
+    if (userOwners.length && (kind === "merge" || side === "sell")) {
+      const userKeys = new Set(userOwners.map(o => String(o).toLowerCase()));
+      for (let i = toSet.length - 1; i >= 0; i--) {
+        if (userKeys.has(String(toSet[i]).toLowerCase())) {
+          seenTo.delete(String(toSet[i]).toLowerCase());
+          toSet.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  return { from: fromSet, to: toSet };
+}
+
+function transferKindLabel(ev) {
+  const side = String(ev?.market_activity?.side || ev?.side || "").toLowerCase();
+  if (side === "buy" || side === "sell") return side.charAt(0).toUpperCase() + side.slice(1);
+  const kind = String(ev?.kind || ev?.event_kind || "-");
+  return kind.charAt(0).toUpperCase() + kind.slice(1);
+}
+
+function transferKindValue(ev) {
+  return String(transferKindLabel(ev) || "").toLowerCase();
+}
+
+function ownerMatchesFilter(owners, needle) {
+  const q = String(needle || "").trim().toLowerCase();
+  if (!q) return true;
+  if (!owners || !owners.length) return false;
+  for (const owner of owners) {
+    const display = ownerToDisplay(owner).toLowerCase();
+    const raw = String(owner || "").toLowerCase();
+    const key = ownerKey(owner);
+    if (display.includes(q) || raw.includes(q) || key.includes(q)) return true;
+    if (display.startsWith("kaspa:") && display === q) return true;
+  }
+  return false;
+}
+
+function matchesTime(ms) {
+  if (ms == null) return !(txFilters.fromMs != null || txFilters.toMs != null);
+  if (txFilters.fromMs != null && ms < txFilters.fromMs) return false;
+  if (txFilters.toMs != null && ms > txFilters.toMs) return false;
+  return true;
+}
+
+function parseAmountInput(value) {
+  const s = String(value ?? "").trim();
+  if (!s) return null;
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  return s.replace(/^0+(?=\d)/, "");
+}
+
+function humanToRaw(human, decimals) {
+  if (human == null || human === "") return null;
+  const s = String(human).trim();
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  const [ints, frac = ""] = s.split(".");
+  const dec = Math.max(0, Number(decimals) || 0);
+  const fracPadded = (frac + "0".repeat(dec)).slice(0, dec);
+  const raw = `${ints || "0"}${fracPadded}`.replace(/^0+(?=\d)/, "") || "0";
+  try {
+    return BigInt(raw);
+  } catch {
+    return null;
+  }
+}
+
+function matchesRawAmount(rawValue, decimals) {
+  if (txFilters.minAmount == null && txFilters.maxAmount == null) return true;
+  let raw = 0n;
+  try {
+    raw = BigInt(rawValue ?? 0);
+    if (raw < 0n) raw = -raw;
+  } catch {
+    raw = 0n;
+  }
+  if (txFilters.minAmount != null) {
+    const minRaw = humanToRaw(txFilters.minAmount, decimals);
+    if (minRaw == null || raw < minRaw) return false;
+  }
+  if (txFilters.maxAmount != null) {
+    const maxRaw = humanToRaw(txFilters.maxAmount, decimals);
+    if (maxRaw == null || raw > maxRaw) return false;
+  }
+  return true;
+}
+
+function transferMatchesFilters(ev) {
+  const { from, to } = transferParties(ev);
+  if (txFilters.fromWallet && !ownerMatchesFilter(from, txFilters.fromWallet)) return false;
+  if (txFilters.toWallet && !ownerMatchesFilter(to, txFilters.toWallet)) return false;
+  if (!matchesTime(eventTime(ev))) return false;
+  const kind = String(txFilters.kind || "all").toLowerCase();
+  if (kind && kind !== "all" && transferKindValue(ev) !== kind) return false;
+  return matchesRawAmount(transferAmount(ev), tokenDec);
+}
+
+function filteredTransfers() {
+  return transfers.filter(transferMatchesFilters);
+}
+
+function markActiveFilters() {
+  fromTh.classList.toggle("activeFilter", Boolean(txFilters.fromWallet));
+  toTh.classList.toggle("activeFilter", Boolean(txFilters.toWallet));
+  timestampTh.classList.toggle("activeFilter", txFilters.fromMs != null || txFilters.toMs != null);
+  typeTh.classList.toggle("activeFilter", String(txFilters.kind || "all") !== "all");
+  amountTh.classList.toggle("activeFilter", txFilters.minAmount != null || txFilters.maxAmount != null);
+}
+
+function toLocalInputValue(ms) {
+  if (ms == null) return "";
+  const d = new Date(ms);
+  if (!isFinite(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function parseLocalInput(value) {
+  if (!value) return null;
+  const ms = new Date(value).getTime();
+  return Number.isFinite(ms) ? ms : null;
+}
+
+function closeFilterDialog() {
+  const dialog = document.getElementById("filterDialog");
+  if (dialog) {
+    dialog.close();
+    dialog.remove();
+  }
+}
+
+function openFilterDialog(title, fieldsHtml, onApply) {
+  closeFilterDialog();
+  const html = `
+<dialog id="filterDialog" class="theme-1" data-popup>
+  <div class="w-container">
+    <div class="w-header">
+      <span>${escHtml(title)}</span>
+      <span class="w-close" data-close></span>
+    </div>
+    <div class="w-fields">${fieldsHtml}</div>
+    <div class="w-actions">
+      <button class="btn" type="button" data-clear>Clear</button>
+      <button class="btn" type="button" data-apply>Apply</button>
+    </div>
+  </div>
+</dialog>`;
+  document.body.insertAdjacentHTML("beforeend", html);
+  const dialog = document.getElementById("filterDialog");
+  dialog.showModal();
+  const close = () => closeFilterDialog();
+  dialog.querySelector("[data-close]").addEventListener("click", close);
+  dialog.addEventListener("click", (e) => {
+    if (!e.target.closest(".w-container")) close();
+  });
+  dialog.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    close();
+  });
+  dialog.querySelector("[data-apply]").addEventListener("click", () => {
+    onApply(dialog, false);
+    close();
+    applyFiltersAndRefresh();
+  });
+  dialog.querySelector("[data-clear]").addEventListener("click", () => {
+    onApply(dialog, true);
+    close();
+    applyFiltersAndRefresh();
+  });
+}
+
+function applyFiltersAndRefresh() {
+  txPage = 0;
+  markActiveFilters();
+  renderTransfersPage();
+  setTxPaging();
+}
+
+function openFromFilter() {
+  openFilterDialog("Filter by from", `
+    <label>From
+      <input id="filterFromWallet" type="text" placeholder="kaspa:... or covenant:..." value="${escHtml(txFilters.fromWallet || "")}">
+    </label>
+  `, (dialog, clear) => {
+    txFilters.fromWallet = clear ? "" : String(dialog.querySelector("#filterFromWallet").value || "").trim().toLowerCase();
+  });
+}
+
+function openToFilter() {
+  openFilterDialog("Filter by to", `
+    <label>To
+      <input id="filterToWallet" type="text" placeholder="kaspa:... or covenant:..." value="${escHtml(txFilters.toWallet || "")}">
+    </label>
+  `, (dialog, clear) => {
+    txFilters.toWallet = clear ? "" : String(dialog.querySelector("#filterToWallet").value || "").trim().toLowerCase();
+  });
+}
+
+function openTimestampFilter() {
+  openFilterDialog("Filter by timestamp", `
+    <label>From
+      <input id="filterFrom" type="datetime-local" value="${toLocalInputValue(txFilters.fromMs)}">
+    </label>
+    <label>To
+      <input id="filterTo" type="datetime-local" value="${toLocalInputValue(txFilters.toMs)}">
+    </label>
+  `, (dialog, clear) => {
+    if (clear) {
+      txFilters.fromMs = null;
+      txFilters.toMs = null;
+      return;
+    }
+    txFilters.fromMs = parseLocalInput(dialog.querySelector("#filterFrom").value);
+    txFilters.toMs = parseLocalInput(dialog.querySelector("#filterTo").value);
+  });
+}
+
+function openTypeFilter() {
+  const selected = String(txFilters.kind || "all").toLowerCase();
+  const options = transferKinds.map(k => `<option value="${k.value}"${selected === k.value ? " selected" : ""}>${k.label}</option>`).join("");
+  openFilterDialog("Filter by type", `
+    <label>Type
+      <select id="filterKind">${options}</select>
+    </label>
+  `, (dialog, clear) => {
+    txFilters.kind = clear ? "all" : String(dialog.querySelector("#filterKind")?.value || "all").toLowerCase();
+  });
+}
+
+function openAmountFilter() {
+  openFilterDialog("Filter by amount", `
+    <label>Min
+      <input id="filterMin" type="number" step="any" min="0" value="${txFilters.minAmount ?? ""}">
+    </label>
+    <label>Max
+      <input id="filterMax" type="number" step="any" min="0" value="${txFilters.maxAmount ?? ""}">
+    </label>
+  `, (dialog, clear) => {
+    if (clear) {
+      txFilters.minAmount = null;
+      txFilters.maxAmount = null;
+      return;
+    }
+    txFilters.minAmount = parseAmountInput(dialog.querySelector("#filterMin").value);
+    txFilters.maxAmount = parseAmountInput(dialog.querySelector("#filterMax").value);
+  });
+}
+
+fromTh.addEventListener("click", openFromFilter);
+toTh.addEventListener("click", openToFilter);
+timestampTh.addEventListener("click", openTimestampFilter);
+typeTh.addEventListener("click", openTypeFilter);
+amountTh.addEventListener("click", openAmountFilter);
+
+function linkTxEmoji(hash) {
+  const tx = String(hash || "").trim();
+  if (!tx || tx === "-" || tx.length !== 64) return "-";
+  return `<a href="/transaction/?q=${encodeURIComponent(tx)}" title="${escHtml(tx)}">🔗</a>`;
+}
+
+function renderTransfersPage() {
+  markActiveFilters();
+  const filtered = filteredTransfers();
+  const start = txPage * TX_LIMIT;
+  const page = filtered.slice(start, start + TX_LIMIT);
+  if (!page.length) {
+    txRows.innerHTML = `<tr><td colspan="6" class="muted">No transfers found.</td></tr>`;
+    return;
+  }
+  txRows.innerHTML = page.map(ev => {
+    const hash = String(ev.txid || "-");
+    const { from, to } = transferParties(ev);
+    const amt = formatTokenAmount(transferAmount(ev), tokenDec);
+    const kind = transferKindLabel(ev);
+    const side = ev.market_activity?.side && !["buy", "sell"].includes(String(ev.market_activity.side).toLowerCase())
+      ? ` (${ev.market_activity.side})`
+      : "";
+    const ts = eventTime(ev);
+    const age = ts ? formatDate(new Date(Number(ts)), true) : "-";
+    return `
+      <tr>
+        <td>${linkTxEmoji(hash)}</td>
+        <td>${ownersCellHtml(from)}</td>
+        <td>${ownersCellHtml(to)}</td>
+        <td>${age}</td>
+        <td>${escHtml(kind + side)}</td>
+        <td>${amt}</td>
+      </tr>`;
+  }).join("");
+}
+
+function setTxPaging() {
+  const filtered = filteredTransfers();
+  prevTx.disabled = txPage === 0;
+  nextTx.disabled = !(filtered.length > (txPage + 1) * TX_LIMIT || txHasMore);
+  txCursor.textContent = filtered.length > 0 ? `Page ${txPage + 1}` : "";
+}
+
+async function ensureTransfersPage() {
+  txLoading.classList.remove("hidden");
+  try {
+    while (filteredTransfers().length < (txPage + 1) * TX_LIMIT && txHasMore) {
+      const before = transfers.length;
+      let guard = 0;
+      while (transfers.length === before && txHasMore && guard < 8) {
+        const page = await fetchTokenTransfers(tokenId, txCursorState, 80);
+        for (const ev of page.events) transfers.push(ev);
+        txCursorState = page.next;
+        txHasMore = Boolean(page.next) && page.rawCount > 0;
+        guard++;
+        if (page.rawCount === 0) break;
+      }
+      if (transfers.length === before) break;
+    }
+    renderTransfersPage();
+    setTxPaging();
+  } catch {
+    txRows.innerHTML = `<tr><td colspan="6" class="muted">Failed to load transfers.</td></tr>`;
+    setTxPaging();
+  } finally {
+    txLoading.classList.add("hidden");
+  }
+}
+
+async function loadTransfers() {
+  if (transfersLoaded) {
+    renderTransfersPage();
+    setTxPaging();
+    return;
+  }
+  transfers = [];
+  txCursorState = null;
+  txHasMore = true;
+  txPage = 0;
+  transfersLoaded = true;
+  await ensureTransfersPage();
+}
+
+function setActiveTab(tabId) {
+  document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
+  document.querySelectorAll(".tabPanel").forEach(p => p.classList.toggle("active", p.id === tabId));
+}
+
+document.querySelectorAll(".tabs .tab").forEach(tab => {
+  tab.addEventListener("click", async () => {
+    setActiveTab(tab.dataset.tab);
+    if (!tokenId) return;
+    if (tab.dataset.tab === "tabHolders") await loadHolders();
+    if (tab.dataset.tab === "tabTransfers") await loadTransfers();
+  });
+});
+
+function renderNav() {
+  const hasLinks = !!(tokenMeta?.website || tokenMeta?.x || tokenMeta?.telegram);
+  explorerNav.style.display = hasLinks ? "flex" : "none";
+  if (!hasLinks) {
+    explorerNav.innerHTML = "";
+    return;
+  }
+  explorerNav.innerHTML = "";
+  const addLink = (url, icon, isWeb = false) => {
+    explorerNav.innerHTML += `
+      <a class="sbtn${isWeb ? " fw" : ""}" href="${escHtml(url)}" target="_blank" rel="noopener noreferrer">
+        <img src="${icon}">
+      </a>`;
+  };
+  if (tokenMeta.website) {
+    addLink(tokenMeta.website, "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/web.webp", true);
+  }
+  if (tokenMeta.x) {
+    addLink(tokenMeta.x, "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/x.webp");
+  }
+  if (tokenMeta.telegram) {
+    addLink(tokenMeta.telegram, "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/logos/telegram.webp");
+  }
+}
+
+async function runSearch(query) {
+  if (BUSY) return;
+  BUSY = true;
+
+  const id = String(query || "").trim().toLowerCase().replace(/^0x/, "");
+  if (!/^[0-9a-f]{64}$/.test(id)) {
+    addToast("Invalid ID", "Enter a 64-character hex covenant ID.");
+    BUSY = false;
+    return;
+  }
+
+  tokenId = id;
+  setUrlId(id);
+  burnOwnerHex = kaspaAddressToOwnerHex(BURN_ADDR);
+
+  holdersLoaded = false;
+  transfersLoaded = false;
+  holderList = [];
+  holderOffset = 0;
+  transfers = [];
+  txPage = 0;
+  txCursorState = null;
+  txHasMore = true;
+  tokenBurnedRaw = "0";
+  tokenMeta = null;
+  txFilters = defaultFilters();
+  markActiveFilters();
+
+  explorerPic.removeAttribute("src");
+  explorerPic.src = "https://cdn.jsdelivr.net/gh/kaspahub/kaspahub.github.io@main/assets/icons/loading.gif";
+
+  try {
+    const [summary, balances] = await Promise.all([
+      fetchTokenSummary(id),
+      fetchTokenBalances(id).catch(() => [])
+    ]);
+
+    if (!summary) throw new Error("Token not found");
+
+    tokenInfo = summary;
+    holderList = Array.isArray(balances) ? balances : [];
+    holdersLoaded = true;
+    holderList.sort((a, b) => {
+      try {
+        const d = BigInt(b.balance_str ?? b.balance ?? 0) - BigInt(a.balance_str ?? a.balance ?? 0);
+        if (d > 0n) return 1;
+        if (d < 0n) return -1;
+      } catch {}
+      return 0;
+    });
+
+    let burnedCandidate = burnedFromHolders(holderList);
+    if (burnedCandidate === "0") {
+      burnedCandidate = String(tokenInfo?.burned_str ?? tokenInfo?.burned ?? "0");
+    }
+    tokenBurnedRaw = burnedCandidate;
+
+    applyTokenImage();
+
+    renderHeader();
+    renderSummary();
+    renderAboutTab();
+    await renderMarket();
+    renderNav();
+
+    const meta = await fetchDirectoryMeta(id).catch(() => null);
+    if (meta) {
+      tokenMeta = meta;
+      renderHeader();
+      renderSummary();
+      renderAboutTab();
+      await renderMarket();
+      renderNav();
+    }
+
+    try {
+      const burnFromAddr = await fetchBurnWalletHolding(id);
+      if (burnFromAddr && burnFromAddr !== "0") {
+        tokenBurnedRaw = burnFromAddr;
+        renderBurned();
+      }
+    } catch {}
+
+    const active = document.querySelector(".tabs .tab.active")?.dataset.tab;
+    if (active === "tabHolders") {
+      renderHoldersPage();
+      setHolderPaging();
+    }
+    if (active === "tabTransfers") await loadTransfers();
+
+  } catch (err) {
+    addToast("Not available", String(err?.message || err));
+    hdrSub.textContent = "-";
+    renderPriceMissing();
+    holderRows.innerHTML = `<tr><td colspan="5" class="muted">-</td></tr>`;
+    txRows.innerHTML = `<tr><td colspan="6" class="muted">-</td></tr>`;
+    pairRows.innerHTML = `<tr><td colspan="4" class="muted">-</td></tr>`;
+    infoDescription.textContent = "-";
+  } finally {
+    BUSY = false;
+  }
+}
+
+prevTx.addEventListener("click", () => {
+  if (txPage > 0) {
+    txPage -= 1;
+    renderTransfersPage();
+    setTxPaging();
+  }
+});
+nextTx.addEventListener("click", async () => {
+  txPage += 1;
+  await ensureTransfersPage();
+});
+
+prevHolder.addEventListener("click", () => {
+  if (holderOffset > 0) {
+    holderOffset -= HOLDER_LIMIT;
+    renderHoldersPage();
+    setHolderPaging();
+  }
+});
+nextHolder.addEventListener("click", () => {
+  holderOffset += HOLDER_LIMIT;
+  renderHoldersPage();
+  setHolderPaging();
+});
+
+document.getElementById("searchContainer")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  if (BUSY) return;
+  const q = String(document.getElementById("searchQueryInput").value || "").trim().toLowerCase();
+  document.getElementById("explorerIntro").style.opacity = "0";
+  document.getElementById("explorerData").style.opacity = "initial";
+  document.getElementById("explorerHead").style.opacity = "initial";
+  runSearch(q);
+}, true);
+
+if (QUERY) {
+  (async () => {
+    await preloadNames();
+    document.getElementById("explorerData").style.opacity = "initial";
+    document.getElementById("explorerHead").style.opacity = "initial";
+    await kasPricePromise;
+    runSearch(String(QUERY).trim().toLowerCase());
+  })();
+} else {
+  preloadNames();
+  document.getElementById("explorerIntro").style.opacity = "initial";
+}
+
+</script>
+
+</body>
+</html>

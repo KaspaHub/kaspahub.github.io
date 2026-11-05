@@ -531,6 +531,14 @@
 	"added": 1779062400
 },
 {
+	"name": "HardKAS",
+	"description": "Open-source local-first toolkit and IDE for building, simulating, and testing Kaspa L1 transactions and SilverScript contracts.",
+	"link": "https://hardkas.dev",
+	"logo": "https://kaspahub.org/assets/logos/hardkas.webp",
+	"features": ["reviewed", "development"],
+	"added": 1793701215
+},
+{
 	"name": "Kasway",
 	"description": "The world’s first decentralized, open-source point-of-sale solution built on Kaspa, enabling instant, secure, non-custodial payments for merchants and users.",
 	"link": "https://github.com/Kasway-Tech/pos",

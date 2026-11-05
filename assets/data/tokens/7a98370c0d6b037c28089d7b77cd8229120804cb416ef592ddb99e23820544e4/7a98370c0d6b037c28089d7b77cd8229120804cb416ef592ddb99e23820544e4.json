@@ -1,0 +1,8 @@
+{
+	"name": "Kron Token",
+	"ticker": "KRON",
+	"description": "The token for KRON, Kaspa's native L1 launchpad and DEX. No bridges, no admin keys, liquidity locked forever at graduation.",
+	"website": "https://kron.technology",
+	"x": "https://x.com/krontechnology",
+	"discord": "https://discord.gg/dGph6xsH5r"
+}
