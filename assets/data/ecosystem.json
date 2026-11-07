@@ -125,7 +125,7 @@
 {
 	"name": "KForge",
 	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
-	"link": "https://testnet.kforge.xyz",
+	"link": "https://www.kforge.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
 	"features": ["launchpad", "dex"],
 	"added": 1788728400
@@ -1849,11 +1849,12 @@
 	"features": ["reviewed", "mica", "cex", "googleApplePay", "withdrawals"]
 },
 {
-	"name": "Topper",
-	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
-	"link": "https://www.topperpay.com",
-	"logo": "https://kaspahub.org/assets/logos/topper.webp",
-	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
+	"name": "eToro",
+	"description": "eToro is an Israel-based multi-asset trading platform founded in 2007, offering social trading, cryptoassets, stocks, ETFs, and CFDs.",
+	"link": "https://www.etoro.com",
+	"logo": "https://kaspahub.org/assets/logos/etoro.webp",
+	"features": ["reviewed", "mica", "cex"],
+	"added": 1794079000
 },
 {
 	"name": "Bybit",
@@ -1967,6 +1968,13 @@
 	"link": "https://pro.bit2me.com",
 	"logo": "https://kaspahub.org/assets/logos/bit2me.webp",
 	"features": ["cex", "mica"]
+},
+{
+	"name": "Topper",
+	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
+	"link": "https://www.topperpay.com",
+	"logo": "https://kaspahub.org/assets/logos/topper.webp",
+	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Simplex",

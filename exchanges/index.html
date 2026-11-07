@@ -115,10 +115,11 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 	<h2>Features</h2>
 	<div class="filter-category">
-		<div class="filter-group"><input type="checkbox" id="mica" data-feature="mica"><label for="mica">MICA</label></div>
 		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
+		<div class="filter-group"><input type="checkbox" id="dex" data-feature="dex"><label for="dex">DEX</label></div>
 		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
 		<div class="filter-group"><input type="checkbox" id="googleApplePay" data-feature="googleApplePay"><label for="googleApplePay">Google & Apple Pay</label></div>
+		<div class="filter-group"><input type="checkbox" id="mica" data-feature="mica"><label for="mica">MICA</label></div>
 		<div class="filter-group"><input type="checkbox" id="noKyc" data-feature="noKyc"><label for="noKyc">No KYC</label></div>
 		<!-- <div class="filter-group"><input type="checkbox" id="swap" data-feature="swap"><label for="swap">Swap</label></div> -->
 		<!-- <div class="filter-group"><input type="checkbox" id="withdrawals" data-feature="withdrawals"><label for="withdrawals">Withdrawals</label></div> -->
@@ -188,11 +189,11 @@ const items = [
 	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
 },
 {
-	"name": "Topper",
-	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
-	"link": "https://www.topperpay.com",
-	"logo": "https://kaspahub.org/assets/logos/topper.webp",
-	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
+	"name": "eToro",
+	"description": "eToro is an Israel-based multi-asset trading platform founded in 2007, offering social trading, cryptoassets, stocks, ETFs, and CFDs.",
+	"link": "https://www.etoro.com",
+	"logo": "https://kaspahub.org/assets/logos/etoro.webp",
+	"features": ["reviewed", "mica", "cex"]
 },
 {
 	"name": "Bybit",
@@ -200,6 +201,41 @@ const items = [
 	"link": "https://www.bybit.com",
 	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
 	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "KRON",
+	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
+	"link": "https://kron.technology",
+	"logo": "https://kaspahub.org/assets/logos/kron.webp",
+	"features": ["launchpad", "dex", "swap", "withdrawals"]
+},
+{
+	"name": "KaspaRocket",
+	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
+	"link": "https://kasparocket.fun",
+	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
+	"features": ["launchpad", "swap", "withdrawals"]
+},
+{
+	"name": "Kasseal",
+	"description": "Native Kaspa L1 token launchpad using KCC-20 covenants. Launch tokens with sealed supply, trade on a fair bonding curve, and graduate to a locked liquidity pool.",
+	"link": "https://app.kasseal.com",
+	"logo": "https://kaspahub.org/assets/logos/kasseal.webp",
+	"features": ["launchpad", "swap", "withdrawals"]
+},
+{
+	"name": "KForge",
+	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
+	"link": "https://www.kforge.xyz",
+	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
+	"features": ["launchpad", "dex", "swap", "withdrawals"]
+},
+{
+	"name": "Braid",
+	"description": "DEX aggregator and exchange for Kaspa that finds the best swap prices across exchanges, shares arbitrage profits with users, and keeps full self-custody.",
+	"link": "https://www.braidswap.com",
+	"logo": "https://kaspahub.org/assets/logos/braidswap.webp",
+	"features": ["dex", "swap", "withdrawals"]
 },
 {
 	"name": "KuCoin",
@@ -305,6 +341,13 @@ const items = [
 	"link": "https://pro.bit2me.com",
 	"logo": "https://kaspahub.org/assets/logos/bit2me.webp",
 	"features": ["cex", "mica", "cryptoCard"]
+},
+{
+	"name": "Topper",
+	"description": "Topper Pay is a service of Uphold that offers a crypto payment solution for buying and selling digital assets.",
+	"link": "https://www.topperpay.com",
+	"logo": "https://kaspahub.org/assets/logos/topper.webp",
+	"features": ["reviewed", "cex", "swap", "googleApplePay", "withdrawals", "payments"]
 },
 {
 	"name": "Simplex",
