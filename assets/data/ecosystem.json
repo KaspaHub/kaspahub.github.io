@@ -893,7 +893,7 @@
 },
 {
 	"name": "Trestly",
-	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa L1 as native kUSDT (KCC-20 covenant token), with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
+	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa L1 as native kUSDT, with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
 	"link": "https://trestly.io",
 	"logo": "https://kaspahub.org/assets/logos/trestly.webp",
 	"features": ["bridge"],
