@@ -39,8 +39,16 @@
 	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa L1, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
 	"link": "https://kaspadollar.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
-	"features": ["reviewed"],
+    "features": ["reviewed", "education"],
 	"added": 1794311187
+},
+{
+    "name": "Kaspa Privacy Initiative",
+    "description": "An independent, open-source research initiative exploring optional financial privacy for native KAS through a shielded domain, without introducing a new token or relying on custodians.",
+    "link": "https://kpi.cash",
+    "logo": "https://kaspahub.org/assets/logos/kpi.webp",
+    "features": ["reviewed", "education"],
+	"added": 1794313156
 },
 {
 	"name": "Igra Labs",
