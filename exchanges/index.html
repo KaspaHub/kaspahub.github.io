@@ -116,10 +116,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<h2>Features</h2>
 	<div class="filter-category">
 		<div class="filter-group"><input type="checkbox" id="cryptoCard" data-feature="cryptoCard"><label for="cryptoCard">Crypto Card</label></div>
-		<div class="filter-group"><input type="checkbox" id="dex" data-feature="dex"><label for="dex">DEX</label></div>
+		<div class="filter-group"><input type="checkbox" id="dex" data-feature="dex"><label for="dex">Decentralized Exchanges</label></div>
 		<div class="filter-group"><input type="checkbox" id="futuresTrading" data-feature="futuresTrading"><label for="futuresTrading">Futures Trading</label></div>
 		<div class="filter-group"><input type="checkbox" id="googleApplePay" data-feature="googleApplePay"><label for="googleApplePay">Google & Apple Pay</label></div>
-		<div class="filter-group"><input type="checkbox" id="mica" data-feature="mica"><label for="mica">MICA</label></div>
+		<div class="filter-group"><input type="checkbox" id="mica" data-feature="mica"><label for="mica">MiCA Licence</label></div>
 		<div class="filter-group"><input type="checkbox" id="noKyc" data-feature="noKyc"><label for="noKyc">No KYC</label></div>
 		<!-- <div class="filter-group"><input type="checkbox" id="swap" data-feature="swap"><label for="swap">Swap</label></div> -->
 		<!-- <div class="filter-group"><input type="checkbox" id="withdrawals" data-feature="withdrawals"><label for="withdrawals">Withdrawals</label></div> -->
@@ -175,34 +175,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 const items = [
 {
-	"name": "Kraken",
-	"description": "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
-	"link": "https://www.kraken.com",
-	"logo": "https://kaspahub.org/assets/logos/kraken.webp",
-	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
-},
-{
-	"name": "Uphold",
-	"description": "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
-	"link": "https://uphold.com",
-	"logo": "https://kaspahub.org/assets/logos/uphold.webp",
-	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
-},
-{
-	"name": "eToro",
-	"description": "eToro is an Israel-based multi-asset trading platform founded in 2007, offering social trading, cryptoassets, stocks, ETFs, and CFDs.",
-	"link": "https://www.etoro.com",
-	"logo": "https://kaspahub.org/assets/logos/etoro.webp",
-	"features": ["reviewed", "mica", "cex"]
-},
-{
-	"name": "Bybit",
-	"description": "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
-	"link": "https://www.bybit.com",
-	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
-	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
-},
-{
 	"name": "KRON",
 	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
 	"link": "https://kron.technology",
@@ -236,6 +208,34 @@ const items = [
 	"link": "https://www.braidswap.com",
 	"logo": "https://kaspahub.org/assets/logos/braidswap.webp",
 	"features": ["dex", "swap", "withdrawals"]
+},
+{
+	"name": "Kraken",
+	"description": "Kraken is a United States-based trading platform founded in 2011, providing crypto and fiat trading services.",
+	"link": "https://www.kraken.com",
+	"logo": "https://kaspahub.org/assets/logos/kraken.webp",
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
+},
+{
+	"name": "Uphold",
+	"description": "Uphold is a United States-based exchange platform founded in 2013, offering crypto, fiat, and metals.",
+	"link": "https://uphold.com",
+	"logo": "https://kaspahub.org/assets/logos/uphold.webp",
+	"features": ["reviewed", "mica", "cex", "cryptoCard", "googleApplePay", "withdrawals"]
+},
+{
+	"name": "eToro",
+	"description": "eToro is an Israel-based multi-asset trading platform founded in 2007, offering social trading, cryptoassets, stocks, ETFs, and CFDs.",
+	"link": "https://www.etoro.com",
+	"logo": "https://kaspahub.org/assets/logos/etoro.webp",
+	"features": ["reviewed", "mica", "cex"]
+},
+{
+	"name": "Bybit",
+	"description": "Bybit is a United Arab Emirates-based trading platform founded in 2018, focusing on crypto derivatives trading.",
+	"link": "https://www.bybit.com",
+	"logo": "https://kaspahub.org/assets/logos/bybit.webp",
+	"features": ["reviewed", "cex", "cryptoCard", "googleApplePay", "futuresTrading", "withdrawals"]
 },
 {
 	"name": "KuCoin",
@@ -502,6 +502,13 @@ const items = [
 	"link": "https://www.btse.com",
 	"logo": "https://kaspahub.org/assets/logos/btse.webp",
 	"features": ["cex", "cryptoCard", "futuresTrading"]
+},
+{
+	"name": "EasyBit",
+	"description": "EasyBit is a Cyprus-based non-custodial crypto-to-crypto exchange founded in 2018, offering instant swaps with competitive rates and Volatility Protection Mode.",
+	"link": "https://easybit.com",
+	"logo": "https://kaspahub.org/assets/logos/easybit.webp",
+	"features": ["cex", "swap", "noKyc", "withdrawals"]
 },
 {
 	"name": "StealthEX",

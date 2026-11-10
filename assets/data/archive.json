@@ -140,6 +140,30 @@
   "features": ["meme", "gaming"]
 },
 {
+  "name": "Crypto Wars",
+  "description": "A retro-style side-scroller where Kaspa fights Solana. Dodge datacenter outages, shoot projectiles, and prove decentralization wins. Built for fun.",
+  "link": "https://cryptowars.world",
+  "logo": "https://kaspahub.org/assets/logos/cryptowars.webp",
+  "features": ["reviewed", "gaming"],
+  "added": 1792416948
+},
+{
+  "name": "Koracle",
+  "description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
+  "link": "https://koracle.xyz",
+  "logo": "https://kaspahub.org/assets/logos/koracle.webp",
+  "features": ["development"],
+  "added": 1788901200
+},
+{
+  "name": "Kaspa Speed",
+  "description": "An interactive community site that visualizes and compares Kaspa network speed against other blockchains with live dashboards, payment simulations, and block production races.",
+  "link": "https://kaspaspeed.com",
+  "logo": "https://kaspahub.org/assets/logos/kaspaspeed.webp",
+  "features": ["reviewed", "education", "visualizer"],
+  "added": 1788998400
+},
+{
   "name": "Kasthletics",
   "description": "Proof of Workout platform merging fitness with Kaspa. Train with AI-verified reps via camera, earn $KAS rewards, rank up, and join challenges for real accountability and long-term discipline.",
   "link": "https://www.kasthletics.com",

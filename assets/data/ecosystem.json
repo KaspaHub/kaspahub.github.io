@@ -35,6 +35,14 @@
 	"features": ["reviewed", "videos"]
 },
 {
+	"name": "KaspaDollar",
+	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa L1, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
+	"link": "https://kaspadollar.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
+	"features": ["reviewed"],
+	"added": 1794311187
+},
+{
 	"name": "Igra Labs",
 	"description": "An EVM-compatible based rollup on Kaspa that uses L1 as a decentralized sequencer, enabling MEV-resistant smart contracts, DeFi, and cross-VM interoperability.",
 	"link": "https://igralabs.com",
@@ -444,14 +452,6 @@
 	"added": 1789074000
 },
 {
-	"name": "Koracle",
-	"description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
-	"link": "https://koracle.xyz",
-	"logo": "https://kaspahub.org/assets/logos/koracle.webp",
-	"features": ["development"],
-	"added": 1788901200
-},
-{
 	"name": "Gembl.Fun",
 	"description": "A crypto casino centered on Kaspa, built so the casino can power further ecosystem growth through events, marketing, and tools.",
 	"link": "https://gembl.fun",
@@ -690,14 +690,6 @@
 	"features": ["reviewed", "gaming"]
 },
 {
-	"name": "Crypto Wars",
-	"description": "A retro-style side-scroller where Kaspa fights Solana. Dodge datacenter outages, shoot projectiles, and prove decentralization wins. Built for fun.",
-	"link": "https://cryptowars.world",
-	"logo": "https://kaspahub.org/assets/logos/cryptowars.webp",
-	"features": ["reviewed", "gaming"],
-	"added": 1792416948
-},
-{
 	"name": "Pixel Peeps",
 	"description": "A playable meme coin on Kaspa. Tap the coin, build a pixel-art city one Peep-grade at a time, click, upgrade, automate, and buy $PEEPS - a coin you can actually play.",
 	"link": "https://pixel-peeps.com",
@@ -900,6 +892,14 @@
 	"features": ["bridge"]
 },
 {
+	"name": "Trestly",
+	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa L1 as native kUSDT (KCC-20 covenant token), with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
+	"link": "https://trestly.io",
+	"logo": "https://kaspahub.org/assets/logos/trestly.webp",
+	"features": ["bridge"],
+	"added": 1794310006
+},
+{
 	"name": "BestChange",
 	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
 	"link": "https://www.bestchange.com",
@@ -979,14 +979,6 @@
 	"link": "https://kasphub.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed", "education", "calculator", "utilities", "education"]
-},
-{
-	"name": "Kaspa Speed",
-	"description": "An interactive community site that visualizes and compares Kaspa network speed against other blockchains with live dashboards, payment simulations, and block production races.",
-	"link": "https://kaspaspeed.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspaspeed.webp",
-	"features": ["reviewed", "education", "visualizer"],
-	"added": 1788998400
 },
 {
 	"name": "KasNodes",
@@ -1523,19 +1515,19 @@
 	"features": ["wallet", "openSource", "selfCustodial", "web"]
 },
 {
+	"name": "Kaspire",
+	"description": "Open-source self-custody Kaspa wallet for Android and browser extension. Supports all L1/L2 assets, WalletConnect v2, BIP39 passphrases, and Argon2id.",
+	"link": "https://kaspire.kaslab.space",
+	"logo": "https://kaspahub.org/assets/logos/kaspire.webp",
+	"features": ["reviewed", "wallet", "selfCustodial", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"],
+	"added": 1787961600
+},
+{
 	"name": "Kasanova",
 	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
 	"link": "https://kasanova.app",
 	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
 	"features": ["wallet", "selfCustodial", "krc20", "knsDomains", "mobile"]
-},
-{
-	"name": "Kaspire",
-	"description": "Open-source self-custody Kaspa wallet for Android and browser extension. Supports all L1/L2 assets, WalletConnect v2, BIP39 passphrases, and Argon2id.",
-	"link": "https://kaspire.kaslab.space",
-	"logo": "https://kaspahub.org/assets/logos/kaspire.webp",
-	"features": ["wallet", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"],
-	"added": 1787961600
 },
 {
 	"name": "Coin Wallet",
@@ -2129,6 +2121,14 @@
 	"link": "https://www.btse.com",
 	"logo": "https://kaspahub.org/assets/logos/btse.webp",
 	"features": ["cex", "futuresTrading"]
+},
+{
+	"name": "EasyBit",
+	"description": "EasyBit is a Cyprus-based non-custodial crypto-to-crypto exchange founded in 2018, offering instant swaps with competitive rates and Volatility Protection Mode.",
+	"link": "https://easybit.com",
+	"logo": "https://kaspahub.org/assets/logos/easybit.webp",
+	"features": ["cex", "swap", "noKyc", "withdrawals"],
+	"added": 1794309506
 },
 {
 	"name": "StealthEX",
