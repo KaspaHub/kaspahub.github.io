@@ -39,15 +39,15 @@
 	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa L1, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
 	"link": "https://kaspadollar.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
-    "features": ["reviewed", "education"],
+	"features": ["reviewed", "education"],
 	"added": 1794311187
 },
 {
-    "name": "Kaspa Privacy Initiative",
-    "description": "An independent, open-source research initiative exploring optional financial privacy for native KAS through a shielded domain, without introducing a new token or relying on custodians.",
-    "link": "https://kpi.cash",
-    "logo": "https://kaspahub.org/assets/logos/kpi.webp",
-    "features": ["reviewed", "education"],
+	"name": "Kaspa Privacy Initiative",
+	"description": "An independent, open-source research initiative exploring optional financial privacy for native KAS through a shielded domain, without introducing a new token or relying on custodians.",
+	"link": "https://kpi.cash",
+	"logo": "https://kaspahub.org/assets/logos/kpi.webp",
+	"features": ["reviewed", "education"],
 	"added": 1794313156
 },
 {
@@ -2249,6 +2249,14 @@
 	"link": "https://www.pionex.com",
 	"logo": "https://kaspahub.org/assets/logos/pionex.webp",
 	"features": ["reviewed", "cex", "futuresTrading"]
+},
+{
+	"name": "Flashift",
+	"description": "Flashift is an Australia-based non-custodial crypto swap aggregator founded in 2020, using AI to compare rates for instant cross-chain exchanges without registration or KYC.",
+	"link": "https://flashift.app",
+	"logo": "https://kaspahub.org/assets/logos/flashift.webp",
+	"features": ["cex", "swap", "noKyc", "withdrawals"],
+	"added": 1794331286
 },
 {
 	"name": "Eclipse Exchange",
