@@ -1270,6 +1270,14 @@
 	"features": ["mining"]
 },
 {
+	"name": "KEKPOOL",
+	"description": "An AI-powered cryptocurrency mining pool that uses machine learning to optimize efficiency, reduce stale shares, and improve performance, with real-time tracking dashboards, low fees, daily payouts, and a profit calculator.",
+	"link": "https://kekpool.com",
+	"logo": "https://kaspahub.org/assets/logos/kekpool.webp",
+	"features": ["mining"],
+	"added": 1794513479
+},
+{
 	"name": "Kryptex Pool",
 	"description": "A mining pool supporting Kaspa with PPS+ and SOLO payout schemes. Features stable payouts, dual mining support, complete anonymity, and compatibility with various miners and OS.",
 	"link": "https://pool.kryptex.com/kas",
