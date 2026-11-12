@@ -14,6 +14,29 @@
   "features": ["blockExplorer"]
 },
 {
+  "name": "Kaspa Bridge",
+  "description": "A multi-chain two-way EVM bridge connecting Igra & Kasplex on Kaspa to BNB Chain and 30–40 additional EVM networks.",
+  "link": "https://kaspabridge.com",
+  "logo": "https://kaspahub.org/assets/logos/kaspabridge.webp",
+  "features": ["reviewed", "bridge"]
+},
+{
+  "name": "K100bet",
+  "description": "Prediction market platform built on the Kaspa blockDAG. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
+  "link": "https://k100bet.com",
+  "logo": "https://kaspahub.org/assets/logos/k100bet.webp",
+  "features": ["dapp", "gambling"],
+  "added": 1781222400
+},
+{
+  "name": "Depth Tool",
+  "description": "Real-time orderbook depth and price impact comparison tool for Kaspa ecosystem tokens. Compare liquidity across centralized exchanges and DEXes like ZealousSwap on Igra and Kasplex L2s.",
+  "link": "https://depthtool.com",
+  "logo": "https://kaspahub.org/assets/logos/depthtool.webp",
+  "features": ["reviewed", "analytics", "utilities"],
+  "added": 1779408000
+},
+{
   "name": "TheCryptoSky",
   "description": "A marketplace for buying and selling goods, services, and listing jobs, all paid in Kaspa, with a secure on-chain wallet and escrow trading system for fast, low-fee transactions.",
   "link": "https://thecryptosky.com",
@@ -21,11 +44,32 @@
   "features": ["jobs", "marketplace"]
 },
 {
+  "name": "KasStamp",
+  "description": "An open-source service for stamping digital artifacts on Kaspa's Layer-1, providing immutable, timestamped proof-of-existence and verifiable attestations with public or private disclosure options.",
+  "link": "https://kasstamp.com",
+  "logo": "https://kaspahub.org/assets/logos/kasstamp.webp",
+  "features": ["reviewed", "utilities"]
+},
+{
+  "name": "OnChain POS",
+  "description": "A professional point-of-sale platform for retail and online businesses to accept cryptocurrency payments directly to their wallet, with real-time on-chain verification.",
+  "link": "https://onchainpos.live",
+  "logo": "https://kaspahub.org/assets/logos/onchainpos.webp",
+  "features": ["reviewed", "development", "payments"]
+},
+{
   "name": "KYO",
   "description": "A Kaspa-based protocol enabling crypto holders to spend and borrow against their assets without selling, offering a seamless card for instant payments and loans while retaining ownership.",
   "link": "https://kyocard.app",
   "logo": "https://kaspahub.org/assets/logos/kyocard.app.webp",
   "features": ["cryptoCard"]
+},
+{
+  "name": "Token Depot",
+  "description": "Platform for utility and entitlement tokens on Kaspa. Provides the OMA Wallet supporting KAS, KRC-20 tokens, and Issue-Mode CA tokens with offers, swaps, analyzer tools, and coupon functionality.",
+  "link": "https://www.token-depot.co",
+  "logo": "https://kaspahub.org/assets/logos/token-depot.webp",
+  "features": ["wallet"]
 },
 {
   "name": "Flux Kmail",
