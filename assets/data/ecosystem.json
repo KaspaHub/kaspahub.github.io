@@ -1242,7 +1242,7 @@
 },
 {
 	"name": "KEKPOOL",
-	"description": "An AI-powered cryptocurrency mining pool that uses machine learning to optimize efficiency, reduce stale shares, and improve performance, with real-time tracking dashboards, low fees, daily payouts, and a profit calculator.",
+	"description": "AI-powered cryptocurrency mining pool that uses machine learning to optimize efficiency, reduce stale shares, and improve performance, with real-time tracking dashboards, low fees, and daily payouts.",
 	"link": "https://kekpool.com",
 	"logo": "https://kaspahub.org/assets/logos/kekpool.webp",
 	"features": ["mining"],
