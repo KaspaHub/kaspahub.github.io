@@ -115,6 +115,22 @@
 	"features": ["reviewed", "dex"]
 },
 {
+	"name": "KOB",
+	"description": "Permissionless decentralized limit order book on Kaspa for KCC-20 tokens. Every order is a covenant UTXO enforced on-chain with no admin keys.",
+	"link": "https://kob.kaspa.ag",
+	"logo": "https://kaspahub.org/assets/logos/kob.webp",
+	"features": ["launchpad", "dex"],
+	"added": 1794515268
+},
+{
+	"name": "Braid",
+	"description": "DEX aggregator and exchange for Kaspa that finds the best swap prices across exchanges, shares arbitrage profits with users, and keeps full self-custody.",
+	"link": "https://www.braidswap.com",
+	"logo": "https://kaspahub.org/assets/logos/braidswap.webp",
+	"features": ["dex"],
+	"added": 1792246149
+},
+{
 	"name": "KRON",
 	"description": "A native Kaspa Layer 1 launchpad and decentralized exchange, offering bonding-curve token launches and permanently locked automated market maker (AMM) trading.",
 	"link": "https://kron.technology",
@@ -147,27 +163,11 @@
 	"added": 1788728400
 },
 {
-	"name": "Braid",
-	"description": "DEX aggregator and exchange for Kaspa that finds the best swap prices across exchanges, shares arbitrage profits with users, and keeps full self-custody.",
-	"link": "https://www.braidswap.com",
-	"logo": "https://kaspahub.org/assets/logos/braidswap.webp",
-	"features": ["dex"],
-	"added": 1792246149
-},
-{
-	"name": "KOB",
-	"description": "Permissionless decentralized limit order book on Kaspa for KCC-20 tokens. Every order is a covenant UTXO enforced on-chain with no admin keys.",
-	"link": "https://kob.kaspa.ag",
-	"logo": "https://kaspahub.org/assets/logos/kob.webp",
-	"features": ["dex"],
-	"added": 1794515268
-},
-{
 	"name": "PumpForge",
 	"description": "Non-custodial launchpad for Solana, Base, BNB Chain, Robinhood Chain and Kaspa, with native Kaspa L1 support via KasForge for bonding-curve token launches and trading.",
-	"link": "https://pumpforge.tech",
+	"link": "https://kaspa.pumpforge.tech",
 	"logo": "https://kaspahub.org/assets/logos/pumpforge.webp",
-	"features": ["launchpad"],
+	"features": ["launchpad", "dex"],
 	"added": 1792246149
 },
 {
@@ -209,19 +209,19 @@
 	"added": 1776211200
 },
 {
-	"name": "Igra Name Service",
-	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
-	"link": "https://insdomains.org",
-	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
-	"features": ["layer2", "marketplace"],
-	"added": 1780099200
-},
-{
 	"name": "KRChange",
 	"description": "The premier Kaspa (KRC20) exchange, offering L1 token trading with preloaded liquidity for top tokens, weekly volume-based buybacks, and an L2 smart contract DEX on Kasplex for scalable DeFi.",
 	"link": "https://krchange.com",
 	"logo": "https://kaspahub.org/assets/logos/krchange.webp",
 	"features": []
+},
+{
+	"name": "Rareloom",
+	"description": "The first NFT marketplace built on Kaspa Layer 1. Enables creating, launching, and trading NFT collections where ownership, royalties, and platform fees are enforced on-chain by covenants.",
+	"link": "https://rareloom.io",
+	"logo": "https://kaspahub.org/assets/logos/rareloom.webp",
+	"features": ["marketplace"],
+	"added": 1795117914
 },
 {
 	"name": "Kaspalytics",
@@ -283,6 +283,14 @@
 	"link": "https://app.knsdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/kns.webp",
 	"features": ["reviewed", "marketplace"]
+},
+{
+	"name": "Igra Name Service",
+	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
+	"link": "https://insdomains.org",
+	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
+	"features": ["layer2", "marketplace"],
+	"added": 1780099200
 },
 {
 	"name": "OverBuild Labs",
