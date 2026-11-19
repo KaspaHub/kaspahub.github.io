@@ -585,6 +585,13 @@
 	"features": ["reviewed"]
 },
 {
+	"name": "kas.coffee",
+	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
+	"link": "https://kas.coffee",
+	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
+	"features": ["reviewed", "payments"]
+},
+{
 	"name": "Kaspa Links",
 	"description": "Non-custodial Kaspa payment links - share a URL, get paid wallet-to-wallet on the Kaspa BlockDAG. No middleman, no platform fees, no custody.",
 	"link": "https://kaspalinks.com",
@@ -593,11 +600,12 @@
 	"added": 1779235200
 },
 {
-	"name": "kas.coffee",
-	"description": "A platform for creating personalized donation pages to accept Kaspa cryptocurrency instantly, with custom handles, themes, QR code payments, and social media integration.",
-	"link": "https://kas.coffee",
-	"logo": "https://kaspahub.org/assets/logos/kascoffee.webp",
-	"features": ["reviewed", "payments"]
+	"name": "BuyMeAKAS",
+	"description": "Tip and donation pages for Kaspa. Create a page, embed “Buy me a KAS” buttons, and receive tips directly to your wallet with 0% fees.",
+	"link": "https://buymeakas.com",
+	"logo": "https://kaspahub.org/assets/logos/buymeakas.webp",
+	"features": ["reviewed", "payments"],
+	"added": 1795085674
 },
 {
 	"name": "KasTip",
@@ -1242,7 +1250,7 @@
 },
 {
 	"name": "KEKPOOL",
-	"description": "AI-powered cryptocurrency mining pool that uses machine learning to optimize efficiency, reduce stale shares, and improve performance, with real-time tracking dashboards, low fees, and daily payouts.",
+	"description": "Cryptocurrency mining pool that uses machine learning to optimize efficiency, reduce stale shares, and improve performance, with real-time tracking dashboards, low fees, and daily payouts.",
 	"link": "https://kekpool.com",
 	"logo": "https://kaspahub.org/assets/logos/kekpool.webp",
 	"features": ["mining"],
