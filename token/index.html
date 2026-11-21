@@ -41,7 +41,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </head>
 <body>
-<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-1">
@@ -574,7 +574,7 @@ async function fetchTokenTransfers(id, cursor, limit = TX_LIMIT) {
 }
 
 async function fetchDirectoryMeta(id) {
-  const jsonUrl = `/assets/data/tokens/${encodeURIComponent(id)}/${encodeURIComponent(id)}.json`;
+  const jsonUrl = `/assets/data/tokens/${encodeURIComponent(id)}/data.json`;
   try {
     const r = await fetch(jsonUrl, { cache: "no-store" });
     if (r.ok) return await r.json();
@@ -585,7 +585,7 @@ async function fetchDirectoryMeta(id) {
 function applyTokenImage() {
   const fallback = "/assets/logos/logo.webp";
   const apiImg = tokenInfo?.claimed_image || tokenInfo?.listed_image;
-  const logoUrl = `/assets/data/tokens/${encodeURIComponent(tokenId)}/${encodeURIComponent(tokenId)}.webp`;
+  const logoUrl = `/assets/data/tokens/${encodeURIComponent(tokenId)}/icon.webp`;
   explorerPic.src = apiImg || fallback;
   const probe = new Image();
   probe.onload = () => {
@@ -616,7 +616,7 @@ function resolveTicker(info, meta) {
     || info?.claimed_ticker
     || info?.listed_ticker
     || info?.name
-    || tokenId.slice(0, 8);
+    || tokenId;
 }
 
 function resolveDescription(info, meta) {
@@ -625,6 +625,12 @@ function resolveDescription(info, meta) {
     || info?.claimed_description
     || info?.listed_description
     || "";
+}
+
+function pairSymbol() {
+  const s = String(displayTicker || "").trim();
+  if (s) return s;
+  return tokenId || "";
 }
 
 function daaToMs(daa) {
@@ -740,6 +746,95 @@ function renderAboutTab() {
   infoDescription.innerHTML = desc ? escHtml(desc) : "-";
 }
 
+function dexVenueKey(name) {
+  const s = String(name || "").toLowerCase();
+  if (s.includes("kron")) return "kron";
+  if (s.includes("kasseal")) return "kasseal";
+  if (s.includes("rocket")) return "kasparocket";
+  if (s.includes("pumpforge")) return "pumpforge";
+  if (s.includes("kforge")) return "kforge";
+  return s.replace(/\s+/g, "") || "";
+}
+
+function venueTradeUrl(venue, id) {
+  const v = String(venue || "").toLowerCase();
+  const cid = encodeURIComponent(String(id || ""));
+  if (!cid) return "";
+  if (v.includes("kron")) return `https://kron.technology/token/${cid}`;
+  if (v.includes("kasseal")) return `https://app.kasseal.com/token/${cid}`;
+  if (v.includes("rocket")) return `https://kasparocket.fun/token/${cid}`;
+  if (v.includes("pumpforge")) return `https://kaspa.pumpforge.tech/coin/${cid}`;
+  if (v.includes("kforge")) return `https://www.kforge.xyz/#/token/${cid}`;
+  return `https://kascov.io/#/mainnet/token/${cid}`;
+}
+
+async function fetchKronListings(id) {
+  const tokenHex = String(id || "").toLowerCase();
+  if (!tokenHex) return [];
+  const out = [];
+  const seen = new Set();
+  const sym = pairSymbol();
+
+  const push = (row) => {
+    const key = `${dexVenueKey(row.venue)}:${String(row.pairId || row.pairLabel || "").toLowerCase()}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(row);
+  };
+
+  try {
+    const tickers = await fetchJson("https://idx.kron.technology/v1/aggregator/tickers", { notFound: [] });
+    for (const t of Array.isArray(tickers) ? tickers : []) {
+      if (String(t.base_currency || "").toLowerCase() !== tokenHex) continue;
+      push({
+        source: "kron",
+        venue: "KRON",
+        pairLabel: `KAS/${sym}`,
+        pairId: t.pool_id || t.ticker_id || tokenHex,
+        link: venueTradeUrl("KRON", tokenHex),
+        priceKas: Number(t.last_price),
+        volumeKas: Number(t.target_volume)
+      });
+    }
+  } catch {}
+
+  if (!out.length) {
+    try {
+      for (const kind of ["pool", "curve"]) {
+        const json = await fetchJson(`https://idx.kron.technology/v1/kcc20/markets?kind=${kind}&limit=500`, { notFound: null });
+        const list = Array.isArray(json?.result) ? json.result : [];
+        for (const m of list) {
+          if (String(m.covenantId || "").toLowerCase() !== tokenHex) continue;
+          const venue = m.graduated ? "KRON" : "KRON Launch";
+          push({
+            source: "kron",
+            venue,
+            pairLabel: `KAS/${sym}`,
+            pairId: m.poolCovenantId || m.covenantId || tokenHex,
+            link: venueTradeUrl(venue, tokenHex),
+            priceKas: Number(m.price),
+            volumeKas: Number(m.volume24h)
+          });
+        }
+      }
+    } catch {}
+  }
+
+  return out;
+}
+
+async function fetchDexListings(id) {
+  const checkers = [fetchKronListings];
+  const all = [];
+  for (const check of checkers) {
+    try {
+      const rows = await check(id);
+      if (Array.isArray(rows) && rows.length) all.push(...rows);
+    } catch {}
+  }
+  return all;
+}
+
 function renderPriceMissing() {
   priceUsd.textContent = "-";
   priceChg.textContent = "-";
@@ -750,25 +845,17 @@ function renderPriceMissing() {
 
 async function renderMarket() {
   const m = tokenInfo?.market;
-  const pairLabel = `KAS/${displayTicker || "TOKEN"}`;
+  const sym = pairSymbol();
+  const pairLabel = `KAS/${sym}`;
   const venue = m?.program?.skeleton || "Market";
-  const marketLink = m?.program?.covenant_id
-    ? `https://kascov.io/#/mainnet/c/${encodeURIComponent(m.program.covenant_id)}`
-    : `https://kascov.io/#/mainnet/token/${encodeURIComponent(tokenId)}`;
-
-  if (!m || m.unpriced_reason) {
-    renderPriceMissing();
-    pairRows.innerHTML = `<tr><td colspan="4" class="muted">${escHtml(m?.unpriced_reason || "No markets listed.")}</td></tr>`;
-    return;
-  }
+  const marketLink = venueTradeUrl(venue, tokenId);
 
   let priceKas = null;
-  if (m.spot_num_sompi != null && m.spot_den != null && Number(m.spot_den) !== 0) {
+  if (m && !m.unpriced_reason && m.spot_num_sompi != null && m.spot_den != null && Number(m.spot_den) !== 0) {
     priceKas = Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8;
   }
-  priceUsd.textContent = Number.isFinite(priceKas) ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8) : "-";
 
-  const chBps = Number(m.change_24h_bps);
+  const chBps = Number(m?.change_24h_bps);
   if (Number.isFinite(chBps)) {
     const ch = chBps / 100;
     priceChg.textContent = `${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%`;
@@ -778,9 +865,60 @@ async function renderMarket() {
     priceChg.style.color = "";
   }
 
-  const volSompi = Number(m.volume_24h_sompi);
-  priceVol.textContent = Number.isFinite(volSompi)
-    ? await formatShortPrice(KASVALUE, CURRENCY, volSompi / 1e8)
+  const volSompi = Number(m?.volume_24h_sompi);
+  const launchVolKas = Number.isFinite(volSompi) ? volSompi / 1e8 : null;
+
+  const rows = [];
+  const seenVenues = new Set();
+
+  if (m && !m.unpriced_reason) {
+    rows.push({
+      source: "launchpad",
+      venue,
+      pairLabel,
+      pairId: m?.program?.covenant_id || tokenId,
+      link: marketLink,
+      priceKas,
+      volumeKas: launchVolKas
+    });
+    const vk = dexVenueKey(venue);
+    if (vk) seenVenues.add(vk);
+  }
+
+  const dexRows = await fetchDexListings(tokenId);
+  for (const r of dexRows) {
+    const vk = dexVenueKey(r.venue || r.source);
+    if (vk && seenVenues.has(vk)) continue;
+    if (vk) seenVenues.add(vk);
+    if (!r.link) r.link = venueTradeUrl(r.venue || r.source, tokenId);
+    rows.push(r);
+  }
+
+  if (!rows.length) {
+    renderPriceMissing();
+    pairRows.innerHTML = `<tr><td colspan="4" class="muted">${escHtml(m?.unpriced_reason || "No markets listed.")}</td></tr>`;
+    return;
+  }
+
+  if (!Number.isFinite(priceKas)) {
+    for (const r of rows) {
+      if (Number.isFinite(r.priceKas)) {
+        priceKas = r.priceKas;
+        break;
+      }
+    }
+  }
+
+  let bestVolKas = launchVolKas;
+  for (const r of rows) {
+    if (Number.isFinite(r.volumeKas) && (bestVolKas == null || r.volumeKas > bestVolKas)) {
+      bestVolKas = r.volumeKas;
+    }
+  }
+
+  priceUsd.textContent = Number.isFinite(priceKas) ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8) : "-";
+  priceVol.textContent = Number.isFinite(bestVolKas)
+    ? await formatShortPrice(KASVALUE, CURRENCY, bestVolKas)
     : "-";
 
   try {
@@ -794,20 +932,24 @@ async function renderMarket() {
     mcap.textContent = "-";
   }
 
-  const priceFmt = Number.isFinite(priceKas) ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8) : "-";
-  const volFmt = Number.isFinite(volSompi) ? await formatShortPrice(KASVALUE, CURRENCY, volSompi / 1e8) : "-";
-
-  pairRows.innerHTML = `
+  const htmlParts = [];
+  for (const r of rows) {
+    const pFmt = Number.isFinite(r.priceKas) ? await formatPrice(KASVALUE, CURRENCY, r.priceKas, 8) : "-";
+    const vFmt = Number.isFinite(r.volumeKas) ? await formatShortPrice(KASVALUE, CURRENCY, r.volumeKas) : "-";
+    const href = r.link || venueTradeUrl(r.venue || r.source, tokenId);
+    htmlParts.push(`
   <tr>
     <td>
       <div class="name-cell">
-        <span>${escHtml(venue)}</span>
+        <span>${escHtml(r.venue)}</span>
       </div>
     </td>
-    <td><a class="tradeBtn" href="${escHtml(marketLink)}" target="_blank" rel="noopener noreferrer">${escHtml(pairLabel)}</a></td>
-    <td>${priceFmt}</td>
-    <td>${volFmt}</td>
-  </tr>`;
+    <td><a class="tradeBtn" href="${escHtml(href)}" target="_blank" rel="noopener noreferrer">${escHtml(r.pairLabel)}</a></td>
+    <td>${pFmt}</td>
+    <td>${vFmt}</td>
+  </tr>`);
+  }
+  pairRows.innerHTML = htmlParts.join("");
 }
 
 function tokenToHuman(rawStr, decimals) {

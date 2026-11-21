@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Kaspa KCC20 Tokens Dashboard - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa KCC20 Tokens Dashboard - Kaspa Hub" />
+<meta property="og:title" content="Kaspa KCC20 Tokens Dashboard - Kaspa Hub" />
+
+<meta name="description" content="Live leaderboard for Kaspa KCC20 tokens by market cap with real-time prices, volume, and performance data." />
+<meta name="twitter:description" content="Explore top Kaspa KCC20 tokens with live market data. Track market capitalization, prices, trading volume, and price changes across the Kaspa ecosystem." />
+<meta property="og:description" content="Discover Kaspa KCC20 tokens sorted by market cap. Real-time price, volume, and market data for tokens on the Kaspa blockchain - powered by KasCov API." />
+
+<link rel="canonical" href="https://kaspahub.org/tokens/" />
+<meta name="twitter:url" content="https://kaspahub.org/tokens/" />
+<meta property="og:url" content="https://kaspahub.org/tokens/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<link rel="manifest" href="/assets/manifest.json" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
+<script defer src="/assets/scripts/explorer.js"></script>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+<div class="intro">
+    <div style="display: flex; align-items: center;">
+        <div><h1>Kaspa Token Tracker</h1>
+        <p>Top KCC-20 Tokens by Market Capitalization</p>
+        <p id="tokenCount" class="muted">A total of — Token Contracts found</p></div>
+    </div>
+    <div class="searchRow">
+      <div class="input" title="Ticker or Covenant ID">
+        <input id="q" placeholder="Ticker or Covenant ID" />
+      </div>
+      <button class="btn" id="go">Search</button>
+    </div>
+</div>
+
+  <section class="statsPanel" id="statsPanel" style="min-height: 140px; margin-bottom: 16px; padding: 0;">
+    <div class="theme-1" id="overviewCard">
+      <h3 class="statCardTitle">Market Overview</h3>
+      <div class="overviewRows">
+        <div class="overviewRow">
+          <span class="muted">Total Market Cap</span>
+          <strong id="totalMcap">—</strong>
+        </div>
+        <div class="overviewRow">
+          <span class="muted">Total Volume (24h)</span>
+          <strong id="totalVol">—</strong>
+        </div>
+      </div>
+      <div class="muted" style="margin-top: auto; padding-top: 14px; font-size: 12px;">Data provided by <a href="https://kascov.io" target="_blank" rel="noopener noreferrer">Kascov</a> and <a href="https://kron.technology" target="_blank" rel="noopener noreferrer">Kron</a>.</div>
+    </div>
+    <div class="theme-1" id="trendingCard">
+      <h3 class="statCardTitle">Trending</h3>
+      <div class="statList" id="trendingList"></div>
+    </div>
+    <div class="theme-1" id="gainersCard">
+      <h3 class="statCardTitle">Top Gainers</h3>
+      <div class="statList" id="gainersList"></div>
+    </div>
+  </section>
+
+<section class="theme-1">
+<div class="tableWrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-column="rank">#</th>
+                <th data-column="name">Name</th>
+                <th data-column="holders">Holders</th>
+                <th data-column="price">Price</th>
+                <th data-column="fdv">FDV</th>
+                <th data-column="volume">Volume (24h)</th>
+                <th data-column="change">Change (24h)</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+</div>
+<div class="miniBtns">
+  <button class="btn" id="prevPage" disabled>Prev</button>
+  <button class="btn" id="nextPage" disabled>Next</button>
+  <span class="muted" style="margin: auto 0;" id="pageCursor"></span>
+</div>
+</section>
+
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
+<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
+<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<style>
+
+.searchRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--search-border);
+  background: var(--search-background);
+  padding: 10px 12px;
+  border-radius: 12px;
+  width: 250px;
+}
+
+.searchRow input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+}
+
+.intro {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .intro {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .searchRow {
+        justify-content: end;
+    }
+}
+
+.positive { color: #2ee59d; font-weight: 500; }
+.negative { color: #ff6b6b; font-weight: 500; }
+
+th {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    opacity: 0.3;
+    font-size: 0.9em;
+}
+
+th.sorted-asc::after  { content: '↑'; opacity: 1; }
+th.sorted-desc::after { content: '↓'; opacity: 1; }
+
+.statsPanel {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1.4fr;
+  gap: 14px;
+  padding: 14px;
+}
+
+#overviewCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.statCardTitle {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.overviewRows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.overviewRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.overviewRow strong {
+  font-size: 1.15rem;
+}
+
+.statList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.statItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.statItemLeft img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.statItemLeft a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+
+.statItemRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.statEmpty {
+  color: inherit;
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .statsPanel {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
+
+<script type="module">
+let tokenData = [];
+let filteredData = [];
+let kronById = new Map();
+let sortColumn = 'rank';
+let sortDirection = 1;
+const PAGE_SIZE = 50;
+let pageOffset = 0;
+
+function getTicker(t) {
+    return t.claimed_ticker || t.listed_ticker || t.name || t.covenant_id.slice(0, 8);
+}
+
+function getLocalIcon(t) {
+    return `/assets/data/tokens/${t.covenant_id}/icon.webp`;
+}
+
+function getImage(t) {
+    return t.claimed_image || t.listed_image || getLocalIcon(t);
+}
+
+function getDecimals(t) {
+    if (t.claimed_decimals != null) return Number(t.claimed_decimals);
+    if (t.listed_decimals != null) return Number(t.listed_decimals);
+    if (t.decimals != null) return Number(t.decimals);
+    if (t.display_decimals != null) return Number(t.display_decimals);
+    return 0;
+}
+
+function tokenToHuman(rawStr, decimals) {
+    try {
+        const s = String(rawStr ?? '0');
+        if (!/^\d+$/.test(s)) return NaN;
+        const d = Math.max(0, Number(decimals) || 0);
+        if (d === 0) {
+            const n = Number(s);
+            return Number.isFinite(n) ? n : NaN;
+        }
+        if (s.length <= d) {
+            return Number('0.' + s.padStart(d, '0'));
+        }
+        const intPart = s.slice(0, -d);
+        const fracPart = s.slice(-d).replace(/0+$/, '');
+        const human = fracPart ? `${intPart}.${fracPart}` : intPart;
+        const n = Number(human);
+        return Number.isFinite(n) ? n : NaN;
+    } catch {
+        return NaN;
+    }
+}
+
+function getKron(t) {
+    return kronById.get(String(t.covenant_id || '').toLowerCase()) || null;
+}
+
+function hasKascovPrice(t) {
+    const m = t.market;
+    return !!(m && !m.unpriced_reason && m.spot_num_sompi != null && m.spot_den != null && Number(m.spot_den) !== 0);
+}
+
+function hasKascovVolume(t) {
+    const m = t.market;
+    return !!(m && m.volume_24h_sompi != null);
+}
+
+function hasKascovChange(t) {
+    const m = t.market;
+    return !!(m && m.change_24h_bps != null);
+}
+
+function needsKronFallback(t) {
+    return !hasKascovPrice(t) || !hasKascovVolume(t) || !hasKascovChange(t);
+}
+
+function getPriceKas(t) {
+    if (hasKascovPrice(t)) {
+        const m = t.market;
+        return Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8;
+    }
+    const k = getKron(t);
+    if (k && Number.isFinite(k.priceKas)) return k.priceKas;
+    return null;
+}
+
+function getVolumeKas(t) {
+    if (hasKascovVolume(t)) {
+        return Number(t.market.volume_24h_sompi) / 1e8;
+    }
+    const k = getKron(t);
+    if (k && Number.isFinite(k.volumeKas)) return k.volumeKas;
+    return 0;
+}
+
+function getFdvKas(t) {
+    const price = getPriceKas(t);
+    if (price == null || !Number.isFinite(price)) return 0;
+    const supplyNum = tokenToHuman(t.supply_str ?? t.supply ?? 0, getDecimals(t));
+    if (!Number.isFinite(supplyNum) || supplyNum <= 0) return 0;
+    return price * supplyNum;
+}
+
+function getChange(t) {
+    if (hasKascovChange(t)) {
+        return Number(t.market.change_24h_bps) / 100;
+    }
+    const k = getKron(t);
+    if (k && Number.isFinite(k.changePct)) return k.changePct;
+    return null;
+}
+
+function getHolders(t) {
+    return Number(t.holders) || 0;
+}
+
+function kasToUsd(kas) {
+    const rate = Number(typeof KASVALUE !== 'undefined' ? KASVALUE : 0);
+    if (!Number.isFinite(rate) || rate <= 0) return 0;
+    return kas * rate;
+}
+
+function isOlderThanOneDay(t) {
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const candidates = [
+        t.created_at_ms,
+        t.created_ms,
+        t.first_seen_ms,
+        t.birth_ms,
+        t.market?.created_at_ms,
+        t.market?.opened_at_ms,
+        t.market?.first_time_ms,
+        t.market?.program?.opened_at_ms
+    ]
+        .map(Number)
+        .filter(n => Number.isFinite(n) && n > 0);
+
+    if (candidates.length) {
+        return now - Math.min(...candidates) >= oneDayMs;
+    }
+
+    return getChange(t) != null;
+}
+
+function getSortValue(item, column) {
+    switch (column) {
+        case 'rank':         return Number(item.marketCapRank) ?? 0;
+        case 'name':         return getTicker(item).toLowerCase();
+        case 'holders':      return getHolders(item);
+        case 'price':        return getPriceKas(item) ?? 0;
+        case 'fdv':          return getFdvKas(item) ?? 0;
+        case 'volume':       return getVolumeKas(item) ?? 0;
+        case 'change':       return getChange(item) ?? 0;
+        default:             return 0;
+    }
+}
+
+function getSortedData() {
+    return [...filteredData].sort((a, b) => {
+        let valA = getSortValue(a, sortColumn);
+        let valB = getSortValue(b, sortColumn);
+
+        if (valA === valB) return 0;
+        if (valA == null) return sortDirection;
+        if (valB == null) return -sortDirection;
+
+        if (typeof valA === 'string') {
+            return valA.localeCompare(String(valB)) * sortDirection;
+        }
+
+        return (valA - valB) * sortDirection;
+    });
+}
+
+async function renderTokens(data) {
+    const html = await Promise.all(
+        data.map(async (t) => {
+            const change = getChange(t);
+            const priceKas = getPriceKas(t);
+            const fdvKas = getFdvKas(t);
+            const volKas = getVolumeKas(t);
+            const holders = getHolders(t);
+            const ticker = getTicker(t);
+            const img = getImage(t);
+            const localIcon = getLocalIcon(t);
+
+            const priceFormatted = Number.isFinite(priceKas)
+                ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8)
+                : '—';
+
+            const fdvFormatted = fdvKas > 0
+                ? await formatShortPrice(KASVALUE, CURRENCY, fdvKas)
+                : '—';
+
+            const volumeFormatted = volKas > 0
+                ? await formatShortPrice(KASVALUE, CURRENCY, volKas)
+                : '—';
+
+            const holdersFormatted = holders > 0
+                ? holders.toLocaleString('en-US')
+                : '—';
+
+            const changeText = change != null
+                ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`
+                : '—';
+
+            return `
+                <tr>
+                    <td>${t.marketCapRank}</td>
+                    <td>
+                        <div class="name-cell">
+                            <img class="tableLogo" src="${img}" data-local="${localIcon}" onerror="if(this.dataset.step!=='1'&&this.src!==this.dataset.local){this.dataset.step='1';this.src=this.dataset.local;}else{this.onerror=null;this.src='/assets/logos/logo.webp';}">
+                            <a href="/token/?q=${t.covenant_id}">${ticker}</a>
+                        </div>
+                    </td>
+                    <td>${holdersFormatted}</td>
+                    <td>${priceFormatted}</td>
+                    <td>${fdvFormatted}</td>
+                    <td>${volumeFormatted}</td>
+                    <td class="${change > 0 ? 'positive' : change < 0 ? 'negative' : ''}">
+                        ${changeText}
+                    </td>
+                </tr>
+            `;
+        })
+    );
+
+    document.getElementById('table-body').innerHTML = html.join('');
+}
+
+function setPaging(total) {
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    const cursor = document.getElementById('pageCursor');
+    const hasPrev = pageOffset > 0;
+    const hasNext = pageOffset + PAGE_SIZE < total;
+    prevBtn.disabled = !hasPrev;
+    nextBtn.disabled = !hasNext;
+    const page = Math.floor(pageOffset / PAGE_SIZE) + 1;
+    const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    cursor.textContent = total > 0 ? `Page ${page} / ${pages}` : '';
+}
+
+async function updateTable() {
+    const sorted = getSortedData();
+    const pageData = sorted.slice(pageOffset, pageOffset + PAGE_SIZE);
+    await renderTokens(pageData);
+    setPaging(sorted.length);
+}
+
+function initSorting() {
+    const headers = document.querySelectorAll('thead th');
+    headers.forEach(th => {
+        th.addEventListener('click', () => {
+            const column = th.dataset.column;
+            if (!column) return;
+
+            if (sortColumn === column) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = column;
+                sortDirection = 1;
+            }
+
+            headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+            th.classList.add(sortDirection === 1 ? 'sorted-asc' : 'sorted-desc');
+
+            pageOffset = 0;
+            updateTable();
+        });
+    });
+}
+
+function mergeKron(map, id, data) {
+    if (!id || !/^[0-9a-f]{64}$/.test(id)) return;
+    const prev = map.get(id) || {};
+    const next = { ...prev };
+    if (Number.isFinite(data.priceKas)) next.priceKas = data.priceKas;
+    if (Number.isFinite(data.volumeKas)) {
+        next.volumeKas = Math.max(prev.volumeKas || 0, data.volumeKas);
+    }
+    if (Number.isFinite(data.changePct)) next.changePct = data.changePct;
+    map.set(id, next);
+}
+
+async function fetchKronMap(onlyIds) {
+    const map = new Map();
+    const allow = onlyIds instanceof Set ? onlyIds : null;
+
+    try {
+        const res = await fetch('https://idx.kron.technology/v1/aggregator/tickers');
+        if (res.ok) {
+            const tickers = await res.json();
+            for (const t of Array.isArray(tickers) ? tickers : []) {
+                const id = String(t.base_currency || '').toLowerCase();
+                if (allow && !allow.has(id)) continue;
+                mergeKron(map, id, {
+                    priceKas: Number(t.last_price),
+                    volumeKas: Number(t.target_volume)
+                });
+            }
+        }
+    } catch {}
+
+    try {
+        for (const kind of ['pool', 'curve']) {
+            const res = await fetch(`https://idx.kron.technology/v1/kcc20/markets?kind=${kind}&limit=500`);
+            if (!res.ok) continue;
+            const json = await res.json();
+            const list = Array.isArray(json?.result) ? json.result : [];
+            for (const m of list) {
+                const id = String(m.covenantId || '').toLowerCase();
+                if (allow && !allow.has(id)) continue;
+                const dec = Math.max(0, Number(m.dec) || 0);
+                const rawPrice = Number(m.price);
+                const priceKas = Number.isFinite(rawPrice) ? rawPrice * Math.pow(10, dec) : NaN;
+                mergeKron(map, id, {
+                    priceKas,
+                    volumeKas: Number(m.volume24h),
+                    changePct: Number(m.change24h)
+                });
+            }
+        }
+    } catch {}
+
+    return map;
+}
+
+async function renderStatItem(t) {
+    const ticker = getTicker(t);
+    const img = getImage(t);
+    const localIcon = getLocalIcon(t);
+    const priceKas = getPriceKas(t);
+    const change = getChange(t);
+
+    const priceFormatted = Number.isFinite(priceKas)
+        ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8)
+        : '—';
+
+    const changeText = change != null
+        ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`
+        : '—';
+
+    const changeClass = change > 0 ? 'positive' : change < 0 ? 'negative' : '';
+
+    return `
+      <div class="statItem">
+        <div class="statItemLeft">
+          <img src="${img}" data-local="${localIcon}" onerror="if(this.dataset.step!=='1'&&this.src!==this.dataset.local){this.dataset.step='1';this.src=this.dataset.local;}else{this.onerror=null;this.src='/assets/logos/logo.webp';}">
+          <a href="/token/?q=${t.covenant_id}">${ticker}</a>
+        </div>
+        <div class="statItemRight">
+          <span>${priceFormatted}</span>
+          <span class="${changeClass}">${changeText}</span>
+        </div>
+      </div>
+    `;
+}
+
+async function updateStatsPanel() {
+    let totalFdvKas = 0;
+    let totalVolKas = 0;
+
+    for (const t of tokenData) {
+        totalFdvKas += getFdvKas(t) || 0;
+        totalVolKas += getVolumeKas(t) || 0;
+    }
+
+    const mcapEl = document.getElementById('totalMcap');
+    const volEl = document.getElementById('totalVol');
+    if (mcapEl) {
+        mcapEl.textContent = totalFdvKas > 0
+            ? await formatShortPrice(KASVALUE, CURRENCY, totalFdvKas)
+            : '—';
+    }
+    if (volEl) {
+        volEl.textContent = totalVolKas > 0
+            ? await formatShortPrice(KASVALUE, CURRENCY, totalVolKas)
+            : '—';
+    }
+
+    const trending = tokenData
+        .filter(t => {
+            const holders = getHolders(t);
+            const fdvUsd = kasToUsd(getFdvKas(t));
+            const volUsd = kasToUsd(getVolumeKas(t));
+            const change = getChange(t);
+            return (
+                isOlderThanOneDay(t) &&
+                holders > 50 &&
+                fdvUsd > 10000 &&
+                volUsd > 10 &&
+                change != null
+            );
+        })
+        .sort((a, b) => (getVolumeKas(b) || 0) - (getVolumeKas(a) || 0))
+        .slice(0, 5);
+
+    const gainers = tokenData
+        .filter(t => {
+            const change = getChange(t);
+            const holders = getHolders(t);
+            const fdvUsd = kasToUsd(getFdvKas(t));
+            return (
+                change != null &&
+                change > 0 &&
+                holders >= 10 &&
+                fdvUsd >= 5000
+            );
+        })
+        .sort((a, b) => (getChange(b) || 0) - (getChange(a) || 0))
+        .slice(0, 5);
+
+    const trendingList = document.getElementById('trendingList');
+    const gainersList = document.getElementById('gainersList');
+
+    if (trendingList) {
+        if (!trending.length) {
+            trendingList.innerHTML = '<div class="statEmpty">No matching tokens</div>';
+        } else {
+            trendingList.innerHTML = (await Promise.all(trending.map(renderStatItem))).join('');
+        }
+    }
+
+    if (gainersList) {
+        if (!gainers.length) {
+            gainersList.innerHTML = '<div class="statEmpty">No matching tokens</div>';
+        } else {
+            gainersList.innerHTML = (await Promise.all(gainers.map(renderStatItem))).join('');
+        }
+    }
+}
+
+async function loadTokens(attempt = 0) {
+    try {
+        const res = await fetch('https://kascov.io/data/mainnet/tokens.json');
+        const json = await res.json();
+        const raw = Array.isArray(json.tokens) ? json.tokens : [];
+
+        await kasPricePromise;
+
+        const missingIds = new Set(
+            raw
+                .filter(needsKronFallback)
+                .map(t => String(t.covenant_id || '').toLowerCase())
+                .filter(id => /^[0-9a-f]{64}$/.test(id))
+        );
+
+        kronById = missingIds.size > 0
+            ? await fetchKronMap(missingIds)
+            : new Map();
+
+        const mapped = raw.map(t => {
+            const vol = getVolumeKas(t);
+            const fdv = getFdvKas(t);
+            return { ...t, _vol: vol, _fdv: fdv };
+        });
+
+        const initialSorted = [...mapped].sort((a, b) => {
+            const groupA = a._vol >= 0.1 ? 0 : 1;
+            const groupB = b._vol >= 0.1 ? 0 : 1;
+            if (groupA !== groupB) return groupA - groupB;
+            return b._fdv - a._fdv;
+        });
+
+        initialSorted.forEach((item, index) => {
+            item.marketCapRank = index + 1;
+        });
+
+        tokenData = initialSorted;
+        filteredData = tokenData;
+        pageOffset = 0;
+
+        const countEl = document.getElementById('tokenCount');
+        if (countEl) {
+            countEl.textContent = `A total of ${tokenData.length.toLocaleString('en-US')} Token Contracts found`;
+        }
+
+        sortColumn = 'rank';
+        sortDirection = 1;
+
+        const headers = document.querySelectorAll('thead th');
+        headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+
+        const rankHeader = Array.from(headers).find(h => h.dataset.column === 'rank');
+        if (rankHeader) rankHeader.classList.add('sorted-asc');
+
+        await Promise.all([updateTable(), updateStatsPanel()]);
+
+    } catch (err) {
+        let delay = 0;
+        if (attempt > 0) {
+            delay = 1000 * Math.pow(2, attempt - 1);
+        }
+        document.getElementById('table-body').innerHTML = `<tr><td colspan="7">Loading data... (retry ${attempt + 1})</td></tr>`;
+        setTimeout(() => loadTokens(attempt + 1), delay);
+    }
+}
+
+initSorting();
+loadTokens();
+
+document.getElementById('prevPage').addEventListener('click', () => {
+    if (pageOffset > 0) {
+        pageOffset -= PAGE_SIZE;
+        updateTable();
+    }
+});
+document.getElementById('nextPage').addEventListener('click', () => {
+    if (pageOffset + PAGE_SIZE < filteredData.length) {
+        pageOffset += PAGE_SIZE;
+        updateTable();
+    }
+});
+
+const qInput = document.getElementById('q');
+const goBtn = document.getElementById('go');
+
+function handleTokenSearch() {
+    const query = qInput.value.trim().toLowerCase().replace(/^0x/, '');
+
+    if (!query) {
+        filteredData = tokenData;
+    } else {
+        filteredData = tokenData.filter(t => {
+            const id = String(t.covenant_id || '').toLowerCase();
+            const ticker = getTicker(t).toLowerCase();
+            return id.includes(query) || ticker.includes(query);
+        });
+    }
+
+    pageOffset = 0;
+    updateTable();
+}
+
+goBtn.addEventListener('click', handleTokenSearch);
+qInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleTokenSearch();
+});
+qInput.addEventListener('input', () => {
+    if (!qInput.value.trim()) {
+        filteredData = tokenData;
+        pageOffset = 0;
+        updateTable();
+    }
+});
+</script>
+
+</body>
+</html>

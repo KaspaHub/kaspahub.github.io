@@ -36,7 +36,7 @@
 },
 {
 	"name": "KaspaDollar",
-	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa L1, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
+	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
 	"link": "https://kaspadollar.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
 	"features": ["reviewed", "education"],
@@ -109,7 +109,7 @@
 },
 {
 	"name": "dotk.name",
-	"description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
+	"description": "Decentralized name service on Kaspa using covenants for consensus-unique .k names with trustless ownership proofs.",
 	"link": "https://dotk.name",
 	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
 	"features": ["reviewed", "marketplace"],
@@ -117,7 +117,7 @@
 },
 {
 	"name": "KRON KNS",
-	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
+	"description": "Decentralized covenant-backed .kaspa names on Kaspa with consensus-enforced ownership, transfers, and on-chain marketplace.",
 	"link": "https://kaspaname.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspaname.webp",
 	"features": ["reviewed", "marketplace"],
@@ -143,7 +143,7 @@
 	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
 	"link": "https://www.zealousswap.com",
 	"logo": "https://kaspahub.org/assets/logos/zealous.webp",
-	"features": ["reviewed", "dex"]
+	"features": ["reviewed", "dex", "layer2"]
 },
 {
 	"name": "KOB",
@@ -171,7 +171,7 @@
 },
 {
 	"name": "KaspaRocket",
-	"description": "Memecoin launchpad on Kaspa L1. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
+	"description": "Memecoin launchpad on Kaspa. Create, discover, and trade KCC20 tokens with bonding curve and AMM mechanics powered by covenants.",
 	"link": "https://kasparocket.fun",
 	"logo": "https://kaspahub.org/assets/logos/kasparocket.webp",
 	"features": ["launchpad"],
@@ -179,7 +179,7 @@
 },
 {
 	"name": "Kasseal",
-	"description": "Native Kaspa L1 token launchpad using KCC-20 covenants. Launch tokens with sealed supply, trade on a fair bonding curve, and graduate to a locked liquidity pool.",
+	"description": "Native Kaspa token launchpad using KCC-20 covenants. Launch tokens with sealed supply, trade on a fair bonding curve, and graduate to a locked liquidity pool.",
 	"link": "https://app.kasseal.com",
 	"logo": "https://kaspahub.org/assets/logos/kasseal.webp",
 	"features": ["launchpad"],
@@ -187,15 +187,15 @@
 },
 {
 	"name": "KForge",
-	"description": "A permissionless fair-launch launchpad and DEX on Kaspa L1 built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
+	"description": "A permissionless fair-launch launchpad on Kaspa built entirely from Kaspa covenants. Tokens climb a bonding curve and graduate into an ownerless pool.",
 	"link": "https://www.kforge.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kforge.webp",
-	"features": ["launchpad", "dex"],
+	"features": ["launchpad"],
 	"added": 1788728400
 },
 {
 	"name": "PumpForge",
-	"description": "Non-custodial launchpad for Solana, Base, BNB Chain, Robinhood Chain and Kaspa, with native Kaspa L1 support via KasForge for bonding-curve token launches and trading.",
+	"description": "Non-custodial launchpad for Solana, Base, BNB Chain, Robinhood Chain and Kaspa, with native Kaspa support via KasForge for bonding-curve token launches and trading.",
 	"link": "https://kaspa.pumpforge.tech",
 	"logo": "https://kaspahub.org/assets/logos/pumpforge.webp",
 	"features": ["launchpad", "dex"],
@@ -203,7 +203,7 @@
 },
 {
 	"name": "Kaspafun",
-	"description": "Non-custodial launchpad for tokens on Kaspa L1, Kasplex L2, and Robinhood Chain, supporting native curves, KRC-20s, and EVM launches approved through your wallet.",
+	"description": "Non-custodial launchpad for tokens on Kaspa, Kasplex L2, and Robinhood Chain, supporting native curves, KRC-20s, and EVM launches approved through your wallet.",
 	"link": "https://kaspafun.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspafun.webp",
 	"features": ["launchpad"],
@@ -398,7 +398,7 @@
 },
 {
 	"name": "Kaspa x402",
-	"description": "Pay-per-call marketplace for AI agents and services settled directly on Kaspa L1 using x402 and Toccata covenants.",
+	"description": "Pay-per-call marketplace for AI agents and services settled directly on Kaspa using x402 and Toccata covenants.",
 	"link": "https://www.kaspa-402.org",
 	"logo": "https://kaspahub.org/assets/logos/kaspa-402.webp",
 	"features": ["marketplace"],
@@ -437,7 +437,7 @@
 },
 {
 	"name": "Dagger",
-	"description": "Telegram bot for fast trading of Kaspa L1 KCC-20 tokens across multiple venues with buy, sell, limit orders, and automation.",
+	"description": "Telegram bot for fast trading of Kaspa KCC-20 tokens across multiple venues with buy, sell, limit orders, and automation.",
 	"link": "https://daggertrade.com/",
 	"logo": "https://kaspahub.org/assets/logos/daggertrade.webp",
 	"features": ["reviewed", "utilities"],
@@ -461,7 +461,7 @@
 },
 {
 	"name": "DagLock",
-	"description": "Trustless escrow and atomic swaps on Kaspa L1 using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
+	"description": "Trustless escrow and atomic swaps on Kaspa using SilverScript covenants. Supports KAS & KRC-20 escrows, time-locked vaults, and on-chain reputation with no admin keys.",
 	"link": "https://daglock.com",
 	"logo": "https://kaspahub.org/assets/logos/daglock.webp",
 	"features": [],
@@ -469,7 +469,7 @@
 },
 {
 	"name": "Warda Protocol",
-	"description": "Open protocol for cryptographic spending limits and delegated grants for autonomous AI agents on Kaspa L1. Limits are compiled into covenant scripts so consensus rejects out-of-bound spends.",
+	"description": "Open protocol for cryptographic spending limits and delegated grants for autonomous AI agents on Kaspa. Limits are compiled into covenant scripts so consensus rejects out-of-bound spends.",
 	"link": "https://www.wardaprotocol.com",
 	"logo": "https://kaspahub.org/assets/logos/wardaprotocol.webp",
 	"features": ["development"],
@@ -509,7 +509,7 @@
 },
 {
 	"name": "KasOdds",
-	"description": "Non-custodial 1v1 even-or-odd betting game on Kaspa L1. Two players pick secret numbers; the sum's parity decides the winner who takes the pot via trustless on-chain covenant escrow with automatic refunds.",
+	"description": "Non-custodial 1v1 even-or-odd betting game on Kaspa. Two players pick secret numbers; the sum's parity decides the winner who takes the pot via trustless on-chain covenant escrow with automatic refunds.",
 	"link": "https://kasodds.com",
 	"logo": "https://kaspahub.org/assets/logos/kasodds.webp",
 	"features": ["reviewed", "dapp", "gambling"],
@@ -556,7 +556,7 @@
 },
 {
 	"name": "HardKAS",
-	"description": "Open-source local-first toolkit and IDE for building, simulating, and testing Kaspa L1 transactions and SilverScript contracts.",
+	"description": "Open-source local-first toolkit and IDE for building, simulating, and testing Kaspa transactions and SilverScript contracts.",
 	"link": "https://hardkas.dev",
 	"logo": "https://kaspahub.org/assets/logos/hardkas.webp",
 	"features": ["reviewed", "development"],
@@ -678,7 +678,7 @@
 },
 {
 	"name": "DAGmate",
-	"description": "P2P wagered chess on Kaspa L1 with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
+	"description": "P2P wagered chess on Kaspa with non-custodial 2-of-3 escrow, zero platform fees, and winner-takes-the-pot payouts. Optional on-chain move anchoring.",
 	"link": "https://dagmate.org",
 	"logo": "https://kaspahub.org/assets/logos/dagmate.webp",
 	"features": ["dapp", "gaming"],
@@ -912,7 +912,7 @@
 },
 {
 	"name": "Trestly",
-	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa L1 as native kUSDT, with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
+	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa as native kUSDT, with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
 	"link": "https://trestly.io",
 	"logo": "https://kaspahub.org/assets/logos/trestly.webp",
 	"features": ["bridge"],
@@ -942,7 +942,7 @@
 },
 {
 	"name": "Kaspa University",
-	"description": "The first Learn-to-Earn platform on Kaspa L1. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
+	"description": "The first Learn-to-Earn platform on Kaspa. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
 	"link": "https://kaspa.university",
 	"logo": "https://kaspahub.org/assets/logos/kaspa.university.webp",
 	"features": ["reviewed", "education"]

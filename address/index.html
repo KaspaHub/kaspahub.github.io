@@ -41,7 +41,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </head>
 <body>
-<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-1">
@@ -1640,6 +1640,7 @@ function renderKcc20Tokens(list) {
     kcc20Rows.innerHTML = emptyRow(3, "No tokens found.");
     return;
   }
+  sortByBalance(list, t => resolveTokenDecimals(t.token_id, t));
   kcc20Rows.innerHTML = list.map(token => {
     const tokenId = String(token.token_id || "");
     const label = resolveTokenTicker(tokenId, token) || "-";
@@ -1662,6 +1663,7 @@ function renderTokens(tokens) {
     tokenRows.innerHTML = emptyRow(3, "No tokens found.");
     return;
   }
+  sortByBalance(tokens, t => t.dec);
   tokenRows.innerHTML = tokens.map(token => {
     const tick = escHtml(token.tick || "-");
     return `
@@ -1888,12 +1890,13 @@ function showTransfers() {
   else ensureKaspaFilteredPage();
 }
 
-function sortByBalance(list, key = "balance") {
+function sortByBalance(list, getDecimals) {
   list.sort((a, b) => {
-    const diff = BigInt(b[key] || 0) - BigInt(a[key] || 0);
-    if (diff > 0n) return 1;
-    if (diff < 0n) return -1;
-    return 0;
+    const aDec = BigInt(Number(getDecimals(a)) || 0);
+    const bDec = BigInt(Number(getDecimals(b)) || 0);
+    const aVal = BigInt(a.balance || 0) * 10n ** bDec;
+    const bVal = BigInt(b.balance || 0) * 10n ** aDec;
+    return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
   });
 }
 
@@ -1912,7 +1915,6 @@ async function loadWith(loadingEl, rowsEl, cols, failText, loader, renderer) {
 async function loadKcc20Tokens() {
   await loadWith(kcc20Loading, kcc20Rows, 3, "Failed to load tokens.", async () => {
     kcc20Tokens = await fetchKcc20Tokens(currentAddr);
-    sortByBalance(kcc20Tokens);
     return kcc20Tokens;
   }, renderKcc20Tokens);
 }
@@ -1920,7 +1922,6 @@ async function loadKcc20Tokens() {
 async function loadTokens() {
   await loadWith(tokenLoading, tokenRows, 3, "Failed to load tokens.", async () => {
     tokens = await fetchAllTokens(currentAddr);
-    sortByBalance(tokens);
     return tokens;
   }, renderTokens);
 }

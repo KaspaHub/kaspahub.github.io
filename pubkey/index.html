@@ -36,96 +36,96 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/assets/manifest.json" />
 
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg: #f7f7f7;
-      --card: #fff;
-      --text: #111;
-      --muted: #666;
-      --line: #ddd;
-      --accent: #49eacb;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0f0f0f;
-        --card: #1a1a1a;
-        --text: #f2f2f2;
-        --muted: #9a9a9a;
-        --line: #333;
-      }
-    }
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f7;
+  --card: #fff;
+  --text: #111;
+  --muted: #666;
+  --line: #ddd;
+  --accent: #49eacb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --text: #f2f2f2;
+    --muted: #9a9a9a;
+    --line: #333;
+  }
+}
 
-    .skip {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-    }
-    .skip:focus {
-      left: 16px;
-      top: 16px;
-      z-index: 10;
-      background: var(--card);
-      padding: 8px 12px;
-      border-radius: 8px;
-    }
-    main {
-      max-width: 720px;
-      margin: 40px auto;
-    }
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 10;
+  background: var(--card);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+main {
+  max-width: 720px;
+  margin: 40px auto;
+}
 
-    h1 { margin: 0 0 8px; font-size: 1.4rem; }
-    h2 { margin: 28px 0 8px; font-size: 1.05rem; }
-    p { color: var(--muted); margin: 0 0 20px; }
+h1 { margin: 0 0 8px; font-size: 1.4rem; }
+h2 { margin: 28px 0 8px; font-size: 1.05rem; }
+p { color: var(--muted); margin: 0 0 20px; }
 
-    label { display: block; font-weight: 600; margin: 14px 0 6px; }
-    input, select, button, textarea {
-      width: 100%;
-      box-sizing: border-box;
-      font: inherit;
-    }
-    input, select, textarea {
-      padding: 10px 12px;
+label { display: block; font-weight: 600; margin: 14px 0 6px; }
+input, select, button, textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+input, select, textarea {
+  padding: 10px 12px;
 
-    }
-    textarea { min-height: 90px; resize: vertical; }
-    button {
-      margin-top: 16px;
-      padding: 12px;
-      border: 0;
-      border-radius: 10px;
-      background: var(--accent);
-      color: #111;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    button:focus-visible,
-    input:focus-visible,
-    select:focus-visible,
+}
+textarea { min-height: 90px; resize: vertical; }
+button {
+  margin-top: 16px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 560px) {
-      .row { grid-template-columns: 1fr; }
-    }
-    .out {
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 10px;
-      background: color-mix(in srgb, var(--accent) 12%, transparent);
-      word-break: break-all;
-      font-family: ui-monospace, monospace;
-      white-space: pre-wrap;
-    }
-    .err { color:#ff6b6b; }
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr; }
+}
+.out {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  word-break: break-all;
+  font-family: ui-monospace, monospace;
+  white-space: pre-wrap;
+}
+.err { color:#ff6b6b; }
 
-  </style>
+</style>
 </head>
 <body>
-<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/explorer/">Explorer</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
 <aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
 
 <main id="container-1">
