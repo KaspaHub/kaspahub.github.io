@@ -108,6 +108,37 @@
 	"features": ["reviewed", "social", "education"]
 },
 {
+	"name": "dotk.name",
+	"description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
+	"link": "https://dotk.name",
+	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
+	"features": ["reviewed", "marketplace"],
+	"added": 1789419600
+},
+{
+	"name": "KRON KNS",
+	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
+	"link": "https://kaspaname.com",
+	"logo": "https://kaspahub.org/assets/logos/kaspaname.webp",
+	"features": ["reviewed", "marketplace"],
+	"added": 1789160400
+},
+{
+	"name": "KNS",
+	"description": "Name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
+	"link": "https://app.knsdomains.org",
+	"logo": "https://kaspahub.org/assets/logos/kns.webp",
+	"features": ["reviewed", "marketplace"]
+},
+{
+	"name": "Igra Name Service",
+	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
+	"link": "https://insdomains.org",
+	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
+	"features": ["layer2", "marketplace"],
+	"added": 1780099200
+},
+{
 	"name": "Zealous Swap",
 	"description": "The first AMM DEX on Kaspa, pioneering DeFi with lightning-fast, secure token swaps, low fees, seamless decentralized trading, and an innovative NFT-based fee system.",
 	"link": "https://www.zealousswap.com",
@@ -260,37 +291,6 @@
 	"logo": "https://kaspahub.org/assets/logos/kasnfthub.webp",
 	"features": ["verified", "analytics"],
 	"added": 1778025600
-},
-{
-	"name": "dot.k",
-	"description": "Decentralized name service on Kaspa L1 using covenants for consensus-unique .k names with trustless ownership proofs.",
-	"link": "https://dotk.name",
-	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
-	"features": ["reviewed", "marketplace"],
-	"added": 1789419600
-},
-{
-	"name": "Kaspa Name Service",
-	"description": "Decentralized covenant-backed .kaspa names on Kaspa L1 with consensus-enforced ownership, transfers, and on-chain marketplace.",
-	"link": "https://kaspaname.com",
-	"logo": "https://kaspahub.org/assets/logos/kaspaname.webp",
-	"features": ["reviewed", "marketplace"],
-	"added": 1789160400
-},
-{
-	"name": "KNS",
-	"description": "Name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
-	"link": "https://app.knsdomains.org",
-	"logo": "https://kaspahub.org/assets/logos/kns.webp",
-	"features": ["reviewed", "marketplace"]
-},
-{
-	"name": "Igra Name Service",
-	"description": "Decentralized name service on the Igra Layer 2, enabling permanent or renewable .igra domains as ERC-721 NFTs with on-chain SVG artwork, wallet resolution, and marketplace trading.",
-	"link": "https://insdomains.org",
-	"logo": "https://kaspahub.org/assets/logos/insdomains.webp",
-	"features": ["layer2", "marketplace"],
-	"added": 1780099200
 },
 {
 	"name": "OverBuild Labs",
@@ -484,6 +484,14 @@
 	"added": 1791554949
 },
 {
+	"name": "Poks",
+	"description": "Decentralized no-limit Texas Hold'em poker on Kaspa for up to 6 players, with collaborative encrypted deck shuffling and on-chain pot vault.",
+	"link": "https://poks.tiene.dev",
+	"logo": "https://kaspahub.org/assets/logos/poks.webp",
+	"features": ["gambling"],
+	"added": 1795256748
+},
+{
 	"name": "KOmarkets",
 	"description": "Kaspa-native binary prediction market protocol for crypto, sports, and weather markets. Uses on-chain covenants for parimutuel pools, native KAS stakes, and oracle-witnessed settlement.",
 	"link": "https://www.komarkets.io",
@@ -645,6 +653,14 @@
 	"logo": "https://kaspahub.org/assets/logos/vivoor.webp",
 	"features": ["reviewed", "social"]
 },
+{
+    "name": "Kaspet",
+    "description": "A living UTXO virtual pet on Kaspa. Hatch, feed, play with, breed, and trade unique pixel-art pets through on-chain interactions.",
+    "link": "https://kaspet.app",
+	"logo": "https://kaspahub.org/assets/logos/kaspet.webp",
+	"features": ["gaming"],
+	"added": 1795258911
+}
 {
 	"name": "KasPlay",
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
@@ -991,6 +1007,14 @@
 	"added": 1788998400
 },
 {
+	"name": "kaspacoin.info",
+	"description": "Real-time interactive visualizer for the Kaspa blockDAG mainnet, allowing users to explore parallel blocks, transactions, and network activity with educational guides.",
+	"link": "https://kaspacoin.info",
+	"logo": "https://kaspahub.org/assets/logos/kaspa-2.webp",
+	"features": ["reviewed", "visualizer", "education"],
+	"added": 1795119762
+},
+{
 	"name": "Kaspa News",
 	"description": "A news site publishing the latest Kaspa updates and research articles on protocol development, covenants, wallets, tokens, and ecosystem tools, with short explainers and videos.",
 	"link": "https://kaspa.news",
@@ -1148,6 +1172,14 @@
 	"logo": "https://kaspahub.org/assets/logos/kaspa.webp",
 	"features": ["reviewed", "analytics"],
 	"added": 1776643200
+},
+{
+	"name": "KaspaHub",
+	"description": "Kaspa shared mining pool and dashboard. Track machines, contributions, and payouts using only your public wallet address. Features 0.6% PROP fee, automatic payouts, and stratum endpoint for ASICs.",
+	"link": "https://kaspahub.net",
+	"logo": "https://kaspahub.org/assets/logos/kaspahub.net.webp",
+	"features": ["mining"],
+	"added": 1795120993
 },
 {
 	"name": "Mining Now",
