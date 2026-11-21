@@ -660,7 +660,7 @@
 	"logo": "https://kaspahub.org/assets/logos/kaspet.webp",
 	"features": ["gaming"],
 	"added": 1795258911
-}
+},
 {
 	"name": "KasPlay",
 	"description": "A collection of classic arcade games built on Kaspa BlockDAG, where high scores and leaderboards are stored directly on-chain using Kaspa transactions.",
