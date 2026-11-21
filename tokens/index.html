@@ -14,13 +14,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 </script>
 
-<title>Kaspa KCC20 Tokens Dashboard - Kaspa Hub</title>
-<meta name="twitter:title" content="Kaspa KCC20 Tokens Dashboard - Kaspa Hub" />
+<title>Kaspa Tokens - Kaspa Hub</title>
+<meta name="twitter:title" content="Kaspa Tokens Dashboard - Kaspa Hub" />
 <meta property="og:title" content="Kaspa KCC20 Tokens Dashboard - Kaspa Hub" />
 
-<meta name="description" content="Live leaderboard for Kaspa KCC20 tokens by market cap with real-time prices, volume, and performance data." />
-<meta name="twitter:description" content="Explore top Kaspa KCC20 tokens with live market data. Track market capitalization, prices, trading volume, and price changes across the Kaspa ecosystem." />
-<meta property="og:description" content="Discover Kaspa KCC20 tokens sorted by market cap. Real-time price, volume, and market data for tokens on the Kaspa blockchain - powered by KasCov API." />
+<meta name="description" content="Explore top Kaspa KCC20 tokens with live market data. Track market capitalization, prices, trading volume, and price changes across the Kaspa ecosystem." />
+<meta name="twitter:description" content="The list of KCC-20 tokens, their prices, market capitalizations, and number of holders on the Kaspa BlockDAG." />
+<meta property="og:description" content="Discover trending Kaspa tokens sorted by market cap. Real-time price, volume, and market data for tokens on the Kaspa network." />
 
 <link rel="canonical" href="https://kaspahub.org/tokens/" />
 <meta name="twitter:url" content="https://kaspahub.org/tokens/" />
@@ -454,8 +454,7 @@ function isOlderThanOneDay(t) {
     if (candidates.length) {
         return now - Math.min(...candidates) >= oneDayMs;
     }
-
-    return getChange(t) != null;
+    return true;
 }
 
 function getSortValue(item, column) {
@@ -619,7 +618,7 @@ async function fetchKronMap(onlyIds) {
     } catch {}
 
     try {
-        for (const kind of ['pool', 'curve']) {
+        for (const kind of ['curve', 'pool']) {
             const res = await fetch(`https://idx.kron.technology/v1/kcc20/markets?kind=${kind}&limit=500`);
             if (!res.ok) continue;
             const json = await res.json();
@@ -700,13 +699,11 @@ async function updateStatsPanel() {
             const holders = getHolders(t);
             const fdvUsd = kasToUsd(getFdvKas(t));
             const volUsd = kasToUsd(getVolumeKas(t));
-            const change = getChange(t);
             return (
                 isOlderThanOneDay(t) &&
                 holders > 50 &&
                 fdvUsd > 10000 &&
-                volUsd > 10 &&
-                change != null
+                volUsd > 10
             );
         })
         .sort((a, b) => (getVolumeKas(b) || 0) - (getVolumeKas(a) || 0))
