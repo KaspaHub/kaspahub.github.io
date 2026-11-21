@@ -315,6 +315,19 @@ function getTicker(t) {
     return t.claimed_ticker || t.listed_ticker || t.name || t.covenant_id.slice(0, 8);
 }
 
+function getTokenName(t) {
+    return t.claimed_name || t.listed_name || t.name || '';
+}
+
+function getDisplayName(t) {
+    const ticker = getTicker(t);
+    const name = getTokenName(t);
+    if (name) {
+        return `${name} (${ticker})`;
+    }
+    return ticker;
+}
+
 function getLocalIcon(t) {
     return `/assets/data/tokens/${t.covenant_id}/icon.webp`;
 }
@@ -483,7 +496,7 @@ async function renderTokens(data) {
             const fdvKas = getFdvKas(t);
             const volKas = getVolumeKas(t);
             const holders = getHolders(t);
-            const ticker = getTicker(t);
+            const displayName = getDisplayName(t);
             const img = getImage(t);
             const localIcon = getLocalIcon(t);
 
@@ -513,7 +526,7 @@ async function renderTokens(data) {
                     <td>
                         <div class="name-cell">
                             <img class="tableLogo" src="${img}" data-local="${localIcon}" onerror="if(this.dataset.step!=='1'&&this.src!==this.dataset.local){this.dataset.step='1';this.src=this.dataset.local;}else{this.onerror=null;this.src='/assets/logos/logo.webp';}">
-                            <a href="/token/?q=${t.covenant_id}">${ticker}</a>
+                            <a href="/token/?q=${t.covenant_id}">${displayName}</a>
                         </div>
                     </td>
                     <td>${holdersFormatted}</td>
@@ -828,7 +841,8 @@ function handleTokenSearch() {
         filteredData = tokenData.filter(t => {
             const id = String(t.covenant_id || '').toLowerCase();
             const ticker = getTicker(t).toLowerCase();
-            return id.includes(query) || ticker.includes(query);
+            const name = getTokenName(t).toLowerCase();
+            return id.includes(query) || ticker.includes(query) || name.includes(query);
         });
     }
 
