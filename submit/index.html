@@ -44,19 +44,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 .field-group { display: flex; flex-direction: column; gap: 8px; }
 .field-group label { font-weight: 600; font-size: 14px; }
 .field-hint, .form-note { opacity: .65; font-weight: 400; font-size: 12px;}
-.listing-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-.listing-checkbox input {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  accent-color: #49b8a5;
-  flex: 0 0 auto;
-}
 .filter-group {
     flex-direction: row;
     align-items: center;
@@ -177,7 +164,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <section class="theme-1 listing-section">
     <div class="listing-card">
-      <form id="listing-form" target="_blank"
+      <form id="listing-form" target="_blank" rel="noopener"
         action="https://formsubmit.co/mail@kaspahub.org" method="POST">
         <input type="hidden" name="_subject" id="email-subject" value="Kaspa Hub submission: Project">
         <input type="hidden" name="_template" value="table">
@@ -208,17 +195,17 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="field-group">
             <label for="project-website">Official website </label>
             <input id="project-website" class="listing-control" type="url" name="Project Website"
-              placeholder="https://example.com" data-required="true">
+              placeholder="https://example.com" maxlength="50" data-required="true">
           </div>
           <div class="field-group">
             <label for="project-logo">Project logo URL </label>
             <input id="project-logo" class="listing-control" type="url" name="Project logo URL"
-              placeholder="https://example.com/logo.png" data-required="true">
+              placeholder="https://example.com/logo.png" maxlength="100" data-required="true">
           </div>
           <div class="field-group">
             <label for="project-email">Contact email <span class="field-hint">(optional)</span></label>
-            <input id="project-email" class="listing-control" type="email" name="Contact Email"
-              placeholder="you@example.com">
+            <input id="project-email" class="listing-control" type="email" name="Developer Contact Email"
+              placeholder="you@example.com" maxlength="50">
             <span class="field-hint">Your email address will not be displayed publicly.</span>
           </div>
           <div class="field-group filter-group">
@@ -242,7 +229,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="field-group">
             <label for="token-covenant-id">Token covenant ID </label>
             <input id="token-covenant-id" class="listing-control" type="text" name="Covenant ID"
-              placeholder="Enter token covenant ID" data-required="true">
+              placeholder="Enter token covenant ID" maxlength="70" data-required="true">
           </div>
           <div class="field-group">
             <label for="token-description">Token description </label>
@@ -253,27 +240,27 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="field-group">
             <label for="token-logo">Token logo URL </label>
             <input id="token-logo" class="listing-control" type="url" name="Token Logo Link"
-              placeholder="https://example.com/logo.png" data-required="true">
+              placeholder="https://example.com/logo.png" maxlength="100" data-required="true">
           </div>
           <div class="field-group">
             <label for="token-website">Official website <span class="field-hint">(optional)</span></label>
             <input id="token-website" class="listing-control" type="url" name="Token Website"
-              placeholder="https://example.com">
+              placeholder="https://example.com" maxlength="50">
           </div>
           <div class="field-group">
             <label for="token-x">X profile <span class="field-hint">(optional)</span></label>
             <input id="token-x" class="listing-control" type="url" name="Token X"
-              placeholder="https://x.com/username">
+              placeholder="https://x.com/username" maxlength="50">
           </div>
           <div class="field-group">
             <label for="token-telegram">Telegram group <span class="field-hint">(optional)</span></label>
             <input id="token-telegram" class="listing-control" type="url" name="Token Telegram"
-              placeholder="https://t.me/username">
+              placeholder="https://t.me/username" maxlength="50">
           </div>
           <div class="field-group">
             <label for="token-email">Contact email <span class="field-hint">(optional)</span></label>
-            <input id="token-email" class="listing-control" type="email" name="Contact Email"
-              placeholder="you@example.com">
+            <input id="token-email" class="listing-control" type="email" name="Creator Contact Email"
+              placeholder="you@example.com" maxlength="50">
             <span class="field-hint">Your email address will not be displayed publicly.</span>
           </div>
           <div class="field-group filter-group">
@@ -293,7 +280,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
           <div class="field-group">
             <label for="other-email">Contact email <span class="field-hint">(optional)</span></label>
             <input id="other-email" class="listing-control" type="email" name="Contact Email"
-              placeholder="you@example.com">
+              placeholder="you@example.com" maxlength="50">
             <span class="field-hint">Your email address will not be displayed publicly.</span>
           </div>
         </div>
