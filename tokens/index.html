@@ -303,9 +303,12 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 </style>
 
 <script type="module">
+const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
+
 let tokenData = [];
 let filteredData = [];
 let kronById = new Map();
+let burnHoldingsMap = new Map();
 let sortColumn = 'rank';
 let sortDirection = 1;
 const PAGE_SIZE = 50;
@@ -408,12 +411,23 @@ function getVolumeKas(t) {
     return 0;
 }
 
+function getBurnedRaw(t) {
+    const id = String(t.covenant_id || '').toLowerCase();
+    const fromAddr = burnHoldingsMap.get(id);
+    if (fromAddr != null) return String(fromAddr);
+    return String(t.burned_str ?? t.burned ?? '0');
+}
+
 function getFdvKas(t) {
     const price = getPriceKas(t);
     if (price == null || !Number.isFinite(price)) return 0;
-    const supplyNum = tokenToHuman(t.supply_str ?? t.supply ?? 0, getDecimals(t));
+    const dec = getDecimals(t);
+    const supplyNum = tokenToHuman(t.supply_str ?? t.supply ?? 0, dec);
     if (!Number.isFinite(supplyNum) || supplyNum <= 0) return 0;
-    return price * supplyNum;
+    const burnedNum = tokenToHuman(getBurnedRaw(t), dec);
+    const burnedSafe = Number.isFinite(burnedNum) && burnedNum > 0 ? burnedNum : 0;
+    const circulating = Math.max(0, supplyNum - burnedSafe);
+    return price * circulating;
 }
 
 function getChange(t) {
@@ -641,6 +655,24 @@ async function fetchKronMap(onlyIds) {
     return map;
 }
 
+async function fetchBurnHoldings() {
+    try {
+        const res = await fetch(`https://kascov.io/data/mainnet/addr/${encodeURIComponent(BURN_ADDR)}`);
+        if (!res.ok) return new Map();
+        const json = await res.json();
+        const list = Array.isArray(json?.token_holdings) ? json.token_holdings : [];
+        const map = new Map();
+        for (const h of list) {
+            const id = String(h.token_id || '').toLowerCase();
+            if (!id) continue;
+            map.set(id, String(h.balance_str ?? h.balance ?? '0'));
+        }
+        return map;
+    } catch {
+        return new Map();
+    }
+}
+
 async function renderStatItem(t) {
     const ticker = getTicker(t);
     const img = getImage(t);
@@ -749,6 +781,8 @@ async function loadTokens(attempt = 0) {
         const res = await fetch('https://kascov.io/data/mainnet/tokens.json');
         const json = await res.json();
         const raw = Array.isArray(json.tokens) ? json.tokens : [];
+
+        burnHoldingsMap = await fetchBurnHoldings();
 
         await kasPricePromise;
 

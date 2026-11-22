@@ -922,7 +922,14 @@ async function renderMarket() {
     : "-";
 
   try {
-    const supplyNum = Number(tokenToHuman(tokenSupplyRaw, tokenDec));
+    let circulatingRaw = tokenSupplyRaw;
+    try {
+      const s = BigInt(tokenSupplyRaw || "0");
+      const b = BigInt(tokenBurnedRaw || "0");
+      const circ = s - b;
+      circulatingRaw = (circ > 0n ? circ : 0n).toString();
+    } catch {}
+    const supplyNum = Number(tokenToHuman(circulatingRaw, tokenDec));
     if (Number.isFinite(priceKas) && Number.isFinite(supplyNum)) {
       mcap.textContent = await formatShortPrice(KASVALUE, CURRENCY, priceKas * supplyNum);
     } else {
@@ -1565,6 +1572,13 @@ async function runSearch(query) {
     }
     tokenBurnedRaw = burnedCandidate;
 
+    try {
+      const burnFromAddr = await fetchBurnWalletHolding(id);
+      if (burnFromAddr && burnFromAddr !== "0") {
+        tokenBurnedRaw = burnFromAddr;
+      }
+    } catch {}
+
     applyTokenImage();
 
     renderHeader();
@@ -1582,14 +1596,6 @@ async function runSearch(query) {
       await renderMarket();
       renderNav();
     }
-
-    try {
-      const burnFromAddr = await fetchBurnWalletHolding(id);
-      if (burnFromAddr && burnFromAddr !== "0") {
-        tokenBurnedRaw = burnFromAddr;
-        renderBurned();
-      }
-    } catch {}
 
     const active = document.querySelector(".tabs .tab.active")?.dataset.tab;
     if (active === "tabHolders") {
