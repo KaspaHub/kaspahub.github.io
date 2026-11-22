@@ -22,7 +22,7 @@ Feel free to reach out if you have any questions on X.
 
 ## Donations
 Support Kaspa Hub development with a donation:
-* [kaspa:qrsy0adfkulwcxklc6f29qudwdd5k2967rxfe02zlcpg3lrtnexc6dzn8qdgx](https://kaspahub.org/address/?q=kaspa:qrsy0adfkulwcxklc6f29qudwdd5k2967rxfe02zlcpg3lrtnexc6dzn8qdgx)
+* [kaspa:qrsy0adfkulwcxklc6f29qudwdd5k2967rxfe02zlcpg3lrtnexc6dzn8qdgx](https://kas.coffee/KaspaHub)
 
 ## License
 Kaspa Hub is licensed under the MIT License with a **custom clause**. See the LICENSE file for details.
