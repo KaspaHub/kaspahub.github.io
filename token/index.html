@@ -751,7 +751,7 @@ function dexVenueKey(name) {
   if (s.includes("kron")) return "kron";
   if (s.includes("kasseal")) return "kasseal";
   if (s.includes("rocket")) return "kasparocket";
-  if (s.includes("pumpforge")) return "pumpforge";
+  if (s.includes("kasforge")) return "kasforge";
   if (s.includes("kforge")) return "kforge";
   return s.replace(/\s+/g, "") || "";
 }
@@ -763,7 +763,7 @@ function venueTradeUrl(venue, id) {
   if (v.includes("kron")) return `https://kron.technology/token/${cid}`;
   if (v.includes("kasseal")) return `https://app.kasseal.com/token/${cid}`;
   if (v.includes("rocket")) return `https://kasparocket.fun/token/${cid}`;
-  if (v.includes("pumpforge")) return `https://kaspa.pumpforge.tech/coin/${cid}`;
+  if (v.includes("kasforge")) return `https://kaspa.pumpforge.tech/coin/${cid}`;
   if (v.includes("kforge")) return `https://www.kforge.xyz/#/token/${cid}`;
   return `https://kascov.io/#/mainnet/token/${cid}`;
 }

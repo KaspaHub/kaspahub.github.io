@@ -116,28 +116,24 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 	<h2>Features</h2>
 	<div class="filter-category">
 		<div class="filter-group">
+			<input type="checkbox" id="tokens" data-feature="tokens">
+			<label for="tokens">Tokens</label>
+		</div>
+<!-- 		<div class="filter-group">
+			<input type="checkbox" id="krc721" data-feature="krc721">
+			<label for="krc721">NFTs</label>
+		</div> -->
+		<div class="filter-group">
+			<input type="checkbox" id="kasDomains" data-feature="kasDomains">
+			<label for="kasDomains">Domains</label>
+		</div>
+		<div class="filter-group">
 			<input type="checkbox" id="openSource" data-feature="openSource">
 			<label for="openSource">Open Source</label>
 		</div>
 		<div class="filter-group">
 			<input type="checkbox" id="selfCustodial" data-feature="selfCustodial">
 			<label for="selfCustodial">Self-Custodial</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="kcc20" data-feature="kcc20">
-			<label for="kcc20">KCC-20 Tokens</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="krc20" data-feature="krc20">
-			<label for="krc20">KRC-20 Tokens</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="krc721" data-feature="krc721">
-			<label for="krc721">KRC-721 NFTs</label>
-		</div>
-		<div class="filter-group">
-			<input type="checkbox" id="knsDomains" data-feature="knsDomains">
-			<label for="knsDomains">KNS Domains</label>
 		</div>
 		<div class="filter-group">
 			<input type="checkbox" id="multiChain" data-feature="multiChain">
@@ -161,6 +157,10 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 		<div class="filter-group">
 			<input type="checkbox" id="deviceBrowserExtension" data-feature="browserExtension">
 			<label for="deviceBrowserExtension">Browser Extension</label>
+		</div>
+		<div class="filter-group">
+			<input type="checkbox" id="deviceTelegram" data-feature="telegram">
+			<label for="deviceTelegram">Telegram Bot</label>
 		</div>
 		<div class="filter-group">
 			<input type="checkbox" id="deviceWeb" data-feature="web">
@@ -256,7 +256,7 @@ const items = [
 	"description": "The first open-source non-custodial DeFi wallet for Kaspa with Kasplex, Igra, and covenant support.",
 	"link": "https://www.kasware.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaswarewallet.webp",
-	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "multiChain", "kcc20", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
+	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "multiChain", "tokens", "krc20", "krc721", "kasDomains", "mobile", "browserExtension"]
 },
 {
 	"name": "OKX Wallet",
@@ -284,14 +284,14 @@ const items = [
 	"description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
 	"link": "https://kastle.cc",
 	"logo": "https://kaspahub.org/assets/logos/kastlewallet.webp",
-	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
+	"features": ["reviewed", "wallet", "selfCustodial", "tokens", "krc20", "krc721", "kasDomains", "mobile", "browserExtension"]
 },
 {
 	"name": "Kurncy",
 	"description": "Lightweight and user-friendly Kaspa wallet for iOS & Android with optional custody, supporting KRC20, KRC721, KNS, and seamless integration with the ecosystem.",
 	"link": "https://www.kurncy.com",
 	"logo": "https://kaspahub.org/assets/logos/kurncywallet.webp",
-	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile"]
+	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "kasDomains", "mobile"]
 },
 {
 	"name": "KasKeeper",
@@ -305,7 +305,7 @@ const items = [
 	"description": "An open-source KaspaCom web wallet, formerly known as Kaspiano, fully integrated with both Layer 1 and Layer 2 of the Kaspa network.",
 	"link": "https://wallet.kaspa.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspacom.webp",
-	"features": ["reviewed", "wallet", "krc20", "krc721", "knsDomains", "openSource", "selfCustodial", "web"]
+	"features": ["reviewed", "wallet", "krc20", "krc721", "kasDomains", "openSource", "selfCustodial", "web"]
 },
 {
 	"name": "Kaspa NG",
@@ -326,14 +326,21 @@ const items = [
 	"description": "Open-source self-custody Kaspa wallet for Android and browser extension. Supports all L1/L2 assets, WalletConnect v2, BIP39 passphrases, and Argon2id.",
 	"link": "https://kaspire.kaslab.space",
 	"logo": "https://kaspahub.org/assets/logos/kaspire.webp",
-	"features": ["reviewed", "wallet", "selfCustodial", "openSource", "mobile", "browserExtension", "knsDomains", "krc20", "krc721", "kcc20"],
+	"features": ["reviewed", "wallet", "selfCustodial", "openSource", "mobile", "browserExtension", "kasDomains", "krc20", "krc721", "tokens"],
 },
 {
 	"name": "Kasanova",
 	"description": "Modern, non-custodial DeFi wallet for Kaspa, supporting KRC20 tokens, KNS domains, and a L1 on-chain marketplace for seamless asset management.",
 	"link": "https://kasanova.app",
 	"logo": "https://kaspahub.org/assets/logos/kasanova.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "knsDomains", "mobile"]
+	"features": ["wallet", "selfCustodial", "krc20", "kasDomains", "mobile"]
+},
+{
+	"name": "Dagger",
+	"description": "Telegram bot for fast trading of Kaspa KCC-20 tokens across multiple venues with buy, sell, limit orders, and automation.",
+	"link": "https://daggertrade.com/",
+	"logo": "https://kaspahub.org/assets/logos/daggertrade.webp",
+	"features": ["reviewed", "wallet", "selfCustodial", "tokens", "telegram"],
 },
 {
 	"name": "Coin Wallet",
@@ -361,14 +368,14 @@ const items = [
 	"description": "Self-custodial Kaspa and Igra wallet with SureSign transaction review, coin control, vaults, escrow, and built-in swap and earn.",
 	"link": "https://enclavefi.app",
 	"logo": "https://kaspahub.org/assets/logos/enclavefi.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "kasDomains", "browserExtension"]
 },
 {
 	"name": "Kache",
 	"description": "The self-custody wallet built for Kaspa. Supports KAS, KRC-20, KRC-721, bridging & swapping on Kasplex and Igra L2s, .kas names, and built-in markets.",
 	"link": "https://kachewallet.com",
 	"logo": "https://kaspahub.org/assets/logos/kachewallet.webp",
-	"features": ["wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "browserExtension"]
+	"features": ["wallet", "selfCustodial", "krc20", "krc721", "kasDomains", "browserExtension"]
 },
 {
 	"name": "Kaspa Kold",
@@ -476,7 +483,7 @@ const items = [
 //    selfCustodial: true,
 //    krc20: false,
 //    krc721: false,
-//    knsDomains: false,
+//    kasDomains: false,
 //    mobile: true
 //  }
 // }
