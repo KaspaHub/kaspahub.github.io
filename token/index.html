@@ -792,7 +792,7 @@ async function fetchKronListings(id) {
         pairLabel: `KAS/${sym}`,
         pairId: t.pool_id || t.ticker_id || tokenHex,
         link: venueTradeUrl("KRON", tokenHex),
-        priceKas: Number(t.last_price),
+        priceKas: Number(t.last_price) * Math.pow(10, Math.max(0, Number(t.dec) || 0)),
         volumeKas: Number(t.target_volume)
       });
     }
@@ -812,7 +812,7 @@ async function fetchKronListings(id) {
             pairLabel: `KAS/${sym}`,
             pairId: m.poolCovenantId || m.covenantId || tokenHex,
             link: venueTradeUrl(venue, tokenHex),
-            priceKas: Number(m.price),
+            priceKas: Number(m.price) * Math.pow(10, Math.max(0, Number(m.dec) || 0)),
             volumeKas: Number(m.volume24h)
           });
         }
@@ -852,7 +852,7 @@ async function renderMarket() {
 
   let priceKas = null;
   if (m && !m.unpriced_reason && m.spot_num_sompi != null && m.spot_den != null && Number(m.spot_den) !== 0) {
-    priceKas = Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8;
+    priceKas = Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8 * Math.pow(10, tokenDec);
   }
 
   const chBps = Number(m?.change_24h_bps);
