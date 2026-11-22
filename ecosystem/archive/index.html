@@ -34,6 +34,87 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/assets/manifest.json" />
 
+<style>
+.main-content-area {
+	min-height: 1300px;
+}
+.category-selector {
+	margin-bottom: 1.5rem;
+}
+.category-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
+}
+.category-pill {
+	padding: 0.35rem 0.9rem;
+	background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
+	border-radius: 10px;
+	border: 1px solid rgba(80, 255, 200, 0.2);
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #003326;
+	cursor: pointer;
+	transition: all 0.1s;
+}
+.category-pill.active {
+	color: white;
+	background: linear-gradient(135deg, #49EACB, #0bbf7a7d);
+}
+.category-pill:hover {
+	filter: brightness(1.1);
+}
+#searchInput {
+	margin-bottom: 20px;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	padding: 0 50px 0 20px;
+	font-size: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.category-dropdown {
+	display: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: 1px solid rgba(80, 255, 200, 0.2);
+	border-radius: 10px;
+	color: #003326; 
+	width: 100%;
+	height: 50px;
+	padding: 0 16px;
+	font-weight: 700;
+	transition: all 0.1s;
+	background-color: #22e39a;
+	background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 20px;
+}
+
+@media (max-aspect-ratio: 1/1) {
+	.category-pills {
+		justify-content: space-between;
+		gap: 0.3rem;
+		display: none;
+	}
+	.category-pill {
+		padding: 0.15rem 0.3rem;
+		border: 1px solid rgba(80, 255, 200, 0.2);
+		font-size: 0.85rem;
+	}
+	.category-dropdown { 
+		display: block; 
+	}
+}
+
+</style>
+
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -127,8 +208,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
 </div>
 <p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
@@ -146,99 +228,18 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <div id="resources">
 <ul class="section-list">
-<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
 <li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
 </ul>
 </div>
 
 </footer>
 
-<style>
-.main-content-area {
-	min-height: 1300px;
-}
-.category-selector {
-	margin-bottom: 1.5rem;
-}
-.category-pills {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	justify-content: center;
-}
-.category-pill {
-	padding: 0.35rem 0.9rem;
-	background: linear-gradient(135deg, #22e39a, #0bbf7a7d);
-	border-radius: 10px;
-	border: 1px solid rgba(80, 255, 200, 0.2);
-	font-size: 0.85rem;
-	font-weight: 700;
-	color: #003326;
-	cursor: pointer;
-	transition: all 0.1s;
-}
-.category-pill.active {
-	color: white;
-	background: linear-gradient(135deg, #49EACB, #0bbf7a7d);
-}
-.category-pill:hover {
-	filter: brightness(1.1);
-}
-#searchInput {
-	margin-bottom: 20px;
-	width: 100%;
-	height: 50px;
-	border-radius: 25px;
-	padding: 0 50px 0 20px;
-	font-size: 1rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
-.category-dropdown {
-	display: none;
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	border: 1px solid rgba(80, 255, 200, 0.2);
-	border-radius: 10px;
-	color: #003326; 
-	width: 100%;
-	height: 50px;
-	padding: 0 16px;
-	font-weight: 700;
-	transition: all 0.1s;
-	background-color: #22e39a;
-	background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>');
-	background-repeat: no-repeat;
-	background-position: right 10px center;
-	background-size: 20px;
-}
-
-@media (max-aspect-ratio: 1/1) {
-	.category-pills {
-		justify-content: space-between;
-		gap: 0.3rem;
-		display: none;
-	}
-	.category-pill {
-		padding: 0.15rem 0.3rem;
-		border: 1px solid rgba(80, 255, 200, 0.2);
-		font-size: 0.85rem;
-	}
-	.category-dropdown { 
-		display: block; 
-	}
-}
-
-</style>
 <script type="text/javascript">
 'use strict';
-
 
 const categoryDropdown = document.getElementById('categoryDropdown');
 

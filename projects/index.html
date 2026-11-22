@@ -36,6 +36,85 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/assets/manifest.json" />
 
+<style>
+.theme-1 {
+  border: 1px solid rgba(80, 255, 200, 0.2);
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.project-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  height: 120px;
+  border-radius: 15px;
+  color: inherit !important;
+  text-decoration: none !important;
+  font-weight: inherit !important;
+}
+.project-card::hover {
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+.card-icon {
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+.card-text {
+  display: flex;
+  flex-direction: column;
+}
+.card-title {
+  font-size: 1.2em;
+  margin: 0;
+}
+.card-description {
+  font-size: 0.9em;
+  margin: 5px 0 0;
+}
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    height: auto;
+  }
+}
+@media (min-width: 1150px) {
+  .project-card {
+   min-width: 360px;
+  }
+}
+.project-card::before {
+  background-image: var(--card-bg, url('https://via.placeholder.com/300x150?text=Default+BG'));
+}
+</style>
+
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -204,8 +283,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
 </div>
 <p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
@@ -223,97 +303,16 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <div id="resources">
 <ul class="section-list">
-<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
 <li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
 </ul>
 </div>
 
 </footer>
 
-<style>
-.theme-1 {
-  border: 1px solid rgba(80, 255, 200, 0.2);
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.project-card {
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: left;
-  height: 120px;
-  border-radius: 15px;
-  color: inherit !important;
-  text-decoration: none !important;
-  font-weight: inherit !important;
-}
-.project-card::hover {
-}
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  filter: blur(10px);
-  z-index: -1;
-}
-.card-icon {
-  border-radius: 12px;
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex-shrink: 0;
-}
-.card-text {
-  display: flex;
-  flex-direction: column;
-}
-.card-title {
-  font-size: 1.2em;
-  margin: 0;
-}
-.card-description {
-  font-size: 0.9em;
-  margin: 5px 0 0;
-}
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
-  .project-card {
-    height: auto;
-  }
-}
-@media (min-width: 1150px) {
-  .project-card {
-   min-width: 360px;
-  }
-}
-
-</style>
-<style>
-  .project-card::before {
-    background-image: var(--card-bg, url('https://via.placeholder.com/300x150?text=Default+BG'));
-  }
-</style>
 <script type="text/javascript">
 'use strict';
 

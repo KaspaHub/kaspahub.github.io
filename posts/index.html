@@ -36,6 +36,23 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/posts/manifest.json" />
 
+<style type="text/css">
+
+@media (max-aspect-ratio: 1/1) {
+
+	footer {
+		display: none;
+	}
+
+	body {
+		min-height: 100vh;
+		max-height: 100vh;
+	}
+
+}
+
+</style>
+
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -136,8 +153,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
 </div>
 <p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
@@ -155,32 +173,15 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <div id="resources">
 <ul class="section-list">
-<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
 <li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
 </ul>
 </div>
 
 </footer>
-
-<style type="text/css">
-
-@media (max-aspect-ratio: 1/1) {
-
-	footer {
-		display: none;
-	}
-
-	body {
-		min-height: 100vh;
-		max-height: 100vh;
-	}
-
-}
-
-</style>
 
 </body>
 </html>

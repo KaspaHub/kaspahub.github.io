@@ -187,14 +187,16 @@ select:focus-visible,
   >kaspa:qpyfkp...</div>
 
 </div>
-  </main>
+</main>
+
 <footer>
 
 <div id="information">
 <div class="social-icons">
 <a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
 <a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
 </div>
 <p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
 </div>
@@ -212,24 +214,25 @@ select:focus-visible,
 
 <div id="resources">
 <ul class="section-list">
-<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
 <li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
 </ul>
 </div>
 
 </footer>
-  <noscript>
-    <p>This converter needs JavaScript to encode and decode Kaspa addresses.</p>
-  </noscript>
-  <script>
-    const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
-    const CHARSET_MAP = Object.fromEntries([...CHARSET].map((ch, i) => [ch, i]));
-    const KNOWN_PREFIXES = ["kaspa", "kaspatest", "kaspadev", "kaspasim"];
-    const VERSION_LEN = { 0: 32, 1: 33, 8: 32 };
-    const VERSION_LABEL = { 0: "PubKey (Schnorr)", 1: "PubKeyECDSA", 8: "ScriptHash" };
+
+<noscript>
+  <p>This converter needs JavaScript to encode and decode Kaspa addresses.</p>
+</noscript>
+<script>
+  const CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+  const CHARSET_MAP = Object.fromEntries([...CHARSET].map((ch, i) => [ch, i]));
+  const KNOWN_PREFIXES = ["kaspa", "kaspatest", "kaspadev", "kaspasim"];
+  const VERSION_LEN = { 0: 32, 1: 33, 8: 32 };
+  const VERSION_LABEL = { 0: "PubKey (Schnorr)", 1: "PubKeyECDSA", 8: "ScriptHash" };
 
 function polymod(values) {
   let c = 1n;

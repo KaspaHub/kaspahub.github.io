@@ -38,112 +38,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <link rel="stylesheet" type="text/css" href="/assets/styles/explorer.css" />
 <script defer src="/assets/scripts/explorer.js"></script>
 
-</head>
-<body>
-<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
-<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
-
-<main id="container-2">
-<div class="intro">
-    <div style="display: flex; align-items: center;">
-        <div><h1>Kaspa Token Tracker</h1>
-        <p>Top KCC-20 Tokens by Market Capitalization</p>
-        <p id="tokenCount" class="muted">A total of — Token Contracts found</p></div>
-    </div>
-    <div class="searchRow">
-      <div class="input" title="Ticker or Covenant ID">
-        <input id="q" placeholder="Ticker or Covenant ID" />
-      </div>
-      <button class="btn" id="go">Search</button>
-    </div>
-</div>
-
-  <section class="statsPanel" id="statsPanel" style="min-height: 140px; margin-bottom: 16px; padding: 0;">
-    <div class="theme-1" id="overviewCard">
-      <h3 class="statCardTitle">Market Overview</h3>
-      <div class="overviewRows">
-        <div class="overviewRow">
-          <span class="muted">Total Market Cap</span>
-          <strong id="totalMcap">—</strong>
-        </div>
-        <div class="overviewRow">
-          <span class="muted">Total Volume (24h)</span>
-          <strong id="totalVol">—</strong>
-        </div>
-      </div>
-      <div class="muted" style="margin-top: auto; padding-top: 14px; font-size: 12px;">Data provided by <a href="https://kascov.io" target="_blank" rel="noopener noreferrer">Kascov</a> and <a href="https://kron.technology" target="_blank" rel="noopener noreferrer">Kron</a>.</div>
-    </div>
-    <div class="theme-1" id="trendingCard">
-      <h3 class="statCardTitle" title="Ranked by 24h Volume / Market Cap — higher means more liquid">Trending</h3>
-      <div class="statList" id="trendingList"></div>
-    </div>
-    <div class="theme-1" id="gainersCard">
-      <h3 class="statCardTitle">Top Gainers</h3>
-      <div class="statList" id="gainersList"></div>
-    </div>
-  </section>
-
-<section class="theme-1">
-<div class="tableWrap">
-    <table>
-        <thead>
-            <tr>
-                <th data-column="rank">#</th>
-                <th data-column="name">Name</th>
-                <th data-column="holders">Holders</th>
-                <th data-column="price">Price</th>
-                <th data-column="fdv">FDV</th>
-                <th data-column="volume">Volume (24h)</th>
-                <th data-column="change">Change (24h)</th>
-            </tr>
-        </thead>
-        <tbody id="table-body"></tbody>
-    </table>
-</div>
-<div class="miniBtns">
-  <button class="btn" id="prevPage" disabled>Prev</button>
-  <button class="btn" id="nextPage" disabled>Next</button>
-  <span class="muted" style="margin: auto 0;" id="pageCursor"></span>
-</div>
-</section>
-
-
-</main>
-
-<footer>
-
-<div id="information">
-<div class="social-icons">
-<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
-<a href="https://kas.coffee/KaspaHub" aria-label="Tiptree (Nostr)" class="icon-nostr"></a>
-<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
-</div>
-<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
-</div>
-
-<div id="advertisement">
-<!-- BEGIN AADS AD UNIT 2432158 -->
-
-<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
-                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
-        </div>
-
-<!-- END AADS AD UNIT 2432158 -->
-</div>
-
-<div id="resources">
-<ul class="section-list">
-<li><a href="https://kas.coffee/KaspaHub">Donate</a></li>
-<li><a href="https://github.com/KaspaHub/kaspahub.github.io">Contribute</a></li>
-<li><a href="mailto:mail@kaspahub.org">Send feedback</a></li>
-<li><a href="https://kaspahub.org/post/legal/">Legal information</a></li>
-<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
-</ul>
-</div>
-
-</footer>
-
 <style>
 
 .searchRow {
@@ -228,20 +122,34 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
   opacity: 0.9;
 }
 
-.overviewRows {
+.overviewStats {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
-.overviewRow {
+.statBlock {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.overviewRow strong {
-  font-size: 1.15rem;
+.statLabel {
+  font-size: 12px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.statDivider {
+  height: 1px;
+  background: var(--search-border);
+  opacity: 0.6;
 }
 
 .statList {
@@ -306,6 +214,118 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
 
 </style>
 
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+<div class="intro">
+    <div style="display: flex; align-items: center;">
+        <div><h1>Kaspa Token Tracker</h1>
+        <p>Top KCC-20 Tokens by Market Capitalization</p>
+        <p id="tokenCount" class="muted">A total of — Token Contracts found</p></div>
+    </div>
+    <div class="searchRow">
+      <div class="input" title="Ticker or Covenant ID">
+        <input id="q" placeholder="Ticker or Covenant ID" />
+      </div>
+      <button class="btn" id="go">Search</button>
+    </div>
+</div>
+
+  <section class="statsPanel" id="statsPanel" style="min-height: 140px; margin-bottom: 16px; padding: 0;">
+    <div class="theme-1" id="overviewCard">
+      <div class="overviewStats">
+        <div class="statBlock">
+          <span class="statLabel">Total Market Cap</span>
+          <span class="statValue" id="totalMcap">—</span>
+        </div>
+        <div class="statDivider"></div>
+        <div class="statBlock">
+          <span class="statLabel">Total Volume (24h)</span>
+          <span class="statValue" id="totalVol">—</span>
+        </div>
+        <div class="statDivider"></div>
+        <div class="statBlock">
+          <span class="statLabel">Total TVL</span>
+          <span class="statValue" id="totalTvl">—</span>
+        </div>
+      </div>
+      <div class="muted" style="margin-top: auto; padding-top: 14px; font-size: 12px;">Data provided by <a href="https://kascov.io" target="_blank" rel="noopener noreferrer">Kascov</a> and <a href="https://kron.technology" target="_blank" rel="noopener noreferrer">Kron</a>.</div>
+    </div>
+    <div class="theme-1" id="trendingCard">
+      <h3 class="statCardTitle" title="Ranked by 24h Volume / Market Cap — higher means more liquid">Trending</h3>
+      <div class="statList" id="trendingList"></div>
+    </div>
+    <div class="theme-1" id="gainersCard">
+      <h3 class="statCardTitle">Top Gainers</h3>
+      <div class="statList" id="gainersList"></div>
+    </div>
+  </section>
+
+<section class="theme-1">
+<div class="tableWrap">
+    <table>
+        <thead>
+            <tr>
+                <th data-column="rank">#</th>
+                <th data-column="name">Name</th>
+                <th data-column="holders">Holders</th>
+                <th data-column="price">Price</th>
+                <th data-column="fdv">FDV</th>
+                <th data-column="volume">Volume (24h)</th>
+                <th data-column="change">Change (24h)</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+</div>
+<div class="miniBtns">
+  <button class="btn" id="prevPage" disabled>Prev</button>
+  <button class="btn" id="nextPage" disabled>Next</button>
+  <span class="muted" style="margin: auto 0;" id="pageCursor"></span>
+</div>
+</section>
+
+
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
 <script type="module">
 const BURN_ADDR = "kaspa:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkx9awp4e";
 
@@ -313,6 +333,7 @@ let tokenData = [];
 let filteredData = [];
 let kronById = new Map();
 let burnHoldingsMap = new Map();
+let kronTotalTvlKas = 0;
 let sortColumn = 'rank';
 let sortDirection = 1;
 const PAGE_SIZE = 50;
@@ -627,6 +648,7 @@ function mergeKron(map, id, data) {
 async function fetchKronMap(onlyIds) {
     const map = new Map();
     const allow = onlyIds instanceof Set ? onlyIds : null;
+    const tvlById = new Map();
 
     try {
         const res = await fetch('https://idx.kron.technology/v1/aggregator/tickers');
@@ -655,6 +677,10 @@ async function fetchKronMap(onlyIds) {
             const list = Array.isArray(json?.result) ? json.result : [];
             for (const m of list) {
                 const id = String(m.covenantId || '').toLowerCase();
+                const tvl = Number(m.liquidity_kas ?? m.tvl_kas ?? m.liquidity ?? m.tvl ?? 0);
+                if (id && Number.isFinite(tvl) && tvl > 0) {
+                    tvlById.set(id, Math.max(tvlById.get(id) || 0, tvl));
+                }
                 if (allow && !allow.has(id)) continue;
                 const dec = Math.max(0, Number(m.dec) || 0);
                 const rawPrice = Number(m.price);
@@ -667,6 +693,10 @@ async function fetchKronMap(onlyIds) {
             }
         }
     } catch {}
+
+    let totalTvl = 0;
+    for (const v of tvlById.values()) totalTvl += v;
+    kronTotalTvlKas = totalTvl;
 
     return map;
 }
@@ -742,6 +772,8 @@ async function updateStatsPanel() {
 
     const mcapEl = document.getElementById('totalMcap');
     const volEl = document.getElementById('totalVol');
+    const tvlEl = document.getElementById('totalTvl');
+
     if (mcapEl) {
         mcapEl.textContent = totalFdvKas > 0
             ? await formatShortPrice(KASVALUE, CURRENCY, totalFdvKas)
@@ -750,6 +782,11 @@ async function updateStatsPanel() {
     if (volEl) {
         volEl.textContent = totalVolKas > 0
             ? await formatShortPrice(KASVALUE, CURRENCY, totalVolKas)
+            : '—';
+    }
+    if (tvlEl) {
+        tvlEl.textContent = kronTotalTvlKas > 0
+            ? await formatShortPrice(KASVALUE, CURRENCY, kronTotalTvlKas)
             : '—';
     }
 
@@ -826,9 +863,7 @@ async function loadTokens(attempt = 0) {
                 .filter(id => /^[0-9a-f]{64}$/.test(id))
         );
 
-        kronById = missingIds.size > 0
-            ? await fetchKronMap(missingIds)
-            : new Map();
+        kronById = await fetchKronMap(missingIds);
 
         const mapped = raw.map(t => {
             const vol = getVolumeKas(t);

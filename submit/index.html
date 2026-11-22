@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FBFBFB" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+<script type="text/javascript">
+'use strict';
+
+// Copyright (c) 2025 Kaspa Hub | kaspahub.org | See LICENSE file
+
+document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark'?'dark':'light';
+
+</script>
+
+<title>Submit a Listing - Kaspa Hub</title>
+<meta name="twitter:title" content="Submit a Request - Kaspa Hub" />
+<meta property="og:title" content="Listings Request Form - Kaspa Hub" />
+
+<meta name="description" content="Submit a project or token for consideration on Kaspa Hub, request listing updates, or contact our team with questions and inquiries related to the Kaspa ecosystem." />
+<meta name="twitter:description" content="Have a project to submit, an existing listing to update, or a question about Kaspa Hub? Send your request to our team and connect with the Kaspa ecosystem." />
+<meta property="og:description" content="Use the Kaspa Hub submission portal to propose new project and token listings, request updates to existing listings, or send general inquiries to our team." />
+
+<link rel="canonical" href="https://kaspahub.org/submit/" />
+<meta name="twitter:url" content="https://kaspahub.org/submit/" />
+<meta property="og:url" content="https://kaspahub.org/submit/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://kaspahub.org/assets/logo.jpg" />
+<meta property="og:image" content="https://kaspahub.org/assets/logo.jpg" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+<script defer src="/assets/scripts/main.js"></script>
+
+<style>
+.listing-intro { margin-bottom: 22px; }
+.listing-section { max-width: 760px; margin: 0 auto 36px; }
+.listing-card {
+  padding: clamp(18px, 4vw, 30px);
+}
+.listing-card form { display: flex; flex-direction: column; gap: 18px; }
+.field-group { display: flex; flex-direction: column; gap: 8px; }
+.field-group label { font-weight: 600; font-size: 14px; }
+.field-hint, .form-note { opacity: .65; font-weight: 400; font-size: 12px;}
+.listing-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.listing-checkbox input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #49b8a5;
+  flex: 0 0 auto;
+}
+.filter-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 11px;
+    margin-top: 2px;
+    padding: 14px 15px;
+    border: 1px solid rgba(128, 128, 128, .2);
+    border-radius: 11px;
+    background: rgba(128, 128, 128, .045);
+}
+.conditional-fields { display: flex; flex-direction: column; gap: 17px; padding-top: 5px; }
+.conditional-fields[hidden] { display: none; }
+.conditional-fields h2 { margin: 4px 0 0; font-size: 18px; }
+.character-count { text-align: right; font-size: 12px; opacity: .6; margin-top: -3px; }
+.listing-control.select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 48px 0 16px;
+  border: 1px solid rgba(128, 128, 128, .32);
+  border-radius: 14px;
+  background-color: var(--input-bg-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238b8b8b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 18px;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background-color .2s ease;
+}
+.listing-control.select:hover {
+  border-color: #49b8a5;
+}
+.listing-control.select:focus-visible {
+  outline: none;
+  border-color: #49b8a5;
+  box-shadow: 0 0 0 4px rgba(73, 184, 165, .18);
+}
+.listing-control.select option {
+  color: #171717;
+  background: #fff;
+}
+.listing-submit {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 54px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #35a995 0%, #49c6a5 48%, #76d6a8 100%);
+  color: #062b27;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(53, 169, 149, .24), inset 0 1px 0 rgba(255, 255, 255, .35);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.listing-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, .34) 50%, transparent 75%);
+  transform: translateX(-120%);
+  transition: transform .55s ease;
+}
+.listing-submit:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.12);
+  box-shadow: 0 12px 28px rgba(53, 169, 149, .32), inset 0 1px 0 rgba(255, 255, 255, .4);
+}
+.listing-submit:hover::before {
+  transform: translateX(120%);
+}
+.listing-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(53, 169, 149, .22);
+}
+.listing-submit:focus-visible {
+  outline: 3px solid rgba(73, 198, 165, .45);
+  outline-offset: 4px;
+}
+.listing-submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+.form-note { margin: -8px 0 0; font-size: 12px; text-align: center; }
+@media (prefers-reduced-motion: reduce) {
+  .listing-control.select, .listing-submit, .listing-submit::before {
+    transition: none;
+  }
+}
+@media (max-width: 600px) {
+  .listing-section { width: 100%; }
+  .listing-card { padding: 16px; }
+}
+
+</style>
+
+</head>
+<body>
+<nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
+<aside><div id="drawer"><div id="drawer-list"></div></div><div id="drawer-overlay" onclick="menu(true)"></div></aside>
+
+<main id="container-2">
+  <div class="intro listing-intro">
+    <div>
+      <h1>Submit a request</h1>
+      <p>Share a project or token from the Kaspa ecosystem with the community.</p>
+    </div>
+  </div>
+
+  <section class="theme-1 listing-section">
+    <div class="listing-card">
+      <form id="listing-form" target="_blank"
+        action="https://formsubmit.co/mail@kaspahub.org" method="POST">
+        <input type="hidden" name="_subject" id="email-subject" value="Kaspa Hub submission: Project">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+
+        <div class="field-group">
+          <select id="submission-type" name="Submission Type" class="select listing-control" required>
+            <option value="" selected disabled hidden>Select a submission type</option>
+            <option value="Project">Project</option>
+            <option value="Token">Token</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="conditional-fields" id="project-fields" hidden>
+          <h2>Project details</h2>
+          <div class="field-group">
+            <label for="project-name">Project name </label>
+            <input id="project-name" class="listing-control" type="text" name="Project Name"
+              placeholder="Enter project name" maxlength="30" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="project-description">Project description </label>
+            <textarea id="project-description" class="listing-control" name="Project Description"
+              placeholder="Provide a concise overview of the project" maxlength="190" rows="3" data-required="true"></textarea>
+            <div class="character-count" data-count-for="project-description">0 / 190</div>
+          </div>
+          <div class="field-group">
+            <label for="project-website">Official website </label>
+            <input id="project-website" class="listing-control" type="url" name="Project Website"
+              placeholder="https://example.com" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="project-logo">Project logo URL </label>
+            <input id="project-logo" class="listing-control" type="url" name="Project logo URL"
+              placeholder="https://example.com/logo.png" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="project-email">Contact email <span class="field-hint">(optional)</span></label>
+            <input id="project-email" class="listing-control" type="email" name="Contact Email"
+              placeholder="you@example.com">
+            <span class="field-hint">Your email address will not be displayed publicly.</span>
+          </div>
+          <div class="field-group filter-group">
+              <input id="project-update" type="checkbox" name="Already Listed - Project" value="Yes">
+              <label class="listing-checkbox" for="project-update">Already listed - I’m submitting updated information</label>
+          </div>
+        </div>
+
+        <div class="conditional-fields" id="token-fields" hidden>
+          <h2>Token details</h2>
+          <div class="field-group">
+            <label for="token-name">Token name </label>
+            <input id="token-name" class="listing-control" type="text" name="Token Name"
+              placeholder="Enter token name" maxlength="30" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="token-ticker">Token ticker </label>
+            <input id="token-ticker" class="listing-control" type="text" name="Ticker"
+              placeholder="e.g. KAS" maxlength="30" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="token-covenant-id">Token covenant ID </label>
+            <input id="token-covenant-id" class="listing-control" type="text" name="Covenant ID"
+              placeholder="Enter token covenant ID" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="token-description">Token description </label>
+            <textarea id="token-description" class="listing-control" name="Token Description"
+              placeholder="Briefly describe the token" maxlength="190" rows="3" data-required="true"></textarea>
+            <div class="character-count" data-count-for="token-description">0 / 190</div>
+          </div>
+          <div class="field-group">
+            <label for="token-logo">Token logo URL </label>
+            <input id="token-logo" class="listing-control" type="url" name="Token Logo Link"
+              placeholder="https://example.com/logo.png" data-required="true">
+          </div>
+          <div class="field-group">
+            <label for="token-website">Official website <span class="field-hint">(optional)</span></label>
+            <input id="token-website" class="listing-control" type="url" name="Token Website"
+              placeholder="https://example.com">
+          </div>
+          <div class="field-group">
+            <label for="token-x">X profile <span class="field-hint">(optional)</span></label>
+            <input id="token-x" class="listing-control" type="url" name="Token X"
+              placeholder="https://x.com/username">
+          </div>
+          <div class="field-group">
+            <label for="token-telegram">Telegram group <span class="field-hint">(optional)</span></label>
+            <input id="token-telegram" class="listing-control" type="url" name="Token Telegram"
+              placeholder="https://t.me/username">
+          </div>
+          <div class="field-group">
+            <label for="token-email">Contact email <span class="field-hint">(optional)</span></label>
+            <input id="token-email" class="listing-control" type="email" name="Contact Email"
+              placeholder="you@example.com">
+            <span class="field-hint">Your email address will not be displayed publicly.</span>
+          </div>
+          <div class="field-group filter-group">
+              <input id="token-update" type="checkbox" name="Already Listed - Token" value="Yes">
+              <label class="listing-checkbox" for="token-update">Already listed - I’m submitting updated information</label>
+          </div>
+        </div>
+
+        <div class="conditional-fields" id="other-fields" hidden>
+          <h2>General inquiry</h2>
+          <div class="field-group">
+            <label for="other-message">Message</label>
+            <textarea id="other-message" class="listing-control" name="Message"
+              placeholder="Tell us how we can help" maxlength="1000" rows="5" data-required="true"></textarea>
+            <div class="character-count" data-count-for="other-message">0 / 1000</div>
+          </div>
+          <div class="field-group">
+            <label for="other-email">Contact email <span class="field-hint">(optional)</span></label>
+            <input id="other-email" class="listing-control" type="email" name="Contact Email"
+              placeholder="you@example.com">
+            <span class="field-hint">Your email address will not be displayed publicly.</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn listing-submit">Submit Form</button>
+        <p class="form-note">By submitting, you confirm that the information provided is accurate.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+
+<div id="information">
+<div class="social-icons">
+<a href="https://x.com/KaspaHub" aria-label="X (Twitter)" class="icon-x"></a>
+<a href="https://kas.coffee/KaspaHub" aria-label="kas.coffee" class="icon-donations"></a>
+<a href="https://discord.gg/7umFvjcANE" aria-label="Discord" class="icon-discord"></a>
+<a href="https://github.com/KaspaHub/kaspahub.github.io" aria-label="Github" class="icon-github"></a>
+</div>
+<p>A community-powered, open-source platform bringing together resources, initiatives, and connections for everyone interested in the Kaspa protocol.</p>
+</div>
+
+<div id="advertisement">
+<!-- BEGIN AADS AD UNIT 2432158 -->
+
+<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+          <iframe data-aa='2432158' src='//acceptable.a-ads.com/2432158/?size=Adaptive'
+                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+
+<!-- END AADS AD UNIT 2432158 -->
+</div>
+
+<div id="resources">
+<ul class="section-list">
+<li><a href="https://kaspahub.org/post/about/">About Us</a></li>
+<li><a href="https://kas.coffee/KaspaHub">Donations</a></li>
+<li><a href="https://kaspahub.org/submit/">Request Form</a></li>
+<li><a href="https://kaspahub.org/post/legal/">Legal Information</a></li>
+<li><a href="https://kaspahub.org/post/acknowledgements/">Acknowledgements</a></li>
+</ul>
+</div>
+
+</footer>
+
+<script type="text/javascript">
+'use strict';
+
+(() => {
+  const typeSelect = document.getElementById('submission-type');
+  const subjectInput = document.getElementById('email-subject');
+  const groups = {
+    'Project': document.getElementById('project-fields'),
+    'Token': document.getElementById('token-fields'),
+    'Other': document.getElementById('other-fields')
+  };
+
+  function updateForm() {
+    const selected = typeSelect.value;
+    subjectInput.value = selected
+      ? 'Kaspa Hub submission: ' + selected
+      : 'Kaspa Hub submission';
+
+    Object.entries(groups).forEach(([type, group]) => {
+      const active = type === selected;
+      group.hidden = !active;
+      group.querySelectorAll('input, textarea').forEach(field => {
+        field.disabled = !active;
+        field.required = active && field.dataset.required === 'true';
+      });
+    });
+  }
+
+  typeSelect.addEventListener('change', updateForm);
+  updateForm();
+
+  document.querySelectorAll('textarea[maxlength]').forEach(field => {
+    const counter = document.querySelector('[data-count-for="' + field.id + '"]');
+    const updateCount = () => {
+      counter.textContent = field.value.length + ' / ' + field.maxLength;
+    };
+    field.addEventListener('input', updateCount);
+    updateCount();
+  });
+})();
+</script>
+
+</body>
+</html>

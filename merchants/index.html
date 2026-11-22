@@ -36,6 +36,13 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
 <link rel="manifest" href="/assets/manifest.json" />
 
+<style>
+#iframeCtn {
+   flex: 1;
+   border: 0;
+}
+</style>
+
 </head>
 <body>
 <nav aria-label="Main Navigation"><div class="navTop"><input type="checkbox" id="menuCheck" aria-label="Toggle navigation menu" onchange="menu()" /><a id="title" href="/" aria-label="Home">Kaspa Hub</a></div><div class="navLinks widescreen-only"><a class="navTag" href="/posts/">Articles</a><a class="navTag" href="/news/">News</a><a class="navTag" href="/ecosystem/">Ecosystem</a><a class="navTag" href="/explorer/">Explorer</a><a class="navTag" href="/tokens/">Tokens</a></div><div class="navActions"><a id="priceTag" aria-live="polite" href="/price/"></a><input type="checkbox" id="themeCheck" aria-label="Toggle dark mode" onchange="theme()" /></div></nav>
@@ -51,15 +58,6 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 ></iframe>
 
 </main>
-
-<style>
-#iframeCtn {
-
-     flex: 1;
-     border: 0;
-}
-
-</style>
 
 </body>
 </html>
