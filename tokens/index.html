@@ -395,7 +395,8 @@ function needsKronFallback(t) {
 function getPriceKas(t) {
     if (hasKascovPrice(t)) {
         const m = t.market;
-        return Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8;
+        const dec = getDecimals(t);
+        return Number(m.spot_num_sompi) / Number(m.spot_den) / 1e8 * Math.pow(10, dec);
     }
     const k = getKron(t);
     if (k && Number.isFinite(k.priceKas)) return k.priceKas;
@@ -621,11 +622,15 @@ async function fetchKronMap(onlyIds) {
         if (res.ok) {
             const tickers = await res.json();
             for (const t of Array.isArray(tickers) ? tickers : []) {
-                const id = String(t.base_currency || '').toLowerCase();
+                const id = String(t.covenantId || t.base_currency || '').toLowerCase();
                 if (allow && !allow.has(id)) continue;
+                const dec = Math.max(0, Number(t.dec) || 0);
+                const rawPrice = Number(t.price ?? t.last_price);
+                const priceKas = Number.isFinite(rawPrice) ? rawPrice * Math.pow(10, dec) : NaN;
                 mergeKron(map, id, {
-                    priceKas: Number(t.last_price),
-                    volumeKas: Number(t.target_volume)
+                    priceKas,
+                    volumeKas: Number(t.volume24h ?? t.target_volume),
+                    changePct: Number(t.change24h)
                 });
             }
         }
