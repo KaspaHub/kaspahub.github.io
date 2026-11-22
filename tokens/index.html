@@ -74,7 +74,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
       <div class="muted" style="margin-top: auto; padding-top: 14px; font-size: 12px;">Data provided by <a href="https://kascov.io" target="_blank" rel="noopener noreferrer">Kascov</a> and <a href="https://kron.technology" target="_blank" rel="noopener noreferrer">Kron</a>.</div>
     </div>
     <div class="theme-1" id="trendingCard">
-      <h3 class="statCardTitle">Trending</h3>
+      <h3 class="statCardTitle" title="Ranked by 24h Volume / Market Cap — higher means more liquid">Trending</h3>
       <div class="statList" id="trendingList"></div>
     </div>
     <div class="theme-1" id="gainersCard">
@@ -288,6 +288,10 @@ th.sorted-desc::after { content: '↓'; opacity: 1; }
   font-size: 13px;
 }
 
+.statRatio {
+  opacity: 0.85;
+}
+
 .statEmpty {
   color: inherit;
   opacity: 0.6;
@@ -448,6 +452,13 @@ function kasToUsd(kas) {
     const rate = Number(typeof KASVALUE !== 'undefined' ? KASVALUE : 0);
     if (!Number.isFinite(rate) || rate <= 0) return 0;
     return kas * rate;
+}
+
+function getVolMcapRatio(t) {
+    const fdvUsd = kasToUsd(getFdvKas(t));
+    const volUsd = kasToUsd(getVolumeKas(t));
+    if (!(fdvUsd > 0) || !(volUsd > 0)) return null;
+    return volUsd / fdvUsd;
 }
 
 function isOlderThanOneDay(t) {
@@ -678,7 +689,7 @@ async function fetchBurnHoldings() {
     }
 }
 
-async function renderStatItem(t) {
+async function renderStatItem(t, ratio = null) {
     const ticker = getTicker(t);
     const img = getImage(t);
     const localIcon = getLocalIcon(t);
@@ -689,11 +700,22 @@ async function renderStatItem(t) {
         ? await formatPrice(KASVALUE, CURRENCY, priceKas, 8)
         : '—';
 
-    const changeText = change != null
-        ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`
-        : '—';
+    let metaText = '—';
+    let metaClass = '';
+    let metaTitle = '';
 
-    const changeClass = change > 0 ? 'positive' : change < 0 ? 'negative' : '';
+    if (ratio != null) {
+        const pct = ratio * 100;
+        const pctText = pct >= 100 ? pct.toFixed(0) : pct >= 10 ? pct.toFixed(1) : pct.toFixed(2);
+        metaText = `V/MC ${pctText}%`;
+        metaClass = 'statRatio';
+        metaTitle = '24h Volume / Market Cap — higher ratio indicates more liquidity';
+    } else {
+        metaText = change != null
+            ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`
+            : '—';
+        metaClass = change > 0 ? 'positive' : change < 0 ? 'negative' : '';
+    }
 
     return `
       <div class="statItem">
@@ -703,7 +725,7 @@ async function renderStatItem(t) {
         </div>
         <div class="statItemRight">
           <span>${priceFormatted}</span>
-          <span class="${changeClass}">${changeText}</span>
+          <span class="${metaClass}"${metaTitle ? ` title="${metaTitle}"` : ''}>${metaText}</span>
         </div>
       </div>
     `;
@@ -732,18 +754,20 @@ async function updateStatsPanel() {
     }
 
     const trending = tokenData
-        .filter(t => {
-            const holders = getHolders(t);
-            const fdvUsd = kasToUsd(getFdvKas(t));
-            const volUsd = kasToUsd(getVolumeKas(t));
+        .map(t => ({ token: t, ratio: getVolMcapRatio(t) }))
+        .filter(({ token, ratio }) => {
+            if (ratio == null) return false;
+            const holders = getHolders(token);
+            const fdvUsd = kasToUsd(getFdvKas(token));
+            const volUsd = kasToUsd(getVolumeKas(token));
             return (
-                isOlderThanOneDay(t) &&
-                holders > 50 &&
-                fdvUsd > 10000 &&
-                volUsd > 10
+                isOlderThanOneDay(token) &&
+                holders > 30 &&
+                fdvUsd >= 10000 &&
+                volUsd >= 10
             );
         })
-        .sort((a, b) => (getVolumeKas(b) || 0) - (getVolumeKas(a) || 0))
+        .sort((a, b) => (b.ratio - a.ratio) || (getVolumeKas(b.token) - getVolumeKas(a.token)))
         .slice(0, 5);
 
     const gainers = tokenData
@@ -768,7 +792,9 @@ async function updateStatsPanel() {
         if (!trending.length) {
             trendingList.innerHTML = '<div class="statEmpty">No matching tokens</div>';
         } else {
-            trendingList.innerHTML = (await Promise.all(trending.map(renderStatItem))).join('');
+            trendingList.innerHTML = (await Promise.all(
+                trending.map(({ token, ratio }) => renderStatItem(token, ratio))
+            )).join('');
         }
     }
 
@@ -776,7 +802,9 @@ async function updateStatsPanel() {
         if (!gainers.length) {
             gainersList.innerHTML = '<div class="statEmpty">No matching tokens</div>';
         } else {
-            gainersList.innerHTML = (await Promise.all(gainers.map(renderStatItem))).join('');
+            gainersList.innerHTML = (await Promise.all(
+                gainers.map(t => renderStatItem(t))
+            )).join('');
         }
     }
 }
