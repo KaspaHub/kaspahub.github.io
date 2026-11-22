@@ -164,11 +164,9 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 
   <section class="theme-1 listing-section">
     <div class="listing-card">
-      <form id="listing-form" target="_blank" rel="noopener"
-        action="https://formsubmit.co/mail@kaspahub.org" method="POST">
-        <input type="hidden" name="_subject" id="email-subject" value="Kaspa Hub submission: Project">
+      <form action="https://formsubmit.co/mail@kaspahub.org" method="POST">
+        <input type="hidden" name="_subject" id="email-subject" value="Kaspa Hub submission">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="true">
 
         <div class="field-group">
           <select id="submission-type" name="Submission Type" class="select listing-control" required>
