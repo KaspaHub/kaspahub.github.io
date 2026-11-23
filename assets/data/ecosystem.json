@@ -198,7 +198,7 @@
 	"description": "Non-custodial launchpad for Solana, Base, BNB Chain, Robinhood Chain and Kaspa, with native Kaspa support via KasForge for bonding-curve token launches and trading.",
 	"link": "https://kaspa.pumpforge.tech",
 	"logo": "https://kaspahub.org/assets/logos/pumpforge.webp",
-	"features": ["launchpad", "dex"],
+	"features": ["launchpad"],
 	"added": 1792246149
 },
 {
