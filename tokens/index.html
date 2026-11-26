@@ -482,28 +482,6 @@ function getVolMcapRatio(t) {
     return volUsd / fdvUsd;
 }
 
-function isOlderThanOneDay(t) {
-    const oneDayMs = 24 * 60 * 60 * 1000;
-    const now = Date.now();
-    const candidates = [
-        t.created_at_ms,
-        t.created_ms,
-        t.first_seen_ms,
-        t.birth_ms,
-        t.market?.created_at_ms,
-        t.market?.opened_at_ms,
-        t.market?.first_time_ms,
-        t.market?.program?.opened_at_ms
-    ]
-        .map(Number)
-        .filter(n => Number.isFinite(n) && n > 0);
-
-    if (candidates.length) {
-        return now - Math.min(...candidates) >= oneDayMs;
-    }
-    return true;
-}
-
 function getSortValue(item, column) {
     switch (column) {
         case 'rank':         return Number(item.marketCapRank) ?? 0;
@@ -796,12 +774,9 @@ async function updateStatsPanel() {
             if (ratio == null) return false;
             const holders = getHolders(token);
             const fdvUsd = kasToUsd(getFdvKas(token));
-            const volUsd = kasToUsd(getVolumeKas(token));
             return (
-                isOlderThanOneDay(token) &&
                 holders > 30 &&
-                fdvUsd >= 7000 &&
-                volUsd >= 10
+                fdvUsd >= 7000
             );
         })
         .sort((a, b) => (b.ratio - a.ratio) || (getVolumeKas(b.token) - getVolumeKas(a.token)))
