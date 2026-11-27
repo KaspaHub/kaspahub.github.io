@@ -368,7 +368,7 @@
 	"added": 1777939200
 },
 {
-	"name": "Kaspa Browser",
+	"name": "Kazium Browser",
 	"description": "Web browser and Web3 gateway that unifies standard web browsing, peer-to-peer mesh discovery, identity management, on-device local node hosting, and native Kaspa wallet utilities.",
 	"link": "https://kaspabrowser.xyz",
 	"logo": "https://kaspahub.org/assets/logos/kaspabrowser.webp",
@@ -933,6 +933,14 @@
 	"features": ["reviewed", "education"]
 },
 {
+	"name": "Geek Protocol",
+	"description": "Kaspa education and gaming built around Proof of Learning: free lessons, quizzes, daily challenges and brain games. Public alpha; no wallet needed to start.",
+	"link": "https://www.geekprotocol.xyz",
+	"logo": "https://kaspahub.org/assets/logos/geekprotocol.webp",
+	"features": ["reviewed", "education", "gaming"],
+	"added": 1795802230
+},
+{
 	"name": "Kaspa University",
 	"description": "The first Learn-to-Earn platform on Kaspa. Study Kaspa technology, earn Kaspa for completing quizzes and courses, get on-chain achievement proofs, and mint a KRC-721 diploma NFT when you finish.",
 	"link": "https://kaspa.university",
@@ -1360,6 +1368,14 @@
 	"logo": "https://kaspahub.org/assets/logos/kascan.webp",
 	"features": ["reviewed", "blockExplorer"],
 	"added": 1777507200
+},
+{
+    "name": "BlockDAG City",
+    "description": "Interactive Kaspa Graph Inspector that lets users fly through six glass-built districts or switch to a live graph view. Floating cubes represent real Kaspa mainnet blocks with lines showing parent connections.",
+    "link": "https://blockdag.city",
+    "logo": "https://kaspahub.org/assets/logos/blockdag.city.webp",
+    "features": ["reviewed", "visualizer", "blockExplorer"],
+	"added": 1795803297
 },
 {
 	"name": "Kaspatrol",
