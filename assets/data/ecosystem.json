@@ -39,7 +39,7 @@
 	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
 	"link": "https://kaspadollar.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
-	"features": ["reviewed"],
+	"features": ["reviewed", "stablecoin"],
 	"added": 1794311187
 },
 {
@@ -900,7 +900,7 @@
 	"description": "Bridge bringing USDT from Ethereum and BNB Chain to Kaspa as native kUSDT, with seamless KasPool swaps for KAS/kUSDT and full redeemability back to EVM chains.",
 	"link": "https://trestly.io",
 	"logo": "https://kaspahub.org/assets/logos/trestly.webp",
-	"features": ["bridge"],
+	"features": ["reviewed", "stablecoin", "bridge"],
 	"added": 1794310006
 },
 {
