@@ -39,7 +39,7 @@
 	"description": "Decentralized, overcollateralized stablecoin (KSD) on Kaspa, backed by $KAS and secured by a first-of-its-kind PoW miner-voted oracle to enable native DeFi.",
 	"link": "https://kaspadollar.com",
 	"logo": "https://kaspahub.org/assets/logos/kaspadollar.webp",
-	"features": ["reviewed", "education"],
+	"features": ["reviewed"],
 	"added": 1794311187
 },
 {
@@ -47,7 +47,7 @@
 	"description": "An independent, open-source research initiative exploring optional financial privacy for native KAS through a shielded domain, without introducing a new token or relying on custodians.",
 	"link": "https://kpi.cash",
 	"logo": "https://kaspahub.org/assets/logos/kpi.webp",
-	"features": ["reviewed", "education"],
+	"features": ["reviewed", "privacy", "education"],
 	"added": 1794313156
 },
 {
@@ -55,21 +55,21 @@
 	"description": "An EVM-compatible based rollup on Kaspa that uses L1 as a decentralized sequencer, enabling MEV-resistant smart contracts, DeFi, and cross-VM interoperability.",
 	"link": "https://igralabs.com",
 	"logo": "https://kaspahub.org/assets/logos/igralabs.webp",
-	"features": ["reviewed", "layer2"]
+	"features": ["reviewed", "layer2", "l2"]
 },
 {
 	"name": "Kasplex",
 	"description": "A based-rollup zkEVM Layer 2 on Kaspa that uses L1 for sequencing and data availability, providing the KRC-20 token standard, ZK-proven EVM smart contracts, and $KAS as gas.",
 	"link": "https://kasplex.org",
 	"logo": "https://kaspahub.org/assets/logos/kasplex.webp",
-	"features": ["reviewed", "layer2"]
+	"features": ["reviewed", "layer2", "l2"]
 },
 {
 	"name": "KasMap",
 	"description": "A community-driven platform for Kaspa, enabling users to find merchants, connect with local communities, join events, compete on leaderboards, try Kaspa apps, and promote real-world $KAS adoption.",
 	"link": "https://kasmap.org",
 	"logo": "https://kaspahub.org/assets/logos/kasmap.webp",
-	"features": ["verified", "social", "visualizer"]
+	"features": ["verified", "education", "social", "visualizer"]
 },
 {
 	"name": "Kaspa Research",
@@ -251,7 +251,7 @@
 	"description": "The first NFT marketplace built on Kaspa Layer 1. Enables creating, launching, and trading NFT collections where ownership, royalties, and platform fees are enforced on-chain by covenants.",
 	"link": "https://rareloom.io",
 	"logo": "https://kaspahub.org/assets/logos/rareloom.webp",
-	"features": ["marketplace"],
+	"features": ["marketplace", "nft"],
 	"added": 1795117914
 },
 {
@@ -909,13 +909,6 @@
 	"logo": "https://kaspahub.org/assets/logos/trestly.webp",
 	"features": ["bridge"],
 	"added": 1794310006
-},
-{
-	"name": "BestChange",
-	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
-	"link": "https://www.bestchange.com",
-	"logo": "https://kaspahub.org/assets/logos/bestchange.webp",
-	"features": ["reviewed", "analytics", "utilities"]
 },
 {
 	"name": "hashd.ag",
@@ -1970,6 +1963,13 @@
 	"features": ["cex", "mica", "googleApplePay"]
 },
 {
+	"name": "BestChange",
+	"description": "BestChange is a United Arab Emirates-based exchanger monitoring platform founded in 2007, offering aggregated rates for buying and selling crypto, fiat, and e-currencies.",
+	"link": "https://www.bestchange.com",
+	"logo": "https://kaspahub.org/assets/logos/bestchange.webp",
+	"features": ["reviewed", "cex"]
+},
+{
 	"name": "CEX.IO",
 	"description": "CEX.IO is a UK-based trading platform founded in 2013, providing crypto and fiat trading services.",
 	"link": "https://www.cex.io",
@@ -2390,6 +2390,14 @@
 	"link": "https://www.bittime.com",
 	"logo": "https://kaspahub.org/assets/logos/bittime.webp",
 	"features": ["cex"]
+},
+{
+	"name": "Finst",
+	"description": "Finst is a Netherlands-based cryptocurrency exchange founded in 2022, offering spot trading, crypto bundles, and staking with a focus on transparency and low fees.",
+	"link": "https://finst.com/en",
+	"logo": "https://kaspahub.org/assets/logos/finst.webp",
+	"features": ["mica", "cex"],
+	"added": 1795873054
 },
 {
 	"name": "Houdini Swap",
