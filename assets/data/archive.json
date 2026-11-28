@@ -21,6 +21,14 @@
   "features": ["reviewed", "bridge"]
 },
 {
+  "name": "KasFun",
+  "description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
+  "link": "https://kas.fun",
+  "logo": "https://kaspahub.org/assets/logos/kasfun.webp",
+  "features": ["layer2", "launchpad"],
+  "added": 1776211200
+},
+{
   "name": "Stroem Finance",
   "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
   "link": "https://stroem.finance",

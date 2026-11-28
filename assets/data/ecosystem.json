@@ -108,7 +108,7 @@
 	"features": ["reviewed", "social", "education"]
 },
 {
-	"name": "dotk.name",
+	"name": "dot.k",
 	"description": "Decentralized name service on Kaspa using covenants for consensus-unique .k names with trustless ownership proofs.",
 	"link": "https://dotk.name",
 	"logo": "https://kaspahub.org/assets/logos/dotk.webp",
@@ -124,7 +124,7 @@
 	"added": 1789160400
 },
 {
-	"name": "KNS",
+	"name": "Kaspa Name Service",
 	"description": "Name service on Kaspa, enabling secure, scalable domain name and arbitrary text inscription for personalized digital identities and asset management.",
 	"link": "https://app.knsdomains.org",
 	"logo": "https://kaspahub.org/assets/logos/kns.webp",
@@ -229,14 +229,6 @@
 	"link": "https://krokoswap.io",
 	"logo": "https://kaspahub.org/assets/logos/krokoswap.webp",
 	"features": ["layer2", "dex"],
-	"added": 1776211200
-},
-{
-	"name": "KasFun",
-	"description": "Memecoin launchpad on Kasplex where users can create tokens in one click, trade instantly on a bonding curve, and watch them graduate to Krokoswap DEX.",
-	"link": "https://kas.fun",
-	"logo": "https://kaspahub.org/assets/logos/kasfun.webp",
-	"features": ["layer2", "launchpad"],
 	"added": 1776211200
 },
 {
