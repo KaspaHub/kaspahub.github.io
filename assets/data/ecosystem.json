@@ -809,7 +809,7 @@
 	"description": "Online marketplace where customers can purchase products using KAS, helping bring Kaspa payments into real-world commerce.",
 	"link": "https://kaspabuy.shop",
 	"logo": "https://kaspahub.org/assets/logos/kaspabuy.webp",
-	"features": ["payments", "marketplace"]
+	"features": ["marketplace"]
 },
 {
 	"name": "Kascoin Shop",
@@ -1479,6 +1479,13 @@
 	"features": ["reviewed", "wallet", "openSource", "selfCustodial", "kcc20", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
 },
 {
+	"name": "Kastle",
+	"description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
+	"link": "https://kastle.cc",
+	"logo": "https://kaspahub.org/assets/logos/kastlewallet.webp",
+	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
+},
+{
 	"name": "OKX Wallet",
 	"description": "User-friendly DeFi wallet by OKX, a tier 1 exchange, audited by SlowMist & Certik, supports secure crypto management across multiple chains.",
 	"link": "https://web3.okx.com",
@@ -1500,13 +1507,6 @@
 	"logo": "https://kaspahub.org/assets/logos/ellipal.webp",
 	"features": ["wallet", "multiChain", "selfCustodial", "hardware", "mobile"],
 	"added": 1773964800
-},
-{
-	"name": "Kastle",
-	"description": "A secure, user-friendly Kaspa wallet supporting $KAS, KRC-20, KRC-721, KNS domains, and Ledger integration, giving you full control over your assets.",
-	"link": "https://kastle.cc",
-	"logo": "https://kaspahub.org/assets/logos/kastlewallet.webp",
-	"features": ["reviewed", "wallet", "selfCustodial", "krc20", "krc721", "knsDomains", "mobile", "browserExtension"]
 },
 {
 	"name": "Kurncy",
