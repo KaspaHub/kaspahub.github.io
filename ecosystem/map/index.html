@@ -39,21 +39,7 @@ document.documentElement.id=(localStorage.getItem('theme')??(matchMedia('(prefer
 <style>
 :root {
   --kas-green: #49EACB;
-  --kas-green-dark: #22e39a;
-  --card-bg: #ffffff;
-  --text: #111;
-  --muted: #555;
-  --border: rgba(73, 234, 203, 0.25);
 }
-#dark {
-  --card-bg: #1a1a1a;
-  --text: #f0f0f0;
-  --muted: #aaa;
-  --border: rgba(73, 234, 203, 0.18);
-}
-
-body { background: var(--bg, #fbfbfb); color: var(--text); }
-#dark body { background: #0f0f0f; }
 
 .infographic-header {
   text-align: center;
@@ -88,11 +74,6 @@ body { background: var(--bg, #fbfbfb); color: var(--text); }
   font-weight: 600;
   user-select: none;
 }
-.controls-bar input[type="checkbox"] {
-  width: 1.1rem;
-  height: 1.1rem;
-  accent-color: var(--kas-green-dark);
-}
 
 #mapContainer {
   display: flex;
@@ -104,15 +85,6 @@ body { background: var(--bg, #fbfbfb); color: var(--text); }
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.25rem;
 }
-
-.category-section {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.5rem 1.25rem 1.75rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-}
-#dark .category-section { box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
 
 .short-mode .category-section {
   padding: 1rem 0.9rem 1.2rem;
@@ -264,6 +236,8 @@ footer { margin-top: 4rem; }
   </div>
 </main>
 
+<a href="/ecosystem/" class="theme-1" id="loadMoreBtn" style="display: block; max-width: fit-content;">Find out more</a>
+
 <footer>
 
 <div id="information">
@@ -365,7 +339,7 @@ function renderMap() {
     const shown = isShort ? projects.slice(0, SHORT_LIMIT) : projects;
 
     html += `
-      <section class="category-section" id="${cat.id}">
+      <section class="theme-1 category-section" id="${cat.id}">
         <div class="category-header">
           <span class="category-number">${cat.number}</span>
           <h2 class="category-title">${cat.title}</h2>
@@ -395,7 +369,7 @@ function renderMap() {
   if (uncategorized.length) {
     const shown = isShort ? uncategorized.slice(0, SHORT_LIMIT) : uncategorized;
     html += `
-      <section class="category-section">
+      <section class="theme-1 category-section">
         <div class="category-header">
           <span class="category-number">+</span>
           <h2 class="category-title">Other / Core Infrastructure</h2>
