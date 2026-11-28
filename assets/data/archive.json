@@ -21,6 +21,13 @@
   "features": ["reviewed", "bridge"]
 },
 {
+  "name": "Stroem Finance",
+  "description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
+  "link": "https://stroem.finance",
+  "logo": "https://kaspahub.org/assets/logos/stroem.webp",
+  "features": []
+},
+{
   "name": "K100bet",
   "description": "Prediction market platform built on the Kaspa blockDAG. Trade on real-world events with AMM, limit orders, and on-chain settlements.",
   "link": "https://k100bet.com",
@@ -198,14 +205,6 @@
   "logo": "https://kaspahub.org/assets/logos/cryptowars.webp",
   "features": ["reviewed", "gaming"],
   "added": 1792416948
-},
-{
-  "name": "Koracle",
-  "description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
-  "link": "https://koracle.xyz",
-  "logo": "https://kaspahub.org/assets/logos/koracle.webp",
-  "features": ["development"],
-  "added": 1788901200
 },
 {
   "name": "Kaspa Speed",

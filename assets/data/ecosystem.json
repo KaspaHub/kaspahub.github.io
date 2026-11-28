@@ -405,13 +405,6 @@
 	"added": 1784592000
 },
 {
-	"name": "Stroem Finance",
-	"description": "A decentralized P2P atomic swap protocol on Kaspa, enabling fast, secure, and trustless cross-chain trading without intermediaries.",
-	"link": "https://stroem.finance",
-	"logo": "https://kaspahub.org/assets/logos/stroem.webp",
-	"features": []
-},
-{
 	"name": "FrostCard",
 	"description": "The first fully open-source NFC cold storage hardware wallet built exclusively for Kaspa. Features EAL6+ secure elements, auditable JavaCard applet, and on-chain covenants for programmable spending rules.",
 	"link": "https://frostcard.io",
@@ -584,6 +577,14 @@
 	"logo": "https://kaspahub.org/assets/logos/kasranks.webp",
 	"features": ["reviewed", "marketplace"],
 	"added": 1779408000
+},
+{
+  "name": "Koracle",
+  "description": "A named, liable Kaspa oracle that signs facts in public and settles covenants. Verifiable, refundable attestations for prices, events, and on-chain settlement.",
+  "link": "https://koracle.xyz",
+  "logo": "https://kaspahub.org/assets/logos/koracle.webp",
+  "features": ["development"],
+  "added": 1788901200
 },
 {
 	"name": "Arkiv File Storage",
